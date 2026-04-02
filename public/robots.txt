@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /mincal
+Disallow: /mincal.html
+Disallow: /admin.html

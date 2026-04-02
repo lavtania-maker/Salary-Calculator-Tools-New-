@@ -1,0 +1,34 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Lead",
+      "description": "A user who downloaded a resource",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The user's email address"
+        },
+        "action": {
+          "type": "string",
+          "description": "The action they took (e.g., Download Salary Report)"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the lead was captured"
+        }
+      },
+      "required": ["email", "action", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/leads/{leadId}": {
+      "schema": {
+        "$ref": "#/entities/Lead"
+      },
+      "description": "Collection of captured leads"
+    }
+  }
+}

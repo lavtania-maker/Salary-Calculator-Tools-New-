@@ -1,0 +1,41 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && (request.auth.token.email == "lavtania@epicareer.com" || request.auth.token.email == "ajtsalary@admin.com");
+    }
+
+    function isValidEmail(email) {
+      return email is string && email.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
+    }
+
+    function isValidLead(data) {
+      return data.keys().hasOnly(['email', 'action', 'createdAt']) &&
+             data.email is string && isValidEmail(data.email) &&
+             data.action is string && data.action.size() > 0 && data.action.size() <= 100 &&
+             data.createdAt is string;
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+
+    match /leads/{leadId} {
+      // Anyone can create a lead (submit their email)
+      allow create: if isValidLead(request.resource.data);
+      
+      // Only admin can read, update, or delete leads
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}
