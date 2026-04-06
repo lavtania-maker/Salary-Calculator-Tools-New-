@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" type="image/png" href="/favicon.png">
     <title>Admin Panel - Leads</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -165,12 +164,14 @@
                         <tr>
                             <th style="width: 40px;"><input type="checkbox" id="selectAll"></th>
                             <th>Email</th>
+                            <th>User Type</th>
+                            <th>Phone Number</th>
                             <th>Action</th>
                             <th id="sortDateBtn" style="cursor: pointer; user-select: none;" title="Click to sort">Date ↕</th>
                         </tr>
                     </thead>
                     <tbody id="leadsTableBody">
-                        <tr><td colspan="4" style="text-align: center; color: var(--text-muted);">Loading...</td></tr>
+                        <tr><td colspan="6" style="text-align: center; color: var(--text-muted);">Loading...</td></tr>
                     </tbody>
                 </table>
             </div>

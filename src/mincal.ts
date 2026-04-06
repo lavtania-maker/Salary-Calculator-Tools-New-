@@ -137,7 +137,7 @@ function renderTable() {
     leadsTableBody.innerHTML = '';
     
     if (currentLeads.length === 0) {
-        leadsTableBody.innerHTML = '<tr><td colspan="4" style="text-align: center; color: var(--text-muted);">No leads found.</td></tr>';
+        leadsTableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: var(--text-muted);">No leads found.</td></tr>';
         return;
     }
 
@@ -147,6 +147,8 @@ function renderTable() {
         tr.innerHTML = `
             <td><input type="checkbox" class="row-checkbox" data-index="${index}"></td>
             <td>${escapeHtml(data.email)}</td>
+            <td>${escapeHtml(data.userType || '-')}</td>
+            <td>${escapeHtml(data.phoneNumber || '-')}</td>
             <td>${escapeHtml(data.action)}</td>
             <td>${date}</td>
         `;
@@ -190,12 +192,14 @@ exportBtn.addEventListener('click', () => {
         return;
     }
 
-    const headers = ['Email', 'Action', 'Date'];
+    const headers = ['Email', 'User Type', 'Phone Number', 'Action', 'Date'];
     const csvRows = [headers.join(',')];
 
     selectedLeads.forEach(lead => {
         const row = [
             `"${lead.email.replace(/"/g, '""')}"`,
+            `"${(lead.userType || '').replace(/"/g, '""')}"`,
+            `"${(lead.phoneNumber || '').replace(/"/g, '""')}"`,
             `"${lead.action.replace(/"/g, '""')}"`,
             `"${new Date(lead.createdAt).toLocaleString().replace(/"/g, '""')}"`
         ];

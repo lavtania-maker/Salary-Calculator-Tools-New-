@@ -20,10 +20,13 @@ service cloud.firestore {
     }
 
     function isValidLead(data) {
-      return data.keys().hasOnly(['email', 'action', 'createdAt']) &&
+      return data.keys().hasOnly(['email', 'action', 'createdAt', 'userType', 'phoneNumber']) &&
+             data.keys().hasAll(['email', 'action', 'createdAt', 'userType']) &&
              data.email is string && isValidEmail(data.email) &&
              data.action is string && data.action.size() > 0 && data.action.size() <= 100 &&
-             data.createdAt is string;
+             data.createdAt is string &&
+             data.userType is string && data.userType in ['Employer / HR', 'Employee', 'Jobseeker'] &&
+             (!('phoneNumber' in data) || (data.phoneNumber is string && data.phoneNumber.size() <= 50));
     }
 
     // ===============================================================

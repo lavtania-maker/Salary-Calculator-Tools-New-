@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/favicon.png">
     <title>Salary Calculator Malaysia (Take Home Pay) | EPF, SOCSO, EIS, PCB</title>
     <meta name="description" content="Calculate your net salary in Malaysia after EPF, SOCSO, EIS, and PCB deductions instantly. Free tool for employees and employers.">
     
@@ -172,16 +171,18 @@
 
         /* Main Calculator Layout */
         .main-layout {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
             margin-top: 20px;
             padding-bottom: 60px;
+            max-width: 750px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         @media (max-width: 768px) {
             .main-layout {
-                grid-template-columns: 1fr;
                 margin-top: 10px;
             }
         }
@@ -196,11 +197,11 @@
         }
 
         .card-title {
-            font-size: 1rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             border-bottom: 1px solid var(--border);
-            padding-bottom: 12px;
+            padding-bottom: 16px;
             color: var(--text-main);
             letter-spacing: 0.02em;
         }
@@ -214,13 +215,13 @@
             display: block;
             font-weight: 600;
             margin-bottom: 8px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-main);
         }
 
         .form-input, .form-select {
             width: 100%;
-            padding: 12px 14px;
+            padding: 14px 16px;
             border: 1px solid var(--border-input);
             border-radius: 10px;
             font-size: 1rem;
@@ -247,36 +248,48 @@
             gap: 5px;
             cursor: pointer;
             font-weight: 500;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
         }
 
         .form-actions {
             display: flex;
-            gap: 8px;
-            margin-top: 20px;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 32px;
         }
 
         .form-actions .btn {
-            flex: 1;
+            width: 100%;
+            padding: 16px;
+            font-size: 1.1rem;
+            border-radius: 10px;
         }
 
         /* Result Panel Styles */
         .result-panel {
-            position: sticky;
-            top: 60px;
+            position: relative;
             height: fit-content;
         }
 
         .placeholder-text {
             text-align: center;
             color: var(--text-muted);
-            padding: 20px 0;
-            font-size: 0.85rem;
+            padding: 40px 0;
+            font-size: 0.95rem;
             font-style: italic;
         }
 
         .result-content {
             display: none; /* Hidden until calculated */
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .result-content.show {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .result-item {
@@ -361,29 +374,31 @@
         }
 
         .highlight-box {
-            background-color: #ffffff;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 25px;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border: 1px solid #bfdbfe;
+            border-radius: 16px;
+            padding: 30px;
             text-align: center;
-            margin-top: 25px;
-            box-shadow: var(--shadow-soft);
+            margin-top: 30px;
+            box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.1), 0 2px 4px -1px rgba(37, 99, 235, 0.06);
         }
 
         .highlight-value {
-            font-size: 1.2rem;
-            font-weight: 700;
+            font-size: 2.5rem;
+            font-weight: 800;
             color: var(--primary);
             display: block;
+            line-height: 1.2;
+            margin-top: 4px;
         }
 
         .highlight-label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            letter-spacing: 0.01em;
-            font-weight: 600;
+            font-size: 0.95rem;
+            color: #1e3a8a;
+            letter-spacing: 0.02em;
+            font-weight: 700;
             display: block;
-            margin-bottom: 2px;
+            text-transform: uppercase;
         }
 
         /* Visual Bar */
@@ -908,7 +923,7 @@
     <header class="navbar">
         <div class="container">
             <a href="/" class="logo">
-                <img src="/logo.png" alt="SalaryCalc MY" class="logo-img">
+                <img src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg" alt="SalaryCalc MY" referrerPolicy="no-referrer" class="logo-img">
             </a>
             <nav class="nav-menu">
                 <a href="#templates" class="btn btn-primary">Free Salary Templates</a>
@@ -1058,27 +1073,27 @@
                             </div>
 
                             <div class="highlight-box">
-                                <div style="margin-bottom: 15px;">
+                                <div style="margin-bottom: 20px;">
                                     <span class="highlight-label">Monthly Take Home Pay</span>
                                     <span id="resNetMonthly" class="highlight-value">RM 0.00</span>
                                 </div>
-                                <div style="padding-top: 15px; border-top: 1px solid #e2e8f0;">
+                                <div style="padding-top: 20px; border-top: 1px solid #bfdbfe;">
                                     <span class="highlight-label">Annual Take Home Pay</span>
-                                    <span id="resNetAnnual" class="highlight-value">RM 0.00</span>
+                                    <span id="resNetAnnual" class="highlight-value" style="font-size: 1.8rem;">RM 0.00</span>
                                 </div>
                             </div>
 
                             <p style="font-size: 0.65rem; color: var(--text-muted); text-align: center; font-style: italic; margin-top: 10px;">Estimated values for reference</p>
 
-                            <div id="incomeGroupSection" class="highlight-box" style="display: none; text-align: left; padding: 15px; border-radius: 12px; border: 1px solid;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                                    <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #1e293b;">Your Income Group</span>
-                                    <span id="resIncomeGroupLabel" style="color: white; padding: 3px 10px; border-radius: 9999px; font-size: 0.8rem; font-weight: 800;">B40</span>
+                            <div id="incomeGroupSection" class="highlight-box" style="display: none; text-align: left; padding: 20px; border-radius: 16px; border: 1px solid;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #1e293b;">Your Income Group</span>
+                                    <span id="resIncomeGroupLabel" style="color: white; padding: 4px 12px; border-radius: 9999px; font-size: 0.85rem; font-weight: 800;">B40</span>
                                 </div>
-                                <p id="resIncomeGroupDescription" style="font-size: 0.85rem; color: #334155; line-height: 1.5; margin: 0;">
+                                <p id="resIncomeGroupDescription" style="font-size: 0.95rem; color: #334155; line-height: 1.5; margin: 0;">
                                     With your total monthly income, you’re in the <strong id="resIncomeGroupText">B40 (lower income group)</strong> in Malaysia.
                                 </p>
-                                <p style="font-size: 0.65rem; color: #64748b; margin-top: 12px; font-style: italic; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 8px;">
+                                <p style="font-size: 0.75rem; color: #64748b; margin-top: 16px; font-style: italic; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 12px;">
                                     This is an estimate based on individual salary. Actual group depends on household income.
                                 </p>
                             </div>
@@ -1189,11 +1204,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>0–30</td><td>0.10</td><td>0.40</td></tr>
-                            <tr><td>30–50</td><td>0.20</td><td>0.70</td></tr>
-                            <tr><td>50–70</td><td>0.30</td><td>1.10</td></tr>
-                            <tr><td>70–100</td><td>0.40</td><td>1.50</td></tr>
-                            <tr><td>4,000+</td><td>19.75</td><td>69.05</td></tr>
+                            <tr><td>1,000</td><td>4.40</td><td>17.50</td></tr>
+                            <tr><td>2,000</td><td>9.85</td><td>34.40</td></tr>
+                            <tr><td>3,000</td><td>14.75</td><td>51.65</td></tr>
+                            <tr><td>4,000</td><td>19.75</td><td>69.05</td></tr>
+                            <tr><td>5,000</td><td>24.75</td><td>86.65</td></tr>
+                            <tr><td>6,000 (Cap)</td><td>29.75</td><td>104.15</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1208,11 +1224,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>0–30</td><td>0.05</td><td>0.05</td></tr>
-                            <tr><td>30–50</td><td>0.10</td><td>0.10</td></tr>
-                            <tr><td>50–70</td><td>0.15</td><td>0.15</td></tr>
-                            <tr><td>70–100</td><td>0.20</td><td>0.20</td></tr>
-                            <tr><td>4,000+</td><td>7.90</td><td>7.90</td></tr>
+                            <tr><td>1,000</td><td>2.00</td><td>2.00</td></tr>
+                            <tr><td>3,000</td><td>6.00</td><td>6.00</td></tr>
+                            <tr><td>5,000 (Cap)</td><td>9.90</td><td>9.90</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1316,18 +1330,18 @@
                     <thead>
                         <tr>
                             <th>Monthly Salary (RM)</th>
-                            <th>Estimated PCB (RM)</th>
+                            <th>PCB (Indicative Only)</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>RM2,000</td><td>RM0</td></tr>
-                        <tr><td>RM3,000</td><td>~RM20–50</td></tr>
-                        <tr><td>RM5,000</td><td>~RM100–300</td></tr>
-                        <tr><td>RM8,000</td><td>~RM400–800</td></tr>
-                        <tr><td>RM12,000+</td><td>RM1,000+</td></tr>
+                        <tr><td>RM2,000</td><td>RM0 – RM10</td></tr>
+                        <tr><td>RM3,000</td><td>RM10 – RM50</td></tr>
+                        <tr><td>RM5,000</td><td>RM50 – RM200</td></tr>
+                        <tr><td>RM8,000</td><td>RM200 – RM600</td></tr>
+                        <tr><td>RM12,000+</td><td>RM600+</td></tr>
                     </tbody>
                 </table>
-                <p style="font-size: 0.85rem; color: var(--text-muted); font-style: italic; margin-bottom: 20px;">Actual PCB depends on tax reliefs and personal details.</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); font-style: italic; margin-bottom: 20px;">⚠️ PCB (Monthly Tax Deduction) is only an estimate. The actual amount depends on individual tax reliefs, marital status, and income. Please use the calculator for accurate results.</p>
 
                 <div style="background: #fefce8; border: 1px solid #fef08a; border-radius: 12px; padding: 12px; margin-top: 16px;">
                     <h3 style="font-size: 0.9rem; font-weight: 700; color: #854d0e; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
@@ -1486,8 +1500,8 @@
                     <h3>Salary Payslip</h3>
                     <p>Generate professional payslips for employees</p>
                     <div class="template-buttons">
-                        <a href="https://docs.google.com/document/d/1XLiCHj4v_nU65Su5xHmkYBEyOs9A_I_DKI6LqEkjaQs/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-template btn-primary">Download Docs</a>
-                        <a href="https://drive.google.com/file/d/1MAhrOkrZJ0xcdj7CnMI_XiLlMTh3tCds/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-template btn-secondary">Download PDF</a>
+                        <a href="#" data-url="https://docs.google.com/document/d/1XLiCHj4v_nU65Su5xHmkYBEyOs9A_I_DKI6LqEkjaQs/edit?usp=sharing" data-action="Salary Payslip (Docs)" class="btn-template btn-primary template-download-btn">Download Docs</a>
+                        <a href="#" data-url="https://drive.google.com/file/d/1MAhrOkrZJ0xcdj7CnMI_XiLlMTh3tCds/view?usp=sharing" data-action="Salary Payslip (PDF)" class="btn-template btn-secondary template-download-btn">Download PDF</a>
                     </div>
                 </div>
                 <!-- Template 2: Increment -->
@@ -1498,8 +1512,8 @@
                     <h3>Salary Increment</h3>
                     <p>Track and manage employee salary increases</p>
                     <div class="template-buttons">
-                        <a href="https://docs.google.com/document/d/1QQXVLvLCApfXJ9FizVO6IXGuqAGDOf410ZzHk7u10yQ/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-template btn-primary">Download Docs</a>
-                        <a href="https://drive.google.com/file/d/1nHkesXVipdHKX66t6OzIpHqA2XYQbl1o/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-template btn-secondary">Download PDF</a>
+                        <a href="#" data-url="https://docs.google.com/document/d/1QQXVLvLCApfXJ9FizVO6IXGuqAGDOf410ZzHk7u10yQ/edit?usp=sharing" data-action="Salary Increment (Docs)" class="btn-template btn-primary template-download-btn">Download Docs</a>
+                        <a href="#" data-url="https://drive.google.com/file/d/1nHkesXVipdHKX66t6OzIpHqA2XYQbl1o/view?usp=sharing" data-action="Salary Increment (PDF)" class="btn-template btn-secondary template-download-btn">Download PDF</a>
                     </div>
                 </div>
                 <!-- Template 3: Adjustment -->
@@ -1510,8 +1524,8 @@
                     <h3>Leave & Salary Adjustment Record</h3>
                     <p>Monitor leave deductions and salary adjustments</p>
                     <div class="template-buttons">
-                        <a href="https://docs.google.com/document/d/1W1SJXa6tzy8g_VyMZBoDKAVXHSH-s_Ha9OWTsz8QHqA/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-template btn-primary">Download Docs</a>
-                        <a href="https://drive.google.com/file/d/1m97akJIfvRy9AxTtngWHShamWJXAQZ3a/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn-template btn-secondary">Download PDF</a>
+                        <a href="#" data-url="https://docs.google.com/document/d/1W1SJXa6tzy8g_VyMZBoDKAVXHSH-s_Ha9OWTsz8QHqA/edit?usp=sharing" data-action="Leave & Salary Adjustment Record (Docs)" class="btn-template btn-primary template-download-btn">Download Docs</a>
+                        <a href="#" data-url="https://drive.google.com/file/d/1m97akJIfvRy9AxTtngWHShamWJXAQZ3a/view?usp=sharing" data-action="Leave & Salary Adjustment Record (PDF)" class="btn-template btn-secondary template-download-btn">Download PDF</a>
                     </div>
                 </div>
             </div>
@@ -1557,8 +1571,21 @@
                 <p id="modalDescription">Enter your email address to receive the detailed salary breakdown and tax report.</p>
                 <form id="emailForm">
                     <div class="form-group">
-                        <label class="form-label" for="userEmail">Email Address</label>
+                        <label class="form-label" for="userEmail">Email Address <span style="color: red;">*</span></label>
                         <input type="email" id="userEmail" class="form-input" placeholder="you@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="userType">Who are you? <span style="color: red;">*</span></label>
+                        <select id="userType" class="form-input" required>
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="Employer / HR">Employer / HR</option>
+                            <option value="Employee">Employee</option>
+                            <option value="Jobseeker">Jobseeker</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="userPhone">Contact Number (Optional)</label>
+                        <input type="tel" id="userPhone" class="form-input" placeholder="e.g. 0123456789">
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">Submit & Download</button>
                 </form>
@@ -1607,7 +1634,7 @@
             // Reset Handler
             resetBtn.addEventListener('click', function() {
                 placeholder.style.display = 'block';
-                results.style.display = 'none';
+                results.classList.remove('show');
                 document.getElementById('incomeGroupSection').style.display = 'none';
                 document.getElementById('includePcb').checked = true;
                 document.getElementById('employeeDeductionsContainer').innerHTML = '';
@@ -1621,6 +1648,7 @@
             const emailModal = document.getElementById('emailModal');
             const downloadReportBtn = document.getElementById('downloadReportBtn');
             const downloadPayslipBtn = document.getElementById('downloadPayslipBtn');
+            const templateDownloadBtns = document.querySelectorAll('.template-download-btn');
             const closeModal = document.getElementById('closeModal');
             const emailForm = document.getElementById('emailForm');
             const modalFormContent = document.getElementById('modalFormContent');
@@ -1630,6 +1658,8 @@
             const modalFeedback = document.getElementById('modalFeedback');
             
             let currentDownloadType = 'report';
+            let currentTemplateUrl = '';
+            let currentTemplateAction = '';
             
             // Persistent storage for email submission
             let hasSubmittedEmail = localStorage.getItem('salaryCalc_hasSubmittedEmail') === 'true';
@@ -1644,6 +1674,16 @@
             downloadPayslipBtn.addEventListener('click', function() {
                 currentDownloadType = 'payslip';
                 openModal();
+            });
+
+            templateDownloadBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentDownloadType = 'template';
+                    currentTemplateUrl = this.getAttribute('data-url');
+                    currentTemplateAction = this.getAttribute('data-action');
+                    openModal();
+                });
             });
 
             function openModal() {
@@ -1661,9 +1701,12 @@
                 if (currentDownloadType === 'report') {
                     modalTitle.textContent = 'Download Salary Report';
                     modalDescription.textContent = 'Enter your email address to receive the detailed salary breakdown and tax report.';
-                } else {
+                } else if (currentDownloadType === 'payslip') {
                     modalTitle.textContent = 'Download Salary Payslip';
                     modalDescription.textContent = 'Enter your email address to receive your professional salary payslip.';
+                } else if (currentDownloadType === 'template') {
+                    modalTitle.textContent = `Download ${currentTemplateAction}`;
+                    modalDescription.textContent = 'Enter your details to download this free template.';
                 }
                 
                 emailModal.style.display = 'flex';
@@ -1672,8 +1715,10 @@
             function updateSuccessMessage() {
                 if (currentDownloadType === 'report') {
                     modalFeedback.textContent = 'Thank you! The report has been sent to your email.';
-                } else {
+                } else if (currentDownloadType === 'payslip') {
                     modalFeedback.textContent = 'Thank you! The salary payslip has been sent to your email.';
+                } else if (currentDownloadType === 'template') {
+                    modalFeedback.textContent = 'Thank you! Your download will start shortly.';
                 }
             }
 
@@ -1690,12 +1735,22 @@
             emailForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 const emailInput = document.getElementById('userEmail');
+                const typeInput = document.getElementById('userType');
+                const phoneInput = document.getElementById('userPhone');
+                
                 const emailValue = emailInput.value.trim();
+                const typeValue = typeInput.value;
+                const phoneValue = phoneInput.value.trim();
                 
                 // Basic email validation
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailValue || !emailRegex.test(emailValue)) {
                     alert('Please enter a valid email address.');
+                    return;
+                }
+                
+                if (!typeValue) {
+                    alert('Please select who you are.');
                     return;
                 }
 
@@ -1707,11 +1762,23 @@
                 localStorage.setItem('salaryCalc_userEmail', userEmailAddress);
 
                 try {
-                    await addDoc(collection(db, 'leads'), {
+                    let actionName = '';
+                    if (currentDownloadType === 'report') actionName = 'Download Salary Report';
+                    else if (currentDownloadType === 'payslip') actionName = 'Download Salary Payslip';
+                    else if (currentDownloadType === 'template') actionName = currentTemplateAction;
+
+                    const leadData = {
                         email: userEmailAddress,
-                        action: currentDownloadType === 'report' ? 'Download Salary Report' : 'Download Salary Payslip',
+                        userType: typeValue,
+                        action: actionName,
                         createdAt: new Date().toISOString()
-                    });
+                    };
+                    
+                    if (phoneValue) {
+                        leadData.phoneNumber = phoneValue;
+                    }
+                    
+                    await addDoc(collection(db, 'leads'), leadData);
                 } catch (error) {
                     console.error("Error adding document: ", error);
                 }
@@ -1721,6 +1788,10 @@
                 modalSuccessContent.style.display = 'block';
                 modalFeedback.style.display = 'block';
                 updateSuccessMessage();
+
+                if (currentDownloadType === 'template' && currentTemplateUrl) {
+                    window.open(currentTemplateUrl, '_blank');
+                }
 
                 // Auto-close after a short delay
                 setTimeout(() => {
@@ -1745,39 +1816,52 @@
 
                 // 2. EPF
                 let epf = 0;
+                let epfEmployer = 0;
                 if (includeEpf && nationality === "malaysian") {
                     epf = totalIncome * 0.11;
+                    epfEmployer = totalIncome <= 5000 ? totalIncome * 0.13 : totalIncome * 0.12;
                 }
 
-                // 3. SOCSO (Employee: ~0.5% with table logic, cap RM6000)
-                function getSocso(salary) {
+                // 3. SOCSO (Official PERKESO table logic, cap RM6000)
+                function getSocsoContributions(salary) {
                     const cappedSalary = Math.min(salary, 6000);
-                    if (cappedSalary <= 30) return 0.10;
-                    if (cappedSalary <= 50) return 0.20;
-                    if (cappedSalary <= 70) return 0.30;
-                    if (cappedSalary <= 100) return 0.40;
-                    if (cappedSalary <= 140) return 0.60;
-                    if (cappedSalary <= 200) return 0.85;
-                    if (cappedSalary <= 300) return 1.25;
-                    if (cappedSalary <= 400) return 1.75;
-                    if (cappedSalary <= 500) return 2.25;
-                    if (cappedSalary <= 600) return 2.75;
-                    if (cappedSalary <= 700) return 3.25;
-                    if (cappedSalary <= 800) return 3.75;
-                    if (cappedSalary <= 900) return 4.25;
-                    if (cappedSalary <= 1000) return 4.75;
+                    if (cappedSalary <= 30) return { employee: 0.10, employer: 0.40 };
+                    if (cappedSalary <= 50) return { employee: 0.20, employer: 0.70 };
+                    if (cappedSalary <= 70) return { employee: 0.30, employer: 1.10 };
+                    if (cappedSalary <= 100) return { employee: 0.40, employer: 1.50 };
+                    if (cappedSalary <= 140) return { employee: 0.60, employer: 2.10 };
+                    if (cappedSalary <= 200) return { employee: 0.85, employer: 2.95 };
                     
                     const tier = Math.ceil(cappedSalary / 100);
-                    return (tier * 0.5) - 0.25;
+                    const midpoint = tier * 100 - 50;
+                    
+                    const employee = midpoint * 0.005;
+                    const employer = midpoint * 0.0175;
+                    
+                    // Official PERKESO table rounds up to the nearest 0.05
+                    const roundUp05 = (num) => Math.ceil(num * 20) / 20;
+                    
+                    return {
+                        employee: roundUp05(employee),
+                        employer: roundUp05(employer)
+                    };
                 }
 
-                let socso = includeSocso ? getSocso(totalIncome) : 0;
+                let socso = 0;
+                let socsoEmployer = 0;
+                if (includeSocso) {
+                    const socsoContribs = getSocsoContributions(totalIncome);
+                    socso = socsoContribs.employee;
+                    socsoEmployer = socsoContribs.employer;
+                }
 
-                // 4. EIS (Employee: 0.2%, cap RM6000)
+                // 4. EIS (Employee: 0.2%, Employer: 0.2%, cap RM5000)
                 let eis = 0;
+                let eisEmployer = 0;
                 if (includeEis) {
-                    const cappedSalary = Math.min(totalIncome, 6000);
-                    eis = cappedSalary * 0.002;
+                    const eisBase = Math.min(totalIncome, 5000);
+                    eis = eisBase * 0.002;
+                    eisEmployer = eisBase * 0.002;
                 }
 
                 // 5. PCB (LHDN Progressive Logic)
@@ -1896,12 +1980,9 @@
                     }
                 }
                 
-                const epfEmployer = includeEpf && nationality === "malaysian" ? (totalIncome * 0.13) : 0;
-                const socsoEmployer = includeSocso ? (totalIncome * 0.0175) : 0;
-                const eisEmployer = includeEis ? (totalIncome * 0.002) : 0;
-                
-                addEmployerContribution('EPF (13%)', epfEmployer);
-                addEmployerContribution('SOCSO (1.75%)', socsoEmployer);
+                const epfEmployerLabel = totalIncome <= 5000 ? 'EPF (13%)' : 'EPF (12%)';
+                addEmployerContribution(epfEmployerLabel, epfEmployer);
+                addEmployerContribution('SOCSO', socsoEmployer);
                 addEmployerContribution('EIS (0.2%)', eisEmployer);
                 
                 document.getElementById('resTotalEmployerContribution').textContent = formatCurrency(totalEmployerContribution);
@@ -1952,12 +2033,12 @@
 
                 // Toggle visibility
                 placeholder.style.display = 'none';
-                results.style.display = 'block';
+                results.classList.add('show');
 
                 // Smooth scroll
-                if (window.innerWidth <= 768) {
-                    document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth' });
-                }
+                setTimeout(() => {
+                    document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
             }
 
             function formatCurrency(amount) {
