@@ -1934,6 +1934,10 @@
             let currentTemplateAction = '';
             let currentDownloadBtn = null;
             
+            // Google Sheets Integration URL
+            // IMPORTANT: Replace this URL with your deployed Apps Script Web App URL
+            const GOOGLE_SHEETS_SCRIPT_URL = 'YOUR_DEPLOYED_APPS_SCRIPT_URL_HERE';
+            
             // Persistent storage for email submission
             let hasSubmittedEmail = localStorage.getItem('salaryCalc_hasSubmittedEmail') === 'true';
             let userEmailAddress = localStorage.getItem('salaryCalc_userEmail') || '';
@@ -2114,6 +2118,31 @@
                     }
                     
                     await addDoc(collection(db, 'leads'), leadData);
+
+                    // Send data to Google Sheets
+                    if (GOOGLE_SHEETS_SCRIPT_URL && GOOGLE_SHEETS_SCRIPT_URL !== 'YOUR_DEPLOYED_APPS_SCRIPT_URL_HERE') {
+                        try {
+                            const sheetsData = {
+                                timestamp: new Date().toISOString(),
+                                email: userEmailAddress,
+                                phone_number: phoneValue || '',
+                                who_are_you: typeValue || '',
+                                company_name: companyValue || '',
+                                download_via: actionName || ''
+                            };
+                            
+                            await fetch(GOOGLE_SHEETS_SCRIPT_URL, {
+                                method: 'POST',
+                                mode: 'no-cors',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(sheetsData)
+                            });
+                        } catch (sheetsError) {
+                            console.error('Error sending to Google Sheets:', sheetsError);
+                        }
+                    }
 
                     // Send Email via Backend API
                     if (currentDownloadType === 'report' || currentDownloadType === 'payslip') {
