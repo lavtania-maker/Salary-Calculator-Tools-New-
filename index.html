@@ -1051,6 +1051,53 @@
                 font-size: 2rem;
             }
         }
+        /* Print Styles */
+        @media print {
+            /* Hide everything we don't want */
+            .navbar, 
+            .hero, 
+            .calculator-panel, 
+            .content-section, 
+            .footer, 
+            #emailModal,
+            #printBtn, 
+            .cta-group {
+                display: none !important;
+            }
+
+            /* Reset layout constraints for printing */
+            body, html {
+                background: white !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            .calculator-area, 
+            .container, 
+            .main-layout, 
+            .result-panel {
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: white !important;
+            }
+
+            #resultCard {
+                box-shadow: none !important;
+                border: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+            }
+
+            /* Ensure colors print correctly */
+            * {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1166,7 +1213,9 @@
                 <!-- Right Side: Result Panel -->
                 <aside class="result-panel">
                     <div class="card" id="resultCard">
-                        <h2 class="card-title">Calculation Results</h2>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                            <h2 class="card-title" style="margin-bottom: 0;">Calculation Results</h2>
+                        </div>
                         
                         <!-- Placeholder (Visible by default/No-JS) -->
                         <div id="placeholder" class="placeholder-text">
@@ -1393,11 +1442,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>1,000</td><td>4.75</td><td>16.65</td><td>21.40</td></tr>
-                            <tr><td>3,000</td><td>14.75</td><td>51.65</td><td>66.40</td></tr>
-                            <tr><td>5,000</td><td>24.75</td><td>86.65</td><td>111.40</td></tr>
-                            <tr><td>6,000 (New Cap)</td><td>29.75</td><td>104.15</td><td>133.90</td></tr>
-                            <tr><td>> 6,000</td><td>30.00</td><td>105.00</td><td>135.00</td></tr>
+                            <tr><td>RM1,000 – RM2,000</td><td>4.75</td><td>16.65</td><td>21.40</td></tr>
+                            <tr><td>RM3,000 – RM4,000</td><td>14.75</td><td>51.65</td><td>66.40</td></tr>
+                            <tr><td>RM5,000 – RM6,000</td><td>24.75</td><td>86.65</td><td>111.40</td></tr>
+                            <tr><td>RM6,000</td><td>29.75</td><td>104.15</td><td>133.90</td></tr>
+                            <tr><td>> RM6,000</td><td>30.00</td><td>105.00</td><td>135.00</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1409,13 +1458,21 @@
                                 <th>Salary Range (RM)</th>
                                 <th>Employee (RM)</th>
                                 <th>Employer (RM)</th>
+                                <th>Total (RM)</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>1,000</td><td>2.00</td><td>2.00</td></tr>
-                            <tr><td>3,000</td><td>6.00</td><td>6.00</td></tr>
-                            <tr><td>5,000</td><td>10.00</td><td>10.00</td></tr>
-                            <tr><td>6,000 (New Cap)</td><td>12.00</td><td>12.00</td></tr>
+                            <tr><td>Up to 300</td><td>0.50</td><td>0.50</td><td>1.00</td></tr>
+                            <tr><td>1,000 – 1,100</td><td>2.10</td><td>2.10</td><td>4.20</td></tr>
+                            <tr><td>2,000 – 2,100</td><td>4.10</td><td>4.10</td><td>8.20</td></tr>
+                            <tr><td>3,000 – 3,100</td><td>6.10</td><td>6.10</td><td>12.20</td></tr>
+                            <tr><td>4,000 – 4,100</td><td>8.10</td><td>8.10</td><td>16.20</td></tr>
+                            <tr><td>4,800 – 4,900</td><td>9.70</td><td>9.70</td><td>19.40</td></tr>
+                            <tr><td>4,900 – 5,000</td><td>9.90</td><td>9.90</td><td>19.80</td></tr>
+                            <tr><td>5,000 – 5,100</td><td>10.10</td><td>10.10</td><td>20.20</td></tr>
+                            <tr><td>5,500 – 5,600</td><td>11.10</td><td>11.10</td><td>22.20</td></tr>
+                            <tr><td>5,900 – 6,000</td><td>11.90</td><td>11.90</td><td>23.80</td></tr>
+                            <tr><td>> 6,000</td><td>11.90</td><td>11.90</td><td>23.80</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1783,6 +1840,10 @@
                         </select>
                         <div id="hiringError" style="color: #dc2626; font-size: 0.75rem; margin-top: 4px; display: none;">Please select your hiring status to continue.</div>
                     </div>
+                    <div class="form-group" id="companyNameGroup">
+                        <label class="form-label" for="companyName">Company Name <span style="color: red;">*</span></label>
+                        <input type="text" id="companyName" class="form-input" placeholder="Your Company Name">
+                    </div>
                     <div class="form-group">
                         <label class="form-label" for="userPhone">Contact Number (Optional)</label>
                         <input type="tel" id="userPhone" class="form-input" placeholder="e.g. 0123456789">
@@ -1825,6 +1886,17 @@
             const placeholder = document.getElementById('placeholder');
             const results = document.getElementById('results');
             
+            // Global storage for the latest calculation
+            let lastCalculation = {
+                salary: 0,
+                epf: 0,
+                socso: 0,
+                eis: 0,
+                pcb: 0,
+                totalDeductions: 0,
+                netSalary: 0
+            };
+            
             // Form Submit Handler
             salaryForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -1866,31 +1938,14 @@
             let hasSubmittedEmail = localStorage.getItem('salaryCalc_hasSubmittedEmail') === 'true';
             let userEmailAddress = localStorage.getItem('salaryCalc_userEmail') || '';
 
-            // Check and apply downloaded state on load
-            function applyDownloadedState(btn, actionKey) {
-                if (localStorage.getItem('salaryCalc_downloaded_' + actionKey) === 'true') {
-                    btn.classList.add('disabled');
-                    btn.setAttribute('disabled', 'true');
-                    btn.textContent = 'Already Downloaded';
-                }
-            }
-
-            applyDownloadedState(downloadReportBtn, 'report');
-            applyDownloadedState(downloadPayslipBtn, 'payslip');
-            templateDownloadBtns.forEach(btn => {
-                applyDownloadedState(btn, btn.getAttribute('data-action'));
-            });
-
             // Modal Handlers
             downloadReportBtn.addEventListener('click', function() {
-                if (this.classList.contains('disabled')) return;
                 currentDownloadType = 'report';
                 currentDownloadBtn = this;
                 openModal();
             });
 
             downloadPayslipBtn.addEventListener('click', function() {
-                if (this.classList.contains('disabled')) return;
                 currentDownloadType = 'payslip';
                 currentDownloadBtn = this;
                 openModal();
@@ -1899,7 +1954,6 @@
             templateDownloadBtns.forEach(btn => {
                 btn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    if (this.classList.contains('disabled')) return;
                     currentDownloadType = 'template';
                     currentTemplateUrl = this.getAttribute('data-url');
                     currentTemplateAction = this.getAttribute('data-action');
@@ -1923,11 +1977,16 @@
                 const hiringGroup = document.getElementById('hiringQuestionGroup');
                 const hiringStatus = document.getElementById('hiringStatus');
                 const hiringError = document.getElementById('hiringError');
+                const companyGroup = document.getElementById('companyNameGroup');
+                const companyInput = document.getElementById('companyName');
                 
                 hiringGroup.style.display = 'none';
                 hiringStatus.required = false;
                 hiringError.style.display = 'none';
                 hiringStatus.value = '';
+                
+                companyGroup.style.display = 'none';
+                companyInput.required = false;
 
                 if (currentDownloadType === 'report') {
                     modalTitle.textContent = 'Download Salary Report';
@@ -1935,11 +1994,16 @@
                 } else if (currentDownloadType === 'payslip') {
                     modalTitle.textContent = 'Download Salary Payslip';
                     modalDescription.textContent = 'Enter your email address to receive your professional salary payslip.';
+                    companyGroup.style.display = 'block';
+                    companyInput.required = true;
                 } else if (currentDownloadType === 'template') {
                     modalTitle.textContent = `Download ${currentTemplateAction}`;
                     modalDescription.textContent = 'Enter your details to download this free template.';
                     
-                    // Show hiring question for specific templates
+                    // Show hiring question and company name for specific templates
+                    companyGroup.style.display = 'block';
+                    companyInput.required = true;
+
                     const templateName = currentTemplateAction.toLowerCase();
                     if (templateName.includes('payslip') || 
                         templateName.includes('increment') || 
@@ -1977,6 +2041,7 @@
                 const emailInput = document.getElementById('userEmail');
                 const typeInput = document.getElementById('userType');
                 const phoneInput = document.getElementById('userPhone');
+                const companyInput = document.getElementById('companyName');
                 const hiringStatusInput = document.getElementById('hiringStatus');
                 const hiringGroup = document.getElementById('hiringQuestionGroup');
                 const hiringError = document.getElementById('hiringError');
@@ -1984,6 +2049,7 @@
                 const emailValue = emailInput.value.trim();
                 const typeValue = typeInput.value;
                 const phoneValue = phoneInput.value.trim();
+                const companyValue = companyInput.value.trim();
                 
                 let hiringValue = '';
                 if (hiringGroup.style.display !== 'none') {
@@ -2039,6 +2105,10 @@
                         leadData.hiringStatus = hiringValue;
                     }
                     
+                    if (companyValue) {
+                        leadData.companyName = companyValue;
+                    }
+                    
                     if (phoneValue) {
                         leadData.phoneNumber = phoneValue;
                     }
@@ -2059,27 +2129,17 @@
                                 })
                             });
                             
-                            const result = await response.json();
                             if (!response.ok) {
+                                const result = await response.json();
                                 console.error('Failed to send email:', result.error);
-                                alert('Failed to send email. Please check configuration.');
-                                // Re-enable button if email failed
-                                return;
                             }
                         } catch (emailError) {
                             console.error('Error calling send-email API:', emailError);
-                            alert('Network error while sending email.');
-                            return;
                         }
                     }
 
                     // Mark as downloaded
                     localStorage.setItem('salaryCalc_downloaded_' + actionKey, 'true');
-                    if (currentDownloadBtn) {
-                        currentDownloadBtn.classList.add('disabled');
-                        currentDownloadBtn.setAttribute('disabled', 'true');
-                        currentDownloadBtn.textContent = 'Already Downloaded';
-                    }
                 } catch (error) {
                     console.error("Error adding document: ", error);
                 }
@@ -2090,18 +2150,44 @@
                 modalFeedback.style.display = 'block';
                 updateSuccessMessage();
 
-                if (currentDownloadType === 'template' && currentTemplateUrl) {
-                    window.open(currentTemplateUrl, '_blank');
-                } else if (currentDownloadType === 'report') {
-                    window.open('https://s3-ap-southeast-1.amazonaws.com/ricebowl/templates/salary-report-template.pdf', '_blank');
+                if (currentDownloadType === 'report') {
+                    const queryParams = new URLSearchParams({
+                        salary: lastCalculation.salary,
+                        epf: lastCalculation.epf,
+                        socso: lastCalculation.socso,
+                        eis: lastCalculation.eis,
+                        pcb: lastCalculation.pcb,
+                        total: lastCalculation.totalDeductions,
+                        net: lastCalculation.netSalary,
+                        company: companyValue || 'COMPANY LOGO & NAME'
+                    }).toString();
+                    setTimeout(() => {
+                        window.open(`/report.html?${queryParams}`, '_blank');
+                    }, 500);
                 } else if (currentDownloadType === 'payslip') {
-                    window.open('https://s3-ap-southeast-1.amazonaws.com/ricebowl/templates/salary-payslip-template.pdf', '_blank');
+                    const queryParams = new URLSearchParams({
+                        salary: lastCalculation.salary,
+                        epf: lastCalculation.epf,
+                        socso: lastCalculation.socso,
+                        eis: lastCalculation.eis,
+                        pcb: lastCalculation.pcb,
+                        total: lastCalculation.totalDeductions,
+                        net: lastCalculation.netSalary,
+                        company: companyValue || 'COMPANY LOGO & NAME'
+                    }).toString();
+                    setTimeout(() => {
+                        window.open(`/payslip.html?${queryParams}`, '_blank');
+                    }, 500);
+                } else if (currentDownloadType === 'template' && currentTemplateUrl) {
+                    setTimeout(() => {
+                        window.open(currentTemplateUrl, '_blank');
+                    }, 500);
                 }
 
                 // Auto-close after a short delay
                 setTimeout(() => {
                     emailModal.style.display = 'none';
-                }, 2500);
+                }, 3000);
             });
 
             function calculateSalary() {
@@ -2167,9 +2253,26 @@
                 let eis = 0;
                 let eisEmployer = 0;
                 if (includeEis) {
+                    // EIS is calculated based on salary brackets (approximately 0.2% but fixed per bracket)
+                    // Cap is at RM6000
                     const eisBase = Math.min(totalIncome, 6000);
-                    eis = eisBase * 0.002;
-                    eisEmployer = eisBase * 0.002;
+                    
+                    if (eisBase <= 300) {
+                        eis = 0.50;
+                        eisEmployer = 0.50;
+                    } else {
+                        // For salaries above 300 up to 6000, the contribution is based on RM100 brackets
+                        // e.g., 300.01 - 400 = 0.70, 400.01 - 500 = 0.90, etc.
+                        // The formula is roughly: Math.ceil(salary / 100) * 0.2 - 0.1
+                        // Let's use the exact formula that matches the table
+                        const bracketMultiplier = Math.ceil(eisBase / 100);
+                        eis = (bracketMultiplier * 0.2) - 0.1;
+                        eisEmployer = (bracketMultiplier * 0.2) - 0.1;
+                        
+                        // Fix floating point precision issues (e.g. 2.1000000000000005 -> 2.10)
+                        eis = Math.round(eis * 100) / 100;
+                        eisEmployer = Math.round(eisEmployer * 100) / 100;
+                    }
                 }
 
                 // 5. PCB (LHDN Progressive Logic)
@@ -2298,6 +2401,17 @@
                 
                 document.getElementById('resNetMonthly').textContent = formatCurrency(totalIncome - totalDeductions);
                 document.getElementById('resNetAnnual').textContent = formatCurrency((totalIncome - totalDeductions) * 12);
+                
+                // Store in global object for payslip/report generation
+                lastCalculation = {
+                    salary: totalIncome.toFixed(2),
+                    epf: epf.toFixed(2),
+                    socso: socso.toFixed(2),
+                    eis: eis.toFixed(2),
+                    pcb: pcb.toFixed(2),
+                    totalDeductions: totalDeductions.toFixed(2),
+                    netSalary: (totalIncome - totalDeductions).toFixed(2)
+                };
 
                 // Update Visual Bar
                 const netSalary = totalIncome - totalDeductions;
