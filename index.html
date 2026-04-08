@@ -499,6 +499,7 @@
         }
         .contribution-content {
             display: none;
+            overflow-x: auto;
         }
         .contribution-content.active {
             display: block;
@@ -1205,7 +1206,7 @@
                                 </svg>
                             </div>
                             <p style="font-weight: 600; font-size: 1.1rem; color: var(--text-main); margin-bottom: 6px;">Your results are just one step away</p>
-                            <p style="color: var(--text-muted); font-size: 0.95rem;">Complete the salary form to continue</p>
+                            <p style="color: var(--text-muted); font-size: 0.95rem;">Complete the form to continue</p>
                             <noscript>
                                 <p style="color: #dc2626; font-weight: 600; margin-top: 10px;">⚠️ JavaScript is required to calculate your salary. Please enable JavaScript in your browser settings to use the interactive calculator.</p>
                             </noscript>
@@ -1385,18 +1386,18 @@
                     <table class="styled-table">
                         <thead>
                             <tr>
-                                <th>Salary Range (RM)</th>
+                                <th>Monthly Wages (RM)</th>
                                 <th>Employee (RM)</th>
                                 <th>Employer (RM)</th>
+                                <th>Total (RM)</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>1,000</td><td>4.40</td><td>17.50</td></tr>
-                            <tr><td>2,000</td><td>9.85</td><td>34.40</td></tr>
-                            <tr><td>3,000</td><td>14.75</td><td>51.65</td></tr>
-                            <tr><td>4,000</td><td>19.75</td><td>69.05</td></tr>
-                            <tr><td>5,000</td><td>24.75</td><td>86.65</td></tr>
-                            <tr><td>6,000 (Cap)</td><td>29.75</td><td>104.15</td></tr>
+                            <tr><td>1,000</td><td>4.75</td><td>16.65</td><td>21.40</td></tr>
+                            <tr><td>3,000</td><td>14.75</td><td>51.65</td><td>66.40</td></tr>
+                            <tr><td>5,000</td><td>24.75</td><td>86.65</td><td>111.40</td></tr>
+                            <tr><td>6,000 (New Cap)</td><td>29.75</td><td>104.15</td><td>133.90</td></tr>
+                            <tr><td>> 6,000</td><td>30.00</td><td>105.00</td><td>135.00</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1413,7 +1414,8 @@
                         <tbody>
                             <tr><td>1,000</td><td>2.00</td><td>2.00</td></tr>
                             <tr><td>3,000</td><td>6.00</td><td>6.00</td></tr>
-                            <tr><td>5,000 (Cap)</td><td>9.90</td><td>9.90</td></tr>
+                            <tr><td>5,000</td><td>10.00</td><td>10.00</td></tr>
+                            <tr><td>6,000 (New Cap)</td><td>12.00</td><td>12.00</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -1770,6 +1772,17 @@
                             <option value="Jobseeker">Jobseeker</option>
                         </select>
                     </div>
+                    <div class="form-group" id="hiringQuestionGroup" style="display: none;">
+                        <label class="form-label" for="hiringStatus">Are you currently hiring? <span style="color: red;">*</span></label>
+                        <select id="hiringStatus" class="form-input">
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="Hiring Now">Hiring now</option>
+                            <option value="Hiring Next Month">Hiring next month</option>
+                            <option value="Within 3 Months">Within 3 months</option>
+                            <option value="Not Hiring Yet">Not hiring yet</option>
+                        </select>
+                        <div id="hiringError" style="color: #dc2626; font-size: 0.75rem; margin-top: 4px; display: none;">Please select your hiring status to continue.</div>
+                    </div>
                     <div class="form-group">
                         <label class="form-label" for="userPhone">Contact Number (Optional)</label>
                         <input type="tel" id="userPhone" class="form-input" placeholder="e.g. 0123456789">
@@ -1907,6 +1920,15 @@
                     emailInput.value = userEmailAddress;
                 }
 
+                const hiringGroup = document.getElementById('hiringQuestionGroup');
+                const hiringStatus = document.getElementById('hiringStatus');
+                const hiringError = document.getElementById('hiringError');
+                
+                hiringGroup.style.display = 'none';
+                hiringStatus.required = false;
+                hiringError.style.display = 'none';
+                hiringStatus.value = '';
+
                 if (currentDownloadType === 'report') {
                     modalTitle.textContent = 'Download Salary Report';
                     modalDescription.textContent = 'Enter your email address to receive the detailed salary breakdown and tax report.';
@@ -1916,6 +1938,15 @@
                 } else if (currentDownloadType === 'template') {
                     modalTitle.textContent = `Download ${currentTemplateAction}`;
                     modalDescription.textContent = 'Enter your details to download this free template.';
+                    
+                    // Show hiring question for specific templates
+                    const templateName = currentTemplateAction.toLowerCase();
+                    if (templateName.includes('payslip') || 
+                        templateName.includes('increment') || 
+                        templateName.includes('adjustment')) {
+                        hiringGroup.style.display = 'block';
+                        hiringStatus.required = true;
+                    }
                 }
                 
                 emailModal.style.display = 'flex';
@@ -1946,10 +1977,23 @@
                 const emailInput = document.getElementById('userEmail');
                 const typeInput = document.getElementById('userType');
                 const phoneInput = document.getElementById('userPhone');
+                const hiringStatusInput = document.getElementById('hiringStatus');
+                const hiringGroup = document.getElementById('hiringQuestionGroup');
+                const hiringError = document.getElementById('hiringError');
                 
                 const emailValue = emailInput.value.trim();
                 const typeValue = typeInput.value;
                 const phoneValue = phoneInput.value.trim();
+                
+                let hiringValue = '';
+                if (hiringGroup.style.display !== 'none') {
+                    hiringValue = hiringStatusInput.value;
+                    if (!hiringValue) {
+                        hiringError.style.display = 'block';
+                        return;
+                    }
+                }
+                hiringError.style.display = 'none';
                 
                 // Basic email validation
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -1990,6 +2034,10 @@
                         action: actionName,
                         createdAt: new Date().toISOString()
                     };
+                    
+                    if (hiringValue) {
+                        leadData.hiringStatus = hiringValue;
+                    }
                     
                     if (phoneValue) {
                         leadData.phoneNumber = phoneValue;
@@ -2079,17 +2127,20 @@
                     epfEmployer = totalIncome <= 5000 ? totalIncome * 0.13 : totalIncome * 0.12;
                 }
 
-                // 3. SOCSO (Official PERKESO table logic, cap RM6000)
+                // 3. SOCSO (Official PERKESO table logic, ceiling RM6000)
                 function getSocsoContributions(salary) {
-                    const cappedSalary = Math.min(salary, 6000);
-                    if (cappedSalary <= 30) return { employee: 0.10, employer: 0.40 };
-                    if (cappedSalary <= 50) return { employee: 0.20, employer: 0.70 };
-                    if (cappedSalary <= 70) return { employee: 0.30, employer: 1.10 };
-                    if (cappedSalary <= 100) return { employee: 0.40, employer: 1.50 };
-                    if (cappedSalary <= 140) return { employee: 0.60, employer: 2.10 };
-                    if (cappedSalary <= 200) return { employee: 0.85, employer: 2.95 };
+                    if (salary > 6000) {
+                        return { employee: 30.00, employer: 105.00 };
+                    }
                     
-                    const tier = Math.ceil(cappedSalary / 100);
+                    if (salary <= 30) return { employee: 0.10, employer: 0.40 };
+                    if (salary <= 50) return { employee: 0.20, employer: 0.70 };
+                    if (salary <= 70) return { employee: 0.30, employer: 1.10 };
+                    if (salary <= 100) return { employee: 0.40, employer: 1.50 };
+                    if (salary <= 140) return { employee: 0.60, employer: 2.10 };
+                    if (salary <= 200) return { employee: 0.85, employer: 2.95 };
+                    
+                    const tier = Math.ceil(salary / 100);
                     const midpoint = tier * 100 - 50;
                     
                     const employee = midpoint * 0.005;
@@ -2112,11 +2163,11 @@
                     socsoEmployer = socsoContribs.employer;
                 }
 
-                // 4. EIS (Employee: 0.2%, Employer: 0.2%, cap RM5000)
+                // 4. EIS (Employee: 0.2%, Employer: 0.2%, cap RM6000)
                 let eis = 0;
                 let eisEmployer = 0;
                 if (includeEis) {
-                    const eisBase = Math.min(totalIncome, 5000);
+                    const eisBase = Math.min(totalIncome, 6000);
                     eis = eisBase * 0.002;
                     eisEmployer = eisBase * 0.002;
                 }
