@@ -4,6 +4,7 @@ import cors from 'cors';
 import path from 'path';
 
 async function startServer() {
+  console.log('[v0] Starting Express server...');
   const app = express();
   const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 
