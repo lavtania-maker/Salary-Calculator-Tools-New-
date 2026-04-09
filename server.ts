@@ -5,7 +5,7 @@ import path from 'path';
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 
   app.use(cors());
   app.use(express.json());
@@ -85,8 +85,24 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
+  const server = app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on http://localhost:${PORT}`);
+  });
+
+  server.on('error', (err: any) => {
+    if (err.code === 'EADDRINUSE') {
+      console.error(`Port ${PORT} is already in use. Trying port ${PORT + 1}...`);
+      const retryServer = app.listen(PORT + 1, '0.0.0.0', () => {
+        console.log(`Server running on http://localhost:${PORT + 1}`);
+      });
+      retryServer.on('error', (retryErr) => {
+        console.error('Failed to start server on alternate ports:', retryErr);
+        process.exit(1);
+      });
+    } else {
+      console.error('Server error:', err);
+      process.exit(1);
+    }
   });
 }
 
