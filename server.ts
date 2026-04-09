@@ -85,21 +85,24 @@ async function startServer() {
     });
   }
 
-  const server = app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-  });
+  const startListening = (port: number) => {
+    const server = app.listen(port, '0.0.0.0', () => {
+      console.log(`Server running on http://localhost:${port}`);
+    });
 
-  server.on('error', (err: NodeJS.ErrnoException) => {
-    if (err.code === 'EADDRINUSE') {
-      console.log(`Port ${PORT} is already in use. Retrying in 1 second...`);
-      setTimeout(() => {
+    server.on('error', (err: NodeJS.ErrnoException) => {
+      if (err.code === 'EADDRINUSE') {
+        console.log(`Port ${port} is already in use. Trying port ${port + 1}...`);
         server.close();
-        server.listen(PORT, '0.0.0.0');
-      }, 1000);
-    } else {
-      console.error('Server error:', err);
-    }
-  });
+        startListening(port + 1);
+      } else {
+        console.error('Server error:', err);
+        process.exit(1);
+      }
+    });
+  };
+
+  startListening(PORT);
 }
 
 startServer();
