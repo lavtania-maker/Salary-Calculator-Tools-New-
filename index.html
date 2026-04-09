@@ -2186,26 +2186,23 @@
                     // Send data to Google Spreadsheet FIRST (independent of Firebase)
                     const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/a/macros/epicareer.com/s/AKfycbzRzkbuA1MslXFMp5diBxL7WTZH2_-n5BsnHYiP9FP8d5gHn6dF20YRPdD8DnYE37u6/exec';
                     
-                    const sheetsPayload = new URLSearchParams();
-                    sheetsPayload.append('timestamp', new Date().toISOString());
-                    sheetsPayload.append('email', userEmailAddress);
-                    sheetsPayload.append('who_are_you', typeValue);
-                    sheetsPayload.append('are_you_hiring', hiringValue || '');
-                    sheetsPayload.append('company_name', companyValue || '');
-                    sheetsPayload.append('phone_number', phoneValue || '');
-                    sheetsPayload.append('download_via', currentDownloadType === 'report' ? 'salary_report' : 'salary_payslip');
+                    const sheetsParams = new URLSearchParams();
+                    sheetsParams.append('timestamp', new Date().toISOString());
+                    sheetsParams.append('email', userEmailAddress);
+                    sheetsParams.append('who_are_you', typeValue);
+                    sheetsParams.append('are_you_hiring', hiringValue || '');
+                    sheetsParams.append('company_name', companyValue || '');
+                    sheetsParams.append('phone_number', phoneValue || '');
+                    sheetsParams.append('download_via', currentDownloadType === 'report' ? 'salary_report' : 'salary_payslip');
                     
-                    console.log('[v0] Sending data to Google Sheets:', Object.fromEntries(sheetsPayload));
+                    const sheetsUrl = GOOGLE_SHEETS_WEB_APP_URL + '?' + sheetsParams.toString();
+                    console.log('[v0] Sending data to Google Sheets via GET:', sheetsUrl);
                     
-                    fetch(GOOGLE_SHEETS_WEB_APP_URL, {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        body: sheetsPayload
-                    }).then(() => {
-                        console.log('[v0] Google Sheets request sent');
-                    }).catch((sheetsError) => {
-                        console.error('[v0] Error sending to Google Sheets:', sheetsError);
-                    });
+                    // Use an image request to bypass CORS - this triggers doGet reliably
+                    const img = new Image();
+                    img.onload = () => console.log('[v0] Google Sheets request completed');
+                    img.onerror = () => console.log('[v0] Google Sheets request sent (expected error due to response type)');
+                    img.src = sheetsUrl;
 
                     const leadData = {
                         email: userEmailAddress,
