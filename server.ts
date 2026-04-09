@@ -69,21 +69,30 @@ async function startServer() {
     }
   });
 
-  // Vite middleware for development
-  if (process.env.NODE_ENV !== 'production') {
-    const { createServer: createViteServer } = await import('vite');
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: 'spa',
-    });
-    app.use(vite.middlewares);
-  } else {
-    const distPath = path.join(process.cwd(), 'dist');
-    app.use(express.static(distPath));
-    app.get('*', (req, res) => {
-      res.sendFile(path.join(distPath, 'index.html'));
-    });
-  }
+  // Serve static files from root directory
+  const rootPath = process.cwd();
+  app.use(express.static(rootPath));
+  
+  // Serve HTML files
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(rootPath, 'index.html'));
+  });
+  
+  app.get('/admin', (req, res) => {
+    res.sendFile(path.join(rootPath, 'admin.html'));
+  });
+  
+  app.get('/payslip', (req, res) => {
+    res.sendFile(path.join(rootPath, 'payslip.html'));
+  });
+  
+  app.get('/report', (req, res) => {
+    res.sendFile(path.join(rootPath, 'report.html'));
+  });
+  
+  app.get('/mincal', (req, res) => {
+    res.sendFile(path.join(rootPath, 'mincal.html'));
+  });
 
   const startListening = (port: number) => {
     const server = app.listen(port, '0.0.0.0', () => {
