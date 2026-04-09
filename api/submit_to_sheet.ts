@@ -1,3 +1,6 @@
+// This file is for Vercel serverless deployment only
+// For local development, the route is handled in server.ts
+
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const SPREADSHEET_ID = '1L7MOhIOVb_XQaIZNH8HrO4Puc-5YTQ-WYI5j0-N_Om4';
@@ -98,13 +101,13 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    console.log('[v0 API] Received submission:', req.body);
+    console.log('[v0] Received submission:', req.body);
     
     const data = req.body;
     
     // Get access token
     const accessToken = await getAccessToken();
-    console.log('[v0 API] Got access token');
+    console.log('[v0] Got access token');
     
     // Prepare row data matching header: timestamp, email, who_are_you, are_you_hiring, company_name, phone_number, download_via
     const rowData = [
@@ -117,12 +120,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       data.download_via || '',
     ];
     
-    console.log('[v0 API] Appending row:', rowData);
+    console.log('[v0] Appending row:', rowData);
     
     // Append to sheet
     const result = await appendToSheet(accessToken, rowData);
     
-    console.log('[v0 API] Sheet updated successfully:', result);
+    console.log('[v0] Sheet updated successfully:', result);
     
     return res.status(200).json({ 
       success: true,
@@ -131,7 +134,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     });
     
   } catch (error) {
-    console.error('[v0 API] Error:', error);
+    console.error('[v0] Error:', error);
     return res.status(500).json({ 
       success: false, 
       error: error instanceof Error ? error.message : String(error)
