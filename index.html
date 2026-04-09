@@ -2168,6 +2168,11 @@
                 localStorage.setItem('salaryCalc_userEmail', userEmailAddress);
 
                 try {
+                    console.log('[v0] Form submission started');
+                    console.log('[v0] Download type:', currentDownloadType);
+                    console.log('[v0] Email:', userEmailAddress);
+                    console.log('[v0] User type:', typeValue);
+                    
                     let actionName = '';
                     let actionKey = '';
                     if (currentDownloadType === 'report') {
@@ -2177,6 +2182,30 @@
                         actionName = 'Download Salary Payslip';
                         actionKey = 'payslip';
                     }
+
+                    // Send data to Google Spreadsheet FIRST (independent of Firebase)
+                    const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/a/macros/epicareer.com/s/AKfycbzRzkbuA1MslXFMp5diBxL7WTZH2_-n5BsnHYiP9FP8d5gHn6dF20YRPdD8DnYE37u6/exec';
+                    
+                    const sheetsPayload = new URLSearchParams();
+                    sheetsPayload.append('timestamp', new Date().toISOString());
+                    sheetsPayload.append('email', userEmailAddress);
+                    sheetsPayload.append('who_are_you', typeValue);
+                    sheetsPayload.append('are_you_hiring', hiringValue || '');
+                    sheetsPayload.append('company_name', companyValue || '');
+                    sheetsPayload.append('phone_number', phoneValue || '');
+                    sheetsPayload.append('download_via', currentDownloadType === 'report' ? 'salary_report' : 'salary_payslip');
+                    
+                    console.log('[v0] Sending data to Google Sheets:', Object.fromEntries(sheetsPayload));
+                    
+                    fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        body: sheetsPayload
+                    }).then(() => {
+                        console.log('[v0] Google Sheets request sent');
+                    }).catch((sheetsError) => {
+                        console.error('[v0] Error sending to Google Sheets:', sheetsError);
+                    });
 
                     const leadData = {
                         email: userEmailAddress,
@@ -2198,34 +2227,7 @@
                     }
                     
                     await addDoc(collection(db, 'leads'), leadData);
-
-                    // Send data to Google Spreadsheet
-                    const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/a/macros/epicareer.com/s/AKfycbzRzkbuA1MslXFMp5diBxL7WTZH2_-n5BsnHYiP9FP8d5gHn6dF20YRPdD8DnYE37u6/exec';
-                    
-                    if (GOOGLE_SHEETS_WEB_APP_URL && GOOGLE_SHEETS_WEB_APP_URL !== '') {
-                        const sheetsPayload = new URLSearchParams();
-                        sheetsPayload.append('timestamp', new Date().toISOString());
-                        sheetsPayload.append('email', userEmailAddress);
-                        sheetsPayload.append('who_are_you', typeValue);
-                        sheetsPayload.append('are_you_hiring', hiringValue || '');
-                        sheetsPayload.append('company_name', companyValue || '');
-                        sheetsPayload.append('phone_number', phoneValue || '');
-                        sheetsPayload.append('download_via', currentDownloadType === 'report' ? 'salary_report' : 'salary_payslip');
-                        
-                        try {
-                            console.log('[v0] Sending data to Google Sheets:', Object.fromEntries(sheetsPayload));
-                            await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
-                                method: 'POST',
-                                mode: 'no-cors',
-                                body: sheetsPayload
-                            });
-                            console.log('[v0] Data sent to Google Sheets successfully');
-                        } catch (sheetsError) {
-                            console.error('[v0] Error sending to Google Sheets:', sheetsError);
-                        }
-                    } else {
-                        console.warn('[v0] Google Sheets URL not configured');
-                    }
+                    console.log('[v0] Firebase data saved');
 
                     // Send Email via Backend API
                     if (currentDownloadType === 'report' || currentDownloadType === 'payslip') {
