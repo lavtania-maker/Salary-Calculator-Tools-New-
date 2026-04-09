@@ -14,8 +14,8 @@ async function startServer() {
   // It will use process.env.RESEND_API_KEY automatically if available
   const resend = new Resend(process.env.RESEND_API_KEY || 're_placeholder');
 
-  // API Route to send email
-  app.post('/api/send-email', async (req, res) => {
+  // API Route to deliver document
+  app.post('/api/deliver-document', async (req, res) => {
     try {
       const { email, type } = req.body;
 

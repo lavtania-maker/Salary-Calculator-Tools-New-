@@ -1930,8 +1930,6 @@
             const modalFeedback = document.getElementById('modalFeedback');
             
             let currentDownloadType = 'report';
-            let currentTemplateUrl = '';
-            let currentTemplateAction = '';
             let currentDownloadBtn = null;
             
             // Persistent storage for email submission
@@ -1951,17 +1949,6 @@
                 openModal();
             });
 
-            templateDownloadBtns.forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    currentDownloadType = 'template';
-                    currentTemplateUrl = this.getAttribute('data-url');
-                    currentTemplateAction = this.getAttribute('data-action');
-                    currentDownloadBtn = this;
-                    openModal();
-                });
-            });
-
             function openModal() {
                 // Always show form to collect email, hide success message
                 modalFormContent.style.display = 'block';
@@ -1979,7 +1966,9 @@
                 const hiringError = document.getElementById('hiringError');
                 const companyGroup = document.getElementById('companyNameGroup');
                 const companyInput = document.getElementById('companyName');
+                const userTypeInput = document.getElementById('userType');
                 
+                userTypeInput.value = '';
                 hiringGroup.style.display = 'none';
                 hiringStatus.required = false;
                 hiringError.style.display = 'none';
@@ -1987,6 +1976,7 @@
                 
                 companyGroup.style.display = 'none';
                 companyInput.required = false;
+                companyInput.value = '';
 
                 if (currentDownloadType === 'report') {
                     modalTitle.textContent = 'Download Salary Report';
@@ -1996,21 +1986,6 @@
                     modalDescription.textContent = 'Enter your email address to receive your professional salary payslip.';
                     companyGroup.style.display = 'block';
                     companyInput.required = true;
-                } else if (currentDownloadType === 'template') {
-                    modalTitle.textContent = `Download ${currentTemplateAction}`;
-                    modalDescription.textContent = 'Enter your details to download this free template.';
-                    
-                    // Show hiring question and company name for specific templates
-                    companyGroup.style.display = 'block';
-                    companyInput.required = true;
-
-                    const templateName = currentTemplateAction.toLowerCase();
-                    if (templateName.includes('payslip') || 
-                        templateName.includes('increment') || 
-                        templateName.includes('adjustment')) {
-                        hiringGroup.style.display = 'block';
-                        hiringStatus.required = true;
-                    }
                 }
                 
                 emailModal.style.display = 'flex';
@@ -2021,8 +1996,6 @@
                     modalFeedback.textContent = 'Thank you! The report has been sent to your email.';
                 } else if (currentDownloadType === 'payslip') {
                     modalFeedback.textContent = 'Thank you! The salary payslip has been sent to your email.';
-                } else if (currentDownloadType === 'template') {
-                    modalFeedback.textContent = 'Thank you! Your download will start shortly.';
                 }
             }
 
@@ -2033,6 +2006,24 @@
             window.addEventListener('click', function(e) {
                 if (e.target === emailModal) {
                     emailModal.style.display = 'none';
+                }
+            });
+
+            // Handle conditional questions based on user type
+            const userTypeSelect = document.getElementById('userType');
+            userTypeSelect.addEventListener('change', function() {
+                const hiringGroup = document.getElementById('hiringQuestionGroup');
+                const hiringStatus = document.getElementById('hiringStatus');
+                const hiringError = document.getElementById('hiringError');
+                
+                if (this.value === 'Employer / HR' || this.value === 'Jobseeker') {
+                    hiringGroup.style.display = 'block';
+                    hiringStatus.required = true;
+                } else {
+                    hiringGroup.style.display = 'none';
+                    hiringStatus.required = false;
+                    hiringStatus.value = '';
+                    hiringError.style.display = 'none';
                 }
             });
 
@@ -2089,9 +2080,6 @@
                     } else if (currentDownloadType === 'payslip') {
                         actionName = 'Download Salary Payslip';
                         actionKey = 'payslip';
-                    } else if (currentDownloadType === 'template') {
-                        actionName = currentTemplateAction;
-                        actionKey = currentTemplateAction;
                     }
 
                     const leadData = {
@@ -2118,7 +2106,7 @@
                     // Send Email via Backend API
                     if (currentDownloadType === 'report' || currentDownloadType === 'payslip') {
                         try {
-                            const response = await fetch('/api/send-email', {
+                            const response = await fetch('/api/deliver-document', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
@@ -2134,7 +2122,7 @@
                                 console.error('Failed to send email:', result.error);
                             }
                         } catch (emailError) {
-                            console.error('Error calling send-email API:', emailError);
+                            console.error('Error calling deliver-document API:', emailError);
                         }
                     }
 
@@ -2177,10 +2165,6 @@
                     }).toString();
                     setTimeout(() => {
                         window.open(`/payslip.html?${queryParams}`, '_blank');
-                    }, 500);
-                } else if (currentDownloadType === 'template' && currentTemplateUrl) {
-                    setTimeout(() => {
-                        window.open(currentTemplateUrl, '_blank');
                     }, 500);
                 }
 
