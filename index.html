@@ -361,36 +361,37 @@
             font-size: 0.95rem;
         }
 
+        /* Collapsible Result Sections */
         .result-section {
-            margin-bottom: 12px;
-            padding: 12px;
             border: 1px solid var(--border);
             border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 12px;
             background-color: #ffffff;
+            transition: box-shadow 0.2s;
         }
 
-        .result-section-employee {
-            background-color: #ffffff;
-            border: 1px solid var(--border);
-        }
-
-        .result-section-employer {
-            background-color: #ffffff;
-            border: 1px solid var(--border);
+        .result-section:hover {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         }
 
         .result-section-title {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            margin-bottom: 12px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 6px;
+            cursor: pointer;
             display: flex;
             align-items: center;
+            user-select: none;
+            padding: 4px;
+            transition: background-color 0.2s;
+            border-radius: 8px;
+            margin: -4px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
             gap: 8px;
-            letter-spacing: 0.02em;
+        }
+
+        .result-section-title:hover {
+            background-color: #f8fafc;
         }
 
         .indicator-dot {
@@ -406,6 +407,40 @@
 
         .indicator-blue {
             background-color: #3b82f6;
+        }
+
+        .toggle-indicator {
+            margin-left: auto;
+            font-size: 0.85rem;
+            color: var(--primary);
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f1f5f9;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .result-section-title:hover .toggle-indicator {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .collapsible-content {
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            max-height: 1000px;
+            opacity: 1;
+            margin-top: 12px;
+        }
+
+        .result-section.collapsed .collapsible-content {
+            max-height: 0;
+            opacity: 0;
+            margin-top: 0 !important;
+            pointer-events: none;
         }
 
         .cta-group {
@@ -1277,29 +1312,35 @@
                                 <div id="barDeduction" class="bar-deduction" style="width: 30%;"></div>
                             </div>
 
-                            <div class="result-section result-section-employee">
-                                <h4 class="result-section-title">
+                            <div class="result-section result-section-employee collapsed" id="sectionEmployee">
+                                <h4 class="result-section-title" onclick="toggleResultSection('sectionEmployee')">
                                     <span class="indicator-dot indicator-red"></span>
-                                    Employee Deductions
+                                    <span>Employee Deductions</span>
+                                    <span class="toggle-indicator">▶</span>
                                 </h4>
-                                <div id="employeeDeductionsContainer">
-                                    <!-- Deductions will be dynamically added here -->
+                                <div class="collapsible-content">
+                                    <div id="employeeDeductionsContainer">
+                                        <!-- Deductions will be dynamically added here -->
+                                    </div>
                                 </div>
-                                <div class="result-item" style="margin-top: 20px; padding-top: 12px; border-top: 1px solid var(--border); font-weight: 700; color: #ef4444; margin-bottom: 0;">
+                                <div class="result-item" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-weight: 700; color: #ef4444; margin-bottom: 0;">
                                     <span>Total Employee Deductions</span>
                                     <span id="resTotalDeductions">- RM 0.00</span>
                                 </div>
                             </div>
 
-                            <div class="result-section result-section-employer">
-                                <h4 class="result-section-title">
+                            <div class="result-section result-section-employer collapsed" id="sectionEmployer">
+                                <h4 class="result-section-title" onclick="toggleResultSection('sectionEmployer')">
                                     <span class="indicator-dot indicator-blue"></span>
-                                    Employer Contributions
+                                    <span>Employer Contributions</span>
+                                    <span class="toggle-indicator">▶</span>
                                 </h4>
-                                <div id="employerContributionsContainer">
-                                    <!-- Contributions will be dynamically added here -->
+                                <div class="collapsible-content">
+                                    <div id="employerContributionsContainer">
+                                        <!-- Contributions will be dynamically added here -->
+                                    </div>
                                 </div>
-                                <div class="result-item" style="margin-top: 20px; padding-top: 12px; border-top: 1px solid var(--border); font-weight: 700; color: #3b82f6; margin-bottom: 0;">
+                                <div class="result-item" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-weight: 700; color: #3b82f6; margin-bottom: 0;">
                                     <span>Total Employer Contributions</span>
                                     <span id="resTotalEmployerContribution">RM 0.00</span>
                                 </div>
@@ -1322,6 +1363,15 @@
 
                             <p style="font-size: 0.65rem; color: var(--text-muted); text-align: center; font-style: italic; margin-top: 10px;">Estimated values for reference</p>
 
+                            <div class="cta-group">
+                                <button id="downloadReportBtn" class="btn btn-primary">
+                                    Download Salary Report
+                                </button>
+                                <button id="downloadPayslipBtn" class="btn btn-primary">
+                                    Download Salary Payslip
+                                </button>
+                            </div>
+
                             <div id="incomeGroupSection" class="highlight-box" style="display: none; text-align: left; padding: 20px; border-radius: 16px; border: 1px solid;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                                     <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #1e293b;">Your Income Group</span>
@@ -1333,15 +1383,6 @@
                                 <p style="font-size: 0.75rem; color: #64748b; margin-top: 16px; font-style: italic; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 12px;">
                                     This is an estimate based on individual salary. Actual group depends on household income.
                                 </p>
-                            </div>
-
-                            <div class="cta-group">
-                                <button id="downloadReportBtn" class="btn btn-primary">
-                                    Download Salary Report
-                                </button>
-                                <button id="downloadPayslipBtn" class="btn btn-primary">
-                                    Download Salary Payslip
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -1857,6 +1898,13 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div id="modalFeedback">Thank you! The report has been sent to your email.</div>
+                <div id="mobileActionButtons" style="display: none; margin-top: 20px; flex-direction: column; gap: 10px;">
+                    <a id="viewFileBtn" href="#" target="_blank" class="btn btn-primary" style="width: 100%; text-align: center; text-decoration: none; display: inline-block;">View File Now</a>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 5px;">Works on Android & iPhone</p>
+                </div>
+                <div id="mobileFallbackText" style="display: none; margin-top: 15px; font-size: 0.875rem; color: var(--text-muted);">
+                    Your file has been downloaded. Open it using your PDF or Docs app.
+                </div>
             </div>
         </div>
     </div>
@@ -1878,6 +1926,19 @@
             }
             document.getElementById(tabName).style.display = "block";
             evt.currentTarget.className += " active";
+        }
+
+        window.toggleResultSection = function(sectionId) {
+            const section = document.getElementById(sectionId);
+            const indicator = section.querySelector('.toggle-indicator');
+            
+            if (section.classList.contains('collapsed')) {
+                section.classList.remove('collapsed');
+                indicator.textContent = '▼';
+            } else {
+                section.classList.add('collapsed');
+                indicator.textContent = '▶';
+            }
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -1990,10 +2051,40 @@
             }
 
             function updateSuccessMessage() {
+                const mobileActionButtons = document.getElementById('mobileActionButtons');
+                const mobileFallbackText = document.getElementById('mobileFallbackText');
+                const viewFileBtn = document.getElementById('viewFileBtn');
+                
+                // Show mobile helpers
+                mobileActionButtons.style.display = 'flex';
+                mobileFallbackText.style.display = 'block';
+
                 if (currentDownloadType === 'report') {
-                    modalFeedback.textContent = 'Thank you! The report has been sent to your email.';
+                    modalFeedback.textContent = 'Thank you! The report has been generated.';
+                    const queryParams = new URLSearchParams({
+                        salary: lastCalculation.salary,
+                        epf: lastCalculation.epf,
+                        socso: lastCalculation.socso,
+                        eis: lastCalculation.eis,
+                        pcb: lastCalculation.pcb,
+                        total: lastCalculation.totalDeductions,
+                        net: lastCalculation.netSalary,
+                        company: document.getElementById('companyName').value.trim() || 'COMPANY LOGO & NAME'
+                    }).toString();
+                    viewFileBtn.href = `/report.html?${queryParams}`;
                 } else if (currentDownloadType === 'payslip') {
-                    modalFeedback.textContent = 'Thank you! The salary payslip has been sent to your email.';
+                    modalFeedback.textContent = 'Thank you! Your professional payslip is ready.';
+                    const queryParams = new URLSearchParams({
+                        salary: lastCalculation.salary,
+                        epf: lastCalculation.epf,
+                        socso: lastCalculation.socso,
+                        eis: lastCalculation.eis,
+                        pcb: lastCalculation.pcb,
+                        total: lastCalculation.totalDeductions,
+                        net: lastCalculation.netSalary,
+                        company: document.getElementById('companyName').value.trim() || 'COMPANY LOGO & NAME'
+                    }).toString();
+                    viewFileBtn.href = `/payslip.html?${queryParams}`;
                 }
             }
 
@@ -2143,40 +2234,10 @@
                 modalFeedback.style.display = 'block';
                 updateSuccessMessage();
 
-                if (currentDownloadType === 'report') {
-                    const queryParams = new URLSearchParams({
-                        salary: lastCalculation.salary,
-                        epf: lastCalculation.epf,
-                        socso: lastCalculation.socso,
-                        eis: lastCalculation.eis,
-                        pcb: lastCalculation.pcb,
-                        total: lastCalculation.totalDeductions,
-                        net: lastCalculation.netSalary,
-                        company: companyValue || 'COMPANY LOGO & NAME'
-                    }).toString();
-                    setTimeout(() => {
-                        window.open(`/report.html?${queryParams}`, '_blank');
-                    }, 500);
-                } else if (currentDownloadType === 'payslip') {
-                    const queryParams = new URLSearchParams({
-                        salary: lastCalculation.salary,
-                        epf: lastCalculation.epf,
-                        socso: lastCalculation.socso,
-                        eis: lastCalculation.eis,
-                        pcb: lastCalculation.pcb,
-                        total: lastCalculation.totalDeductions,
-                        net: lastCalculation.netSalary,
-                        company: companyValue || 'COMPANY LOGO & NAME'
-                    }).toString();
-                    setTimeout(() => {
-                        window.open(`/payslip.html?${queryParams}`, '_blank');
-                    }, 500);
-                }
-
-                // Auto-close after a short delay
+                // Auto-close after a longer delay to allow users to click the button
                 setTimeout(() => {
                     emailModal.style.display = 'none';
-                }, 3000);
+                }, 10000);
             });
 
             function calculateSalary() {
