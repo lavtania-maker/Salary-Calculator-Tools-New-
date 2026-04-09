@@ -2104,30 +2104,31 @@
                     await addDoc(collection(db, 'leads'), leadData);
 
                     // Send data to Google Spreadsheet
-                    const GOOGLE_SHEETS_WEB_APP_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+                    const GOOGLE_SHEETS_WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbweBHp6tVvKYcVBRMKGPsxDqYRdlqyxO5rTxTKlzxPQI2hPBbCNwqoAJKLMnOpQrStU/exec';
                     
-                    const sheetsPayload = {
-                        timestamp: new Date().toISOString(),
-                        email: userEmailAddress,
-                        who_are_you: typeValue,
-                        are_you_hiring: hiringValue || '',
-                        company_name: companyValue || '',
-                        phone_number: phoneValue || '',
-                        download_via: currentDownloadType === 'report' ? 'salary_report' : 'salary_payslip'
-                    };
-                    
-                    try {
-                        await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
-                            method: 'POST',
-                            mode: 'no-cors',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(sheetsPayload)
-                        });
-                        console.log('Data sent to Google Sheets');
-                    } catch (sheetsError) {
-                        console.error('Error sending to Google Sheets:', sheetsError);
+                    if (GOOGLE_SHEETS_WEB_APP_URL && GOOGLE_SHEETS_WEB_APP_URL !== '') {
+                        const sheetsPayload = new URLSearchParams();
+                        sheetsPayload.append('timestamp', new Date().toISOString());
+                        sheetsPayload.append('email', userEmailAddress);
+                        sheetsPayload.append('who_are_you', typeValue);
+                        sheetsPayload.append('are_you_hiring', hiringValue || '');
+                        sheetsPayload.append('company_name', companyValue || '');
+                        sheetsPayload.append('phone_number', phoneValue || '');
+                        sheetsPayload.append('download_via', currentDownloadType === 'report' ? 'salary_report' : 'salary_payslip');
+                        
+                        try {
+                            console.log('[v0] Sending data to Google Sheets:', Object.fromEntries(sheetsPayload));
+                            await fetch(GOOGLE_SHEETS_WEB_APP_URL, {
+                                method: 'POST',
+                                mode: 'no-cors',
+                                body: sheetsPayload
+                            });
+                            console.log('[v0] Data sent to Google Sheets successfully');
+                        } catch (sheetsError) {
+                            console.error('[v0] Error sending to Google Sheets:', sheetsError);
+                        }
+                    } else {
+                        console.warn('[v0] Google Sheets URL not configured');
                     }
 
                     // Send Email via Backend API
