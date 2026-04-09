@@ -1,10 +1,13 @@
 import express from 'express';
-import { Resend } from 'resend';
-import cors from 'cors';
 import path from 'path';
+import cors from 'cors';
+import { Resend } from 'resend';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 async function startServer() {
-  console.log('[v0] Starting Express server...');
+  console.log('[v0] Starting Express server... (updated 09:33)');
   const app = express();
   const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 
