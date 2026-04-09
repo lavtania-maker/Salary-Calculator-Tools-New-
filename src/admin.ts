@@ -65,6 +65,7 @@ async function loadLeads() {
             const tr = document.createElement('tr');
             tr.innerHTML = `
                 <td>${escapeHtml(data.email)}</td>
+                <td>${escapeHtml(data.phoneNumber || '-')}</td>
                 <td>${escapeHtml(data.userType || '-')}</td>
                 <td>${escapeHtml(data.hiringStatus || '-')}</td>
                 <td>${escapeHtml(data.action)}</td>
@@ -90,12 +91,13 @@ if (exportBtn) {
             return;
         }
 
-        const headers = ['Email', 'User Type', 'Hiring Status', 'Action', 'Date'];
+        const headers = ['Email', 'Phone', 'User Type', 'Hiring Status', 'Action', 'Date'];
         const csvRows = [headers.join(',')];
 
         currentLeads.forEach(lead => {
             const row = [
                 `"${lead.email.replace(/"/g, '""')}"`,
+                `"${(lead.phoneNumber || '').replace(/"/g, '""')}"`,
                 `"${(lead.userType || '').replace(/"/g, '""')}"`,
                 `"${(lead.hiringStatus || '').replace(/"/g, '""')}"`,
                 `"${lead.action.replace(/"/g, '""')}"`,
