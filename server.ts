@@ -195,6 +195,7 @@ async function startServer() {
   
   // Serve HTML files
   app.get('/', (req, res) => {
+    console.log('[v0] Serving index.html');
     res.sendFile(path.join(rootPath, 'index.html'));
   });
   
