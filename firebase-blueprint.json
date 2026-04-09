@@ -18,9 +18,17 @@
           "type": "string",
           "format": "date-time",
           "description": "When the lead was captured"
+        },
+        "userType": {
+          "type": "string",
+          "description": "The type of user (e.g., Employer / HR, Employee, Jobseeker)"
+        },
+        "hiringStatus": {
+          "type": "string",
+          "description": "The user's hiring status (if applicable)"
         }
       },
-      "required": ["email", "action", "createdAt"]
+      "required": ["email", "action", "createdAt", "userType"]
     }
   },
   "firestore": {

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Salary Report</title>
+  <style>
+    body { 
+        font-family: Arial, sans-serif; 
+        padding: 40px; 
+        color: #333; 
+        max-width: 800px; 
+        margin: 0 auto; 
+    }
+    .header { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        border-bottom: 2px solid #000; 
+        padding-bottom: 20px; 
+        margin-bottom: 30px; 
+    }
+    .company-name { 
+        font-size: 24px; 
+        font-weight: bold; 
+        color: #2563eb; 
+    }
+    .report-title { 
+        font-size: 20px; 
+        font-weight: bold; 
+        color: #64748b;
+    }
+    .row { 
+        display: flex; 
+        justify-content: space-between; 
+        padding: 12px 0; 
+        border-bottom: 1px solid #e2e8f0; 
+    }
+    .row.bold { 
+        font-weight: bold; 
+        color: #0f172a;
+    }
+    .row.total { 
+        font-size: 20px; 
+        border-top: 2px solid #000; 
+        border-bottom: none; 
+        padding-top: 20px; 
+        margin-top: 10px; 
+    }
+    .section-title { 
+        font-size: 18px; 
+        font-weight: bold; 
+        margin-top: 40px; 
+        margin-bottom: 15px; 
+        color: #1e293b; 
+    }
+    .btn { 
+        padding: 10px 20px; 
+        background-color: #2563eb; 
+        color: white; 
+        border: none; 
+        border-radius: 4px; 
+        cursor: pointer; 
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .btn:hover {
+        background-color: #1d4ed8;
+    }
+    .print-controls {
+        text-align: right; 
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px dashed #cbd5e1;
+    }
+    @media print {
+      .print-controls { display: none; }
+      body { padding: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="print-controls">
+    <button class="btn" onclick="window.print()">Print to PDF</button>
+  </div>
+
+  <div class="header">
+    <div class="company-name" id="company">COMPANY NAME</div>
+    <div class="report-title">Salary Report</div>
+  </div>
+
+  <div class="row bold" style="font-size: 18px;">
+    <span>Gross Pay</span>
+    <span id="salary">RM 0.00</span>
+  </div>
+
+  <div class="section-title">Breakdown of Contribution Amounts*</div>
+  
+  <div class="row">
+    <span>EPF (Employee)</span>
+    <span id="epf">RM 0.00</span>
+  </div>
+  <div class="row">
+    <span>SOCSO (Employee)</span>
+    <span id="socso">RM 0.00</span>
+  </div>
+  <div class="row">
+    <span>EIS (Employee)</span>
+    <span id="eis">RM 0.00</span>
+  </div>
+  <div class="row">
+    <span>PCB (Monthly Tax Deduction)</span>
+    <span id="pcb">RM 0.00</span>
+  </div>
+
+  <div class="row bold" style="background-color: #f8fafc; padding: 15px 10px; margin-top: 15px;">
+    <span>Total Deductions</span>
+    <span id="total">RM 0.00</span>
+  </div>
+
+  <div class="row bold total">
+    <span>Net Pay (Take Home)</span>
+    <span id="net">RM 0.00</span>
+  </div>
+
+  <div style="margin-top: 50px; font-size: 12px; color: #64748b; line-height: 1.5;">
+    <p>Disclaimer: This calculator is offered for informational and reference purposes only. Calculations are not meant to supplant or serve as a substitute for professional guidance or official calculations provided by relevant authorities.</p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const formatRM = (val) => "RM " + parseFloat(val || 0).toFixed(2);
+    
+    const companyName = params.get("company");
+    if (companyName && companyName !== 'COMPANY LOGO & NAME') {
+        document.getElementById("company").innerText = companyName;
+    } else {
+        document.getElementById("company").innerText = "SalaryCalc MY";
+    }
+    
+    document.getElementById("salary").innerText = formatRM(params.get("salary"));
+    document.getElementById("epf").innerText = formatRM(params.get("epf"));
+    document.getElementById("socso").innerText = formatRM(params.get("socso"));
+    document.getElementById("eis").innerText = formatRM(params.get("eis"));
+    document.getElementById("pcb").innerText = formatRM(params.get("pcb"));
+    document.getElementById("total").innerText = formatRM(params.get("total"));
+    document.getElementById("net").innerText = formatRM(params.get("net"));
+  </script>
+</body>
+</html>
