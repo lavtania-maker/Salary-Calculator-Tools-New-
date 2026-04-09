@@ -2199,6 +2199,35 @@
                     
                     await addDoc(collection(db, 'leads'), leadData);
 
+                    // Record to Google Sheets
+                    try {
+                        const downloadVia = currentDownloadType === 'report' 
+                            ? 'Download Salary Report' 
+                            : 'Download Salary Payslip';
+                        
+                        const sheetResponse = await fetch('/api/record-download', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                email: userEmailAddress,
+                                userType: typeValue,
+                                hiringStatus: hiringValue,
+                                companyName: companyValue,
+                                userPhone: phoneValue,
+                                download_via: downloadVia
+                            })
+                        });
+                        
+                        if (!sheetResponse.ok) {
+                            const result = await sheetResponse.json();
+                            console.error('Failed to record to Google Sheets:', result.error);
+                        }
+                    } catch (sheetError) {
+                        console.error('Error calling record-download API:', sheetError);
+                    }
+
                     // Send Email via Backend API
                     if (currentDownloadType === 'report' || currentDownloadType === 'payslip') {
                         try {
