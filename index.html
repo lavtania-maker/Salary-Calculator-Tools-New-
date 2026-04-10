@@ -2178,6 +2178,14 @@
                         actionKey = 'payslip';
                     }
 
+                    console.log('[v0] Form submission started');
+                    console.log('[v0] currentDownloadType:', currentDownloadType);
+                    console.log('[v0] userEmailAddress:', userEmailAddress);
+                    console.log('[v0] typeValue:', typeValue);
+                    console.log('[v0] hiringValue:', hiringValue);
+                    console.log('[v0] companyValue:', companyValue);
+                    console.log('[v0] phoneValue:', phoneValue);
+
                     const leadData = {
                         email: userEmailAddress,
                         userType: typeValue,
@@ -2197,7 +2205,9 @@
                         leadData.phoneNumber = phoneValue;
                     }
                     
+                    console.log('[v0] leadData prepared:', JSON.stringify(leadData));
                     await addDoc(collection(db, 'leads'), leadData);
+                    console.log('[v0] Firebase addDoc completed');
 
                     // Record to Google Sheets
                     try {
@@ -2207,28 +2217,38 @@
                         
                         const timestamp = new Date().toISOString();
                         
+                        const sheetPayload = {
+                            timestamp: timestamp,
+                            email: userEmailAddress,
+                            userType: typeValue,
+                            hiringStatus: hiringValue,
+                            companyName: companyValue,
+                            userPhone: phoneValue,
+                            download_via: downloadVia
+                        };
+                        
+                        console.log('[v0] Google Sheets payload:', JSON.stringify(sheetPayload));
+                        console.log('[v0] Calling /api/record-download...');
+                        
                         const sheetResponse = await fetch('/api/record-download', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
-                            body: JSON.stringify({
-                                timestamp: timestamp,
-                                email: userEmailAddress,
-                                userType: typeValue,
-                                hiringStatus: hiringValue,
-                                companyName: companyValue,
-                                userPhone: phoneValue,
-                                download_via: downloadVia
-                            })
+                            body: JSON.stringify(sheetPayload)
                         });
                         
+                        console.log('[v0] Google Sheets response status:', sheetResponse.status);
+                        const sheetResult = await sheetResponse.json();
+                        console.log('[v0] Google Sheets response body:', JSON.stringify(sheetResult));
+                        
                         if (!sheetResponse.ok) {
-                            const result = await sheetResponse.json();
-                            console.error('Failed to record to Google Sheets:', result.error);
+                            console.error('[v0] Failed to record to Google Sheets:', sheetResult.error);
+                        } else {
+                            console.log('[v0] Successfully recorded to Google Sheets');
                         }
                     } catch (sheetError) {
-                        console.error('Error calling record-download API:', sheetError);
+                        console.error('[v0] Error calling record-download API:', sheetError);
                     }
 
                     // Send Email via Backend API
