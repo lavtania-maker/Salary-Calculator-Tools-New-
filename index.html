@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salary Calculator Malaysia (Take Home Pay) | EPF, SOCSO, EIS, PCB</title>
-    <meta name="description" content="Calculate your net salary in Malaysia after EPF, SOCSO, EIS, and PCB deductions instantly. Free tool for employees and employers.">
-    
+    <meta name="description"
+        content="Calculate your net salary in Malaysia after EPF, SOCSO, EIS, and PCB deductions instantly. Free tool for employees and employers.">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,15 +16,20 @@
     <style>
         /* CSS Variables for easy maintenance */
         :root {
-            --primary: #2563eb; /* Modern Blue */
+            --primary: #2563eb;
+            /* Modern Blue */
             --primary-hover: #1d4ed8;
             --secondary: #4b5563;
-            --bg-light: #ffffff; /* Pure white background */
+            --bg-light: #ffffff;
+            /* Pure white background */
             --card-bg: #ffffff;
-            --text-main: #1f2937; /* Dark grey text */
+            --text-main: #1f2937;
+            /* Dark grey text */
             --text-muted: #6b7280;
-            --border: #f1f5f9; /* Light border for cards/navbar */
-            --border-input: #e5e7eb; /* Border for inputs */
+            --border: #f1f5f9;
+            /* Light border for cards/navbar */
+            --border-input: #e5e7eb;
+            /* Border for inputs */
             --success: #059669;
             --danger: #dc2626;
             --shadow-soft: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
@@ -143,7 +150,8 @@
             color: #111827;
         }
 
-        .btn:disabled, .btn.disabled {
+        .btn:disabled,
+        .btn.disabled {
             background-color: #e2e8f0 !important;
             color: #94a3b8 !important;
             cursor: not-allowed !important;
@@ -224,7 +232,8 @@
             color: var(--text-main);
         }
 
-        .form-input, .form-select {
+        .form-input,
+        .form-select {
             width: 100%;
             padding: 8px 12px;
             border: 1px solid var(--border-input);
@@ -272,7 +281,8 @@
             box-shadow: none;
         }
 
-        .form-input:focus, .form-select:focus {
+        .form-input:focus,
+        .form-select:focus {
             outline: none;
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
@@ -332,7 +342,8 @@
         }
 
         .result-content {
-            display: none; /* Hidden until calculated */
+            display: none;
+            /* Hidden until calculated */
             opacity: 0;
             transform: translateY(20px);
             transition: opacity 0.5s ease, transform 0.5s ease;
@@ -372,7 +383,7 @@
         }
 
         .result-section:hover {
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
 
         .result-section-title {
@@ -500,8 +511,17 @@
             display: flex;
         }
 
-        .bar-net { background: var(--success); height: 100%; transition: width 0.3s ease; }
-        .bar-deduction { background: var(--danger); height: 100%; transition: width 0.3s ease; }
+        .bar-net {
+            background: var(--success);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
+
+        .bar-deduction {
+            background: var(--danger);
+            height: 100%;
+            transition: width 0.3s ease;
+        }
 
         /* Contribution Section Styles */
         .contribution-section {
@@ -509,6 +529,7 @@
             background-color: #ffffff;
             border-top: 1px solid var(--border);
         }
+
         .contribution-tabs {
             display: flex;
             gap: 5px;
@@ -517,6 +538,7 @@
             padding: 5px;
             border-radius: 8px;
         }
+
         .contribution-tab {
             padding: 8px 16px;
             cursor: pointer;
@@ -527,32 +549,40 @@
             flex: 1;
             text-align: center;
         }
+
         .contribution-tab.active {
             background: white;
             color: var(--primary);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
+
         .contribution-content {
             display: none;
             overflow-x: auto;
         }
+
         .contribution-content.active {
             display: block;
         }
+
         .contribution-table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 10px;
         }
-        .contribution-table th, .contribution-table td {
+
+        .contribution-table th,
+        .contribution-table td {
             padding: 12px;
             text-align: left;
             border-bottom: 1px solid var(--border);
         }
+
         .contribution-table th {
             background-color: #f8fafc;
             font-weight: 600;
         }
+
         .contribution-table tr:nth-child(even) {
             background-color: #f9fafb;
         }
@@ -630,11 +660,39 @@
             border-radius: 4px;
         }
 
-        .doc-header { height: 10px; background: #e2e8f0; width: 60%; border-radius: 2px; }
-        .doc-line { height: 6px; background: #f1f5f9; width: 100%; border-radius: 2px; }
-        .doc-row { display: flex; gap: 5px; }
-        .doc-cell { height: 6px; background: #f1f5f9; flex: 1; border-radius: 2px; }
-        .doc-highlight { height: 8px; background: #dbeafe; width: 40%; border-radius: 2px; margin-top: auto; }
+        .doc-header {
+            height: 10px;
+            background: #e2e8f0;
+            width: 60%;
+            border-radius: 2px;
+        }
+
+        .doc-line {
+            height: 6px;
+            background: #f1f5f9;
+            width: 100%;
+            border-radius: 2px;
+        }
+
+        .doc-row {
+            display: flex;
+            gap: 5px;
+        }
+
+        .doc-cell {
+            height: 6px;
+            background: #f1f5f9;
+            flex: 1;
+            border-radius: 2px;
+        }
+
+        .doc-highlight {
+            height: 8px;
+            background: #dbeafe;
+            width: 40%;
+            border-radius: 2px;
+            margin-top: auto;
+        }
 
 
         .template-card h3 {
@@ -802,7 +860,8 @@
             border-bottom: 1px solid var(--border);
         }
 
-        .styled-table th, .styled-table td {
+        .styled-table th,
+        .styled-table td {
             padding: 10px 12px;
         }
 
@@ -913,9 +972,11 @@
             .footer-col-links {
                 padding-left: 0;
             }
+
             .footer-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
             .footer-col:first-child {
                 grid-column: span 2;
                 margin-bottom: 20px;
@@ -926,6 +987,7 @@
             .footer-grid {
                 grid-template-columns: 1fr;
             }
+
             .footer-col:first-child {
                 grid-column: span 1;
             }
@@ -1003,16 +1065,20 @@
         noscript .result-content {
             display: none !important;
         }
+
         noscript .placeholder-text {
             display: block !important;
         }
+
         noscript .contribution-content {
             display: block !important;
             margin-bottom: 20px;
         }
+
         noscript .contribution-tabs {
             display: none !important;
         }
+
         .result-item span:last-child {
             text-align: right;
             flex-shrink: 0;
@@ -1021,6 +1087,7 @@
 
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
+
             /* Layout */
             .main-layout {
                 grid-template-columns: 1fr;
@@ -1040,13 +1107,16 @@
             .form-actions {
                 flex-direction: column !important;
             }
+
             .form-actions .btn {
                 width: 100% !important;
                 flex: none !important;
             }
+
             .cta-group {
                 flex-direction: column;
             }
+
             .cta-group .btn {
                 width: 100%;
             }
@@ -1063,7 +1133,8 @@
                 background: transparent !important;
                 border: none !important;
             }
-            .pcb-table-grid > div {
+
+            .pcb-table-grid>div {
                 border: 1px solid #e2e8f0;
                 border-radius: 8px;
             }
@@ -1071,45 +1142,51 @@
             .deductions-grid {
                 grid-template-columns: 1fr !important;
             }
-            
+
             /* Typography & Spacing */
             .hero h1 {
                 font-size: 1.6rem;
             }
+
             .hero p {
                 font-size: 0.95rem;
             }
+
             .card {
                 padding: 16px;
             }
+
             .highlight-value {
                 font-size: 2rem;
             }
         }
+
         /* Print Styles */
         @media print {
+
             /* Hide everything we don't want */
-            .navbar, 
-            .hero, 
-            .calculator-panel, 
-            .content-section, 
-            .footer, 
+            .navbar,
+            .hero,
+            .calculator-panel,
+            .content-section,
+            .footer,
             #emailModal,
-            #printBtn, 
+            #printBtn,
             .cta-group {
                 display: none !important;
             }
 
             /* Reset layout constraints for printing */
-            body, html {
+            body,
+            html {
                 background: white !important;
                 margin: 0 !important;
                 padding: 0 !important;
             }
-            
-            .calculator-area, 
-            .container, 
-            .main-layout, 
+
+            .calculator-area,
+            .container,
+            .main-layout,
             .result-panel {
                 display: block !important;
                 width: 100% !important;
@@ -1135,13 +1212,15 @@
         }
     </style>
 </head>
+
 <body>
 
     <!-- Navbar -->
     <header class="navbar">
         <div class="container">
             <a href="/" class="logo">
-                <img src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg" alt="SalaryCalc MY" referrerPolicy="no-referrer" class="logo-img">
+                <img src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
+                    alt="SalaryCalc MY" referrerPolicy="no-referrer" class="logo-img">
             </a>
         </div>
     </header>
@@ -1159,65 +1238,99 @@
         <!-- Main Content -->
         <main class="container">
             <div class="main-layout">
-                
+
                 <!-- Left Side: Form Input -->
                 <section class="card">
                     <h2 class="card-title">Enter Salary Details</h2>
                     <form id="salaryForm" action="#resultCard" method="GET">
                         <div class="form-group">
-                            <label class="form-label" for="grossSalary" style="display: flex; align-items: center; gap: 6px;">
+                            <label class="form-label" for="grossSalary"
+                                style="display: flex; align-items: center; gap: 6px;">
                                 Gross Monthly Salary
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-muted);"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                    style="color: var(--text-muted);">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                                </svg>
                             </label>
-                            <p style="font-size: 0.7rem; color: #dc2626; margin-top: -2px; margin-bottom: 4px; font-weight: 600;">*Required</p>
+                            <p
+                                style="font-size: 0.7rem; color: #dc2626; margin-top: -2px; margin-bottom: 4px; font-weight: 600;">
+                                *Required</p>
                             <div class="input-group">
                                 <span class="input-prefix">RM</span>
-                                <input type="number" id="grossSalary" name="grossSalary" class="form-input" placeholder="0" required>
+                                <input type="number" id="grossSalary" name="grossSalary" class="form-input"
+                                    placeholder="0" required>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label" for="bonus">Bonus / Allowance (RM)</label>
-                            <p style="font-size: 0.7rem; color: #9ca3af; margin-top: -2px; margin-bottom: 4px;">(Optional)</p>
+                            <p style="font-size: 0.7rem; color: #9ca3af; margin-top: -2px; margin-bottom: 4px;">
+                                (Optional)</p>
                             <input type="number" id="bonus" name="bonus" class="form-input" placeholder="e.g. 1000">
                         </div>
 
                         <div class="form-actions" style="margin-top: 20px; margin-bottom: 24px;">
                             <button type="reset" id="resetBtn" class="btn btn-outline">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                    <path d="M3 3v5h5"></path>
+                                </svg>
                                 Reset
                             </button>
                             <button type="submit" class="btn btn-primary">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16.01" y2="14"></line><line x1="16" y1="18" x2="16.01" y2="18"></line><line x1="12" y1="14" x2="12.01" y2="14"></line><line x1="12" y1="18" x2="12.01" y2="18"></line><line x1="8" y1="14" x2="8.01" y2="14"></line><line x1="8" y1="18" x2="8.01" y2="18"></line></svg>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="6" x2="16" y2="6"></line>
+                                    <line x1="16" y1="14" x2="16.01" y2="14"></line>
+                                    <line x1="16" y1="18" x2="16.01" y2="18"></line>
+                                    <line x1="12" y1="14" x2="12.01" y2="14"></line>
+                                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                                    <line x1="8" y1="14" x2="8.01" y2="14"></line>
+                                    <line x1="8" y1="18" x2="8.01" y2="18"></line>
+                                </svg>
                                 Calculate
                             </button>
                         </div>
 
-                        <div style="margin-bottom: 16px; font-weight: 700; font-size: 1.1rem; color: var(--text-main); border-bottom: 1px solid var(--border); padding-bottom: 8px;">
+                        <div
+                            style="margin-bottom: 16px; font-weight: 700; font-size: 1.1rem; color: var(--text-main); border-bottom: 1px solid var(--border); padding-bottom: 8px;">
                             Salary Option
                         </div>
 
                         <div class="form-group">
                             <label class="form-label" for="maritalStatus">Marital Status</label>
-                            <p style="font-size: 0.7rem; color: #9ca3af; margin-top: -2px; margin-bottom: 4px;">(Optional)</p>
+                            <p style="font-size: 0.7rem; color: #9ca3af; margin-top: -2px; margin-bottom: 4px;">
+                                (Optional)</p>
                             <select id="maritalStatus" name="maritalStatus" class="form-select">
                                 <option value="single">Single</option>
                                 <optgroup label="Spouse Not Working">
-                                    <option value="married_spouse_not_working_no_child">Married (Spouse NOT Working, No Child)</option>
-                                    <option value="married_1_child_spouse_not_working">Married + 1 Child (Spouse NOT Working)</option>
-                                    <option value="married_2_children_spouse_not_working">Married + 2 Children (Spouse NOT Working)</option>
+                                    <option value="married_spouse_not_working_no_child">Married (Spouse NOT Working, No
+                                        Child)</option>
+                                    <option value="married_1_child_spouse_not_working">Married + 1 Child (Spouse NOT
+                                        Working)</option>
+                                    <option value="married_2_children_spouse_not_working">Married + 2 Children (Spouse
+                                        NOT Working)</option>
                                 </optgroup>
                                 <optgroup label="Spouse Working">
-                                    <option value="married_spouse_working_no_child">Married (Spouse Working, No Child)</option>
-                                    <option value="married_1_child_spouse_working">Married + 1 Child (Spouse Working)</option>
-                                    <option value="married_2_children_spouse_working">Married + 2 Children (Spouse Working)</option>
+                                    <option value="married_spouse_working_no_child">Married (Spouse Working, No Child)
+                                    </option>
+                                    <option value="married_1_child_spouse_working">Married + 1 Child (Spouse Working)
+                                    </option>
+                                    <option value="married_2_children_spouse_working">Married + 2 Children (Spouse
+                                        Working)</option>
                                 </optgroup>
                             </select>
                         </div>
 
                         <div class="form-group">
                             <label class="form-label" for="nationality">Nationality</label>
-                            <p style="font-size: 0.7rem; color: #9ca3af; margin-top: -2px; margin-bottom: 4px;">(Optional)</p>
+                            <p style="font-size: 0.7rem; color: #9ca3af; margin-top: -2px; margin-bottom: 4px;">
+                                (Optional)</p>
                             <select id="nationality" name="nationality" class="form-select">
                                 <option value="malaysian">Malaysian</option>
                                 <option value="foreigner">Foreigner</option>
@@ -1226,18 +1339,24 @@
 
                         <div class="form-group" style="margin-bottom: 0;">
                             <label class="form-label">Statutory Contributions</label>
-                            <p style="font-size: 0.7rem; color: #9ca3af; margin-top: -2px; margin-bottom: 4px;">(Optional)</p>
-                            <div class="statutory-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
-                                <label class="checkbox-item" style="background: #f9fafb; border: 1px solid var(--border); padding: 10px; border-radius: 6px;">
+                            <p style="font-size: 0.7rem; color: #9ca3af; margin-top: -2px; margin-bottom: 4px;">
+                                (Optional)</p>
+                            <div class="statutory-grid"
+                                style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px;">
+                                <label class="checkbox-item"
+                                    style="background: #f9fafb; border: 1px solid var(--border); padding: 10px; border-radius: 6px;">
                                     <input type="checkbox" id="includeEpf" name="includeEpf" checked> EPF
                                 </label>
-                                <label class="checkbox-item" style="background: #f9fafb; border: 1px solid var(--border); padding: 10px; border-radius: 6px;">
+                                <label class="checkbox-item"
+                                    style="background: #f9fafb; border: 1px solid var(--border); padding: 10px; border-radius: 6px;">
                                     <input type="checkbox" id="includeSocso" name="includeSocso" checked> SOCSO
                                 </label>
-                                <label class="checkbox-item" style="background: #f9fafb; border: 1px solid var(--border); padding: 10px; border-radius: 6px;">
+                                <label class="checkbox-item"
+                                    style="background: #f9fafb; border: 1px solid var(--border); padding: 10px; border-radius: 6px;">
                                     <input type="checkbox" id="includeEis" name="includeEis" checked> EIS
                                 </label>
-                                <label class="checkbox-item" style="background: #f9fafb; border: 1px solid var(--border); padding: 10px; border-radius: 6px;">
+                                <label class="checkbox-item"
+                                    style="background: #f9fafb; border: 1px solid var(--border); padding: 10px; border-radius: 6px;">
                                     <input type="checkbox" id="includePcb" name="includePcb" checked> PCB
                                 </label>
                             </div>
@@ -1248,51 +1367,64 @@
                 <!-- Right Side: Result Panel -->
                 <aside class="result-panel">
                     <div class="card" id="resultCard">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
                             <h2 class="card-title" style="margin-bottom: 0;">Calculation Results</h2>
                         </div>
-                        
+
                         <!-- Placeholder (Visible by default/No-JS) -->
                         <div id="placeholder" class="placeholder-text">
                             <div style="display: flex; justify-content: center; margin-bottom: 16px; margin-top: 10px;">
-                                <svg width="160" height="160" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <svg width="160" height="160" viewBox="0 0 200 200" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <!-- Background Blob -->
-                                    <path d="M154.5 135.5C168.1 118.7 178.3 98.5 174.1 80.1C169.9 61.7 151.3 45.1 131.5 35.3C111.7 25.5 90.7 22.5 71.9 28.1C53.1 33.7 36.5 47.9 25.7 65.5C14.9 83.1 9.9 104.1 15.5 121.9C21.1 139.7 37.3 154.3 55.7 163.5C74.1 172.7 94.7 176.5 113.1 171.1C131.5 165.7 140.9 152.3 154.5 135.5Z" fill="#EFF6FF"/>
-                                    
+                                    <path
+                                        d="M154.5 135.5C168.1 118.7 178.3 98.5 174.1 80.1C169.9 61.7 151.3 45.1 131.5 35.3C111.7 25.5 90.7 22.5 71.9 28.1C53.1 33.7 36.5 47.9 25.7 65.5C14.9 83.1 9.9 104.1 15.5 121.9C21.1 139.7 37.3 154.3 55.7 163.5C74.1 172.7 94.7 176.5 113.1 171.1C131.5 165.7 140.9 152.3 154.5 135.5Z"
+                                        fill="#EFF6FF" />
+
                                     <!-- Calculator Body -->
-                                    <rect x="65" y="45" width="70" height="110" rx="12" fill="#FFFFFF" stroke="#3B82F6" stroke-width="4"/>
-                                    
+                                    <rect x="65" y="45" width="70" height="110" rx="12" fill="#FFFFFF" stroke="#3B82F6"
+                                        stroke-width="4" />
+
                                     <!-- Screen -->
-                                    <rect x="77" y="60" width="46" height="24" rx="6" fill="#DBEAFE"/>
-                                    
+                                    <rect x="77" y="60" width="46" height="24" rx="6" fill="#DBEAFE" />
+
                                     <!-- Buttons -->
-                                    <rect x="77" y="95" width="10" height="10" rx="3" fill="#93C5FD"/>
-                                    <rect x="95" y="95" width="10" height="10" rx="3" fill="#93C5FD"/>
-                                    <rect x="113" y="95" width="10" height="10" rx="3" fill="#93C5FD"/>
-                                    
-                                    <rect x="77" y="113" width="10" height="10" rx="3" fill="#93C5FD"/>
-                                    <rect x="95" y="113" width="10" height="10" rx="3" fill="#93C5FD"/>
-                                    <rect x="113" y="113" width="10" height="10" rx="3" fill="#3B82F6"/>
-                                    
-                                    <rect x="77" y="131" width="10" height="10" rx="3" fill="#93C5FD"/>
-                                    <rect x="95" y="131" width="10" height="10" rx="3" fill="#93C5FD"/>
-                                    <rect x="113" y="131" width="10" height="10" rx="3" fill="#3B82F6"/>
+                                    <rect x="77" y="95" width="10" height="10" rx="3" fill="#93C5FD" />
+                                    <rect x="95" y="95" width="10" height="10" rx="3" fill="#93C5FD" />
+                                    <rect x="113" y="95" width="10" height="10" rx="3" fill="#93C5FD" />
+
+                                    <rect x="77" y="113" width="10" height="10" rx="3" fill="#93C5FD" />
+                                    <rect x="95" y="113" width="10" height="10" rx="3" fill="#93C5FD" />
+                                    <rect x="113" y="113" width="10" height="10" rx="3" fill="#3B82F6" />
+
+                                    <rect x="77" y="131" width="10" height="10" rx="3" fill="#93C5FD" />
+                                    <rect x="95" y="131" width="10" height="10" rx="3" fill="#93C5FD" />
+                                    <rect x="113" y="131" width="10" height="10" rx="3" fill="#3B82F6" />
 
                                     <!-- Floating Elements -->
-                                    <circle cx="155" cy="75" r="12" fill="#FCD34D" stroke="#F59E0B" stroke-width="3"/>
-                                    <path d="M155 69V81M151 75H159" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
-                                    
-                                    <circle cx="45" cy="125" r="10" fill="#FCD34D" stroke="#F59E0B" stroke-width="3"/>
-                                    <path d="M45 120V130M41 125H49" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
-                                    
-                                    <path d="M35 65H45M40 60V70" stroke="#10B981" stroke-width="4" stroke-linecap="round"/>
-                                    <path d="M145 145H155M145 153H155" stroke="#8B5CF6" stroke-width="4" stroke-linecap="round"/>
+                                    <circle cx="155" cy="75" r="12" fill="#FCD34D" stroke="#F59E0B" stroke-width="3" />
+                                    <path d="M155 69V81M151 75H159" stroke="#F59E0B" stroke-width="2"
+                                        stroke-linecap="round" />
+
+                                    <circle cx="45" cy="125" r="10" fill="#FCD34D" stroke="#F59E0B" stroke-width="3" />
+                                    <path d="M45 120V130M41 125H49" stroke="#F59E0B" stroke-width="2"
+                                        stroke-linecap="round" />
+
+                                    <path d="M35 65H45M40 60V70" stroke="#10B981" stroke-width="4"
+                                        stroke-linecap="round" />
+                                    <path d="M145 145H155M145 153H155" stroke="#8B5CF6" stroke-width="4"
+                                        stroke-linecap="round" />
                                 </svg>
                             </div>
-                            <p style="font-weight: 600; font-size: 1.1rem; color: var(--text-main); margin-bottom: 6px;">Your results are just one step away</p>
+                            <p
+                                style="font-weight: 600; font-size: 1.1rem; color: var(--text-main); margin-bottom: 6px;">
+                                Your results are just one step away</p>
                             <p style="color: var(--text-muted); font-size: 0.95rem;">Complete the form to continue</p>
                             <noscript>
-                                <p style="color: #dc2626; font-weight: 600; margin-top: 10px;">⚠️ JavaScript is required to calculate your salary. Please enable JavaScript in your browser settings to use the interactive calculator.</p>
+                                <p style="color: #dc2626; font-weight: 600; margin-top: 10px;">⚠️ JavaScript is required
+                                    to calculate your salary. Please enable JavaScript in your browser settings to use
+                                    the interactive calculator.</p>
                             </noscript>
                         </div>
 
@@ -1323,7 +1455,8 @@
                                         <!-- Deductions will be dynamically added here -->
                                     </div>
                                 </div>
-                                <div class="result-item" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-weight: 700; color: #ef4444; margin-bottom: 0;">
+                                <div class="result-item"
+                                    style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-weight: 700; color: #ef4444; margin-bottom: 0;">
                                     <span>Total Employee Deductions</span>
                                     <span id="resTotalDeductions">- RM 0.00</span>
                                 </div>
@@ -1340,7 +1473,8 @@
                                         <!-- Contributions will be dynamically added here -->
                                     </div>
                                 </div>
-                                <div class="result-item" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-weight: 700; color: #3b82f6; margin-bottom: 0;">
+                                <div class="result-item"
+                                    style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-weight: 700; color: #3b82f6; margin-bottom: 0;">
                                     <span>Total Employer Contributions</span>
                                     <span id="resTotalEmployerContribution">RM 0.00</span>
                                 </div>
@@ -1357,11 +1491,14 @@
                                 </div>
                                 <div style="padding-top: 20px; border-top: 1px solid #bfdbfe;">
                                     <span class="highlight-label">Annual Take Home Pay</span>
-                                    <span id="resNetAnnual" class="highlight-value" style="font-size: 1.8rem;">RM 0.00</span>
+                                    <span id="resNetAnnual" class="highlight-value" style="font-size: 1.8rem;">RM
+                                        0.00</span>
                                 </div>
                             </div>
 
-                            <p style="font-size: 0.65rem; color: var(--text-muted); text-align: center; font-style: italic; margin-top: 10px;">Estimated values for reference</p>
+                            <p
+                                style="font-size: 0.65rem; color: var(--text-muted); text-align: center; font-style: italic; margin-top: 10px;">
+                                Estimated values for reference</p>
 
                             <div class="cta-group">
                                 <button id="downloadReportBtn" class="btn btn-primary">
@@ -1372,16 +1509,25 @@
                                 </button>
                             </div>
 
-                            <div id="incomeGroupSection" class="highlight-box" style="display: none; text-align: left; padding: 20px; border-radius: 16px; border: 1px solid;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                                    <span style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #1e293b;">Your Income Group</span>
-                                    <span id="resIncomeGroupLabel" style="color: white; padding: 4px 12px; border-radius: 9999px; font-size: 0.85rem; font-weight: 800;">B40</span>
+                            <div id="incomeGroupSection" class="highlight-box"
+                                style="display: none; text-align: left; padding: 20px; border-radius: 16px; border: 1px solid;">
+                                <div
+                                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                                    <span
+                                        style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #1e293b;">Your
+                                        Income Group</span>
+                                    <span id="resIncomeGroupLabel"
+                                        style="color: white; padding: 4px 12px; border-radius: 9999px; font-size: 0.85rem; font-weight: 800;">B40</span>
                                 </div>
-                                <p id="resIncomeGroupDescription" style="font-size: 0.95rem; color: #334155; line-height: 1.5; margin: 0;">
-                                    With your total monthly income, you’re in the <strong id="resIncomeGroupText">B40 (lower income group)</strong> in Malaysia.
+                                <p id="resIncomeGroupDescription"
+                                    style="font-size: 0.95rem; color: #334155; line-height: 1.5; margin: 0;">
+                                    With your total monthly income, you’re in the <strong id="resIncomeGroupText">B40
+                                        (lower income group)</strong> in Malaysia.
                                 </p>
-                                <p style="font-size: 0.75rem; color: #64748b; margin-top: 16px; font-style: italic; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 12px;">
-                                    This is an estimate based on individual salary. Actual group depends on household income.
+                                <p
+                                    style="font-size: 0.75rem; color: #64748b; margin-top: 16px; font-style: italic; border-top: 1px solid rgba(0,0,0,0.05); padding-top: 12px;">
+                                    This is an estimate based on individual salary. Actual group depends on household
+                                    income.
                                 </p>
                             </div>
                         </div>
@@ -1398,11 +1544,13 @@
             <!-- Section 1: Formula -->
             <div class="content-card" style="margin-bottom: 2rem;">
                 <h2>What are the components of a salary calculator?</h2>
-                <p>Calculating your take-home pay involves subtracting all statutory deductions from your total earnings. Use this standard formula to verify your payslip:</p>
+                <p>Calculating your take-home pay involves subtracting all statutory deductions from your total
+                    earnings. Use this standard formula to verify your payslip:</p>
                 <div class="formula-box">
                     <span class="formula-text">Net Salary = Gross Salary – Total Deductions</span>
                 </div>
-                <p><strong>Total Deductions</strong> typically include contributions to <strong>EPF</strong>, <strong>SOCSO</strong>, <strong>EIS</strong>, and <strong>PCB (Monthly Tax Deduction)</strong>.</p>
+                <p><strong>Total Deductions</strong> typically include contributions to <strong>EPF</strong>,
+                    <strong>SOCSO</strong>, <strong>EIS</strong>, and <strong>PCB (Monthly Tax Deduction)</strong>.</p>
             </div>
 
             <!-- Section 3: Comparison Table -->
@@ -1447,8 +1595,9 @@
             <!-- Section 4: Contribution Tables -->
             <div class="content-card" style="margin-bottom: 2rem;">
                 <h2>EPF, SOCSO & EIS Contribution Tables</h2>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Quick reference for employer and employee contribution rates in Malaysia (Updated 2026)</p>
-                
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Quick reference for employer and employee
+                    contribution rates in Malaysia (Updated 2026)</p>
+
                 <div class="contribution-tabs">
                     <div class="contribution-tab active" onclick="openTab(event, 'epf')">EPF (KWSP)</div>
                     <div class="contribution-tab" onclick="openTab(event, 'socso')">SOCSO (PERKESO)</div>
@@ -1465,13 +1614,25 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>≤ RM5,000</td><td>11%</td><td>13%</td></tr>
-                            <tr><td>> RM5,000</td><td>11%</td><td>12%</td></tr>
-                            <tr><td>Age 60+</td><td>5.5%</td><td>6.5%</td></tr>
+                            <tr>
+                                <td>≤ RM5,000</td>
+                                <td>11%</td>
+                                <td>13%</td>
+                            </tr>
+                            <tr>
+                                <td>> RM5,000</td>
+                                <td>11%</td>
+                                <td>12%</td>
+                            </tr>
+                            <tr>
+                                <td>Age 60+</td>
+                                <td>5.5%</td>
+                                <td>6.5%</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-                
+
                 <div id="socso" class="contribution-content">
                     <table class="styled-table">
                         <thead>
@@ -1483,11 +1644,36 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>RM1,000 – RM2,000</td><td>4.75</td><td>16.65</td><td>21.40</td></tr>
-                            <tr><td>RM3,000 – RM4,000</td><td>14.75</td><td>51.65</td><td>66.40</td></tr>
-                            <tr><td>RM5,000 – RM6,000</td><td>24.75</td><td>86.65</td><td>111.40</td></tr>
-                            <tr><td>RM6,000</td><td>29.75</td><td>104.15</td><td>133.90</td></tr>
-                            <tr><td>> RM6,000</td><td>30.00</td><td>105.00</td><td>135.00</td></tr>
+                            <tr>
+                                <td>RM1,000 – RM2,000</td>
+                                <td>4.75</td>
+                                <td>16.65</td>
+                                <td>21.40</td>
+                            </tr>
+                            <tr>
+                                <td>RM3,000 – RM4,000</td>
+                                <td>14.75</td>
+                                <td>51.65</td>
+                                <td>66.40</td>
+                            </tr>
+                            <tr>
+                                <td>RM5,000 – RM6,000</td>
+                                <td>24.75</td>
+                                <td>86.65</td>
+                                <td>111.40</td>
+                            </tr>
+                            <tr>
+                                <td>RM6,000</td>
+                                <td>29.75</td>
+                                <td>104.15</td>
+                                <td>133.90</td>
+                            </tr>
+                            <tr>
+                                <td>> RM6,000</td>
+                                <td>30.00</td>
+                                <td>105.00</td>
+                                <td>135.00</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -1503,17 +1689,72 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>Up to 300</td><td>0.50</td><td>0.50</td><td>1.00</td></tr>
-                            <tr><td>1,000 – 1,100</td><td>2.10</td><td>2.10</td><td>4.20</td></tr>
-                            <tr><td>2,000 – 2,100</td><td>4.10</td><td>4.10</td><td>8.20</td></tr>
-                            <tr><td>3,000 – 3,100</td><td>6.10</td><td>6.10</td><td>12.20</td></tr>
-                            <tr><td>4,000 – 4,100</td><td>8.10</td><td>8.10</td><td>16.20</td></tr>
-                            <tr><td>4,800 – 4,900</td><td>9.70</td><td>9.70</td><td>19.40</td></tr>
-                            <tr><td>4,900 – 5,000</td><td>9.90</td><td>9.90</td><td>19.80</td></tr>
-                            <tr><td>5,000 – 5,100</td><td>10.10</td><td>10.10</td><td>20.20</td></tr>
-                            <tr><td>5,500 – 5,600</td><td>11.10</td><td>11.10</td><td>22.20</td></tr>
-                            <tr><td>5,900 – 6,000</td><td>11.90</td><td>11.90</td><td>23.80</td></tr>
-                            <tr><td>> 6,000</td><td>11.90</td><td>11.90</td><td>23.80</td></tr>
+                            <tr>
+                                <td>Up to 300</td>
+                                <td>0.50</td>
+                                <td>0.50</td>
+                                <td>1.00</td>
+                            </tr>
+                            <tr>
+                                <td>1,000 – 1,100</td>
+                                <td>2.10</td>
+                                <td>2.10</td>
+                                <td>4.20</td>
+                            </tr>
+                            <tr>
+                                <td>2,000 – 2,100</td>
+                                <td>4.10</td>
+                                <td>4.10</td>
+                                <td>8.20</td>
+                            </tr>
+                            <tr>
+                                <td>3,000 – 3,100</td>
+                                <td>6.10</td>
+                                <td>6.10</td>
+                                <td>12.20</td>
+                            </tr>
+                            <tr>
+                                <td>4,000 – 4,100</td>
+                                <td>8.10</td>
+                                <td>8.10</td>
+                                <td>16.20</td>
+                            </tr>
+                            <tr>
+                                <td>4,800 – 4,900</td>
+                                <td>9.70</td>
+                                <td>9.70</td>
+                                <td>19.40</td>
+                            </tr>
+                            <tr>
+                                <td>4,900 – 5,000</td>
+                                <td>9.90</td>
+                                <td>9.90</td>
+                                <td>19.80</td>
+                            </tr>
+                            <tr>
+                                <td>5,000 – 5,100</td>
+                                <td>10.10</td>
+                                <td>10.10</td>
+                                <td>20.20</td>
+                            </tr>
+                            <tr>
+                                <td>5,500 – 5,600</td>
+                                <td>11.10</td>
+                                <td>11.10</td>
+                                <td>22.20</td>
+                            </tr>
+                            <tr>
+                                <td>5,900 – 6,000</td>
+                                <td>11.90</td>
+                                <td>11.90</td>
+                                <td>23.80</td>
+                            </tr>
+                            <tr>
+                                <td>> 6,000</td>
+                                <td>11.90</td>
+                                <td>11.90</td>
+                                <td>23.80</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -1521,14 +1762,18 @@
 
             <!-- Section: Salary Payment Subject to EPF -->
             <div class="content-card" style="margin-bottom: 2rem;">
-                <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">Salary Payment Subject to EPF</h2>
+                <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">Salary
+                    Payment Subject to EPF</h2>
                 <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px; line-height: 1.6;">
-                    EPF contributions are mandatory for almost all types of monetary payments from an employer to an employee.
+                    EPF contributions are mandatory for almost all types of monetary payments from an employer to an
+                    employee.
                 </p>
-                
+
                 <div style="margin-bottom: 16px;">
-                    <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-main); margin-bottom: 8px;">Included Items:</p>
-                    <ul style="list-style: disc; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                    <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-main); margin-bottom: 8px;">
+                        Included Items:</p>
+                    <ul
+                        style="list-style: disc; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
                         <li>Basic salary</li>
                         <li>Bonuses and incentives</li>
                         <li>Commissions</li>
@@ -1538,8 +1783,10 @@
                 </div>
 
                 <div>
-                    <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-main); margin-bottom: 8px;">Excluded Items:</p>
-                    <ul style="list-style: disc; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                    <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-main); margin-bottom: 8px;">
+                        Excluded Items:</p>
+                    <ul
+                        style="list-style: disc; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
                         <li>Service charges</li>
                         <li>Overtime payments</li>
                         <li>Gratuity and retirement benefits</li>
@@ -1550,14 +1797,18 @@
 
             <!-- Section: Salary Payment Subject to SOCSO -->
             <div class="content-card" style="margin-bottom: 2rem;">
-                <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">Salary Payment Subject to SOCSO</h2>
+                <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">Salary
+                    Payment Subject to SOCSO</h2>
                 <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px; line-height: 1.6;">
-                    SOCSO contributions are calculated based on the employee's monthly wages, which includes various forms of remuneration.
+                    SOCSO contributions are calculated based on the employee's monthly wages, which includes various
+                    forms of remuneration.
                 </p>
-                
+
                 <div style="margin-bottom: 16px;">
-                    <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-main); margin-bottom: 8px;">Included Items:</p>
-                    <ul style="list-style: disc; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                    <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-main); margin-bottom: 8px;">
+                        Included Items:</p>
+                    <ul
+                        style="list-style: disc; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
                         <li>Basic salary</li>
                         <li>Overtime payments</li>
                         <li>Commissions and service charges</li>
@@ -1567,8 +1818,10 @@
                 </div>
 
                 <div>
-                    <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-main); margin-bottom: 8px;">Excluded Items:</p>
-                    <ul style="list-style: disc; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                    <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-main); margin-bottom: 8px;">
+                        Excluded Items:</p>
+                    <ul
+                        style="list-style: disc; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
                         <li>EPF contributions</li>
                         <li>Traveling allowances</li>
                         <li>Gratuity and retirement benefits</li>
@@ -1579,14 +1832,18 @@
 
             <!-- Section: Salary Payment Subject to EIS -->
             <div class="content-card" style="margin-bottom: 2rem;">
-                <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">Salary Payment Subject to EIS</h2>
+                <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-main); margin-bottom: 12px;">Salary
+                    Payment Subject to EIS</h2>
                 <p style="color: var(--text-muted); font-size: 0.95rem; margin-bottom: 16px; line-height: 1.6;">
-                    The Employment Insurance System (EIS) follows the same definition of "wages" as SOCSO for contribution purposes.
+                    The Employment Insurance System (EIS) follows the same definition of "wages" as SOCSO for
+                    contribution purposes.
                 </p>
-                
+
                 <div style="margin-bottom: 16px;">
-                    <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-main); margin-bottom: 8px;">Included Items:</p>
-                    <ul style="list-style: disc; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                    <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-main); margin-bottom: 8px;">
+                        Included Items:</p>
+                    <ul
+                        style="list-style: disc; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
                         <li>Basic salary</li>
                         <li>Overtime payments</li>
                         <li>Commissions</li>
@@ -1596,8 +1853,10 @@
                 </div>
 
                 <div>
-                    <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-main); margin-bottom: 8px;">Excluded Items:</p>
-                    <ul style="list-style: disc; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                    <p style="font-weight: 700; font-size: 0.9rem; color: var(--text-main); margin-bottom: 8px;">
+                        Excluded Items:</p>
+                    <ul
+                        style="list-style: disc; margin-left: 20px; color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
                         <li>EPF and SOCSO contributions</li>
                         <li>Gratuity payments</li>
                         <li>Annual bonus</li>
@@ -1610,8 +1869,9 @@
             <!-- Section 5: PCB (Monthly Tax Deduction) -->
             <div class="content-card" style="margin-bottom: 2rem;">
                 <h2>PCB (Monthly Tax Deduction)</h2>
-                <p style="color: var(--text-muted); margin-bottom: 20px;">Estimate how much income tax is deducted from your salary</p>
-                
+                <p style="color: var(--text-muted); margin-bottom: 20px;">Estimate how much income tax is deducted from
+                    your salary</p>
+
                 <h3>Quick PCB Estimate</h3>
                 <table class="styled-table" style="margin-bottom: 20px;">
                     <thead>
@@ -1621,30 +1881,53 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr><td>RM2,000</td><td>RM0 – RM10</td></tr>
-                        <tr><td>RM3,000</td><td>RM10 – RM50</td></tr>
-                        <tr><td>RM5,000</td><td>RM50 – RM200</td></tr>
-                        <tr><td>RM8,000</td><td>RM200 – RM600</td></tr>
-                        <tr><td>RM12,000+</td><td>RM600+</td></tr>
+                        <tr>
+                            <td>RM2,000</td>
+                            <td>RM0 – RM10</td>
+                        </tr>
+                        <tr>
+                            <td>RM3,000</td>
+                            <td>RM10 – RM50</td>
+                        </tr>
+                        <tr>
+                            <td>RM5,000</td>
+                            <td>RM50 – RM200</td>
+                        </tr>
+                        <tr>
+                            <td>RM8,000</td>
+                            <td>RM200 – RM600</td>
+                        </tr>
+                        <tr>
+                            <td>RM12,000+</td>
+                            <td>RM600+</td>
+                        </tr>
                     </tbody>
                 </table>
-                <p style="font-size: 0.85rem; color: var(--text-muted); font-style: italic; margin-bottom: 20px;">⚠️ PCB (Monthly Tax Deduction) is only an estimate. The actual amount depends on individual tax reliefs, marital status, and income. Please use the calculator for accurate results.</p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); font-style: italic; margin-bottom: 20px;">⚠️ PCB
+                    (Monthly Tax Deduction) is only an estimate. The actual amount depends on individual tax reliefs,
+                    marital status, and income. Please use the calculator for accurate results.</p>
 
-                <div style="background: #fefce8; border: 1px solid #fef08a; border-radius: 12px; padding: 12px; margin-top: 16px;">
-                    <h3 style="font-size: 0.9rem; font-weight: 700; color: #854d0e; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
+                <div
+                    style="background: #fefce8; border: 1px solid #fef08a; border-radius: 12px; padding: 12px; margin-top: 16px;">
+                    <h3
+                        style="font-size: 0.9rem; font-weight: 700; color: #854d0e; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; display: flex; align-items: center; gap: 4px;">
                         ⚠️ Penalties & Compliance
                     </h3>
                     <div class="penalties-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                         <div>
-                            <p style="font-size: 0.95rem; font-weight: 700; color: #854d0e; margin-bottom: 4px;">Employers</p>
-                            <ul style="list-style: none; padding: 0; font-size: 0.95rem; color: #713f12; line-height: 1.4;">
+                            <p style="font-size: 0.95rem; font-weight: 700; color: #854d0e; margin-bottom: 4px;">
+                                Employers</p>
+                            <ul
+                                style="list-style: none; padding: 0; font-size: 0.95rem; color: #713f12; line-height: 1.4;">
                                 <li>• Late payment: +10% (+5% after 60d)</li>
                                 <li>• Non-payment: Fine up to RM20,000</li>
                             </ul>
                         </div>
                         <div>
-                            <p style="font-size: 0.95rem; font-weight: 700; color: #854d0e; margin-bottom: 4px;">Employees</p>
-                            <ul style="list-style: none; padding: 0; font-size: 0.95rem; color: #713f12; line-height: 1.4;">
+                            <p style="font-size: 0.95rem; font-weight: 700; color: #854d0e; margin-bottom: 4px;">
+                                Employees</p>
+                            <ul
+                                style="list-style: none; padding: 0; font-size: 0.95rem; color: #713f12; line-height: 1.4;">
                                 <li>• Late filing: +10% penalty</li>
                             </ul>
                         </div>
@@ -1653,50 +1936,72 @@
             </div>
 
             <!-- Section: Understanding Your Yearly Income Tax (PCB) -->
-            <div class="content-card" style="margin-bottom: 2rem; padding: 16px; border: 1px solid #e2e8f0; border-radius: 12px;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+            <div class="content-card"
+                style="margin-bottom: 2rem; padding: 16px; border: 1px solid #e2e8f0; border-radius: 12px;">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
                     <div>
-                        <h2 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px;">Understanding Your Yearly Income Tax (PCB)</h2>
-                        <p style="color: var(--text-muted); font-size: 0.8rem;">How your monthly tax is calculated based on your annual income.</p>
+                        <h2 style="font-size: 1.1rem; font-weight: 700; color: var(--text-main); margin-bottom: 2px;">
+                            Understanding Your Yearly Income Tax (PCB)</h2>
+                        <p style="color: var(--text-muted); font-size: 0.8rem;">How your monthly tax is calculated based
+                            on your annual income.</p>
                     </div>
                 </div>
-                
-                <div class="pcb-table-grid" style="display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 1px; background: #e2e8f0; border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden;">
+
+                <div class="pcb-table-grid"
+                    style="display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 1px; background: #e2e8f0; border-radius: 8px; border: 1px solid #e2e8f0; overflow: hidden;">
                     <div style="background: #f8fafc; padding: 12px;">
-                        <span style="display: block; font-size: 0.65rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">Monthly Salary</span>
+                        <span
+                            style="display: block; font-size: 0.65rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">Monthly
+                            Salary</span>
                         <span style="font-size: 0.9rem; font-weight: 700; color: var(--text-main);">RM5,000</span>
                     </div>
                     <div style="background: #f8fafc; padding: 12px;">
-                        <span style="display: block; font-size: 0.65rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">Total Yearly</span>
+                        <span
+                            style="display: block; font-size: 0.65rem; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px;">Total
+                            Yearly</span>
                         <span style="font-size: 0.9rem; font-weight: 700; color: var(--text-main);">RM60,000</span>
                     </div>
                     <div style="background: #ffffff; padding: 12px; text-align: right;">
-                        <span style="display: block; font-size: 0.65rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; margin-bottom: 2px;">Estimated Tax</span>
+                        <span
+                            style="display: block; font-size: 0.65rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; margin-bottom: 2px;">Estimated
+                            Tax</span>
                         <span style="font-size: 1.1rem; font-weight: 800; color: var(--primary);">~RM1,500/yr</span>
                     </div>
                 </div>
 
-                <div style="margin-top: 12px; padding: 10px; background: #f9fafb; border-radius: 8px; border: 1px solid #f1f5f9;">
+                <div
+                    style="margin-top: 12px; padding: 10px; background: #f9fafb; border-radius: 8px; border: 1px solid #f1f5f9;">
                     <p style="font-size: 0.8rem; color: #475569; line-height: 1.5;">
-                        <strong>The Calculation:</strong> With a yearly income of RM60,000, you get a standard <strong>RM9,000 personal relief</strong>. Your taxable income becomes <strong>RM51,000</strong>, which is then applied to the tax brackets below.
+                        <strong>The Calculation:</strong> With a yearly income of RM60,000, you get a standard
+                        <strong>RM9,000 personal relief</strong>. Your taxable income becomes <strong>RM51,000</strong>,
+                        which is then applied to the tax brackets below.
                     </p>
                 </div>
 
                 <details style="margin-top: 12px;">
-                    <summary style="font-size: 0.8rem; color: var(--primary); cursor: pointer; font-weight: 600; list-style: none; display: flex; align-items: center; gap: 4px; user-select: none;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+                    <summary
+                        style="font-size: 0.8rem; color: var(--primary); cursor: pointer; font-weight: 600; list-style: none; display: flex; align-items: center; gap: 4px; user-select: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="m6 9 6 6 6-6" />
+                        </svg>
                         View Tax Brackets (How tax is split)
                     </summary>
-                    <div style="margin-top: 8px; padding: 12px; background: #fdfdfd; border: 1px solid #f1f5f9; border-radius: 8px; font-size: 0.8rem;">
-                        <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                    <div
+                        style="margin-top: 8px; padding: 12px; background: #fdfdfd; border: 1px solid #f1f5f9; border-radius: 8px; font-size: 0.8rem;">
+                        <div
+                            style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
                             <span style="color: #64748b;">First RM5,000</span>
                             <span style="font-weight: 600; color: #059669;">0% Tax</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                        <div
+                            style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
                             <span style="color: #64748b;">Next RM15,000</span>
                             <span style="font-weight: 600;">1% Tax</span>
                         </div>
-                        <div style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
+                        <div
+                            style="display: flex; justify-content: space-between; padding: 4px 0; border-bottom: 1px solid #f1f5f9;">
                             <span style="color: #64748b;">Next RM20,000</span>
                             <span style="font-weight: 600;">3% Tax</span>
                         </div>
@@ -1706,43 +2011,69 @@
                         </div>
                     </div>
                 </details>
-                
-                <p style="font-size: 0.7rem; color: var(--text-muted); margin-top: 12px; font-style: italic; opacity: 0.8;">*Actual tax depends on your specific tax reliefs (EPF, insurance, etc.).</p>
+
+                <p
+                    style="font-size: 0.7rem; color: var(--text-muted); margin-top: 12px; font-style: italic; opacity: 0.8;">
+                    *Actual tax depends on your specific tax reliefs (EPF, insurance, etc.).</p>
             </div>
 
             <!-- Section: Example Allowable Tax Deductions -->
             <div class="content-card" style="margin-bottom: 2rem;">
-                <h2 style="font-size: 1.2rem; margin-bottom: 4px; color: var(--text-main);">Example Allowable Tax Deductions</h2>
-                <p style="color: var(--text-muted); margin-bottom: 16px; font-size: 0.85rem;">Common deductions to reduce your taxable income in Malaysia</p>
-                
-                <div class="deductions-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px;">
-                        <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);">EPF Contribution</span>
-                        <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary); background: #eff6ff; padding: 2px 8px; border-radius: 4px;">Statutory</span>
+                <h2 style="font-size: 1.2rem; margin-bottom: 4px; color: var(--text-main);">Example Allowable Tax
+                    Deductions</h2>
+                <p style="color: var(--text-muted); margin-bottom: 16px; font-size: 0.85rem;">Common deductions to
+                    reduce your taxable income in Malaysia</p>
+
+                <div class="deductions-grid"
+                    style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px;">
+                        <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);">EPF
+                            Contribution</span>
+                        <span
+                            style="font-size: 0.75rem; font-weight: 700; color: var(--primary); background: #eff6ff; padding: 2px 8px; border-radius: 4px;">Statutory</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px;">
-                        <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);">SOCSO Contribution</span>
-                        <span style="font-size: 0.75rem; font-weight: 700; color: var(--primary); background: #eff6ff; padding: 2px 8px; border-radius: 4px;">Statutory</span>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px;">
+                        <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);">SOCSO
+                            Contribution</span>
+                        <span
+                            style="font-size: 0.75rem; font-weight: 700; color: var(--primary); background: #eff6ff; padding: 2px 8px; border-radius: 4px;">Statutory</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px;">
-                        <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);">Lifestyle Relief</span>
-                        <span style="font-size: 0.75rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 2px 8px; border-radius: 4px;">RM2,500</span>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px;">
+                        <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);">Lifestyle
+                            Relief</span>
+                        <span
+                            style="font-size: 0.75rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 2px 8px; border-radius: 4px;">RM2,500</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px;">
-                        <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);">Medical Expenses</span>
-                        <span style="font-size: 0.75rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 2px 8px; border-radius: 4px;">RM10,000</span>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px;">
+                        <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);">Medical
+                            Expenses</span>
+                        <span
+                            style="font-size: 0.75rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 2px 8px; border-radius: 4px;">RM10,000</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px;">
-                        <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);">Education Fees</span>
-                        <span style="font-size: 0.75rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 2px 8px; border-radius: 4px;">RM7,000</span>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px;">
+                        <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);">Education
+                            Fees</span>
+                        <span
+                            style="font-size: 0.75rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 2px 8px; border-radius: 4px;">RM7,000</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px;">
                         <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);">Child Relief</span>
-                        <span style="font-size: 0.75rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 2px 8px; border-radius: 4px;">Per Child</span>
+                        <span
+                            style="font-size: 0.75rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 2px 8px; border-radius: 4px;">Per
+                            Child</span>
                     </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px;">
-                        <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);">Insurance & Takaful</span>
-                        <span style="font-size: 0.75rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 2px 8px; border-radius: 4px;">RM3,000</span>
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 6px;">
+                        <span style="font-size: 0.9rem; font-weight: 600; color: var(--text-main);">Insurance &
+                            Takaful</span>
+                        <span
+                            style="font-size: 0.75rem; font-weight: 700; color: #059669; background: #ecfdf5; padding: 2px 8px; border-radius: 4px;">RM3,000</span>
                     </div>
                 </div>
             </div>
@@ -1750,8 +2081,10 @@
             <!-- Section 6: Deadline Submission -->
             <div class="content-card" style="margin-bottom: 2rem;">
                 <h2>Deadline Submission for Employers</h2>
-                <p>EPF (KWSP), SOCSO (PERKESO), and EIS contributions <strong>must be submitted on or before the 15th of the following month</strong>.</p>
-                <ul style="list-style-type: disc; margin-left: 20px; margin-top: 15px; color: #64748b; font-size: 0.875rem;">
+                <p>EPF (KWSP), SOCSO (PERKESO), and EIS contributions <strong>must be submitted on or before the 15th of
+                        the following month</strong>.</p>
+                <ul
+                    style="list-style-type: disc; margin-left: 20px; margin-top: 15px; color: #64748b; font-size: 0.875rem;">
                     <li>Late payments may result in penalties</li>
                     <li>Deadlines are subject to changes by the respective authorities</li>
                 </ul>
@@ -1777,42 +2110,69 @@
                 <h2>Download Free Salary Templates</h2>
                 <p style="color: var(--text-muted);">Professional, ready-to-use templates for payroll management.</p>
             </div>
-            
+
             <div class="template-grid">
                 <!-- Template 1: Payslip -->
                 <div class="template-card">
                     <div class="template-preview">
-                        <img src="https://www.ajobthing.com/resources/blog/data/blog/images/2026/03/Salary%20Payslip%20Template-1.jpg" alt="Salary Payslip" referrerPolicy="no-referrer" class="template-img">
+                        <img src="https://www.ajobthing.com/resources/blog/data/blog/images/2026/03/Salary%20Payslip%20Template-1.jpg"
+                            alt="Salary Payslip" referrerPolicy="no-referrer" class="template-img">
                     </div>
                     <h3>Salary Payslip</h3>
                     <p>Generate professional payslips for employees</p>
                     <div class="template-buttons">
-                        <a href="https://docs.google.com/document/d/1XLiCHj4v_nU65Su5xHmkYBEyOs9A_I_DKI6LqEkjaQs/edit?usp=sharing" target="_blank" data-url="https://docs.google.com/document/d/1XLiCHj4v_nU65Su5xHmkYBEyOs9A_I_DKI6LqEkjaQs/edit?usp=sharing" data-action="Salary Payslip (Docs)" class="btn-template btn-primary template-download-btn">Download Docs</a>
-                        <a href="https://drive.google.com/file/d/1MAhrOkrZJ0xcdj7CnMI_XiLlMTh3tCds/view?usp=sharing" target="_blank" data-url="https://drive.google.com/file/d/1MAhrOkrZJ0xcdj7CnMI_XiLlMTh3tCds/view?usp=sharing" data-action="Salary Payslip (PDF)" class="btn-template btn-secondary template-download-btn">Download PDF</a>
+                        <a href="https://docs.google.com/document/d/1XLiCHj4v_nU65Su5xHmkYBEyOs9A_I_DKI6LqEkjaQs/edit?usp=sharing"
+                            target="_blank"
+                            data-url="https://docs.google.com/document/d/1XLiCHj4v_nU65Su5xHmkYBEyOs9A_I_DKI6LqEkjaQs/edit?usp=sharing"
+                            data-action="Salary Payslip (Docs)"
+                            class="btn-template btn-primary template-download-btn">Download Docs</a>
+                        <a href="https://drive.google.com/file/d/1MAhrOkrZJ0xcdj7CnMI_XiLlMTh3tCds/view?usp=sharing"
+                            target="_blank"
+                            data-url="https://drive.google.com/file/d/1MAhrOkrZJ0xcdj7CnMI_XiLlMTh3tCds/view?usp=sharing"
+                            data-action="Salary Payslip (PDF)"
+                            class="btn-template btn-secondary template-download-btn">Download PDF</a>
                     </div>
                 </div>
                 <!-- Template 2: Increment -->
                 <div class="template-card">
                     <div class="template-preview">
-                        <img src="https://www.ajobthing.com/resources/blog/data/blog/images/2026/03/Salary%20Increment%20Template-1.jpg" alt="Salary Increment" referrerPolicy="no-referrer" class="template-img">
+                        <img src="https://www.ajobthing.com/resources/blog/data/blog/images/2026/03/Salary%20Increment%20Template-1.jpg"
+                            alt="Salary Increment" referrerPolicy="no-referrer" class="template-img">
                     </div>
                     <h3>Salary Increment</h3>
                     <p>Track and manage employee salary increases</p>
                     <div class="template-buttons">
-                        <a href="https://docs.google.com/document/d/1QQXVLvLCApfXJ9FizVO6IXGuqAGDOf410ZzHk7u10yQ/edit?usp=sharing" target="_blank" data-url="https://docs.google.com/document/d/1QQXVLvLCApfXJ9FizVO6IXGuqAGDOf410ZzHk7u10yQ/edit?usp=sharing" data-action="Salary Increment (Docs)" class="btn-template btn-primary template-download-btn">Download Docs</a>
-                        <a href="https://drive.google.com/file/d/1nHkesXVipdHKX66t6OzIpHqA2XYQbl1o/view?usp=sharing" target="_blank" data-url="https://drive.google.com/file/d/1nHkesXVipdHKX66t6OzIpHqA2XYQbl1o/view?usp=sharing" data-action="Salary Increment (PDF)" class="btn-template btn-secondary template-download-btn">Download PDF</a>
+                        <a href="https://docs.google.com/document/d/1QQXVLvLCApfXJ9FizVO6IXGuqAGDOf410ZzHk7u10yQ/edit?usp=sharing"
+                            target="_blank"
+                            data-url="https://docs.google.com/document/d/1QQXVLvLCApfXJ9FizVO6IXGuqAGDOf410ZzHk7u10yQ/edit?usp=sharing"
+                            data-action="Salary Increment (Docs)"
+                            class="btn-template btn-primary template-download-btn">Download Docs</a>
+                        <a href="https://drive.google.com/file/d/1nHkesXVipdHKX66t6OzIpHqA2XYQbl1o/view?usp=sharing"
+                            target="_blank"
+                            data-url="https://drive.google.com/file/d/1nHkesXVipdHKX66t6OzIpHqA2XYQbl1o/view?usp=sharing"
+                            data-action="Salary Increment (PDF)"
+                            class="btn-template btn-secondary template-download-btn">Download PDF</a>
                     </div>
                 </div>
                 <!-- Template 3: Adjustment -->
                 <div class="template-card">
                     <div class="template-preview">
-                        <img src="https://www.ajobthing.com/resources/blog/data/blog/images/2026/03/Leave%20%20Salary%20Adjustment%20Record-1.jpg" alt="Leave & Salary Adjustment Record" referrerPolicy="no-referrer" class="template-img">
+                        <img src="https://www.ajobthing.com/resources/blog/data/blog/images/2026/03/Leave%20%20Salary%20Adjustment%20Record-1.jpg"
+                            alt="Leave & Salary Adjustment Record" referrerPolicy="no-referrer" class="template-img">
                     </div>
                     <h3>Leave & Salary Adjustment Record</h3>
                     <p>Monitor leave deductions and salary adjustments</p>
                     <div class="template-buttons">
-                        <a href="https://docs.google.com/document/d/1W1SJXa6tzy8g_VyMZBoDKAVXHSH-s_Ha9OWTsz8QHqA/edit?usp=sharing" target="_blank" data-url="https://docs.google.com/document/d/1W1SJXa6tzy8g_VyMZBoDKAVXHSH-s_Ha9OWTsz8QHqA/edit?usp=sharing" data-action="Leave & Salary Adjustment Record (Docs)" class="btn-template btn-primary template-download-btn">Download Docs</a>
-                        <a href="https://drive.google.com/file/d/1m97akJIfvRy9AxTtngWHShamWJXAQZ3a/view?usp=sharing" target="_blank" data-url="https://drive.google.com/file/d/1m97akJIfvRy9AxTtngWHShamWJXAQZ3a/view?usp=sharing" data-action="Leave & Salary Adjustment Record (PDF)" class="btn-template btn-secondary template-download-btn">Download PDF</a>
+                        <a href="https://docs.google.com/document/d/1W1SJXa6tzy8g_VyMZBoDKAVXHSH-s_Ha9OWTsz8QHqA/edit?usp=sharing"
+                            target="_blank"
+                            data-url="https://docs.google.com/document/d/1W1SJXa6tzy8g_VyMZBoDKAVXHSH-s_Ha9OWTsz8QHqA/edit?usp=sharing"
+                            data-action="Leave & Salary Adjustment Record (Docs)"
+                            class="btn-template btn-primary template-download-btn">Download Docs</a>
+                        <a href="https://drive.google.com/file/d/1m97akJIfvRy9AxTtngWHShamWJXAQZ3a/view?usp=sharing"
+                            target="_blank"
+                            data-url="https://drive.google.com/file/d/1m97akJIfvRy9AxTtngWHShamWJXAQZ3a/view?usp=sharing"
+                            data-action="Leave & Salary Adjustment Record (PDF)"
+                            class="btn-template btn-secondary template-download-btn">Download PDF</a>
                     </div>
                 </div>
             </div>
@@ -1826,10 +2186,13 @@
                 <!-- Logo + Description -->
                 <div class="footer-col">
                     <a href="/" class="logo" style="margin-bottom: 20px; display: block;">
-                        <img src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg" alt="SalaryCalc MY" referrerPolicy="no-referrer" style="height: 60px; width: auto; object-fit: contain; border-radius: 4px; mix-blend-mode: screen; opacity: 0.9;">
+                        <img src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
+                            alt="SalaryCalc MY" referrerPolicy="no-referrer"
+                            style="height: 60px; width: auto; object-fit: contain; border-radius: 4px; mix-blend-mode: screen; opacity: 0.9;">
                     </a>
                     <p style="color: #94a3b8; font-size: 0.9375rem; line-height: 1.6;">
-                        Accurate Malaysia salary calculator. Instantly calculate take-home pay after <br> EPF, SOCSO, EIS & PCB.
+                        Accurate Malaysia salary calculator. Instantly calculate take-home pay after <br> EPF, SOCSO,
+                        EIS & PCB.
                     </p>
                 </div>
 
@@ -1852,13 +2215,15 @@
     <div id="emailModal" class="modal-overlay">
         <div class="modal">
             <span class="modal-close" id="closeModal">&times;</span>
-            
+
             <div id="modalFormContent">
                 <h2 id="modalTitle">Download Full Report</h2>
-                <p id="modalDescription">Enter your email address to receive the detailed salary breakdown and tax report.</p>
+                <p id="modalDescription">Enter your email address to receive the detailed salary breakdown and tax
+                    report.</p>
                 <form id="emailForm">
                     <div class="form-group">
-                        <label class="form-label" for="userEmail">Email Address <span style="color: red;">*</span></label>
+                        <label class="form-label" for="userEmail">Email Address <span
+                                style="color: red;">*</span></label>
                         <input type="email" id="userEmail" class="form-input" placeholder="you@example.com" required>
                     </div>
                     <div class="form-group">
@@ -1871,7 +2236,8 @@
                         </select>
                     </div>
                     <div class="form-group" id="hiringQuestionGroup" style="display: none;">
-                        <label class="form-label" for="hiringStatus">Are you currently hiring? <span style="color: red;">*</span></label>
+                        <label class="form-label" for="hiringStatus">Are you currently hiring? <span
+                                style="color: red;">*</span></label>
                         <select id="hiringStatus" class="form-input">
                             <option value="" disabled selected>Select an option</option>
                             <option value="Hiring Now">Hiring now</option>
@@ -1879,10 +2245,13 @@
                             <option value="Within 3 Months">Within 3 months</option>
                             <option value="Not Hiring Yet">Not hiring yet</option>
                         </select>
-                        <div id="hiringError" style="color: #dc2626; font-size: 0.75rem; margin-top: 4px; display: none;">Please select your hiring status to continue.</div>
+                        <div id="hiringError"
+                            style="color: #dc2626; font-size: 0.75rem; margin-top: 4px; display: none;">Please select
+                            your hiring status to continue.</div>
                     </div>
                     <div class="form-group" id="companyNameGroup" style="display: none;">
-                        <label class="form-label" for="companyName">Company Name <span style="color: red;">*</span></label>
+                        <label class="form-label" for="companyName">Company Name <span
+                                style="color: red;">*</span></label>
                         <input type="text" id="companyName" class="form-input" placeholder="Your Company Name">
                     </div>
                     <div class="form-group">
@@ -1894,15 +2263,22 @@
             </div>
 
             <div id="modalSuccessContent" style="display: none; padding: 20px 0;">
-                <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <div id="modalFeedback">Thank you! The report has been sent to your email.</div>
-                <div id="mobileActionButtons" style="display: none; margin-top: 20px; flex-direction: column; gap: 10px;">
-                    <a id="viewFileBtn" href="#" target="_blank" class="btn btn-primary" style="width: 100%; text-align: center; text-decoration: none; display: inline-block;">View File Now</a>
-                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 5px;">Works on Android & iPhone</p>
+                <div id="mobileActionButtons"
+                    style="display: none; margin-top: 20px; flex-direction: column; gap: 10px;">
+                    <a id="viewFileBtn" href="#" target="_blank" class="btn btn-primary"
+                        style="width: 100%; text-align: center; text-decoration: none; display: inline-block;">View File
+                        Now</a>
+                    <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 5px;">Works on Android & iPhone
+                    </p>
                 </div>
-                <div id="mobileFallbackText" style="display: none; margin-top: 15px; font-size: 0.875rem; color: var(--text-muted);">
+                <div id="mobileFallbackText"
+                    style="display: none; margin-top: 15px; font-size: 0.875rem; color: var(--text-muted);">
                     Your file has been downloaded. Open it using your PDF or Docs app.
                 </div>
             </div>
@@ -1914,7 +2290,7 @@
         import { db } from './src/firebase.ts';
         import { collection, addDoc } from 'firebase/firestore';
 
-        window.openTab = function(evt, tabName) {
+        window.openTab = function (evt, tabName) {
             var i, content, tabs;
             content = document.getElementsByClassName("contribution-content");
             for (i = 0; i < content.length; i++) {
@@ -1928,10 +2304,10 @@
             evt.currentTarget.className += " active";
         }
 
-        window.toggleResultSection = function(sectionId) {
+        window.toggleResultSection = function (sectionId) {
             const section = document.getElementById(sectionId);
             const indicator = section.querySelector('.toggle-indicator');
-            
+
             if (section.classList.contains('collapsed')) {
                 section.classList.remove('collapsed');
                 indicator.textContent = '▼';
@@ -1941,12 +2317,12 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const salaryForm = document.getElementById('salaryForm');
             const resetBtn = document.getElementById('resetBtn');
             const placeholder = document.getElementById('placeholder');
             const results = document.getElementById('results');
-            
+
             // Global storage for the latest calculation
             let lastCalculation = {
                 salary: 0,
@@ -1957,15 +2333,15 @@
                 totalDeductions: 0,
                 netSalary: 0
             };
-            
+
             // Form Submit Handler
-            salaryForm.addEventListener('submit', function(e) {
+            salaryForm.addEventListener('submit', function (e) {
                 e.preventDefault();
                 calculateSalary();
             });
 
             // Reset Handler
-            resetBtn.addEventListener('click', function() {
+            resetBtn.addEventListener('click', function () {
                 placeholder.style.display = 'block';
                 results.classList.remove('show');
                 document.getElementById('incomeGroupSection').style.display = 'none';
@@ -1989,22 +2365,22 @@
             const modalTitle = document.getElementById('modalTitle');
             const modalDescription = document.getElementById('modalDescription');
             const modalFeedback = document.getElementById('modalFeedback');
-            
+
             let currentDownloadType = 'report';
             let currentDownloadBtn = null;
-            
+
             // Persistent storage for email submission
             let hasSubmittedEmail = localStorage.getItem('salaryCalc_hasSubmittedEmail') === 'true';
             let userEmailAddress = localStorage.getItem('salaryCalc_userEmail') || '';
 
             // Modal Handlers
-            downloadReportBtn.addEventListener('click', function() {
+            downloadReportBtn.addEventListener('click', function () {
                 currentDownloadType = 'report';
                 currentDownloadBtn = this;
                 openModal();
             });
 
-            downloadPayslipBtn.addEventListener('click', function() {
+            downloadPayslipBtn.addEventListener('click', function () {
                 currentDownloadType = 'payslip';
                 currentDownloadBtn = this;
                 openModal();
@@ -2015,7 +2391,7 @@
                 modalFormContent.style.display = 'block';
                 modalSuccessContent.style.display = 'none';
                 modalFeedback.style.display = 'none';
-                
+
                 // Pre-fill email if we have it
                 const emailInput = document.getElementById('userEmail');
                 if (userEmailAddress) {
@@ -2028,13 +2404,13 @@
                 const companyGroup = document.getElementById('companyNameGroup');
                 const companyInput = document.getElementById('companyName');
                 const userTypeInput = document.getElementById('userType');
-                
+
                 userTypeInput.value = '';
                 hiringGroup.style.display = 'none';
                 hiringStatus.required = false;
                 hiringError.style.display = 'none';
                 hiringStatus.value = '';
-                
+
                 companyGroup.style.display = 'none';
                 companyInput.required = false;
                 companyInput.value = '';
@@ -2046,7 +2422,7 @@
                     modalTitle.textContent = 'Download Salary Payslip';
                     modalDescription.textContent = 'Enter your email address to receive your professional salary payslip.';
                 }
-                
+
                 emailModal.style.display = 'flex';
             }
 
@@ -2054,7 +2430,7 @@
                 const mobileActionButtons = document.getElementById('mobileActionButtons');
                 const mobileFallbackText = document.getElementById('mobileFallbackText');
                 const viewFileBtn = document.getElementById('viewFileBtn');
-                
+
                 // Show mobile helpers
                 mobileActionButtons.style.display = 'flex';
                 mobileFallbackText.style.display = 'block';
@@ -2088,11 +2464,11 @@
                 }
             }
 
-            closeModal.addEventListener('click', function() {
+            closeModal.addEventListener('click', function () {
                 emailModal.style.display = 'none';
             });
 
-            window.addEventListener('click', function(e) {
+            window.addEventListener('click', function (e) {
                 if (e.target === emailModal) {
                     emailModal.style.display = 'none';
                 }
@@ -2100,13 +2476,13 @@
 
             // Handle conditional questions based on user type
             const userTypeSelect = document.getElementById('userType');
-            userTypeSelect.addEventListener('change', function() {
+            userTypeSelect.addEventListener('change', function () {
                 const hiringGroup = document.getElementById('hiringQuestionGroup');
                 const hiringStatus = document.getElementById('hiringStatus');
                 const hiringError = document.getElementById('hiringError');
                 const companyGroup = document.getElementById('companyNameGroup');
                 const companyInput = document.getElementById('companyName');
-                
+
                 if (this.value === 'Employer / HR') {
                     hiringGroup.style.display = 'block';
                     hiringStatus.required = true;
@@ -2123,7 +2499,7 @@
                 }
             });
 
-            emailForm.addEventListener('submit', async function(e) {
+            emailForm.addEventListener('submit', async function (e) {
                 e.preventDefault();
                 const emailInput = document.getElementById('userEmail');
                 const typeInput = document.getElementById('userType');
@@ -2132,12 +2508,12 @@
                 const hiringStatusInput = document.getElementById('hiringStatus');
                 const hiringGroup = document.getElementById('hiringQuestionGroup');
                 const hiringError = document.getElementById('hiringError');
-                
+
                 const emailValue = emailInput.value.trim();
                 const typeValue = typeInput.value;
                 const phoneValue = phoneInput.value.trim();
                 const companyValue = companyInput.value.trim();
-                
+
                 let hiringValue = '';
                 if (hiringGroup.style.display !== 'none') {
                     hiringValue = hiringStatusInput.value;
@@ -2147,14 +2523,14 @@
                     }
                 }
                 hiringError.style.display = 'none';
-                
+
                 // Basic email validation
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailValue || !emailRegex.test(emailValue)) {
                     alert('Please enter a valid email address.');
                     return;
                 }
-                
+
                 if (!typeValue) {
                     alert('Please select who you are.');
                     return;
@@ -2162,7 +2538,7 @@
 
                 userEmailAddress = emailValue;
                 hasSubmittedEmail = true;
-                
+
                 // Store in localStorage for persistence
                 localStorage.setItem('salaryCalc_hasSubmittedEmail', 'true');
                 localStorage.setItem('salaryCalc_userEmail', userEmailAddress);
@@ -2178,26 +2554,79 @@
                         actionKey = 'payslip';
                     }
 
+                    console.log('[v0] Form submission started');
+                    console.log('[v0] currentDownloadType:', currentDownloadType);
+                    console.log('[v0] userEmailAddress:', userEmailAddress);
+                    console.log('[v0] typeValue:', typeValue);
+                    console.log('[v0] hiringValue:', hiringValue);
+                    console.log('[v0] companyValue:', companyValue);
+                    console.log('[v0] phoneValue:', phoneValue);
+
                     const leadData = {
                         email: userEmailAddress,
                         userType: typeValue,
                         action: actionName,
                         createdAt: new Date().toISOString()
                     };
-                    
+
                     if (hiringValue) {
                         leadData.hiringStatus = hiringValue;
                     }
-                    
+
                     if (companyValue) {
                         leadData.companyName = companyValue;
                     }
-                    
+
                     if (phoneValue) {
                         leadData.phoneNumber = phoneValue;
                     }
-                    
+
+                    console.log('[v0] leadData prepared:', JSON.stringify(leadData));
                     await addDoc(collection(db, 'leads'), leadData);
+                    console.log('[v0] Firebase addDoc completed');
+
+                    // Record to Google Sheets
+                    try {
+                        // IMPORTANT: Replace this URL with your Google Sheets Web App URL
+                        const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbydhPS83sen8Dk-lR71hvk1HAGToiO2vmxLNvW4p35fpgrsL_0SIciydYQlTX_pSPvJ/exec';
+
+                        const downloadVia = currentDownloadType === 'report'
+                            ? 'Download Salary Report'
+                            : 'Download Salary Payslip';
+
+                        const timestamp = new Date().toISOString();
+
+                        const sheetPayload = {
+                            timestamp: timestamp,
+                            email: userEmailAddress,
+                            userType: typeValue,
+                            hiringStatus: hiringValue,
+                            companyName: companyValue,
+                            userPhone: phoneValue,
+                            download_via: downloadVia
+                        };
+
+                        console.log('[v0] Google Sheets payload:', JSON.stringify(sheetPayload));
+                        console.log('[v0] Calling Google Sheets Web App...');
+
+                        if (GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_SHEETS_WEB_APP_URL_HERE') {
+                            console.warn('[v0] Google Sheets URL not configured. Please replace YOUR_GOOGLE_SHEETS_WEB_APP_URL_HERE with your actual Web App URL.');
+                        } else {
+                            const sheetResponse = await fetch(GOOGLE_SHEETS_URL, {
+                                method: 'POST',
+                                mode: 'no-cors',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(sheetPayload)
+                            });
+
+                            console.log('[v0] Google Sheets request sent (no-cors mode, response not readable)');
+                            console.log('[v0] Data should be recorded in Google Sheets');
+                        }
+                    } catch (sheetError) {
+                        console.error('[v0] Error calling Google Sheets:', sheetError);
+                    }
 
                     // Send Email via Backend API
                     if (currentDownloadType === 'report' || currentDownloadType === 'payslip') {
@@ -2212,7 +2641,7 @@
                                     type: currentDownloadType
                                 })
                             });
-                            
+
                             if (!response.ok) {
                                 const result = await response.json();
                                 console.error('Failed to send email:', result.error);
@@ -2227,7 +2656,7 @@
                 } catch (error) {
                     console.error("Error adding document: ", error);
                 }
-                
+
                 // Hide form and show success
                 modalFormContent.style.display = 'none';
                 modalSuccessContent.style.display = 'block';
@@ -2246,7 +2675,7 @@
                 const bonus = parseFloat(document.getElementById('bonus').value) || 0;
                 const maritalStatus = document.getElementById('maritalStatus').value;
                 const nationality = document.getElementById('nationality').value;
-                
+
                 const includeEpf = document.getElementById('includeEpf').checked;
                 const includeSocso = document.getElementById('includeSocso').checked;
                 const includeEis = document.getElementById('includeEis').checked;
@@ -2268,23 +2697,23 @@
                     if (salary > 6000) {
                         return { employee: 30.00, employer: 105.00 };
                     }
-                    
+
                     if (salary <= 30) return { employee: 0.10, employer: 0.40 };
                     if (salary <= 50) return { employee: 0.20, employer: 0.70 };
                     if (salary <= 70) return { employee: 0.30, employer: 1.10 };
                     if (salary <= 100) return { employee: 0.40, employer: 1.50 };
                     if (salary <= 140) return { employee: 0.60, employer: 2.10 };
                     if (salary <= 200) return { employee: 0.85, employer: 2.95 };
-                    
+
                     const tier = Math.ceil(salary / 100);
                     const midpoint = tier * 100 - 50;
-                    
+
                     const employee = midpoint * 0.005;
                     const employer = midpoint * 0.0175;
-                    
+
                     // Official PERKESO table rounds up to the nearest 0.05
                     const roundUp05 = (num) => Math.ceil(num * 20) / 20;
-                    
+
                     return {
                         employee: roundUp05(employee),
                         employer: roundUp05(employer)
@@ -2306,7 +2735,7 @@
                     // EIS is calculated based on salary brackets (approximately 0.2% but fixed per bracket)
                     // Cap is at RM6000
                     const eisBase = Math.min(totalIncome, 6000);
-                    
+
                     if (eisBase <= 300) {
                         eis = 0.50;
                         eisEmployer = 0.50;
@@ -2318,7 +2747,7 @@
                         const bracketMultiplier = Math.ceil(eisBase / 100);
                         eis = (bracketMultiplier * 0.2) - 0.1;
                         eisEmployer = (bracketMultiplier * 0.2) - 0.1;
-                        
+
                         // Fix floating point precision issues (e.g. 2.1000000000000005 -> 2.10)
                         eis = Math.round(eis * 100) / 100;
                         eisEmployer = Math.round(eisEmployer * 100) / 100;
@@ -2331,7 +2760,7 @@
                     const annualIncome = totalIncome * 12;
                     const epfRelief = Math.min(epf * 12, 4000);
                     const personalRelief = 9000;
-                    
+
                     let spouseRelief = 0;
                     let childRelief = 0;
 
@@ -2385,12 +2814,12 @@
                         } else {
                             annualTax = 528700 + (taxableIncome - 2000000) * 0.30;
                         }
-                        
+
                         // Tax rebate for low income
                         if (taxableIncome <= 35000) {
                             annualTax = Math.max(0, annualTax - 400);
                         }
-                        
+
                         pcb = annualTax / 12;
                     }
                 }
@@ -2401,12 +2830,12 @@
                 // Update UI
                 document.getElementById('resGrossMonthly').textContent = formatCurrency(totalIncome);
                 document.getElementById('resGrossAnnual').textContent = formatCurrency(totalIncome * 12);
-                
+
                 // Dynamic Deductions
                 const container = document.getElementById('employeeDeductionsContainer');
                 container.innerHTML = '';
                 let totalDeductions = 0;
-                
+
                 function addDeduction(label, amount) {
                     if (amount > 0) {
                         const div = document.createElement('div');
@@ -2416,21 +2845,21 @@
                         totalDeductions += amount;
                     }
                 }
-                
+
                 addDeduction('EPF (11%)', epf);
                 addDeduction('SOCSO', socso);
                 addDeduction('EIS (0.2%)', eis);
-                
+
                 const pcbPercent = totalIncome > 0 ? ((pcb / totalIncome) * 100).toFixed(1) : 0;
                 addDeduction(`PCB (${pcbPercent}%)`, pcb);
-                
+
                 document.getElementById('resTotalDeductions').textContent = '- ' + formatCurrency(totalDeductions);
-                
+
                 // Dynamic Employer Contributions
                 const employerContainer = document.getElementById('employerContributionsContainer');
                 employerContainer.innerHTML = '';
                 let totalEmployerContribution = 0;
-                
+
                 function addEmployerContribution(label, amount) {
                     if (amount > 0) {
                         const div = document.createElement('div');
@@ -2440,18 +2869,18 @@
                         totalEmployerContribution += amount;
                     }
                 }
-                
+
                 const epfEmployerLabel = totalIncome <= 5000 ? 'EPF (13%)' : 'EPF (12%)';
                 addEmployerContribution(epfEmployerLabel, epfEmployer);
                 addEmployerContribution('SOCSO', socsoEmployer);
                 addEmployerContribution('EIS (0.2%)', eisEmployer);
-                
+
                 document.getElementById('resTotalEmployerContribution').textContent = formatCurrency(totalEmployerContribution);
                 document.getElementById('resTotalEmployerCost').textContent = formatCurrency(totalIncome + totalEmployerContribution);
-                
+
                 document.getElementById('resNetMonthly').textContent = formatCurrency(totalIncome - totalDeductions);
                 document.getElementById('resNetAnnual').textContent = formatCurrency((totalIncome - totalDeductions) * 12);
-                
+
                 // Store in global object for payslip/report generation
                 lastCalculation = {
                     salary: totalIncome.toFixed(2),
@@ -2519,5 +2948,5 @@
         });
     </script>
 </body>
-</html>
 
+</html>
