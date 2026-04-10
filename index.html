@@ -2211,6 +2211,9 @@
 
                     // Record to Google Sheets
                     try {
+                        // IMPORTANT: Replace this URL with your Google Sheets Web App URL
+                        const GOOGLE_SHEETS_URL = 'YOUR_GOOGLE_SHEETS_WEB_APP_URL_HERE';
+                        
                         const downloadVia = currentDownloadType === 'report' 
                             ? 'Download Salary Report' 
                             : 'Download Salary Payslip';
@@ -2228,27 +2231,25 @@
                         };
                         
                         console.log('[v0] Google Sheets payload:', JSON.stringify(sheetPayload));
-                        console.log('[v0] Calling /api/record-download...');
+                        console.log('[v0] Calling Google Sheets Web App...');
                         
-                        const sheetResponse = await fetch('/api/record-download', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(sheetPayload)
-                        });
-                        
-                        console.log('[v0] Google Sheets response status:', sheetResponse.status);
-                        const sheetResult = await sheetResponse.json();
-                        console.log('[v0] Google Sheets response body:', JSON.stringify(sheetResult));
-                        
-                        if (!sheetResponse.ok) {
-                            console.error('[v0] Failed to record to Google Sheets:', sheetResult.error);
+                        if (GOOGLE_SHEETS_URL === 'YOUR_GOOGLE_SHEETS_WEB_APP_URL_HERE') {
+                            console.warn('[v0] Google Sheets URL not configured. Please replace YOUR_GOOGLE_SHEETS_WEB_APP_URL_HERE with your actual Web App URL.');
                         } else {
-                            console.log('[v0] Successfully recorded to Google Sheets');
+                            const sheetResponse = await fetch(GOOGLE_SHEETS_URL, {
+                                method: 'POST',
+                                mode: 'no-cors',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify(sheetPayload)
+                            });
+                            
+                            console.log('[v0] Google Sheets request sent (no-cors mode, response not readable)');
+                            console.log('[v0] Data should be recorded in Google Sheets');
                         }
                     } catch (sheetError) {
-                        console.error('[v0] Error calling record-download API:', sheetError);
+                        console.error('[v0] Error calling Google Sheets:', sheetError);
                     }
 
                     // Send Email via Backend API
