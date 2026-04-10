@@ -2205,12 +2205,15 @@
                             ? 'Download Salary Report' 
                             : 'Download Salary Payslip';
                         
+                        const timestamp = new Date().toISOString();
+                        
                         const sheetResponse = await fetch('/api/record-download', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({
+                                timestamp: timestamp,
                                 email: userEmailAddress,
                                 userType: typeValue,
                                 hiringStatus: hiringValue,
