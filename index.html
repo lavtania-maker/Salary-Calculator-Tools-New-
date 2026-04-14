@@ -2674,6 +2674,12 @@
             });
 
             function calculateSalary() {
+                // GA4 event tracking
+                gtag('event', 'click_calculate', {
+                    event_category: 'calculator',
+                    event_label: 'Calculate Button'
+                });
+
                 // Get inputs
                 const grossSalary = parseFloat(document.getElementById('grossSalary').value) || 0;
                 const bonus = parseFloat(document.getElementById('bonus').value) || 0;
