@@ -1,0 +1,9 @@
+{
+  "rewrites": [
+    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
+    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/mincal", "destination": "/mincal.html" },
+    { "source": "/payslip-generator", "destination": "/payslip.html" },
+    { "source": "/report", "destination": "/report.html" }
+  ]
+}
