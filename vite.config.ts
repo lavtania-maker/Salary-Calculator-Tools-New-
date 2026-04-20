@@ -26,7 +26,8 @@ export default defineConfig(({mode}) => {
           admin: path.resolve(__dirname, 'admin.html'),
           mincal: path.resolve(__dirname, 'mincal.html'),
           payslip: path.resolve(__dirname, 'payslip.html'),
-          report: path.resolve(__dirname, 'report.html')
+          report: path.resolve(__dirname, 'report.html'),
+          'privacy-policy': path.resolve(__dirname, 'privacy-policy.html')
         }
       }
     }
