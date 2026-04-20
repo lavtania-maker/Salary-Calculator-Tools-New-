@@ -7,5 +7,13 @@
     { "source": "/mincal", "destination": "/mincal.html" },
     { "source": "/payslip-generator", "destination": "/payslip.html" },
     { "source": "/report", "destination": "/report.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" }
+      ]
+    }
   ]
 }
