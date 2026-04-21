@@ -3035,7 +3035,19 @@
             });
         };
 
+        var _logPin = '2904';
+        var _logUnlocked = false;
+
         function openErrorLogViewer() {
+            if (!_logUnlocked) {
+                var entered = prompt('Enter PIN to view error logs:');
+                if (entered === null) return;
+                if (entered !== _logPin) {
+                    alert('Incorrect PIN.');
+                    return;
+                }
+                _logUnlocked = true;
+            }
             var logs = getErrorLogs();
             var content = document.getElementById('errorLogContent');
             if (logs.length === 0) {
