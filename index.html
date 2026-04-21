@@ -2674,6 +2674,7 @@
             });
 
             function calculateSalary() {
+              try {
                 // GA4 event tracking
                 gtag('event', 'click_calculate', {
                     event_category: 'calculator',
@@ -2685,6 +2686,11 @@
                 const bonus = parseFloat(document.getElementById('bonus').value) || 0;
                 const maritalStatus = document.getElementById('maritalStatus').value;
                 const nationality = document.getElementById('nationality').value;
+
+                // Input validation
+                if (!grossSalary || isNaN(grossSalary)) {
+                    logError("input", "Invalid salary input", { grossSalary: document.getElementById('grossSalary').value });
+                }
 
                 const includeEpf = document.getElementById('includeEpf').checked;
                 const includeSocso = document.getElementById('includeSocso').checked;
@@ -2902,6 +2908,11 @@
                     netSalary: (totalIncome - totalDeductions).toFixed(2)
                 };
 
+                // Result validation
+                if (!lastCalculation || isNaN(parseFloat(lastCalculation.netSalary))) {
+                    logError("calculation", "Invalid result generated", { grossSalary, bonus }, { result: lastCalculation });
+                }
+
                 // Update Visual Bar
                 const netSalary = totalIncome - totalDeductions;
                 const netPercent = totalIncome > 0 ? (netSalary / totalIncome) * 100 : 0;
@@ -2950,12 +2961,65 @@
                 setTimeout(() => {
                     document.getElementById('resultCard').scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }, 100);
+
+              } catch (err) {
+                logError("calculation", err.message, {
+                    grossSalary: document.getElementById('grossSalary').value,
+                    bonus: document.getElementById('bonus').value
+                }, { stack: err.stack });
+                throw err;
+              }
             }
 
             function formatCurrency(amount) {
                 return 'RM ' + amount.toLocaleString('en-MY', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
             }
         });
+
+        // ─── Global Error Logger ───────────────────────────────────────────────
+        function logError(type, message, input, extra) {
+            if (input === undefined) input = {};
+            if (extra === undefined) extra = {};
+            var error = {
+                timestamp: new Date().toISOString(),
+                type: type,
+                message: message,
+                input: input,
+                extra: extra,
+                url: window.location.href,
+                userAgent: navigator.userAgent,
+                status: "new"
+            };
+            var logs = JSON.parse(localStorage.getItem("salary_error_logs") || "[]");
+            logs.unshift(error);
+            localStorage.setItem("salary_error_logs", JSON.stringify(logs));
+            console.error("[Salary Tool Error]:", error);
+        }
+
+        function getErrorLogs() {
+            return JSON.parse(localStorage.getItem("salary_error_logs") || "[]");
+        }
+
+        function clearErrorLogs() {
+            localStorage.removeItem("salary_error_logs");
+        }
+
+        // Global JS error catcher
+        window.onerror = function (message, source, lineno, colno, error) {
+            logError("system", message, {}, {
+                source: source,
+                lineno: lineno,
+                colno: colno,
+                stack: error ? error.stack : null
+            });
+        };
+
+        window.onunhandledrejection = function (event) {
+            logError("promise", event.reason ? event.reason.message || "Unhandled promise" : "Unhandled promise", {}, {
+                stack: event.reason ? event.reason.stack : null
+            });
+        };
+        // ──────────────────────────────────────────────────────────────────────
     </script>
 </body>
 
