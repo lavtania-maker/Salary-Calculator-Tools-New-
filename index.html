@@ -2991,7 +2991,7 @@
             }
         });
 
-        // ─── Global Error Logger ────────────��──────────────────────────────────
+        // ─── Global Error Logger ────────────���──────────────────────────────────
         function logError(type, message, input, extra) {
             if (input === undefined) input = {};
             if (extra === undefined) extra = {};
@@ -3074,11 +3074,19 @@
             openErrorLogViewer();
         }
 
-        // Secret shortcut: Ctrl+Shift+L (Windows) or Cmd+Shift+L (Mac) to open error logs
+        // Secret keyword: type "errorlogs" anywhere on the page to open log viewer
+        var _secretBuffer = '';
+        var _secretCode = 'errorlogs';
         document.addEventListener('keydown', function(e) {
-            var key = e.key ? e.key.toLowerCase() : '';
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && key === 'l') {
-                e.preventDefault();
+            // Ignore if user is typing inside an input, textarea or select
+            var tag = document.activeElement ? document.activeElement.tagName : '';
+            if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+            _secretBuffer += (e.key || '').toLowerCase();
+            if (_secretBuffer.length > _secretCode.length) {
+                _secretBuffer = _secretBuffer.slice(-_secretCode.length);
+            }
+            if (_secretBuffer === _secretCode) {
+                _secretBuffer = '';
                 openErrorLogViewer();
             }
         });
