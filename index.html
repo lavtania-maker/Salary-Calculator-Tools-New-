@@ -2991,24 +2991,63 @@
             }
         });
 
-        // ─── Global Error Logger ────────────���──────────────────────────────────
+        // ─── Global Error Logger ──────────────────────────────────────────────
+        var _fixSuggestions = {
+            input:       "Check that the user entered a valid number in the salary field.",
+            calculation: "Review the calculation logic — check for division by zero or NaN values.",
+            system:      "A JavaScript crash occurred. Check the stack trace for the exact file and line.",
+            promise:     "An async operation failed. Check API calls or Firebase for errors.",
+            api:         "The API request failed. Verify the endpoint URL, payload, and network."
+        };
+
+        var _severityMap = {
+            input:       "low",
+            calculation: "high",
+            system:      "critical",
+            promise:     "high",
+            api:         "high"
+        };
+
         function logError(type, message, input, extra) {
             if (input === undefined) input = {};
             if (extra === undefined) extra = {};
-            var error = {
-                timestamp: new Date().toISOString(),
-                type: type,
-                message: message,
-                input: input,
-                extra: extra,
-                url: window.location.href,
-                userAgent: navigator.userAgent,
-                status: "new"
-            };
             var logs = JSON.parse(localStorage.getItem("salary_error_logs") || "[]");
-            logs.unshift(error);
+
+            // Deduplication — increment count if same type + message within last 10 logs
+            var existing = null;
+            for (var i = 0; i < Math.min(logs.length, 10); i++) {
+                if (logs[i].type === type && logs[i].message === message) {
+                    existing = logs[i];
+                    logs.splice(i, 1);
+                    break;
+                }
+            }
+
+            var entry = {
+                id:         Date.now(),
+                timestamp:  new Date().toISOString(),
+                type:       type,
+                severity:   _severityMap[type] || "medium",
+                message:    message,
+                fix:        _fixSuggestions[type] || "Check the code related to this error type.",
+                input:      input,
+                extra:      extra,
+                stack:      (extra && extra.stack) ? extra.stack : null,
+                url:        window.location.href,
+                userAgent:  navigator.userAgent,
+                count:      existing ? (existing.count || 1) + 1 : 1,
+                status:     "new"
+            };
+
+            logs.unshift(entry);
+            if (logs.length > 100) logs = logs.slice(0, 100); // keep max 100
             localStorage.setItem("salary_error_logs", JSON.stringify(logs));
-            console.error("[Salary Tool Error]:", error);
+            console.group("[SalaryCalc Error] " + type.toUpperCase() + " — " + message);
+            console.info("Severity :", entry.severity);
+            console.info("Input    :", entry.input);
+            console.info("Fix      :", entry.fix);
+            if (entry.stack) console.info("Stack    :", entry.stack);
+            console.groupEnd();
         }
 
         function getErrorLogs() {
@@ -3017,6 +3056,7 @@
 
         function clearErrorLogs() {
             localStorage.removeItem("salary_error_logs");
+            console.info("[SalaryCalc] Error logs cleared.");
         }
 
         // Global JS error catcher
@@ -3038,6 +3078,65 @@
         var _logPin = '2904';
         var _logUnlocked = false;
 
+        var _currentFilter = 'all';
+
+        function renderLogTable(filter) {
+            var allLogs = getErrorLogs();
+            var logs = filter === 'all' ? allLogs : allLogs.filter(function(l){ return l.type === filter; });
+            var content = document.getElementById('errorLogContent');
+
+            var typeColors    = { input:'#f59e0b', calculation:'#ef4444', system:'#8b5cf6', promise:'#3b82f6', api:'#10b981', test:'#64748b' };
+            var severityColor = { low:'#22c55e', medium:'#f59e0b', high:'#ef4444', critical:'#7f1d1d' };
+
+            var summary = '<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px;align-items:center;">' +
+                '<span style="color:#64748b;font-size:0.82rem;">Total: <strong>' + allLogs.length + '</strong></span>' +
+                '<select onchange="renderLogTable(this.value)" style="font-size:0.8rem;padding:4px 8px;border:1px solid #e2e8f0;border-radius:6px;color:#334155;">' +
+                '<option value="all"' + (filter==='all'?' selected':'') + '>All Types</option>' +
+                '<option value="input"' + (filter==='input'?' selected':'') + '>Input</option>' +
+                '<option value="calculation"' + (filter==='calculation'?' selected':'') + '>Calculation</option>' +
+                '<option value="system"' + (filter==='system'?' selected':'') + '>System</option>' +
+                '<option value="promise"' + (filter==='promise'?' selected':'') + '>Promise</option>' +
+                '<option value="api"' + (filter==='api'?' selected':'') + '>API</option>' +
+                '</select>' +
+                '</div>';
+
+            if (logs.length === 0) {
+                content.innerHTML = summary + '<p style="color:#64748b;text-align:center;padding:30px 0;">No errors for this filter.</p>';
+                return;
+            }
+
+            var rows = logs.map(function(log) {
+                var tc  = typeColors[log.type] || '#64748b';
+                var sc  = severityColor[log.severity] || '#64748b';
+                var time = new Date(log.timestamp).toLocaleString('en-MY');
+                var inputStr = Object.keys(log.input||{}).length ? JSON.stringify(log.input) : '—';
+                var stack = log.stack ? '<details style="margin-top:4px;"><summary style="cursor:pointer;color:#94a3b8;font-size:0.72rem;">View stack trace</summary><pre style="font-size:0.68rem;color:#64748b;white-space:pre-wrap;margin-top:4px;">' + log.stack.substring(0, 400) + '</pre></details>' : '';
+                var countBadge = log.count > 1 ? ' <span style="background:#fef3c7;color:#92400e;padding:1px 5px;border-radius:4px;font-size:0.68rem;">x' + log.count + '</span>' : '';
+                return '<tr style="border-bottom:1px solid #f1f5f9;vertical-align:top;">' +
+                    '<td style="padding:10px 8px;color:#64748b;white-space:nowrap;font-size:0.78rem;">' + time + '</td>' +
+                    '<td style="padding:10px 8px;"><span style="background:' + tc + '20;color:' + tc + ';padding:2px 8px;border-radius:4px;font-weight:700;text-transform:uppercase;font-size:0.7rem;">' + log.type + '</span></td>' +
+                    '<td style="padding:10px 8px;"><span style="background:' + sc + '20;color:' + sc + ';padding:2px 8px;border-radius:4px;font-weight:600;font-size:0.7rem;">' + (log.severity||'—') + '</span></td>' +
+                    '<td style="padding:10px 8px;color:#1e293b;font-size:0.82rem;">' + log.message + countBadge + stack + '</td>' +
+                    '<td style="padding:10px 8px;color:#64748b;font-size:0.75rem;">' + inputStr + '</td>' +
+                    '<td style="padding:10px 8px;color:#0369a1;font-size:0.75rem;">' + (log.fix||'—') + '</td>' +
+                '</tr>';
+            }).join('');
+
+            content.innerHTML = summary +
+                '<div style="overflow-x:auto;">' +
+                '<table style="width:100%;border-collapse:collapse;min-width:700px;">' +
+                '<thead><tr style="background:#f8fafc;">' +
+                '<th style="padding:10px 8px;text-align:left;color:#475569;font-size:0.75rem;white-space:nowrap;">Time</th>' +
+                '<th style="padding:10px 8px;text-align:left;color:#475569;font-size:0.75rem;">Type</th>' +
+                '<th style="padding:10px 8px;text-align:left;color:#475569;font-size:0.75rem;">Severity</th>' +
+                '<th style="padding:10px 8px;text-align:left;color:#475569;font-size:0.75rem;">Message</th>' +
+                '<th style="padding:10px 8px;text-align:left;color:#475569;font-size:0.75rem;">Input</th>' +
+                '<th style="padding:10px 8px;text-align:left;color:#475569;font-size:0.75rem;">How to Fix</th>' +
+                '</tr></thead>' +
+                '<tbody>' + rows + '</tbody>' +
+                '</table></div>';
+        }
+
         function openErrorLogViewer() {
             if (!_logUnlocked) {
                 var entered = prompt('Enter PIN to view error logs:');
@@ -3048,42 +3147,13 @@
                 }
                 _logUnlocked = true;
             }
-            var logs = getErrorLogs();
-            var content = document.getElementById('errorLogContent');
-            if (logs.length === 0) {
-                content.innerHTML = '<p style="color:#64748b;text-align:center;padding:40px 0;">No errors logged yet. Your calculator is running clean!</p>';
-            } else {
-                var typeColors = { input: '#f59e0b', calculation: '#ef4444', system: '#8b5cf6', promise: '#3b82f6', api: '#10b981', test: '#64748b' };
-                var rows = logs.map(function(log, i) {
-                    var color = typeColors[log.type] || '#64748b';
-                    var time = new Date(log.timestamp).toLocaleString('en-MY');
-                    var inputStr = Object.keys(log.input||{}).length ? JSON.stringify(log.input) : '—';
-                    return '<tr style="border-bottom:1px solid #f1f5f9;">' +
-                        '<td style="padding:10px 8px;color:#64748b;white-space:nowrap;">' + time + '</td>' +
-                        '<td style="padding:10px 8px;"><span style="background:' + color + '20;color:' + color + ';padding:2px 8px;border-radius:4px;font-weight:600;text-transform:uppercase;font-size:0.72rem;">' + log.type + '</span></td>' +
-                        '<td style="padding:10px 8px;color:#1e293b;">' + log.message + '</td>' +
-                        '<td style="padding:10px 8px;color:#64748b;font-size:0.78rem;">' + inputStr + '</td>' +
-                    '</tr>';
-                }).join('');
-                content.innerHTML =
-                    '<p style="color:#64748b;margin-bottom:12px;">' + logs.length + ' error(s) found</p>' +
-                    '<div style="overflow-x:auto;">' +
-                    '<table style="width:100%;border-collapse:collapse;">' +
-                    '<thead><tr style="background:#f8fafc;">' +
-                    '<th style="padding:10px 8px;text-align:left;color:#475569;font-size:0.78rem;">Time</th>' +
-                    '<th style="padding:10px 8px;text-align:left;color:#475569;font-size:0.78rem;">Type</th>' +
-                    '<th style="padding:10px 8px;text-align:left;color:#475569;font-size:0.78rem;">Message</th>' +
-                    '<th style="padding:10px 8px;text-align:left;color:#475569;font-size:0.78rem;">Input</th>' +
-                    '</tr></thead>' +
-                    '<tbody>' + rows + '</tbody>' +
-                    '</table></div>';
-            }
+            renderLogTable(_currentFilter);
             document.getElementById('errorLogModal').style.display = 'block';
         }
 
         function clearAndRefreshLogs() {
             clearErrorLogs();
-            openErrorLogViewer();
+            renderLogTable('all');
         }
 
         // Secret keyword: type "errorlogs" anywhere on the page to open log viewer
