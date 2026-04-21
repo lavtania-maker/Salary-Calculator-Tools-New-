@@ -1,302 +1,212 @@
 [
   {
-    "id": "TC-001",
-    "category": "Normal",
-    "scenario": "Standard salary below RM5,000 — single Malaysian employee",
-    "input": "Gross: RM3,000 | Status: Single | Nationality: Malaysian | Bonus: RM0",
-    "expected": "EPF: RM330 | SOCSO: RM29.75 | EIS: RM7.50 | PCB: RM0 | Net: ~RM2,632.75",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Most common use case. Verify all deductions correct."
+    "id": "TC-001", "severity": "High", "category": "Calculation",
+    "scenario": "Cannot calculate salary — Calculate button does nothing",
+    "input": "Enter RM5,000, click Calculate",
+    "expected": "Result card appears with EPF, SOCSO, EIS, PCB and Net Pay values",
+    "status": "Not Run", "notes": "Most critical path. Must always work."
   },
   {
-    "id": "TC-002",
-    "category": "Normal",
-    "scenario": "Standard salary above RM5,000 — single Malaysian employee",
-    "input": "Gross: RM6,000 | Status: Single | Nationality: Malaysian | Bonus: RM0",
-    "expected": "EPF: RM660 (11%) | Employer EPF: RM720 (12%) | SOCSO: capped | EIS: capped | PCB: ~RM200+ | Net: ~RM5,041",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Employer EPF drops to 12% above RM5,000."
+    "id": "TC-002", "severity": "High", "category": "Calculation",
+    "scenario": "Page blank or not loading on open",
+    "input": "Open https://salarycalculator.my",
+    "expected": "Full page loads within 3 seconds. Calculator visible.",
+    "status": "Not Run", "notes": "Check on Chrome, Safari, Firefox."
   },
   {
-    "id": "TC-003",
-    "category": "Normal",
-    "scenario": "Married employee with no children",
-    "input": "Gross: RM4,000 | Status: Married | Nationality: Malaysian | Bonus: RM0",
-    "expected": "PCB lower than equivalent single employee. Net pay higher than TC-001.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Marital status reduces PCB. EPF/SOCSO/EIS unchanged."
+    "id": "TC-003", "severity": "High", "category": "Calculation",
+    "scenario": "Cannot type in salary input field",
+    "input": "Click on salary field and type RM3000",
+    "expected": "Characters appear in field. Value accepted.",
+    "status": "Not Run", "notes": "Input field must be interactive."
   },
   {
-    "id": "TC-004",
-    "category": "Normal",
-    "scenario": "Salary with bonus included",
-    "input": "Gross: RM5,000 | Bonus: RM5,000 | Status: Single | Nationality: Malaysian",
-    "expected": "EPF calculated on RM10,000 total. PCB recalculated with bonus annualisation. Total deductions increase significantly.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Bonus must be added to gross before PCB annualisation calculation."
+    "id": "TC-004", "severity": "High", "category": "Download",
+    "scenario": "Cannot download Salary Report — form does not open",
+    "input": "Click Download Salary Report button",
+    "expected": "Modal form opens asking for email, user type, company, phone",
+    "status": "Not Run", "notes": "Critical lead capture feature."
   },
   {
-    "id": "TC-005",
-    "category": "Normal",
-    "scenario": "Non-citizen employee",
-    "input": "Gross: RM5,000 | Status: Single | Nationality: Non-Malaysian | Bonus: RM0",
-    "expected": "EPF applies. SOCSO: not applicable. EIS: not applicable. PCB applies at standard rate.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Non-citizens exempt from SOCSO and EIS contributions."
+    "id": "TC-005", "severity": "High", "category": "Download",
+    "scenario": "Cannot download Salary Payslip — form does not open",
+    "input": "Click Download Salary Payslip button",
+    "expected": "Modal form opens. download_via = 'Download Salary Payslip'",
+    "status": "Not Run", "notes": "Verify in Google Sheet after submit."
   },
   {
-    "id": "TC-006",
-    "category": "Normal",
-    "scenario": "Minimum wage salary (RM1,700)",
-    "input": "Gross: RM1,700 | Status: Single | Nationality: Malaysian | Bonus: RM0",
-    "expected": "EPF: RM187 | SOCSO: RM16.35 | EIS: RM4.25 | PCB: RM0 | Net: ~RM1,492.40",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "PCB is RM0 at this income level. Common real-world scenario."
+    "id": "TC-006", "severity": "High", "category": "Data",
+    "scenario": "Google Sheets not recording submissions",
+    "input": "Complete form and submit after clicking Download",
+    "expected": "New row appears in Google Sheet with timestamp, email, userType, hiringStatus, companyName, userPhone, download_via",
+    "status": "Not Run", "notes": "Check sheet after every submission."
   },
   {
-    "id": "TC-007",
-    "category": "Normal",
-    "scenario": "Download Salary Report button triggers form",
-    "input": "Complete calculator, click Download Salary Report",
-    "expected": "Modal appears asking for email, user type, hiring status, company, phone. Form submits and records to Google Sheets.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Check Google Sheet for new row after submission."
-  },
-  {
-    "id": "TC-008",
-    "category": "Normal",
-    "scenario": "Download Payslip button triggers form",
-    "input": "Complete calculator, click Download Salary Payslip",
-    "expected": "Same modal as TC-007. download_via column = 'Download Salary Payslip' in Google Sheet.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Verify download_via value is correct for this button."
-  },
-  {
-    "id": "TC-009",
-    "category": "Edge",
-    "scenario": "Salary exactly at RM5,000 threshold",
-    "input": "Gross: RM5,000 | Status: Single | Nationality: Malaysian",
-    "expected": "Employer EPF at 13% (not 12%). SOCSO and EIS at correct band. No rounding errors.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Boundary condition. RM5,000 must use 13% employer rate, not 12%."
-  },
-  {
-    "id": "TC-010",
-    "category": "Edge",
-    "scenario": "Salary just above RM5,000 threshold (RM5,000.01)",
-    "input": "Gross: RM5,000.01 | Status: Single | Nationality: Malaysian",
-    "expected": "Employer EPF switches to 12%. All other deductions recalculate correctly.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "One cent above threshold must change employer EPF rate."
-  },
-  {
-    "id": "TC-011",
-    "category": "Edge",
-    "scenario": "SOCSO wage ceiling hit (above RM5,000)",
-    "input": "Gross: RM8,000 | Status: Single | Nationality: Malaysian",
-    "expected": "SOCSO employee: RM69.05 (capped). SOCSO employer: RM175.35 (capped). No further increase above ceiling.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "SOCSO ceiling is RM5,000 per month wage."
-  },
-  {
-    "id": "TC-012",
-    "category": "Edge",
-    "scenario": "EIS wage ceiling hit (above RM5,000)",
-    "input": "Gross: RM10,000 | Status: Single | Nationality: Malaysian",
-    "expected": "EIS employee: RM29.85 (capped). EIS employer: RM29.85 (capped). No further increase.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "EIS ceiling is RM5,000 per month wage."
-  },
-  {
-    "id": "TC-013",
-    "category": "Edge",
-    "scenario": "Very high salary (RM50,000)",
-    "input": "Gross: RM50,000 | Status: Single | Nationality: Malaysian | Bonus: RM0",
-    "expected": "EPF: RM5,500 | SOCSO capped | EIS capped | PCB at top bracket | Net significantly reduced.",
-    "priority": "Medium",
-    "status": "Not Run",
-    "notes": "Verify no overflow or NaN in result display."
-  },
-  {
-    "id": "TC-014",
-    "category": "Edge",
-    "scenario": "Large bonus with low base salary",
-    "input": "Gross: RM3,000 | Bonus: RM20,000 | Status: Single | Nationality: Malaysian",
-    "expected": "PCB spikes significantly due to bonus annualisation formula. EPF calculated on total RM23,000.",
-    "priority": "Medium",
-    "status": "Not Run",
-    "notes": "Bonus annualisation formula must apply correctly."
-  },
-  {
-    "id": "TC-015",
-    "category": "Edge",
-    "scenario": "Decimal salary input",
-    "input": "Gross: RM3,500.50 | Status: Single | Nationality: Malaysian",
-    "expected": "All deductions calculated to 2 decimal places. No rounding errors. Net pay correct.",
-    "priority": "Medium",
-    "status": "Not Run",
-    "notes": "Test floating point precision."
-  },
-  {
-    "id": "TC-016",
-    "category": "Invalid Input",
-    "scenario": "Empty salary field — click Calculate",
-    "input": "Gross: (empty) | Click Calculate",
-    "expected": "Error logged via logError('input'). Result card does not display. No crash. Console shows error entry.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Type 'errorlogs' on page after test to verify log was captured."
-  },
-  {
-    "id": "TC-017",
-    "category": "Invalid Input",
-    "scenario": "Negative salary value",
-    "input": "Gross: -3000 | Status: Single",
-    "expected": "Input rejected or treated as RM0. Error logged. No negative deductions shown.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Calculator must never produce negative deduction values."
-  },
-  {
-    "id": "TC-018",
-    "category": "Invalid Input",
-    "scenario": "Alphabetical text in salary field",
-    "input": "Gross: 'abc' | Click Calculate",
-    "expected": "Field rejects input or shows RM0. Error logged with type 'input'. No crash.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Browser may block non-numeric. Verify logError still fires."
-  },
-  {
-    "id": "TC-019",
-    "category": "Invalid Input",
-    "scenario": "Special characters in salary field",
-    "input": "Gross: '@@##' | Click Calculate",
-    "expected": "Input sanitised to 0 or rejected. No crash. Error logged.",
-    "priority": "Medium",
-    "status": "Not Run",
-    "notes": "Check that special chars cannot break the calculation logic."
-  },
-  {
-    "id": "TC-020",
-    "category": "Invalid Input",
-    "scenario": "Zero salary",
-    "input": "Gross: RM0 | Status: Single | Nationality: Malaysian",
-    "expected": "All deductions = RM0. Net = RM0. No divide-by-zero crash. Page remains stable.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Divide-by-zero must be handled gracefully."
-  },
-  {
-    "id": "TC-021",
-    "category": "Invalid Input",
-    "scenario": "Extremely large number",
-    "input": "Gross: RM999,999,999 | Status: Single",
-    "expected": "Calculator handles without overflow or NaN. Displays result at top PCB bracket. No page crash.",
-    "priority": "Medium",
-    "status": "Not Run",
-    "notes": "Test JavaScript number limits."
-  },
-  {
-    "id": "TC-022",
-    "category": "UI/UX",
-    "scenario": "Page loads correctly on mobile (375px width)",
-    "input": "Open site on iPhone or resize browser to 375px",
-    "expected": "All elements visible and not overlapping. Calculator usable. No horizontal scroll.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Use Chrome DevTools device mode to simulate mobile."
-  },
-  {
-    "id": "TC-023",
-    "category": "UI/UX",
-    "scenario": "Result card visible after calculation",
-    "input": "Enter valid salary, click Calculate",
-    "expected": "Page smoothly scrolls to result card. All values (EPF, SOCSO, EIS, PCB, Net) displayed clearly.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Smooth scroll behaviour must work on mobile too."
-  },
-  {
-    "id": "TC-024",
-    "category": "UI/UX",
-    "scenario": "Footer Privacy Policy link works",
+    "id": "TC-007", "severity": "High", "category": "Navigation",
+    "scenario": "Privacy Policy page returns 404 in production",
     "input": "Click Privacy Policy in footer",
-    "expected": "Navigates to /privacy-policy. Page loads correctly. No 404 error.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Previously had 404 issue. Must verify in production."
+    "expected": "Page loads at /privacy-policy with full content. No 404.",
+    "status": "Not Run", "notes": "Was a known issue — verify fix is live."
   },
   {
-    "id": "TC-025",
-    "category": "UI/UX",
-    "scenario": "Favicon visible in browser tab",
-    "input": "Open https://salarycalculator.my in browser",
-    "expected": "Ricebowl logo appears in browser tab. Visible on both desktop and mobile.",
-    "priority": "Low",
-    "status": "Not Run",
-    "notes": "Check on Chrome, Safari and Firefox."
+    "id": "TC-008", "severity": "High", "category": "Calculation",
+    "scenario": "Empty salary field — calculator crashes",
+    "input": "Leave salary blank, click Calculate",
+    "expected": "No crash. Error logged. Result card does not show.",
+    "status": "Not Run", "notes": "Type 'errorlogs' to confirm error was captured."
   },
   {
-    "id": "TC-026",
-    "category": "Performance",
-    "scenario": "Page load time under 3 seconds",
-    "input": "Open https://salarycalculator.my on a standard connection",
-    "expected": "Page fully interactive in under 3 seconds. No blank screen delay.",
-    "priority": "Medium",
-    "status": "Not Run",
-    "notes": "Use Chrome Lighthouse or PageSpeed Insights to measure."
+    "id": "TC-009", "severity": "High", "category": "Calculation",
+    "scenario": "Zero salary crashes or shows NaN",
+    "input": "Gross: RM0, click Calculate",
+    "expected": "All values = RM0.00. No NaN or crash.",
+    "status": "Not Run", "notes": "Divide-by-zero must be handled."
   },
   {
-    "id": "TC-027",
-    "category": "Performance",
-    "scenario": "Calculation responds instantly",
-    "input": "Enter valid salary, click Calculate",
-    "expected": "Result appears in under 500ms. No visible lag or spinner needed.",
-    "priority": "Medium",
-    "status": "Not Run",
-    "notes": "All calculation is client-side so should be near-instant."
+    "id": "TC-010", "severity": "High", "category": "Calculation",
+    "scenario": "Negative salary produces wrong results",
+    "input": "Gross: -3000, click Calculate",
+    "expected": "Treated as 0 or rejected. No negative deductions.",
+    "status": "Not Run", "notes": "Must not produce negative EPF or net pay."
   },
   {
-    "id": "TC-028",
-    "category": "Error Logging",
-    "scenario": "Error logger captures empty salary",
-    "input": "Leave salary blank, click Calculate. Then type 'errorlogs' on page.",
-    "expected": "Popup shows one log entry with type='input' and message='Invalid salary input'.",
-    "priority": "High",
-    "status": "Not Run",
-    "notes": "Primary way to verify error logging is working."
+    "id": "TC-011", "severity": "Medium", "category": "Calculation",
+    "scenario": "EPF rate incorrect — below RM5,000",
+    "input": "Gross: RM3,000, Malaysian, Single",
+    "expected": "Employee EPF: RM330 (11%). Employer EPF: RM390 (13%).",
+    "status": "Not Run", "notes": "Verify both employee and employer rates."
   },
   {
-    "id": "TC-029",
-    "category": "Error Logging",
-    "scenario": "Error logs persist after page refresh",
-    "input": "Trigger an error, refresh the page, type 'errorlogs'",
-    "expected": "Previously logged errors still visible. localStorage persists across refresh.",
-    "priority": "Medium",
-    "status": "Not Run",
-    "notes": "Confirms localStorage is used correctly."
+    "id": "TC-012", "severity": "Medium", "category": "Calculation",
+    "scenario": "EPF employer rate wrong above RM5,000",
+    "input": "Gross: RM6,000, Malaysian, Single",
+    "expected": "Employee EPF: RM660 (11%). Employer EPF: RM720 (12%).",
+    "status": "Not Run", "notes": "Rate drops from 13% to 12% above RM5,000."
   },
   {
-    "id": "TC-030",
-    "category": "Error Logging",
-    "scenario": "Clear all logs works correctly",
-    "input": "Open error log viewer, click 'Clear All Logs'",
-    "expected": "All logs removed. Viewer shows 'No errors logged yet' message.",
-    "priority": "Low",
-    "status": "Not Run",
-    "notes": "Verify clearErrorLogs() empties localStorage key."
+    "id": "TC-013", "severity": "Medium", "category": "Calculation",
+    "scenario": "SOCSO not capping at RM5,000 ceiling",
+    "input": "Gross: RM8,000, Malaysian",
+    "expected": "SOCSO employee: RM69.05 (capped). No further increase.",
+    "status": "Not Run", "notes": "SOCSO is capped at RM5,000 wage ceiling."
+  },
+  {
+    "id": "TC-014", "severity": "Medium", "category": "Calculation",
+    "scenario": "EIS not capping at RM5,000 ceiling",
+    "input": "Gross: RM10,000, Malaysian",
+    "expected": "EIS employee: RM29.85 (capped). EIS employer: RM29.85 (capped).",
+    "status": "Not Run", "notes": "EIS ceiling is RM5,000 per month."
+  },
+  {
+    "id": "TC-015", "severity": "Medium", "category": "Calculation",
+    "scenario": "PCB not lower for married vs single employee",
+    "input": "Gross: RM4,000, Married vs same salary Single",
+    "expected": "Married PCB lower than Single. Net pay higher for married.",
+    "status": "Not Run", "notes": "Marital status must affect PCB calculation."
+  },
+  {
+    "id": "TC-016", "severity": "Medium", "category": "Calculation",
+    "scenario": "Bonus not included in EPF or PCB calculation",
+    "input": "Gross: RM5,000, Bonus: RM5,000",
+    "expected": "EPF calculated on RM10,000. PCB annualised with bonus.",
+    "status": "Not Run", "notes": "Bonus must affect both EPF and PCB."
+  },
+  {
+    "id": "TC-017", "severity": "Medium", "category": "Performance",
+    "scenario": "Page loads slower than 5 seconds",
+    "input": "Open site on standard broadband connection",
+    "expected": "Page interactive in under 3 seconds. Lighthouse score > 70.",
+    "status": "Not Run", "notes": "Use Google PageSpeed Insights to measure."
+  },
+  {
+    "id": "TC-018", "severity": "Medium", "category": "Navigation",
+    "scenario": "Wrong redirection after form submission",
+    "input": "Submit download form with valid data",
+    "expected": "PDF/email delivered or success message shown. No redirect to wrong page.",
+    "status": "Not Run", "notes": "Check UX flow after form submit."
+  },
+  {
+    "id": "TC-019", "severity": "Medium", "category": "UI",
+    "scenario": "Mobile layout broken — calculator not usable on phone",
+    "input": "Open on iPhone / Android or resize to 375px",
+    "expected": "All inputs, buttons and results visible. No overlapping or cut-off elements.",
+    "status": "Not Run", "notes": "Use Chrome DevTools device mode."
+  },
+  {
+    "id": "TC-020", "severity": "Medium", "category": "Calculation",
+    "scenario": "Non-citizen employee shows SOCSO or EIS",
+    "input": "Gross: RM5,000, Non-Malaysian",
+    "expected": "SOCSO: RM0. EIS: RM0. EPF and PCB still apply.",
+    "status": "Not Run", "notes": "Non-citizens exempt from SOCSO and EIS."
+  },
+  {
+    "id": "TC-021", "severity": "Low", "category": "UI",
+    "scenario": "Favicon not showing in browser tab",
+    "input": "Open site in Chrome, Safari, Firefox",
+    "expected": "Ricebowl logo appears in browser tab on all browsers.",
+    "status": "Not Run", "notes": "Minor visual issue. Does not affect function."
+  },
+  {
+    "id": "TC-022", "severity": "Low", "category": "UI",
+    "scenario": "Text typo or wrong capitalization in UI",
+    "input": "Read all visible text on page",
+    "expected": "All text grammatically correct. No spelling errors.",
+    "status": "Not Run", "notes": "Review header, labels, tooltips and footer."
+  },
+  {
+    "id": "TC-023", "severity": "Low", "category": "UI",
+    "scenario": "Spacing or alignment looks off on desktop",
+    "input": "View page at 1280px width",
+    "expected": "All sections evenly spaced. No overlapping elements. Clean layout.",
+    "status": "Not Run", "notes": "Minor visual polish check."
+  },
+  {
+    "id": "TC-024", "severity": "Low", "category": "UI",
+    "scenario": "Footer copyright year is outdated",
+    "input": "Scroll to footer",
+    "expected": "Copyright shows current year (2026).",
+    "status": "Not Run", "notes": "Update annually."
+  },
+  {
+    "id": "TC-025", "severity": "Low", "category": "UI",
+    "scenario": "Colour inconsistency in buttons or badges",
+    "input": "Check all buttons, badges and links",
+    "expected": "All primary actions use consistent blue (#2563eb). No random colours.",
+    "status": "Not Run", "notes": "Visual consistency check."
+  },
+  {
+    "id": "TC-026", "severity": "Low", "category": "UI",
+    "scenario": "Tooltip text missing or incorrect on deduction fields",
+    "input": "Hover over EPF, SOCSO, EIS, PCB labels",
+    "expected": "Tooltip appears explaining what each deduction is.",
+    "status": "Not Run", "notes": "Helpful for non-finance users."
+  },
+  {
+    "id": "TC-027", "severity": "Medium", "category": "Data",
+    "scenario": "Timestamp not recorded in Google Sheet",
+    "input": "Submit download form",
+    "expected": "Timestamp column in sheet shows correct date and time of submission.",
+    "status": "Not Run", "notes": "Auto-generated on form submit."
+  },
+  {
+    "id": "TC-028", "severity": "High", "category": "Error Logging",
+    "scenario": "Error logger not capturing empty salary",
+    "input": "Leave salary blank, click Calculate, type 'errorlogs' on page",
+    "expected": "Popup shows log with type='input', message='Invalid salary input'.",
+    "status": "Not Run", "notes": "Verify error logging is active."
+  },
+  {
+    "id": "TC-029", "severity": "Medium", "category": "Error Logging",
+    "scenario": "Error logs lost after page refresh",
+    "input": "Trigger error, refresh page, type 'errorlogs'",
+    "expected": "Logs still visible after refresh. localStorage persists.",
+    "status": "Not Run", "notes": "Confirms localStorage is working."
+  },
+  {
+    "id": "TC-030", "severity": "Low", "category": "Error Logging",
+    "scenario": "Clear All Logs does not work",
+    "input": "Open error log viewer, click Clear All Logs",
+    "expected": "All logs removed. Viewer shows empty state message.",
+    "status": "Not Run", "notes": "Minor admin utility."
   }
 ]
