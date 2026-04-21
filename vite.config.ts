@@ -28,7 +28,8 @@ export default defineConfig(({mode}) => {
           payslip: path.resolve(__dirname, 'payslip.html'),
           report: path.resolve(__dirname, 'report.html'),
           'privacy-policy': path.resolve(__dirname, 'privacy-policy/index.html'),
-          'error-logs': path.resolve(__dirname, 'error-logs/index.html')
+          'error-logs': path.resolve(__dirname, 'error-logs/index.html'),
+          'test-case': path.resolve(__dirname, 'test-case/index.html')
         }
       }
     }

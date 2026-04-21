@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TMQV1XC09P');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png">
+  <title>QA Test Cases — SalaryCalculator.my</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --primary: #1e3a5f;
+      --accent: #2563eb;
+      --bg: #f8fafc;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --text: #1e293b;
+      --muted: #64748b;
+      --pass: #16a34a;
+      --fail: #dc2626;
+      --notrun: #94a3b8;
+      --high: #dc2626;
+      --medium: #d97706;
+      --low: #16a34a;
+      --cat-normal: #2563eb;
+      --cat-edge: #7c3aed;
+      --cat-invalid: #dc2626;
+      --cat-ui: #0891b2;
+      --cat-perf: #d97706;
+      --cat-error: #059669;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* Header */
+    .header {
+      background: var(--primary);
+      color: white;
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .header-left h1 { font-size: 1.25rem; font-weight: 700; }
+    .header-left p { font-size: 0.8rem; color: #94a3b8; margin-top: 4px; }
+    .header-right { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-outline { background: transparent; border: 1px solid #475569; color: #cbd5e1; }
+    .btn-primary { background: var(--accent); color: white; }
+    .btn-danger { background: #dc2626; color: white; }
+
+    /* Summary cards */
+    .summary {
+      display: flex;
+      gap: 12px;
+      padding: 24px 32px 0;
+      flex-wrap: wrap;
+    }
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      flex: 1;
+      min-width: 130px;
+      text-align: center;
+    }
+    .card-num { font-size: 1.75rem; font-weight: 700; color: var(--primary); }
+    .card-label { font-size: 0.72rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .card.pass .card-num { color: var(--pass); }
+    .card.fail .card-num { color: var(--fail); }
+    .card.notrun .card-num { color: var(--notrun); }
+
+    /* Architecture box */
+    .arch-box {
+      margin: 24px 32px 0;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 24px;
+    }
+    .arch-box h3 { font-size: 0.85rem; font-weight: 700; color: var(--primary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .arch-flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    .arch-step {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .arch-arrow { color: var(--accent); font-weight: 700; font-size: 1rem; }
+
+    /* Controls */
+    .controls {
+      padding: 20px 32px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .search-box {
+      flex: 1;
+      min-width: 200px;
+      padding: 9px 14px;
+      border: 1px solid var(--border);
+      border-radius: 7px;
+      font-size: 0.85rem;
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      color: var(--text);
+    }
+    .search-box:focus { outline: none; border-color: var(--accent); }
+    .filter-group { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      color: var(--muted);
+      transition: all 0.15s;
+    }
+    .filter-btn.active {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: white;
+    }
+
+    /* Table */
+    .table-wrap {
+      padding: 0 32px 40px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--white);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      font-size: 0.83rem;
+    }
+    thead tr { background: var(--primary); }
+    thead th {
+      padding: 12px 14px;
+      text-align: left;
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #f8fafc; }
+    td { padding: 12px 14px; vertical-align: top; line-height: 1.5; }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 12px;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    /* Category badges */
+    .cat-Normal    { background: #dbeafe; color: var(--cat-normal); }
+    .cat-Edge      { background: #ede9fe; color: var(--cat-edge); }
+    .cat-Invalid   { background: #fee2e2; color: var(--cat-invalid); }
+    .cat-UIUX      { background: #cffafe; color: var(--cat-ui); }
+    .cat-Performance { background: #fef3c7; color: var(--cat-perf); }
+    .cat-Error     { background: #d1fae5; color: var(--cat-error); }
+
+    /* Priority badges */
+    .pri-High   { background: #fee2e2; color: var(--high); }
+    .pri-Medium { background: #fef3c7; color: var(--medium); }
+    .pri-Low    { background: #d1fae5; color: var(--low); }
+
+    /* Status badges */
+    .sta-Pass    { background: #d1fae5; color: var(--pass); }
+    .sta-Fail    { background: #fee2e2; color: var(--fail); }
+    .sta-NotRun  { background: #f1f5f9; color: var(--notrun); }
+
+    .status-select {
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 3px 6px;
+      font-size: 0.75rem;
+      font-family: 'Inter', sans-serif;
+      background: var(--white);
+      cursor: pointer;
+    }
+
+    .id-col { font-weight: 700; color: var(--accent); white-space: nowrap; }
+    .scenario-text { font-weight: 500; }
+    .meta-text { color: var(--muted); font-size: 0.78rem; }
+    .notes-text { font-style: italic; color: var(--muted); font-size: 0.75rem; }
+
+    .no-results { text-align: center; padding: 60px 20px; color: var(--muted); }
+
+    /* Legend */
+    .legend {
+      margin: 0 32px 16px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+
+    /* Export bar */
+    .export-bar {
+      padding: 0 32px 16px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+    .count-text { font-size: 0.8rem; color: var(--muted); }
+
+    @media (max-width: 768px) {
+      .header { padding: 20px 16px; }
+      .summary { padding: 16px 16px 0; }
+      .controls { padding: 16px; }
+      .table-wrap { padding: 0 16px 32px; }
+      .export-bar { padding: 0 16px 12px; }
+      .legend { margin: 0 16px 12px; }
+      .arch-box { margin: 16px 16px 0; }
+      thead th:nth-child(5),
+      td:nth-child(5),
+      thead th:nth-child(6),
+      td:nth-child(6) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <h1>QA Test Cases — SalaryCalculator.my</h1>
+    <p>Quality Assurance dashboard. Not indexed by search engines.</p>
+  </div>
+  <div class="header-right">
+    <button class="btn btn-outline" onclick="exportCSV()">Export CSV</button>
+    <button class="btn btn-danger" onclick="resetAllStatus()">Reset All Status</button>
+    <a href="/" class="btn btn-primary">Back to Calculator</a>
+  </div>
+</header>
+
+<!-- Summary Cards -->
+<div class="summary" id="summaryCards"></div>
+
+<!-- System Architecture -->
+<div class="arch-box">
+  <h3>System Architecture</h3>
+  <div class="arch-flow">
+    <span class="arch-step">test-cases.json</span>
+    <span class="arch-arrow">→</span>
+    <span class="arch-step">/test-case page fetches JSON</span>
+    <span class="arch-arrow">→</span>
+    <span class="arch-step">Table renders in browser</span>
+    <span class="arch-arrow">→</span>
+    <span class="arch-step">You update Pass / Fail</span>
+    <span class="arch-arrow">→</span>
+    <span class="arch-step">Status saved to localStorage</span>
+  </div>
+  <p style="margin-top:12px;font-size:0.75rem;color:var(--muted);">
+    Storage: <strong>test-cases.json</strong> (source of truth for scenarios) + <strong>localStorage</strong> (tracks your Pass/Fail updates per browser).
+    To update test cases permanently, edit <code>public/test-cases.json</code>.
+  </p>
+</div>
+
+<!-- Controls -->
+<div class="controls">
+  <input class="search-box" type="text" id="searchInput" placeholder="Search by scenario, input, or ID..." oninput="renderTable()">
+  <div class="filter-group" id="categoryFilters"></div>
+  <div class="filter-group" id="priorityFilters"></div>
+  <div class="filter-group" id="statusFilters"></div>
+</div>
+
+<!-- Export bar -->
+<div class="export-bar">
+  <span class="count-text" id="countText">Loading...</span>
+</div>
+
+<!-- Table -->
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Category</th>
+        <th>Scenario</th>
+        <th>Input</th>
+        <th>Expected Output</th>
+        <th>Priority</th>
+        <th>Status</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+      <tr><td colspan="8" class="no-results">Loading test cases...</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  var allCases = [];
+  var activeFilters = { category: 'All', priority: 'All', status: 'All' };
+
+  // Load status overrides from localStorage
+  function getStatusOverrides() {
+    try { return JSON.parse(localStorage.getItem('qa_status_overrides') || '{}'); } catch(e) { return {}; }
+  }
+  function saveStatusOverride(id, status) {
+    var overrides = getStatusOverrides();
+    overrides[id] = status;
+    localStorage.setItem('qa_status_overrides', JSON.stringify(overrides));
+  }
+
+  // Fetch test cases
+  fetch('/test-cases.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      allCases = data;
+      buildFilters();
+      renderSummary();
+      renderTable();
+    })
+    .catch(function(e) {
+      document.getElementById('tableBody').innerHTML =
+        '<tr><td colspan="8" class="no-results">Failed to load test cases. Make sure test-cases.json is in /public.</td></tr>';
+    });
+
+  function getEffectiveStatus(tc) {
+    var overrides = getStatusOverrides();
+    return overrides[tc.id] || tc.status;
+  }
+
+  function renderSummary() {
+    var overrides = getStatusOverrides();
+    var total = allCases.length;
+    var pass = allCases.filter(function(tc) { return getEffectiveStatus(tc) === 'Pass'; }).length;
+    var fail = allCases.filter(function(tc) { return getEffectiveStatus(tc) === 'Fail'; }).length;
+    var notrun = allCases.filter(function(tc) { return getEffectiveStatus(tc) === 'Not Run'; }).length;
+    var high = allCases.filter(function(tc) { return tc.priority === 'High'; }).length;
+
+    document.getElementById('summaryCards').innerHTML =
+      card(total, 'Total Test Cases', '') +
+      card(pass, 'Passed', 'pass') +
+      card(fail, 'Failed', 'fail') +
+      card(notrun, 'Not Run', 'notrun') +
+      card(high, 'High Priority', '');
+  }
+
+  function card(num, label, cls) {
+    return '<div class="card ' + cls + '"><div class="card-num">' + num + '</div><div class="card-label">' + label + '</div></div>';
+  }
+
+  function buildFilters() {
+    var categories = ['All', 'Normal', 'Edge', 'Invalid Input', 'UI/UX', 'Performance', 'Error Logging'];
+    var priorities = ['All', 'High', 'Medium', 'Low'];
+    var statuses = ['All', 'Not Run', 'Pass', 'Fail'];
+
+    document.getElementById('categoryFilters').innerHTML = categories.map(function(c) {
+      return '<button class="filter-btn' + (c === 'All' ? ' active' : '') + '" onclick="setFilter(\'category\',\'' + c + '\',this)">' + c + '</button>';
+    }).join('');
+    document.getElementById('priorityFilters').innerHTML = priorities.map(function(p) {
+      return '<button class="filter-btn' + (p === 'All' ? ' active' : '') + '" onclick="setFilter(\'priority\',\'' + p + '\',this)">' + p + '</button>';
+    }).join('');
+    document.getElementById('statusFilters').innerHTML = statuses.map(function(s) {
+      return '<button class="filter-btn' + (s === 'All' ? ' active' : '') + '" onclick="setFilter(\'status\',\'' + s + '\',this)">' + s + '</button>';
+    }).join('');
+  }
+
+  function setFilter(type, value, btn) {
+    activeFilters[type] = value;
+    var group = btn.parentElement.querySelectorAll('.filter-btn');
+    group.forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    renderTable();
+  }
+
+  function renderTable() {
+    var search = document.getElementById('searchInput').value.toLowerCase();
+    var filtered = allCases.filter(function(tc) {
+      var cat = tc.category === 'Invalid Input' ? 'Invalid Input' : tc.category;
+      var matchCat = activeFilters.category === 'All' || tc.category === activeFilters.category;
+      var matchPri = activeFilters.priority === 'All' || tc.priority === activeFilters.priority;
+      var matchSta = activeFilters.status === 'All' || getEffectiveStatus(tc) === activeFilters.status;
+      var matchSearch = !search ||
+        tc.id.toLowerCase().includes(search) ||
+        tc.scenario.toLowerCase().includes(search) ||
+        tc.input.toLowerCase().includes(search) ||
+        tc.expected.toLowerCase().includes(search);
+      return matchCat && matchPri && matchSta && matchSearch;
+    });
+
+    document.getElementById('countText').textContent = 'Showing ' + filtered.length + ' of ' + allCases.length + ' test cases';
+
+    if (filtered.length === 0) {
+      document.getElementById('tableBody').innerHTML = '<tr><td colspan="8" class="no-results">No test cases match your filters.</td></tr>';
+      return;
+    }
+
+    document.getElementById('tableBody').innerHTML = filtered.map(function(tc) {
+      var status = getEffectiveStatus(tc);
+      var catKey = tc.category.replace(/[^a-zA-Z]/g,'');
+      var priKey = tc.priority;
+      var staKey = status.replace(/\s/g,'');
+      return '<tr>' +
+        '<td class="id-col">' + tc.id + '</td>' +
+        '<td><span class="badge cat-' + catKey + '">' + tc.category + '</span></td>' +
+        '<td class="scenario-text">' + tc.scenario + '</td>' +
+        '<td class="meta-text">' + tc.input.replace(/\|/g, '<br>') + '</td>' +
+        '<td class="meta-text">' + tc.expected.replace(/\|/g, '<br>') + '</td>' +
+        '<td><span class="badge pri-' + priKey + '">' + tc.priority + '</span></td>' +
+        '<td>' +
+          '<select class="status-select" onchange="updateStatus(\'' + tc.id + '\', this.value)">' +
+            ['Not Run','Pass','Fail'].map(function(s) {
+              return '<option value="' + s + '"' + (status === s ? ' selected' : '') + '>' + s + '</option>';
+            }).join('') +
+          '</select>' +
+        '</td>' +
+        '<td class="notes-text">' + (tc.notes || '—') + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  function updateStatus(id, newStatus) {
+    saveStatusOverride(id, newStatus);
+    renderSummary();
+  }
+
+  function resetAllStatus() {
+    if (!confirm('Reset all test case statuses to "Not Run"?')) return;
+    localStorage.removeItem('qa_status_overrides');
+    renderSummary();
+    renderTable();
+  }
+
+  function exportCSV() {
+    var overrides = getStatusOverrides();
+    var header = ['ID','Category','Scenario','Input','Expected Output','Priority','Status','Notes'];
+    var rows = allCases.map(function(tc) {
+      return [tc.id, tc.category, tc.scenario, tc.input, tc.expected, tc.priority, overrides[tc.id] || tc.status, tc.notes || ''].map(function(v) {
+        return '"' + String(v).replace(/"/g, '""') + '"';
+      });
+    });
+    var csv = [header.join(',')].concat(rows.map(function(r) { return r.join(','); })).join('\n');
+    var blob = new Blob([csv], { type: 'text/csv' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'qa-test-cases-salarycalculator.csv';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+</script>
+</body>
+</html>
