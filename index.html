@@ -2991,7 +2991,7 @@
             }
         });
 
-        // ─── Global Error Logger ───────────────────────────────────────────────
+        // ─── Global Error Logger ────────────��──────────────────────────────────
         function logError(type, message, input, extra) {
             if (input === undefined) input = {};
             if (extra === undefined) extra = {};
@@ -3076,7 +3076,8 @@
 
         // Secret shortcut: Ctrl+Shift+L (Windows) or Cmd+Shift+L (Mac) to open error logs
         document.addEventListener('keydown', function(e) {
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'L') {
+            var key = e.key ? e.key.toLowerCase() : '';
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && key === 'l') {
                 e.preventDefault();
                 openErrorLogViewer();
             }
