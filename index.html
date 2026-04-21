@@ -2211,7 +2211,7 @@
             <div class="footer-bottom">
                 <p>&copy; 2026 SalaryCalc MY</p>
                 <p style="margin-top: 8px; font-size: 0.75rem; color: #64748b;">Data is estimated for reference only</p>
-                <button onclick="openErrorLogViewer()" style="margin-top:12px;background:none;border:1px solid #334155;color:#94a3b8;font-size:0.7rem;padding:4px 10px;border-radius:4px;cursor:pointer;">View Error Logs</button>
+
             </div>
         </div>
     </footer>
@@ -3073,6 +3073,14 @@
             clearErrorLogs();
             openErrorLogViewer();
         }
+
+        // Secret shortcut: Ctrl+Shift+L (Windows) or Cmd+Shift+L (Mac) to open error logs
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'L') {
+                e.preventDefault();
+                openErrorLogViewer();
+            }
+        });
         // ──────────────────────────────────────────────────────────────────────
     </script>
 </body>
