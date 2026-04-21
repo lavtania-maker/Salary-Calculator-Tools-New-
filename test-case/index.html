@@ -13,31 +13,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/png" href="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png">
-  <title>QA Test Cases — SalaryCalculator.my</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>QA Test Cases — Salary Calculator MY</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --primary: #1e3a5f;
-      --accent: #2563eb;
-      --bg: #f8fafc;
-      --white: #ffffff;
-      --border: #e2e8f0;
-      --text: #1e293b;
-      --muted: #64748b;
-      --pass: #16a34a;
-      --fail: #dc2626;
-      --notrun: #94a3b8;
-      --high: #dc2626;
-      --medium: #d97706;
-      --low: #16a34a;
-      --cat-normal: #2563eb;
-      --cat-edge: #7c3aed;
-      --cat-invalid: #dc2626;
-      --cat-ui: #0891b2;
-      --cat-perf: #d97706;
-      --cat-error: #059669;
+      --bg: #0f172a;
+      --surface: #1e293b;
+      --surface2: #263347;
+      --border: #334155;
+      --text: #f1f5f9;
+      --muted: #94a3b8;
+      --accent: #3b82f6;
+      --accent-dim: #1d4ed840;
+      --high: #ef4444;
+      --high-bg: #450a0a;
+      --high-border: #7f1d1d;
+      --medium: #f59e0b;
+      --medium-bg: #451a03;
+      --medium-border: #78350f;
+      --low: #22c55e;
+      --low-bg: #052e16;
+      --low-border: #14532d;
+      --pass: #22c55e;
+      --fail: #ef4444;
+      --notrun: #64748b;
+      --radius: 10px;
     }
 
     body {
@@ -47,282 +49,311 @@
       min-height: 100vh;
     }
 
-    /* Header */
+    /* ── Header ── */
     .header {
-      background: var(--primary);
-      color: white;
-      padding: 24px 32px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 16px;
+      gap: 12px;
     }
-    .header-left h1 { font-size: 1.25rem; font-weight: 700; }
-    .header-left p { font-size: 0.8rem; color: #94a3b8; margin-top: 4px; }
-    .header-right { display: flex; gap: 10px; flex-wrap: wrap; }
+    .header-brand { display: flex; align-items: center; gap: 12px; }
+    .header-brand img { width: 28px; height: 28px; border-radius: 6px; }
+    .header-title { font-size: 1rem; font-weight: 700; color: var(--text); }
+    .header-sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+    .header-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
     .btn {
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-size: 0.8rem;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px;
+      border-radius: 7px;
+      font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
       border: none;
-      transition: opacity 0.2s;
+      text-decoration: none;
+      transition: opacity 0.15s, background 0.15s;
+      white-space: nowrap;
     }
     .btn:hover { opacity: 0.85; }
-    .btn-outline { background: transparent; border: 1px solid #475569; color: #cbd5e1; }
-    .btn-primary { background: var(--accent); color: white; }
-    .btn-danger { background: #dc2626; color: white; }
+    .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-danger { background: #7f1d1d; color: #fca5a5; border: 1px solid var(--high-border); }
 
-    /* Summary cards */
-    .summary {
+    /* ── Summary ── */
+    .summary-row {
       display: flex;
       gap: 12px;
       padding: 24px 32px 0;
       flex-wrap: wrap;
     }
-    .card {
-      background: var(--white);
+    .stat-card {
+      flex: 1; min-width: 110px;
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 16px 20px;
-      flex: 1;
-      min-width: 130px;
+      border-radius: var(--radius);
+      padding: 16px 18px;
       text-align: center;
     }
-    .card-num { font-size: 1.75rem; font-weight: 700; color: var(--primary); }
-    .card-label { font-size: 0.72rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
-    .card.pass .card-num { color: var(--pass); }
-    .card.fail .card-num { color: var(--fail); }
-    .card.notrun .card-num { color: var(--notrun); }
+    .stat-num { font-size: 2rem; font-weight: 800; line-height: 1; }
+    .stat-label { font-size: 0.68rem; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .stat-card.s-pass .stat-num  { color: var(--pass); }
+    .stat-card.s-fail .stat-num  { color: var(--fail); }
+    .stat-card.s-notrun .stat-num { color: var(--notrun); }
+    .stat-card.s-high .stat-num  { color: var(--high); }
 
-    /* Architecture box */
-    .arch-box {
-      margin: 24px 32px 0;
-      background: var(--white);
+    /* ── How to use ── */
+    .how-section {
+      margin: 20px 32px 0;
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px 24px;
+      border-radius: var(--radius);
+      padding: 18px 22px;
     }
-    .arch-box h3 { font-size: 0.85rem; font-weight: 700; color: var(--primary); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
-    .arch-flow {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
-      font-size: 0.78rem;
-      color: var(--muted);
-    }
-    .arch-step {
-      background: #f1f5f9;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 6px 12px;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .arch-arrow { color: var(--accent); font-weight: 700; font-size: 1rem; }
-
-    /* Controls */
-    .controls {
-      padding: 20px 32px;
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-    .search-box {
-      flex: 1;
-      min-width: 200px;
-      padding: 9px 14px;
+    .how-title { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+    .how-steps { display: flex; gap: 8px; flex-wrap: wrap; counter-reset: steps; }
+    .how-step {
+      display: flex; align-items: flex-start; gap: 8px;
+      background: var(--surface2);
       border: 1px solid var(--border);
       border-radius: 7px;
-      font-size: 0.85rem;
-      font-family: 'Inter', sans-serif;
-      background: var(--white);
+      padding: 10px 14px;
+      flex: 1; min-width: 160px;
+      font-size: 0.78rem; color: var(--muted);
+    }
+    .how-num {
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.68rem; font-weight: 800;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .how-text strong { color: var(--text); display: block; margin-bottom: 2px; }
+
+    /* ── Severity Tabs ── */
+    .tabs-wrap { padding: 24px 32px 0; }
+    .tabs {
+      display: flex; gap: 4px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 4px;
+      width: fit-content;
+    }
+    .tab {
+      padding: 8px 20px;
+      border-radius: 7px;
+      font-size: 0.82rem; font-weight: 600;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      color: var(--muted);
+      transition: all 0.15s;
+      display: flex; align-items: center; gap: 7px;
+      white-space: nowrap;
+    }
+    .tab:hover { color: var(--text); }
+    .tab.active-high   { background: var(--high-bg); color: var(--high); border: 1px solid var(--high-border); }
+    .tab.active-medium { background: var(--medium-bg); color: var(--medium); border: 1px solid var(--medium-border); }
+    .tab.active-low    { background: var(--low-bg); color: var(--low); border: 1px solid var(--low-border); }
+    .tab-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .dot-high   { background: var(--high); }
+    .dot-medium { background: var(--medium); }
+    .dot-low    { background: var(--low); }
+    .tab-count {
+      font-size: 0.65rem; font-weight: 700;
+      padding: 1px 6px; border-radius: 10px;
+      background: rgba(255,255,255,0.08);
+      color: inherit;
+    }
+
+    /* ── Controls ── */
+    .controls {
+      padding: 16px 32px 0;
+      display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+    }
+    .search-wrap { position: relative; flex: 1; min-width: 200px; }
+    .search-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+    .search-box {
+      width: 100%;
+      padding: 9px 12px 9px 34px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.82rem; font-family: 'Inter', sans-serif;
       color: var(--text);
     }
+    .search-box::placeholder { color: var(--muted); }
     .search-box:focus { outline: none; border-color: var(--accent); }
-    .filter-group { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
     .filter-btn {
-      padding: 6px 14px;
+      padding: 6px 12px;
       border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
+      font-size: 0.72rem; font-weight: 600;
       cursor: pointer;
-      border: 1.5px solid var(--border);
-      background: var(--white);
+      border: 1px solid var(--border);
+      background: transparent;
       color: var(--muted);
       transition: all 0.15s;
     }
-    .filter-btn.active {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: white;
-    }
+    .filter-btn:hover { color: var(--text); border-color: var(--accent); }
+    .filter-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
 
-    /* Table */
-    .table-wrap {
-      padding: 0 32px 40px;
-      overflow-x: auto;
-    }
+    /* ── Table ── */
+    .table-wrap { padding: 16px 32px 48px; overflow-x: auto; }
+    .result-meta { font-size: 0.75rem; color: var(--muted); margin-bottom: 10px; }
+
     table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--white);
-      border-radius: 10px;
-      overflow: hidden;
+      width: 100%; border-collapse: collapse;
+      background: var(--surface);
       border: 1px solid var(--border);
-      font-size: 0.83rem;
+      border-radius: var(--radius);
+      overflow: hidden;
+      font-size: 0.82rem;
     }
-    thead tr { background: var(--primary); }
+    thead tr { background: var(--surface2); }
     thead th {
-      padding: 12px 14px;
+      padding: 11px 14px;
       text-align: left;
-      color: white;
-      font-size: 0.72rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      color: var(--muted);
+      font-size: 0.68rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      white-space: nowrap;
+      border-bottom: 1px solid var(--border);
+    }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; cursor: pointer; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: var(--surface2); }
+    td { padding: 13px 14px; vertical-align: top; line-height: 1.55; }
+
+    /* expandable detail row */
+    .detail-row { display: none; }
+    .detail-row td {
+      padding: 0;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+    }
+    .detail-inner {
+      padding: 14px 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      font-size: 0.78rem;
+    }
+    .detail-block label { display: block; font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .detail-block p { color: var(--text); line-height: 1.5; }
+
+    /* badges */
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 3px 9px;
+      border-radius: 12px;
+      font-size: 0.65rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.04em;
       white-space: nowrap;
     }
-    tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
-    tbody tr:last-child { border-bottom: none; }
-    tbody tr:hover { background: #f8fafc; }
-    td { padding: 12px 14px; vertical-align: top; line-height: 1.5; }
+    .sev-High   { background: var(--high-bg); color: var(--high); border: 1px solid var(--high-border); }
+    .sev-Medium { background: var(--medium-bg); color: var(--medium); border: 1px solid var(--medium-border); }
+    .sev-Low    { background: var(--low-bg); color: var(--low); border: 1px solid var(--low-border); }
 
-    .badge {
+    .cat-badge {
       display: inline-block;
-      padding: 2px 9px;
-      border-radius: 12px;
-      font-size: 0.68rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+      padding: 2px 8px; border-radius: 4px;
+      font-size: 0.65rem; font-weight: 600;
+      background: rgba(59,130,246,0.12); color: #93c5fd;
     }
-    /* Category badges */
-    .cat-Normal    { background: #dbeafe; color: var(--cat-normal); }
-    .cat-Edge      { background: #ede9fe; color: var(--cat-edge); }
-    .cat-Invalid   { background: #fee2e2; color: var(--cat-invalid); }
-    .cat-UIUX      { background: #cffafe; color: var(--cat-ui); }
-    .cat-Performance { background: #fef3c7; color: var(--cat-perf); }
-    .cat-Error     { background: #d1fae5; color: var(--cat-error); }
-
-    /* Priority badges */
-    .pri-High   { background: #fee2e2; color: var(--high); }
-    .pri-Medium { background: #fef3c7; color: var(--medium); }
-    .pri-Low    { background: #d1fae5; color: var(--low); }
-
-    /* Status badges */
-    .sta-Pass    { background: #d1fae5; color: var(--pass); }
-    .sta-Fail    { background: #fee2e2; color: var(--fail); }
-    .sta-NotRun  { background: #f1f5f9; color: var(--notrun); }
 
     .status-select {
+      background: var(--surface2);
       border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 3px 6px;
-      font-size: 0.75rem;
-      font-family: 'Inter', sans-serif;
-      background: var(--white);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 0.75rem; font-family: 'Inter', sans-serif;
+      color: var(--text);
       cursor: pointer;
+      transition: border-color 0.15s;
     }
+    .status-select:focus { outline: none; border-color: var(--accent); }
+    .status-select.s-Pass { border-color: var(--pass); color: var(--pass); background: #052e16; }
+    .status-select.s-Fail { border-color: var(--fail); color: var(--fail); background: var(--high-bg); }
 
-    .id-col { font-weight: 700; color: var(--accent); white-space: nowrap; }
-    .scenario-text { font-weight: 500; }
-    .meta-text { color: var(--muted); font-size: 0.78rem; }
-    .notes-text { font-style: italic; color: var(--muted); font-size: 0.75rem; }
+    .id-col { font-weight: 700; color: var(--accent); font-size: 0.78rem; white-space: nowrap; }
+    .scenario-text { font-weight: 500; color: var(--text); }
+    .muted-text { color: var(--muted); font-size: 0.78rem; }
+    .expand-icon { float: right; color: var(--muted); font-size: 0.75rem; }
 
-    .no-results { text-align: center; padding: 60px 20px; color: var(--muted); }
-
-    /* Legend */
-    .legend {
-      margin: 0 32px 16px;
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      font-size: 0.75rem;
-      color: var(--muted);
-    }
-    .legend-item { display: flex; align-items: center; gap: 6px; }
-
-    /* Export bar */
-    .export-bar {
-      padding: 0 32px 16px;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
-    .count-text { font-size: 0.8rem; color: var(--muted); }
+    .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+    .empty-state p { font-size: 0.85rem; margin-top: 8px; }
 
     @media (max-width: 768px) {
-      .header { padding: 20px 16px; }
-      .summary { padding: 16px 16px 0; }
-      .controls { padding: 16px; }
-      .table-wrap { padding: 0 16px 32px; }
-      .export-bar { padding: 0 16px 12px; }
-      .legend { margin: 0 16px 12px; }
-      .arch-box { margin: 16px 16px 0; }
-      thead th:nth-child(5),
-      td:nth-child(5),
-      thead th:nth-child(6),
-      td:nth-child(6) { display: none; }
+      .header, .summary-row, .tabs-wrap, .controls, .table-wrap, .how-section { padding-left: 16px; padding-right: 16px; }
+      .how-section { margin-left: 16px; margin-right: 16px; }
+      thead th:nth-child(4), td:nth-child(4),
+      thead th:nth-child(5), td:nth-child(5) { display: none; }
+      .detail-inner { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
+<!-- Header -->
 <header class="header">
-  <div class="header-left">
-    <h1>QA Test Cases — SalaryCalculator.my</h1>
-    <p>Quality Assurance dashboard. Not indexed by search engines.</p>
+  <div class="header-brand">
+    <img src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png" alt="Logo">
+    <div>
+      <div class="header-title">QA Test Cases — Salary Calculator MY</div>
+      <div class="header-sub">Manual testing checklist for production quality assurance</div>
+    </div>
   </div>
-  <div class="header-right">
-    <button class="btn btn-outline" onclick="exportCSV()">Export CSV</button>
-    <button class="btn btn-danger" onclick="resetAllStatus()">Reset All Status</button>
+  <div class="header-actions">
+    <button class="btn btn-ghost" onclick="exportCSV()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Export CSV
+    </button>
+    <button class="btn btn-danger" onclick="resetAll()">Reset All</button>
     <a href="/" class="btn btn-primary">Back to Calculator</a>
   </div>
 </header>
 
-<!-- Summary Cards -->
-<div class="summary" id="summaryCards"></div>
+<!-- Summary cards -->
+<div class="summary-row" id="summaryRow"></div>
 
-<!-- System Architecture -->
-<div class="arch-box">
-  <h3>System Architecture</h3>
-  <div class="arch-flow">
-    <span class="arch-step">test-cases.json</span>
-    <span class="arch-arrow">→</span>
-    <span class="arch-step">/test-case page fetches JSON</span>
-    <span class="arch-arrow">→</span>
-    <span class="arch-step">Table renders in browser</span>
-    <span class="arch-arrow">→</span>
-    <span class="arch-step">You update Pass / Fail</span>
-    <span class="arch-arrow">→</span>
-    <span class="arch-step">Status saved to localStorage</span>
+<!-- How to use -->
+<div class="how-section">
+  <div class="how-title">How to use this QA page</div>
+  <div class="how-steps">
+    <div class="how-step"><div class="how-num">1</div><div class="how-text"><strong>Open Calculator</strong>Go to salarycalculator.my</div></div>
+    <div class="how-step"><div class="how-num">2</div><div class="how-text"><strong>Enter Input</strong>Type the values from the Input column</div></div>
+    <div class="how-step"><div class="how-num">3</div><div class="how-text"><strong>Compare Result</strong>Check output vs Expected Result column</div></div>
+    <div class="how-step"><div class="how-num">4</div><div class="how-text"><strong>Mark Status</strong>Set dropdown to Pass or Fail</div></div>
+    <div class="how-step"><div class="how-num">5</div><div class="how-text"><strong>Export Report</strong>Click Export CSV to save results</div></div>
   </div>
-  <p style="margin-top:12px;font-size:0.75rem;color:var(--muted);">
-    Storage: <strong>test-cases.json</strong> (source of truth for scenarios) + <strong>localStorage</strong> (tracks your Pass/Fail updates per browser).
-    To update test cases permanently, edit <code>public/test-cases.json</code>.
-  </p>
+</div>
+
+<!-- Severity Tabs -->
+<div class="tabs-wrap">
+  <div class="tabs" id="severityTabs"></div>
 </div>
 
 <!-- Controls -->
 <div class="controls">
-  <input class="search-box" type="text" id="searchInput" placeholder="Search by scenario, input, or ID..." oninput="renderTable()">
+  <div class="search-wrap">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    <input class="search-box" type="text" id="searchInput" placeholder="Search scenario, input, category..." oninput="renderTable()">
+  </div>
   <div class="filter-group" id="categoryFilters"></div>
-  <div class="filter-group" id="priorityFilters"></div>
   <div class="filter-group" id="statusFilters"></div>
-</div>
-
-<!-- Export bar -->
-<div class="export-bar">
-  <span class="count-text" id="countText">Loading...</span>
 </div>
 
 <!-- Table -->
 <div class="table-wrap">
+  <div class="result-meta" id="resultMeta"></div>
   <table>
     <thead>
       <tr>
@@ -330,91 +361,105 @@
         <th>Category</th>
         <th>Scenario</th>
         <th>Input</th>
-        <th>Expected Output</th>
-        <th>Priority</th>
+        <th>Expected Result</th>
+        <th>Severity</th>
         <th>Status</th>
-        <th>Notes</th>
       </tr>
     </thead>
     <tbody id="tableBody">
-      <tr><td colspan="8" class="no-results">Loading test cases...</td></tr>
+      <tr><td colspan="7" class="empty-state">Loading...</td></tr>
     </tbody>
   </table>
 </div>
 
 <script>
   var allCases = [];
-  var activeFilters = { category: 'All', priority: 'All', status: 'All' };
+  var activeSeverity = 'High';
+  var activeCategory = 'All';
+  var activeStatus = 'All';
 
-  // Load status overrides from localStorage
-  function getStatusOverrides() {
-    try { return JSON.parse(localStorage.getItem('qa_status_overrides') || '{}'); } catch(e) { return {}; }
+  function getOverrides() {
+    try { return JSON.parse(localStorage.getItem('qa_overrides_v2') || '{}'); } catch(e) { return {}; }
   }
-  function saveStatusOverride(id, status) {
-    var overrides = getStatusOverrides();
-    overrides[id] = status;
-    localStorage.setItem('qa_status_overrides', JSON.stringify(overrides));
+  function saveOverride(id, val) {
+    var o = getOverrides(); o[id] = val;
+    localStorage.setItem('qa_overrides_v2', JSON.stringify(o));
+  }
+  function getStatus(tc) {
+    return getOverrides()[tc.id] || tc.status;
   }
 
-  // Fetch test cases
   fetch('/test-cases.json')
     .then(function(r) { return r.json(); })
     .then(function(data) {
       allCases = data;
+      buildTabs();
       buildFilters();
       renderSummary();
       renderTable();
     })
-    .catch(function(e) {
+    .catch(function() {
       document.getElementById('tableBody').innerHTML =
-        '<tr><td colspan="8" class="no-results">Failed to load test cases. Make sure test-cases.json is in /public.</td></tr>';
+        '<tr><td colspan="7" class="empty-state"><strong>Failed to load test cases.</strong><p>Make sure test-cases.json is in /public folder.</p></td></tr>';
     });
 
-  function getEffectiveStatus(tc) {
-    var overrides = getStatusOverrides();
-    return overrides[tc.id] || tc.status;
-  }
-
   function renderSummary() {
-    var overrides = getStatusOverrides();
     var total = allCases.length;
-    var pass = allCases.filter(function(tc) { return getEffectiveStatus(tc) === 'Pass'; }).length;
-    var fail = allCases.filter(function(tc) { return getEffectiveStatus(tc) === 'Fail'; }).length;
-    var notrun = allCases.filter(function(tc) { return getEffectiveStatus(tc) === 'Not Run'; }).length;
-    var high = allCases.filter(function(tc) { return tc.priority === 'High'; }).length;
-
-    document.getElementById('summaryCards').innerHTML =
-      card(total, 'Total Test Cases', '') +
-      card(pass, 'Passed', 'pass') +
-      card(fail, 'Failed', 'fail') +
-      card(notrun, 'Not Run', 'notrun') +
-      card(high, 'High Priority', '');
+    var pass = allCases.filter(function(t){ return getStatus(t) === 'Pass'; }).length;
+    var fail = allCases.filter(function(t){ return getStatus(t) === 'Fail'; }).length;
+    var notrun = allCases.filter(function(t){ return getStatus(t) === 'Not Run'; }).length;
+    var high = allCases.filter(function(t){ return t.severity === 'High'; }).length;
+    document.getElementById('summaryRow').innerHTML = [
+      { n: total, l: 'Total Cases', c: '' },
+      { n: high,  l: 'Critical (High)', c: 's-high' },
+      { n: pass,  l: 'Passed', c: 's-pass' },
+      { n: fail,  l: 'Failed', c: 's-fail' },
+      { n: notrun,l: 'Not Run', c: 's-notrun' }
+    ].map(function(s) {
+      return '<div class="stat-card ' + s.c + '"><div class="stat-num">' + s.n + '</div><div class="stat-label">' + s.l + '</div></div>';
+    }).join('');
   }
 
-  function card(num, label, cls) {
-    return '<div class="card ' + cls + '"><div class="card-num">' + num + '</div><div class="card-label">' + label + '</div></div>';
+  function buildTabs() {
+    var sevs = ['High', 'Medium', 'Low'];
+    var dots = { High: 'dot-high', Medium: 'dot-medium', Low: 'dot-low' };
+    var labels = { High: 'HIGH — Critical', Medium: 'MEDIUM — Functional', Low: 'LOW — UI / Minor' };
+    document.getElementById('severityTabs').innerHTML = sevs.map(function(s) {
+      var cnt = allCases.filter(function(t){ return t.severity === s; }).length;
+      var isActive = s === activeSeverity;
+      return '<button class="tab' + (isActive ? ' active-' + s.toLowerCase() : '') + '" onclick="setSeverity(\'' + s + '\', this)">' +
+        '<span class="tab-dot ' + dots[s] + '"></span>' + labels[s] +
+        '<span class="tab-count">' + cnt + '</span>' +
+        '</button>';
+    }).join('');
   }
 
   function buildFilters() {
-    var categories = ['All', 'Normal', 'Edge', 'Invalid Input', 'UI/UX', 'Performance', 'Error Logging'];
-    var priorities = ['All', 'High', 'Medium', 'Low'];
-    var statuses = ['All', 'Not Run', 'Pass', 'Fail'];
-
-    document.getElementById('categoryFilters').innerHTML = categories.map(function(c) {
-      return '<button class="filter-btn' + (c === 'All' ? ' active' : '') + '" onclick="setFilter(\'category\',\'' + c + '\',this)">' + c + '</button>';
+    var cats = ['All'].concat(
+      allCases.reduce(function(acc, t) {
+        if (acc.indexOf(t.category) === -1) acc.push(t.category);
+        return acc;
+      }, [])
+    );
+    document.getElementById('categoryFilters').innerHTML = cats.map(function(c) {
+      return '<button class="filter-btn' + (c === 'All' ? ' active' : '') + '" onclick="setFilter(\'cat\',\'' + c + '\',this)">' + c + '</button>';
     }).join('');
-    document.getElementById('priorityFilters').innerHTML = priorities.map(function(p) {
-      return '<button class="filter-btn' + (p === 'All' ? ' active' : '') + '" onclick="setFilter(\'priority\',\'' + p + '\',this)">' + p + '</button>';
-    }).join('');
-    document.getElementById('statusFilters').innerHTML = statuses.map(function(s) {
-      return '<button class="filter-btn' + (s === 'All' ? ' active' : '') + '" onclick="setFilter(\'status\',\'' + s + '\',this)">' + s + '</button>';
+    document.getElementById('statusFilters').innerHTML = ['All','Not Run','Pass','Fail'].map(function(s) {
+      return '<button class="filter-btn' + (s === 'All' ? ' active' : '') + '" onclick="setFilter(\'sta\',\'' + s + '\',this)">' + s + '</button>';
     }).join('');
   }
 
-  function setFilter(type, value, btn) {
-    activeFilters[type] = value;
-    var group = btn.parentElement.querySelectorAll('.filter-btn');
-    group.forEach(function(b) { b.classList.remove('active'); });
+  function setSeverity(sev, btn) {
+    activeSeverity = sev;
+    document.querySelectorAll('.tab').forEach(function(b) { b.className = 'tab'; });
+    btn.className = 'tab active-' + sev.toLowerCase();
+    renderTable();
+  }
+
+  function setFilter(type, val, btn) {
+    if (type === 'cat') { activeCategory = val; var grp = 'categoryFilters'; }
+    else { activeStatus = val; var grp = 'statusFilters'; }
+    document.getElementById(grp).querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
     btn.classList.add('active');
     renderTable();
   }
@@ -422,77 +467,88 @@
   function renderTable() {
     var search = document.getElementById('searchInput').value.toLowerCase();
     var filtered = allCases.filter(function(tc) {
-      var cat = tc.category === 'Invalid Input' ? 'Invalid Input' : tc.category;
-      var matchCat = activeFilters.category === 'All' || tc.category === activeFilters.category;
-      var matchPri = activeFilters.priority === 'All' || tc.priority === activeFilters.priority;
-      var matchSta = activeFilters.status === 'All' || getEffectiveStatus(tc) === activeFilters.status;
-      var matchSearch = !search ||
-        tc.id.toLowerCase().includes(search) ||
-        tc.scenario.toLowerCase().includes(search) ||
-        tc.input.toLowerCase().includes(search) ||
-        tc.expected.toLowerCase().includes(search);
-      return matchCat && matchPri && matchSta && matchSearch;
+      return tc.severity === activeSeverity &&
+        (activeCategory === 'All' || tc.category === activeCategory) &&
+        (activeStatus === 'All' || getStatus(tc) === activeStatus) &&
+        (!search || tc.id.toLowerCase().includes(search) ||
+          tc.scenario.toLowerCase().includes(search) ||
+          tc.input.toLowerCase().includes(search) ||
+          tc.category.toLowerCase().includes(search));
     });
 
-    document.getElementById('countText').textContent = 'Showing ' + filtered.length + ' of ' + allCases.length + ' test cases';
+    document.getElementById('resultMeta').textContent =
+      'Showing ' + filtered.length + ' of ' + allCases.filter(function(t){ return t.severity === activeSeverity; }).length + ' ' + activeSeverity + ' severity cases';
 
-    if (filtered.length === 0) {
-      document.getElementById('tableBody').innerHTML = '<tr><td colspan="8" class="no-results">No test cases match your filters.</td></tr>';
+    if (!filtered.length) {
+      document.getElementById('tableBody').innerHTML =
+        '<tr><td colspan="7" class="empty-state"><strong>No test cases found</strong><p>Try adjusting your filters or search.</p></td></tr>';
       return;
     }
 
     document.getElementById('tableBody').innerHTML = filtered.map(function(tc) {
-      var status = getEffectiveStatus(tc);
-      var catKey = tc.category.replace(/[^a-zA-Z]/g,'');
-      var priKey = tc.priority;
-      var staKey = status.replace(/\s/g,'');
-      return '<tr>' +
-        '<td class="id-col">' + tc.id + '</td>' +
-        '<td><span class="badge cat-' + catKey + '">' + tc.category + '</span></td>' +
+      var status = getStatus(tc);
+      var selCls = status === 'Pass' ? 's-Pass' : status === 'Fail' ? 's-Fail' : '';
+      return '<tr onclick="toggleDetail(\'' + tc.id + '\')" id="row-' + tc.id + '">' +
+        '<td class="id-col">' + tc.id + ' <span class="expand-icon" id="icon-' + tc.id + '">▶</span></td>' +
+        '<td><span class="cat-badge">' + tc.category + '</span></td>' +
         '<td class="scenario-text">' + tc.scenario + '</td>' +
-        '<td class="meta-text">' + tc.input.replace(/\|/g, '<br>') + '</td>' +
-        '<td class="meta-text">' + tc.expected.replace(/\|/g, '<br>') + '</td>' +
-        '<td><span class="badge pri-' + priKey + '">' + tc.priority + '</span></td>' +
-        '<td>' +
-          '<select class="status-select" onchange="updateStatus(\'' + tc.id + '\', this.value)">' +
-            ['Not Run','Pass','Fail'].map(function(s) {
-              return '<option value="' + s + '"' + (status === s ? ' selected' : '') + '>' + s + '</option>';
+        '<td class="muted-text">' + tc.input + '</td>' +
+        '<td class="muted-text">' + tc.expected + '</td>' +
+        '<td><span class="badge sev-' + tc.severity + '">' +
+          '<span class="tab-dot dot-' + tc.severity.toLowerCase() + '" style="width:6px;height:6px;"></span>' + tc.severity +
+        '</span></td>' +
+        '<td onclick="event.stopPropagation()">' +
+          '<select class="status-select ' + selCls + '" onchange="updateStatus(\'' + tc.id + '\', this)">' +
+            ['Not Run','Pass','Fail'].map(function(s){
+              return '<option' + (status === s ? ' selected' : '') + '>' + s + '</option>';
             }).join('') +
           '</select>' +
         '</td>' +
-        '<td class="notes-text">' + (tc.notes || '—') + '</td>' +
+      '</tr>' +
+      '<tr class="detail-row" id="detail-' + tc.id + '">' +
+        '<td colspan="7"><div class="detail-inner">' +
+          '<div class="detail-block"><label>Full Input</label><p>' + tc.input + '</p></div>' +
+          '<div class="detail-block"><label>Expected Result</label><p>' + tc.expected + '</p></div>' +
+          '<div class="detail-block"><label>Notes</label><p>' + (tc.notes || '—') + '</p></div>' +
+          '<div class="detail-block"><label>Severity</label><p>' + tc.severity + ' — ' + (tc.severity === 'High' ? 'Critical. Must fix before release.' : tc.severity === 'Medium' ? 'Functional issue. Fix in next sprint.' : 'Minor / cosmetic. Fix when possible.') + '</p></div>' +
+        '</div></td>' +
       '</tr>';
     }).join('');
   }
 
-  function updateStatus(id, newStatus) {
-    saveStatusOverride(id, newStatus);
+  function toggleDetail(id) {
+    var detail = document.getElementById('detail-' + id);
+    var icon = document.getElementById('icon-' + id);
+    var isOpen = detail.style.display === 'table-row';
+    detail.style.display = isOpen ? 'none' : 'table-row';
+    icon.textContent = isOpen ? '▶' : '▼';
+  }
+
+  function updateStatus(id, sel) {
+    var status = sel.value;
+    saveOverride(id, status);
+    sel.className = 'status-select' + (status === 'Pass' ? ' s-Pass' : status === 'Fail' ? ' s-Fail' : '');
     renderSummary();
   }
 
-  function resetAllStatus() {
-    if (!confirm('Reset all test case statuses to "Not Run"?')) return;
-    localStorage.removeItem('qa_status_overrides');
+  function resetAll() {
+    if (!confirm('Reset all test statuses to Not Run?')) return;
+    localStorage.removeItem('qa_overrides_v2');
     renderSummary();
     renderTable();
   }
 
   function exportCSV() {
-    var overrides = getStatusOverrides();
-    var header = ['ID','Category','Scenario','Input','Expected Output','Priority','Status','Notes'];
+    var header = ['ID','Severity','Category','Scenario','Input','Expected Result','Status','Notes'];
     var rows = allCases.map(function(tc) {
-      return [tc.id, tc.category, tc.scenario, tc.input, tc.expected, tc.priority, overrides[tc.id] || tc.status, tc.notes || ''].map(function(v) {
-        return '"' + String(v).replace(/"/g, '""') + '"';
-      });
+      return [tc.id, tc.severity, tc.category, tc.scenario, tc.input, tc.expected, getStatus(tc), tc.notes || '']
+        .map(function(v) { return '"' + String(v).replace(/"/g,'""') + '"'; });
     });
-    var csv = [header.join(',')].concat(rows.map(function(r) { return r.join(','); })).join('\n');
-    var blob = new Blob([csv], { type: 'text/csv' });
-    var url = URL.createObjectURL(blob);
+    var csv = [header.join(',')].concat(rows.map(function(r){ return r.join(','); })).join('\n');
     var a = document.createElement('a');
-    a.href = url;
-    a.download = 'qa-test-cases-salarycalculator.csv';
+    a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
+    a.download = 'qa-report-salarycalculator-' + new Date().toISOString().slice(0,10) + '.csv';
     a.click();
-    URL.revokeObjectURL(url);
   }
 </script>
 </body>
