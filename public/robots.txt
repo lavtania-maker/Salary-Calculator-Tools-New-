@@ -1,37 +1,68 @@
 User-agent: *
 Disallow: /mincal
-Disallow: /api
 Disallow: /mincal.html
+Disallow: /admin
 Disallow: /admin.html
+Disallow: /error-logs
+Disallow: /qa-report
+Disallow: /test-case
+Disallow: /api/
 
 # Allow major search engines
 User-agent: Googlebot
 Allow: /
+Disallow: /mincal
+Disallow: /admin
+Disallow: /error-logs
+Disallow: /qa-report
+Disallow: /test-case
+Disallow: /api/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /mincal
+Disallow: /admin
+Disallow: /error-logs
+Disallow: /qa-report
+Disallow: /test-case
+Disallow: /api/
 
 User-agent: Slurp
 Allow: /
+Disallow: /mincal
+Disallow: /admin
+Disallow: /error-logs
+Disallow: /qa-report
+Disallow: /test-case
+Disallow: /api/
 
 User-agent: DuckDuckBot
 Allow: /
+Disallow: /mincal
+Disallow: /admin
+Disallow: /error-logs
+Disallow: /qa-report
+Disallow: /test-case
+Disallow: /api/
 
 User-agent: Applebot
 Allow: /
-
-User-agent: Baiduspider
-Allow: /
+Disallow: /mincal
+Disallow: /admin
+Disallow: /error-logs
+Disallow: /qa-report
+Disallow: /test-case
+Disallow: /api/
 
 User-agent: Yandex
 Disallow: /
 
-# Block AI training / scraping bots (optional but aligned with your reference)
+# Block AI training / scraping bots
 User-agent: GPTBot
-Disallow:
+Disallow: /
 
 User-agent: Google-Extended
-Disallow:
+Disallow: /
 
 User-agent: anthropic-ai
 Disallow: /
@@ -43,7 +74,7 @@ User-agent: Claude-Web
 Disallow: /
 
 User-agent: PerplexityBot
-Disallow:
+Disallow: /
 
 User-agent: cohere-ai
 Disallow: /

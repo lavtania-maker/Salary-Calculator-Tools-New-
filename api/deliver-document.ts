@@ -66,19 +66,19 @@ export default async function handler(request: Request) {
 
     if (data.error) {
       console.error('Resend API Error:', data.error);
-      return new Response(JSON.stringify({ error: data.error.message }), {
+      return new Response(JSON.stringify({ error: 'Unable to send email. Please try again.' }), {
         status: 500,
         headers: { 'Content-Type': 'application/json' },
       });
     }
 
-    return new Response(JSON.stringify({ success: true, data }), {
+    return new Response(JSON.stringify({ success: true }), {
       status: 200,
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
-    console.error('Error sending email:', error);
-    return new Response(JSON.stringify({ error: 'Failed to send email' }), {
+    console.error('Email send error:', error);
+    return new Response(JSON.stringify({ error: 'Unable to send email. Please try again.' }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
