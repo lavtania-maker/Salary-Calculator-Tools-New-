@@ -1,9 +1,9 @@
 {
   "rewrites": [
-    { "source": "/admin", "destination": "/admin.html" },
-    { "source": "/mincal", "destination": "/mincal.html" },
-    { "source": "/payslip-generator", "destination": "/payslip.html" },
-    { "source": "/report", "destination": "/report.html" }
+    { "source": "/admin",             "destination": "/admin.html"    },
+    { "source": "/mincal",            "destination": "/mincal.html"   },
+    { "source": "/payslip-generator", "destination": "/payslip.html"  },
+    { "source": "/report",            "destination": "/report.html"   }
   ],
   "headers": [
     {
@@ -11,6 +11,12 @@
       "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" }
       ]
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/qa-scheduler",
+      "schedule": "0 18 * * 6"
     }
   ]
 }
