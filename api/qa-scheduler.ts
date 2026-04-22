@@ -182,9 +182,9 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).json(report);
 
   } catch (err: any) {
+    console.error('QA audit error:', err);
     return res.status(500).json({
-      error: 'QA audit failed',
-      message: err.message || 'Unknown error',
+      error: 'QA audit could not be completed. Please try again later.',
       timestamp: new Date().toISOString(),
     });
   }
