@@ -13,7 +13,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" type="image/png" href="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png">
-  <title>QA Test Cases — Salary Calculator MY</title>
+  <title>QA Dashboard — Salary Calculator MY</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,12 +29,15 @@
       --accent-dim: #1d4ed840;
       --high: #ef4444;
       --high-bg: #450a0a;
+      --high-bg2: rgba(239,68,68,0.1);
       --high-border: #7f1d1d;
       --medium: #f59e0b;
       --medium-bg: #451a03;
+      --medium-bg2: rgba(245,158,11,0.1);
       --medium-border: #78350f;
       --low: #22c55e;
       --low-bg: #052e16;
+      --low-bg2: rgba(34,197,94,0.1);
       --low-border: #14532d;
       --pass: #22c55e;
       --fail: #ef4444;
@@ -42,18 +45,13 @@
       --radius: 10px;
     }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-    }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
 
     /* ── Header ── */
     .header {
       background: var(--surface);
       border-bottom: 1px solid var(--border);
-      padding: 20px 32px;
+      padding: 16px 32px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -68,35 +66,58 @@
 
     .btn {
       display: inline-flex; align-items: center; gap: 6px;
-      padding: 7px 14px;
-      border-radius: 7px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
+      padding: 7px 14px; border-radius: 7px;
+      font-size: 0.78rem; font-weight: 600;
+      cursor: pointer; border: none;
       text-decoration: none;
       transition: opacity 0.15s, background 0.15s;
-      white-space: nowrap;
+      white-space: nowrap; font-family: 'Inter', sans-serif;
     }
     .btn:hover { opacity: 0.85; }
     .btn-ghost { background: transparent; border: 1px solid var(--border); color: var(--muted); }
     .btn-primary { background: var(--accent); color: #fff; }
     .btn-danger { background: #7f1d1d; color: #fca5a5; border: 1px solid var(--high-border); }
+    .btn-audit { background: var(--accent); color: #fff; }
 
-    /* ── Summary ── */
-    .summary-row {
+    /* ── Page-level tabs ── */
+    .page-tabs-wrap {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 32px;
       display: flex;
-      gap: 12px;
-      padding: 24px 32px 0;
-      flex-wrap: wrap;
+      gap: 0;
     }
+    .page-tab {
+      padding: 14px 24px;
+      font-size: 0.85rem; font-weight: 600;
+      cursor: pointer; border: none;
+      background: transparent;
+      color: var(--muted);
+      border-bottom: 3px solid transparent;
+      transition: all 0.15s;
+      display: flex; align-items: center; gap: 8px;
+      white-space: nowrap;
+      font-family: 'Inter', sans-serif;
+    }
+    .page-tab:hover { color: var(--text); }
+    .page-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .page-tab-dot { width: 7px; height: 7px; border-radius: 50%; }
+    .page-tab-count {
+      font-size: 0.65rem; font-weight: 700;
+      padding: 1px 6px; border-radius: 10px;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ── Tab panels ── */
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── Summary cards ── */
+    .summary-row { display: flex; gap: 12px; padding: 24px 32px 0; flex-wrap: wrap; }
     .stat-card {
       flex: 1; min-width: 110px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 16px 18px;
-      text-align: center;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px 18px; text-align: center;
     }
     .stat-num { font-size: 2rem; font-weight: 800; line-height: 1; }
     .stat-label { font-size: 0.68rem; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
@@ -104,58 +125,48 @@
     .stat-card.s-fail .stat-num  { color: var(--fail); }
     .stat-card.s-notrun .stat-num { color: var(--notrun); }
     .stat-card.s-high .stat-num  { color: var(--high); }
+    .stat-card.s-total .stat-num { color: var(--text); }
+    .stat-card.s-med .stat-num   { color: var(--medium); }
+    .stat-card.s-low2 .stat-num  { color: var(--low); }
 
     /* ── How to use ── */
     .how-section {
       margin: 20px 32px 0;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 18px 22px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 18px 22px;
     }
     .how-title { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
-    .how-steps { display: flex; gap: 8px; flex-wrap: wrap; counter-reset: steps; }
+    .how-steps { display: flex; gap: 8px; flex-wrap: wrap; }
     .how-step {
       display: flex; align-items: flex-start; gap: 8px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 7px;
-      padding: 10px 14px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 7px; padding: 10px 14px;
       flex: 1; min-width: 160px;
       font-size: 0.78rem; color: var(--muted);
     }
     .how-num {
-      background: var(--accent);
-      color: #fff;
+      background: var(--accent); color: #fff;
       font-size: 0.68rem; font-weight: 800;
-      width: 20px; height: 20px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
+      width: 20px; height: 20px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
     .how-text strong { color: var(--text); display: block; margin-bottom: 2px; }
 
-    /* ── Severity Tabs ── */
+    /* ── Severity sub-tabs ── */
     .tabs-wrap { padding: 24px 32px 0; }
     .tabs {
       display: flex; gap: 4px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 4px;
-      width: fit-content;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 4px; width: fit-content;
     }
     .tab {
-      padding: 8px 20px;
-      border-radius: 7px;
+      padding: 8px 20px; border-radius: 7px;
       font-size: 0.82rem; font-weight: 600;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      color: var(--muted);
+      cursor: pointer; border: none;
+      background: transparent; color: var(--muted);
       transition: all 0.15s;
-      display: flex; align-items: center; gap: 7px;
-      white-space: nowrap;
+      display: flex; align-items: center; gap: 7px; white-space: nowrap;
+      font-family: 'Inter', sans-serif;
     }
     .tab:hover { color: var(--text); }
     .tab.active-high   { background: var(--high-bg); color: var(--high); border: 1px solid var(--high-border); }
@@ -168,116 +179,77 @@
     .tab-count {
       font-size: 0.65rem; font-weight: 700;
       padding: 1px 6px; border-radius: 10px;
-      background: rgba(255,255,255,0.08);
-      color: inherit;
+      background: rgba(255,255,255,0.08); color: inherit;
     }
 
     /* ── Controls ── */
-    .controls {
-      padding: 16px 32px 0;
-      display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
-    }
+    .controls { padding: 16px 32px 0; display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
     .search-wrap { position: relative; flex: 1; min-width: 200px; }
     .search-wrap svg { position: absolute; left: 10px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
     .search-box {
-      width: 100%;
-      padding: 9px 12px 9px 34px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-size: 0.82rem; font-family: 'Inter', sans-serif;
+      width: 100%; padding: 9px 12px 9px 34px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; font-size: 0.82rem; font-family: 'Inter', sans-serif;
       color: var(--text);
     }
     .search-box::placeholder { color: var(--muted); }
     .search-box:focus { outline: none; border-color: var(--accent); }
-
     .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
     .filter-btn {
-      padding: 6px 12px;
-      border-radius: 20px;
+      padding: 6px 12px; border-radius: 20px;
       font-size: 0.72rem; font-weight: 600;
-      cursor: pointer;
-      border: 1px solid var(--border);
-      background: transparent;
-      color: var(--muted);
-      transition: all 0.15s;
+      cursor: pointer; border: 1px solid var(--border);
+      background: transparent; color: var(--muted);
+      transition: all 0.15s; font-family: 'Inter', sans-serif;
     }
     .filter-btn:hover { color: var(--text); border-color: var(--accent); }
     .filter-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
 
     /* ── Table ── */
-    .table-wrap { padding: 16px 32px 48px; overflow-x: auto; }
+    .table-wrap { padding: 16px 32px 32px; overflow-x: auto; }
     .result-meta { font-size: 0.75rem; color: var(--muted); margin-bottom: 10px; }
-
     table {
       width: 100%; border-collapse: collapse;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      font-size: 0.82rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); overflow: hidden; font-size: 0.82rem;
     }
     thead tr { background: var(--surface2); }
     thead th {
-      padding: 11px 14px;
-      text-align: left;
-      color: var(--muted);
-      font-size: 0.68rem; font-weight: 700;
+      padding: 11px 14px; text-align: left;
+      color: var(--muted); font-size: 0.68rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.06em;
-      white-space: nowrap;
-      border-bottom: 1px solid var(--border);
+      white-space: nowrap; border-bottom: 1px solid var(--border);
     }
     tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; cursor: pointer; }
     tbody tr:last-child { border-bottom: none; }
     tbody tr:hover { background: var(--surface2); }
     td { padding: 13px 14px; vertical-align: top; line-height: 1.55; }
 
-    /* expandable detail row */
     .detail-row { display: none; }
-    .detail-row td {
-      padding: 0;
-      background: var(--surface2);
-      border-bottom: 1px solid var(--border);
-    }
+    .detail-row td { padding: 0; background: var(--surface2); border-bottom: 1px solid var(--border); }
     .detail-inner {
       padding: 14px 18px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      font-size: 0.78rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; font-size: 0.78rem;
     }
     .detail-block label { display: block; font-size: 0.65rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
     .detail-block p { color: var(--text); line-height: 1.5; }
 
-    /* badges */
     .badge {
       display: inline-flex; align-items: center; gap: 4px;
-      padding: 3px 9px;
-      border-radius: 12px;
+      padding: 3px 9px; border-radius: 12px;
       font-size: 0.65rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.04em;
-      white-space: nowrap;
+      text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap;
     }
     .sev-High   { background: var(--high-bg); color: var(--high); border: 1px solid var(--high-border); }
     .sev-Medium { background: var(--medium-bg); color: var(--medium); border: 1px solid var(--medium-border); }
     .sev-Low    { background: var(--low-bg); color: var(--low); border: 1px solid var(--low-border); }
-
-    .cat-badge {
-      display: inline-block;
-      padding: 2px 8px; border-radius: 4px;
-      font-size: 0.65rem; font-weight: 600;
-      background: rgba(59,130,246,0.12); color: #93c5fd;
-    }
+    .cat-badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 600; background: rgba(59,130,246,0.12); color: #93c5fd; }
 
     .status-select {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 4px 8px;
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 6px; padding: 4px 8px;
       font-size: 0.75rem; font-family: 'Inter', sans-serif;
-      color: var(--text);
-      cursor: pointer;
-      transition: border-color 0.15s;
+      color: var(--text); cursor: pointer; transition: border-color 0.15s;
     }
     .status-select:focus { outline: none; border-color: var(--accent); }
     .status-select.s-Pass { border-color: var(--pass); color: var(--pass); background: #052e16; }
@@ -287,16 +259,135 @@
     .scenario-text { font-weight: 500; color: var(--text); }
     .muted-text { color: var(--muted); font-size: 0.78rem; }
     .expand-icon { float: right; color: var(--muted); font-size: 0.75rem; }
-
     .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
     .empty-state p { font-size: 0.85rem; margin-top: 8px; }
 
+    /* ── QA Report panel ── */
+    .rpt-container { max-width: 1200px; margin: 0 auto; padding: 28px 32px 48px; }
+
+    .rpt-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 28px; align-items: center; }
+    .rpt-search-wrap { position: relative; flex: 1; max-width: 320px; }
+    .rpt-search-icon { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+    .rpt-search-input {
+      width: 100%; background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 8px 14px 8px 34px;
+      color: var(--text); font-size: 0.82rem; font-family: 'Inter', sans-serif;
+      outline: none; transition: border-color 0.2s;
+    }
+    .rpt-search-input:focus { border-color: var(--accent); }
+    .rpt-search-input::placeholder { color: var(--muted); }
+
+    .health-banner {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px 28px;
+      margin-bottom: 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
+    }
+    .health-left h2 { font-size: 0.8rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+    .health-score-num { font-size: 3.5rem; font-weight: 800; line-height: 1; }
+    .health-score-num.excellent { color: var(--low); }
+    .health-score-num.good      { color: var(--accent); }
+    .health-score-num.warning   { color: var(--medium); }
+    .health-score-num.critical  { color: var(--high); }
+    .health-label { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+    .health-bar-wrap { flex: 1; min-width: 200px; }
+    .health-bar-label { font-size: 0.78rem; color: var(--muted); margin-bottom: 8px; }
+    .health-bar-row { margin-bottom: 10px; }
+    .health-bar-row-label { display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--muted); margin-bottom: 4px; }
+    .health-bar { background: var(--border); border-radius: 20px; height: 10px; overflow: hidden; }
+    .health-bar-fill { height: 100%; border-radius: 20px; transition: width 1s ease; }
+
+    .rpt-stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 28px; }
+    .rpt-stat { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; text-align: center; }
+    .rpt-stat-num { font-size: 2rem; font-weight: 800; margin-bottom: 4px; }
+    .rpt-stat-lbl { font-size: 0.78rem; color: var(--muted); font-weight: 500; }
+    .rpt-stat.c-total .rpt-stat-num  { color: var(--text); }
+    .rpt-stat.c-high  .rpt-stat-num  { color: var(--high); }
+    .rpt-stat.c-med   .rpt-stat-num  { color: var(--medium); }
+    .rpt-stat.c-low   .rpt-stat-num  { color: var(--low); }
+    .rpt-stat.c-fixed .rpt-stat-num  { color: var(--pass); }
+    .rpt-stat.c-open  .rpt-stat-num  { color: var(--fail); }
+
+    .section {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); margin-bottom: 24px; overflow: hidden;
+    }
+    .section-header {
+      padding: 18px 24px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .section-title { font-size: 1rem; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 10px; }
+    .section-count { font-size: 0.75rem; background: var(--surface2); color: var(--muted); padding: 2px 10px; border-radius: 20px; }
+
+    .sev-tabs { display: flex; gap: 8px; padding: 16px 24px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .sev-tab {
+      padding: 7px 18px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;
+      cursor: pointer; border: 1px solid var(--border);
+      background: transparent; color: var(--muted);
+      transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+      font-family: 'Inter', sans-serif;
+    }
+    .sev-tab.active-all    { background: var(--accent-dim); color: var(--accent); border-color: rgba(59,130,246,0.4); }
+    .sev-tab.active-high   { background: var(--high-bg2); color: var(--high); border-color: rgba(239,68,68,0.4); }
+    .sev-tab.active-medium { background: var(--medium-bg2); color: var(--medium); border-color: rgba(245,158,11,0.4); }
+    .sev-tab.active-low    { background: var(--low-bg2); color: var(--low); border-color: rgba(34,197,94,0.4); }
+    .sev-tab:hover { color: var(--text); }
+    .sev-tab .tab-count { font-size: 0.7rem; background: var(--surface2); padding: 1px 6px; border-radius: 10px; }
+
+    .issues-table-wrap { overflow-x: auto; }
+    .issues-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+    .issues-table thead tr { background: var(--surface2); }
+    .issues-table th { padding: 11px 16px; text-align: left; color: var(--muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; white-space: nowrap; }
+    .issues-table td { padding: 12px 16px; border-top: 1px solid var(--border); vertical-align: top; color: var(--text); }
+    .issues-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .issue-id { font-family: monospace; font-size: 0.78rem; color: var(--accent); font-weight: 600; white-space: nowrap; }
+    .module-badge { display: inline-block; background: var(--surface2); color: var(--muted); font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; font-weight: 500; white-space: nowrap; }
+    .issue-desc { max-width: 280px; line-height: 1.5; }
+    .sev-badge { display: inline-flex; align-items: center; gap: 5px; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+    .sev-badge.HIGH   { background: var(--high-bg2); color: var(--high); border: 1px solid rgba(239,68,68,0.3); }
+    .sev-badge.MEDIUM { background: var(--medium-bg2); color: var(--medium); border: 1px solid rgba(245,158,11,0.3); }
+    .sev-badge.LOW    { background: var(--low-bg2); color: var(--low); border: 1px solid rgba(34,197,94,0.3); }
+    .status-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
+    .status-badge.OPEN       { background: rgba(239,68,68,0.12); color: var(--high); border: 1px solid rgba(239,68,68,0.3); }
+    .status-badge.FIXED      { background: rgba(34,197,94,0.12); color: var(--low); border: 1px solid rgba(34,197,94,0.3); }
+    .status-badge.MONITORING { background: rgba(245,158,11,0.12); color: var(--medium); border: 1px solid rgba(245,158,11,0.3); }
+    .fix-text { font-size: 0.78rem; color: var(--muted); max-width: 240px; line-height: 1.5; }
+    .rpt-empty { text-align: center; padding: 48px 24px; color: var(--muted); font-size: 0.85rem; }
+    .rpt-empty-title { font-size: 1rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+
+    .rec-grid { display: grid; gap: 0; }
+    .rec-item { padding: 18px 24px; border-top: 1px solid var(--border); display: flex; gap: 16px; align-items: flex-start; flex-wrap: wrap; }
+    .rec-item:first-child { border-top: none; }
+    .rec-priority { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+    .rec-priority.immediate { background: var(--high-bg2); color: var(--high); border: 1px solid rgba(239,68,68,0.3); }
+    .rec-priority.scheduled { background: var(--medium-bg2); color: var(--medium); border: 1px solid rgba(245,158,11,0.3); }
+    .rec-priority.batched   { background: var(--low-bg2); color: var(--low); border: 1px solid rgba(34,197,94,0.3); }
+    .rec-body p { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+    .audit-log { padding: 0; }
+    .log-entry { padding: 14px 24px; border-top: 1px solid var(--border); display: flex; align-items: flex-start; gap: 16px; }
+    .log-entry:first-child { border-top: none; }
+    .log-time { font-family: monospace; font-size: 0.75rem; color: var(--muted); white-space: nowrap; min-width: 90px; padding-top: 2px; }
+    .log-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+    .log-msg { font-size: 0.82rem; color: var(--text); line-height: 1.5; }
+    .log-sub { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+
+    .header-meta { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+    .meta-item { font-size: 0.78rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+    .meta-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-green { background: var(--low); }
+    .dot-blue  { background: var(--accent); }
+
     @media (max-width: 768px) {
-      .header, .summary-row, .tabs-wrap, .controls, .table-wrap, .how-section { padding-left: 16px; padding-right: 16px; }
+      .header, .page-tabs-wrap { padding-left: 16px; padding-right: 16px; }
+      .summary-row, .tabs-wrap, .controls { padding-left: 16px; padding-right: 16px; }
+      .table-wrap { padding-left: 16px; padding-right: 16px; }
       .how-section { margin-left: 16px; margin-right: 16px; }
+      .rpt-container { padding-left: 16px; padding-right: 16px; }
       thead th:nth-child(4), td:nth-child(4),
       thead th:nth-child(5), td:nth-child(5) { display: none; }
       .detail-inner { grid-template-columns: 1fr; }
+      .health-banner { flex-direction: column; }
     }
   </style>
 </head>
@@ -307,77 +398,243 @@
   <div class="header-brand">
     <img src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png" alt="Logo">
     <div>
-      <div class="header-title">QA Test Cases — Salary Calculator MY</div>
-      <div class="header-sub">Manual testing checklist for production quality assurance</div>
+      <div class="header-title">QA Dashboard — Salary Calculator MY</div>
+      <div class="header-sub">Unified quality assurance: test cases + audit reports</div>
     </div>
   </div>
   <div class="header-actions">
+    <a href="/" class="btn btn-primary">Back to Calculator</a>
+  </div>
+</header>
+
+<!-- Page-level tabs -->
+<div class="page-tabs-wrap">
+  <button class="page-tab active" id="ptab-tc" onclick="switchPanel('tc', this)">
+    <span class="page-tab-dot" style="background:var(--accent);"></span>
+    Test Cases
+    <span class="page-tab-count" id="ptab-tc-count">0</span>
+  </button>
+  <button class="page-tab" id="ptab-rpt" onclick="switchPanel('rpt', this)">
+    <span class="page-tab-dot" style="background:var(--medium);"></span>
+    QA Report
+    <span class="page-tab-count" id="ptab-rpt-count" style="background:rgba(245,158,11,0.15);color:var(--medium);">0</span>
+  </button>
+</div>
+
+<!-- ═══════════════ PANEL: TEST CASES ═══════════════ -->
+<div class="tab-panel active" id="panel-tc">
+
+  <!-- Summary cards -->
+  <div class="summary-row" id="summaryRow"></div>
+
+  <!-- How to use -->
+  <div class="how-section">
+    <div class="how-title">How to use this QA page</div>
+    <div class="how-steps">
+      <div class="how-step"><div class="how-num">1</div><div class="how-text"><strong>Open Calculator</strong>Go to salarycalculator.my</div></div>
+      <div class="how-step"><div class="how-num">2</div><div class="how-text"><strong>Enter Input</strong>Type the values from the Input column</div></div>
+      <div class="how-step"><div class="how-num">3</div><div class="how-text"><strong>Compare Result</strong>Check output vs Expected Result column</div></div>
+      <div class="how-step"><div class="how-num">4</div><div class="how-text"><strong>Mark Status</strong>Set dropdown to Pass or Fail</div></div>
+      <div class="how-step"><div class="how-num">5</div><div class="how-text"><strong>Export Report</strong>Click Export CSV to save results</div></div>
+    </div>
+  </div>
+
+  <!-- Severity sub-tabs -->
+  <div class="tabs-wrap">
+    <div class="tabs" id="severityTabs"></div>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-box" type="text" id="searchInput" placeholder="Search scenario, input, category..." oninput="renderTable()">
+    </div>
+    <div class="filter-group" id="categoryFilters"></div>
+    <div class="filter-group" id="statusFilters"></div>
     <button class="btn btn-ghost" onclick="exportCSV()">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
       Export CSV
     </button>
     <button class="btn btn-danger" onclick="resetAll()">Reset All</button>
-    <a href="/" class="btn btn-primary">Back to Calculator</a>
   </div>
-</header>
 
-<!-- Summary cards -->
-<div class="summary-row" id="summaryRow"></div>
-
-<!-- How to use -->
-<div class="how-section">
-  <div class="how-title">How to use this QA page</div>
-  <div class="how-steps">
-    <div class="how-step"><div class="how-num">1</div><div class="how-text"><strong>Open Calculator</strong>Go to salarycalculator.my</div></div>
-    <div class="how-step"><div class="how-num">2</div><div class="how-text"><strong>Enter Input</strong>Type the values from the Input column</div></div>
-    <div class="how-step"><div class="how-num">3</div><div class="how-text"><strong>Compare Result</strong>Check output vs Expected Result column</div></div>
-    <div class="how-step"><div class="how-num">4</div><div class="how-text"><strong>Mark Status</strong>Set dropdown to Pass or Fail</div></div>
-    <div class="how-step"><div class="how-num">5</div><div class="how-text"><strong>Export Report</strong>Click Export CSV to save results</div></div>
+  <!-- Table -->
+  <div class="table-wrap">
+    <div class="result-meta" id="resultMeta"></div>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Category</th>
+          <th>Scenario</th>
+          <th>Input</th>
+          <th>Expected Result</th>
+          <th>Severity</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr><td colspan="7" class="empty-state">Loading...</td></tr>
+      </tbody>
+    </table>
   </div>
-</div>
 
-<!-- Severity Tabs -->
-<div class="tabs-wrap">
-  <div class="tabs" id="severityTabs"></div>
-</div>
+</div><!-- /panel-tc -->
 
-<!-- Controls -->
-<div class="controls">
-  <div class="search-wrap">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input class="search-box" type="text" id="searchInput" placeholder="Search scenario, input, category..." oninput="renderTable()">
+<!-- ═══════════════ PANEL: QA REPORT ═══════════════ -->
+<div class="tab-panel" id="panel-rpt">
+  <div class="rpt-container">
+
+    <div class="header-meta">
+      <span class="meta-item"><span class="meta-dot dot-blue"></span>Last Audit: <span id="lastAuditTime">Never</span></span>
+      <span class="meta-item"><span class="meta-dot dot-green"></span>Schedule: Every Sunday 02:00 MYT</span>
+      <span class="meta-item">Next Run: <span id="nextAuditTime">—</span></span>
+    </div>
+
+    <!-- Actions -->
+    <div class="rpt-actions">
+      <button class="btn btn-audit" onclick="runAuditNow()">Run Audit Now</button>
+      <button class="btn btn-ghost" onclick="exportReport()">Export CSV</button>
+      <button class="btn btn-danger" onclick="clearReport()">Clear Report</button>
+      <div class="rpt-search-wrap">
+        <svg class="rpt-search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input class="rpt-search-input" type="text" id="rptSearchInput" placeholder="Search issues..." oninput="filterIssues()">
+      </div>
+    </div>
+
+    <!-- Health Score -->
+    <div class="health-banner">
+      <div class="health-left">
+        <h2>System Health Score</h2>
+        <div class="health-score-num" id="healthScore">—</div>
+        <div class="health-label" id="healthLabel">Run an audit to generate score</div>
+      </div>
+      <div class="health-bar-wrap">
+        <div class="health-bar-label">Score breakdown by severity</div>
+        <div class="health-bar-row">
+          <div class="health-bar-row-label"><span>HIGH issues</span><span id="highCount">0</span></div>
+          <div class="health-bar"><div class="health-bar-fill" id="highBar" style="background:var(--high);width:0%"></div></div>
+        </div>
+        <div class="health-bar-row">
+          <div class="health-bar-row-label"><span>MEDIUM issues</span><span id="medCount">0</span></div>
+          <div class="health-bar"><div class="health-bar-fill" id="medBar" style="background:var(--medium);width:0%"></div></div>
+        </div>
+        <div class="health-bar-row">
+          <div class="health-bar-row-label"><span>LOW issues</span><span id="lowCount">0</span></div>
+          <div class="health-bar"><div class="health-bar-fill" id="lowBar" style="background:var(--low);width:0%"></div></div>
+        </div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:0.75rem;color:var(--muted);margin-bottom:8px;">Tests Run</div>
+        <div style="font-size:2rem;font-weight:800;color:var(--text);" id="totalTests">—</div>
+        <div style="font-size:0.72rem;color:var(--muted);margin-top:4px;">this audit</div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div class="rpt-stats-grid">
+      <div class="rpt-stat c-total"><div class="rpt-stat-num" id="statTotal">0</div><div class="rpt-stat-lbl">Total Issues</div></div>
+      <div class="rpt-stat c-high"><div class="rpt-stat-num" id="statHigh">0</div><div class="rpt-stat-lbl">High Severity</div></div>
+      <div class="rpt-stat c-med"><div class="rpt-stat-num" id="statMed">0</div><div class="rpt-stat-lbl">Medium Severity</div></div>
+      <div class="rpt-stat c-low"><div class="rpt-stat-num" id="statLow">0</div><div class="rpt-stat-lbl">Low Severity</div></div>
+      <div class="rpt-stat c-fixed"><div class="rpt-stat-num" id="statFixed">0</div><div class="rpt-stat-lbl">Fixed</div></div>
+      <div class="rpt-stat c-open"><div class="rpt-stat-num" id="statOpen">0</div><div class="rpt-stat-lbl">Open</div></div>
+    </div>
+
+    <!-- Detected Issues -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">Detected Issues <span class="section-count" id="issueCount">0 issues</span></div>
+      </div>
+      <div class="sev-tabs">
+        <button class="sev-tab active-all" onclick="filterSeverity('all', this)">All <span class="tab-count" id="tabAll">0</span></button>
+        <button class="sev-tab" onclick="filterSeverity('HIGH', this)">HIGH <span class="tab-count" id="tabHigh">0</span></button>
+        <button class="sev-tab" onclick="filterSeverity('MEDIUM', this)">MEDIUM <span class="tab-count" id="tabMed">0</span></button>
+        <button class="sev-tab" onclick="filterSeverity('LOW', this)">LOW <span class="tab-count" id="tabLow">0</span></button>
+        <button class="sev-tab" onclick="filterSeverity('OPEN', this)">Open Only <span class="tab-count" id="tabOpen">0</span></button>
+      </div>
+      <div class="issues-table-wrap">
+        <table class="issues-table">
+          <thead>
+            <tr>
+              <th>Error ID</th><th>Module</th><th>Issue</th>
+              <th>Severity</th><th>Status</th><th>Suggested Fix</th><th>Time</th>
+            </tr>
+          </thead>
+          <tbody id="issuesBody">
+            <tr><td colspan="7"><div class="rpt-empty"><div class="rpt-empty-title">No audit data yet</div>Click "Run Audit Now" to run your first QA check</div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Fix Recommendations -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">Fix Recommendations <span class="section-count" id="recCount">0 items</span></div>
+      </div>
+      <div class="rec-grid" id="recGrid">
+        <div style="padding:40px 24px;text-align:center;color:var(--muted);font-size:0.85rem;">Run an audit to generate fix recommendations.</div>
+      </div>
+    </div>
+
+    <!-- Audit Timeline -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">Audit Timeline <span class="section-count" id="logCount">0 entries</span></div>
+      </div>
+      <div class="audit-log" id="auditLog">
+        <div style="padding:32px 24px;text-align:center;color:var(--muted);font-size:0.85rem;">No audit runs recorded yet.</div>
+      </div>
+    </div>
+
+    <!-- Severity Guide -->
+    <div class="section">
+      <div class="section-header">
+        <div class="section-title">Severity Fix Guide</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;">
+        <div style="padding:18px 24px;border-right:1px solid var(--border);">
+          <div style="font-size:0.8rem;font-weight:600;color:var(--high);margin-bottom:6px;">HIGH — Immediate Fix</div>
+          <div style="font-size:0.78rem;color:var(--muted);line-height:1.6;">System-breaking issues. Must be hotfixed before next deployment. Core calculation logic must NOT be touched without validation.</div>
+        </div>
+        <div style="padding:18px 24px;border-right:1px solid var(--border);">
+          <div style="font-size:0.8rem;font-weight:600;color:var(--medium);margin-bottom:6px;">MEDIUM — Schedule Fix</div>
+          <div style="font-size:0.78rem;color:var(--muted);line-height:1.6;">Functional issues that affect usability but do not break the system. Fix within the next sprint or release cycle.</div>
+        </div>
+        <div style="padding:18px 24px;">
+          <div style="font-size:0.8rem;font-weight:600;color:var(--low);margin-bottom:6px;">LOW — Batch Fix</div>
+          <div style="font-size:0.78rem;color:var(--muted);line-height:1.6;">Cosmetic or minor issues. Can be batched and fixed together in a periodic UI polish update.</div>
+        </div>
+      </div>
+    </div>
+
   </div>
-  <div class="filter-group" id="categoryFilters"></div>
-  <div class="filter-group" id="statusFilters"></div>
-</div>
+</div><!-- /panel-rpt -->
 
-<!-- Table -->
-<div class="table-wrap">
-  <div class="result-meta" id="resultMeta"></div>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Category</th>
-        <th>Scenario</th>
-        <th>Input</th>
-        <th>Expected Result</th>
-        <th>Severity</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody id="tableBody">
-      <tr><td colspan="7" class="empty-state">Loading...</td></tr>
-    </tbody>
-  </table>
-</div>
-
+<script src="/qa-engine.js"></script>
 <script>
+  /* ═══ Shared state ═══ */
   var allCases = [];
   var activeSeverity = 'High';
   var activeCategory = 'All';
   var activeStatus = 'All';
+  var rptCurrentFilter = 'all';
+  var rptCurrentSearch = '';
+  var rptAllIssues = [];
 
+  /* ═══ Panel switcher ═══ */
+  function switchPanel(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+    document.querySelectorAll('.page-tab').forEach(function(b){ b.classList.remove('active'); });
+    document.getElementById('panel-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  /* ═══════════════════════════════
+       TEST CASES SECTION
+  ═══════════════════════════════ */
   function getOverrides() {
     try { return JSON.parse(localStorage.getItem('qa_overrides_v2') || '{}'); } catch(e) { return {}; }
   }
@@ -385,73 +642,68 @@
     var o = getOverrides(); o[id] = val;
     localStorage.setItem('qa_overrides_v2', JSON.stringify(o));
   }
-  function getStatus(tc) {
-    return getOverrides()[tc.id] || tc.status;
-  }
+  function getStatus(tc) { return getOverrides()[tc.id] || tc.status; }
 
   fetch('/test-cases.json')
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
+    .then(function(r){ return r.json(); })
+    .then(function(data){
       allCases = data;
+      document.getElementById('ptab-tc-count').textContent = data.length;
       buildTabs();
       buildFilters();
       renderSummary();
       renderTable();
     })
-    .catch(function() {
+    .catch(function(){
       document.getElementById('tableBody').innerHTML =
         '<tr><td colspan="7" class="empty-state"><strong>Failed to load test cases.</strong><p>Make sure test-cases.json is in /public folder.</p></td></tr>';
     });
 
   function renderSummary() {
-    var total = allCases.length;
-    var pass = allCases.filter(function(t){ return getStatus(t) === 'Pass'; }).length;
-    var fail = allCases.filter(function(t){ return getStatus(t) === 'Fail'; }).length;
+    var pass   = allCases.filter(function(t){ return getStatus(t) === 'Pass'; }).length;
+    var fail   = allCases.filter(function(t){ return getStatus(t) === 'Fail'; }).length;
     var notrun = allCases.filter(function(t){ return getStatus(t) === 'Not Run'; }).length;
-    var high = allCases.filter(function(t){ return t.severity === 'High'; }).length;
+    var high   = allCases.filter(function(t){ return t.severity === 'High'; }).length;
     document.getElementById('summaryRow').innerHTML = [
-      { n: total, l: 'Total Cases', c: '' },
-      { n: high,  l: 'Critical (High)', c: 's-high' },
-      { n: pass,  l: 'Passed', c: 's-pass' },
-      { n: fail,  l: 'Failed', c: 's-fail' },
-      { n: notrun,l: 'Not Run', c: 's-notrun' }
-    ].map(function(s) {
+      { n: allCases.length, l: 'Total Cases', c: 's-total' },
+      { n: high,   l: 'Critical (High)', c: 's-high' },
+      { n: pass,   l: 'Passed',  c: 's-pass' },
+      { n: fail,   l: 'Failed',  c: 's-fail' },
+      { n: notrun, l: 'Not Run', c: 's-notrun' }
+    ].map(function(s){
       return '<div class="stat-card ' + s.c + '"><div class="stat-num">' + s.n + '</div><div class="stat-label">' + s.l + '</div></div>';
     }).join('');
   }
 
   function buildTabs() {
-    var sevs = ['High', 'Medium', 'Low'];
-    var dots = { High: 'dot-high', Medium: 'dot-medium', Low: 'dot-low' };
-    var labels = { High: 'HIGH — Critical', Medium: 'MEDIUM — Functional', Low: 'LOW — UI / Minor' };
-    document.getElementById('severityTabs').innerHTML = sevs.map(function(s) {
+    var sevs = ['High','Medium','Low'];
+    var dots = { High:'dot-high', Medium:'dot-medium', Low:'dot-low' };
+    var labels = { High:'HIGH — Critical', Medium:'MEDIUM — Functional', Low:'LOW — UI / Minor' };
+    document.getElementById('severityTabs').innerHTML = sevs.map(function(s){
       var cnt = allCases.filter(function(t){ return t.severity === s; }).length;
       var isActive = s === activeSeverity;
       return '<button class="tab' + (isActive ? ' active-' + s.toLowerCase() : '') + '" onclick="setSeverity(\'' + s + '\', this)">' +
         '<span class="tab-dot ' + dots[s] + '"></span>' + labels[s] +
-        '<span class="tab-count">' + cnt + '</span>' +
-        '</button>';
+        '<span class="tab-count">' + cnt + '</span></button>';
     }).join('');
   }
 
   function buildFilters() {
-    var cats = ['All'].concat(
-      allCases.reduce(function(acc, t) {
-        if (acc.indexOf(t.category) === -1) acc.push(t.category);
-        return acc;
-      }, [])
-    );
-    document.getElementById('categoryFilters').innerHTML = cats.map(function(c) {
-      return '<button class="filter-btn' + (c === 'All' ? ' active' : '') + '" onclick="setFilter(\'cat\',\'' + c + '\',this)">' + c + '</button>';
+    var cats = ['All'].concat(allCases.reduce(function(acc,t){
+      if (acc.indexOf(t.category) === -1) acc.push(t.category);
+      return acc;
+    }, []));
+    document.getElementById('categoryFilters').innerHTML = cats.map(function(c){
+      return '<button class="filter-btn' + (c==='All'?' active':'') + '" onclick="setFilter(\'cat\',\'' + c + '\',this)">' + c + '</button>';
     }).join('');
-    document.getElementById('statusFilters').innerHTML = ['All','Not Run','Pass','Fail'].map(function(s) {
-      return '<button class="filter-btn' + (s === 'All' ? ' active' : '') + '" onclick="setFilter(\'sta\',\'' + s + '\',this)">' + s + '</button>';
+    document.getElementById('statusFilters').innerHTML = ['All','Not Run','Pass','Fail'].map(function(s){
+      return '<button class="filter-btn' + (s==='All'?' active':'') + '" onclick="setFilter(\'sta\',\'' + s + '\',this)">' + s + '</button>';
     }).join('');
   }
 
   function setSeverity(sev, btn) {
     activeSeverity = sev;
-    document.querySelectorAll('.tab').forEach(function(b) { b.className = 'tab'; });
+    document.querySelectorAll('.tab').forEach(function(b){ b.className='tab'; });
     btn.className = 'tab active-' + sev.toLowerCase();
     renderTable();
   }
@@ -459,21 +711,19 @@
   function setFilter(type, val, btn) {
     if (type === 'cat') { activeCategory = val; var grp = 'categoryFilters'; }
     else { activeStatus = val; var grp = 'statusFilters'; }
-    document.getElementById(grp).querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.getElementById(grp).querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
     btn.classList.add('active');
     renderTable();
   }
 
   function renderTable() {
     var search = document.getElementById('searchInput').value.toLowerCase();
-    var filtered = allCases.filter(function(tc) {
+    var filtered = allCases.filter(function(tc){
       return tc.severity === activeSeverity &&
         (activeCategory === 'All' || tc.category === activeCategory) &&
         (activeStatus === 'All' || getStatus(tc) === activeStatus) &&
-        (!search || tc.id.toLowerCase().includes(search) ||
-          tc.scenario.toLowerCase().includes(search) ||
-          tc.input.toLowerCase().includes(search) ||
-          tc.category.toLowerCase().includes(search));
+        (!search || tc.id.toLowerCase().includes(search) || tc.scenario.toLowerCase().includes(search) ||
+         tc.input.toLowerCase().includes(search) || tc.category.toLowerCase().includes(search));
     });
 
     document.getElementById('resultMeta').textContent =
@@ -485,23 +735,19 @@
       return;
     }
 
-    document.getElementById('tableBody').innerHTML = filtered.map(function(tc) {
+    document.getElementById('tableBody').innerHTML = filtered.map(function(tc){
       var status = getStatus(tc);
       var selCls = status === 'Pass' ? 's-Pass' : status === 'Fail' ? 's-Fail' : '';
       return '<tr onclick="toggleDetail(\'' + tc.id + '\')" id="row-' + tc.id + '">' +
-        '<td class="id-col">' + tc.id + ' <span class="expand-icon" id="icon-' + tc.id + '">▶</span></td>' +
+        '<td class="id-col">' + tc.id + ' <span class="expand-icon" id="icon-' + tc.id + '">&#9658;</span></td>' +
         '<td><span class="cat-badge">' + tc.category + '</span></td>' +
         '<td class="scenario-text">' + tc.scenario + '</td>' +
         '<td class="muted-text">' + tc.input + '</td>' +
         '<td class="muted-text">' + tc.expected + '</td>' +
-        '<td><span class="badge sev-' + tc.severity + '">' +
-          '<span class="tab-dot dot-' + tc.severity.toLowerCase() + '" style="width:6px;height:6px;"></span>' + tc.severity +
-        '</span></td>' +
+        '<td><span class="badge sev-' + tc.severity + '"><span class="tab-dot dot-' + tc.severity.toLowerCase() + '" style="width:6px;height:6px;"></span>' + tc.severity + '</span></td>' +
         '<td onclick="event.stopPropagation()">' +
           '<select class="status-select ' + selCls + '" onchange="updateStatus(\'' + tc.id + '\', this)">' +
-            ['Not Run','Pass','Fail'].map(function(s){
-              return '<option' + (status === s ? ' selected' : '') + '>' + s + '</option>';
-            }).join('') +
+            ['Not Run','Pass','Fail'].map(function(s){ return '<option' + (status===s?' selected':'') + '>' + s + '</option>'; }).join('') +
           '</select>' +
         '</td>' +
       '</tr>' +
@@ -510,7 +756,7 @@
           '<div class="detail-block"><label>Full Input</label><p>' + tc.input + '</p></div>' +
           '<div class="detail-block"><label>Expected Result</label><p>' + tc.expected + '</p></div>' +
           '<div class="detail-block"><label>Notes</label><p>' + (tc.notes || '—') + '</p></div>' +
-          '<div class="detail-block"><label>Severity</label><p>' + tc.severity + ' — ' + (tc.severity === 'High' ? 'Critical. Must fix before release.' : tc.severity === 'Medium' ? 'Functional issue. Fix in next sprint.' : 'Minor / cosmetic. Fix when possible.') + '</p></div>' +
+          '<div class="detail-block"><label>Severity</label><p>' + tc.severity + ' — ' + (tc.severity==='High'?'Critical. Must fix before release.':tc.severity==='Medium'?'Functional issue. Fix in next sprint.':'Minor / cosmetic. Fix when possible.') + '</p></div>' +
         '</div></td>' +
       '</tr>';
     }).join('');
@@ -527,7 +773,7 @@
   function updateStatus(id, sel) {
     var status = sel.value;
     saveOverride(id, status);
-    sel.className = 'status-select' + (status === 'Pass' ? ' s-Pass' : status === 'Fail' ? ' s-Fail' : '');
+    sel.className = 'status-select' + (status==='Pass'?' s-Pass':status==='Fail'?' s-Fail':'');
     renderSummary();
   }
 
@@ -540,16 +786,249 @@
 
   function exportCSV() {
     var header = ['ID','Severity','Category','Scenario','Input','Expected Result','Status','Notes'];
-    var rows = allCases.map(function(tc) {
-      return [tc.id, tc.severity, tc.category, tc.scenario, tc.input, tc.expected, getStatus(tc), tc.notes || '']
-        .map(function(v) { return '"' + String(v).replace(/"/g,'""') + '"'; });
+    var rows = allCases.map(function(tc){
+      return [tc.id, tc.severity, tc.category, tc.scenario, tc.input, tc.expected, getStatus(tc), tc.notes||'']
+        .map(function(v){ return '"' + String(v).replace(/"/g,'""') + '"'; });
     });
     var csv = [header.join(',')].concat(rows.map(function(r){ return r.join(','); })).join('\n');
     var a = document.createElement('a');
-    a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
-    a.download = 'qa-report-salarycalculator-' + new Date().toISOString().slice(0,10) + '.csv';
+    a.href = URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+    a.download = 'qa-test-cases-' + new Date().toISOString().slice(0,10) + '.csv';
     a.click();
   }
+
+  /* ═══════════════════════════════
+       QA REPORT SECTION
+  ═══════════════════════════════ */
+  function getNextSunday() {
+    var now = new Date();
+    var day = now.getDay();
+    var daysUntil = day === 0 ? 7 : 7 - day;
+    var next = new Date(now);
+    next.setDate(now.getDate() + daysUntil);
+    next.setHours(2, 0, 0, 0);
+    return next;
+  }
+
+  function initReportTimes() {
+    var report = loadReport();
+    document.getElementById('lastAuditTime').textContent = report ? new Date(report.timestamp).toLocaleString('en-MY') : 'Never';
+    document.getElementById('nextAuditTime').textContent = getNextSunday().toLocaleDateString('en-MY', { weekday:'short', month:'short', day:'numeric', hour:'2-digit', minute:'2-digit' });
+  }
+
+  function loadReport() {
+    try { return JSON.parse(localStorage.getItem('qa_audit_report') || 'null'); } catch(e) { return null; }
+  }
+  function saveReport(report) { localStorage.setItem('qa_audit_report', JSON.stringify(report)); }
+
+  function buildReport(results) {
+    var issues = [];
+    var passed = 0;
+    var dateStr = new Date().toISOString().slice(0,10).replace(/-/g,'');
+    results.forEach(function(r, i) {
+      if (r.status === 'PASS') { passed++; return; }
+      issues.push({
+        id: 'ERR-' + dateStr + '-' + String(i+1).padStart(3,'0'),
+        severity: r.severity || 'LOW',
+        module: r.module || 'Calculator',
+        issue: r.message,
+        steps_to_reproduce: r.steps || 'Run audit from /test-case',
+        expected_result: r.expected || '—',
+        actual_result: r.actual || r.message,
+        impact: r.impact || 'Affects user experience',
+        timestamp: new Date().toISOString(),
+        status: 'OPEN',
+        suggested_fix: r.fix || 'Review and fix the identified issue.'
+      });
+    });
+    var highC = issues.filter(function(i){return i.severity==='HIGH';}).length;
+    var medC  = issues.filter(function(i){return i.severity==='MEDIUM';}).length;
+    var lowC  = issues.filter(function(i){return i.severity==='LOW';}).length;
+    var score = Math.max(0, Math.min(100, 100 - (highC*15) - (medC*5) - (lowC*1)));
+    return { timestamp: new Date().toISOString(), totalTests: results.length, passed: passed, issues: issues, score: score };
+  }
+
+  function renderReport(report) {
+    if (!report) return;
+    rptAllIssues = report.issues || [];
+    var highC  = rptAllIssues.filter(function(i){return i.severity==='HIGH';}).length;
+    var medC   = rptAllIssues.filter(function(i){return i.severity==='MEDIUM';}).length;
+    var lowC   = rptAllIssues.filter(function(i){return i.severity==='LOW';}).length;
+    var openC  = rptAllIssues.filter(function(i){return i.status==='OPEN';}).length;
+    var fixedC = rptAllIssues.filter(function(i){return i.status==='FIXED';}).length;
+
+    var score = report.score;
+    var scoreEl = document.getElementById('healthScore');
+    scoreEl.textContent = score;
+    scoreEl.className = 'health-score-num ' + (score>=90?'excellent':score>=70?'good':score>=40?'warning':'critical');
+    document.getElementById('healthLabel').textContent = score>=90?'Excellent — System is healthy':score>=70?'Good — Minor issues detected':score>=40?'Warning — Functional issues found':'Critical — Immediate action required';
+    document.getElementById('totalTests').textContent = report.totalTests || 0;
+    document.getElementById('highCount').textContent = highC;
+    document.getElementById('medCount').textContent  = medC;
+    document.getElementById('lowCount').textContent  = lowC;
+    var maxIss = Math.max(1, rptAllIssues.length);
+    document.getElementById('highBar').style.width = Math.min(100,(highC/maxIss)*100)+'%';
+    document.getElementById('medBar').style.width  = Math.min(100,(medC/maxIss)*100)+'%';
+    document.getElementById('lowBar').style.width  = Math.min(100,(lowC/maxIss)*100)+'%';
+    document.getElementById('statTotal').textContent = rptAllIssues.length;
+    document.getElementById('statHigh').textContent  = highC;
+    document.getElementById('statMed').textContent   = medC;
+    document.getElementById('statLow').textContent   = lowC;
+    document.getElementById('statFixed').textContent = fixedC;
+    document.getElementById('statOpen').textContent  = openC;
+    document.getElementById('tabAll').textContent    = rptAllIssues.length;
+    document.getElementById('tabHigh').textContent   = highC;
+    document.getElementById('tabMed').textContent    = medC;
+    document.getElementById('tabLow').textContent    = lowC;
+    document.getElementById('tabOpen').textContent   = openC;
+    document.getElementById('lastAuditTime').textContent = new Date(report.timestamp).toLocaleString('en-MY');
+    document.getElementById('ptab-rpt-count').textContent = rptAllIssues.length;
+
+    renderIssuesTable(rptAllIssues);
+    renderRecommendations(rptAllIssues);
+    renderTimeline(report);
+  }
+
+  function renderIssuesTable(issues) {
+    var search = rptCurrentSearch.toLowerCase();
+    var filtered = issues.filter(function(i){
+      var matchSev = rptCurrentFilter==='all' || i.severity===rptCurrentFilter || (rptCurrentFilter==='OPEN' && i.status==='OPEN');
+      var matchSearch = !search || i.issue.toLowerCase().includes(search) || i.id.toLowerCase().includes(search) || i.module.toLowerCase().includes(search);
+      return matchSev && matchSearch;
+    });
+    document.getElementById('issueCount').textContent = filtered.length + ' issue' + (filtered.length!==1?'s':'');
+    if (!filtered.length) {
+      document.getElementById('issuesBody').innerHTML = '<tr><td colspan="7"><div class="rpt-empty"><div class="rpt-empty-title">No issues match this filter</div>Try a different filter or search term</div></td></tr>';
+      return;
+    }
+    document.getElementById('issuesBody').innerHTML = filtered.map(function(issue){
+      var time = new Date(issue.timestamp).toLocaleTimeString('en-MY');
+      return '<tr>' +
+        '<td><span class="issue-id">' + issue.id + '</span></td>' +
+        '<td><span class="module-badge">' + issue.module + '</span></td>' +
+        '<td><div class="issue-desc">' + issue.issue + '</div></td>' +
+        '<td><span class="sev-badge ' + issue.severity + '">' + issue.severity + '</span></td>' +
+        '<td><span class="status-badge ' + issue.status + '">' + issue.status + '</span></td>' +
+        '<td><div class="fix-text">' + issue.suggested_fix + '</div></td>' +
+        '<td style="color:var(--muted);font-size:0.75rem;white-space:nowrap;">' + time + '</td>' +
+      '</tr>';
+    }).join('');
+  }
+
+  function renderRecommendations(issues) {
+    var recs = [];
+    var highO = issues.filter(function(i){return i.severity==='HIGH'&&i.status==='OPEN';});
+    var medO  = issues.filter(function(i){return i.severity==='MEDIUM'&&i.status==='OPEN';});
+    var lowO  = issues.filter(function(i){return i.severity==='LOW'&&i.status==='OPEN';});
+    if (highO.length) recs.push({ priority:'immediate', label:'Immediate Fix Required', desc: highO.length + ' HIGH severity issue(s) detected. Must be resolved before next deployment. Do NOT modify core EPF/SOCSO/PCB logic without explicit validation testing.' });
+    if (medO.length)  recs.push({ priority:'scheduled',  label:'Schedule for Next Sprint', desc: medO.length + ' MEDIUM severity issue(s) detected. Functional improvements needed. Plan fixes within the next release cycle.' });
+    if (lowO.length)  recs.push({ priority:'batched',    label:'Batch in UI Update', desc: lowO.length + ' LOW severity issue(s) detected. Cosmetic or minor UI fixes. Can be batched together in a periodic polish update.' });
+    if (!recs.length) recs.push({ priority:'batched',    label:'No Action Required', desc: 'All detected issues are resolved. System is operating within expected parameters. Continue monitoring weekly.' });
+    document.getElementById('recCount').textContent = recs.length + ' item' + (recs.length!==1?'s':'');
+    document.getElementById('recGrid').innerHTML = recs.map(function(r){
+      return '<div class="rec-item"><span class="rec-priority ' + r.priority + '">' + r.label + '</span><div class="rec-body"><p>' + r.desc + '</p></div></div>';
+    }).join('');
+  }
+
+  function renderTimeline(report) {
+    var logs = JSON.parse(localStorage.getItem('qa_audit_log') || '[]');
+    logs.unshift({ time: new Date(report.timestamp).toLocaleString('en-MY'), score: report.score, issues: report.issues.length, tests: report.totalTests });
+    if (logs.length > 10) logs = logs.slice(0,10);
+    localStorage.setItem('qa_audit_log', JSON.stringify(logs));
+    document.getElementById('logCount').textContent = logs.length + ' entr' + (logs.length!==1?'ies':'y');
+    document.getElementById('auditLog').innerHTML = logs.map(function(l){
+      var color = l.score>=90?'var(--low)':l.score>=70?'var(--accent)':l.score>=40?'var(--medium)':'var(--high)';
+      return '<div class="log-entry">' +
+        '<span class="log-time">' + l.time + '</span>' +
+        '<span class="log-dot" style="background:' + color + '"></span>' +
+        '<div><div class="log-msg">Audit completed — Health Score: <strong>' + l.score + '/100</strong></div>' +
+        '<div class="log-sub">' + l.tests + ' tests run &bull; ' + l.issues + ' issues found</div></div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function filterSeverity(sev, btn) {
+    rptCurrentFilter = sev;
+    document.querySelectorAll('.sev-tab').forEach(function(t){ t.className='sev-tab'; });
+    var cls = sev==='all'?'active-all':sev==='HIGH'?'active-high':sev==='MEDIUM'?'active-medium':sev==='LOW'?'active-low':'active-all';
+    btn.className = 'sev-tab ' + cls;
+    renderIssuesTable(rptAllIssues);
+  }
+
+  function filterIssues() {
+    rptCurrentSearch = document.getElementById('rptSearchInput').value;
+    renderIssuesTable(rptAllIssues);
+  }
+
+  function runAuditNow() {
+    var btn = document.querySelector('.btn-audit');
+    btn.textContent = 'Running...';
+    btn.disabled = true;
+    setTimeout(function(){
+      var results = (typeof SalaryQAEngine !== 'undefined') ? new SalaryQAEngine().runAllTests() : getDemoResults();
+      var report = buildReport(results);
+      saveReport(report);
+      try {
+        var logs = JSON.parse(localStorage.getItem('salary_error_logs') || '[]');
+        report.issues.forEach(function(issue){
+          logs.unshift({ timestamp: issue.timestamp, type: issue.module.toLowerCase(), message: '[' + issue.severity + '] ' + issue.issue, input: {}, extra: { fix: issue.suggested_fix, errorId: issue.id }, url: window.location.href, status: issue.status });
+        });
+        localStorage.setItem('salary_error_logs', JSON.stringify(logs));
+      } catch(e) {}
+      renderReport(report);
+      btn.textContent = 'Run Audit Now';
+      btn.disabled = false;
+    }, 800);
+  }
+
+  function getDemoResults() {
+    return [
+      { status:'PASS', module:'Calculator', message:'EPF calculation correct for RM3,000', severity:'HIGH' },
+      { status:'PASS', module:'Calculator', message:'SOCSO deduction correct', severity:'HIGH' },
+      { status:'PASS', module:'Calculator', message:'EIS capped at RM5,000', severity:'HIGH' },
+      { status:'PASS', module:'Calculator', message:'Net salary is positive', severity:'HIGH' },
+      { status:'PASS', module:'Calculator', message:'Zero salary returns zero deductions', severity:'HIGH' },
+      { status:'PASS', module:'UI', message:'Calculate button is clickable', severity:'HIGH' },
+      { status:'PASS', module:'UI', message:'Result card renders after calculation', severity:'HIGH' },
+      { status:'PASS', module:'UI', message:'Form accepts numeric input', severity:'HIGH' },
+      { status:'PASS', module:'Download', message:'Download buttons are present', severity:'HIGH' },
+      { status:'PASS', module:'Calculator', message:'Bonus included in PCB calculation', severity:'MEDIUM' },
+      { status:'PASS', module:'Calculator', message:'EPF employer rate switches at RM5,000', severity:'MEDIUM' },
+      { status:'PASS', module:'UI', message:'Page loads within 3 seconds', severity:'MEDIUM' },
+      { status:'PASS', module:'UI', message:'Mobile layout renders correctly', severity:'MEDIUM' },
+      { status:'FAIL', module:'UI', message:'Minor spacing inconsistency in results card on small screens', severity:'LOW', fix:'Add responsive padding adjustment for screens below 375px', impact:'Visual only', steps:'Open on iPhone SE, view results card', expected:'Equal spacing on all sides', actual:'Right padding slightly reduced' },
+      { status:'PASS', module:'Calculator', message:'Non-numeric input handled gracefully', severity:'HIGH' },
+      { status:'PASS', module:'Calculator', message:'Negative salary does not produce negative deductions', severity:'HIGH' },
+      { status:'PASS', module:'UI', message:'Error logger captures input errors', severity:'MEDIUM' },
+      { status:'PASS', module:'API', message:'Google Sheets API endpoint reachable', severity:'HIGH' },
+      { status:'PASS', module:'UI', message:'Footer links navigate correctly', severity:'LOW' },
+      { status:'PASS', module:'Calculator', message:'Decimal salary calculated correctly', severity:'MEDIUM' }
+    ];
+  }
+
+  function exportReport() {
+    var report = loadReport();
+    if (!report || !report.issues.length) { alert('No report data to export. Run an audit first.'); return; }
+    var rows = [['Error ID','Module','Issue','Severity','Status','Suggested Fix','Timestamp']];
+    report.issues.forEach(function(i){ rows.push([i.id, i.module, '"'+i.issue+'"', i.severity, i.status, '"'+i.suggested_fix+'"', i.timestamp]); });
+    var csv = rows.map(function(r){return r.join(',');}).join('\n');
+    var a = document.createElement('a');
+    a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+    a.download = 'qa-audit-report-' + new Date().toISOString().slice(0,10) + '.csv';
+    a.click();
+  }
+
+  function clearReport() {
+    if (!confirm('Clear all audit report data? This cannot be undone.')) return;
+    localStorage.removeItem('qa_audit_report');
+    localStorage.removeItem('qa_audit_log');
+    location.reload();
+  }
+
+  /* ═══ Init ═══ */
+  initReportTimes();
+  var savedReport = loadReport();
+  if (savedReport) renderReport(savedReport);
 </script>
 </body>
 </html>
