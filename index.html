@@ -106,6 +106,84 @@
             object-fit: contain;
         }
 
+        /* Desktop Nav Styles */
+        .desktop-nav {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .nav-item {
+            background: transparent;
+            border: none;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .nav-item:hover {
+            background: #f8fafc;
+            color: var(--text-main);
+        }
+        
+        .active-nav {
+            background: #eff6ff !important;
+            color: var(--primary) !important;
+            font-weight: 600 !important;
+        }
+
+        /* Mobile Nav Button */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            color: var(--text-main);
+        }
+
+        /* Mobile Dropdown Menu */
+        .mobile-nav {
+            display: none;
+            flex-direction: column;
+            background: #ffffff;
+            border-top: 1px solid var(--border);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            z-index: 99;
+        }
+        
+        .mobile-nav.open {
+            display: flex;
+        }
+
+        .mobile-nav-item {
+            background: transparent;
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-main);
+            padding: 14px 20px;
+            margin: 6px;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .mobile-nav-item:hover {
+            background: #f8fafc;
+        }
+
         .nav-menu {
             display: flex;
             gap: 15px;
@@ -204,40 +282,40 @@
         .main-layout {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin-top: 8px;
-            padding-bottom: 20px;
+            gap: 24px;
+            margin-top: 16px;
+            padding-bottom: 32px;
         }
 
         /* Card Style */
         .card {
             background: var(--card-bg);
             border-radius: 16px;
-            padding: 20px;
+            padding: 24px;
             box-shadow: var(--shadow-soft);
             border: 1px solid var(--border);
         }
 
         .card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 12px;
+            font-size: 1.35rem;
+            font-weight: 800;
+            margin-bottom: 20px;
             border-bottom: 1px solid var(--border);
-            padding-bottom: 8px;
+            padding-bottom: 12px;
             color: var(--text-main);
-            letter-spacing: -0.01em;
+            letter-spacing: -0.02em;
         }
 
         /* Form Styles */
         .form-group {
-            margin-bottom: 10px;
+            margin-bottom: 24px;
         }
 
         .form-label {
             display: block;
-            font-weight: 600;
-            margin-bottom: 6px;
-            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-size: 1rem;
             color: var(--text-main);
         }
 
@@ -597,165 +675,6 @@
         }
 
 
-        /* Template Section Styles */
-        .template-section {
-            padding: 32px 0;
-            background-color: #ffffff;
-            border-top: 1px solid var(--border);
-        }
-
-        .template-section h2 {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-            text-align: center;
-            color: var(--text-main);
-            font-weight: 700;
-            letter-spacing: -0.01em;
-        }
-
-        .template-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-top: 16px;
-        }
-
-        @media (min-width: 768px) {
-            .template-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .template-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-
-        .template-card {
-            background: #ffffff;
-            border-radius: 16px;
-            padding: 16px;
-            box-shadow: var(--shadow-soft);
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
-            border: 1px solid var(--border);
-        }
-
-        .template-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .template-preview {
-            height: 180px;
-            background: #f8fafc;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            position: relative;
-            border: 1px solid #e2e8f0;
-            box-shadow: inset 0 0 0 1px #fff;
-            overflow: hidden;
-            padding: 15px;
-        }
-
-        /* Template Image */
-        .template-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: top;
-            border-radius: 4px;
-        }
-
-        .doc-header {
-            height: 10px;
-            background: #e2e8f0;
-            width: 60%;
-            border-radius: 2px;
-        }
-
-        .doc-line {
-            height: 6px;
-            background: #f1f5f9;
-            width: 100%;
-            border-radius: 2px;
-        }
-
-        .doc-row {
-            display: flex;
-            gap: 5px;
-        }
-
-        .doc-cell {
-            height: 6px;
-            background: #f1f5f9;
-            flex: 1;
-            border-radius: 2px;
-        }
-
-        .doc-highlight {
-            height: 8px;
-            background: #dbeafe;
-            width: 40%;
-            border-radius: 2px;
-            margin-top: auto;
-        }
-
-
-        .template-card h3 {
-            font-size: 1.05rem;
-            margin-bottom: 6px;
-            color: var(--text-main);
-            font-weight: 700;
-            letter-spacing: -0.01em;
-        }
-
-        .template-card p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 16px;
-            flex-grow: 1;
-            line-height: 1.4;
-        }
-
-        .template-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn-template {
-            flex: 1;
-            padding: 10px;
-            border-radius: 6px;
-            text-align: center;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.2s;
-        }
-
-        .btn-primary {
-            background-color: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #1d4ed8;
-        }
-
-        .btn-secondary {
-            background-color: #e2e8f0;
-            color: var(--text-main);
-        }
-
-        .btn-secondary:hover {
-            background-color: #cbd5e1;
-        }
-
-
         .content-section {
             padding: 32px 0;
             background-color: #ffffff;
@@ -1096,6 +1015,14 @@
 
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
+            
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
 
             /* Layout */
             .main-layout {
@@ -1226,12 +1153,33 @@
 
     <!-- Navbar -->
     <header class="navbar">
-        <div class="container">
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
             <a href="/" class="logo">
                 <img src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
                     alt="SalaryCalc MY" referrerPolicy="no-referrer" class="logo-img">
             </a>
+
+            <!-- Desktop Nav -->
+            <nav class="desktop-nav">
+                <button type="button" id="navBtnSalary" class="nav-item active-nav">Salary Calculator (Take Home Pay)</button>
+                <button type="button" id="navBtnSocso" class="nav-item">SOCSO PERKESO Calculator</button>
+            </nav>
+
+            <!-- Mobile Hamburger Button -->
+            <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
         </div>
+        
+        <!-- Mobile Dropdown Menu -->
+        <nav class="mobile-nav" id="mobileNavMenu">
+            <button type="button" id="mobileNavBtnSalary" class="mobile-nav-item active-nav">Salary Calculator (Take Home Pay)</button>
+            <button type="button" id="mobileNavBtnSocso" class="mobile-nav-item">SOCSO PERKESO Calculator</button>
+        </nav>
     </header>
 
     <!-- Calculator Area -->
@@ -1239,14 +1187,15 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
-                <h1>Salary Calculator Malaysia (Take Home Pay)</h1>
-                <p>Calculate Salary, EPF, SOCSO, EIS and PCB Contributions for FREE.</p>
+                <h1 id="heroTitle">Salary Calculator Malaysia (Take Home Pay)</h1>
+                <p id="heroSubtitle">Calculate Salary, EPF, SOCSO, EIS and PCB Contributions for FREE.</p>
             </div>
         </section>
 
         <!-- Main Content -->
         <main class="container">
-            <div class="main-layout">
+            <!-- SALARY CALCULATOR LAYOUT (EXISTING) -->
+            <div class="main-layout" id="layoutSalary">
 
                 <!-- Left Side: Form Input -->
                 <section class="card">
@@ -1544,11 +1493,138 @@
                 </aside>
 
             </div>
+
+            <!-- SOCSO CALCULATOR LAYOUT (NEW) -->
+            <div class="main-layout" id="layoutSocso" style="display: none; opacity: 0; transition: opacity 0.3s ease;">
+                <!-- Left Side: Form Input -->
+                <section class="card">
+                    <h2 class="card-title" style="margin-bottom: 24px;">SOCSO PERKESO Details</h2>
+                    <form id="socsoForm" action="#socsoResultCard">
+                        <div class="form-group" style="margin-bottom: 24px;">
+                            <label class="form-label" for="socsoGrossSalary" style="display: flex; align-items: center; gap: 6px; margin-bottom: 8px;">
+                                Gross Monthly Salary
+                            </label>
+                            <p style="font-size: 0.75rem; color: #dc2626; margin-bottom: 8px; font-weight: 600;">*Required</p>
+                            <div class="input-group">
+                                <span class="input-prefix">RM</span>
+                                <input type="number" id="socsoGrossSalary" class="form-input" placeholder="0" min="0.01" step="0.01" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 24px;">
+                            <label class="form-label" style="margin-bottom: 12px;">Age Group</label>
+                            <div style="display: flex; gap: 24px;">
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.95rem;">
+                                    <input type="radio" name="socsoAge" value="below60" checked style="width: 18px; height: 18px;"> Below 60
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.95rem;">
+                                    <input type="radio" name="socsoAge" value="above60" style="width: 18px; height: 18px;"> Above 60
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 32px;">
+                            <label class="form-label" style="margin-bottom: 12px;">Nationality</label>
+                            <div style="display: flex; gap: 24px;">
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.95rem;">
+                                    <input type="radio" name="socsoNationality" value="malaysian" checked style="width: 18px; height: 18px;"> Malaysian
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; font-size: 0.95rem;">
+                                    <input type="radio" name="socsoNationality" value="foreigner" style="width: 18px; height: 18px;"> Foreigner
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-actions" style="margin-top: 32px; gap: 16px;">
+                            <button type="reset" id="socsoResetBtn" class="btn btn-outline" style="flex: 1; justify-content: center; padding: 12px;">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+                                Reset
+                            </button>
+                            <button type="submit" class="btn btn-primary" style="flex: 2; justify-content: center; padding: 12px;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="16" y1="14" x2="16.01" y2="14"></line><line x1="16" y1="18" x2="16.01" y2="18"></line><line x1="12" y1="14" x2="12.01" y2="14"></line><line x1="12" y1="18" x2="12.01" y2="18"></line><line x1="8" y1="14" x2="8.01" y2="14"></line><line x1="8" y1="18" x2="8.01" y2="18"></line></svg>
+                                Calculate
+                            </button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Right Side: Result Panel -->
+                <aside class="result-panel">
+                    <div class="card" id="socsoResultCard" style="box-shadow: none; padding: 16px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+                            <h2 class="card-title" style="margin-bottom: 0; font-size: 1.1rem;">SOCSO Results</h2>
+                        </div>
+
+                        <!-- Placeholder -->
+                        <div id="socsoPlaceholder" class="placeholder-text" style="padding: 32px 0;">
+                            <div style="display: flex; justify-content: center; margin-bottom: 12px;">
+                                <svg width="80" height="80" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M154.5 135.5C168.1 118.7 178.3 98.5 174.1 80.1C169.9 61.7 151.3 45.1 131.5 35.3C111.7 25.5 90.7 22.5 71.9 28.1C53.1 33.7 36.5 47.9 25.7 65.5C14.9 83.1 9.9 104.1 15.5 121.9C21.1 139.7 37.3 154.3 55.7 163.5C74.1 172.7 94.7 176.5 113.1 171.1C131.5 165.7 140.9 152.3 154.5 135.5Z" fill="#EFF6FF" />
+                                    <rect x="65" y="45" width="70" height="110" rx="12" fill="#FFFFFF" stroke="#3B82F6" stroke-width="4" />
+                                    <rect x="77" y="60" width="46" height="24" rx="6" fill="#DBEAFE" />
+                                    <rect x="77" y="95" width="12" height="12" rx="3" fill="#E5E7EB" />
+                                    <rect x="94" y="95" width="12" height="12" rx="3" fill="#E5E7EB" />
+                                    <rect x="111" y="95" width="12" height="12" rx="3" fill="#E5E7EB" />
+                                    <rect x="77" y="112" width="12" height="12" rx="3" fill="#E5E7EB" />
+                                    <rect x="94" y="112" width="12" height="12" rx="3" fill="#E5E7EB" />
+                                    <rect x="111" y="112" width="12" height="12" rx="3" fill="#E5E7EB" />
+                                    <rect x="77" y="129" width="29" height="12" rx="3" fill="#3B82F6" />
+                                    <rect x="111" y="129" width="12" height="12" rx="3" fill="#E5E7EB" />
+                                </svg>
+                            </div>
+                            <p style="font-weight: 600; font-size: 0.95rem; color: var(--text-main); margin-bottom: 2px;">Fill your salary to see results</p>
+                            <p style="font-size: 0.8rem;">SOCSO contributions will appear here.</p>
+                        </div>
+
+                        <!-- Results -->
+                        <div id="socsoResultsContent" class="results-content" style="display: none; padding: 0;">
+                            <div style="background: #fff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 20px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);">
+                                <!-- Employee Row -->
+                                <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f1f5f9;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 32px; height: 32px; background: #f0fdf4; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #166534;">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                                        </div>
+                                        <span style="font-weight: 600; color: #475569;">Employee contribution</span>
+                                    </div>
+                                    <span id="socsoEmployeeCardVal" style="font-weight: 700; color: #059669;">RM 0.00</span>
+                                </div>
+                                <!-- Employer Row -->
+                                <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #f1f5f9;">
+                                    <div style="display: flex; align-items: center; gap: 12px;">
+                                        <div style="width: 32px; height: 32px; background: #fffbeb; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #b45309;">
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line><line x1="9" y1="15" x2="15" y2="15"></line></svg>
+                                        </div>
+                                        <span style="font-weight: 600; color: #475569;">Employer contribution</span>
+                                    </div>
+                                    <span id="socsoEmployerCardVal" style="font-weight: 700; color: #b45309;">RM 0.00</span>
+                                </div>
+                                <!-- Total Row -->
+                                <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px; background: #eff6ff; border-radius: 12px; margin-top: 16px;">
+                                    <span style="font-weight: 700; color: #1e40af;">Total Contribution</span>
+                                    <span id="socsoTotalCardVal" style="font-weight: 800; color: #1e3a8a; font-size: 1.1rem;">RM 0.00</span>
+                                </div>
+                                <!-- Disclaimer -->
+                                <p style="font-size: 0.75rem; color: #94a3b8; text-align: center; margin: 16px 0 0; line-height: 1.4;">
+                                    This calculator is for reference only. Please check official PERKESO guidelines for accurate deductions.
+                                </p>
+                            </div>
+                            
+                            <!-- Download Button -->
+                            <button id="downloadSocsoReportBtn" style="width: 100%; margin-top: 16px; padding: 14px; font-size: 0.95rem; display: flex; align-items: center; justify-content: center; gap: 10px; background: #2563eb; color: white; font-weight: 700; border-radius: 12px; border: none; cursor: pointer; transition: background 0.2s;">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                Download SOCSO Report
+                            </button>
+                        </div>
+                    </div>
+                </aside>
+
+            </div>
         </main>
     </div>
 
-    <!-- SEO Content Sections -->
-    <section class="content-section">
+    <!-- SEO Content Sections - Salary -->
+    <section class="content-section" id="salarySeoContent">
         <div class="container">
             <!-- Section 1: Formula -->
             <div class="content-card" style="margin-bottom: 2rem;">
@@ -2107,78 +2183,299 @@
         </div>
     </section>
 
-    <!-- Section 7: Download Templates -->
-    <section id="templates" class="template-section">
+    <!-- SEO Content Sections - SOCSO -->
+    <section class="content-section" id="socsoSeoContent">
         <div class="container">
-            <div style="text-align: center; margin-bottom: 30px;">
-                <h2>Download Free Salary Templates</h2>
-                <p style="color: var(--text-muted);">Professional, ready-to-use templates for payroll management.</p>
+            <!-- Section 1: What is SOCSO (PERKESO) -->
+            <div class="content-card" style="margin-bottom: 32px; padding: 32px; background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+                <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 16px; letter-spacing: -0.025em;">What is SOCSO (PERKESO)?</h2>
+                <p style="margin-bottom: 24px; line-height: 1.7; color: var(--text-muted); font-size: 1rem;">
+                    SOCSO (Social Security Organization), known as PERKESO, provides essential social security protection to Malaysian employees through comprehensive coverage schemes.
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 12px;">
+                        <span style="display:flex; align-items:center; justify-content:center; width: 32px; height: 32px; background: #dcfce7; color: #166534; border-radius: 8px; font-weight: 700;">✓</span>
+                        <span style="color: #334155; font-weight: 600; font-size: 0.95rem;">Work-related injuries</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 12px;">
+                        <span style="display:flex; align-items:center; justify-content:center; width: 32px; height: 32px; background: #dcfce7; color: #166534; border-radius: 8px; font-weight: 700;">✓</span>
+                        <span style="color: #334155; font-weight: 600; font-size: 0.95rem;">Disability protection</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 12px;">
+                        <span style="display:flex; align-items:center; justify-content:center; width: 32px; height: 32px; background: #dcfce7; color: #166534; border-radius: 8px; font-weight: 700;">✓</span>
+                        <span style="color: #334155; font-weight: 600; font-size: 0.95rem;">Medical support</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px; padding: 12px; background: #f8fafc; border-radius: 12px;">
+                        <span style="display:flex; align-items:center; justify-content:center; width: 32px; height: 32px; background: #dcfce7; color: #166534; border-radius: 8px; font-weight: 700;">✓</span>
+                        <span style="color: #334155; font-weight: 600; font-size: 0.95rem;">Loss of income coverage</span>
+                    </div>
+                </div>
             </div>
 
-            <div class="template-grid">
-                <!-- Template 1: Payslip -->
-                <div class="template-card">
-                    <div class="template-preview">
-                        <img src="https://www.ajobthing.com/resources/blog/data/blog/images/2026/03/Salary%20Payslip%20Template-1.jpg"
-                            alt="Salary Payslip" referrerPolicy="no-referrer" class="template-img">
+            <!-- Section 2: How SOCSO Contribution Works -->
+            <div class="content-card" style="margin-bottom: 32px; padding: 32px; background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+                <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 16px; letter-spacing: -0.025em;">How SOCSO Contribution Works</h2>
+                <p style="margin-bottom: 24px; color: var(--text-muted); font-size: 1rem; line-height: 1.7;">
+                    SOCSO contribution is calculated based on two main variables: your monthly gross salary and your age.
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                    <!-- Salary Factor -->
+                    <div style="background: #f8fafc; padding: 24px; border-radius: 16px; border: 1px solid #f1f5f9;">
+                        <h3 style="font-size: 1.15rem; font-weight: 750; color: var(--text-main); margin-bottom: 12px;">💰 Gross Monthly Salary</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">SOCSO is structured by contribution bands:</p>
+                        <ul style="list-style-type: none; padding-left: 0; margin-bottom: 0;">
+                            <li style="display: flex; align-items: start; gap: 10px; margin-bottom: 10px; color: #475569; font-size: 0.9rem; line-height: 1.6;"><span style="color: #10b981;">✓</span> Uses <strong>official contribution tables</strong>.</li>
+                            <li style="display: flex; align-items: start; gap: 10px; margin-bottom: 10px; color: #475569; font-size: 0.9rem; line-height: 1.6;"><span style="color: #10b981;">✓</span> Salaries mapped to <strong>specific bands</strong>.</li>
+                            <li style="display: flex; align-items: start; gap: 10px; margin-bottom: 0; color: #475569; font-size: 0.9rem; line-height: 1.6;"><span style="color: #10b981;">✓</span> Ceiling capped at <strong>RM6,000</strong>.</li>
+                        </ul>
                     </div>
-                    <h3>Salary Payslip</h3>
-                    <p>Generate professional payslips for employees</p>
-                    <div class="template-buttons">
-                        <a href="https://docs.google.com/document/d/1XLiCHj4v_nU65Su5xHmkYBEyOs9A_I_DKI6LqEkjaQs/edit?usp=sharing"
-                            target="_blank"
-                            data-url="https://docs.google.com/document/d/1XLiCHj4v_nU65Su5xHmkYBEyOs9A_I_DKI6LqEkjaQs/edit?usp=sharing"
-                            data-action="Salary Payslip (Docs)"
-                            class="btn-template btn-primary template-download-btn">Download Docs</a>
-                        <a href="https://drive.google.com/file/d/1MAhrOkrZJ0xcdj7CnMI_XiLlMTh3tCds/view?usp=sharing"
-                            target="_blank"
-                            data-url="https://drive.google.com/file/d/1MAhrOkrZJ0xcdj7CnMI_XiLlMTh3tCds/view?usp=sharing"
-                            data-action="Salary Payslip (PDF)"
-                            class="btn-template btn-secondary template-download-btn">Download PDF</a>
-                    </div>
-                </div>
-                <!-- Template 2: Increment -->
-                <div class="template-card">
-                    <div class="template-preview">
-                        <img src="https://www.ajobthing.com/resources/blog/data/blog/images/2026/03/Salary%20Increment%20Template-1.jpg"
-                            alt="Salary Increment" referrerPolicy="no-referrer" class="template-img">
-                    </div>
-                    <h3>Salary Increment</h3>
-                    <p>Track and manage employee salary increases</p>
-                    <div class="template-buttons">
-                        <a href="https://docs.google.com/document/d/1QQXVLvLCApfXJ9FizVO6IXGuqAGDOf410ZzHk7u10yQ/edit?usp=sharing"
-                            target="_blank"
-                            data-url="https://docs.google.com/document/d/1QQXVLvLCApfXJ9FizVO6IXGuqAGDOf410ZzHk7u10yQ/edit?usp=sharing"
-                            data-action="Salary Increment (Docs)"
-                            class="btn-template btn-primary template-download-btn">Download Docs</a>
-                        <a href="https://drive.google.com/file/d/1nHkesXVipdHKX66t6OzIpHqA2XYQbl1o/view?usp=sharing"
-                            target="_blank"
-                            data-url="https://drive.google.com/file/d/1nHkesXVipdHKX66t6OzIpHqA2XYQbl1o/view?usp=sharing"
-                            data-action="Salary Increment (PDF)"
-                            class="btn-template btn-secondary template-download-btn">Download PDF</a>
+                    <!-- Age Factor -->
+                    <div style="background: #f8fafc; padding: 24px; border-radius: 16px; border: 1px solid #f1f5f9;">
+                        <h3 style="font-size: 1.15rem; font-weight: 750; color: var(--text-main); margin-bottom: 12px;">👤 Age Factor</h3>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px;">Your age determines protection scope:</p>
+                        <ul style="list-style-type: none; padding-left: 0; margin-bottom: 0;">
+                            <li style="display: flex; align-items: start; gap: 10px; margin-bottom: 10px; color: #475569; font-size: 0.9rem; line-height: 1.6;"><span style="color: #10b981;">✓</span> <strong>Below 60:</strong> Full protection coverage.</li>
+                            <li style="display: flex; align-items: start; gap: 10px; margin-bottom: 0; color: #475569; font-size: 0.9rem; line-height: 1.6;"><span style="color: #10b981;">✓</span> <strong>60 & Above:</strong> Employment injury only.</li>
+                        </ul>
                     </div>
                 </div>
-                <!-- Template 3: Adjustment -->
-                <div class="template-card">
-                    <div class="template-preview">
-                        <img src="https://www.ajobthing.com/resources/blog/data/blog/images/2026/03/Leave%20%20Salary%20Adjustment%20Record-1.jpg"
-                            alt="Leave & Salary Adjustment Record" referrerPolicy="no-referrer" class="template-img">
+            </div>
+
+            <!-- Section 3: Coverage Categories -->
+            <div class="content-card" style="margin-bottom: 32px; padding: 32px; background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+                <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 20px; letter-spacing: -0.025em;">Coverage Categories (Act 4)</h2>
+                <p style="margin-bottom: 24px; color: var(--text-muted); font-size: 1rem; line-height: 1.7; max-width: 800px;">
+                    The Employees’ Social Security Act 1969 provides protection to all Malaysian employees, regardless of religion, nationality, or permanent status.
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
+                    <!-- Below 60 -->
+                    <div style="padding: 28px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 20px;">
+                        <div style="display: inline-block; background: #eff6ff; color: var(--primary); padding: 6px 16px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 16px;">Category 1</div>
+                        <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-main); margin: 0 0 12px;">Below 60 Years Old</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">Full coverage: Employment Injury & Invalidity Schemes. Employer and employee contribute.</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+                            <div style="background: #fff; padding: 12px; border-radius: 12px; text-align: center;">
+                                <div style="font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">Employer</div>
+                                <div style="font-size: 1.2rem; font-weight: 800; color: var(--primary);">~1.75%</div>
+                            </div>
+                            <div style="background: #fff; padding: 12px; border-radius: 12px; text-align: center;">
+                                <div style="font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">Employee</div>
+                                <div style="font-size: 1.2rem; font-weight: 800; color: var(--primary);">~0.5%</div>
+                            </div>
+                        </div>
                     </div>
-                    <h3>Leave & Salary Adjustment Record</h3>
-                    <p>Monitor leave deductions and salary adjustments</p>
-                    <div class="template-buttons">
-                        <a href="https://docs.google.com/document/d/1W1SJXa6tzy8g_VyMZBoDKAVXHSH-s_Ha9OWTsz8QHqA/edit?usp=sharing"
-                            target="_blank"
-                            data-url="https://docs.google.com/document/d/1W1SJXa6tzy8g_VyMZBoDKAVXHSH-s_Ha9OWTsz8QHqA/edit?usp=sharing"
-                            data-action="Leave & Salary Adjustment Record (Docs)"
-                            class="btn-template btn-primary template-download-btn">Download Docs</a>
-                        <a href="https://drive.google.com/file/d/1m97akJIfvRy9AxTtngWHShamWJXAQZ3a/view?usp=sharing"
-                            target="_blank"
-                            data-url="https://drive.google.com/file/d/1m97akJIfvRy9AxTtngWHShamWJXAQZ3a/view?usp=sharing"
-                            data-action="Leave & Salary Adjustment Record (PDF)"
-                            class="btn-template btn-secondary template-download-btn">Download PDF</a>
+                    <!-- 60 & Above -->
+                    <div style="padding: 28px; background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 20px;">
+                        <div style="display: inline-block; background: #f0fdf4; color: #166534; padding: 6px 16px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 16px;">Category 2</div>
+                        <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-main); margin: 0 0 12px;">60 Years & Above</h3>
+                        <p style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6;">Limited coverage: Employment Injury Scheme only. Only employer contributes; <strong>Employee pays RM0</strong>.</p>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-top: 20px; border-top: 1px solid #e2e8f0;">
+                            <div style="background: #fff; padding: 12px; border-radius: 12px; text-align: center;">
+                                <div style="font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">Employer</div>
+                                <div style="font-size: 1.2rem; font-weight: 800; color: #166534;">~1.25%</div>
+                            </div>
+                            <div style="background: #fff; padding: 12px; border-radius: 12px; text-align: center;">
+                                <div style="font-size: 0.75rem; color: #64748b; font-weight: 600; text-transform: uppercase; margin-bottom: 4px;">Employee</div>
+                                <div style="font-size: 1.2rem; font-weight: 800; color: #166534;">0%</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Section 4: Compliance & Rules -->
+            <div class="content-card" style="margin-bottom: 32px; padding: 32px; background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+                <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 24px; letter-spacing: -0.025em;">Payment Schedule & Compliance</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+                    <div style="display: flex; gap: 20px; align-items: flex-start; padding: 20px; background: #f8fafc; border-radius: 16px;">
+                        <div style="background: #eff6ff; padding: 12px; border-radius: 12px; font-size: 1.5rem;">📅</div>
+                        <div>
+                            <strong style="display: block; font-size: 1.05rem; color: var(--text-main); margin-bottom: 6px;">Monthly Deadline</strong>
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">Contributions must be paid by the <strong>15th of the following month</strong>.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 20px; align-items: flex-start; padding: 20px; background: #f8fafc; border-radius: 16px;">
+                        <div style="background: #fef2f2; padding: 12px; border-radius: 12px; font-size: 1.5rem;">⚠️</div>
+                        <div>
+                            <strong style="display: block; font-size: 1.05rem; color: var(--text-main); margin-bottom: 6px;">Late Payment Penalty</strong>
+                            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">Late interest of <strong>6% per annum</strong> applies to overdue payments.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Ceiling Update -->
+            <div class="content-card" style="margin-bottom: 32px; padding: 32px; background: #fffbeb; border: 1px solid #fbbf24; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(251, 191, 36, 0.1);">
+                <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 24px;">
+                    <div style="flex: 1; min-width: 280px;">
+                        <h2 style="font-size: 1.5rem; font-weight: 800; color: #92400e; margin-bottom: 12px; letter-spacing: -0.025em;">SOCSO & EIS Salary Ceiling Update</h2>
+                        <p style="font-size: 1rem; color: #b45309; line-height: 1.6; margin-bottom: 0;">
+                            Effective <strong>1st October 2024</strong>, the monthly salary ceiling for both SOCSO and EIS contributions has increased.
+                        </p>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 20px; background: #fff; padding: 16px 28px; border-radius: 16px; border: 1px solid #fbbf24;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 0.75rem; color: #94a3b8; font-weight: 750; text-transform: uppercase; margin-bottom: 2px;">Old</div>
+                            <div style="font-size: 1.05rem; color: #94a3b8; text-decoration: line-through; font-weight: 700;">RM5,000</div>
+                        </div>
+                        <div style="font-size: 1.75rem; color: #fbbf24;">→</div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 0.75rem; color: var(--primary); font-weight: 750; text-transform: uppercase; margin-bottom: 2px;">New</div>
+                            <div style="font-size: 1.75rem; font-weight: 800; color: var(--primary);">RM6,000</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6: SOCSO Contribution Table -->
+            <div class="content-card" style="margin-bottom: 48px; padding: 32px; background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+                <div style="margin-bottom: 24px;">
+                    <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px; letter-spacing: -0.025em;">SOCSO Contribution Table</h2>
+                    <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 0;">Official contribution rates mapped to salary bands.</p>
+                </div>
+                
+                <div class="socso-table-wrapper" id="socsoTableWrapper" style="position: relative; max-height: 480px; overflow: hidden; transition: max-height 0.4s ease-in-out; border-radius: 16px; border: 1px solid #f1f5f9;">
+                    <div class="table-container" style="overflow-x: auto;">
+                        <table class="styled-table" id="socsoAct4Table" style="margin: 0; width: 100%; border: none;">
+                            <thead style="background: #f8fafc; position: sticky; top: 0; z-index: 10;">
+                                <tr>
+                                    <th style="padding: 16px; font-size: 0.85rem; color: #64748b; text-align: center; border-bottom: 1px solid #e2e8f0;">No</th>
+                                    <th style="padding: 16px; text-align: left; font-size: 0.85rem; color: #64748b; border-bottom: 1px solid #e2e8f0;">Salary Range</th>
+                                    <th style="padding: 16px; font-size: 0.85rem; color: #64748b; text-align: center; border-bottom: 1px solid #e2e8f0;">Employer</th>
+                                    <th style="padding: 16px; font-size: 0.85rem; color: #64748b; text-align: center; border-bottom: 1px solid #e2e8f0;">Employee</th>
+                                    <th style="padding: 16px; font-size: 0.85rem; color: #64748b; text-align: center; border-bottom: 1px solid #e2e8f0;">Total</th>
+                                    <th style="padding: 16px; font-size: 0.85rem; color: #64748b; text-align: center; border-bottom: 1px solid #e2e8f0;">Employer Only</th>
+                                </tr>
+                            </thead>
+                            <tbody style="font-size: 0.9rem; color: #334155;">
+                            <tr><td>1</td><td>Wages up to RM30</td><td>RM0.40</td><td>RM0.10</td><td>RM0.50</td><td>RM0.30</td></tr>
+                            <tr><td>2</td><td>Exceed RM30 but not exceed RM50</td><td>RM0.70</td><td>RM0.20</td><td>RM0.90</td><td>RM0.50</td></tr>
+                            <tr><td>3</td><td>Exceed RM50 but not exceed RM70</td><td>RM1.10</td><td>RM0.30</td><td>RM1.40</td><td>RM0.80</td></tr>
+                            <tr><td>4</td><td>Exceed RM70 but not exceed RM100</td><td>RM1.50</td><td>RM0.40</td><td>RM1.90</td><td>RM1.10</td></tr>
+                            <tr><td>5</td><td>Exceed RM100 but not exceed RM140</td><td>RM2.10</td><td>RM0.60</td><td>RM2.70</td><td>RM1.50</td></tr>
+                            <tr><td>6</td><td>Exceed RM140 but not exceed RM200</td><td>RM2.95</td><td>RM0.85</td><td>RM3.80</td><td>RM2.10</td></tr>
+                            <tr><td>7</td><td>Exceed RM200 but not exceed RM300</td><td>RM4.35</td><td>RM1.25</td><td>RM5.60</td><td>RM3.10</td></tr>
+                            <tr><td>8</td><td>Exceed RM300 but not exceed RM400</td><td>RM6.15</td><td>RM1.75</td><td>RM7.90</td><td>RM4.40</td></tr>
+                            <tr><td>9</td><td>Exceed RM400 but not exceed RM500</td><td>RM7.85</td><td>RM2.25</td><td>RM10.10</td><td>RM5.60</td></tr>
+                            <tr><td>10</td><td>Exceed RM500 but not exceed RM600</td><td>RM9.65</td><td>RM2.75</td><td>RM12.40</td><td>RM6.90</td></tr>
+                            <tr><td>11</td><td>Exceed RM600 but not exceed RM700</td><td>RM11.35</td><td>RM3.25</td><td>RM14.60</td><td>RM8.10</td></tr>
+                            <tr><td>12</td><td>Exceed RM700 but not exceed RM800</td><td>RM13.15</td><td>RM3.75</td><td>RM16.90</td><td>RM9.40</td></tr>
+                            <tr><td>13</td><td>Exceed RM800 but not exceed RM900</td><td>RM14.85</td><td>RM4.25</td><td>RM19.10</td><td>RM10.60</td></tr>
+                            <tr><td>14</td><td>Exceed RM900 but not exceed RM1,000</td><td>RM16.65</td><td>RM4.75</td><td>RM21.40</td><td>RM11.90</td></tr>
+                            <tr><td>15</td><td>Exceed RM1,000 but not exceed RM1,100</td><td>RM18.35</td><td>RM5.25</td><td>RM23.60</td><td>RM13.10</td></tr>
+                            <tr><td>16</td><td>Exceed RM1,100 but not exceed RM1,200</td><td>RM20.15</td><td>RM5.75</td><td>RM25.90</td><td>RM14.40</td></tr>
+                            <tr><td>17</td><td>Exceed RM1,200 but not exceed RM1,300</td><td>RM21.85</td><td>RM6.25</td><td>RM28.10</td><td>RM15.60</td></tr>
+                            <tr><td>18</td><td>Exceed RM1,300 but not exceed RM1,400</td><td>RM23.65</td><td>RM6.75</td><td>RM30.40</td><td>RM16.90</td></tr>
+                            <tr><td>19</td><td>Exceed RM1,400 but not exceed RM1,500</td><td>RM25.35</td><td>RM7.25</td><td>RM32.60</td><td>RM18.10</td></tr>
+                            <tr><td>20</td><td>Exceed RM1,500 but not exceed RM1,600</td><td>RM27.15</td><td>RM7.75</td><td>RM34.90</td><td>RM19.40</td></tr>
+                            <tr><td>21</td><td>Exceed RM1,600 but not exceed RM1,700</td><td>RM28.85</td><td>RM8.25</td><td>RM37.10</td><td>RM20.60</td></tr>
+                            <tr><td>22</td><td>Exceed RM1,700 but not exceed RM1,800</td><td>RM30.65</td><td>RM8.75</td><td>RM39.40</td><td>RM21.90</td></tr>
+                            <tr><td>23</td><td>Exceed RM1,800 but not exceed RM1,900</td><td>RM32.35</td><td>RM9.25</td><td>RM41.60</td><td>RM23.10</td></tr>
+                            <tr><td>24</td><td>Exceed RM1,900 but not exceed RM2,000</td><td>RM34.15</td><td>RM9.75</td><td>RM43.90</td><td>RM24.40</td></tr>
+                            <tr><td>25</td><td>Exceed RM2,000 but not exceed RM2,100</td><td>RM35.85</td><td>RM10.25</td><td>RM46.10</td><td>RM25.60</td></tr>
+                            <tr><td>26</td><td>Exceed RM2,100 but not exceed RM2,200</td><td>RM37.65</td><td>RM10.75</td><td>RM48.40</td><td>RM26.90</td></tr>
+                            <tr><td>27</td><td>Exceed RM2,200 but not exceed RM2,300</td><td>RM39.35</td><td>RM11.25</td><td>RM50.60</td><td>RM28.10</td></tr>
+                            <tr><td>28</td><td>Exceed RM2,300 but not exceed RM2,400</td><td>RM41.15</td><td>RM11.75</td><td>RM52.90</td><td>RM29.40</td></tr>
+                            <tr><td>29</td><td>Exceed RM2,400 but not exceed RM2,500</td><td>RM42.85</td><td>RM12.25</td><td>RM55.10</td><td>RM30.60</td></tr>
+                            <tr><td>30</td><td>Exceed RM2,500 but not exceed RM2,600</td><td>RM44.65</td><td>RM12.75</td><td>RM57.40</td><td>RM31.90</td></tr>
+                            <tr><td>31</td><td>Exceed RM2,600 but not exceed RM2,700</td><td>RM46.35</td><td>RM13.25</td><td>RM59.60</td><td>RM33.10</td></tr>
+                            <tr><td>32</td><td>Exceed RM2,700 but not exceed RM2,800</td><td>RM48.15</td><td>RM13.75</td><td>RM61.90</td><td>RM34.40</td></tr>
+                            <tr><td>33</td><td>Exceed RM2,800 but not exceed RM2,900</td><td>RM49.85</td><td>RM14.25</td><td>RM64.10</td><td>RM35.60</td></tr>
+                            <tr><td>34</td><td>Exceed RM2,900 but not exceed RM3,000</td><td>RM51.65</td><td>RM14.75</td><td>RM66.40</td><td>RM36.90</td></tr>
+                            <tr><td>35</td><td>Exceed RM3,000 but not exceed RM3,100</td><td>RM53.35</td><td>RM15.25</td><td>RM68.60</td><td>RM38.10</td></tr>
+                            <tr><td>36</td><td>Exceed RM3,100 but not exceed RM3,200</td><td>RM55.15</td><td>RM15.75</td><td>RM70.90</td><td>RM39.40</td></tr>
+                            <tr><td>37</td><td>Exceed RM3,200 but not exceed RM3,300</td><td>RM56.85</td><td>RM16.25</td><td>RM73.10</td><td>RM40.60</td></tr>
+                            <tr><td>38</td><td>Exceed RM3,300 but not exceed RM3,400</td><td>RM58.65</td><td>RM16.75</td><td>RM75.40</td><td>RM41.90</td></tr>
+                            <tr><td>39</td><td>Exceed RM3,400 but not exceed RM3,500</td><td>RM60.35</td><td>RM17.25</td><td>RM77.60</td><td>RM43.10</td></tr>
+                            <tr><td>40</td><td>Exceed RM3,500 but not exceed RM3,600</td><td>RM62.15</td><td>RM17.75</td><td>RM79.90</td><td>RM44.40</td></tr>
+                            <tr><td>41</td><td>Exceed RM3,600 but not exceed RM3,700</td><td>RM63.85</td><td>RM18.25</td><td>RM82.10</td><td>RM45.60</td></tr>
+                            <tr><td>42</td><td>Exceed RM3,700 but not exceed RM3,800</td><td>RM65.65</td><td>RM18.75</td><td>RM84.40</td><td>RM46.90</td></tr>
+                            <tr><td>43</td><td>Exceed RM3,800 but not exceed RM3,900</td><td>RM67.35</td><td>RM19.25</td><td>RM86.60</td><td>RM48.10</td></tr>
+                            <tr><td>44</td><td>Exceed RM3,900 but not exceed RM4,000</td><td>RM69.15</td><td>RM19.75</td><td>RM88.90</td><td>RM49.40</td></tr>
+                            <tr><td>45</td><td>Exceed RM4,000 but not exceed RM4,100</td><td>RM70.85</td><td>RM20.25</td><td>RM91.10</td><td>RM50.60</td></tr>
+                            <tr><td>46</td><td>Exceed RM4,100 but not exceed RM4,200</td><td>RM72.65</td><td>RM20.75</td><td>RM93.40</td><td>RM51.90</td></tr>
+                            <tr><td>47</td><td>Exceed RM4,200 but not exceed RM4,300</td><td>RM74.35</td><td>RM21.25</td><td>RM95.60</td><td>RM53.10</td></tr>
+                            <tr><td>48</td><td>Exceed RM4,300 but not exceed RM4,400</td><td>RM76.15</td><td>RM21.75</td><td>RM97.90</td><td>RM54.40</td></tr>
+                            <tr><td>49</td><td>Exceed RM4,400 but not exceed RM4,500</td><td>RM77.85</td><td>RM22.25</td><td>RM100.10</td><td>RM55.60</td></tr>
+                            <tr><td>50</td><td>Exceed RM4,500 but not exceed RM4,600</td><td>RM79.65</td><td>RM22.75</td><td>RM102.40</td><td>RM56.90</td></tr>
+                            <tr><td>51</td><td>Exceed RM4,600 but not exceed RM4,700</td><td>RM81.35</td><td>RM23.25</td><td>RM104.60</td><td>RM58.10</td></tr>
+                            <tr><td>52</td><td>Exceed RM4,700 but not exceed RM4,800</td><td>RM83.15</td><td>RM23.75</td><td>RM106.90</td><td>RM59.40</td></tr>
+                            <tr><td>53</td><td>Exceed RM4,800 but not exceed RM4,900</td><td>RM84.85</td><td>RM24.25</td><td>RM109.10</td><td>RM60.60</td></tr>
+                            <tr><td>54</td><td>Exceed RM4,900 but not exceed RM5,000</td><td>RM86.65</td><td>RM24.75</td><td>RM111.40</td><td>RM61.90</td></tr>
+                            <tr><td>55</td><td>Exceed RM5,000 but not exceed RM5,100</td><td>RM88.35</td><td>RM25.25</td><td>RM113.60</td><td>RM63.10</td></tr>
+                            <tr><td>56</td><td>Exceed RM5,100 but not exceed RM5,200</td><td>RM90.15</td><td>RM25.75</td><td>RM115.90</td><td>RM64.40</td></tr>
+                            <tr><td>57</td><td>Exceed RM5,200 but not exceed RM5,300</td><td>RM91.85</td><td>RM26.25</td><td>RM118.10</td><td>RM65.60</td></tr>
+                            <tr><td>58</td><td>Exceed RM5,300 but not exceed RM5,400</td><td>RM93.65</td><td>RM26.75</td><td>RM120.40</td><td>RM66.90</td></tr>
+                            <tr><td>59</td><td>Exceed RM5,400 but not exceed RM5,500</td><td>RM95.35</td><td>RM27.25</td><td>RM122.60</td><td>RM68.10</td></tr>
+                            <tr><td>60</td><td>Exceed RM5,500 but not exceed RM5,600</td><td>RM97.15</td><td>RM27.75</td><td>RM124.90</td><td>RM69.40</td></tr>
+                            <tr><td>61</td><td>Exceed RM5,600 but not exceed RM5,700</td><td>RM98.85</td><td>RM28.25</td><td>RM127.10</td><td>RM70.60</td></tr>
+                            <tr><td>62</td><td>Exceed RM5,700 but not exceed RM5,800</td><td>RM100.65</td><td>RM28.75</td><td>RM129.40</td><td>RM71.90</td></tr>
+                            <tr><td>63</td><td>Exceed RM5,800 but not exceed RM5,900</td><td>RM102.35</td><td>RM29.25</td><td>RM131.60</td><td>RM73.10</td></tr>
+                            <tr><td>64</td><td>Exceed RM5,900 but not exceed RM6,000</td><td>RM104.15</td><td>RM29.75</td><td>RM133.90</td><td>RM74.40</td></tr>
+                            <tr><td>65</td><td>Wages exceed RM6,000</td><td>RM104.15</td><td>RM29.75</td><td>RM133.90</td><td>RM74.40</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-fade" id="socsoTableFade" style="position: absolute; bottom: 0; left: 0; right: 0; height: 120px; background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,1)); pointer-events: none; transition: opacity 0.3s ease;"></div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 24px;">
+                    <button type="button" id="toggleSocsoTableBtn" class="btn btn-outline" style="border-radius: 12px; padding: 12px 32px; font-weight: 700; font-size: 0.95rem; background-color: #fff; border: 2px solid var(--primary); color: var(--primary); cursor: pointer; transition: all 0.2s;">Show All Contribution Table</button>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 48px; align-items: stretch;">
+                <!-- Section 7: Payment Methods -->
+                <div class="content-card" style="padding: 28px; background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                        <span style="font-size: 1.5rem; background: #f1f5f9; padding: 10px; border-radius: 12px;">💳</span>
+                        <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0; letter-spacing: -0.01em;">Payment Methods</h2>
+                    </div>
+                    <ul style="list-style-type: none; padding: 0; line-height: 1.8; color: #475569; font-size: 0.95rem;">
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;"><span style="color: var(--primary); font-size: 1.2rem;">•</span> FPX online banking</li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;"><span style="color: var(--primary); font-size: 1.2rem;">•</span> PERKESO ASSIST Portal</li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;"><span style="color: var(--primary); font-size: 1.2rem;">•</span> Direct Debit Authorisation</li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;"><span style="color: var(--primary); font-size: 1.2rem;">•</span> Bank portals (Maybank, CIMB)</li>
+                        <li style="display: flex; align-items: center; gap: 10px;"><span style="color: var(--primary); font-size: 1.2rem;">•</span> Over-the-counter payments</li>
+                    </ul>
+                </div>
+
+                <!-- Section 8: ASSIST Portal -->
+                <div class="content-card" style="padding: 28px; background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                        <span style="font-size: 1.5rem; background: #fdf2f8; padding: 10px; border-radius: 12px;">💻</span>
+                        <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0; letter-spacing: -0.01em;">ASSIST Portal</h2>
+                    </div>
+                    <ul style="list-style-type: none; padding: 0; line-height: 1.8; color: #475569; font-size: 0.95rem;">
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;"><span style="color: #db2777; font-size: 1.2rem;">•</span> Register new employees</li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;"><span style="color: #db2777; font-size: 1.2rem;">•</span> Submit monthly contributions</li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;"><span style="color: #db2777; font-size: 1.2rem;">•</span> Track payment history</li>
+                        <li style="display: flex; align-items: center; gap: 10px;"><span style="color: #db2777; font-size: 1.2rem;">•</span> Manage employer records</li>
+                    </ul>
+                </div>
+
+                <!-- Section 9: Who Should Use -->
+                <div class="content-card" style="padding: 28px; background: #fff; border: 1px solid #e2e8f0; border-radius: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);">
+                    <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;">
+                        <span style="font-size: 1.5rem; background: #ecfdf5; padding: 10px; border-radius: 12px;">🎯</span>
+                        <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 0; letter-spacing: -0.01em;">Who Should Use This?</h2>
+                    </div>
+                    <ul style="list-style-type: none; padding: 0; line-height: 1.8; color: #475569; font-size: 0.95rem;">
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;"><span style="color: #059669; font-size: 1.2rem;">•</span> HR Managers & Payroll Teams</li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;"><span style="color: #059669; font-size: 1.2rem;">•</span> Business Owners & SMEs</li>
+                        <li style="margin-bottom: 10px; display: flex; align-items: center; gap: 10px;"><span style="color: #059669; font-size: 1.2rem;">•</span> Accounting Professionals</li>
+                        <li style="display: flex; align-items: center; gap: 10px;"><span style="color: #059669; font-size: 1.2rem;">•</span> Employees verifying deductions</li>
+                    </ul>
+                </div>
+                <!-- Section 10: Official PERKESO Calculator -->
+                <a href="https://www.perkeso.gov.my/" target="_blank" rel="noopener noreferrer" class="content-card" style="padding: 20px; background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 16px; display: flex; align-items: center; gap: 16px; text-decoration: none; color: inherit;">
+                    <img src="/perkeso-logo.png" alt="PERKESO Logo" style="width: 50px; height: 50px; object-fit: contain;">
+                    <div>
+                        <h2 style="font-size: 1.1rem; font-weight: 800; color: #0369a1; margin-bottom: 4px;">Official PERKESO Calculator</h2>
+                        <p style="font-size: 0.85rem; color: #075985; margin: 0; margin-bottom: 8px;">Use the official PERKESO calculator for the most accurate SOCSO contribution reference.</p>
+                        <span style="display: inline-block; padding: 6px 12px; background: #0369a1; color: white; font-size: 0.8rem; font-weight: 700; border-radius: 99px;">Go to PERKESO Calculator</span>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -2203,7 +2500,6 @@
                 <!-- Quick Links -->
                 <div class="footer-col footer-col-links">
                     <h4>Quick Links</h4>
-                    <a href="#templates" class="footer-link">Free Salary Templates</a>
                     <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
                 </div>
             </div>
@@ -2359,6 +2655,326 @@
                 calculateSalary();
             });
 
+            // Number animation helper function
+            function animateValue(id, start, end, duration, prefix = '') {
+                if (start === end) {
+                    document.getElementById(id).textContent = prefix + end.toFixed(2);
+                    return;
+                }
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    // easeOutQuart
+                    const easeProgress = 1 - Math.pow(1 - progress, 4);
+                    const currentVal = (progress * (end - start) + start).toFixed(2);
+                    document.getElementById(id).textContent = prefix + currentVal;
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    } else {
+                        document.getElementById(id).textContent = prefix + end.toFixed(2);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            // --- SOCSO Tool Logic ---
+            const socsoForm = document.getElementById('socsoForm');
+            const socsoResetBtn = document.getElementById('socsoResetBtn');
+            const socsoPlaceholder = document.getElementById('socsoPlaceholder');
+            const socsoResultsContent = document.getElementById('socsoResultsContent');
+
+            socsoResetBtn.addEventListener('click', function () {
+                socsoPlaceholder.style.display = 'block';
+                socsoResultsContent.style.display = 'none';
+                document.getElementById('socsoEmployeeCardVal').textContent = 'RM 0.00';
+                document.getElementById('socsoEmployerCardVal').textContent = 'RM 0.00';
+            });
+
+            socsoForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                calculateSocsoOnly();
+            });
+
+            function getSocsoRates(salary, age, nationality = 'malaysian') {
+                if (!salary || salary <= 0) return { er: 0, ee: 0, total: 0, er_only: 0, bracket: 0 };
+                
+                const capped = Math.min(salary, 6000);
+                let bracketIndex = 0;
+
+                // Determine Bracket Index (Rows 1-65)
+                if (capped <= 30) bracketIndex = 1;
+                else if (capped <= 50) bracketIndex = 2;
+                else if (capped <= 70) bracketIndex = 3;
+                else if (capped <= 100) bracketIndex = 4;
+                else if (capped <= 140) bracketIndex = 5;
+                else if (capped <= 200) bracketIndex = 6;
+                else if (salary > 6000) bracketIndex = 65;
+                else {
+                    bracketIndex = Math.floor((capped - 200.01) / 100) + 7;
+                }
+
+                const er_act4_table = [
+                    0, 0.40, 0.70, 1.10, 1.50, 2.10, 2.95,
+                    4.35, 6.15, 7.85, 9.65, 11.35, 13.15, 14.85, 16.65, 18.35, 20.15,
+                    21.85, 23.65, 25.35, 27.15, 28.85, 30.65, 32.35, 34.15, 35.85, 37.65,
+                    39.35, 41.15, 42.85, 44.65, 46.35, 48.15, 49.85, 51.65, 53.35, 55.15,
+                    56.85, 58.65, 60.35, 62.15, 63.85, 65.65, 67.35, 69.15, 70.85, 72.65,
+                    74.35, 76.15, 77.85, 79.65, 81.35, 83.15, 84.85, 86.65, 88.35, 90.15,
+                    91.85, 93.65, 95.35, 97.15, 98.85, 100.65, 102.35, 104.15, 104.15
+                ];
+                
+                const er_only_table = [
+                    0, 0.30, 0.50, 0.80, 1.10, 1.50, 2.10,
+                    3.10, 4.40, 5.60, 6.90, 8.10, 9.40, 10.60, 11.90, 13.10, 14.40,
+                    15.60, 16.90, 18.10, 19.40, 20.60, 21.90, 23.10, 24.40, 25.60, 26.90,
+                    28.10, 29.40, 30.60, 31.90, 33.10, 34.40, 35.60, 36.90, 38.10, 39.40,
+                    40.60, 41.90, 43.10, 44.40, 45.60, 46.90, 48.10, 49.40, 50.60, 51.90,
+                    53.10, 54.40, 55.60, 56.90, 58.10, 59.40, 60.60, 61.90, 63.10, 64.40,
+                    65.60, 66.90, 68.10, 69.40, 70.60, 71.90, 73.10, 74.40, 74.40
+                ];
+
+                const ee_table = [
+                    0, 0.10, 0.20, 0.30, 0.40, 0.60, 0.85,
+                    1.25, 1.75, 2.25, 2.75, 3.25, 3.75, 4.25, 4.75, 5.25, 5.75,
+                    6.25, 6.75, 7.25, 7.75, 8.25, 8.75, 9.25, 9.75, 10.25, 10.75,
+                    11.25, 11.75, 12.25, 12.75, 13.25, 13.75, 14.25, 14.75, 15.25, 15.75,
+                    16.25, 16.75, 17.25, 17.75, 18.25, 18.75, 19.25, 19.75, 20.25, 20.75,
+                    21.25, 21.75, 22.25, 22.75, 23.25, 23.75, 24.25, 24.75, 25.25, 25.75,
+                    26.25, 26.75, 27.25, 27.75, 28.25, 28.75, 29.25, 29.75, 29.75
+                ];
+
+                const bracket_er_act4 = er_act4_table[bracketIndex];
+                const bracket_er_only = er_only_table[bracketIndex];
+                const bracket_ee = ee_table[bracketIndex];
+
+                // Category 2 (Employer only) applies to:
+                // 1. Employees 60 years old and above
+                // 2. Foreign workers (non-Malaysians)
+                if (age === 'above60' || nationality === 'foreigner') {
+                    return {
+                        er: bracket_er_only,
+                        ee: 0,
+                        total: bracket_er_only,
+                        er_only: bracket_er_only,
+                        bracket: bracketIndex
+                    };
+                }
+
+                return {
+                    er: bracket_er_act4,
+                    ee: bracket_ee,
+                    total: Number((bracket_er_act4 + bracket_ee).toFixed(2)),
+                    er_only: bracket_er_only,
+                    bracket: bracketIndex
+                };
+            }
+
+
+
+            function calculateSocsoOnly() {
+                const salary = parseFloat(document.getElementById('socsoGrossSalary').value) || 0;
+                const ageInput = document.querySelector('input[name="socsoAge"]:checked');
+                const age = ageInput ? ageInput.value : 'below60';
+                const nationalityInput = document.querySelector('input[name="socsoNationality"]:checked');
+                const nationality = nationalityInput ? nationalityInput.value : 'malaysian';
+
+                if (salary <= 0) return;
+
+                // 1. SOCSO Calculation (Deterministic Table Lookup)
+                const socsoRates = getSocsoRates(salary, age, nationality);
+                const socsoEmployer = socsoRates.er;
+                const socsoEmployee = socsoRates.ee;
+
+                // Store for download
+                lastCalculation = {
+                    salary: salary,
+                    epf: 0,
+                    socso: socsoEmployee,
+                    socsoEmployer: socsoEmployer,
+                    socsoTotal: socsoRates.total,
+                    socsoCategory: age === 'above60' ? '60 years and above (Employment Injury Scheme Only)' : 'Below 60 years old (Full Coverage)',
+                    socsoBracket: socsoRates.bracket,
+                    eis: 0,
+                    pcb: 0,
+                    totalDeductions: socsoEmployee,
+                    netSalary: salary - socsoEmployee
+                };
+
+                // UI Update logic (Highlighting Act 4 Result correctly)
+                socsoResultsContent.style.display = 'block';
+                socsoPlaceholder.style.display = 'none';
+
+                document.getElementById('socsoEmployeeCardVal').textContent = 'RM ' + socsoEmployee.toFixed(2);
+                document.getElementById('socsoEmployerCardVal').textContent = 'RM ' + socsoEmployer.toFixed(2);
+                document.getElementById('socsoTotalCardVal').textContent = 'RM ' + socsoRates.total.toFixed(2);
+            }
+
+            // Tab Switcher Logic
+            const layoutSalary = document.getElementById('layoutSalary');
+            const layoutSocso = document.getElementById('layoutSocso');
+            const salarySeoContent = document.getElementById('salarySeoContent');
+            const socsoSeoContent = document.getElementById('socsoSeoContent');
+            
+            // Nav Link Elements
+            const navBtnSalary = document.getElementById('navBtnSalary');
+            const navBtnSocso = document.getElementById('navBtnSocso');
+            const mobileNavBtnSalary = document.getElementById('mobileNavBtnSalary');
+            const mobileNavBtnSocso = document.getElementById('mobileNavBtnSocso');
+            const mobileNavMenu = document.getElementById('mobileNavMenu');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            
+            // Mobile Menu Toggle logic
+            mobileMenuToggle.addEventListener('click', () => {
+                mobileNavMenu.classList.toggle('open');
+            });
+
+            function switchToolTab(tool, shouldScroll = true, updateHistory = true) {
+                // Determine scrolling to calculator
+                if (shouldScroll) {
+                    const calcArea = document.querySelector('.calculator-area');
+                    if (calcArea) {
+                        const offset = 80;
+                        const bodyRect = document.body.getBoundingClientRect().top;
+                        const elementRect = calcArea.getBoundingClientRect().top;
+                        const elementPosition = elementRect - bodyRect;
+                        const offsetPosition = elementPosition - offset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            
+                const heroTitle = document.getElementById('heroTitle');
+                const heroSubtitle = document.getElementById('heroSubtitle');
+
+                if (tool === 'salary') {
+                    // Update URL and History
+                    if (updateHistory) {
+                        window.history.pushState({ tool: 'salary' }, '', '/');
+                    }
+                    
+                    // Update Hero
+                    if (heroTitle) heroTitle.textContent = 'Salary Calculator Malaysia (Take Home Pay)';
+                    if (heroSubtitle) heroSubtitle.textContent = 'Calculate Salary, EPF, SOCSO, EIS and PCB Contributions for FREE.';
+                    document.title = 'Salary Calculator Malaysia (Take Home Pay) | EPF, SOCSO, EIS, PCB';
+                    
+                    // Desktop Nav
+                    if (navBtnSalary) navBtnSalary.classList.add('active-nav');
+                    if (navBtnSocso) navBtnSocso.classList.remove('active-nav');
+                    
+                    // Mobile Nav
+                    if (mobileNavBtnSalary) mobileNavBtnSalary.classList.add('active-nav');
+                    if (mobileNavBtnSocso) mobileNavBtnSocso.classList.remove('active-nav');
+                    
+                    // Layout change
+                    if (layoutSalary) {
+                        layoutSalary.style.display = ''; // Reverts to CSS grid
+                        layoutSalary.style.opacity = '1';
+                    }
+                    if (layoutSocso) {
+                        layoutSocso.style.display = 'none';
+                        layoutSocso.style.opacity = '0';
+                    }
+                    
+                    if (salarySeoContent) salarySeoContent.style.display = '';
+                    if (socsoSeoContent) socsoSeoContent.style.display = 'none';
+                } else {
+                    // Update URL and History
+                    if (updateHistory) {
+                        window.history.pushState({ tool: 'socso' }, '', '/socso-perkeso');
+                    }
+
+                    // Update Hero
+                    if (heroTitle) heroTitle.textContent = 'SOCSO (PERKESO) Calculator Malaysia';
+                    if (heroSubtitle) heroSubtitle.textContent = 'Check employee and employer SOCSO contributions instantly, FAST & FREE.';
+                    document.title = 'SOCSO (PERKESO) Calculator Malaysia | Check employee and employer SOCSO contributions';
+                    
+                    const socsoCardTitle = document.querySelector('#layoutSocso .card-title');
+                    if (socsoCardTitle) socsoCardTitle.textContent = 'SOCSO (PERKESO) Calculator Malaysia';
+
+                    // Desktop Nav
+                    if (navBtnSocso) navBtnSocso.classList.add('active-nav');
+                    if (navBtnSalary) navBtnSalary.classList.remove('active-nav');
+                    
+                    // Mobile Nav
+                    if (mobileNavBtnSocso) mobileNavBtnSocso.classList.add('active-nav');
+                    if (mobileNavBtnSalary) mobileNavBtnSalary.classList.remove('active-nav');
+                    
+                    // Layout change
+                    if (layoutSocso) {
+                        layoutSocso.style.display = '';
+                        layoutSocso.style.opacity = '1';
+                    }
+                    if (layoutSalary) {
+                        layoutSalary.style.display = 'none';
+                        layoutSalary.style.opacity = '0';
+                    }
+                    
+                    if (salarySeoContent) salarySeoContent.style.display = 'none';
+                    if (socsoSeoContent) socsoSeoContent.style.display = '';
+                }
+                
+                // Close mobile menu if open
+                if (mobileNavMenu) mobileNavMenu.classList.remove('open');
+            }
+
+            // Initial Routing Logic
+            if (window.location.pathname === '/socso-perkeso') {
+                switchToolTab('socso', false, false);
+            } else {
+                switchToolTab('salary', false, false);
+            }
+
+            // Popstate handling for browser back/forward
+            window.addEventListener('popstate', (event) => {
+                const path = window.location.pathname;
+                if (path === '/socso-perkeso') {
+                    switchToolTab('socso', false, false);
+                } else {
+                    switchToolTab('salary', false, false);
+                }
+            });
+
+            navBtnSalary.addEventListener('click', () => switchToolTab('salary'));
+            navBtnSocso.addEventListener('click', () => switchToolTab('socso'));
+            mobileNavBtnSalary.addEventListener('click', () => switchToolTab('salary'));
+            mobileNavBtnSocso.addEventListener('click', () => switchToolTab('socso'));
+            // --- End SOCSO Tool Logic ---
+
+            // --- SOCSO Table Expand/Collapse Logic ---
+            const socsoTableWrapper = document.getElementById('socsoTableWrapper');
+            const toggleSocsoTableBtn = document.getElementById('toggleSocsoTableBtn');
+            const socsoTableFade = document.getElementById('socsoTableFade');
+            let isSocsoTableExpanded = false;
+
+            if (toggleSocsoTableBtn) {
+                toggleSocsoTableBtn.addEventListener('click', () => {
+                    isSocsoTableExpanded = !isSocsoTableExpanded;
+                    if (isSocsoTableExpanded) {
+                        socsoTableWrapper.style.maxHeight = socsoTableWrapper.scrollHeight + "px";
+                        socsoTableFade.style.opacity = '0';
+                        toggleSocsoTableBtn.textContent = 'Show Less';
+                    } else {
+                        socsoTableWrapper.style.maxHeight = '500px';
+                        socsoTableFade.style.opacity = '1';
+                        toggleSocsoTableBtn.textContent = 'Show All Contribution Table';
+                        
+                        // Preserve scroll - smooth scroll back to table header if viewport is below it
+                        const cardRect = socsoTableWrapper.parentElement.getBoundingClientRect();
+                        if (cardRect.top < 0) {
+                            window.scrollTo({
+                                top: window.scrollY + cardRect.top - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            }
+            // --- End SOCSO Table Expand/Collapse Logic ---
+
             // Reset Handler
             resetBtn.addEventListener('click', function () {
                 placeholder.style.display = 'block';
@@ -2376,7 +2992,7 @@
             const emailModal = document.getElementById('emailModal');
             const downloadReportBtn = document.getElementById('downloadReportBtn');
             const downloadPayslipBtn = document.getElementById('downloadPayslipBtn');
-            const templateDownloadBtns = document.querySelectorAll('.template-download-btn');
+            const downloadSocsoReportBtn = document.getElementById('downloadSocsoReportBtn');
             const closeModal = document.getElementById('closeModal');
             const emailForm = document.getElementById('emailForm');
             const modalFormContent = document.getElementById('modalFormContent');
@@ -2393,17 +3009,29 @@
             let userEmailAddress = localStorage.getItem('salaryCalc_userEmail') || '';
 
             // Modal Handlers
-            downloadReportBtn.addEventListener('click', function () {
-                currentDownloadType = 'report';
-                currentDownloadBtn = this;
-                openModal();
-            });
+            if (downloadReportBtn) {
+                downloadReportBtn.addEventListener('click', function () {
+                    currentDownloadType = 'report';
+                    currentDownloadBtn = this;
+                    openModal();
+                });
+            }
 
-            downloadPayslipBtn.addEventListener('click', function () {
-                currentDownloadType = 'payslip';
-                currentDownloadBtn = this;
-                openModal();
-            });
+            if (downloadSocsoReportBtn) {
+                downloadSocsoReportBtn.addEventListener('click', function () {
+                    currentDownloadType = 'socsoreport';
+                    currentDownloadBtn = this;
+                    openModal();
+                });
+            }
+
+            if (downloadPayslipBtn) {
+                downloadPayslipBtn.addEventListener('click', function () {
+                    currentDownloadType = 'payslip';
+                    currentDownloadBtn = this;
+                    openModal();
+                });
+            }
 
             function openModal() {
                 // Always show form to collect email, hide success message
@@ -2434,7 +3062,7 @@
                 companyInput.required = false;
                 companyInput.value = '';
 
-                if (currentDownloadType === 'report') {
+                if (currentDownloadType === 'report' || currentDownloadType === 'socsoreport') {
                     modalTitle.textContent = 'Download Salary Report';
                     modalDescription.textContent = 'Enter your email address to receive the detailed salary breakdown and tax report.';
                 } else if (currentDownloadType === 'payslip') {
@@ -2454,7 +3082,19 @@
                 mobileActionButtons.style.display = 'flex';
                 mobileFallbackText.style.display = 'block';
 
-                if (currentDownloadType === 'report') {
+                if (currentDownloadType === 'socsoreport') {
+                    modalFeedback.textContent = 'Thank you! The SOCSO report has been generated.';
+                    const queryParams = new URLSearchParams({
+                        salary: lastCalculation.salary,
+                        employee: lastCalculation.socso,
+                        employer: lastCalculation.socsoEmployer,
+                        total: lastCalculation.socsoTotal,
+                        category: lastCalculation.socsoCategory,
+                        bracket: lastCalculation.socsoBracket,
+                        company: document.getElementById('companyName').value.trim() || 'SalaryCalc MY'
+                    }).toString();
+                    viewFileBtn.href = `/socsoreport.html?${queryParams}`;
+                } else if (currentDownloadType === 'report') {
                     modalFeedback.textContent = 'Thank you! The report has been generated.';
                     const queryParams = new URLSearchParams({
                         salary: lastCalculation.salary,
@@ -2571,6 +3211,9 @@
                     } else if (currentDownloadType === 'payslip') {
                         actionName = 'Download Salary Payslip';
                         actionKey = 'payslip';
+                    } else if (currentDownloadType === 'socsoreport') {
+                        actionName = 'Download SOCSO Report';
+                        actionKey = 'socsoreport';
                     }
 
                     console.log('[v0] Form submission started');
@@ -2611,7 +3254,9 @@
 
                         const downloadVia = currentDownloadType === 'report'
                             ? 'Download Salary Report'
-                            : 'Download Salary Payslip';
+                            : currentDownloadType === 'payslip'
+                                ? 'Download Salary Payslip'
+                                : 'Download SOCSO Report';
 
                         const timestamp = new Date().toISOString();
 
@@ -2648,7 +3293,7 @@
                     }
 
                     // Send Email via Backend API
-                    if (currentDownloadType === 'report' || currentDownloadType === 'payslip') {
+                    if (currentDownloadType === 'report' || currentDownloadType === 'payslip' || currentDownloadType === 'socsoreport') {
                         try {
                             const response = await fetch('/api/deliver-document', {
                                 method: 'POST',
@@ -2657,7 +3302,9 @@
                                 },
                                 body: JSON.stringify({
                                     email: userEmailAddress,
-                                    type: currentDownloadType
+                                    type: currentDownloadType,
+                                    // Add calculation data for backend if needed
+                                    data: lastCalculation
                                 })
                             });
 
@@ -2723,41 +3370,15 @@
                     epfEmployer = totalIncome <= 5000 ? totalIncome * 0.13 : totalIncome * 0.12;
                 }
 
-                // 3. SOCSO (Official PERKESO table logic, ceiling RM6000)
-                function getSocsoContributions(salary) {
-                    if (salary > 6000) {
-                        return { employee: 30.00, employer: 105.00 };
-                    }
-
-                    if (salary <= 30) return { employee: 0.10, employer: 0.40 };
-                    if (salary <= 50) return { employee: 0.20, employer: 0.70 };
-                    if (salary <= 70) return { employee: 0.30, employer: 1.10 };
-                    if (salary <= 100) return { employee: 0.40, employer: 1.50 };
-                    if (salary <= 140) return { employee: 0.60, employer: 2.10 };
-                    if (salary <= 200) return { employee: 0.85, employer: 2.95 };
-
-                    const tier = Math.ceil(salary / 100);
-                    const midpoint = tier * 100 - 50;
-
-                    const employee = midpoint * 0.005;
-                    const employer = midpoint * 0.0175;
-
-                    // Official PERKESO table rounds up to the nearest 0.05
-                    const roundUp05 = (num) => Math.ceil(num * 20) / 20;
-
-                    return {
-                        employee: roundUp05(employee),
-                        employer: roundUp05(employer)
-                    };
-                }
-
+                // 3. SOCSO (Official PERKESO deterministic table lookup)
                 let socso = 0;
                 let socsoEmployer = 0;
                 if (includeSocso) {
-                    const socsoContribs = getSocsoContributions(totalIncome);
-                    socso = socsoContribs.employee;
-                    socsoEmployer = socsoContribs.employer;
+                    const socsoRates = getSocsoRates(totalIncome, 'below60', nationality);
+                    socso = socsoRates.ee;
+                    socsoEmployer = socsoRates.er;
                 }
+
 
                 // 4. EIS (Employee: 0.2%, Employer: 0.2%, cap RM6000)
                 let eis = 0;
@@ -2917,6 +3538,10 @@
                     salary: totalIncome.toFixed(2),
                     epf: epf.toFixed(2),
                     socso: socso.toFixed(2),
+                    socsoEmployer: socsoEmployer.toFixed(2),
+                    socsoTotal: (socso + socsoEmployer).toFixed(2),
+                    socsoCategory: 'Below 60 years old (Full Coverage)',
+                    socsoBracket: (totalIncome <= 6000) ? (totalIncome <= 200 ? Math.floor(totalIncome/30) : Math.floor((totalIncome - 200.01) / 100) + 7) : 65,
                     eis: eis.toFixed(2),
                     pcb: pcb.toFixed(2),
                     totalDeductions: totalDeductions.toFixed(2),
