@@ -6217,7 +6217,7 @@
           <!-- Quick Links -->
           <div class="footer-col footer-col-links">
             <h4>Quick Links</h4>
-            <a href="/socso-perkeso" class="footer-link">SOCSO (PERKESO Calculator)</a>
+            <a href="javascript:void(0)" id="footerLinkSocso" class="footer-link">SOCSO (PERKESO Calculator)</a>
             <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
           </div>
         </div>
@@ -6842,6 +6842,12 @@
 
         navBtnSalary.addEventListener("click", () => switchToolTab("salary"));
         navBtnSocso.addEventListener("click", () => switchToolTab("socso"));
+        
+        const footerLinkSocso = document.getElementById("footerLinkSocso");
+        if (footerLinkSocso) {
+          footerLinkSocso.addEventListener("click", () => switchToolTab("socso"));
+        }
+        
         mobileNavBtnSalary.addEventListener("click", () =>
           switchToolTab("salary"),
         );
