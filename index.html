@@ -7266,8 +7266,12 @@
                 });
 
                 if (!response.ok) {
-                  const result = await response.json();
-                  console.error("Failed to send email:", result.error);
+                  try {
+                    const result = await response.json();
+                    console.error("Failed to send email:", result.error);
+                  } catch (e) {
+                    console.error("Failed to send email: Server returned an error (likely 404 when hosted statically)", response.status);
+                  }
                 }
               } catch (emailError) {
                 console.error(
