@@ -23,6 +23,14 @@
           "type": "string",
           "description": "The type of user (e.g., Employer / HR, Employee, Jobseeker)"
         },
+        "phoneNumber": {
+          "type": "string",
+          "description": "The user's phone number"
+        },
+        "companyName": {
+          "type": "string",
+          "description": "The user's company name"
+        },
         "hiringStatus": {
           "type": "string",
           "description": "The user's hiring status (if applicable)"

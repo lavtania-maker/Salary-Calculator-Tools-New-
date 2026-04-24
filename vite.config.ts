@@ -27,10 +27,7 @@ export default defineConfig(({mode}) => {
           mincal: path.resolve(__dirname, 'mincal.html'),
           payslip: path.resolve(__dirname, 'payslip.html'),
           report: path.resolve(__dirname, 'report.html'),
-          'privacy-policy': path.resolve(__dirname, 'privacy-policy/index.html'),
-          'error-logs': path.resolve(__dirname, 'error-logs/index.html'),
-          'test-case': path.resolve(__dirname, 'test-case/index.html'),
-          'qa-report': path.resolve(__dirname, 'qa-report/index.html')
+          socsoreport: path.resolve(__dirname, 'socsoreport.html')
         }
       }
     }

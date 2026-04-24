@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png"
+    />
+    <title>SOCSO Contribution Report</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 40px;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .company-name {
+        font-size: 24px;
+        font-weight: bold;
+        color: #2563eb;
+      }
+      .report-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #64748b;
+      }
+      .date-row {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #64748b;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #000;
+        margin-bottom: 30px;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .row.bold {
+        font-weight: bold;
+        color: #0f172a;
+      }
+      .row.total {
+        font-size: 20px;
+        border-top: 2px solid #000;
+        border-bottom: none;
+        padding-top: 20px;
+        margin-top: 10px;
+      }
+      .section-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 40px;
+        margin-bottom: 15px;
+        color: #1e293b;
+      }
+      .btn {
+        padding: 10px 20px;
+        background-color: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .btn:hover {
+        background-color: #1d4ed8;
+      }
+      .print-controls {
+        text-align: right;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px dashed #cbd5e1;
+      }
+      .reminder {
+        margin-top: 40px;
+        font-size: 14px;
+        color: #475569;
+        line-height: 1.6;
+      }
+      .reminder-title {
+        font-weight: bold;
+        color: #1e293b;
+        margin-bottom: 8px;
+      }
+      @media print {
+        .print-controls {
+          display: none;
+        }
+        body {
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="print-controls">
+      <button class="btn" onclick="window.print()">Print to PDF</button>
+    </div>
+
+    <div class="header">
+      <div class="company-name" id="company">SalaryCalc MY</div>
+      <div class="report-title">SOCSO Contribution Report</div>
+    </div>
+
+    <div class="date-row" id="generatedDate"></div>
+
+    <div class="row bold" style="font-size: 18px">
+      <span>Monthly Salary</span>
+      <span id="salary">RM 0.00</span>
+    </div>
+
+    <div class="section-title">Breakdown of Contribution Amounts</div>
+
+    <div class="row">
+      <span>SOCSO (Employee)</span>
+      <span id="employee">RM 0.00</span>
+    </div>
+    <div class="row">
+      <span>SOCSO (Employer)</span>
+      <span id="employer">RM 0.00</span>
+    </div>
+
+    <div class="row bold total">
+      <span>Total Contribution</span>
+      <span id="total">RM 0.00</span>
+    </div>
+
+    <div class="section-title" style="margin-top: 50px">
+      Contribution Details
+    </div>
+
+    <div class="row">
+      <span>Salary Band</span>
+      <span id="salary-band">-</span>
+    </div>
+    <div class="row">
+      <span>Category</span>
+      <span id="category">-</span>
+    </div>
+
+    <div class="reminder">
+      <div class="reminder-title">EMPLOYER REMINDER</div>
+      Payment deadline: before 15th of every month<br />
+      Late payment may incur penalty<br />
+      Salary ceiling capped at RM6,000
+    </div>
+
+    <div
+      style="
+        margin-top: 50px;
+        font-size: 12px;
+        color: #64748b;
+        line-height: 1.5;
+      "
+    >
+      <p>This is an estimate based on SOCSO contribution table.</p>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const formatRM = (val) =>
+        "RM " +
+        parseFloat(val || 0).toLocaleString("en-MY", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+
+      const companyName = params.get("company");
+      if (companyName && companyName !== "COMPANY LOGO & NAME") {
+        document.getElementById("company").innerText = companyName;
+      } else {
+        document.getElementById("company").innerText = "SalaryCalc MY";
+      }
+
+      // Set Date
+      const today = new Date();
+      const dateString = today.toLocaleDateString("en-MY", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+      document.getElementById("generatedDate").innerText =
+        "Generated: " + dateString;
+
+      document.getElementById("salary").innerText = formatRM(
+        params.get("salary"),
+      );
+      document.getElementById("employee").innerText = formatRM(
+        params.get("employee"),
+      );
+      document.getElementById("employer").innerText = formatRM(
+        params.get("employer"),
+      );
+      document.getElementById("total").innerText = formatRM(
+        params.get("total"),
+      );
+
+      const category = params.get("category") || "N/A";
+      let formattedCategory = "-";
+      if (category === "below60") {
+        formattedCategory = "Below 60 years old";
+      } else if (category === "above60") {
+        formattedCategory = "60 years and above";
+      } else {
+        formattedCategory = category;
+      }
+      document.getElementById("category").innerText = formattedCategory;
+
+      const bracket = parseInt(params.get("bracket") || "0");
+      function getSalaryBand(bracket) {
+        if (bracket === 1) return "Wages up to RM30";
+        if (bracket === 2) return "Exceed RM30 but not exceed RM50";
+        if (bracket === 3) return "Exceed RM50 but not exceed RM70";
+        if (bracket === 4) return "Exceed RM70 but not exceed RM100";
+        if (bracket === 5) return "Exceed RM100 but not exceed RM140";
+        if (bracket === 6) return "Exceed RM140 but not exceed RM200";
+        if (bracket === 65) return "Wages exceed RM6,000";
+
+        const lower = (bracket - 7) * 100 + 200;
+        const upper = lower + 100;
+        return (
+          "Exceed RM" +
+          lower.toLocaleString("en-MY") +
+          " but not exceed RM" +
+          upper.toLocaleString("en-MY")
+        );
+      }
+
+      if (bracket > 0) {
+        document.getElementById("salary-band").innerText =
+          getSalaryBand(bracket);
+      } else {
+        document.getElementById("salary-band").innerText = "N/A";
+      }
+    </script>
+  </body>
+</html>
