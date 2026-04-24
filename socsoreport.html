@@ -1,197 +1,248 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <link rel="icon" type="image/png" href="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png">
-  <title>SOCSO Contribution Report</title>
-  <style>
-    body { 
-        font-family: Arial, sans-serif; 
-        padding: 40px; 
-        color: #333; 
-        max-width: 800px; 
-        margin: 0 auto; 
-    }
-    .header { 
-        display: flex; 
-        justify-content: space-between; 
-        align-items: center; 
-        border-bottom: 2px solid #000; 
-        padding-bottom: 20px; 
-        margin-bottom: 30px; 
-    }
-    .company-name { 
-        font-size: 24px; 
-        font-weight: bold; 
-        color: #2563eb; 
-    }
-    .report-title { 
-        font-size: 20px; 
-        font-weight: bold; 
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png"
+    />
+    <title>SOCSO Contribution Report</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 40px;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .company-name {
+        font-size: 24px;
+        font-weight: bold;
+        color: #2563eb;
+      }
+      .report-title {
+        font-size: 20px;
+        font-weight: bold;
         color: #64748b;
-    }
-    .row { 
-        display: flex; 
-        justify-content: space-between; 
-        padding: 12px 0; 
-        border-bottom: 1px solid #e2e8f0; 
-    }
-    .row.bold { 
-        font-weight: bold; 
+      }
+      .date-row {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #64748b;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #000;
+        margin-bottom: 30px;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .row.bold {
+        font-weight: bold;
         color: #0f172a;
-    }
-    .btn { 
-        padding: 10px 20px; 
-        background-color: #2563eb; 
-        color: white; 
-        border: none; 
-        border-radius: 4px; 
-        cursor: pointer; 
+      }
+      .row.total {
+        font-size: 20px;
+        border-top: 2px solid #000;
+        border-bottom: none;
+        padding-top: 20px;
+        margin-top: 10px;
+      }
+      .section-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 40px;
+        margin-bottom: 15px;
+        color: #1e293b;
+      }
+      .btn {
+        padding: 10px 20px;
+        background-color: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
         font-size: 16px;
         font-weight: 600;
-    }
-    .btn:hover {
+      }
+      .btn:hover {
         background-color: #1d4ed8;
-    }
-    .print-controls {
-        text-align: right; 
+      }
+      .print-controls {
+        text-align: right;
         margin-bottom: 30px;
         padding-bottom: 20px;
         border-bottom: 1px dashed #cbd5e1;
-    }
-    .ai-content {
-        line-height: 1.6;
-        white-space: pre-wrap;
-        margin-top: 20px;
-    }
-    .loading {
-        text-align: center;
-        padding: 40px;
-        color: #64748b;
-    }
-    @media print {
-      .print-controls { display: none; }
-      body { padding: 0; }
-    }
-  </style>
-</head>
-<body>
-  <div class="print-controls">
-    <button class="btn" onclick="window.print()">Print to PDF</button>
-  </div>
-
-  <div class="header">
-    <div class="company-name" id="company">SalaryCalc MY</div>
-    <div class="report-title">SOCSO Report</div>
-  </div>
-
-  <div id="loading" class="loading">Generating AI Report...</div>
-  <div id="report-container" style="display: none;">
-    <div id="ai-output" class="ai-content"></div>
-  </div>
-
-  <script type="module">
-    import { GoogleGenAI } from "@google/genai";
-
-    const params = new URLSearchParams(window.location.search);
-    
-    // API Key from Vite define (process.env.GEMINI_API_KEY)
-    const apiKey = (typeof process !== 'undefined' && process.env && process.env.GEMINI_API_KEY);
-    
-    const salary = params.get("salary") || "0";
-    const employee = params.get("employee") || "0";
-    const employer = params.get("employer") || "0";
-    const total = params.get("total") || "0";
-    const category = params.get("category") || "N/A";
-    const bracket = parseInt(params.get("bracket") || "0");
-    const company = params.get("company");
-
-    if (company) document.getElementById("company").innerText = company;
-
-    function getSalaryBand(bracket) {
-      if (bracket === 1) return "Wages up to RM30";
-      if (bracket === 2) return "Exceed RM30 but not exceed RM50";
-      if (bracket === 3) return "Exceed RM50 but not exceed RM70";
-      if (bracket === 4) return "Exceed RM70 but not exceed RM100";
-      if (bracket === 5) return "Exceed RM100 but not exceed RM140";
-      if (bracket === 6) return "Exceed RM140 but not exceed RM200";
-      if (bracket === 65) return "Wages exceed RM6,000";
-      
-      const lower = (bracket - 7) * 100 + 200;
-      const upper = lower + 100;
-      return `Exceed RM${lower.toLocaleString('en-MY')} but not exceed RM${upper.toLocaleString('en-MY')}`;
-    }
-
-    async function generateReport() {
-      const outputEl = document.getElementById("ai-output");
-      const loadingEl = document.getElementById("loading");
-
-      if (!apiKey) {
-        console.warn("Gemini API Key missing.");
-        loadingEl.innerText = "Configuration Error: API Key not found. Please ensure GEMINI_API_KEY is set.";
-        return;
       }
+      .reminder {
+        margin-top: 40px;
+        font-size: 14px;
+        color: #475569;
+        line-height: 1.6;
+      }
+      .reminder-title {
+        font-weight: bold;
+        color: #1e293b;
+        margin-bottom: 8px;
+      }
+      @media print {
+        .print-controls {
+          display: none;
+        }
+        body {
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="print-controls">
+      <button class="btn" onclick="window.print()">Print to PDF</button>
+    </div>
 
-      try {
-        const ai = new GoogleGenAI({ apiKey: apiKey });
+    <div class="header">
+      <div class="company-name" id="company">SalaryCalc MY</div>
+      <div class="report-title">SOCSO Contribution Report</div>
+    </div>
 
-        const salary_band = getSalaryBand(bracket);
+    <div class="date-row" id="generatedDate"></div>
 
-        const prompt = `Generate a clean, professional SOCSO Contribution Report in simple English.
+    <div class="row bold" style="font-size: 18px">
+      <span>Monthly Salary</span>
+      <span id="salary">RM 0.00</span>
+    </div>
 
-Keep it short, clear, and HR-friendly. Do not use complex words.
+    <div class="section-title">Breakdown of Contribution Amounts</div>
 
-Structure:
+    <div class="row">
+      <span>SOCSO (Employee)</span>
+      <span id="employee">RM 0.00</span>
+    </div>
+    <div class="row">
+      <span>SOCSO (Employer)</span>
+      <span id="employer">RM 0.00</span>
+    </div>
 
-Title:
-SOCSO Contribution Report
+    <div class="row bold total">
+      <span>Total Contribution</span>
+      <span id="total">RM 0.00</span>
+    </div>
 
-Section 1: Summary
+    <div class="section-title" style="margin-top: 50px">
+      Contribution Details
+    </div>
 
-Salary: RM ${parseFloat(salary).toLocaleString('en-MY', {minimumFractionDigits: 2})}
-Employee Contribution: RM ${parseFloat(employee).toLocaleString('en-MY', {minimumFractionDigits: 2})}
-Employer Contribution: RM ${parseFloat(employer).toLocaleString('en-MY', {minimumFractionDigits: 2})}
-Total Contribution: RM ${parseFloat(total).toLocaleString('en-MY', {minimumFractionDigits: 2})}
-Category: ${category}
+    <div class="row">
+      <span>Salary Band</span>
+      <span id="salary-band">-</span>
+    </div>
+    <div class="row">
+      <span>Category</span>
+      <span id="category">-</span>
+    </div>
 
-Section 2: Contribution Details
+    <div class="reminder">
+      <div class="reminder-title">EMPLOYER REMINDER</div>
+      Payment deadline: before 15th of every month<br />
+      Late payment may incur penalty<br />
+      Salary ceiling capped at RM6,000
+    </div>
 
-Based on SOCSO Contribution Table
-Salary Band: ${salary_band}
+    <div
+      style="
+        margin-top: 50px;
+        font-size: 12px;
+        color: #64748b;
+        line-height: 1.5;
+      "
+    >
+      <p>This is an estimate based on SOCSO contribution table.</p>
+    </div>
 
-Section 3: Employer Notes
-
-SOCSO must be paid before 15th of each month
-Late payment may incur penalties
-Applicable to eligible employees
-
-Section 4: Disclaimer
-This calculator is for reference only. Please check official PERKESO guidelines for accurate deductions.
-
-Make the tone professional, simple, and easy to read.
-Do not add extra sections.
-Do not include EIS or other deductions.`;
-
-        const response = await ai.models.generateContent({
-          model: "gemini-3-flash-preview",
-          contents: prompt
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const formatRM = (val) =>
+        "RM " +
+        parseFloat(val || 0).toLocaleString("en-MY", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
         });
 
-        const text = response.text || "";
-
-        // Remove markdown formatting if AI adds it (e.g. ```text)
-        const cleanText = text.replace(/```[a-z]*\n?/gi, '').replace(/```/g, '').trim();
-
-        outputEl.innerText = cleanText;
-        loadingEl.style.display = "none";
-        document.getElementById("report-container").style.display = "block";
-      } catch (error) {
-        console.error("AI Generation failed:", error);
-        loadingEl.innerText = "Error generating report: " + error.message;
+      const companyName = params.get("company");
+      if (companyName && companyName !== "COMPANY LOGO & NAME") {
+        document.getElementById("company").innerText = companyName;
+      } else {
+        document.getElementById("company").innerText = "SalaryCalc MY";
       }
-    }
 
-    generateReport();
-  </script>
-</body>
+      // Set Date
+      const today = new Date();
+      const dateString = today.toLocaleDateString("en-MY", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+      document.getElementById("generatedDate").innerText =
+        "Generated: " + dateString;
+
+      document.getElementById("salary").innerText = formatRM(
+        params.get("salary"),
+      );
+      document.getElementById("employee").innerText = formatRM(
+        params.get("employee"),
+      );
+      document.getElementById("employer").innerText = formatRM(
+        params.get("employer"),
+      );
+      document.getElementById("total").innerText = formatRM(
+        params.get("total"),
+      );
+
+      const category = params.get("category") || "N/A";
+      let formattedCategory = "-";
+      if (category === "below60") {
+        formattedCategory = "Below 60 years old";
+      } else if (category === "above60") {
+        formattedCategory = "60 years and above";
+      } else {
+        formattedCategory = category;
+      }
+      document.getElementById("category").innerText = formattedCategory;
+
+      const bracket = parseInt(params.get("bracket") || "0");
+      function getSalaryBand(bracket) {
+        if (bracket === 1) return "Wages up to RM30";
+        if (bracket === 2) return "Exceed RM30 but not exceed RM50";
+        if (bracket === 3) return "Exceed RM50 but not exceed RM70";
+        if (bracket === 4) return "Exceed RM70 but not exceed RM100";
+        if (bracket === 5) return "Exceed RM100 but not exceed RM140";
+        if (bracket === 6) return "Exceed RM140 but not exceed RM200";
+        if (bracket === 65) return "Wages exceed RM6,000";
+
+        const lower = (bracket - 7) * 100 + 200;
+        const upper = lower + 100;
+        return (
+          "Exceed RM" +
+          lower.toLocaleString("en-MY") +
+          " but not exceed RM" +
+          upper.toLocaleString("en-MY")
+        );
+      }
+
+      if (bracket > 0) {
+        document.getElementById("salary-band").innerText =
+          getSalaryBand(bracket);
+      } else {
+        document.getElementById("salary-band").innerText = "N/A";
+      }
+    </script>
+  </body>
 </html>
