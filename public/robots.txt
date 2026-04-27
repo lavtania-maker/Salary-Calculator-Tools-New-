@@ -80,6 +80,4 @@ User-agent: img2dataset
 Disallow: /
 User-agent: Google-CloudVertexBot
 Disallow: /
-Sitemap: https://www.salarycalculator.com/sitemap.xml
-Sitemap: https://www.salarycalculator.com/sitemap-pages.xml
-Sitemap: https://www.salarycalculator.com/sitemap-tools.xml
+Sitemap: https://salarycalculator.my/sitemap.xml
