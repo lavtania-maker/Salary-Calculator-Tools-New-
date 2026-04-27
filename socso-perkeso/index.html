@@ -5756,7 +5756,7 @@
 
     <!-- JavaScript Logic -->
     <script type="module">
-      import { db } from "./src/firebase.ts";
+      import { db } from "../src/firebase.ts";
       import { collection, addDoc } from "firebase/firestore";
 
       window.openTab = function (evt, tabName) {
@@ -6479,9 +6479,7 @@
               leadData.phoneNumber = phoneValue;
             }
 
-            console.log("[v0] leadData prepared:", JSON.stringify(leadData));
             await addDoc(collection(db, "leads"), leadData);
-            console.log("[v0] Firebase addDoc completed");
 
             // Record to Google Sheets
             try {
