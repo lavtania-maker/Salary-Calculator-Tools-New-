@@ -7247,8 +7247,7 @@
             // Send Email via Backend API
             if (
               currentDownloadType === "report" ||
-              currentDownloadType === "payslip" ||
-              currentDownloadType === "socsoreport"
+              currentDownloadType === "payslip"
             ) {
               try {
                 const response = await fetch("/api/deliver-document", {
