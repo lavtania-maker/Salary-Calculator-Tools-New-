@@ -6514,41 +6514,7 @@
               console.error("Error sending to Google Sheets:", sheetError);
             }
 
-            // Send Email via Backend API
-            if (
-              currentDownloadType === "report" ||
-              currentDownloadType === "payslip" ||
-              currentDownloadType === "socsoreport"
-            ) {
-              try {
-                const response = await fetch("/api/deliver-document", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    email: userEmailAddress,
-                    type: currentDownloadType,
-                    // Add calculation data for backend if needed
-                    data: lastCalculation,
-                  }),
-                });
-
-                if (!response.ok) {
-                  try {
-                    const result = await response.json();
-                    console.error("Failed to send email:", result.error);
-                  } catch (e) {
-                    console.error("Failed to send email: Server returned an error (likely 404 when hosted statically)", response.status);
-                  }
-                }
-              } catch (emailError) {
-                console.error(
-                  "Error calling deliver-document API:",
-                  emailError,
-                );
-              }
-            }
+            // No email delivery on SOCSO page — submission recorded to sheet only
 
             // Mark as downloaded
             localStorage.setItem("salaryCalc_downloaded_" + actionKey, "true");

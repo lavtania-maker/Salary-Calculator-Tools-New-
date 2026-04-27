@@ -14,6 +14,17 @@
       gtag("js", new Date());
       gtag("config", "G-TMQV1XC09P");
     </script>
+    <!-- Dev-mode SPA fallback: redirect sub-pages to their own HTML files -->
+    <script>
+      (function () {
+        var routes = {
+          "/socso-perkeso": "/socso-perkeso/index.html",
+          "/socso-perkeso/": "/socso-perkeso/index.html",
+        };
+        var dest = routes[window.location.pathname];
+        if (dest) window.location.replace(dest);
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
