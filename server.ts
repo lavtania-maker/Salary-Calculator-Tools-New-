@@ -104,11 +104,7 @@ async function startServer() {
       server: { middlewareMode: true },
       appType: "mpa",
     });
-    // Skip Vite for /api/* so Express handles those routes
-    app.use((req, res, next) => {
-      if (req.path.startsWith("/api/")) return next();
-      vite.middlewares(req, res, next);
-    });
+    app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
