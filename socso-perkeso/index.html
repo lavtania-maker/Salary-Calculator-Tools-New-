@@ -5797,13 +5797,6 @@
         }
       };
 
-      // Fetch script URLs from server so they are read from env vars, not hardcoded
-      window._appConfig = { googleSheetsScriptUrl: "", socsoSheetsScriptUrl: "" };
-      fetch("/api/config")
-        .then(function (r) { return r.json(); })
-        .then(function (cfg) { window._appConfig = cfg; })
-        .catch(function () {});
-
       document.addEventListener("DOMContentLoaded", function () {
         const salaryForm = document.getElementById("salaryForm");
         const resetBtn = document.getElementById("resetBtn");
@@ -6490,8 +6483,8 @@
 
             // Record to Google Sheets
             try {
-              // SOCSO page — always use SOCSO_SHEETS_SCRIPT_URL
-              const SOCSO_SHEETS_URL = (window._appConfig && window._appConfig.socsoSheetsScriptUrl) || "";
+              // SOCSO page — posts directly to the SOCSO Google Sheets AppScript
+              const SOCSO_SHEETS_URL = "https://script.google.com/macros/s/AKfycbzWJVLF-CQME8DhdKJj13x33I2jvSjfMhWdxmISqSv5wWPDBmVDzEu4j-ejBRoSgyvKFw/exec";
 
               const downloadVia = "Download SOCSO Report";
 
