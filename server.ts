@@ -94,6 +94,12 @@ async function startServer() {
     }
   });
 
+  // Serve socso-perkeso page explicitly so it uses its own index.html
+  // (Vite SPA mode would otherwise always fall back to the root index.html)
+  app.get(["/socso-perkeso", "/socso-perkeso/"], (req, res) => {
+    res.sendFile(path.join(__dirname, "socso-perkeso", "index.html"));
+  });
+
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
@@ -104,6 +110,9 @@ async function startServer() {
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
+    app.get(["/socso-perkeso", "/socso-perkeso/"], (req, res) => {
+      res.sendFile(path.join(distPath, "socso-perkeso", "index.html"));
+    });
     app.get("*all", (req, res) => {
       res.sendFile(path.join(distPath, "index.html"));
     });
