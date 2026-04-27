@@ -7208,9 +7208,10 @@
 
             await addDoc(collection(db, "leads"), leadData);
 
-            // Record to Google Sheets
+            // Record to Google Sheets — salary calculator only (report & payslip)
+            // socsoreport is handled exclusively by socso-perkeso/index.html via SOCSO_SHEETS_SCRIPT_URL
+            if (currentDownloadType === "report" || currentDownloadType === "payslip")
             try {
-              // Salary calculator page — always use GOOGLE_SHEETS_SCRIPT_URL
               const GOOGLE_SHEETS_URL = (window._appConfig && window._appConfig.googleSheetsScriptUrl) || "";
 
               const downloadVia =
