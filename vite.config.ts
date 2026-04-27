@@ -28,7 +28,8 @@ export default defineConfig(({mode}) => {
           mincal: path.resolve(__dirname, 'mincal.html'),
           payslip: path.resolve(__dirname, 'payslip.html'),
           report: path.resolve(__dirname, 'report.html'),
-          socsoreport: path.resolve(__dirname, 'socsoreport.html')
+          socsoreport: path.resolve(__dirname, 'socsoreport.html'),
+          socsoPage: path.resolve(__dirname, 'socso-perkeso/index.html'),
         }
       }
     }
