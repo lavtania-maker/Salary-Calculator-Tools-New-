@@ -14,22 +14,6 @@
       gtag("js", new Date());
       gtag("config", "G-TMQV1XC09P");
     </script>
-    <!-- Dev-mode SPA fallback: load correct page without changing the URL -->
-    <script>
-      (function () {
-        var path = window.location.pathname.replace(/\/$/, "");
-        if (path === "/socso-perkeso") {
-          fetch("/socso-perkeso/index.html")
-            .then(function (r) { return r.text(); })
-            .then(function (html) {
-              document.open();
-              document.write(html);
-              document.close();
-              history.replaceState(null, "", "/socso-perkeso");
-            });
-        }
-      })();
-    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link

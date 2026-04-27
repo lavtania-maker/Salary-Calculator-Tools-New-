@@ -15,6 +15,7 @@ export default defineConfig(({mode}) => {
         '@': path.resolve(__dirname, '.'),
       },
     },
+    appType: 'mpa',
     server: {
       host: '0.0.0.0',
       port: 3000,
