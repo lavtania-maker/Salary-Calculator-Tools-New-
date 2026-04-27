@@ -5,7 +5,9 @@ import { fileURLToPath } from "url";
 import { Resend } from "resend";
 import dotenv from "dotenv";
 
-dotenv.config();
+// Load env vars from the v0 shared env file first, then fall back to local .env
+dotenv.config({ path: "/vercel/share/.env.project", override: false });
+dotenv.config({ override: false });
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -94,17 +96,13 @@ async function startServer() {
     }
   });
 
-  // Serve socso-perkeso page explicitly so it uses its own index.html
-  // (Vite SPA mode would otherwise always fall back to the root index.html)
-  app.get(["/socso-perkeso", "/socso-perkeso/"], (req, res) => {
-    res.sendFile(path.join(__dirname, "socso-perkeso", "index.html"));
-  });
-
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
+    // Use MPA mode so Vite serves each HTML at its own path
+    // (e.g. /socso-perkeso/ → socso-perkeso/index.html) without SPA fallback
     const vite = await createViteServer({
       server: { middlewareMode: true },
-      appType: "spa",
+      appType: "mpa",
     });
     app.use(vite.middlewares);
   } else {
