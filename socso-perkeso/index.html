@@ -5797,6 +5797,13 @@
         }
       };
 
+      // Fetch script URLs from server so they are read from env vars, not hardcoded
+      window._appConfig = { googleSheetsScriptUrl: "", socsoSheetsScriptUrl: "" };
+      fetch("/api/config")
+        .then(function (r) { return r.json(); })
+        .then(function (cfg) { window._appConfig = cfg; })
+        .catch(function () {});
+
       document.addEventListener("DOMContentLoaded", function () {
         const salaryForm = document.getElementById("salaryForm");
         const resetBtn = document.getElementById("resetBtn");
@@ -6483,13 +6490,9 @@
 
             // Record to Google Sheets
             try {
-              // Main salary calculator sheet (report & payslip downloads)
-              const GOOGLE_SHEETS_URL =
-                "https://script.google.com/macros/s/AKfycbydhPS83sen8Dk-lR71hvk1HAGToiO2vmxLNvW4p35fpgrsL_0SIciydYQlTX_pSPvJ/exec";
-
-              // Dedicated SOCSO sheet — different spreadsheet, sheet_name: socso
-              const SOCSO_SHEETS_URL =
-                "YOUR_SOCSO_GOOGLE_SHEETS_WEB_APP_URL_HERE";
+              // URLs are loaded from env vars via /api/config at page load
+              const GOOGLE_SHEETS_URL = (window._appConfig && window._appConfig.googleSheetsScriptUrl) || "";
+              const SOCSO_SHEETS_URL = (window._appConfig && window._appConfig.socsoSheetsScriptUrl) || "";
 
               const downloadVia =
                 currentDownloadType === "report"
@@ -6516,31 +6519,20 @@
                   ? SOCSO_SHEETS_URL
                   : GOOGLE_SHEETS_URL;
 
-              if (
-                targetUrl === "YOUR_GOOGLE_SHEETS_WEB_APP_URL_HERE" ||
-                targetUrl === "YOUR_SOCSO_GOOGLE_SHEETS_WEB_APP_URL_HERE"
-              ) {
+              if (!targetUrl) {
                 console.warn(
-                  "[v0] Google Sheets URL not configured for this download type:",
-                  currentDownloadType,
+                  "Sheets URL not configured for type:", currentDownloadType
                 );
               } else {
-                const sheetResponse = await fetch(targetUrl, {
+                await fetch(targetUrl, {
                   method: "POST",
                   mode: "no-cors",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
+                  headers: { "Content-Type": "application/json" },
                   body: JSON.stringify(sheetPayload),
                 });
-
-                console.log(
-                  "[v0] Google Sheets request sent (no-cors mode) to:",
-                  currentDownloadType === "socsoreport" ? "SOCSO sheet" : "main sheet",
-                );
               }
             } catch (sheetError) {
-              console.error("[v0] Error calling Google Sheets:", sheetError);
+              console.error("Error sending to Google Sheets:", sheetError);
             }
 
             // Send Email via Backend API

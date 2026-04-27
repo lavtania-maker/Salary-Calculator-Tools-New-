@@ -29,6 +29,15 @@ async function startServer() {
   app.use(express.json());
 
   // API Routes
+
+  // Expose public config (script URLs) to the static HTML frontend
+  app.get("/api/config", (req, res) => {
+    res.json({
+      googleSheetsScriptUrl: process.env.GOOGLE_SHEETS_SCRIPT_URL || "",
+      socsoSheetsScriptUrl: process.env.SOCSO_SHEETS_SCRIPT_URL || "",
+    });
+  });
+
   app.post("/api/deliver-document", async (req, res) => {
     try {
       const { email, type, data } = req.body;
