@@ -4,11 +4,7 @@ import path from 'path';
 import {defineConfig, loadEnv} from 'vite';
 
 export default defineConfig(({mode}) => {
-  // Load from the v0 shared env file so variables are available during build
-  const env = {
-    ...loadEnv(mode, '/vercel/share', ''),
-    ...loadEnv(mode, '.', ''),
-  };
+  const env = loadEnv(mode, '.', '');
   return {
     plugins: [react(), tailwindcss()],
     define: {

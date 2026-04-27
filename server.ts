@@ -5,9 +5,7 @@ import { fileURLToPath } from "url";
 import { Resend } from "resend";
 import dotenv from "dotenv";
 
-// Load env vars from the v0 shared env file first, then fall back to local .env
-dotenv.config({ path: "/vercel/share/.env.project", override: false });
-dotenv.config({ override: false });
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -98,11 +96,9 @@ async function startServer() {
 
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
-    // Use MPA mode so Vite serves each HTML at its own path
-    // (e.g. /socso-perkeso/ → socso-perkeso/index.html) without SPA fallback
     const vite = await createViteServer({
       server: { middlewareMode: true },
-      appType: "mpa",
+      appType: "spa",
     });
     app.use(vite.middlewares);
   } else {
