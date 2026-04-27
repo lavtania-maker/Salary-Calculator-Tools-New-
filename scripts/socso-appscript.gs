@@ -101,6 +101,8 @@ function doPost(e) {
     var config = getConfig();
     var sheet  = getOrCreateSheet(config.spreadsheetId, config.sheetName);
 
+    // Content-Type is sent as text/plain to avoid CORS preflight rejection
+    // e.postData.contents still contains the JSON string regardless
     var data = JSON.parse(e.postData.contents);
 
     var timestamp    = data.timestamp    || new Date().toISOString();

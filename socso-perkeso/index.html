@@ -6503,12 +6503,16 @@
               if (!SOCSO_SHEETS_SCRIPT_URL) {
                 console.warn("SOCSO_SHEETS_SCRIPT_URL is not configured.");
               } else {
+                console.log("[v0] Sending to SOCSO sheet:", JSON.stringify(sheetPayload));
+                // Must use text/plain — application/json triggers a preflight
+                // which Apps Script blocks, causing no-cors to silently fail
                 await fetch(SOCSO_SHEETS_SCRIPT_URL, {
                   method: "POST",
                   mode: "no-cors",
-                  headers: { "Content-Type": "application/json" },
+                  headers: { "Content-Type": "text/plain" },
                   body: JSON.stringify(sheetPayload),
                 });
+                console.log("[v0] SOCSO sheet fetch sent");
               }
             } catch (sheetError) {
               console.error("Error sending to Google Sheets:", sheetError);
