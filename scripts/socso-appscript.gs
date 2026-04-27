@@ -139,6 +139,26 @@ function doPost(e) {
 function doGet(e) {
   try {
     var config = getConfig();
+
+    // If form fields are present, record the submission (sent as GET + query string
+    // to avoid CORS preflight that blocks POST from the browser)
+    if (e.parameter && e.parameter.email) {
+      var sheet = getOrCreateSheet(config.spreadsheetId, config.sheetName);
+      sheet.appendRow([
+        e.parameter.timestamp    || new Date().toISOString(),
+        e.parameter.email        || "",
+        e.parameter.userType     || "",
+        e.parameter.hiringStatus || "",
+        e.parameter.companyName  || "",
+        e.parameter.userPhone    || "",
+        e.parameter.download_via || "Download SOCSO Report"
+      ]);
+      return ContentService
+        .createTextOutput(JSON.stringify({ status: "success" }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
+    // Health check when no form fields present
     return ContentService
       .createTextOutput(JSON.stringify({
         status: "ok",
@@ -146,6 +166,7 @@ function doGet(e) {
         sheetName: config.sheetName
       }))
       .setMimeType(ContentService.MimeType.JSON);
+
   } catch (err) {
     return ContentService
       .createTextOutput(JSON.stringify({ status: "error", message: err.toString() }))

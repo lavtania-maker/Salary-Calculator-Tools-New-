@@ -6481,42 +6481,34 @@
 
             await addDoc(collection(db, "leads"), leadData);
 
-            // Record to Google Sheets
+            // Record to Google Sheets — sent outside Firebase try/catch so it
+            // always fires even if Firestore addDoc fails
             try {
-              // SOCSO page — posts directly to the SOCSO Google Sheets AppScript
               const SOCSO_SHEETS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWJVLF-CQME8DhdKJj13x33I2jvSjfMhWdxmISqSv5wWPDBmVDzEu4j-ejBRoSgyvKFw/exec";
 
-              const downloadVia = "Download SOCSO Report";
-
-              const timestamp = new Date().toISOString();
-
               const sheetPayload = {
-                timestamp: timestamp,
+                timestamp: new Date().toISOString(),
                 email: userEmailAddress,
                 userType: typeValue,
                 hiringStatus: hiringValue,
                 companyName: companyValue,
                 userPhone: phoneValue,
-                download_via: downloadVia,
+                download_via: "Download SOCSO Report",
               };
 
-              if (!SOCSO_SHEETS_SCRIPT_URL) {
-                console.warn("SOCSO_SHEETS_SCRIPT_URL is not configured.");
-              } else {
-                // Send as URL-encoded form data — a true simple request with no
-                // CORS preflight, guaranteed to reach Apps Script doPost()
-                const formBody = Object.keys(sheetPayload)
-                  .map(function (k) {
-                    return encodeURIComponent(k) + "=" + encodeURIComponent(sheetPayload[k]);
-                  })
-                  .join("&");
-                await fetch(SOCSO_SHEETS_SCRIPT_URL, {
-                  method: "POST",
-                  mode: "no-cors",
-                  headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                  body: formBody,
-                });
-              }
+              // Build URL-encoded body and append as query string on a GET request
+              // GET with no custom headers = simple request, no CORS preflight,
+              // guaranteed to reach Apps Script doGet() / handled via e.parameter
+              const params = Object.keys(sheetPayload)
+                .map(function (k) {
+                  return encodeURIComponent(k) + "=" + encodeURIComponent(sheetPayload[k] || "");
+                })
+                .join("&");
+
+              await fetch(SOCSO_SHEETS_SCRIPT_URL + "?" + params, {
+                method: "GET",
+                mode: "no-cors",
+              });
             } catch (sheetError) {
               console.error("Error sending to Google Sheets:", sheetError);
             }
