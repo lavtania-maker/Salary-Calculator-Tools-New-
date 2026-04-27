@@ -101,17 +101,15 @@ function doPost(e) {
     var config = getConfig();
     var sheet  = getOrCreateSheet(config.spreadsheetId, config.sheetName);
 
-    // Content-Type is sent as text/plain to avoid CORS preflight rejection
-    // e.postData.contents still contains the JSON string regardless
-    var data = JSON.parse(e.postData.contents);
-
-    var timestamp    = data.timestamp    || new Date().toISOString();
-    var email        = data.email        || "";
-    var userType     = data.userType     || "";
-    var hiringStatus = data.hiringStatus || "";
-    var companyName  = data.companyName  || "";
-    var userPhone    = data.userPhone    || "";
-    var downloadVia  = data.download_via || "Download SOCSO Report";
+    // Read from e.parameter (application/x-www-form-urlencoded — no CORS preflight)
+    // This is the most reliable way to receive data from a no-cors browser fetch
+    var timestamp    = e.parameter.timestamp    || new Date().toISOString();
+    var email        = e.parameter.email        || "";
+    var userType     = e.parameter.userType     || "";
+    var hiringStatus = e.parameter.hiringStatus || "";
+    var companyName  = e.parameter.companyName  || "";
+    var userPhone    = e.parameter.userPhone    || "";
+    var downloadVia  = e.parameter.download_via || "Download SOCSO Report";
 
     sheet.appendRow([
       timestamp,
