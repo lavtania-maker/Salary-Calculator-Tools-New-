@@ -14,15 +14,20 @@
       gtag("js", new Date());
       gtag("config", "G-TMQV1XC09P");
     </script>
-    <!-- Dev-mode SPA fallback: redirect sub-pages to their own HTML files -->
+    <!-- Dev-mode SPA fallback: load correct page without changing the URL -->
     <script>
       (function () {
-        var routes = {
-          "/socso-perkeso": "/socso-perkeso/index.html",
-          "/socso-perkeso/": "/socso-perkeso/index.html",
-        };
-        var dest = routes[window.location.pathname];
-        if (dest) window.location.replace(dest);
+        var path = window.location.pathname.replace(/\/$/, "");
+        if (path === "/socso-perkeso") {
+          fetch("/socso-perkeso/index.html")
+            .then(function (r) { return r.text(); })
+            .then(function (html) {
+              document.open();
+              document.write(html);
+              document.close();
+              history.replaceState(null, "", "/socso-perkeso");
+            });
+        }
       })();
     </script>
     <meta charset="UTF-8" />
