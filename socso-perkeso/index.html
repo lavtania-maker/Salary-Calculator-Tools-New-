@@ -148,6 +148,8 @@
         padding: 8px 14px;
         border-radius: 8px;
         transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-block;
       }
 
       .nav-item:hover {
@@ -206,6 +208,8 @@
         text-align: left;
         cursor: pointer;
         transition: all 0.2s ease;
+        text-decoration: none;
+        display: block;
       }
 
       .mobile-nav-item:hover {
@@ -1201,12 +1205,12 @@
 
         <!-- Desktop Nav -->
         <nav class="desktop-nav">
-          <button type="button" id="navBtnSalary" class="nav-item active-nav">
+          <a href="/" id="navBtnSalary" class="nav-item">
             Salary Calculator (Take Home Pay)
-          </button>
-          <button type="button" id="navBtnSocso" class="nav-item">
+          </a>
+          <a href="/socso-perkeso" id="navBtnSocso" class="nav-item active-nav">
             SOCSO (PERKESO) Calculator
-          </button>
+          </a>
         </nav>
 
         <!-- Mobile Hamburger Button -->
@@ -1234,18 +1238,25 @@
 
       <!-- Mobile Dropdown Menu -->
       <nav class="mobile-nav" id="mobileNavMenu">
-        <button
-          type="button"
+        <a
+          href="/"
           id="mobileNavBtnSalary"
-          class="mobile-nav-item active-nav"
+          class="mobile-nav-item"
         >
           Salary Calculator (Take Home Pay)
-        </button>
-        <button type="button" id="mobileNavBtnSocso" class="mobile-nav-item">
+        </a>
+        <a href="/socso-perkeso" id="mobileNavBtnSocso" class="mobile-nav-item active-nav">
           SOCSO (PERKESO) Calculator
-        </button>
+        </a>
       </nav>
     </header>
+
+    <!-- No-JS banner -->
+    <noscript>
+      <div style="background:#fef2f2;border-bottom:1px solid #fecaca;padding:12px 20px;text-align:center;font-family:inherit;font-size:0.9rem;color:#dc2626;font-weight:600;">
+        JavaScript is required to use this calculator. Please enable JavaScript in your browser settings.
+      </div>
+    </noscript>
 
     <!-- Calculator Area -->
     <div class="calculator-area">
@@ -6132,20 +6143,16 @@
           }
         });
 
-        navBtnSalary.addEventListener("click", () => switchToolTab("salary"));
-        navBtnSocso.addEventListener("click", () => switchToolTab("socso"));
+  navBtnSalary.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("salary"); });
+  navBtnSocso.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("socso"); });
         
         const footerLinkSocso = document.getElementById("footerLinkSocso");
         if (footerLinkSocso) {
           footerLinkSocso.addEventListener("click", () => switchToolTab("socso"));
         }
         
-        mobileNavBtnSalary.addEventListener("click", () =>
-          switchToolTab("salary"),
-        );
-        mobileNavBtnSocso.addEventListener("click", () =>
-          switchToolTab("socso"),
-        );
+  mobileNavBtnSalary.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("salary"); });
+  mobileNavBtnSocso.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("socso"); });
         // --- End SOCSO Tool Logic ---
 
         // --- SOCSO Table Expand/Collapse Logic ---
