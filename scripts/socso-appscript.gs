@@ -56,7 +56,7 @@ function getConfig() {
 
   return {
     spreadsheetId: spreadsheetId,
-    sheetName: sheetName,
+    sheetName: sheetName
   };
 }
 
@@ -80,7 +80,7 @@ function getOrCreateSheet(spreadsheetId, sheetName) {
       "Hiring Status",
       "Company Name",
       "User Phone",
-      "Download Via",
+      "Download Via"
     ]);
     // Freeze the header row for readability
     sheet.setFrozenRows(1);
@@ -118,7 +118,7 @@ function doPost(e) {
       hiringStatus,
       companyName,
       userPhone,
-      downloadVia,
+      downloadVia
     ]);
 
     return ContentService
@@ -141,9 +141,9 @@ function doGet(e) {
     var config = getConfig();
     return ContentService
       .createTextOutput(JSON.stringify({
-        status        : "ok",
-        spreadsheetId : config.spreadsheetId,
-        sheetName     : config.sheetName,
+        status: "ok",
+        spreadsheetId: config.spreadsheetId,
+        sheetName: config.sheetName
       }))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
