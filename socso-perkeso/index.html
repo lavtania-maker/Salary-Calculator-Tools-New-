@@ -6288,13 +6288,14 @@
           companyInput.required = false;
           companyInput.value = "";
 
-          if (
-            currentDownloadType === "report" ||
-            currentDownloadType === "socsoreport"
-          ) {
+          if (currentDownloadType === "report") {
             modalTitle.textContent = "Download Salary Report";
             modalDescription.textContent =
               "Enter your email address to receive the detailed salary breakdown and tax report.";
+          } else if (currentDownloadType === "socsoreport") {
+            modalTitle.textContent = "Download SOCSO Report";
+            modalDescription.textContent =
+              "Enter your email address to receive the detailed SOCSO breakdown.";
           } else if (currentDownloadType === "payslip") {
             modalTitle.textContent = "Download Salary Payslip";
             modalDescription.textContent =
@@ -6459,14 +6460,6 @@
               actionKey = "socsoreport";
             }
 
-            console.log("[v0] Form submission started");
-            console.log("[v0] currentDownloadType:", currentDownloadType);
-            console.log("[v0] userEmailAddress:", userEmailAddress);
-            console.log("[v0] typeValue:", typeValue);
-            console.log("[v0] hiringValue:", hiringValue);
-            console.log("[v0] companyValue:", companyValue);
-            console.log("[v0] phoneValue:", phoneValue);
-
             const leadData = {
               email: userEmailAddress,
               userType: typeValue,
@@ -6490,16 +6483,10 @@
 
             // Record to Google Sheets
             try {
-              // IMPORTANT: Replace this URL with your Google Sheets Web App URL
-              const GOOGLE_SHEETS_URL =
-                "https://script.google.com/macros/s/AKfycbydhPS83sen8Dk-lR71hvk1HAGToiO2vmxLNvW4p35fpgrsL_0SIciydYQlTX_pSPvJ/exec";
+              // SOCSO page — posts directly to the SOCSO Google Sheets AppScript
+              const SOCSO_SHEETS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWJVLF-CQME8DhdKJj13x33I2jvSjfMhWdxmISqSv5wWPDBmVDzEu4j-ejBRoSgyvKFw/exec";
 
-              const downloadVia =
-                currentDownloadType === "report"
-                  ? "Download Salary Report"
-                  : currentDownloadType === "payslip"
-                    ? "Download Salary Payslip"
-                    : "Download SOCSO Report";
+              const downloadVia = "Download SOCSO Report";
 
               const timestamp = new Date().toISOString();
 
@@ -6513,70 +6500,25 @@
                 download_via: downloadVia,
               };
 
-              console.log(
-                "[v0] Google Sheets payload:",
-                JSON.stringify(sheetPayload),
-              );
-              console.log("[v0] Calling Google Sheets Web App...");
-
-              if (GOOGLE_SHEETS_URL === "YOUR_GOOGLE_SHEETS_WEB_APP_URL_HERE") {
-                console.warn(
-                  "[v0] Google Sheets URL not configured. Please replace YOUR_GOOGLE_SHEETS_WEB_APP_URL_HERE with your actual Web App URL.",
-                );
+              if (!SOCSO_SHEETS_SCRIPT_URL) {
+                console.warn("SOCSO_SHEETS_SCRIPT_URL is not configured.");
               } else {
-                const sheetResponse = await fetch(GOOGLE_SHEETS_URL, {
+                console.log("[v0] Sending to SOCSO sheet:", JSON.stringify(sheetPayload));
+                // Must use text/plain — application/json triggers a preflight
+                // which Apps Script blocks, causing no-cors to silently fail
+                await fetch(SOCSO_SHEETS_SCRIPT_URL, {
                   method: "POST",
                   mode: "no-cors",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
+                  headers: { "Content-Type": "text/plain" },
                   body: JSON.stringify(sheetPayload),
                 });
-
-                console.log(
-                  "[v0] Google Sheets request sent (no-cors mode, response not readable)",
-                );
-                console.log("[v0] Data should be recorded in Google Sheets");
+                console.log("[v0] SOCSO sheet fetch sent");
               }
             } catch (sheetError) {
-              console.error("[v0] Error calling Google Sheets:", sheetError);
+              console.error("Error sending to Google Sheets:", sheetError);
             }
 
-            // Send Email via Backend API
-            if (
-              currentDownloadType === "report" ||
-              currentDownloadType === "payslip" ||
-              currentDownloadType === "socsoreport"
-            ) {
-              try {
-                const response = await fetch("/api/deliver-document", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    email: userEmailAddress,
-                    type: currentDownloadType,
-                    // Add calculation data for backend if needed
-                    data: lastCalculation,
-                  }),
-                });
-
-                if (!response.ok) {
-                  try {
-                    const result = await response.json();
-                    console.error("Failed to send email:", result.error);
-                  } catch (e) {
-                    console.error("Failed to send email: Server returned an error (likely 404 when hosted statically)", response.status);
-                  }
-                }
-              } catch (emailError) {
-                console.error(
-                  "Error calling deliver-document API:",
-                  emailError,
-                );
-              }
-            }
+            // No email delivery on SOCSO page — submission recorded to sheet only
 
             // Mark as downloaded
             localStorage.setItem("salaryCalc_downloaded_" + actionKey, "true");

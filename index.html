@@ -6506,6 +6506,13 @@
         }
       };
 
+      // Fetch script URLs from server so they are read from env vars, not hardcoded
+      window._appConfig = { googleSheetsScriptUrl: "", socsoSheetsScriptUrl: "" };
+      fetch("/api/config")
+        .then(function (r) { return r.json(); })
+        .then(function (cfg) { window._appConfig = cfg; })
+        .catch(function () {});
+
       document.addEventListener("DOMContentLoaded", function () {
         const salaryForm = document.getElementById("salaryForm");
         const resetBtn = document.getElementById("resetBtn");
@@ -6997,13 +7004,14 @@
           companyInput.required = false;
           companyInput.value = "";
 
-          if (
-            currentDownloadType === "report" ||
-            currentDownloadType === "socsoreport"
-          ) {
+          if (currentDownloadType === "report") {
             modalTitle.textContent = "Download Salary Report";
             modalDescription.textContent =
               "Enter your email address to receive the detailed salary breakdown and tax report.";
+          } else if (currentDownloadType === "socsoreport") {
+            modalTitle.textContent = "Download SOCSO Report";
+            modalDescription.textContent =
+              "Enter your email address to receive the detailed SOCSO breakdown.";
           } else if (currentDownloadType === "payslip") {
             modalTitle.textContent = "Download Salary Payslip";
             modalDescription.textContent =
@@ -7168,14 +7176,6 @@
               actionKey = "socsoreport";
             }
 
-            console.log("[v0] Form submission started");
-            console.log("[v0] currentDownloadType:", currentDownloadType);
-            console.log("[v0] userEmailAddress:", userEmailAddress);
-            console.log("[v0] typeValue:", typeValue);
-            console.log("[v0] hiringValue:", hiringValue);
-            console.log("[v0] companyValue:", companyValue);
-            console.log("[v0] phoneValue:", phoneValue);
-
             const leadData = {
               email: userEmailAddress,
               userType: typeValue,
@@ -7195,22 +7195,18 @@
               leadData.phoneNumber = phoneValue;
             }
 
-            console.log("[v0] leadData prepared:", JSON.stringify(leadData));
             await addDoc(collection(db, "leads"), leadData);
-            console.log("[v0] Firebase addDoc completed");
 
-            // Record to Google Sheets
+            // Record to Google Sheets — salary calculator only (report & payslip)
+            // socsoreport is handled exclusively by socso-perkeso/index.html via SOCSO_SHEETS_SCRIPT_URL
+            if (currentDownloadType === "report" || currentDownloadType === "payslip")
             try {
-              // IMPORTANT: Replace this URL with your Google Sheets Web App URL
-              const GOOGLE_SHEETS_URL =
-                "https://script.google.com/macros/s/AKfycbydhPS83sen8Dk-lR71hvk1HAGToiO2vmxLNvW4p35fpgrsL_0SIciydYQlTX_pSPvJ/exec";
+              const GOOGLE_SHEETS_URL = (window._appConfig && window._appConfig.googleSheetsScriptUrl) || "";
 
               const downloadVia =
                 currentDownloadType === "report"
                   ? "Download Salary Report"
-                  : currentDownloadType === "payslip"
-                    ? "Download Salary Payslip"
-                    : "Download SOCSO Report";
+                  : "Download Salary Payslip";
 
               const timestamp = new Date().toISOString();
 
@@ -7224,40 +7220,24 @@
                 download_via: downloadVia,
               };
 
-              console.log(
-                "[v0] Google Sheets payload:",
-                JSON.stringify(sheetPayload),
-              );
-              console.log("[v0] Calling Google Sheets Web App...");
-
-              if (GOOGLE_SHEETS_URL === "YOUR_GOOGLE_SHEETS_WEB_APP_URL_HERE") {
-                console.warn(
-                  "[v0] Google Sheets URL not configured. Please replace YOUR_GOOGLE_SHEETS_WEB_APP_URL_HERE with your actual Web App URL.",
-                );
+              if (!GOOGLE_SHEETS_URL) {
+                console.warn("GOOGLE_SHEETS_SCRIPT_URL is not configured.");
               } else {
-                const sheetResponse = await fetch(GOOGLE_SHEETS_URL, {
+                await fetch(GOOGLE_SHEETS_URL, {
                   method: "POST",
                   mode: "no-cors",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
+                  headers: { "Content-Type": "application/json" },
                   body: JSON.stringify(sheetPayload),
                 });
-
-                console.log(
-                  "[v0] Google Sheets request sent (no-cors mode, response not readable)",
-                );
-                console.log("[v0] Data should be recorded in Google Sheets");
               }
             } catch (sheetError) {
-              console.error("[v0] Error calling Google Sheets:", sheetError);
+              console.error("Error sending to Google Sheets:", sheetError);
             }
 
             // Send Email via Backend API
             if (
               currentDownloadType === "report" ||
-              currentDownloadType === "payslip" ||
-              currentDownloadType === "socsoreport"
+              currentDownloadType === "payslip"
             ) {
               try {
                 const response = await fetch("/api/deliver-document", {

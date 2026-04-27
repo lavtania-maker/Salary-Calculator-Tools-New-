@@ -29,6 +29,15 @@ async function startServer() {
   app.use(express.json());
 
   // API Routes
+
+  // Expose public config (script URLs) to the static HTML frontend
+  app.get("/api/config", (req, res) => {
+    res.json({
+      googleSheetsScriptUrl: process.env.GOOGLE_SHEETS_SCRIPT_URL || "",
+      socsoSheetsScriptUrl: process.env.SOCSO_SHEETS_SCRIPT_URL || "",
+    });
+  });
+
   app.post("/api/deliver-document", async (req, res) => {
     try {
       const { email, type, data } = req.body;
@@ -95,6 +104,9 @@ async function startServer() {
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
+    app.get(["/socso-perkeso", "/socso-perkeso/"], (req, res) => {
+      res.sendFile(path.join(distPath, "socso-perkeso", "index.html"));
+    });
     app.get("*all", (req, res) => {
       res.sendFile(path.join(distPath, "index.html"));
     });
