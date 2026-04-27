@@ -6484,7 +6484,7 @@
             // Record to Google Sheets
             try {
               // SOCSO page — posts directly to the SOCSO Google Sheets AppScript
-              const SOCSO_SHEETS_URL = "https://script.google.com/macros/s/AKfycbzWJVLF-CQME8DhdKJj13x33I2jvSjfMhWdxmISqSv5wWPDBmVDzEu4j-ejBRoSgyvKFw/exec";
+              const SOCSO_SHEETS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWJVLF-CQME8DhdKJj13x33I2jvSjfMhWdxmISqSv5wWPDBmVDzEu4j-ejBRoSgyvKFw/exec";
 
               const downloadVia = "Download SOCSO Report";
 
@@ -6500,10 +6500,10 @@
                 download_via: downloadVia,
               };
 
-              if (!SOCSO_SHEETS_URL) {
+              if (!SOCSO_SHEETS_SCRIPT_URL) {
                 console.warn("SOCSO_SHEETS_SCRIPT_URL is not configured.");
               } else {
-                await fetch(SOCSO_SHEETS_URL, {
+                await fetch(SOCSO_SHEETS_SCRIPT_URL, {
                   method: "POST",
                   mode: "no-cors",
                   headers: { "Content-Type": "application/json" },
