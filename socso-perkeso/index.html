@@ -6288,13 +6288,14 @@
           companyInput.required = false;
           companyInput.value = "";
 
-          if (
-            currentDownloadType === "report" ||
-            currentDownloadType === "socsoreport"
-          ) {
+          if (currentDownloadType === "report") {
             modalTitle.textContent = "Download Salary Report";
             modalDescription.textContent =
               "Enter your email address to receive the detailed salary breakdown and tax report.";
+          } else if (currentDownloadType === "socsoreport") {
+            modalTitle.textContent = "Download SOCSO Report";
+            modalDescription.textContent =
+              "Enter your email address to receive the detailed SOCSO breakdown.";
           } else if (currentDownloadType === "payslip") {
             modalTitle.textContent = "Download Salary Payslip";
             modalDescription.textContent =
@@ -6459,14 +6460,6 @@
               actionKey = "socsoreport";
             }
 
-            console.log("[v0] Form submission started");
-            console.log("[v0] currentDownloadType:", currentDownloadType);
-            console.log("[v0] userEmailAddress:", userEmailAddress);
-            console.log("[v0] typeValue:", typeValue);
-            console.log("[v0] hiringValue:", hiringValue);
-            console.log("[v0] companyValue:", companyValue);
-            console.log("[v0] phoneValue:", phoneValue);
-
             const leadData = {
               email: userEmailAddress,
               userType: typeValue,
@@ -6490,9 +6483,13 @@
 
             // Record to Google Sheets
             try {
-              // IMPORTANT: Replace this URL with your Google Sheets Web App URL
+              // Main salary calculator sheet (report & payslip downloads)
               const GOOGLE_SHEETS_URL =
                 "https://script.google.com/macros/s/AKfycbydhPS83sen8Dk-lR71hvk1HAGToiO2vmxLNvW4p35fpgrsL_0SIciydYQlTX_pSPvJ/exec";
+
+              // Dedicated SOCSO sheet — different spreadsheet, sheet_name: socso
+              const SOCSO_SHEETS_URL =
+                "YOUR_SOCSO_GOOGLE_SHEETS_WEB_APP_URL_HERE";
 
               const downloadVia =
                 currentDownloadType === "report"
@@ -6513,18 +6510,22 @@
                 download_via: downloadVia,
               };
 
-              console.log(
-                "[v0] Google Sheets payload:",
-                JSON.stringify(sheetPayload),
-              );
-              console.log("[v0] Calling Google Sheets Web App...");
+              // Choose the correct endpoint based on download type
+              const targetUrl =
+                currentDownloadType === "socsoreport"
+                  ? SOCSO_SHEETS_URL
+                  : GOOGLE_SHEETS_URL;
 
-              if (GOOGLE_SHEETS_URL === "YOUR_GOOGLE_SHEETS_WEB_APP_URL_HERE") {
+              if (
+                targetUrl === "YOUR_GOOGLE_SHEETS_WEB_APP_URL_HERE" ||
+                targetUrl === "YOUR_SOCSO_GOOGLE_SHEETS_WEB_APP_URL_HERE"
+              ) {
                 console.warn(
-                  "[v0] Google Sheets URL not configured. Please replace YOUR_GOOGLE_SHEETS_WEB_APP_URL_HERE with your actual Web App URL.",
+                  "[v0] Google Sheets URL not configured for this download type:",
+                  currentDownloadType,
                 );
               } else {
-                const sheetResponse = await fetch(GOOGLE_SHEETS_URL, {
+                const sheetResponse = await fetch(targetUrl, {
                   method: "POST",
                   mode: "no-cors",
                   headers: {
@@ -6534,9 +6535,9 @@
                 });
 
                 console.log(
-                  "[v0] Google Sheets request sent (no-cors mode, response not readable)",
+                  "[v0] Google Sheets request sent (no-cors mode) to:",
+                  currentDownloadType === "socsoreport" ? "SOCSO sheet" : "main sheet",
                 );
-                console.log("[v0] Data should be recorded in Google Sheets");
               }
             } catch (sheetError) {
               console.error("[v0] Error calling Google Sheets:", sheetError);
