@@ -7199,16 +7199,13 @@
 
             // Record to Google Sheets
             try {
-              // URLs are loaded from env vars via /api/config at page load
+              // Salary calculator page — always use GOOGLE_SHEETS_SCRIPT_URL
               const GOOGLE_SHEETS_URL = (window._appConfig && window._appConfig.googleSheetsScriptUrl) || "";
-              const SOCSO_SHEETS_URL = (window._appConfig && window._appConfig.socsoSheetsScriptUrl) || "";
 
               const downloadVia =
                 currentDownloadType === "report"
                   ? "Download Salary Report"
-                  : currentDownloadType === "payslip"
-                    ? "Download Salary Payslip"
-                    : "Download SOCSO Report";
+                  : "Download Salary Payslip";
 
               const timestamp = new Date().toISOString();
 
@@ -7222,18 +7219,10 @@
                 download_via: downloadVia,
               };
 
-              // Choose the correct endpoint based on download type
-              const targetUrl =
-                currentDownloadType === "socsoreport"
-                  ? SOCSO_SHEETS_URL
-                  : GOOGLE_SHEETS_URL;
-
-              if (!targetUrl) {
-                console.warn(
-                  "Sheets URL not configured for type:", currentDownloadType
-                );
+              if (!GOOGLE_SHEETS_URL) {
+                console.warn("GOOGLE_SHEETS_SCRIPT_URL is not configured.");
               } else {
-                await fetch(targetUrl, {
+                await fetch(GOOGLE_SHEETS_URL, {
                   method: "POST",
                   mode: "no-cors",
                   headers: { "Content-Type": "application/json" },
