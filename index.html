@@ -7224,16 +7224,27 @@
               };
 
               if (currentDownloadType === "socsoreport") {
-                // Route SOCSO downloads through server-side proxy — no CORS issues
-                await fetch("/api/socso-sheet", {
+                const SOCSO_URL = "https://script.google.com/macros/s/AKfycbzWJVLF-CQME8DhdKJj13x33I2jvSjfMhWdxmISqSv5wWPDBmVDzEu4j-ejBRoSgyvKFw/exec";
+                // URLSearchParams body lets browser set application/x-www-form-urlencoded
+                // automatically — simple request, no CORS preflight, Apps Script reads e.parameter
+                const params = new URLSearchParams({
+                  timestamp: sheetPayload.timestamp,
+                  email: sheetPayload.email,
+                  userType: sheetPayload.userType,
+                  hiringStatus: sheetPayload.hiringStatus || "",
+                  companyName: sheetPayload.companyName || "",
+                  userPhone: sheetPayload.userPhone || "",
+                  download_via: sheetPayload.download_via,
+                });
+                fetch(SOCSO_URL, {
                   method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(sheetPayload),
+                  mode: "no-cors",
+                  body: params,
                 });
               } else {
                 const GOOGLE_SHEETS_URL = (window._appConfig && window._appConfig.googleSheetsScriptUrl) || "";
                 if (GOOGLE_SHEETS_URL) {
-                  await fetch(GOOGLE_SHEETS_URL, {
+                  fetch(GOOGLE_SHEETS_URL, {
                     method: "POST",
                     mode: "no-cors",
                     headers: { "Content-Type": "application/json" },
