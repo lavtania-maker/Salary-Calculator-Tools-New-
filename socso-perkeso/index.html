@@ -24,8 +24,17 @@
     <title>SOCSO PERKESO Calculator Malaysia 2025 | Kiraan SOCSO</title>
     <meta
       name="description"
-      content="Calculate your net salary in Malaysia after EPF, SOCSO, EIS, and PCB deductions instantly. Free tool for employees and employers."
+      content="Calculate your SOCSO PERKESO contributions in Malaysia instantly. Free calculator for employees and employers — contribution rates, tables, and breakdown."
     />
+
+    <!-- SEO -->
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://salarycalculator.my/socso-perkeso" />
+    <link rel="alternate" hreflang="en-MY" href="https://salarycalculator.my/socso-perkeso" />
+    <link rel="alternate" hreflang="ms-MY" href="https://salarycalculator.my/socso-perkeso" />
+    <link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/socso-perkeso" />
+    <meta property="article:published_time" content="2025-01-01T00:00:00+08:00" />
+    <meta property="article:modified_time" content="2026-04-27T00:00:00+08:00" />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -6446,9 +6455,8 @@
           localStorage.setItem("salaryCalc_hasSubmittedEmail", "true");
           localStorage.setItem("salaryCalc_userEmail", userEmailAddress);
 
-          // Record to Google Sheets — same pattern as index.html
+          // Record to SOCSO sheet via server-side proxy — no CORS issues
           try {
-            const SOCSO_SHEETS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWJVLF-CQME8DhdKJj13x33I2jvSjfMhWdxmISqSv5wWPDBmVDzEu4j-ejBRoSgyvKFw/exec";
             const sheetPayload = {
               timestamp: new Date().toISOString(),
               email: userEmailAddress,
@@ -6458,9 +6466,8 @@
               userPhone: phoneValue,
               download_via: "Download SOCSO Report",
             };
-            await fetch(SOCSO_SHEETS_SCRIPT_URL, {
+            await fetch("/api/socso-sheet", {
               method: "POST",
-              mode: "no-cors",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(sheetPayload),
             });

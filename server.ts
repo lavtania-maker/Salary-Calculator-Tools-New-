@@ -38,6 +38,26 @@ async function startServer() {
     });
   });
 
+  // Server-side proxy for SOCSO sheet submission — avoids CORS preflight
+  // The browser POSTs JSON to this endpoint; we forward it to Apps Script
+  app.post("/api/socso-sheet", async (req, res) => {
+    try {
+      const scriptUrl = process.env.SOCSO_SHEETS_SCRIPT_URL;
+      if (!scriptUrl) {
+        return res.status(500).json({ error: "SOCSO_SHEETS_SCRIPT_URL not configured" });
+      }
+      const response = await fetch(scriptUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(req.body),
+      });
+      res.status(200).json({ success: true });
+    } catch (err: any) {
+      console.error("[API] socso-sheet error:", err);
+      res.status(500).json({ error: err.message });
+    }
+  });
+
   app.post("/api/deliver-document", async (req, res) => {
     try {
       const { email, type, data } = req.body;
