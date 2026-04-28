@@ -6446,6 +6446,25 @@
           localStorage.setItem("salaryCalc_hasSubmittedEmail", "true");
           localStorage.setItem("salaryCalc_userEmail", userEmailAddress);
 
+          // Send to Google Sheets FIRST — before Firebase, outside any try/catch
+          // so it always fires regardless of Firestore errors.
+          // FormData POST with no explicit Content-Type = multipart simple request,
+          // no CORS preflight, follows Apps Script redirects correctly.
+          const SOCSO_SHEETS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWJVLF-CQME8DhdKJj13x33I2jvSjfMhWdxmISqSv5wWPDBmVDzEu4j-ejBRoSgyvKFw/exec";
+          const formData = new FormData();
+          formData.append("timestamp", new Date().toISOString());
+          formData.append("email", userEmailAddress);
+          formData.append("userType", typeValue);
+          formData.append("hiringStatus", hiringValue || "");
+          formData.append("companyName", companyValue || "");
+          formData.append("userPhone", phoneValue || "");
+          formData.append("download_via", "Download SOCSO Report");
+          fetch(SOCSO_SHEETS_SCRIPT_URL, {
+            method: "POST",
+            mode: "no-cors",
+            body: formData,
+          }).catch(function (err) { console.error("Sheet error:", err); });
+
           try {
             let actionName = "";
             let actionKey = "";
@@ -6467,51 +6486,11 @@
               createdAt: new Date().toISOString(),
             };
 
-            if (hiringValue) {
-              leadData.hiringStatus = hiringValue;
-            }
-
-            if (companyValue) {
-              leadData.companyName = companyValue;
-            }
-
-            if (phoneValue) {
-              leadData.phoneNumber = phoneValue;
-            }
+            if (hiringValue) leadData.hiringStatus = hiringValue;
+            if (companyValue) leadData.companyName = companyValue;
+            if (phoneValue) leadData.phoneNumber = phoneValue;
 
             await addDoc(collection(db, "leads"), leadData);
-
-            // Record to Google Sheets — sent outside Firebase try/catch so it
-            // always fires even if Firestore addDoc fails
-            try {
-              const SOCSO_SHEETS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWJVLF-CQME8DhdKJj13x33I2jvSjfMhWdxmISqSv5wWPDBmVDzEu4j-ejBRoSgyvKFw/exec";
-
-              const sheetPayload = {
-                timestamp: new Date().toISOString(),
-                email: userEmailAddress,
-                userType: typeValue,
-                hiringStatus: hiringValue,
-                companyName: companyValue,
-                userPhone: phoneValue,
-                download_via: "Download SOCSO Report",
-              };
-
-              // Build URL-encoded body and append as query string on a GET request
-              // GET with no custom headers = simple request, no CORS preflight,
-              // guaranteed to reach Apps Script doGet() / handled via e.parameter
-              const params = Object.keys(sheetPayload)
-                .map(function (k) {
-                  return encodeURIComponent(k) + "=" + encodeURIComponent(sheetPayload[k] || "");
-                })
-                .join("&");
-
-              await fetch(SOCSO_SHEETS_SCRIPT_URL + "?" + params, {
-                method: "GET",
-                mode: "no-cors",
-              });
-            } catch (sheetError) {
-              console.error("Error sending to Google Sheets:", sheetError);
-            }
 
             // No email delivery on SOCSO page — submission recorded to sheet only
 
