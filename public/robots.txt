@@ -81,3 +81,4 @@ Disallow: /
 User-agent: Google-CloudVertexBot
 Disallow: /
 Sitemap: https://salarycalculator.my/sitemap.xml
+Sitemap: https://www.salarycalculator.my/sitemap.xml
