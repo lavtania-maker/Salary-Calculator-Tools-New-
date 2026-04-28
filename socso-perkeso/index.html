@@ -6446,11 +6446,19 @@
           localStorage.setItem("salaryCalc_hasSubmittedEmail", "true");
           localStorage.setItem("salaryCalc_userEmail", userEmailAddress);
 
+          console.log("[socso-submit] Form submitted", {
+            email: userEmailAddress,
+            userType: typeValue,
+            hiringStatus: hiringValue,
+            companyName: companyValue,
+            userPhone: phoneValue,
+            currentDownloadType: currentDownloadType,
+          });
+
           // Send to Google Sheets FIRST — before Firebase, outside any try/catch
-          // so it always fires regardless of Firestore errors.
-          // FormData POST with no explicit Content-Type = multipart simple request,
-          // no CORS preflight, follows Apps Script redirects correctly.
           const SOCSO_SHEETS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWJVLF-CQME8DhdKJj13x33I2jvSjfMhWdxmISqSv5wWPDBmVDzEu4j-ejBRoSgyvKFw/exec";
+          console.log("[socso-submit] Sending to SOCSO sheet URL:", SOCSO_SHEETS_SCRIPT_URL);
+
           const formData = new FormData();
           formData.append("timestamp", new Date().toISOString());
           formData.append("email", userEmailAddress);
@@ -6459,11 +6467,24 @@
           formData.append("companyName", companyValue || "");
           formData.append("userPhone", phoneValue || "");
           formData.append("download_via", "Download SOCSO Report");
+
+          console.log("[socso-submit] FormData entries:", {
+            timestamp: formData.get("timestamp"),
+            email: formData.get("email"),
+            userType: formData.get("userType"),
+            hiringStatus: formData.get("hiringStatus"),
+            companyName: formData.get("companyName"),
+            userPhone: formData.get("userPhone"),
+            download_via: formData.get("download_via"),
+          });
+
           fetch(SOCSO_SHEETS_SCRIPT_URL, {
             method: "POST",
             mode: "no-cors",
             body: formData,
-          }).catch(function (err) { console.error("Sheet error:", err); });
+          })
+            .then(function () { console.log("[socso-submit] Sheet fetch completed (no-cors, response opaque)"); })
+            .catch(function (err) { console.error("[socso-submit] Sheet fetch ERROR:", err); });
 
           try {
             let actionName = "";
@@ -6479,6 +6500,8 @@
               actionKey = "socsoreport";
             }
 
+            console.log("[socso-submit] Saving to Firestore, actionName:", actionName);
+
             const leadData = {
               email: userEmailAddress,
               userType: typeValue,
@@ -6491,13 +6514,12 @@
             if (phoneValue) leadData.phoneNumber = phoneValue;
 
             await addDoc(collection(db, "leads"), leadData);
-
-            // No email delivery on SOCSO page — submission recorded to sheet only
+            console.log("[socso-submit] Firestore addDoc success");
 
             // Mark as downloaded
             localStorage.setItem("salaryCalc_downloaded_" + actionKey, "true");
           } catch (error) {
-            console.error("Error adding document: ", error);
+            console.error("[socso-submit] Firestore ERROR:", error);
           }
 
           // Hide form and show success
