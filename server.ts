@@ -118,9 +118,13 @@ async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       server: { middlewareMode: true },
-      appType: "spa",
+      appType: "mpa",
     });
-    app.use(vite.middlewares);
+    // Only pass non-API requests to Vite
+    app.use((req, res, next) => {
+      if (req.path.startsWith("/api/")) return next();
+      vite.middlewares(req, res, next);
+    });
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
