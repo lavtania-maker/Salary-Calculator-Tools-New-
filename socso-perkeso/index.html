@@ -6446,6 +6446,28 @@
           localStorage.setItem("salaryCalc_hasSubmittedEmail", "true");
           localStorage.setItem("salaryCalc_userEmail", userEmailAddress);
 
+          // Record to Google Sheets — same pattern as index.html
+          try {
+            const SOCSO_SHEETS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWJVLF-CQME8DhdKJj13x33I2jvSjfMhWdxmISqSv5wWPDBmVDzEu4j-ejBRoSgyvKFw/exec";
+            const sheetPayload = {
+              timestamp: new Date().toISOString(),
+              email: userEmailAddress,
+              userType: typeValue,
+              hiringStatus: hiringValue,
+              companyName: companyValue,
+              userPhone: phoneValue,
+              download_via: "Download SOCSO Report",
+            };
+            await fetch(SOCSO_SHEETS_SCRIPT_URL, {
+              method: "POST",
+              mode: "no-cors",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(sheetPayload),
+            });
+          } catch (sheetError) {
+            console.error("Error sending to SOCSO sheet:", sheetError);
+          }
+
           try {
             let actionName = "";
             let actionKey = "";
@@ -6467,63 +6489,17 @@
               createdAt: new Date().toISOString(),
             };
 
-            if (hiringValue) {
-              leadData.hiringStatus = hiringValue;
-            }
-
-            if (companyValue) {
-              leadData.companyName = companyValue;
-            }
-
-            if (phoneValue) {
-              leadData.phoneNumber = phoneValue;
-            }
+            if (hiringValue) leadData.hiringStatus = hiringValue;
+            if (companyValue) leadData.companyName = companyValue;
+            if (phoneValue) leadData.phoneNumber = phoneValue;
 
             await addDoc(collection(db, "leads"), leadData);
-
-            // Record to Google Sheets
-            try {
-              // SOCSO page — posts directly to the SOCSO Google Sheets AppScript
-              const SOCSO_SHEETS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzWJVLF-CQME8DhdKJj13x33I2jvSjfMhWdxmISqSv5wWPDBmVDzEu4j-ejBRoSgyvKFw/exec";
-
-              const downloadVia = "Download SOCSO Report";
-
-              const timestamp = new Date().toISOString();
-
-              const sheetPayload = {
-                timestamp: timestamp,
-                email: userEmailAddress,
-                userType: typeValue,
-                hiringStatus: hiringValue,
-                companyName: companyValue,
-                userPhone: phoneValue,
-                download_via: downloadVia,
-              };
-
-              if (!SOCSO_SHEETS_SCRIPT_URL) {
-                console.warn("SOCSO_SHEETS_SCRIPT_URL is not configured.");
-              } else {
-                console.log("[v0] Sending to SOCSO sheet:", JSON.stringify(sheetPayload));
-                // Must use text/plain — application/json triggers a preflight
-                // which Apps Script blocks, causing no-cors to silently fail
-                await fetch(SOCSO_SHEETS_SCRIPT_URL, {
-                  method: "POST",
-                  mode: "no-cors",
-                  headers: { "Content-Type": "text/plain" },
-                  body: JSON.stringify(sheetPayload),
-                });
-                console.log("[v0] SOCSO sheet fetch sent");
-              }
-            } catch (sheetError) {
-              console.error("Error sending to Google Sheets:", sheetError);
-            }
-
-            // No email delivery on SOCSO page — submission recorded to sheet only
+            console.log("[socso-submit] Firestore addDoc success");
 
             // Mark as downloaded
             localStorage.setItem("salaryCalc_downloaded_" + actionKey, "true");
           } catch (error) {
-            console.error("Error adding document: ", error);
+            console.error("[socso-submit] Firestore ERROR:", error);
           }
 
           // Hide form and show success
