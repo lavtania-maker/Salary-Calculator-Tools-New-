@@ -7127,8 +7127,11 @@
           }
         });
 
+        console.log("[root-page] index.html loaded, emailForm:", emailForm);
+
         emailForm.addEventListener("submit", async function (e) {
           e.preventDefault();
+          console.log("[root-page] submit fired, currentDownloadType:", currentDownloadType);
           const emailInput = document.getElementById("userEmail");
           const typeInput = document.getElementById("userType");
           const phoneInput = document.getElementById("userPhone");
