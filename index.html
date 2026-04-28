@@ -7225,21 +7225,13 @@
 
               if (currentDownloadType === "socsoreport") {
                 const SOCSO_URL = "https://script.google.com/macros/s/AKfycbzWJVLF-CQME8DhdKJj13x33I2jvSjfMhWdxmISqSv5wWPDBmVDzEu4j-ejBRoSgyvKFw/exec";
-                // GET + query string — e.parameter is always populated from the URL
-                // query string in Apps Script regardless of method. POST body does NOT
-                // populate e.parameter, only e.postData. This is the reliable approach.
-                const params = new URLSearchParams({
-                  timestamp: sheetPayload.timestamp,
-                  email: sheetPayload.email,
-                  userType: sheetPayload.userType,
-                  hiringStatus: sheetPayload.hiringStatus || "",
-                  companyName: sheetPayload.companyName || "",
-                  userPhone: sheetPayload.userPhone || "",
-                  download_via: sheetPayload.download_via,
-                });
-                fetch(SOCSO_URL + "?" + params.toString(), {
-                  method: "GET",
+                // POST with text/plain — no CORS preflight triggered, Apps Script
+                // receives JSON body in e.postData.contents which doPost can parse
+                fetch(SOCSO_URL, {
+                  method: "POST",
                   mode: "no-cors",
+                  headers: { "Content-Type": "text/plain" },
+                  body: JSON.stringify(sheetPayload),
                 });
               } else {
                 const GOOGLE_SHEETS_URL = (window._appConfig && window._appConfig.googleSheetsScriptUrl) || "";
