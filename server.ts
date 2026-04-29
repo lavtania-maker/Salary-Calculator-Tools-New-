@@ -117,6 +117,7 @@ async function startServer() {
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
+      configFile: path.join(__dirname, "vite.config.ts"),
       server: { middlewareMode: true },
       appType: "mpa",
     });
