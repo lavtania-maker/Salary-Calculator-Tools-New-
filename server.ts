@@ -120,11 +120,7 @@ async function startServer() {
       server: { middlewareMode: true },
       appType: "mpa",
     });
-    // Only pass non-API requests to Vite
-    app.use((req, res, next) => {
-      if (req.path.startsWith("/api/")) return next();
-      vite.middlewares(req, res, next);
-    });
+    app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
