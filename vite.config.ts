@@ -31,6 +31,7 @@ export default defineConfig(({mode}) => {
           report: path.resolve(__dirname, 'report.html'),
           socsoreport: path.resolve(__dirname, 'socsoreport.html'),
           socsoPage: path.resolve(__dirname, 'socso-perkeso/index.html'),
+          privacyPolicy: path.resolve(__dirname, 'privacy-policy.html'),
         }
       }
     }
