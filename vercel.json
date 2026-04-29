@@ -5,6 +5,12 @@
       "has": [{ "type": "header", "key": "x-forwarded-proto", "value": "http" }],
       "destination": "https://salarycalculator.my/$1",
       "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "www.salarycalculator.my" }],
+      "destination": "https://salarycalculator.my/$1",
+      "permanent": true
     }
   ],
   "rewrites": [
