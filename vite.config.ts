@@ -31,7 +31,8 @@ export default defineConfig(({mode}) => {
           report: path.resolve(__dirname, 'report.html'),
           socsoreport: path.resolve(__dirname, 'socsoreport.html'),
           privacyPolicy: path.resolve(__dirname, 'privacy-policy.html'),
-          pcbCalculator: path.resolve(__dirname, 'pcb-calculator.html'),
+          pcbIncomeTax: path.resolve(__dirname, 'pcb-income-tax.html'),
+          socsoCalculator: path.resolve(__dirname, 'socso-perkeso.html'),
         }
       }
     }
