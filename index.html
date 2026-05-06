@@ -1957,10 +1957,12 @@
                       id="resIncomeGroupLabel"
                       style="
                         color: white;
-                        padding: 4px 12px;
+                        padding: 6px 14px;
                         border-radius: 9999px;
                         font-size: 0.85rem;
                         font-weight: 800;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                        letter-spacing: 0.025em;
                       "
                       >B40</span
                     >
@@ -1980,6 +1982,22 @@
                     >
                     in Malaysia.
                   </p>
+                  
+                  <div
+                    style="
+                      display: flex;
+                      height: 6px;
+                      border-radius: 9999px;
+                      overflow: hidden;
+                      margin-top: 16px;
+                      background-color: #e2e8f0;
+                      gap: 2px;
+                    "
+                  >
+                    <div id="groupBarB40" style="flex: 4; background-color: #ef4444; opacity: 0.2; transition: opacity 0.3s"></div>
+                    <div id="groupBarM40" style="flex: 4; background-color: #ca8a04; opacity: 0.2; transition: opacity 0.3s"></div>
+                    <div id="groupBarT20" style="flex: 2; background-color: #16a34a; opacity: 0.2; transition: opacity 0.3s"></div>
+                  </div>
                   <p
                     style="
                       font-size: 0.75rem;
@@ -2496,8 +2514,7 @@
                       line-height: 1.4;
                     "
                   >
-                    This calculator is for reference only. Please check official
-                    PERKESO guidelines for accurate deductions.
+                    This calculator is for reference only.<br /><span style="display: block; margin-top: 4px;">Please check official PERKESO guidelines for accurate deductions.</span>
                   </p>
                 </div>
 
@@ -3663,28 +3680,192 @@
         </div>
 
         <!-- Section 6: Official Calculators -->
-        <div class="content-card" style="margin-bottom: 2rem">
-          <h2>Official Government Salary Calculators</h2>
-          <p>
+        <div class="content-card" style="margin-bottom: 2rem; padding: 32px">
+          <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px;">Official Government Salary Calculators</h2>
+          <p style="color: #64748b; font-size: 1.05rem; margin-bottom: 24px; line-height: 1.6;">
             For official verification and precise statutory calculations, visit
             these government portals:
           </p>
-          <div class="links-grid">
-            <a href="https://www.kwsp.gov.my/" target="_blank" class="btn-link"
-              >EPF Official Website</a
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+            <!-- CARD 1: EPF (Blue) -->
+            <a
+              href="https://www.kwsp.gov.my/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="
+                padding: 16px;
+                background: #f0f9ff;
+                border: 1px solid #bae6fd;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                text-decoration: none;
+                color: inherit;
+                box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+                transition: transform 0.2s, box-shadow 0.2s;
+              "
+              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 10px -3px rgba(0, 0, 0, 0.1)';"
+              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px -1px rgba(0, 0, 0, 0.05)';"
             >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/en/thumb/6/64/Employees_Provident_Fund_%28Malaysia%29_logo.svg/1280px-Employees_Provident_Fund_%28Malaysia%29_logo.svg.png"
+                alt="EPF Logo"
+                style="width: 48px; height: 48px; object-fit: contain; flex-shrink: 0; margin-bottom: 4px;"
+              />
+              <div style="flex: 1;">
+                <h3
+                  style="
+                    font-size: 1rem;
+                    font-weight: 800;
+                    color: #0369a1;
+                    margin: 0 0 4px 0;
+                  "
+                >
+                  Official EPF Website
+                </h3>
+                <p style="font-size: 0.85rem; color: #075985; margin: 0; line-height: 1.3;">
+                  Official EPF contribution & savings portal.
+                </p>
+              </div>
+              <span
+                style="
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 4px;
+                  padding: 6px 12px;
+                  background: #0369a1;
+                  color: white;
+                  font-size: 0.8rem;
+                  font-weight: 700;
+                  border-radius: 6px;
+                  align-self: flex-start;
+                "
+              >
+                Visit EPF
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </span>
+            </a>
+
+            <!-- CARD 2: SOCSO (Green) -->
             <a
               href="https://www.perkeso.gov.my/"
               target="_blank"
-              class="btn-link"
-              >SOCSO Official Website</a
+              rel="noopener noreferrer"
+              style="
+                padding: 16px;
+                background: #f0fdf4;
+                border: 1px solid #bbf7d0;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                text-decoration: none;
+                color: inherit;
+                box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+                transition: transform 0.2s, box-shadow 0.2s;
+              "
+              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 10px -3px rgba(0, 0, 0, 0.1)';"
+              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px -1px rgba(0, 0, 0, 0.05)';"
             >
+              <img
+                src="https://vectorseek.com/wp-content/uploads/2023/09/Perkeso-Socso-Logo-Vector.svg-.png"
+                alt="SOCSO Logo"
+                style="width: 48px; height: 48px; object-fit: contain; flex-shrink: 0; margin-bottom: 4px;"
+              />
+              <div style="flex: 1;">
+                <h3
+                  style="
+                    font-size: 1rem;
+                    font-weight: 800;
+                    color: #15803d;
+                    margin: 0 0 4px 0;
+                  "
+                >
+                  Official SOCSO Website
+                </h3>
+                <p style="font-size: 0.85rem; color: #166534; margin: 0; line-height: 1.3;">
+                  Official PERKESO contribution reference portal.
+                </p>
+              </div>
+              <span
+                style="
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 4px;
+                  padding: 6px 12px;
+                  background: #15803d;
+                  color: white;
+                  font-size: 0.8rem;
+                  font-weight: 700;
+                  border-radius: 6px;
+                  align-self: flex-start;
+                "
+              >
+                Visit SOCSO
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </span>
+            </a>
+
+            <!-- CARD 3: LHDN (Yellow) -->
             <a
               href="https://calc.hasil.gov.my/"
               target="_blank"
-              class="btn-link"
-              >LHDN PCB Calculator</a
+              rel="noopener noreferrer"
+              style="
+                padding: 16px;
+                background: #fefce8;
+                border: 1px solid #fef08a;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                text-decoration: none;
+                color: inherit;
+                box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+                transition: transform 0.2s, box-shadow 0.2s;
+              "
+              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 10px -3px rgba(0, 0, 0, 0.1)';"
+              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px -1px rgba(0, 0, 0, 0.05)';"
             >
+              <img
+                src="https://www.ajobthing.com/resources/blog/data/blog/images/2026/05/LHDN_logo%20(1).png"
+                alt="LHDN Logo"
+                style="width: 48px; height: 48px; object-fit: contain; flex-shrink: 0; margin-bottom: 4px;"
+              />
+              <div style="flex: 1;">
+                <h3
+                  style="
+                    font-size: 1rem;
+                    font-weight: 800;
+                    color: #a16207;
+                    margin: 0 0 4px 0;
+                  "
+                >
+                  Official LHDN PCB Calculator
+                </h3>
+                <p style="font-size: 0.85rem; color: #854d0e; margin: 0; line-height: 1.3;">
+                  Official LHDN PCB tax calculation tool.
+                </p>
+              </div>
+              <span
+                style="
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 4px;
+                  padding: 6px 12px;
+                  background: #a16207;
+                  color: white;
+                  font-size: 0.8rem;
+                  font-weight: 700;
+                  border-radius: 6px;
+                  align-self: flex-start;
+                "
+              >
+                Open PCB Calculator
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </span>
+            </a>
           </div>
         </div>
       </div>
@@ -6037,7 +6218,7 @@
             "
           >
             <img
-              src="https://www.ajobthing.com/resources/blog/data/blog/images/2026/04/1a1fe2_9d23a797c9f14c66889bae3556d1eb03mv2.jpg"
+              src="https://vectorseek.com/wp-content/uploads/2023/09/Perkeso-Socso-Logo-Vector.svg-.png"
               alt="PERKESO Logo"
               style="width: 64px; height: 64px; object-fit: contain"
             />
@@ -7080,11 +7261,16 @@
             const queryParams = new URLSearchParams({
               salary: lastCalculation.salary,
               epf: lastCalculation.epf,
+              epfEmployer: lastCalculation.epfEmployer || 0,
               socso: lastCalculation.socso,
+              socsoEmployer: lastCalculation.socsoEmployer || 0,
               eis: lastCalculation.eis,
+              eisEmployer: lastCalculation.eisEmployer || 0,
               pcb: lastCalculation.pcb,
               total: lastCalculation.totalDeductions,
               net: lastCalculation.netSalary,
+              incomeGroup: lastCalculation.incomeGroup,
+              subGroup: lastCalculation.subGroup,
               company:
                 document.getElementById("companyName").value.trim() ||
                 "COMPANY LOGO & NAME",
@@ -7545,6 +7731,7 @@
             lastCalculation = {
               salary: totalIncome.toFixed(2),
               epf: epf.toFixed(2),
+              epfEmployer: epfEmployer.toFixed(2),
               socso: socso.toFixed(2),
               socsoEmployer: socsoEmployer.toFixed(2),
               socsoTotal: (socso + socsoEmployer).toFixed(2),
@@ -7556,6 +7743,7 @@
                     : Math.floor((totalIncome - 200.01) / 100) + 7
                   : 65,
               eis: eis.toFixed(2),
+              eisEmployer: eisEmployer.toFixed(2),
               pcb: pcb.toFixed(2),
               totalDeductions: totalDeductions.toFixed(2),
               netSalary: (totalIncome - totalDeductions).toFixed(2),
@@ -7585,33 +7773,50 @@
 
             // Income Group Logic
             let incomeGroup = "B40";
-            let groupColor = "#ef4444";
+            let subGroup = "B1";
+            let groupColor = "#ef4444"; // red for B40
             let groupBg = "#fef2f2";
             let groupBorder = "#fee2e2";
             let shortExplanation = "lower income group";
 
-            if (totalIncome > 10970) {
-              incomeGroup = "T20";
-              groupColor = "#16a34a";
-              groupBg = "#f0fdf4";
-              groupBorder = "#dcfce7";
-              shortExplanation = "top income group";
-            } else if (totalIncome > 4850) {
-              incomeGroup = "M40";
-              groupColor = "#ca8a04";
-              groupBg = "#fefce8";
-              groupBorder = "#fef9c3";
-              shortExplanation = "middle income group";
+            if (totalIncome >= 15870) {
+              incomeGroup = "T20"; subGroup = "T2"; groupColor = "#16a34a"; groupBg = "#f0fdf4"; groupBorder = "#dcfce7"; shortExplanation = "top income group";
+            } else if (totalIncome >= 11820) {
+              incomeGroup = "T20"; subGroup = "T1"; groupColor = "#16a34a"; groupBg = "#f0fdf4"; groupBorder = "#dcfce7"; shortExplanation = "top income group";
+            } else if (totalIncome >= 9450) {
+              incomeGroup = "M40"; subGroup = "M4"; groupColor = "#ca8a04"; groupBg = "#fefce8"; groupBorder = "#fef9c3"; shortExplanation = "middle income group";
+            } else if (totalIncome >= 7690) {
+              incomeGroup = "M40"; subGroup = "M3"; groupColor = "#ca8a04"; groupBg = "#fefce8"; groupBorder = "#fef9c3"; shortExplanation = "middle income group";
+            } else if (totalIncome >= 6340) {
+              incomeGroup = "M40"; subGroup = "M2"; groupColor = "#ca8a04"; groupBg = "#fefce8"; groupBorder = "#fef9c3"; shortExplanation = "middle income group";
+            } else if (totalIncome >= 5250) {
+              incomeGroup = "M40"; subGroup = "M1"; groupColor = "#ca8a04"; groupBg = "#fefce8"; groupBorder = "#fef9c3"; shortExplanation = "middle income group";
+            } else if (totalIncome >= 4310) {
+              incomeGroup = "B40"; subGroup = "B4"; groupColor = "#ef4444"; groupBg = "#fef2f2"; groupBorder = "#fee2e2"; shortExplanation = "lower income group";
+            } else if (totalIncome >= 3440) {
+              incomeGroup = "B40"; subGroup = "B3"; groupColor = "#ef4444"; groupBg = "#fef2f2"; groupBorder = "#fee2e2"; shortExplanation = "lower income group";
+            } else if (totalIncome >= 2560) {
+              incomeGroup = "B40"; subGroup = "B2"; groupColor = "#ef4444"; groupBg = "#fef2f2"; groupBorder = "#fee2e2"; shortExplanation = "lower income group";
+            } else {
+              incomeGroup = "B40"; subGroup = "B1"; groupColor = "#ef4444"; groupBg = "#fef2f2"; groupBorder = "#fee2e2"; shortExplanation = "lower income group";
             }
 
             const groupLabel = document.getElementById("resIncomeGroupLabel");
-            groupLabel.textContent = incomeGroup;
+            groupLabel.textContent = `${incomeGroup} (${subGroup})`;
             groupLabel.style.backgroundColor = groupColor;
+
+            // Highlight the visual bar segment
+            document.getElementById("groupBarB40").style.opacity = incomeGroup === "B40" ? "1" : "0.2";
+            document.getElementById("groupBarM40").style.opacity = incomeGroup === "M40" ? "1" : "0.2";
+            document.getElementById("groupBarT20").style.opacity = incomeGroup === "T20" ? "1" : "0.2";
+
+            lastCalculation.incomeGroup = incomeGroup;
+            lastCalculation.subGroup = subGroup;
 
             const descriptionEl = document.getElementById(
               "resIncomeGroupDescription",
             );
-            descriptionEl.innerHTML = `With your total monthly income, you’re in the <strong style="color: ${groupColor}; font-weight: 800;">${incomeGroup} (${shortExplanation})</strong> in Malaysia.`;
+            descriptionEl.innerHTML = `With your total monthly income, you’re in the <strong style="color: ${groupColor}; font-weight: 800;">${incomeGroup} (${subGroup}) category (${shortExplanation})</strong> in Malaysia.`;
 
             const section = document.getElementById("incomeGroupSection");
             section.style.backgroundColor = groupBg;
