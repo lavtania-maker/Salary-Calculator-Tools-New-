@@ -19,7 +19,8 @@
     { "source": "/mincal",            "destination": "/mincal.html"   },
     { "source": "/payslip-generator", "destination": "/payslip.html"  },
     { "source": "/report",            "destination": "/report.html"   },
-    { "source": "/socso-perkeso",     "destination": "/socso-perkeso/index.html" }
+    { "source": "/socso-perkeso",     "destination": "/socso-perkeso/index.html" },
+    { "source": "/pcb-calculator",    "destination": "/pcb-calculator.html" }
   ],
   "headers": [
     {

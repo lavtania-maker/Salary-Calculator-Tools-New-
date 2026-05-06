@@ -135,7 +135,7 @@
       }
 
       .logo-img {
-        height: 60px;
+        height: 48px;
         width: auto;
         max-width: 250px;
         object-fit: contain;
@@ -152,15 +152,16 @@
         background: transparent;
         border: none;
         font-family: inherit;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         font-weight: 500;
         color: var(--text-muted);
         cursor: pointer;
-        padding: 8px 14px;
+        padding: 6px 12px;
         border-radius: 8px;
         transition: all 0.2s ease;
         text-decoration: none;
         display: inline-block;
+        white-space: nowrap;
       }
 
       .nav-item:hover {
@@ -213,7 +214,7 @@
         font-size: 1rem;
         font-weight: 500;
         color: var(--text-main);
-        padding: 14px 20px;
+        padding: 16px 20px;
         margin: 6px;
         border-radius: 8px;
         text-align: left;
@@ -1216,11 +1217,14 @@
 
         <!-- Desktop Nav -->
         <nav class="desktop-nav">
-          <a href="/" id="navBtnSalary" class="nav-item active-nav">
-            Salary Calculator (Take Home Pay)
+          <a href="/" id="navBtnSalary" class="nav-item active-nav" title="Salary Calculator (Take Home Pay)">
+            Salary Calculator
           </a>
-          <a href="/socso-perkeso" id="navBtnSocso" class="nav-item">
-            SOCSO (PERKESO) Calculator
+          <a href="/socso-perkeso" id="navBtnSocso" class="nav-item" title="SOCSO (PERKESO) Calculator">
+            SOCSO Calculator
+          </a>
+          <a href="/pcb-calculator" id="navBtnPcb" class="nav-item" title="PCB (Monthly Tax Deduction) Calculator">
+            PCB Calculator
           </a>
         </nav>
 
@@ -1258,6 +1262,9 @@
         </a>
         <a href="/socso-perkeso" id="mobileNavBtnSocso" class="mobile-nav-item">
           SOCSO (PERKESO) Calculator
+        </a>
+        <a href="/pcb-calculator" id="mobileNavBtnPcb" class="mobile-nav-item">
+          PCB (Monthly Tax Deduction) Calculator
         </a>
       </nav>
     </header>
@@ -6782,12 +6789,16 @@
             // Desktop Nav
             if (navBtnSalary) navBtnSalary.classList.add("active-nav");
             if (navBtnSocso) navBtnSocso.classList.remove("active-nav");
+            const navBtnPcb = document.getElementById("navBtnPcb");
+            if (navBtnPcb) navBtnPcb.classList.remove("active-nav");
 
             // Mobile Nav
             if (mobileNavBtnSalary)
               mobileNavBtnSalary.classList.add("active-nav");
             if (mobileNavBtnSocso)
               mobileNavBtnSocso.classList.remove("active-nav");
+            const mobileNavBtnPcb = document.getElementById("mobileNavBtnPcb");
+            if (mobileNavBtnPcb) mobileNavBtnPcb.classList.remove("active-nav");
 
             // Layout change
             if (layoutSalary) {
@@ -6826,12 +6837,16 @@
             // Desktop Nav
             if (navBtnSocso) navBtnSocso.classList.add("active-nav");
             if (navBtnSalary) navBtnSalary.classList.remove("active-nav");
+            const navBtnPcb = document.getElementById("navBtnPcb");
+            if (navBtnPcb) navBtnPcb.classList.remove("active-nav");
 
             // Mobile Nav
             if (mobileNavBtnSocso)
               mobileNavBtnSocso.classList.add("active-nav");
             if (mobileNavBtnSalary)
               mobileNavBtnSalary.classList.remove("active-nav");
+            const mobileNavBtnPcb = document.getElementById("mobileNavBtnPcb");
+            if (mobileNavBtnPcb) mobileNavBtnPcb.classList.remove("active-nav");
 
             // Layout change
             if (layoutSocso) {
@@ -6870,6 +6885,7 @@
 
   navBtnSalary.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("salary"); });
   navBtnSocso.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("socso"); });
+  navBtnPcb.addEventListener("click", (e) => { e.preventDefault(); window.location.href = "/pcb-calculator"; });
         
         const footerLinkSocso = document.getElementById("footerLinkSocso");
         if (footerLinkSocso) {
@@ -6878,6 +6894,7 @@
         
   mobileNavBtnSalary.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("salary"); });
   mobileNavBtnSocso.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("socso"); });
+  mobileNavBtnPcb.addEventListener("click", (e) => { e.preventDefault(); window.location.href = "/pcb-calculator"; });
         // --- End SOCSO Tool Logic ---
 
         // --- SOCSO Table Expand/Collapse Logic ---

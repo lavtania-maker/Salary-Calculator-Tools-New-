@@ -1,2 +1,1 @@
-// Admin UI logic will go here
-import './firebase';
+console.log("admin");

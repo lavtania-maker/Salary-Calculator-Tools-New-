@@ -1,2 +1,1 @@
-// Mincal UI logic will go here
-import './firebase';
+console.log("mincal");

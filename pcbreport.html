@@ -1,0 +1,235 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href="https://salarycalculator.my/pcb-calculator" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png"
+    />
+    <title>PCB Contribution Report</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 40px;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .company-name {
+        font-size: 24px;
+        font-weight: bold;
+        color: #2563eb;
+      }
+      .report-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #64748b;
+      }
+      .date-row {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #64748b;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #000;
+        margin-bottom: 30px;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .row.bold {
+        font-weight: bold;
+        color: #0f172a;
+      }
+      .row.total {
+        font-size: 20px;
+        border-top: 2px solid #000;
+        border-bottom: none;
+        padding-top: 20px;
+        margin-top: 10px;
+      }
+      .section-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 40px;
+        margin-bottom: 15px;
+        color: #1e293b;
+      }
+      .btn {
+        padding: 10px 20px;
+        background-color: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .btn:hover {
+        background-color: #1d4ed8;
+      }
+      .print-controls {
+        text-align: right;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px dashed #cbd5e1;
+      }
+      .reminder {
+        margin-top: 40px;
+        font-size: 14px;
+        color: #475569;
+        line-height: 1.6;
+      }
+      .reminder-title {
+        font-weight: bold;
+        color: #1e293b;
+        margin-bottom: 8px;
+      }
+      @media print {
+        .print-controls {
+          display: none;
+        }
+        body {
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="print-controls">
+      <button class="btn" onclick="window.print()">Print to PDF</button>
+    </div>
+
+    <div class="header">
+      <div class="company-name" id="company">SalaryCalc MY</div>
+      <div class="report-title">PCB Contribution Report</div>
+    </div>
+
+    <div class="date-row" id="generatedDate"></div>
+
+    <div class="section-title">Monthly Summary</div>
+    <div class="row">
+      <span>Gross Salary</span>
+      <span id="salary">RM 0.00</span>
+    </div>
+    <div class="row">
+      <span>Bonus / Additional Income</span>
+      <span id="bonus">RM 0.00</span>
+    </div>
+    <div class="row">
+      <span>EPF Deduction</span>
+      <span id="epf" style="color: #dc2626">- RM 0.00</span>
+    </div>
+    <div class="row">
+      <span>Tax Relief / Zakat</span>
+      <span id="relief" style="color: #64748b">- RM 0.00</span>
+    </div>
+    <div class="row bold" style="font-size: 18px; background-color: #f8fafc; padding: 15px 10px; margin-top: 10px;">
+      <span>Monthly PCB Deduction</span>
+      <span id="pcb">RM 0.00</span>
+    </div>
+
+    <div class="section-title">Annual Summary</div>
+    <div class="row">
+      <span>Estimated Annual Income</span>
+      <span id="annualIncome">RM 0.00</span>
+    </div>
+    <div class="row">
+      <span>Estimated Annual PCB</span>
+      <span id="annualPcb">RM 0.00</span>
+    </div>
+    <div class="row">
+      <span>Effective Tax Rate</span>
+      <span id="effectiveRate">0.00%</span>
+    </div>
+    <div class="row">
+      <span>Tax Bracket</span>
+      <span id="taxBracket">0%</span>
+    </div>
+
+    <div class="section-title">PCB Details</div>
+    <div class="row">
+      <span>Tax Status</span>
+      <span id="taxStatus">-</span>
+    </div>
+    <div class="row">
+      <span>EPF Contribution Rate</span>
+      <span id="epfRate">0%</span>
+    </div>
+    <div class="row">
+      <span>Estimated Chargeable Income</span>
+      <span id="chargeable">RM 0.00</span>
+    </div>
+
+    <div class="reminder">
+      <div class="reminder-title">EMPLOYEE REMINDER</div>
+      PCB is deducted monthly by employer<br />
+      Submit tax filing before deadline<br />
+      PCB is an advance income tax payment
+    </div>
+
+    <div
+      style="
+        margin-top: 50px;
+        font-size: 12px;
+        color: #64748b;
+        line-height: 1.5;
+      "
+    >
+      <p>This is an estimated PCB calculation based on LHDN tax rates.</p>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const formatRM = (val) =>
+        "RM " +
+        parseFloat(val || 0).toLocaleString("en-MY", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+
+      const companyName = params.get("company");
+      if (companyName && companyName !== "COMPANY LOGO & NAME") {
+        document.getElementById("company").innerText = companyName;
+      } else {
+        document.getElementById("company").innerText = "SalaryCalc MY";
+      }
+
+      // Set Date
+      const today = new Date();
+      const dateString = today.toLocaleDateString("en-MY", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+      document.getElementById("generatedDate").innerText =
+        "Generated: " + dateString;
+
+      document.getElementById("salary").innerText = formatRM(params.get("salary"));
+      document.getElementById("bonus").innerText = formatRM(params.get("bonus"));
+      document.getElementById("epf").innerText = "- " + formatRM(params.get("epf"));
+      document.getElementById("relief").innerText = "- " + formatRM(params.get("relief"));
+      document.getElementById("pcb").innerText = formatRM(params.get("pcb"));
+
+      document.getElementById("annualIncome").innerText = formatRM(params.get("annualIncome"));
+      document.getElementById("annualPcb").innerText = formatRM(params.get("annualPcb"));
+      document.getElementById("effectiveRate").innerText = params.get("effectiveRate") + "%";
+      document.getElementById("taxBracket").innerText = params.get("taxBracket");
+
+      document.getElementById("taxStatus").innerText = params.get("taxStatus") === "non-resident" ? "Non-Resident" : "Resident";
+      document.getElementById("epfRate").innerText = params.get("epfRate") + "%";
+      document.getElementById("chargeable").innerText = formatRM(params.get("chargeable"));
+    </script>
+  </body>
+</html>
