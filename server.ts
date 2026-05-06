@@ -121,6 +121,13 @@ async function startServer() {
       server: { middlewareMode: true },
       appType: "mpa",
     });
+    // Rewrite bare "/" to "/index.html" so Vite MPA mode can find the entry
+    app.use((req, _res, next) => {
+      if (req.path === "/") {
+        req.url = "/index.html";
+      }
+      next();
+    });
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
