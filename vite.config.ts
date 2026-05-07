@@ -30,6 +30,7 @@ export default defineConfig(({mode}) => {
           payslip: path.resolve(__dirname, 'payslip.html'),
           report: path.resolve(__dirname, 'report.html'),
           socsoreport: path.resolve(__dirname, 'socsoreport.html'),
+          pcbreport: path.resolve(__dirname, 'pcbreport.html'),
           privacyPolicy: path.resolve(__dirname, 'privacy-policy.html'),
           pcbIncomeTax: path.resolve(__dirname, 'pcb-income-tax.html'),
           socsoCalculator: path.resolve(__dirname, 'socso-perkeso.html'),

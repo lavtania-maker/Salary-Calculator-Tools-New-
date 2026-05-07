@@ -6426,7 +6426,7 @@
           <div class="footer-col footer-col-links">
             <h4>Quick Links</h4>
             <a href="/" class="footer-link">Salary Calculator (Take Home Pay)</a>
-            <a href="javascript:void(0)" id="footerLinkSocso" class="footer-link">SOCSO (PERKESO) Calculator</a>
+            <a href="/socso-perkeso" id="footerLinkSocso" class="footer-link">SOCSO (PERKESO) Calculator</a>
             <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
           </div>
         </div>
@@ -7047,16 +7047,8 @@
           if (mobileNavMenu) mobileNavMenu.classList.remove("open");
         }
 
-        // Initial Routing Logic
-        const _pendingTool = sessionStorage.getItem("pendingTool");
-        if (_pendingTool) {
-          sessionStorage.removeItem("pendingTool");
-        }
-        if (window.location.pathname === "/socso-perkeso" || _pendingTool === "socso") {
-          switchToolTab("socso", false, false);
-        } else {
-          switchToolTab("salary", false, false);
-        }
+        // Initial Routing Logic - Salary Calculator page defaults to salary tab
+        switchToolTab("salary", false, false);
 
         // Popstate handling for browser back/forward
         window.addEventListener("popstate", (event) => {
@@ -7069,16 +7061,16 @@
         });
 
   navBtnSalary.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("salary"); });
-  navBtnSocso.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("socso"); });
+  navBtnSocso.addEventListener("click", (e) => { e.preventDefault(); window.location.href = "/socso-perkeso"; });
   navBtnPcb.addEventListener("click", (e) => { e.preventDefault(); window.location.href = "/pcb-income-tax"; });
         
         const footerLinkSocso = document.getElementById("footerLinkSocso");
         if (footerLinkSocso) {
-          footerLinkSocso.addEventListener("click", () => switchToolTab("socso"));
+          footerLinkSocso.addEventListener("click", (e) => { e.preventDefault(); window.location.href = "/socso-perkeso"; });
         }
         
   mobileNavBtnSalary.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("salary"); });
-  mobileNavBtnSocso.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("socso"); });
+  mobileNavBtnSocso.addEventListener("click", (e) => { e.preventDefault(); window.location.href = "/socso-perkeso"; });
   mobileNavBtnPcb.addEventListener("click", (e) => { e.preventDefault(); window.location.href = "/pcb-income-tax"; });
         // --- End SOCSO Tool Logic ---
 
