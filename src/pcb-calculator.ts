@@ -194,11 +194,12 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // GA4: Calculate button clicked
+    // GA4 event: Calculate button clicked
     if (typeof (window as any).gtag === "function") {
-      (window as any).gtag("event", "click_calculate_pcb", {
+      (window as any).gtag("event", "click_calculate", {
         event_category: "pcb_calculator",
-        event_label: "Calculate PCB",
+        event_label: "Calculate PCB Button",
+        page_path: "/pcb-income-tax",
       });
     }
 
