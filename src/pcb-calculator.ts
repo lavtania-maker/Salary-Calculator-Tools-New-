@@ -193,7 +193,16 @@ document.addEventListener("DOMContentLoaded", () => {
   // Calculate only on submit
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    
+
+    // GA4 event: Calculate button clicked
+    if (typeof (window as any).gtag === "function") {
+      (window as any).gtag("event", "click_calculate", {
+        event_category: "pcb_calculator",
+        event_label: "Calculate PCB Button",
+        page_path: "/pcb-income-tax",
+      });
+    }
+
     // Optional: show loading state on button
     const originalText = calculateBtn.textContent || "Calculate";
     calculateBtn.textContent = "Calculating...";
@@ -227,6 +236,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // Modal logic
   if (downloadReportBtn && emailModal) {
     downloadReportBtn.addEventListener("click", () => {
+      // GA4 event: Download PCB Report button clicked
+      if (typeof (window as any).gtag === "function") {
+        (window as any).gtag("event", "click_download_pcb_report", {
+          event_category: "pcb_calculator",
+          event_label: "Download PCB Report Button",
+          page_path: "/pcb-income-tax",
+        });
+      }
+
       if (modalFormContent && modalSuccessContent && modalFeedback) {
           modalFormContent.style.display = "block";
           modalSuccessContent.style.display = "none";

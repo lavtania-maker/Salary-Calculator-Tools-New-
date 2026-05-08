@@ -1978,7 +1978,7 @@
                       margin: 0;
                     "
                   >
-                    With your total monthly income, you’re in the
+                    With your gross monthly income, you’re in the
                     <strong id="resIncomeGroupText"
                       >B40 (lower income group)</strong
                     >
@@ -7167,6 +7167,14 @@
 
         if (downloadSocsoReportBtn) {
           downloadSocsoReportBtn.addEventListener("click", function () {
+            // GA4 event: Download SOCSO Report button clicked
+            if (typeof gtag === "function") {
+              gtag("event", "click_download_socso_report", {
+                event_category: "socso_calculator",
+                event_label: "Download SOCSO Report Button",
+                page_path: "/socso-perkeso",
+              });
+            }
             currentDownloadType = "socsoreport";
             currentDownloadBtn = this;
             openModal();
@@ -7505,10 +7513,11 @@
 
         function calculateSalary() {
           try {
-            // GA4 event tracking
+            // GA4 event: Calculate button clicked on SOCSO page
             gtag("event", "click_calculate", {
-              event_category: "calculator",
-              event_label: "Calculate Button",
+              event_category: "socso_calculator",
+              event_label: "Calculate SOCSO Button",
+              page_path: "/socso-perkeso",
             });
 
             // Get inputs
@@ -7815,7 +7824,7 @@
             const descriptionEl = document.getElementById(
               "resIncomeGroupDescription",
             );
-            descriptionEl.innerHTML = `With your total monthly income, you’re in the <strong style="color: ${groupColor}; font-weight: 800;">${incomeGroup} (${subGroup}) category (${shortExplanation})</strong> in Malaysia.`;
+            descriptionEl.innerHTML = `With your gross monthly income, you’re in the <strong style="color: ${groupColor}; font-weight: 800;">${incomeGroup} (${subGroup}) category (${shortExplanation})</strong> in Malaysia.`;
 
             const section = document.getElementById("incomeGroupSection");
             section.style.backgroundColor = groupBg;
