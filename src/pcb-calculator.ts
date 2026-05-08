@@ -297,6 +297,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Fire off background data saving (non-blocking for UI transition)
         const savePromise = (async () => {
+          // Save to Google Sheets via Apps Script
+          const pcbSheetsUrl = import.meta.env.VITE_PCB_SHEETS_SCRIPT_URL;
+          if (pcbSheetsUrl) {
+            try {
+              await fetch(pcbSheetsUrl, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  timestamp: new Date().toISOString(),
+                  email,
+                  userType: role,
+                  hiringStatus: isHiring,
+                  companyName: company,
+                  userPhone: phone,
+                  download_via: "pcb calculator"
+                })
+              });
+            } catch (sheetsErr) {
+              console.error("Google Sheets error (non-blocking):", sheetsErr);
+            }
+          }
+          
+          // Also save to Firebase if available
           if (db) {
             try {
               await addDoc(collection(db, "leads"), {
