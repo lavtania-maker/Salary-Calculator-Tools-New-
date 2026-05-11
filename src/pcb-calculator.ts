@@ -194,12 +194,11 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    // GA4 event: Calculate button clicked
+    // GA4: Calculate button clicked
     if (typeof (window as any).gtag === "function") {
-      (window as any).gtag("event", "click_calculate", {
+      (window as any).gtag("event", "click_calculate_pcb", {
         event_category: "pcb_calculator",
-        event_label: "Calculate PCB Button",
-        page_path: "/pcb-income-tax",
+        event_label: "Calculate PCB",
       });
     }
 
@@ -236,12 +235,11 @@ document.addEventListener("DOMContentLoaded", () => {
   // Modal logic
   if (downloadReportBtn && emailModal) {
     downloadReportBtn.addEventListener("click", () => {
-      // GA4 event: Download PCB Report button clicked
+      // GA4: Download PCB Report button clicked
       if (typeof (window as any).gtag === "function") {
-        (window as any).gtag("event", "click_download_pcb_report", {
+        (window as any).gtag("event", "click_download_pcb", {
           event_category: "pcb_calculator",
-          event_label: "Download PCB Report Button",
-          page_path: "/pcb-income-tax",
+          event_label: "Download PCB Report",
         });
       }
 
