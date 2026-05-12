@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Allow: /socso-perkeso
+Allow: /pcb-income-tax
+Allow: /privacy-policy
+
+Disallow: /admin
+Disallow: /mincal
+Disallow: /payslip
+Disallow: /report
+Disallow: /pcbreport
+Disallow: /socsoreport
+
+Sitemap: https://salarycalculator.my/sitemap.xml

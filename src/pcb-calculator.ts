@@ -193,7 +193,15 @@ document.addEventListener("DOMContentLoaded", () => {
   // Calculate only on submit
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    
+
+    // GA4: Calculate button clicked
+    if (typeof (window as any).gtag === "function") {
+      (window as any).gtag("event", "click_calculate_pcb", {
+        event_category: "pcb_calculator",
+        event_label: "Calculate PCB",
+      });
+    }
+
     // Optional: show loading state on button
     const originalText = calculateBtn.textContent || "Calculate";
     calculateBtn.textContent = "Calculating...";
@@ -227,6 +235,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // Modal logic
   if (downloadReportBtn && emailModal) {
     downloadReportBtn.addEventListener("click", () => {
+      // GA4: Download PCB Report button clicked
+      if (typeof (window as any).gtag === "function") {
+        (window as any).gtag("event", "click_download_pcb", {
+          event_category: "pcb_calculator",
+          event_label: "Download PCB Report",
+        });
+      }
+
       if (modalFormContent && modalSuccessContent && modalFeedback) {
           modalFormContent.style.display = "block";
           modalSuccessContent.style.display = "none";
@@ -272,6 +288,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (emailForm) {
     emailForm.addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      // GA4: Submit button clicked in form
+      if (typeof (window as any).gtag === "function") {
+        (window as any).gtag("event", "click_submit_pcb", {
+          event_category: "pcb_calculator",
+          event_label: "Submit PCB Form",
+        });
+      }
       
       const email = userEmail ? userEmail.value : "";
       const role = userType ? userType.value : "";
@@ -297,6 +321,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Fire off background data saving (non-blocking for UI transition)
         const savePromise = (async () => {
+          // Save to Google Sheets via Apps Script
+          const pcbSheetsUrl = import.meta.env.VITE_PCB_SHEETS_SCRIPT_URL;
+          if (pcbSheetsUrl) {
+            try {
+              await fetch(pcbSheetsUrl, {
+                method: "POST",
+                mode: "no-cors",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  timestamp: new Date().toISOString(),
+                  email,
+                  userType: role,
+                  hiringStatus: isHiring,
+                  companyName: company,
+                  userPhone: phone,
+                  download_via: "pcb calculator"
+                })
+              });
+            } catch (sheetsErr) {
+              console.error("Google Sheets error (non-blocking):", sheetsErr);
+            }
+          }
+          
+          // Also save to Firebase if available
           if (db) {
             try {
               await addDoc(collection(db, "leads"), {
