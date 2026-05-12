@@ -7167,12 +7167,11 @@
 
         if (downloadSocsoReportBtn) {
           downloadSocsoReportBtn.addEventListener("click", function () {
-            // GA4 event: Download SOCSO Report button clicked
+            // GA4: Download SOCSO Report button clicked
             if (typeof gtag === "function") {
-              gtag("event", "click_download_socso_report", {
+              gtag("event", "click_download_socso", {
                 event_category: "socso_calculator",
-                event_label: "Download SOCSO Report Button",
-                page_path: "/socso-perkeso",
+                event_label: "Download SOCSO Report",
               });
             }
             currentDownloadType = "socsoreport";
@@ -7339,6 +7338,15 @@
 
         emailForm.addEventListener("submit", async function (e) {
           e.preventDefault();
+
+          // GA4: Submit button clicked in form
+          if (typeof gtag === "function") {
+            gtag("event", "click_submit_socso", {
+              event_category: "socso_calculator",
+              event_label: "Submit SOCSO Form",
+            });
+          }
+
           const emailInput = document.getElementById("userEmail");
           const typeInput = document.getElementById("userType");
           const phoneInput = document.getElementById("userPhone");
@@ -7513,11 +7521,10 @@
 
         function calculateSalary() {
           try {
-            // GA4 event: Calculate button clicked on SOCSO page
-            gtag("event", "click_calculate", {
+            // GA4: Calculate button clicked
+            gtag("event", "click_calculate_socso", {
               event_category: "socso_calculator",
-              event_label: "Calculate SOCSO Button",
-              page_path: "/socso-perkeso",
+              event_label: "Calculate SOCSO",
             });
 
             // Get inputs

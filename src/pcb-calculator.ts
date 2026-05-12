@@ -288,6 +288,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (emailForm) {
     emailForm.addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      // GA4: Submit button clicked in form
+      if (typeof (window as any).gtag === "function") {
+        (window as any).gtag("event", "click_submit_pcb", {
+          event_category: "pcb_calculator",
+          event_label: "Submit PCB Form",
+        });
+      }
       
       const email = userEmail ? userEmail.value : "";
       const role = userType ? userType.value : "";
