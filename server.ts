@@ -24,7 +24,7 @@ function getResend() {
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = parseInt(process.env.PORT || "8080", 10);
 
   app.use(express.json());
 
@@ -112,6 +112,11 @@ async function startServer() {
       // Still return JSON even on error to prevent client-side parsing failures
       res.status(500).json({ error: error.message || "Internal server error" });
     }
+  });
+
+  // Root route — redirect bare "/" to "/index.html" so Vite MPA serves the main page
+  app.get("/", (req, res) => {
+    res.redirect(301, "/index.html");
   });
 
   // Vite middleware for development
