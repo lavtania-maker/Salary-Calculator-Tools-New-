@@ -1,6 +1,7 @@
 import express from "express";
 import { createServer as createViteServer } from "vite";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 import { Resend } from "resend";
 import dotenv from "dotenv";
@@ -24,7 +25,7 @@ function getResend() {
 
 async function startServer() {
   const app = express();
-  const PORT = parseInt(process.env.PORT || "8080", 10);
+  const PORT = parseInt(process.env.PORT || "3001", 10);
 
   app.use(express.json());
 
@@ -114,11 +115,6 @@ async function startServer() {
     }
   });
 
-  // Root route — redirect bare "/" to "/index.html" so Vite MPA serves the main page
-  app.get("/", (req, res) => {
-    res.redirect(301, "/index.html");
-  });
-
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
@@ -127,6 +123,46 @@ async function startServer() {
       appType: "mpa",
     });
     app.use(vite.middlewares);
+
+    // Serve HTML pages for MPA routes — Vite middleware mode does NOT auto-serve HTML
+    const htmlPages: Record<string, string> = {
+      "/": "index.html",
+      "/index.html": "index.html",
+      "/admin": "admin.html",
+      "/admin.html": "admin.html",
+      "/mincal": "mincal.html",
+      "/mincal.html": "mincal.html",
+      "/payslip": "payslip.html",
+      "/payslip.html": "payslip.html",
+      "/report": "report.html",
+      "/report.html": "report.html",
+      "/epf-kwsp": "epf-kwsp.html",
+      "/epf-kwsp.html": "epf-kwsp.html",
+      "/epfreport": "epfreport.html",
+      "/epfreport.html": "epfreport.html",
+      "/socsoreport": "socsoreport.html",
+      "/socsoreport.html": "socsoreport.html",
+      "/privacy-policy": "privacy-policy.html",
+      "/privacy-policy.html": "privacy-policy.html",
+      "/pcb-calculator": "pcb-calculator.html",
+      "/pcb-calculator.html": "pcb-calculator.html",
+    };
+
+    app.use(async (req, res, next) => {
+      const urlPath = req.path;
+      const htmlFile = htmlPages[urlPath];
+      if (!htmlFile) return next();
+
+      try {
+        const filePath = path.join(CURRENT_DIRNAME, htmlFile);
+        let html = fs.readFileSync(filePath, "utf-8");
+        html = await vite.transformIndexHtml(req.originalUrl, html);
+        res.setHeader("Content-Type", "text/html");
+        res.end(html);
+      } catch (e) {
+        next(e);
+      }
+    });
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath, { extensions: ["html"] }));

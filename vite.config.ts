@@ -16,11 +16,6 @@ export default defineConfig(({mode}) => {
       },
     },
     appType: 'mpa',
-    server: {
-      host: '0.0.0.0',
-      port: parseInt(process.env.PORT || '8080', 10),
-      hmr: process.env.DISABLE_HMR !== 'true',
-    },
     build: {
       rollupOptions: {
         input: {
