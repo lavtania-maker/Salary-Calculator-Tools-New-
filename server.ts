@@ -7,8 +7,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const CURRENT_FILENAME = typeof import.meta.url !== "undefined" ? fileURLToPath(import.meta.url) : __filename;
+const CURRENT_DIRNAME = typeof import.meta.url !== "undefined" ? path.dirname(CURRENT_FILENAME) : __dirname;
 
 // Lazy initialization of Resend to avoid crash if key is missing
 let resendClient: Resend | null = null;
@@ -117,15 +117,19 @@ async function startServer() {
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
-      configFile: path.join(__dirname, "vite.config.ts"),
+      configFile: path.join(CURRENT_DIRNAME, "vite.config.ts"),
       server: { middlewareMode: true },
       appType: "mpa",
     });
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
+    app.use(express.static(distPath, { extensions: ["html"] }));
+    
+    // For MPA, we don't necessarily want a single catch-all that returns index.html
+    // unless it's truly a fallback.
     app.get("*all", (req, res) => {
+      // If none of the static files matched, fallback to index.html
       res.sendFile(path.join(distPath, "index.html"));
     });
   }

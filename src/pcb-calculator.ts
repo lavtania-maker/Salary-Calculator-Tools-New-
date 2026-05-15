@@ -186,8 +186,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const calculateBtn = form.querySelector("button[type='submit']") as HTMLButtonElement;
 
   grossSalaryInput.addEventListener("input", () => {
-    const salary = parseFloat(grossSalaryInput.value) || 0;
-    calculateBtn.disabled = salary <= 0;
+    // const salary = parseFloat(grossSalaryInput.value) || 0;
+    // calculateBtn.disabled = salary <= 0;
   });
 
   // Calculate only on submit
@@ -195,13 +195,13 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     
     // Optional: show loading state on button
-    const originalText = calculateBtn.textContent || "Calculate";
-    calculateBtn.textContent = "Calculating...";
+    const originalHTML = calculateBtn.innerHTML;
+    calculateBtn.innerHTML = "Calculating...";
     calculateBtn.disabled = true;
 
     setTimeout(() => {
       calculatePcb();
-      calculateBtn.textContent = originalText;
+      calculateBtn.innerHTML = originalHTML;
       calculateBtn.disabled = false;
       
       // Show disclaimer after calculation
@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       placeholderText.style.display = "block";
       resultContent.classList.remove("show");
-      calculateBtn.disabled = true;
+      // calculateBtn.disabled = true;
       if (pcbDisclaimer) pcbDisclaimer.style.display = "none";
     }, 10);
   });
@@ -358,11 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       } catch (err) {
         console.error("Submission error:", err);
-        // Fallback: still show success if possible
-        if (modalFormContent && modalSuccessContent) {
-           modalFormContent.style.display = "none";
-           modalSuccessContent.style.display = "block";
-        }
+        alert("An error occurred while generating the report. Please try again.");
       } finally {
         if (submitBtn) {
           submitBtn.textContent = originalText;

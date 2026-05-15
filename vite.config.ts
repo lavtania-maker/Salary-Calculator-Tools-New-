@@ -29,6 +29,8 @@ export default defineConfig(({mode}) => {
           mincal: path.resolve(__dirname, 'mincal.html'),
           payslip: path.resolve(__dirname, 'payslip.html'),
           report: path.resolve(__dirname, 'report.html'),
+          epfKwsp: path.resolve(__dirname, 'epf-kwsp.html'),
+          epfreport: path.resolve(__dirname, 'epfreport.html'),
           socsoreport: path.resolve(__dirname, 'socsoreport.html'),
           privacyPolicy: path.resolve(__dirname, 'privacy-policy.html'),
           pcbCalculator: path.resolve(__dirname, 'pcb-calculator.html'),

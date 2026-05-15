@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />
-    <link rel="canonical" href="https://salarycalculator.my/socso-perkeso" />
+    <link rel="canonical" href="https://salarycalculator.my/epf-kwsp" />
     <link
       rel="icon"
       type="image/png"
       href="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png"
     />
-    <title>SOCSO Contribution Report</title>
+    <title>EPF Contribution Report Malaysia</title>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -141,7 +141,7 @@
         </svg>
         Salary Calculator MY
       </div>
-      <div class="report-title">SOCSO Contribution Report</div>
+      <div class="report-title">EPF Contribution Report</div>
     </div>
 
     <div class="date-row" id="generatedDate"></div>
@@ -150,45 +150,47 @@
         <div style="font-weight: bold; font-size: 16px; margin-top: 4px;" id="employeeName"></div>
     </div>
 
-    <div class="row bold" style="font-size: 18px">
-      <span>Monthly Salary</span>
+    <div class="section-title">Salary Detail</div>
+    <div class="row">
+      <span>Gross Salary</span>
       <span id="salary">RM 0.00</span>
     </div>
 
-    <div class="section-title">Breakdown of Contribution Amounts</div>
-
+    <div class="section-title">EPF (KWSP) Breakdown</div>
     <div class="row">
-      <span>SOCSO (Employee)</span>
-      <span id="employee">RM 0.00</span>
-    </div>
-    <div class="row">
-      <span>SOCSO (Employer)</span>
-      <span id="employer">RM 0.00</span>
-    </div>
-
-    <div class="row bold total">
-      <span>Total Contribution</span>
-      <span id="total">RM 0.00</span>
-    </div>
-
-    <div class="section-title" style="margin-top: 50px">
-      Contribution Details
-    </div>
-
-    <div class="row">
-      <span>Salary Band</span>
-      <span id="salary-band">-</span>
+      <span>Employee Deduction (<span id="empRateStr">0%</span>)</span>
+      <span id="employeeEpf" style="color: #dc2626">- RM 0.00</span>
     </div>
     <div class="row">
-      <span>Category</span>
-      <span id="category">-</span>
+      <span>Employer Contribution (<span id="emprRateStr">0%</span>)</span>
+      <span id="employerEpf" style="color: #059669">+ RM 0.00</span>
+    </div>
+    <div class="row bold" style="font-size: 18px; background-color: #f8fafc; padding: 15px 10px; margin-top: 10px;">
+      <span>Total Monthly EPF Remittance</span>
+      <span id="totalEpf">RM 0.00</span>
+    </div>
+
+    <div class="section-title">Net Salary Summary</div>
+    <div class="row bold" style="font-size: 20px; padding-top: 15px; border-bottom: none;">
+      <span>Estimated Net Salary (After EPF)</span>
+      <span id="netSalary" style="color: #0f172a">RM 0.00</span>
+    </div>
+
+    <div class="section-title">Employee Details</div>
+    <div class="row">
+      <span>Nationality</span>
+      <span id="nationality" style="text-transform: capitalize;">-</span>
+    </div>
+    <div class="row">
+      <span>Age Category</span>
+      <span id="ageCategory">-</span>
     </div>
 
     <div class="reminder">
       <div class="reminder-title">EMPLOYER REMINDER</div>
-      Payment deadline: before 15th of every month<br />
-      Late payment may incur penalty<br />
-      Salary ceiling capped at RM6,000
+      EPF contributions must be remitted by the 15th of the following month.<br />
+      Late remittance will be subject to penalties and late payment charges.<br />
+      Ensure correct employee particulars when submitting to KWSP.
     </div>
 
     <div class="footer-brand">
@@ -205,76 +207,41 @@
           maximumFractionDigits: 2,
         });
 
-      const companyName = params.get("company");
-      if (companyName && companyName !== "null" && companyName !== "COMPANY LOGO & NAME" && companyName !== "SalaryCalc MY" && companyName !== "SalaryCalculator.my") {
-        document.getElementById("companyNameDisplay").innerText = "Company: " + companyName;
+      document.getElementById("generatedDate").textContent =
+        "Generated on: " + new Date().toLocaleDateString("en-MY", { 
+          year: 'numeric', month: 'long', day: 'numeric',
+          hour: '2-digit', minute: '2-digit'
+        });
+
+      const company = params.get("company");
+      if (company && company !== "null" && company !== "COMPANY LOGO & NAME" && company !== "SalaryCalc MY" && company !== "SalaryCalculator.my") {
+        document.getElementById("companyNameDisplay").textContent = "Company: " + company;
       }
-      
       const employeeName = params.get("name");
       if (employeeName && employeeName !== "null" && employeeName.trim() !== "") {
-        document.getElementById("employeeName").innerText = "Employee: " + employeeName;
+         document.getElementById("employeeName").textContent = "Employee Name: " + employeeName;
       }
 
-      // Set Date
-      const today = new Date();
-      const dateString = today.toLocaleDateString("en-MY", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      });
-      document.getElementById("generatedDate").innerText =
-        "Generated: " + dateString;
-
-      document.getElementById("salary").innerText = formatRM(
-        params.get("salary"),
-      );
-      document.getElementById("employee").innerText = formatRM(
-        params.get("employee"),
-      );
-      document.getElementById("employer").innerText = formatRM(
-        params.get("employer"),
-      );
-      document.getElementById("total").innerText = formatRM(
-        params.get("total"),
-      );
-
-      const category = params.get("category") || "N/A";
-      let formattedCategory = "-";
-      if (category === "below60") {
-        formattedCategory = "Below 60 years old";
-      } else if (category === "above60") {
-        formattedCategory = "60 years and above";
-      } else {
-        formattedCategory = category;
-      }
-      document.getElementById("category").innerText = formattedCategory;
-
-      const bracket = parseInt(params.get("bracket") || "0");
-      function getSalaryBand(bracket) {
-        if (bracket === 1) return "Wages up to RM30";
-        if (bracket === 2) return "Exceed RM30 but not exceed RM50";
-        if (bracket === 3) return "Exceed RM50 but not exceed RM70";
-        if (bracket === 4) return "Exceed RM70 but not exceed RM100";
-        if (bracket === 5) return "Exceed RM100 but not exceed RM140";
-        if (bracket === 6) return "Exceed RM140 but not exceed RM200";
-        if (bracket === 65) return "Wages exceed RM6,000";
-
-        const lower = (bracket - 7) * 100 + 200;
-        const upper = lower + 100;
-        return (
-          "Exceed RM" +
-          lower.toLocaleString("en-MY") +
-          " but not exceed RM" +
-          upper.toLocaleString("en-MY")
-        );
-      }
-
-      if (bracket > 0) {
-        document.getElementById("salary-band").innerText =
-          getSalaryBand(bracket);
-      } else {
-        document.getElementById("salary-band").innerText = "N/A";
-      }
+      document.getElementById("salary").textContent = formatRM(params.get("salary"));
+      document.getElementById("employeeEpf").textContent = "- " + formatRM(params.get("employeeEpf"));
+      document.getElementById("employerEpf").textContent = "+ " + formatRM(params.get("employerEpf"));
+      document.getElementById("totalEpf").textContent = formatRM(params.get("totalEpf"));
+      document.getElementById("netSalary").textContent = formatRM(params.get("netSalary"));
+      
+      document.getElementById("empRateStr").textContent = params.get("empRateStr") || '';
+      document.getElementById("emprRateStr").textContent = params.get("emprRateStr") || '';
+      
+      document.getElementById("nationality").textContent = params.get("nationality") || '-';
+      let ageVal = params.get("age");
+      let ageText = "-";
+      if (ageVal === "below60") ageText = "Below 60 Years Old";
+      if (ageVal === "above60") ageText = "60 Years Old & Above";
+      document.getElementById("ageCategory").textContent = ageText;
+      
+      // Auto-trigger print dialog for PDF download
+      setTimeout(() => {
+          window.print();
+      }, 500);
     </script>
   </body>
 </html>
