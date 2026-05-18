@@ -119,7 +119,10 @@ async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       configFile: path.join(CURRENT_DIRNAME, "vite.config.ts"),
-      server: { middlewareMode: true },
+      server: { 
+        middlewareMode: true,
+        hmr: false, // Disable HMR - WebSocket doesn't work through v0 proxy
+      },
       appType: "mpa",
     });
     app.use(vite.middlewares);
@@ -138,14 +141,17 @@ async function startServer() {
       "/report.html": "report.html",
       "/epf-kwsp": "epf-kwsp.html",
       "/epf-kwsp.html": "epf-kwsp.html",
+      "/socso-perkeso": "index.html",
       "/epfreport": "epfreport.html",
       "/epfreport.html": "epfreport.html",
       "/socsoreport": "socsoreport.html",
       "/socsoreport.html": "socsoreport.html",
       "/privacy-policy": "privacy-policy.html",
       "/privacy-policy.html": "privacy-policy.html",
-      "/pcb-calculator": "pcb-calculator.html",
-      "/pcb-calculator.html": "pcb-calculator.html",
+      "/pcb-calculator": "pcb-income-tax.html",
+      "/pcb-calculator.html": "pcb-income-tax.html",
+      "/pcb-income-tax": "pcb-income-tax.html",
+      "/pcb-income-tax.html": "pcb-income-tax.html",
     };
 
     app.use(async (req, res, next) => {

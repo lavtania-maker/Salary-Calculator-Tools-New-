@@ -16,6 +16,9 @@ export default defineConfig(({mode}) => {
       },
     },
     appType: 'mpa',
+    server: {
+      hmr: false, // Disable HMR - WebSocket doesn't work through v0 proxy
+    },
     build: {
       rollupOptions: {
         input: {
@@ -28,7 +31,7 @@ export default defineConfig(({mode}) => {
           epfreport: path.resolve(__dirname, 'epfreport.html'),
           socsoreport: path.resolve(__dirname, 'socsoreport.html'),
           privacyPolicy: path.resolve(__dirname, 'privacy-policy.html'),
-          pcbCalculator: path.resolve(__dirname, 'pcb-calculator.html'),
+          pcbCalculator: path.resolve(__dirname, 'pcb-income-tax.html'),
         }
       }
     }
