@@ -36,7 +36,27 @@ async function startServer() {
     res.json({
       googleSheetsScriptUrl: process.env.GOOGLE_SHEETS_SCRIPT_URL || "",
       socsoSheetsScriptUrl: process.env.SOCSO_SHEETS_SCRIPT_URL || "",
+      epfSheetsScriptUrl: process.env.EPF_SHEETS_SCRIPT_URL || "",
     });
+  });
+
+  // Server-side proxy for EPF sheet submission — avoids CORS preflight
+  app.post("/api/epf-sheet", async (req, res) => {
+    try {
+      const scriptUrl = process.env.EPF_SHEETS_SCRIPT_URL;
+      if (!scriptUrl) {
+        return res.status(500).json({ error: "EPF_SHEETS_SCRIPT_URL not configured" });
+      }
+      await fetch(scriptUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(req.body),
+      });
+      res.status(200).json({ success: true });
+    } catch (err: any) {
+      console.error("[API] epf-sheet error:", err);
+      res.status(500).json({ error: err.message });
+    }
   });
 
   // Server-side proxy for SOCSO sheet submission — avoids CORS preflight
