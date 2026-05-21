@@ -4527,6 +4527,11 @@
         }
 
         function calculateSocsoOnly() {
+          gtag("event", "click_calculate_socso", {
+            event_category: "SOCSO Calculator",
+            event_label: "Calculate Button",
+          });
+
           const salary =
             parseFloat(document.getElementById("socsoGrossSalary").value) || 0;
           const ageInput = document.querySelector(
