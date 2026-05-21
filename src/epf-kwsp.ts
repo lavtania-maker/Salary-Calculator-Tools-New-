@@ -1,12 +1,3 @@
-import { collection, addDoc } from "firebase/firestore";
-
-let db: any = null;
-import("./firebase.ts").then(fb => {
-  db = fb.db;
-}).catch(e => {
-  console.warn("Firebase not ready", e);
-});
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("epfForm") as HTMLFormElement;
   const resetBtn = document.getElementById("epfResetBtn") as HTMLButtonElement;
@@ -286,20 +277,22 @@ document.addEventListener("DOMContentLoaded", () => {
       
       try {
         const savePromise = (async () => {
-          if (db) {
-            try {
-              await addDoc(collection(db, "leads"), {
+          try {
+            await fetch("/api/epf-sheet", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                timestamp: new Date().toISOString(),
                 email,
-                role,
-                isHiring,
-                company,
-                phone,
-                source: "epf_calculator",
-                createdAt: new Date().toISOString()
-              });
-            } catch (fbErr) {
-              console.error("Firebase error", fbErr);
-            }
+                userType: role,
+                hiringStatus: isHiring,
+                companyName: company,
+                userPhone: phone,
+                download_via: "epf calculator",
+              }),
+            });
+          } catch (sheetErr) {
+            console.error("EPF sheet submission error", sheetErr);
           }
         })();
 

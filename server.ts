@@ -1,6 +1,7 @@
 import express from "express";
 import { createServer as createViteServer } from "vite";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 import { Resend } from "resend";
 import dotenv from "dotenv";
@@ -24,7 +25,7 @@ function getResend() {
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = parseInt(process.env.PORT || "3001", 10);
 
   app.use(express.json());
 
@@ -35,7 +36,27 @@ async function startServer() {
     res.json({
       googleSheetsScriptUrl: process.env.GOOGLE_SHEETS_SCRIPT_URL || "",
       socsoSheetsScriptUrl: process.env.SOCSO_SHEETS_SCRIPT_URL || "",
+      epfSheetsScriptUrl: process.env.EPF_SHEETS_SCRIPT_URL || "",
     });
+  });
+
+  // Server-side proxy for EPF sheet submission — avoids CORS preflight
+  app.post("/api/epf-sheet", async (req, res) => {
+    try {
+      const scriptUrl = process.env.EPF_SHEETS_SCRIPT_URL;
+      if (!scriptUrl) {
+        return res.status(500).json({ error: "EPF_SHEETS_SCRIPT_URL not configured" });
+      }
+      await fetch(scriptUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(req.body),
+      });
+      res.status(200).json({ success: true });
+    } catch (err: any) {
+      console.error("[API] epf-sheet error:", err);
+      res.status(500).json({ error: err.message });
+    }
   });
 
   // Server-side proxy for SOCSO sheet submission — avoids CORS preflight
@@ -118,10 +139,63 @@ async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       configFile: path.join(CURRENT_DIRNAME, "vite.config.ts"),
-      server: { middlewareMode: true },
+      server: { 
+        middlewareMode: true,
+        hmr: false,
+        watch: { usePolling: false },
+      },
+      // Disable the HMR client injection entirely
+      define: {
+        __vite_is_modern_browser: "true",
+      },
       appType: "mpa",
     });
     app.use(vite.middlewares);
+
+    // Serve HTML pages for MPA routes — Vite middleware mode does NOT auto-serve HTML
+    const htmlPages: Record<string, string> = {
+      "/": "index.html",
+      "/index.html": "index.html",
+      "/admin": "admin.html",
+      "/admin.html": "admin.html",
+      "/mincal": "mincal.html",
+      "/mincal.html": "mincal.html",
+      "/payslip": "payslip.html",
+      "/payslip.html": "payslip.html",
+      "/report": "report.html",
+      "/report.html": "report.html",
+      "/epf-kwsp": "epf-kwsp.html",
+      "/epf-kwsp.html": "epf-kwsp.html",
+      "/socso-perkeso": "index.html",
+      "/epfreport": "epfreport.html",
+      "/epfreport.html": "epfreport.html",
+      "/socsoreport": "socsoreport.html",
+      "/socsoreport.html": "socsoreport.html",
+      "/privacy-policy": "privacy-policy.html",
+      "/privacy-policy.html": "privacy-policy.html",
+      "/pcb-calculator": "pcb-income-tax.html",
+      "/pcb-calculator.html": "pcb-income-tax.html",
+      "/pcb-income-tax": "pcb-income-tax.html",
+      "/pcb-income-tax.html": "pcb-income-tax.html",
+    };
+
+    app.use(async (req, res, next) => {
+      const urlPath = req.path;
+      const htmlFile = htmlPages[urlPath];
+      if (!htmlFile) return next();
+
+      try {
+        const filePath = path.join(CURRENT_DIRNAME, htmlFile);
+        let html = fs.readFileSync(filePath, "utf-8");
+        html = await vite.transformIndexHtml(req.originalUrl, html);
+        // Strip @vite/client WebSocket script — it cannot connect through the v0 proxy
+        html = html.replace(/<script type="module" src="\/@vite\/client"><\/script>\n?/g, "");
+        res.setHeader("Content-Type", "text/html");
+        res.end(html);
+      } catch (e) {
+        next(e);
+      }
+    });
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath, { extensions: ["html"] }));
