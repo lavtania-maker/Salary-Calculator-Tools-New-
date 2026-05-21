@@ -121,7 +121,12 @@ async function startServer() {
       configFile: path.join(CURRENT_DIRNAME, "vite.config.ts"),
       server: { 
         middlewareMode: true,
-        hmr: false, // Disable HMR - WebSocket doesn't work through v0 proxy
+        hmr: false,
+        watch: { usePolling: false },
+      },
+      // Disable the HMR client injection entirely
+      define: {
+        __vite_is_modern_browser: "true",
       },
       appType: "mpa",
     });
@@ -163,6 +168,8 @@ async function startServer() {
         const filePath = path.join(CURRENT_DIRNAME, htmlFile);
         let html = fs.readFileSync(filePath, "utf-8");
         html = await vite.transformIndexHtml(req.originalUrl, html);
+        // Strip @vite/client WebSocket script — it cannot connect through the v0 proxy
+        html = html.replace(/<script type="module" src="\/@vite\/client"><\/script>\n?/g, "");
         res.setHeader("Content-Type", "text/html");
         res.end(html);
       } catch (e) {
