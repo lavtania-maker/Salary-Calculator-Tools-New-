@@ -35,8 +35,10 @@ async function startServer() {
   app.get("/api/config", (req, res) => {
     res.json({
       googleSheetsScriptUrl: process.env.GOOGLE_SHEETS_SCRIPT_URL || "",
-      socsoSheetsScriptUrl: process.env.SOCSO_SHEETS_SCRIPT_URL || "",
-      epfSheetsScriptUrl: process.env.EPF_SHEETS_SCRIPT_URL || "",
+      socsoSheetsScriptUrl:  process.env.SOCSO_SHEETS_SCRIPT_URL  || "",
+      epfSheetsScriptUrl:    process.env.EPF_SHEETS_SCRIPT_URL    || "",
+      epfSheetId:            process.env.EPF_SHEET_ID             || "",
+      epfSheetName:          process.env.EPF_SHEET_NAME           || "",
     });
   });
 
@@ -44,13 +46,29 @@ async function startServer() {
   app.post("/api/epf-sheet", async (req, res) => {
     try {
       const scriptUrl = process.env.EPF_SHEETS_SCRIPT_URL;
+      const sheetId   = process.env.EPF_SHEET_ID;
+      const sheetName = process.env.EPF_SHEET_NAME;
+
       if (!scriptUrl) {
         return res.status(500).json({ error: "EPF_SHEETS_SCRIPT_URL not configured" });
       }
+      if (!sheetId) {
+        return res.status(500).json({ error: "EPF_SHEET_ID not configured" });
+      }
+      if (!sheetName) {
+        return res.status(500).json({ error: "EPF_SHEET_NAME not configured" });
+      }
+
+      const payload = {
+        ...req.body,
+        sheetId,
+        sheetName,
+      };
+
       await fetch(scriptUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(req.body),
+        body: JSON.stringify(payload),
       });
       res.status(200).json({ success: true });
     } catch (err: any) {
