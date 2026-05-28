@@ -276,23 +276,31 @@ document.addEventListener("DOMContentLoaded", () => {
       const popup = window.open('about:blank', '_blank');
       
       try {
-        const savePromise = (async () => {
+      const savePromise = (async () => {
           try {
-            await fetch("/api/epf-sheet", {
+            console.log("[v0] EPF sheet submission starting...");
+            const payload = {
+              timestamp: new Date().toISOString(),
+              email,
+              userType: role,
+              hiringStatus: isHiring,
+              companyName: company,
+              userPhone: phone,
+              download_via: "epf calculator",
+            };
+            console.log("[v0] EPF payload:", JSON.stringify(payload));
+            const response = await fetch("/api/epf-sheet", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                timestamp: new Date().toISOString(),
-                email,
-                userType: role,
-                hiringStatus: isHiring,
-                companyName: company,
-                userPhone: phone,
-                download_via: "epf calculator",
-              }),
+              body: JSON.stringify(payload),
             });
+            const result = await response.json();
+            console.log("[v0] EPF sheet response:", response.status, JSON.stringify(result));
+            if (!response.ok) {
+              console.error("[v0] EPF sheet API error:", result);
+            }
           } catch (sheetErr) {
-            console.error("EPF sheet submission error", sheetErr);
+            console.error("[v0] EPF sheet fetch error:", sheetErr);
           }
         })();
 

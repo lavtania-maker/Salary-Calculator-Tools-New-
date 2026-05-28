@@ -7,6 +7,9 @@ import { Resend } from "resend";
 import dotenv from "dotenv";
 
 dotenv.config();
+// In the Vercel sandbox, project env vars live in /vercel/share/.env.project
+dotenv.config({ path: "/vercel/share/.env.project", override: false });
+dotenv.config({ path: "/vercel/share/.env.snowflake", override: false });
 
 const CURRENT_FILENAME = typeof import.meta.url !== "undefined" ? fileURLToPath(import.meta.url) : __filename;
 const CURRENT_DIRNAME = typeof import.meta.url !== "undefined" ? path.dirname(CURRENT_FILENAME) : __dirname;
@@ -35,8 +38,10 @@ async function startServer() {
   app.get("/api/config", (req, res) => {
     res.json({
       googleSheetsScriptUrl: process.env.GOOGLE_SHEETS_SCRIPT_URL || "",
-      socsoSheetsScriptUrl: process.env.SOCSO_SHEETS_SCRIPT_URL || "",
-      epfSheetsScriptUrl: process.env.EPF_SHEETS_SCRIPT_URL || "",
+      socsoSheetsScriptUrl:  process.env.SOCSO_SHEETS_SCRIPT_URL  || "",
+      epfSheetsScriptUrl:    process.env.EPF_SHEETS_SCRIPT_URL    || "",
+      epfSheetId:            process.env.EPF_SHEET_ID             || "",
+      epfSheetName:          process.env.EPF_SHEET_NAME           || "",
     });
   });
 
@@ -44,14 +49,40 @@ async function startServer() {
   app.post("/api/epf-sheet", async (req, res) => {
     try {
       const scriptUrl = process.env.EPF_SHEETS_SCRIPT_URL;
+      const sheetId   = process.env.EPF_SHEET_ID;
+      const sheetName = process.env.EPF_SHEET_NAME;
+
+      console.log("[v0] /api/epf-sheet called");
+      console.log("[v0] EPF_SHEETS_SCRIPT_URL set:", !!scriptUrl);
+      console.log("[v0] EPF_SHEET_ID set:", !!sheetId);
+      console.log("[v0] EPF_SHEET_NAME set:", !!sheetName);
+
       if (!scriptUrl) {
         return res.status(500).json({ error: "EPF_SHEETS_SCRIPT_URL not configured" });
       }
-      await fetch(scriptUrl, {
+      if (!sheetId) {
+        return res.status(500).json({ error: "EPF_SHEET_ID not configured" });
+      }
+      if (!sheetName) {
+        return res.status(500).json({ error: "EPF_SHEET_NAME not configured" });
+      }
+
+      const payload = {
+        ...req.body,
+        sheetId,
+        sheetName,
+      };
+
+      console.log("[v0] Forwarding to Apps Script:", scriptUrl.slice(0, 60) + "...");
+      const appsRes = await fetch(scriptUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(req.body),
+        body: JSON.stringify(payload),
       });
+      const appsText = await appsRes.text();
+      console.log("[v0] Apps Script response status:", appsRes.status);
+      console.log("[v0] Apps Script response body:", appsText);
+
       res.status(200).json({ success: true });
     } catch (err: any) {
       console.error("[API] epf-sheet error:", err);
