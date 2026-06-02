@@ -1,12 +1,4 @@
 // Simplified Malaysia PCB Tax Calculator
-import { collection, addDoc } from "firebase/firestore";
-// If db fails to import, we will gracefully handle it
-let db: any = null;
-import("./firebase.ts").then(fb => {
-  db = fb.db;
-}).catch(e => {
-  console.warn("Firebase not ready", e);
-});
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("pcbForm") as HTMLFormElement;
@@ -295,22 +287,24 @@ document.addEventListener("DOMContentLoaded", () => {
           submitBtn.disabled = true;
         }
 
-        // Fire off background data saving (non-blocking for UI transition)
+        // Fire off background data saving to Google Sheets (non-blocking for UI transition)
         const savePromise = (async () => {
-          if (db) {
-            try {
-              await addDoc(collection(db, "leads"), {
+          try {
+            await fetch("/api/pcb-sheet", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                timestamp: new Date().toISOString(),
                 email,
-                role,
-                isHiring,
-                company,
-                phone,
-                source: "pcb_calculator",
-                createdAt: new Date().toISOString()
-              });
-            } catch (fbErr) {
-              console.error("Firebase error (non-blocking):", fbErr);
-            }
+                userType: role,
+                hiringStatus: isHiring,
+                companyName: company,
+                userPhone: phone,
+                download_via: "pcb calculator",
+              }),
+            });
+          } catch (sheetErr) {
+            console.error("PCB sheet submission error:", sheetErr);
           }
         })();
 

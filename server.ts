@@ -45,6 +45,60 @@ async function startServer() {
     });
   });
 
+  // Server-side proxy for Homepage Salary sheet submission
+  app.post("/api/salary-sheet", async (req, res) => {
+    try {
+      const scriptUrl = process.env.GOOGLE_SHEETS_SCRIPT_URL;
+      const sheetId   = process.env.GOOGLE_SHEET_ID;
+
+      if (!scriptUrl) {
+        return res.status(500).json({ error: "GOOGLE_SHEETS_SCRIPT_URL not configured" });
+      }
+      if (!sheetId) {
+        return res.status(500).json({ error: "GOOGLE_SHEET_ID not configured" });
+      }
+
+      const payload = { ...req.body, sheetId };
+
+      const appsRes = await fetch(scriptUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const appsText = await appsRes.text();
+      console.log("[API] salary-sheet response:", appsRes.status, appsText.slice(0, 100));
+
+      res.status(200).json({ success: true });
+    } catch (err: any) {
+      console.error("[API] salary-sheet error:", err);
+      res.status(500).json({ error: err.message });
+    }
+  });
+
+  // Server-side proxy for PCB sheet submission
+  app.post("/api/pcb-sheet", async (req, res) => {
+    try {
+      const scriptUrl = process.env.VITE_PCB_SHEETS_SCRIPT_URL;
+
+      if (!scriptUrl) {
+        return res.status(500).json({ error: "VITE_PCB_SHEETS_SCRIPT_URL not configured" });
+      }
+
+      const appsRes = await fetch(scriptUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(req.body),
+      });
+      const appsText = await appsRes.text();
+      console.log("[API] pcb-sheet response:", appsRes.status, appsText.slice(0, 100));
+
+      res.status(200).json({ success: true });
+    } catch (err: any) {
+      console.error("[API] pcb-sheet error:", err);
+      res.status(500).json({ error: err.message });
+    }
+  });
+
   // Server-side proxy for EPF sheet submission — avoids CORS preflight
   app.post("/api/epf-sheet", async (req, res) => {
     try {
@@ -91,18 +145,28 @@ async function startServer() {
   });
 
   // Server-side proxy for SOCSO sheet submission — avoids CORS preflight
-  // The browser POSTs JSON to this endpoint; we forward it to Apps Script
   app.post("/api/socso-sheet", async (req, res) => {
     try {
       const scriptUrl = process.env.SOCSO_SHEETS_SCRIPT_URL;
+      const sheetId   = process.env.SOCSO_SPREADSHEET_ID;
+
       if (!scriptUrl) {
         return res.status(500).json({ error: "SOCSO_SHEETS_SCRIPT_URL not configured" });
       }
-      const response = await fetch(scriptUrl, {
+      if (!sheetId) {
+        return res.status(500).json({ error: "SOCSO_SPREADSHEET_ID not configured" });
+      }
+
+      const payload = { ...req.body, sheetId };
+
+      const appsRes = await fetch(scriptUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(req.body),
+        body: JSON.stringify(payload),
       });
+      const appsText = await appsRes.text();
+      console.log("[API] socso-sheet response:", appsRes.status, appsText.slice(0, 100));
+
       res.status(200).json({ success: true });
     } catch (err: any) {
       console.error("[API] socso-sheet error:", err);

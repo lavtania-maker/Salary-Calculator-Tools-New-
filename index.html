@@ -5135,25 +5135,19 @@
               };
 
               if (currentDownloadType === "socsoreport") {
-                const SOCSO_URL = "https://script.google.com/macros/s/AKfycbzWJVLF-CQME8DhdKJj13x33I2jvSjfMhWdxmISqSv5wWPDBmVDzEu4j-ejBRoSgyvKFw/exec";
-                // POST with text/plain — no CORS preflight triggered, Apps Script
-                // receives JSON body in e.postData.contents which doPost can parse
-                fetch(SOCSO_URL, {
+                // Use server proxy for SOCSO sheet submission
+                fetch("/api/socso-sheet", {
                   method: "POST",
-                  mode: "no-cors",
-                  headers: { "Content-Type": "text/plain" },
+                  headers: { "Content-Type": "application/json" },
                   body: JSON.stringify(sheetPayload),
                 });
               } else {
-                const GOOGLE_SHEETS_URL = (window._appConfig && window._appConfig.googleSheetsScriptUrl) || "";
-                if (GOOGLE_SHEETS_URL) {
-                  fetch(GOOGLE_SHEETS_URL, {
-                    method: "POST",
-                    mode: "no-cors",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(sheetPayload),
-                  });
-                }
+                // Use server proxy for salary sheet submission
+                fetch("/api/salary-sheet", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(sheetPayload),
+                });
               }
             } catch (sheetError) {
               console.error("Error sending to Google Sheets:", sheetError);
