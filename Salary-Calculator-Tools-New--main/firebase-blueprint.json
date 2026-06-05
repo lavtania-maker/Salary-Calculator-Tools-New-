@@ -1,0 +1,50 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Lead",
+      "description": "A user who downloaded a resource",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "The user's email address"
+        },
+        "action": {
+          "type": "string",
+          "description": "The action they took (e.g., Download Salary Report)"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "When the lead was captured"
+        },
+        "userType": {
+          "type": "string",
+          "description": "The type of user (e.g., Employer / HR, Employee, Jobseeker)"
+        },
+        "phoneNumber": {
+          "type": "string",
+          "description": "The user's phone number"
+        },
+        "companyName": {
+          "type": "string",
+          "description": "The user's company name"
+        },
+        "hiringStatus": {
+          "type": "string",
+          "description": "The user's hiring status (if applicable)"
+        }
+      },
+      "required": ["email", "action", "createdAt", "userType"]
+    }
+  },
+  "firestore": {
+    "/leads/{leadId}": {
+      "schema": {
+        "$ref": "#/entities/Lead"
+      },
+      "description": "Collection of captured leads"
+    }
+  }
+}

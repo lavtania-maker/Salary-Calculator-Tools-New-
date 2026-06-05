@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-TMQV1XC09P");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="canonical" href="https://salarycalculator.my/report" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png"
+    />
+    <title>Salary Breakdown Report</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 40px;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #000;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+      }
+      .brand-logo {
+        color: #2563eb; 
+        font-weight: 900; 
+        font-size: 26px; 
+        display: flex; 
+        align-items: center; 
+        gap: 8px;
+        letter-spacing: -0.5px;
+      }
+      .report-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #64748b;
+        text-align: right;
+      }
+      .footer-brand {
+        margin-top: 60px;
+        padding-top: 20px;
+        border-top: 1px dashed #cbd5e1;
+        font-size: 13px;
+        color: #64748b;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .footer-brand a {
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .date-row {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #64748b;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #000;
+        margin-bottom: 30px;
+      }
+      .row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .row.bold {
+        font-weight: bold;
+        color: #0f172a;
+      }
+      .row.total {
+        font-size: 20px;
+        border-top: 2px solid #000;
+        border-bottom: none;
+        padding-top: 20px;
+        margin-top: 10px;
+      }
+      .section-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 40px;
+        margin-bottom: 15px;
+        color: #1e293b;
+      }
+      .btn {
+        padding: 10px 20px;
+        background-color: #2563eb;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+      }
+      .btn:hover {
+        background-color: #1d4ed8;
+      }
+      .print-controls {
+        text-align: right;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px dashed #cbd5e1;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+      }
+      th,
+      td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      th {
+        font-weight: bold;
+        color: #64748b;
+        border-bottom: 2px solid #cbd5e1;
+      }
+      .reminder {
+        margin-top: 40px;
+        font-size: 14px;
+        color: #475569;
+        line-height: 1.6;
+      }
+      .reminder-title {
+        font-weight: bold;
+        color: #1e293b;
+        margin-bottom: 8px;
+      }
+      @media print {
+        .print-controls {
+          display: none;
+        }
+        body {
+          padding: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="print-controls">
+      <button class="btn" onclick="window.print()">Print to PDF</button>
+    </div>
+
+    <div class="header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 10px;">
+      <div class="brand-logo">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="28" height="28">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z" />
+        </svg>
+        Salary Calculator MY
+      </div>
+      <div class="report-title">Salary Report</div>
+    </div>
+
+    <div class="date-row" id="generatedDate"></div>
+    <div style="margin-bottom: 20px;">
+        <div style="font-weight: bold; font-size: 16px;" id="companyNameDisplay"></div>
+        <div style="font-weight: bold; font-size: 16px; margin-top: 4px;" id="employeeName"></div>
+    </div>
+
+    <div class="section-title" style="margin-top: 0">
+      Monthly Salary Summary
+    </div>
+    <div class="row bold" style="font-size: 18px">
+      <span>Gross Monthly Salary</span>
+      <span id="salary">RM 0.00</span>
+    </div>
+
+    <div class="row">
+      <span>Monthly EPF</span>
+      <span id="epf">RM 0.00</span>
+    </div>
+    <div class="row">
+      <span>Monthly SOCSO</span>
+      <span id="socso">RM 0.00</span>
+    </div>
+    <div class="row">
+      <span>Monthly EIS</span>
+      <span id="eis">RM 0.00</span>
+    </div>
+    <div class="row">
+      <span style="font-weight: bold; color: #0284c7;">Monthly PCB</span>
+      <span id="pcb" style="font-weight: bold; color: #0284c7;">RM 0.00</span>
+    </div>
+    <div
+      class="row bold"
+      style="background-color: #f8fafc; padding: 15px 10px; margin-top: 15px"
+    >
+      <span>Monthly Total Deductions</span>
+      <span id="total">RM 0.00</span>
+    </div>
+
+    <div class="row bold total" style="color: #10b981;">
+      <span>Monthly Take Home Pay</span>
+      <span id="net">RM 0.00</span>
+    </div>
+
+    <div class="section-title" style="margin-top: 40px; border-top: 2px dashed #e2e8f0; padding-top: 30px;">
+      Annual Salary Summary
+    </div>
+    <div class="row bold" style="font-size: 18px">
+      <span>Estimated Annual Income</span>
+      <span id="annual-salary">RM 0.00</span>
+    </div>
+
+    <div class="row">
+      <span>Annual EPF Contribution</span>
+      <span id="annual-epf">RM 0.00</span>
+    </div>
+    <div class="row">
+      <span>Annual SOCSO Contribution</span>
+      <span id="annual-socso">RM 0.00</span>
+    </div>
+    <div class="row">
+      <span>Annual EIS Contribution</span>
+      <span id="annual-eis">RM 0.00</span>
+    </div>
+    <div class="row">
+      <span style="font-weight: bold; color: #0284c7;">Estimated Annual PCB</span>
+      <span id="annual-pcb" style="font-weight: bold; color: #0284c7;">RM 0.00</span>
+    </div>
+    <div
+      class="row bold"
+      style="background-color: #f8fafc; padding: 15px 10px; margin-top: 15px;"
+    >
+      <span>Estimated Annual Total Deductions</span>
+      <span id="annual-total">RM 0.00</span>
+    </div>
+
+    <div class="row bold total" style="color: #10b981;">
+      <span>Estimated Annual Take Home Pay</span>
+      <span id="annual-net">RM 0.00</span>
+    </div>
+
+    <div class="section-title">Contribution Breakdown</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Contribution</th>
+          <th>Employee</th>
+          <th>Employer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="bold">EPF</td>
+          <td id="epf-employee">RM 0.00</td>
+          <td id="epf-employer">RM 0.00</td>
+        </tr>
+        <tr>
+          <td class="bold">SOCSO</td>
+          <td id="socso-employee">RM 0.00</td>
+          <td id="socso-employer">RM 0.00</td>
+        </tr>
+        <tr>
+          <td class="bold">EIS</td>
+          <td id="eis-employee">RM 0.00</td>
+          <td id="eis-employer">RM 0.00</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">PCB / Tax Section</div>
+    <div id="pcb-section">
+      <!-- Injected via JS -->
+    </div>
+
+    <div class="section-title">Income Group Section</div>
+    <div class="row">
+      <span id="income-group-category" style="font-weight: bold; font-size: 16px;">-</span>
+    </div>
+
+    <div class="reminder">
+      <div class="reminder-title">EMPLOYEE NOTES</div>
+      Figures are estimates only.<br />
+      Actual deductions may vary.<br />
+      Refer to official EPF, SOCSO, and LHDN guidelines for precise calculations.
+    </div>
+
+    <div class="footer-brand">
+      <div>Generated by <strong>Salary Calculator MY</strong></div>
+      <a href="https://salarycalculator.my" target="_blank">salarycalculator.my</a>
+    </div>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const formatRM = (val) =>
+        "RM " +
+        parseFloat(val || 0).toLocaleString("en-MY", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        });
+
+      const companyName = params.get("company");
+      if (companyName && companyName !== "null" && companyName !== "COMPANY LOGO & NAME" && companyName !== "SalaryCalc MY" && companyName !== "SalaryCalculator.my") {
+        document.getElementById("companyNameDisplay").innerText = "Company: " + companyName;
+      }
+
+      // Set Date
+      const today = new Date();
+      const dateString = today.toLocaleDateString("en-MY", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+      document.getElementById("generatedDate").innerText =
+        "Generated: " + dateString;
+
+      const salaryParam = parseFloat(params.get("salary") || 0);
+
+      document.getElementById("salary").innerText = formatRM(salaryParam);
+      document.getElementById("epf").innerText = formatRM(params.get("epf"));
+      document.getElementById("socso").innerText = formatRM(
+        params.get("socso"),
+      );
+      document.getElementById("eis").innerText = formatRM(params.get("eis"));
+      document.getElementById("pcb").innerText = formatRM(params.get("pcb"));
+      document.getElementById("total").innerText = formatRM(
+        params.get("total"),
+      );
+      document.getElementById("net").innerText = formatRM(params.get("net"));
+
+      // Set Annual Values
+      document.getElementById("annual-salary").innerText = formatRM(salaryParam * 12);
+      document.getElementById("annual-epf").innerText = formatRM(parseFloat(params.get("epf") || 0) * 12);
+      document.getElementById("annual-socso").innerText = formatRM(parseFloat(params.get("socso") || 0) * 12);
+      document.getElementById("annual-eis").innerText = formatRM(parseFloat(params.get("eis") || 0) * 12);
+      document.getElementById("annual-pcb").innerText = formatRM(parseFloat(params.get("pcb") || 0) * 12);
+      document.getElementById("annual-total").innerText = formatRM(parseFloat(params.get("total") || 0) * 12);
+      document.getElementById("annual-net").innerText = formatRM(parseFloat(params.get("net") || 0) * 12);
+
+      // Table Breakdown
+      document.getElementById("epf-employee").innerText = formatRM(
+        params.get("epf"),
+      );
+      document.getElementById("epf-employer").innerText = formatRM(
+        params.get("epfEmployer"),
+      );
+      document.getElementById("socso-employee").innerText = formatRM(
+        params.get("socso"),
+      );
+      document.getElementById("socso-employer").innerText = formatRM(
+        params.get("socsoEmployer"),
+      );
+      document.getElementById("eis-employee").innerText = formatRM(
+        params.get("eis"),
+      );
+      document.getElementById("eis-employer").innerText = formatRM(
+        params.get("eisEmployer"),
+      );
+
+      // PCB / Tax Section
+      const pcbValue = parseFloat(params.get("pcb") || 0);
+      const pcbSection = document.getElementById("pcb-section");
+
+      if (pcbValue > 0) {
+        const annualPCB = pcbValue * 12;
+        const annualSalary = salaryParam * 12;
+        let effRate = 0;
+        if (annualSalary > 0) {
+          effRate = ((annualPCB / annualSalary) * 100).toFixed(2);
+        }
+
+        // Estimate tax bracket based on annualized gross salary (approximate)
+        let bracket = "Refer to LHDN";
+        const estimatedTaxable = annualSalary - 9000; // rough generic individual relief
+        if (estimatedTaxable <= 5000) bracket = "0% (Up to RM5,000)";
+        else if (estimatedTaxable <= 20000) bracket = "1% (RM5,001 - RM20,000)";
+        else if (estimatedTaxable <= 35000) bracket = "3% (RM20,001 - RM35,000)";
+        else if (estimatedTaxable <= 50000) bracket = "8% (RM35,001 - RM50,000)";
+        else if (estimatedTaxable <= 70000) bracket = "11% (RM50,001 - RM70,000)";
+        else if (estimatedTaxable <= 100000) bracket = "19% (RM70,001 - RM100,000)";
+        else if (estimatedTaxable <= 400000) bracket = "25% (RM100,001 - RM400,000)";
+        else if (estimatedTaxable <= 600000) bracket = "26% (RM400,001 - RM600,000)";
+        else if (estimatedTaxable <= 2000000) bracket = "28% (RM600,001 - RM2,000,000)";
+        else bracket = "30% (Above RM2,000,000)";
+
+        pcbSection.innerHTML = `
+          <div class="row">
+            <span>Monthly PCB</span>
+            <span>${formatRM(pcbValue)}</span>
+          </div>
+          <div class="row">
+            <span>Estimated Annual PCB</span>
+            <span>${formatRM(annualPCB)}</span>
+          </div>
+          <div class="row">
+            <span>Effective Tax Rate (Est.)</span>
+            <span>${effRate}%</span>
+          </div>
+          <div class="row">
+            <span>Est. Tax Bracket</span>
+            <span>${bracket}</span>
+          </div>
+        `;
+      } else {
+        pcbSection.innerHTML = `
+          <div class="row" style="color: #10b981; font-weight: 500;">
+            No PCB deduction required
+          </div>
+        `;
+      }
+
+      // Income Group Section
+      const incomeGroup = params.get("incomeGroup") || "Unknown";
+      const subGroup = params.get("subGroup") || "Unknown";
+      if (incomeGroup !== "Unknown") {
+          document.getElementById("income-group-category").innerText = `${incomeGroup} (${subGroup})`;
+      } else {
+          document.getElementById("income-group-category").innerText = "-";
+      }
+    </script>
+  </body>
+</html>

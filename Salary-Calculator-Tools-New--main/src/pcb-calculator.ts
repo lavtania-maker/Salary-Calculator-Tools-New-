@@ -1,7 +1,5 @@
 // Simplified Malaysia PCB Tax Calculator
 
-import { generatePDFReport } from "./lib/pdf-generator";
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("pcbForm") as HTMLFormElement;
   const resetBtn = document.getElementById("resetBtn") as HTMLButtonElement;
@@ -280,35 +278,35 @@ document.addEventListener("DOMContentLoaded", () => {
         submitBtn.textContent = "Processing...";
         submitBtn.disabled = true;
       }
-
-      // Generate the PDF synchronously IMMEDIATELY to bypass download blockers.
-      try {
-        if (lastCalculation) {
-            generatePDFReport({
-              title: "PCB (Income Tax) Report",
-              fileName: "PCB_Report",
-              data: [
-                { label: "Gross Salary", value: `RM ${parseFloat(lastCalculation.salary).toFixed(2)}` },
-                { label: "Bonus", value: `RM ${parseFloat(lastCalculation.bonus).toFixed(2)}` },
-                { label: "Tax Status", value: lastCalculation.taxStatus === 'resident' ? 'Resident' : 'Non-Resident' },
-                { label: "EPF Rate", value: `${parseFloat(lastCalculation.epfRate)}%` },
-                { label: "Annual Income", value: `RM ${parseFloat(lastCalculation.annualIncome).toFixed(2)}` },
-                { label: "Total Tax Reliefs", value: `RM ${parseFloat(lastCalculation.relief).toFixed(2)}` },
-                { label: "Chargeable Income", value: `RM ${parseFloat(lastCalculation.chargeable).toFixed(2)}` },
-                { label: "Tax Bracket", value: lastCalculation.taxBracket },
-                { label: "Effective Tax Rate", value: `${lastCalculation.effectiveRate}%` },
-                { label: "Monthly PCB Deducted", value: `-RM ${parseFloat(lastCalculation.pcb).toFixed(2)}` },
-                { label: "Net Salary", value: `RM ${parseFloat(lastCalculation.netSalary).toFixed(2)}` }
-              ]
-            });
-        }
-      } catch (err) {
-        console.error("PDF Generation error:", err);
-      }
   
       try {
+        // Start showing processing state
+        if (submitBtn) {
+          originalText = submitBtn.textContent || "Download PDF";
+          submitBtn.textContent = "Processing...";
+          submitBtn.disabled = true;
+        }
+
         // Fire off background data saving to Google Sheets (non-blocking for UI transition)
-        fetch("/api/pcb-sheet", {method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({timestamp: new Date().toISOString(), email, userType: role, hiringStatus: isHiring, companyName: company, userPhone: phone, download_via: "pcb calculator"})}).catch(e=>console.error(e));
+        const savePromise = (async () => {
+          try {
+            await fetch("/api/pcb-sheet", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                timestamp: new Date().toISOString(),
+                email,
+                userType: role,
+                hiringStatus: isHiring,
+                companyName: company,
+                userPhone: phone,
+                download_via: "pcb calculator",
+              }),
+            });
+          } catch (sheetErr) {
+            console.error("PCB sheet submission error:", sheetErr);
+          }
+        })();
 
         // Small delay to make "Processing..." visible but not annoying
         await new Promise(resolve => setTimeout(resolve, 800));
@@ -316,17 +314,45 @@ document.addEventListener("DOMContentLoaded", () => {
         // Transition UI
         if (modalFormContent && modalSuccessContent && modalFeedback) {
           modalFormContent.style.display = "none";
-          if(emailModal) emailModal.style.display = "none";
-          modalFeedback.textContent = "Thank you! Your PCB report has been downloaded.";
+          modalSuccessContent.style.display = "block";
           modalFeedback.style.display = "block";
           
           const mobileActionButtons = document.getElementById("mobileActionButtons");
           const mobileFallbackText = document.getElementById("mobileFallbackText");
-          if (mobileActionButtons) mobileActionButtons.style.display = "none";
-          if (mobileFallbackText) mobileFallbackText.style.display = "none";
+          if (mobileActionButtons) mobileActionButtons.style.display = "flex";
+          if (mobileFallbackText) mobileFallbackText.style.display = "block";
         }
+        
+        if (viewFileBtn && lastCalculation) {
+            const queryParams = new URLSearchParams({
+              salary: lastCalculation.salary,
+              bonus: lastCalculation.bonus,
+              epf: lastCalculation.epf,
+              relief: lastCalculation.relief,
+              pcb: lastCalculation.pcb,
+              annualIncome: lastCalculation.annualIncome,
+              annualPcb: lastCalculation.annualPcb,
+              effectiveRate: lastCalculation.effectiveRate,
+              taxBracket: lastCalculation.taxBracket,
+              taxStatus: lastCalculation.taxStatus,
+              epfRate: lastCalculation.epfRate,
+              chargeable: lastCalculation.chargeable,
+              company: company || "SalaryCalc MY"
+            }).toString();
+            viewFileBtn.href = `/pcbreport.html?${queryParams}`;
+            
+            // Close modal when user clicks the view button
+            viewFileBtn.addEventListener("click", () => {
+              if (emailModal) emailModal.style.display = "none";
+            });
+        }
+        
+        // Wait for save to finish in background if we really want to, but we've already shown success
+        await savePromise;
+
       } catch (err) {
         console.error("Submission error:", err);
+        alert("An error occurred while generating the report. Please try again.");
       } finally {
         if (submitBtn) {
           submitBtn.textContent = originalText;

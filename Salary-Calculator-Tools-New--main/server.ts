@@ -28,7 +28,7 @@ function getResend() {
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = parseInt(process.env.PORT || "3001", 10);
 
   app.use(express.json());
 
@@ -49,30 +49,18 @@ async function startServer() {
   app.post("/api/salary-sheet", async (req, res) => {
     try {
       const scriptUrl = process.env.GOOGLE_SHEETS_SCRIPT_URL;
-      const sheetId   = "1lkK2LBrFUPtRZMDGgHdnaYw-IcPGUtylVhp7fpe_I_0"; // Salary Calculator ID
+      const sheetId   = process.env.GOOGLE_SHEET_ID;
 
       if (!scriptUrl) {
         return res.status(500).json({ error: "GOOGLE_SHEETS_SCRIPT_URL not configured" });
       }
-
-      // Check if it's from Annual Leave Calculator
-      let targetSheetId = sheetId;
-      let targetScriptUrl = scriptUrl;
-      const actn = typeof req.body.action === "string" ? req.body.action.toLowerCase() : "";
-      const dl = typeof req.body.download_via === "string" ? req.body.download_via.toLowerCase() : "";
-
-      if (actn.includes("annual leave") || dl.includes("annual leave")) {
-        targetSheetId = "14qNhk_A8THVB_eWsUi3Hyve7Sw6NLJRY-oF4HIqpDwA";
-        targetScriptUrl = process.env.ANNUAL_LEAVE_SHEETS_SCRIPT_URL || process.env.GOOGLE_SHEETS_SCRIPT_URL;
+      if (!sheetId) {
+        return res.status(500).json({ error: "GOOGLE_SHEET_ID not configured" });
       }
 
-      if (!targetScriptUrl) {
-        return res.status(500).json({ error: "Script URL not configured" });
-      }
+      const payload = { ...req.body, sheetId };
 
-      const payload = { ...req.body, sheetId: targetSheetId };
-
-      const appsRes = await fetch(targetScriptUrl, {
+      const appsRes = await fetch(scriptUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -90,20 +78,16 @@ async function startServer() {
   // Server-side proxy for PCB sheet submission
   app.post("/api/pcb-sheet", async (req, res) => {
     try {
-      const scriptUrl = process.env.VITE_PCB_SHEETS_SCRIPT_URL || process.env.GOOGLE_SHEETS_SCRIPT_URL;
-
-      const targetSheetId = "1T6QfXmRl-0T2b_dog8_VSXVYCVJj-ifcH4Jf-Uv_dTw"; // PCB Calculator ID
+      const scriptUrl = process.env.VITE_PCB_SHEETS_SCRIPT_URL;
 
       if (!scriptUrl) {
-        return res.status(500).json({ error: "Script URL not configured" });
+        return res.status(500).json({ error: "VITE_PCB_SHEETS_SCRIPT_URL not configured" });
       }
-
-      const payload = { ...req.body, sheetId: targetSheetId };
 
       const appsRes = await fetch(scriptUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(req.body),
       });
       const appsText = await appsRes.text();
       console.log("[API] pcb-sheet response:", appsRes.status, appsText.slice(0, 100));
@@ -118,15 +102,23 @@ async function startServer() {
   // Server-side proxy for EPF sheet submission — avoids CORS preflight
   app.post("/api/epf-sheet", async (req, res) => {
     try {
-      const scriptUrl = process.env.EPF_SHEETS_SCRIPT_URL || process.env.GOOGLE_SHEETS_SCRIPT_URL;
-      const sheetId   = "1ZjzvFhb1xA5x1SB8OJgUgkUwlaSnIHrMWeqjte2uw7k"; // EPF Calculator ID
-      const sheetName = process.env.EPF_SHEET_NAME || "Sheet1";
+      const scriptUrl = process.env.EPF_SHEETS_SCRIPT_URL;
+      const sheetId   = process.env.EPF_SHEET_ID;
+      const sheetName = process.env.EPF_SHEET_NAME;
 
       console.log("[v0] /api/epf-sheet called");
-      console.log("[v0] scriptUrl set:", !!scriptUrl);
+      console.log("[v0] EPF_SHEETS_SCRIPT_URL set:", !!scriptUrl);
+      console.log("[v0] EPF_SHEET_ID set:", !!sheetId);
+      console.log("[v0] EPF_SHEET_NAME set:", !!sheetName);
 
       if (!scriptUrl) {
-        return res.status(500).json({ error: "Script URL not configured" });
+        return res.status(500).json({ error: "EPF_SHEETS_SCRIPT_URL not configured" });
+      }
+      if (!sheetId) {
+        return res.status(500).json({ error: "EPF_SHEET_ID not configured" });
+      }
+      if (!sheetName) {
+        return res.status(500).json({ error: "EPF_SHEET_NAME not configured" });
       }
 
       const payload = {
@@ -155,11 +147,14 @@ async function startServer() {
   // Server-side proxy for SOCSO sheet submission — avoids CORS preflight
   app.post("/api/socso-sheet", async (req, res) => {
     try {
-      const scriptUrl = process.env.SOCSO_SHEETS_SCRIPT_URL || process.env.GOOGLE_SHEETS_SCRIPT_URL;
-      const sheetId   = "1rUCrHGE6kdfw17iQgtC1K426JdQZWbBZPl-uwTy3CkE"; // SOCSO Calculator ID
+      const scriptUrl = process.env.SOCSO_SHEETS_SCRIPT_URL;
+      const sheetId   = process.env.SOCSO_SPREADSHEET_ID;
 
       if (!scriptUrl) {
-        return res.status(500).json({ error: "Script URL not configured" });
+        return res.status(500).json({ error: "SOCSO_SHEETS_SCRIPT_URL not configured" });
+      }
+      if (!sheetId) {
+        return res.status(500).json({ error: "SOCSO_SPREADSHEET_ID not configured" });
       }
 
       const payload = { ...req.body, sheetId };
@@ -248,7 +243,7 @@ async function startServer() {
       define: {
         __vite_is_modern_browser: "true",
       },
-      appType: "custom",
+      appType: "mpa",
     });
     app.use(vite.middlewares);
 
@@ -262,7 +257,6 @@ async function startServer() {
       "/mincal.html": "mincal.html",
       "/payslip": "payslip.html",
       "/payslip.html": "payslip.html",
-      "/payslip-generator": "payslip.html",
       "/report": "report.html",
       "/report.html": "report.html",
       "/epf-kwsp": "epf-kwsp.html",
@@ -278,12 +272,9 @@ async function startServer() {
       "/pcb-calculator.html": "pcb-income-tax.html",
       "/pcb-income-tax": "pcb-income-tax.html",
       "/pcb-income-tax.html": "pcb-income-tax.html",
-      "/annual-leave-calculator": "annual-leave-calculator.html",
-      "/annual-leave-calculator.html": "annual-leave-calculator.html",
     };
 
     app.use(async (req, res, next) => {
-      console.log(`[DEBUG] Received request: ${req.method} ${req.url} (originalUrl: ${req.originalUrl}, path: ${req.path})`);
       const urlPath = req.path;
       const htmlFile = htmlPages[urlPath];
       if (!htmlFile) return next();

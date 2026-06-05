@@ -90,11 +90,6 @@
   </head>
 
   <body>
-    <noscript>
-      <div style="background-color: #fef2f2; border: 1px solid #fecaca; color: #dc2626; padding: 16px; text-align: center; font-weight: 500; font-family: ui-sans-serif, system-ui, sans-serif;">
-        JavaScript is required to use this calculator. Please enable JavaScript in your browser settings to calculate your salary, EPF, PCB, and SOCSO.
-      </div>
-    </noscript>
     <!-- Navbar -->
     <header class="navbar">
       <div
@@ -123,13 +118,12 @@
           <a href="/socso-perkeso" id="navBtnSocso" class="nav-item" title="SOCSO (PERKESO) Calculator">
             SOCSO Calculator
           </a>
-          <a href="/pcb-income-tax.html" id="navBtnPcb" class="nav-item" title="PCB (Monthly Tax Deduction) Calculator">
+          <a href="/pcb-income-tax" id="navBtnPcb" class="nav-item" title="PCB (Monthly Tax Deduction) Calculator">
             PCB Calculator
           </a>
-          <a href="/epf-kwsp.html" id="navBtnEpf" class="nav-item" title="EPF (KWSP) Calculator">
+          <a href="/epf-kwsp" id="navBtnEpf" class="nav-item" title="EPF (KWSP) Calculator">
             EPF Calculator
           </a>
-          <a href="/annual-leave-calculator.html" class="nav-item" title="Annual Leave Calculator">Annual Leave Calculator</a>
         </nav>
 
         <!-- Mobile Hamburger Button -->
@@ -167,13 +161,12 @@
         <a href="/socso-perkeso" id="mobileNavBtnSocso" class="mobile-nav-item">
           SOCSO (PERKESO) Calculator
         </a>
-        <a href="/pcb-income-tax.html" id="mobileNavBtnPcb" class="mobile-nav-item">
+        <a href="/pcb-income-tax" id="mobileNavBtnPcb" class="mobile-nav-item">
           PCB (Monthly Tax Deduction) Calculator
         </a>
-        <a href="/epf-kwsp.html" id="mobileNavBtnEpf" class="mobile-nav-item">
+        <a href="/epf-kwsp" id="mobileNavBtnEpf" class="mobile-nav-item">
           EPF (KWSP) Calculator
         </a>
-        <a href="/annual-leave-calculator.html" class="mobile-nav-item">Annual Leave Calculator</a>
       </nav>
     </header>
 
@@ -4103,9 +4096,8 @@
             <h4>Quick Links</h4>
             <a href="/" class="footer-link">Salary Calculator</a>
             <a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
-            <a href="/pcb-income-tax.html" class="footer-link">PCB Calculator</a>
-            <a href="/epf-kwsp.html" class="footer-link">EPF Calculator</a>
-          <a href="/annual-leave-calculator.html" class="footer-link">Annual Leave Calculator</a>
+            <a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
+            <a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
             <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
           </div>
         </div>
@@ -4352,9 +4344,8 @@
 
     <!-- JavaScript Logic -->
     <script type="module">
-      import { db } from "/src/firebase.ts";
+      import { db } from "./src/firebase.ts";
       import { collection, addDoc } from "firebase/firestore";
-      import { generatePDFReport } from "/src/lib/pdf-generator.ts";
 
       window.openTab = function (evt, tabName) {
         var i, content, tabs;
@@ -4783,7 +4774,7 @@
 
   if (navBtnSalary) navBtnSalary.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("salary"); });
   if (navBtnSocso) navBtnSocso.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("socso"); });
-  if (navBtnPcb) navBtnPcb.addEventListener("click", (e) => { e.preventDefault(); window.location.href = "/pcb-income-tax.html"; });
+  if (navBtnPcb) navBtnPcb.addEventListener("click", (e) => { e.preventDefault(); window.location.href = "/pcb-income-tax"; });
         
         const footerLinkSocso = document.getElementById("footerLinkSocso");
         if (footerLinkSocso) {
@@ -4792,7 +4783,7 @@
         
   if (mobileNavBtnSalary) mobileNavBtnSalary.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("salary"); });
   if (mobileNavBtnSocso) mobileNavBtnSocso.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("socso"); });
-  if (mobileNavBtnPcb) mobileNavBtnPcb.addEventListener("click", (e) => { e.preventDefault(); window.location.href = "/pcb-income-tax.html"; });
+  if (mobileNavBtnPcb) mobileNavBtnPcb.addEventListener("click", (e) => { e.preventDefault(); window.location.href = "/pcb-income-tax"; });
         // --- End SOCSO Tool Logic ---
 
         // --- SOCSO Table Expand/Collapse Logic ---
@@ -4951,64 +4942,64 @@
           );
           const mobileFallbackText =
             document.getElementById("mobileFallbackText");
+          const viewFileBtn = document.getElementById("viewFileBtn");
 
-          // Hide mobile action buttons since we auto process PDF
-          if (mobileActionButtons) mobileActionButtons.style.display = "none";
-          if (mobileFallbackText) mobileFallbackText.style.display = "none";
+          // Show mobile helpers
+          mobileActionButtons.style.display = "flex";
+          mobileFallbackText.style.display = "block";
 
-          try {
-            if (currentDownloadType === "socsoreport" && lastCalculation) {
-              modalFeedback.textContent =
-                "Thank you! The SOCSO report has been downloaded.";
-                generatePDFReport({
-                  title: "SOCSO Contribution Report",
-                  fileName: "SOCSO_Report",
-                  data: [
-                    { label: "Gross Salary", value: `RM ${lastCalculation.salary}` },
-                    { label: "SOCSO Category", value: lastCalculation.socsoCategory || "-" },
-                    { label: "Employee Contribution", value: `RM ${lastCalculation.socso}` },
-                    { label: "Employer Contribution", value: `RM ${lastCalculation.socsoEmployer}` },
-                    { label: "Total SOCSO", value: `RM ${lastCalculation.socsoTotal}` }
-                  ]
-                });
-            } else if (currentDownloadType === "report" && lastCalculation) {
-              modalFeedback.textContent =
-                "Thank you! The report has been downloaded.";
-                generatePDFReport({
-                  title: "Salary Breakdown Report",
-                  fileName: "Salary_Report",
-                  data: [
-                    { label: "Gross Salary", value: `RM ${lastCalculation.salary}` },
-                    { label: "EPF Employee (11%)", value: `-RM ${lastCalculation.epf}` },
-                    { label: "SOCSO Employee", value: `-RM ${lastCalculation.socso}` },
-                    { label: "EIS Employee", value: `-RM ${lastCalculation.eis}` },
-                    { label: "PCB / Monthly Tax", value: `-RM ${lastCalculation.pcb}` },
-                    { label: "Net Salary", value: `RM ${lastCalculation.netSalary}` },
-                    { label: "EPF Employer (12/13%)", value: `RM ${lastCalculation.epfEmployer || "0.00"}` },
-                    { label: "SOCSO Employer", value: `RM ${lastCalculation.socsoEmployer || "0.00"}` },
-                    { label: "EIS Employer", value: `RM ${lastCalculation.eisEmployer || "0.00"}` }
-                  ]
-                });
-            } else if (currentDownloadType === "payslip" && lastCalculation) {
-              modalFeedback.textContent =
-                "Thank you! Your professional payslip is downloaded.";
-                generatePDFReport({
-                  title: "Professional Payslip",
-                  fileName: "Salary_Payslip",
-                  data: [
-                    { label: "Gross Earnings", value: `RM ${lastCalculation.salary}` },
-                    { label: "EPF Deduction", value: `-RM ${lastCalculation.epf}` },
-                    { label: "SOCSO Deduction", value: `-RM ${lastCalculation.socso}` },
-                    { label: "EIS Deduction", value: `-RM ${lastCalculation.eis}` },
-                    { label: "PCB Deduction", value: `-RM ${lastCalculation.pcb}` },
-                    { label: "Total Deductions", value: `RM ${lastCalculation.totalDeductions}` },
-                    { label: "Net Pay", value: `RM ${lastCalculation.netSalary}` }
-                  ]
-                });
-            }
-          } catch(e) {
-            console.error("Failed to generate PDF:", e);
-            modalFeedback.innerHTML = `<span style="color:red">Failed to generate PDF automatically. Check console for errors.</span>`;
+          if (currentDownloadType === "socsoreport") {
+            modalFeedback.textContent =
+              "Thank you! The SOCSO report has been generated.";
+            const queryParams = new URLSearchParams({
+              salary: lastCalculation.salary,
+              employee: lastCalculation.socso,
+              employer: lastCalculation.socsoEmployer,
+              total: lastCalculation.socsoTotal,
+              category: lastCalculation.socsoCategory,
+              bracket: lastCalculation.socsoBracket,
+              company:
+                document.getElementById("companyName").value.trim() ||
+                "SalaryCalc MY",
+            }).toString();
+            viewFileBtn.href = `/socsoreport.html?${queryParams}`;
+          } else if (currentDownloadType === "report") {
+            modalFeedback.textContent =
+              "Thank you! The report has been generated.";
+            const queryParams = new URLSearchParams({
+              salary: lastCalculation.salary,
+              epf: lastCalculation.epf,
+              epfEmployer: lastCalculation.epfEmployer || 0,
+              socso: lastCalculation.socso,
+              socsoEmployer: lastCalculation.socsoEmployer || 0,
+              eis: lastCalculation.eis,
+              eisEmployer: lastCalculation.eisEmployer || 0,
+              pcb: lastCalculation.pcb,
+              total: lastCalculation.totalDeductions,
+              net: lastCalculation.netSalary,
+              incomeGroup: lastCalculation.incomeGroup,
+              subGroup: lastCalculation.subGroup,
+              company:
+                document.getElementById("companyName").value.trim() ||
+                "COMPANY LOGO & NAME",
+            }).toString();
+            viewFileBtn.href = `/report.html?${queryParams}`;
+          } else if (currentDownloadType === "payslip") {
+            modalFeedback.textContent =
+              "Thank you! Your professional payslip is ready.";
+            const queryParams = new URLSearchParams({
+              salary: lastCalculation.salary,
+              epf: lastCalculation.epf,
+              socso: lastCalculation.socso,
+              eis: lastCalculation.eis,
+              pcb: lastCalculation.pcb,
+              total: lastCalculation.totalDeductions,
+              net: lastCalculation.netSalary,
+              company:
+                document.getElementById("companyName").value.trim() ||
+                "COMPANY LOGO & NAME",
+            }).toString();
+            viewFileBtn.href = `/payslip.html?${queryParams}`;
           }
         }
 
@@ -5145,14 +5136,14 @@
 
               if (currentDownloadType === "socsoreport") {
                 // Use server proxy for SOCSO sheet submission
-                await fetch("/api/socso-sheet", {
+                fetch("/api/socso-sheet", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify(sheetPayload),
                 });
               } else {
                 // Use server proxy for salary sheet submission
-                await fetch("/api/salary-sheet", {
+                fetch("/api/salary-sheet", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
                   body: JSON.stringify(sheetPayload),
@@ -5204,7 +5195,8 @@
           }
 
           // Hide form and show success
-          modalFormContent.style.display = "none"; emailModal.style.display = "none";
+          modalFormContent.style.display = "none";
+          modalSuccessContent.style.display = "block";
           modalFeedback.style.display = "block";
           updateSuccessMessage();
 

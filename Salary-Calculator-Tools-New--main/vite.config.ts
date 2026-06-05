@@ -15,7 +15,7 @@ export default defineConfig(({mode}) => {
         '@': path.resolve(__dirname, '.'),
       },
     },
-    appType: 'custom',
+    appType: 'mpa',
     server: {
       hmr: false, // Disable HMR - WebSocket doesn't work through v0 proxy
     },
@@ -32,7 +32,6 @@ export default defineConfig(({mode}) => {
           socsoreport: path.resolve(__dirname, 'socsoreport.html'),
           privacyPolicy: path.resolve(__dirname, 'privacy-policy.html'),
           pcbCalculator: path.resolve(__dirname, 'pcb-income-tax.html'),
-          annualLeave: path.resolve(__dirname, 'annual-leave-calculator.html'),
         }
       }
     }

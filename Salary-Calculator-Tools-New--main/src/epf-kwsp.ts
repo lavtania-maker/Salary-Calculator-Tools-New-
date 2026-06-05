@@ -1,5 +1,3 @@
-import { generatePDFReport } from "./lib/pdf-generator";
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("epfForm") as HTMLFormElement;
   const resetBtn = document.getElementById("epfResetBtn") as HTMLButtonElement;
@@ -273,32 +271,38 @@ document.addEventListener("DOMContentLoaded", () => {
         submitBtn.textContent = "Generating your report...";
         submitBtn.disabled = true;
       }
-
-      // Generate the PDF synchronously IMMEDIATELY to bypass download blockers.
-      try {
-        if (lastCalculation) {
-            generatePDFReport({
-              title: "EPF Contribution Report",
-              fileName: "EPF_Report",
-              data: [
-                { label: "Gross Salary", value: `RM ${parseFloat(lastCalculation.salary).toFixed(2)}` },
-                { label: "Age Group", value: lastCalculation.age === 'above60' ? 'Above 60' : 'Below 60' },
-                { label: "Nationality", value: lastCalculation.nationality === 'malaysian' ? 'Malaysian' : 'Foreigner' },
-                { label: "Employee Rate", value: lastCalculation.empRateStr },
-                { label: "Employer Rate", value: lastCalculation.emprRateStr },
-                { label: "Employee Contribution", value: `-RM ${parseFloat(lastCalculation.employeeEpf).toFixed(2)}` },
-                { label: "Employer Contribution", value: `RM ${parseFloat(lastCalculation.employerEpf).toFixed(2)}` },
-                { label: "Total EPF Contribution", value: `RM ${parseFloat(lastCalculation.totalEpf).toFixed(2)}` },
-                { label: "Net Salary (After EPF)", value: `RM ${parseFloat(lastCalculation.netSalary).toFixed(2)}` }
-              ]
-            });
-        }
-      } catch (err) {
-        console.error("PDF generation error:", err);
-      }
+      
+      // Open new window immediately to bypass popup blockers
+      const popup = window.open('about:blank', '_blank');
       
       try {
-      fetch("/api/epf-sheet", {method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({timestamp: new Date().toISOString(), email, userType: role, hiringStatus: isHiring, companyName: company, userPhone: phone, download_via: "epf calculator"})}).catch(e=>console.error(e));
+      const savePromise = (async () => {
+          try {
+            console.log("[v0] EPF sheet submission starting...");
+            const payload = {
+              timestamp: new Date().toISOString(),
+              email,
+              userType: role,
+              hiringStatus: isHiring,
+              companyName: company,
+              userPhone: phone,
+              download_via: "epf calculator",
+            };
+            console.log("[v0] EPF payload:", JSON.stringify(payload));
+            const response = await fetch("/api/epf-sheet", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+            const result = await response.json();
+            console.log("[v0] EPF sheet response:", response.status, JSON.stringify(result));
+            if (!response.ok) {
+              console.error("[v0] EPF sheet API error:", result);
+            }
+          } catch (sheetErr) {
+            console.error("[v0] EPF sheet fetch error:", sheetErr);
+          }
+        })();
 
         if (typeof (window as any).gtag === 'function') {
           (window as any).gtag('event', 'submit_lead_epf', { event_category: 'lead' });
@@ -308,19 +312,57 @@ document.addEventListener("DOMContentLoaded", () => {
         
         if (modalFormContent && modalSuccessContent) {
           modalFormContent.style.display = "none";
-          if(emailModal) emailModal.style.display = "none";
-          if (modalFeedback) {
-             modalFeedback.textContent = "Thank you! Your EPF report has been downloaded.";
-             modalFeedback.style.display = "block";
-          }
+          modalSuccessContent.style.display = "block";
+          if (modalFeedback) modalFeedback.style.display = "block";
           
           const mobileActionButtons = document.getElementById("mobileActionButtons");
           const mobileFallbackText = document.getElementById("mobileFallbackText");
-          if (mobileActionButtons) mobileActionButtons.style.display = "none";
-          if (mobileFallbackText) mobileFallbackText.style.display = "none";
+          if (mobileActionButtons) mobileActionButtons.style.display = "flex";
+          if (mobileFallbackText) mobileFallbackText.style.display = "block";
         }
+        
+        if (lastCalculation) {
+            const queryParams = new URLSearchParams({
+              salary: lastCalculation.salary,
+              employeeEpf: lastCalculation.employeeEpf,
+              employerEpf: lastCalculation.employerEpf,
+              totalEpf: lastCalculation.totalEpf,
+              netSalary: lastCalculation.netSalary,
+              empRateStr: lastCalculation.empRateStr,
+              emprRateStr: lastCalculation.emprRateStr,
+              age: lastCalculation.age,
+              nationality: lastCalculation.nationality,
+              company: company || "SalaryCalculator.my"
+            }).toString();
+            
+            const reportUrl = `/epfreport.html?${queryParams}`;
+            if (popup) {
+              popup.location.href = reportUrl;
+            } else {
+              // Fallback if popup blocked
+              if (viewFileBtn) {
+                viewFileBtn.href = reportUrl;
+                viewFileBtn.click();
+              } else {
+                window.location.href = reportUrl;
+              }
+            }
+            
+            if (viewFileBtn) {
+              viewFileBtn.href = reportUrl;
+              viewFileBtn.addEventListener("click", () => {
+                if (emailModal) emailModal.style.display = "none";
+              });
+            }
+        } else {
+          if (popup) popup.close();
+        }
+        
+        await savePromise;
+
       } catch (err) {
         console.error("Submission error:", err);
+        if (popup) popup.close();
         alert("An error occurred while generating the report. Please try again.");
       } finally {
         if (submitBtn) {

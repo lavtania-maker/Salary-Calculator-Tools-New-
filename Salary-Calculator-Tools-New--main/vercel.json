@@ -24,8 +24,7 @@
     { "source": "/epf-kwsp",          "destination": "/epf-kwsp.html" },
     { "source": "/socso-perkeso",     "destination": "/#socsoForm" },
     { "source": "/pcb-calculator",    "destination": "/pcb-income-tax.html" },
-    { "source": "/pcb-income-tax",    "destination": "/pcb-income-tax.html" },
-    { "source": "/annual-leave-calculator", "destination": "/annual-leave-calculator.html" }
+    { "source": "/pcb-income-tax",   "destination": "/pcb-income-tax.html" }
   ],
   "headers": [
     {
