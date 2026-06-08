@@ -193,8 +193,8 @@
       </section>
 
       <!-- Calculator Layout -->
-      <main class="container" style="max-width: 1200px;">
-        <div class="main-layout" id="layoutLeave" style="gap: 40px;">
+      <main class="container">
+        <div class="main-layout" id="layoutLeave">
           <!-- Left Side: Form Input -->
           <section class="card">
             <h2 class="card-title">Enter Details</h2>
@@ -222,33 +222,14 @@
                 </div>
               </div>
 
-              <div class="form-group" style="margin-bottom: 24px;">
-                <label class="form-label" for="leaveEmpType">Employment Type <span style="font-weight: 400; color: #64748b;">(Optional)</span></label>
-                <select id="leaveEmpType" class="form-select">
-                  <option value="Full Time">Full Time</option>
-                  <option value="Part Time">Part Time</option>
-                  <option value="Contract">Contract</option>
-                </select>
-              </div>
-
-              <!-- Readonly Auto Logic Field -->
-              <div class="form-group" style="margin-bottom: 24px;">
-                <label class="form-label" for="leaveCategory">Employee Category</label>
-                <select id="leaveCategory" class="form-select">
-                  <option value="Below 2 Years">Below 2 Years</option>
-                  <option value="2-5 Years">2–5 Years</option>
-                  <option value="More Than 5 Years">More Than 5 Years</option>
-                </select>
-                <p style="font-size: 0.8rem; color: #64748b; margin-top: 8px;">Automatically calculated based on start date. Can be overridden.</p>
-              </div>
-
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
                 <div class="form-group" style="margin-bottom: 0;">
                   <label class="form-label" for="leaveEntitlement">Annual Leave Entitlement</label>
                   <div class="input-group">
-                    <input type="number" id="leaveEntitlement" class="form-input" min="0" step="0.5" value="8" />
+                    <input type="number" id="leaveEntitlement" class="form-input" min="0" step="0.5" />
                     <span class="input-postfix" style="padding: 0 16px; color: #64748b; background: #f8fafc; border-left: 1px solid var(--border-input); display: flex; align-items: center; font-weight: 500;">Days</span>
                   </div>
+                  <p style="font-size: 0.8rem; color: #64748b; margin-top: 8px;">Based on Malaysian Employment Act minimum entitlement.</p>
                 </div>
 
                 <div class="form-group" style="margin-bottom: 0;">
@@ -260,19 +241,7 @@
                 </div>
               </div>
 
-              <div class="form-group" style="margin-top: 24px;">
-                <label class="form-label">Public Holiday Included?</label>
-                <div style="display: flex; gap: 24px; margin-top: 8px;">
-                  <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--text-main); font-weight: 500;">
-                    <input type="radio" name="leavePubHoliday" value="Yes" style="width: 20px; height: 20px; accent-color: var(--primary);" />
-                    Yes
-                  </label>
-                  <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; color: var(--text-main); font-weight: 500;">
-                    <input type="radio" name="leavePubHoliday" value="No" checked style="width: 20px; height: 20px; accent-color: var(--primary);" />
-                    No
-                  </label>
-                </div>
-              </div>
+ 
 
               <div class="form-actions" style="gap: 20px; align-items: stretch; margin-top: 40px;">
                 <button type="reset" id="leaveResetBtn" class="btn btn-outline">
@@ -323,17 +292,30 @@
                   </svg>
                 </div>
                 <div style="font-weight: 700; font-size: 1.1rem; color: #1f2937; margin-bottom: 6px;">
-                  Fill employee details to get instant results
+                  Fill employee details to calculate annual leave
                 </div>
                 <div style="font-size: 0.95rem; color: #475569;">
-                  Your annual leave entitlement will appear here
+                  Your leave entitlement and balance will appear here
                 </div>
               </div>
 
               <!-- Results -->
               <div id="leaveResultsContent" class="results-content" style="display: none; padding: 0">
                 <div class="result-section" style="padding: 24px; border-radius: 16px;">
+                  
                   <div class="result-item" style="padding-top: 0; padding-bottom: 16px;">
+                    <div style="display: flex; align-items: center; gap: 16px">
+                      <div style="width: 36px; height: 36px; background: #f8fafc; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #64748b; flex-shrink: 0;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                      </div>
+                      <div style="display: flex; flex-direction: column;">
+                        <span style="font-weight: 600; color: #334155; font-size: 1rem;">Years of Service</span>
+                      </div>
+                    </div>
+                    <span id="resYearsOfService" style="font-weight: 700; color: #1e293b; font-size: 1.05rem; font-variant-numeric: tabular-nums; min-width: 60px; text-align: right;">-</span>
+                  </div>
+
+                  <div class="result-item" style="padding: 16px 0;">
                     <div style="display: flex; align-items: center; gap: 16px">
                       <div style="width: 36px; height: 36px; background: #eff6ff; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #3b82f6; flex-shrink: 0;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
@@ -345,7 +327,7 @@
                     <span id="resTotalEntitlement" style="font-weight: 700; color: #1e293b; font-size: 1.05rem; font-variant-numeric: tabular-nums; min-width: 60px; text-align: right;">12 Days</span>
                   </div>
                   
-                  <div class="result-item" style="padding: 16px 0;">
+                  <div class="result-item" id="resProratedItem" style="padding: 16px 0; display: none;">
                     <div style="display: flex; align-items: center; gap: 16px">
                       <div style="width: 36px; height: 36px; background: #fef2f2; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #ef4444; flex-shrink: 0;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.29 7 12 12 20.71 7"></polyline><line x1="12" y1="22" x2="12" y2="12"></line></svg>
@@ -520,10 +502,10 @@
         <div class="content-card">
           <h2 style="font-size: 1.5rem; text-align: center;">Try Other HR Calculators</h2>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 24px; align-items: stretch;">
-            <a href="/" style="display: flex; align-items: center; justify-content: center; padding: 16px; height: 100%; box-sizing: border-box; background: white; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center; text-decoration: none; color: #1e293b; font-weight: 600; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">Salary Calculator</a>
-            <a href="/epf-kwsp.html" style="display: flex; align-items: center; justify-content: center; padding: 16px; height: 100%; box-sizing: border-box; background: white; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center; text-decoration: none; color: #1e293b; font-weight: 600; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">EPF Calculator</a>
-            <a href="/pcb-income-tax.html" style="display: flex; align-items: center; justify-content: center; padding: 16px; height: 100%; box-sizing: border-box; background: white; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center; text-decoration: none; color: #1e293b; font-weight: 600; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">PCB Calculator</a>
-            <a href="/socso-perkeso" style="display: flex; align-items: center; justify-content: center; padding: 16px; height: 100%; box-sizing: border-box; background: white; border-radius: 8px; border: 1px solid #e2e8f0; text-align: center; text-decoration: none; color: #1e293b; font-weight: 600; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.05);" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">SOCSO Calculator</a>
+            <a href="/" style="display: flex; align-items: center; justify-content: center; padding: 16px; height: 100%; box-sizing: border-box; background: #eab308; border-radius: 8px; text-align: center; text-decoration: none; color: #ffffff; font-weight: 700; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onmouseover="this.style.background='#ca8a04'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#eab308'; this.style.transform='translateY(0)'">Salary Calculator</a>
+            <a href="/socso-perkeso" style="display: flex; align-items: center; justify-content: center; padding: 16px; height: 100%; box-sizing: border-box; background: #22c55e; border-radius: 8px; text-align: center; text-decoration: none; color: white; font-weight: 600; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onmouseover="this.style.background='#16a34a'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#22c55e'; this.style.transform='translateY(0)'">SOCSO Calculator</a>
+            <a href="/pcb-income-tax.html" style="display: flex; align-items: center; justify-content: center; padding: 16px; height: 100%; box-sizing: border-box; background: #3b82f6; border-radius: 8px; text-align: center; text-decoration: none; color: white; font-weight: 600; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onmouseover="this.style.background='#2563eb'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#3b82f6'; this.style.transform='translateY(0)'">PCB Calculator</a>
+            <a href="/epf-kwsp.html" style="display: flex; align-items: center; justify-content: center; padding: 16px; height: 100%; box-sizing: border-box; background: #ef4444; border-radius: 8px; text-align: center; text-decoration: none; color: white; font-weight: 600; transition: all 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onmouseover="this.style.background='#dc2626'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#ef4444'; this.style.transform='translateY(0)'">EPF Calculator</a>
           </div>
         </div>
 
@@ -573,10 +555,6 @@
           <p id="modalDescription">Enter your email to receive your annual leave balance report.</p>
           <form id="emailForm">
             <div class="form-group">
-              <label class="form-label" for="userName">Full Name <span style="color: #ef4444">*</span></label>
-              <input type="text" id="userName" class="form-input" placeholder="Your Name" required />
-            </div>
-            <div class="form-group">
               <label class="form-label" for="userEmail">Email Address <span style="color: #ef4444">*</span></label>
               <input type="email" id="userEmail" class="form-input" placeholder="you@example.com" required />
             </div>
@@ -586,12 +564,12 @@
                 <option value="" disabled selected>Select an option</option>
                 <option value="Employer / HR">Employer / HR</option>
                 <option value="Employee">Employee</option>
-                <option value="Jobseeker">Jobseeker</option>
+                <option value="Job Seeker">Job Seeker</option>
               </select>
             </div>
-            <div class="form-group" id="companyNameGroup" style="display: none">
-              <label class="form-label" for="companyName">Company Name <span style="color: #ef4444">*</span></label>
-              <input type="text" id="companyName" class="form-input" placeholder="Your Company Sdn Bhd" />
+            <div class="form-group">
+              <label class="form-label" for="userPhone">Contact Number (Optional)</label>
+              <input type="tel" id="userPhone" class="form-input" placeholder="+60123456789" />
             </div>
             <p style="font-size: 0.75rem; color: #64748b; margin-top: 16px; margin-bottom: 24px;">By continuing, you agree to our privacy policy and terms of service. We may send you relevant HR materials.</p>
             <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">Submit & Download</button>

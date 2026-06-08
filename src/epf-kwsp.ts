@@ -239,31 +239,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (userType) {
-    userType.addEventListener("change", function () {
-      if (!hiringQuestionGroup || !hiringStatus || !companyNameGroup || !companyName) return;
-      if (this.value === "Employer / HR") {
-        hiringQuestionGroup.style.display = "block";
-        hiringStatus.required = true;
-        companyNameGroup.style.display = "block";
-        companyName.required = true;
-      } else {
-        hiringQuestionGroup.style.display = "none";
-        hiringStatus.required = false;
-        companyNameGroup.style.display = "none";
-        companyName.required = false;
-      }
-    });
-  }
-
   if (emailForm) {
     emailForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       
       const email = userEmail ? userEmail.value : "";
       const role = userType ? userType.value : "";
-      const isHiring = hiringStatus ? hiringStatus.value : "";
-      const company = companyName ? companyName.value : "";
+      const isHiring = "";
+      const company = "";
       const phone = userPhone ? userPhone.value : "";
   
       const submitBtn = emailForm.querySelector('button[type="submit"]') as HTMLButtonElement | null;
@@ -274,8 +257,24 @@ document.addEventListener("DOMContentLoaded", () => {
         submitBtn.disabled = true;
       }
 
-      // Generate the PDF synchronously IMMEDIATELY to bypass download blockers.
       try {
+        const sheetPayload = {
+          timestamp: new Date().toISOString(),
+          email: email,
+          userType: role,
+          userPhone: phone,
+          download_via: "EPF Calculator"
+        };
+        await fetch("/api/epf-sheet", {
+          method: "POST", 
+          headers: { "Content-Type": "application/json" }, 
+          body: JSON.stringify(sheetPayload)
+        });
+
+        if (typeof (window as any).gtag === 'function') {
+          (window as any).gtag('event', 'submit_lead_epf', { event_category: 'lead' });
+        }
+        
         if (lastCalculation) {
             generatePDFReport({
               title: "EPF Contribution Report",
@@ -293,16 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
               ]
             });
         }
-      } catch (err) {
-        console.error("PDF generation error:", err);
-      }
-      
-      try {
-      fetch("/api/epf-sheet", {method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({timestamp: new Date().toISOString(), email, userType: role, hiringStatus: isHiring, companyName: company, userPhone: phone, download_via: "epf calculator"})}).catch(e=>console.error(e));
 
-        if (typeof (window as any).gtag === 'function') {
-          (window as any).gtag('event', 'submit_lead_epf', { event_category: 'lead' });
-        }
 
         await new Promise(resolve => setTimeout(resolve, 800));
         

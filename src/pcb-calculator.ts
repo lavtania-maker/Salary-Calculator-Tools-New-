@@ -246,43 +246,39 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if (userType) {
-    userType.addEventListener("change", function () {
-      if (!hiringQuestionGroup || !hiringStatus || !companyNameGroup || !companyName) return;
-      if (this.value === "Employer / HR") {
-        hiringQuestionGroup.style.display = "block";
-        hiringStatus.required = true;
-        companyNameGroup.style.display = "block";
-        companyName.required = true;
-      } else {
-        hiringQuestionGroup.style.display = "none";
-        hiringStatus.required = false;
-        companyNameGroup.style.display = "none";
-        companyName.required = false;
-      }
-    });
-  }
-
   if (emailForm) {
     emailForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       
       const email = userEmail ? userEmail.value : "";
       const role = userType ? userType.value : "";
-      const isHiring = hiringStatus ? hiringStatus.value : "";
-      const company = companyName ? companyName.value : "";
+      const isHiring = "";
+      const company = "";
       const phone = userPhone ? userPhone.value : "";
   
       const submitBtn = emailForm.querySelector('button[type="submit"]') as HTMLButtonElement | null;
-      let originalText = "Download PDF";
+      let originalText = "Submit & Download";
       if (submitBtn) {
-        originalText = submitBtn.textContent || "Download PDF";
+        originalText = submitBtn.textContent || "Submit & Download";
         submitBtn.textContent = "Processing...";
         submitBtn.disabled = true;
       }
 
-      // Generate the PDF synchronously IMMEDIATELY to bypass download blockers.
       try {
+        // Data saving to Google Sheets
+        const sheetPayload = {
+          timestamp: new Date().toISOString(),
+          email: email,
+          userType: role,
+          userPhone: phone,
+          download_via: "PCB Calculator"
+        };
+        await fetch("/api/pcb-sheet", {
+          method: "POST", 
+          headers: { "Content-Type": "application/json" }, 
+          body: JSON.stringify(sheetPayload)
+        });
+
         if (lastCalculation) {
             generatePDFReport({
               title: "PCB (Income Tax) Report",
@@ -302,13 +298,7 @@ document.addEventListener("DOMContentLoaded", () => {
               ]
             });
         }
-      } catch (err) {
-        console.error("PDF Generation error:", err);
-      }
-  
-      try {
-        // Fire off background data saving to Google Sheets (non-blocking for UI transition)
-        fetch("/api/pcb-sheet", {method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({timestamp: new Date().toISOString(), email, userType: role, hiringStatus: isHiring, companyName: company, userPhone: phone, download_via: "pcb calculator"})}).catch(e=>console.error(e));
+
 
         // Small delay to make "Processing..." visible but not annoying
         await new Promise(resolve => setTimeout(resolve, 800));

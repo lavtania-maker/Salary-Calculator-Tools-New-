@@ -13,11 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const resLeaveTaken = document.getElementById("resLeaveTaken") as HTMLElement;
   const resRemainingBalance = document.getElementById("resRemainingBalance") as HTMLElement;
   const resSuggestedAction = document.getElementById("resSuggestedAction") as HTMLElement;
+  const resYearsOfService = document.getElementById("resYearsOfService") as HTMLElement;
 
   const startDateInput = document.getElementById("leaveStartDate") as HTMLInputElement;
   const calcYearSelect = document.getElementById("leaveCalcYear") as HTMLSelectElement;
   const customYearInput = document.getElementById("leaveCustomYearInput") as HTMLInputElement;
-  const categorySelect = document.getElementById("leaveCategory") as HTMLSelectElement;
   const entitlementInput = document.getElementById("leaveEntitlement") as HTMLInputElement;
   const takenInput = document.getElementById("leaveTaken") as HTMLInputElement;
   const submitBtn = document.getElementById("leaveSubmitBtn") as HTMLButtonElement;
@@ -83,24 +83,23 @@ document.addEventListener("DOMContentLoaded", () => {
          return;
     }
 
-    const currentDate = new Date(targetYear, 11, 31); // End of target year
-    let yearsOfService = currentDate.getFullYear() - startDate.getFullYear();
-    if (
-      currentDate.getMonth() < startDate.getMonth() ||
-      (currentDate.getMonth() === startDate.getMonth() && currentDate.getDate() < startDate.getDate())
-    ) {
-      yearsOfService--;
+    // Calculate completed years and months by end of target year
+    const currentDate = new Date(targetYear, 11, 31);
+    let totalMonths = (currentDate.getFullYear() - startDate.getFullYear()) * 12 + (currentDate.getMonth() - startDate.getMonth());
+    if (currentDate.getDate() < startDate.getDate()) {
+      totalMonths--;
     }
-    if (yearsOfService < 0) yearsOfService = 0;
+    if (totalMonths < 0) totalMonths = 0;
+
+    const years = Math.floor(totalMonths / 12);
+
+    const yearsOfService = years;
 
     if (yearsOfService < 2) {
-      categorySelect.value = "Below 2 Years";
       entitlementInput.value = "8";
     } else if (yearsOfService >= 2 && yearsOfService < 5) {
-      categorySelect.value = "2-5 Years";
       entitlementInput.value = "12";
     } else {
-      categorySelect.value = "More Than 5 Years";
       entitlementInput.value = "16";
     }
     
@@ -133,14 +132,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const currentDate = new Date(targetYear, 11, 31);
-    let yearsOfService = currentDate.getFullYear() - startDate.getFullYear();
-    if (
-      currentDate.getMonth() < startDate.getMonth() ||
-      (currentDate.getMonth() === startDate.getMonth() && currentDate.getDate() < startDate.getDate())
-    ) {
-      yearsOfService--;
+    let totalMonths = (currentDate.getFullYear() - startDate.getFullYear()) * 12 + (currentDate.getMonth() - startDate.getMonth());
+    if (currentDate.getDate() < startDate.getDate()) {
+      totalMonths--;
     }
-    if (yearsOfService < 0) yearsOfService = 0;
+    if (totalMonths < 0) totalMonths = 0;
+
+    let yearsOfService = Math.floor(totalMonths / 12);
 
     let minEntitlement = 8;
     if (yearsOfService >= 2 && yearsOfService < 5) minEntitlement = 12;
@@ -151,10 +149,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     let proratedLeave = baseEntitlement;
+    const proratedItem = document.getElementById("resProratedItem");
 
     // Pro-rated rule: ONLY use pro-rated calculation if employee joined DURING the selected calculation year
     if (startDate.getFullYear() === targetYear) {
-      // Calculate months worked this year (e.g. joined in July means 12 - 6 = 6 months worked)
+      if (proratedItem) proratedItem.style.display = "flex";
+      
+      // Calculate months worked this year
       let monthsWorked = 12 - startDate.getMonth();
       if (startDate.getDate() > 15) {
         monthsWorked -= 0.5;
@@ -164,11 +165,15 @@ document.addEventListener("DOMContentLoaded", () => {
       proratedLeave = Math.round(((monthsWorked / 12) * baseEntitlement) * 10) / 10;
     } else if (targetYear < startDate.getFullYear()) {
       proratedLeave = 0;
+      if (proratedItem) proratedItem.style.display = "none";
+    } else {
+      proratedLeave = baseEntitlement; // Full entitlement
+      if (proratedItem) proratedItem.style.display = "none";
     }
 
     if (leaveTaken > proratedLeave && startDate.getFullYear() === targetYear) {
       warningMsgs.push(`Leave taken exceeds pro-rated entitlement.`);
-    } else if (leaveTaken > baseEntitlement) {
+    } else if (leaveTaken > proratedLeave) {
       warningMsgs.push(`Leave taken exceeds entitlement.`);
     }
 
@@ -182,7 +187,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const remainingBalance = Math.round((proratedLeave - leaveTaken) * 10) / 10;
+    const months = totalMonths % 12;
 
+    resYearsOfService.textContent = `${yearsOfService} Year${yearsOfService !== 1 ? 's' : ''} ${months} Month${months !== 1 ? 's' : ''}`;
     resTotalEntitlement.textContent = `${baseEntitlement} Days`;
     resProratedLeave.textContent = `${proratedLeave} Days`;
     resLeaveTaken.textContent = `${leaveTaken} Days`;
@@ -205,6 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
     lastCalculation = {
       startDate: startDateInput.value,
       targetYear,
+      yearsOfServiceText: `${yearsOfService} Year${yearsOfService !== 1 ? 's' : ''} ${months} Month${months !== 1 ? 's' : ''}`,
       baseEntitlement,
       proratedLeave,
       leaveTaken,
@@ -302,20 +310,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const userType = document.getElementById("userType") as HTMLSelectElement;
-  const companyNameGroup = document.getElementById("companyNameGroup") as HTMLElement;
-  const companyName = document.getElementById("companyName") as HTMLInputElement;
-
-  if (userType && companyNameGroup && companyName) {
-    userType.addEventListener("change", function () {
-      if (this.value === "Employer / HR") {
-        companyNameGroup.style.display = "block";
-        companyName.required = true;
-      } else {
-        companyNameGroup.style.display = "none";
-        companyName.required = false;
-      }
-    });
-  }
 
   if (emailForm) {
     emailForm.addEventListener("submit", async (e) => {
@@ -329,8 +323,29 @@ document.addEventListener("DOMContentLoaded", () => {
         submitBtn.disabled = true;
       }
 
-      // Generate the PDF synchronously IMMEDIATELY to bypass download blockers.
       try {
+        const emailInput = document.getElementById("userEmail") as HTMLInputElement;
+        const userTypeSelect = document.getElementById("userType") as HTMLSelectElement;
+        const phoneInput = document.getElementById("userPhone") as HTMLInputElement;
+        
+        const sheetPayload = {
+          timestamp: new Date().toISOString(),
+          email: emailInput?.value || "",
+          userType: userTypeSelect?.value || "",
+          userPhone: phoneInput?.value || "",
+          download_via: "Annual Leave Calculator"
+        };
+        
+        await fetch("/api/salary-sheet", {
+          method: "POST", 
+          headers: { "Content-Type": "application/json" }, 
+          body: JSON.stringify(sheetPayload)
+        });
+
+        if (typeof (window as any).gtag === 'function') {
+          (window as any).gtag('event', 'submit_lead_leave', { event_category: 'lead' });
+        }
+
         if (lastCalculation) {
           generatePDFReport({
             title: "Annual Leave Report",
@@ -338,6 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
             data: [
               { label: "Join Date", value: lastCalculation.startDate },
               { label: "Calculation Year", value: lastCalculation.targetYear },
+              { label: "Years of Service", value: lastCalculation.yearsOfServiceText },
               { label: "Base Entitlement", value: `${lastCalculation.baseEntitlement} Days` },
               { label: "Pro-Rated Entitlement", value: `${lastCalculation.proratedLeave} Days` },
               { label: "Leave Taken", value: `${lastCalculation.leaveTaken} Days` },
@@ -345,16 +361,7 @@ document.addEventListener("DOMContentLoaded", () => {
             ]
           });
         }
-      } catch (err) {
-        console.error("PDF generation error:", err);
-      }
-      
-      try {
-        if (typeof (window as any).gtag === 'function') {
-          (window as any).gtag('event', 'submit_lead_leave', { event_category: 'lead' });
-        }
 
-        fetch("/api/salary-sheet", {method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({timestamp: new Date().toISOString(), email: (document.getElementById("userEmail") as HTMLInputElement)?.value || "", userType: (document.getElementById("userType") as HTMLSelectElement)?.value || "", companyName: (document.getElementById("companyName") as HTMLInputElement)?.value || "", userPhone: (document.getElementById("userPhone") as HTMLInputElement)?.value || "", action: "Annual Leave Calculator", download_via: "annual leave calculator"})}).catch(e=>console.error("Sheet err", e));
         
         const modalFormContent = document.getElementById("modalFormContent");
         const modalSuccessContent = document.getElementById("modalSuccessContent");
