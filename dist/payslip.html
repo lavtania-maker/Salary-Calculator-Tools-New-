@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TMQV1XC09P');
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="canonical" href="https://salarycalculator.my/payslip-generator" />
+  <link rel="icon" type="image/png" href="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png">
+  <title>Payslip Generator</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html-docx-js/0.4.1/html-docx.js"></script>
+
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    .container { border: 1px solid #000; padding: 20px; max-width: 900px; margin: 0 auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    td, th { border: 1px solid #000; padding: 8px; text-align: left; }
+    .no-border td { border: none; }
+    .btn { margin-top: 15px; padding: 10px 20px; cursor: pointer; background-color: #2563eb; color: white; border: none; border-radius: 4px; }
+    .btn:hover { background-color: #1d4ed8; }
+    .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    @media print {
+      .btn { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+<div style="text-align: center;">
+  <h2>Payslip</h2>
+</div>
+
+<div class="container" id="payslip">
+
+  <div class="header">
+    <b id="displayCompanyName">COMPANY LOGO & NAME</b>
+  </div>
+
+  <table class="no-border">
+    <tr>
+      <td>Name: <input id="name" style="border: none; border-bottom: 1px solid #ccc; outline: none;"></td>
+      <td>Date: <span id="date"></span></td>
+    </tr>
+    <tr>
+      <td>IC: <input id="ic" style="border: none; border-bottom: 1px solid #ccc; outline: none;"></td>
+      <td>Department: <input id="dept" style="border: none; border-bottom: 1px solid #ccc; outline: none;"></td>
+    </tr>
+    <tr>
+      <td>Employee No: <input id="empno" style="border: none; border-bottom: 1px solid #ccc; outline: none;"></td>
+      <td>EPF No: <input id="epfno" style="border: none; border-bottom: 1px solid #ccc; outline: none;"></td>
+    </tr>
+    <tr>
+      <td>Position: <input id="position" style="border: none; border-bottom: 1px solid #ccc; outline: none;"></td>
+      <td>SOCSO No: <input id="socso_no" style="border: none; border-bottom: 1px solid #ccc; outline: none;"></td>
+    </tr>
+    <tr>
+      <td>Bank: <input id="bank" style="border: none; border-bottom: 1px solid #ccc; outline: none;"></td>
+      <td>Income Tax No: <input id="tax" style="border: none; border-bottom: 1px solid #ccc; outline: none;"></td>
+    </tr>
+    <tr>
+      <td>Bank Acc No: <input id="bankacc" style="border: none; border-bottom: 1px solid #ccc; outline: none;"></td>
+    </tr>
+  </table>
+
+  <hr>
+
+  <table>
+    <tr>
+      <th>Income</th>
+      <th>Amount (RM)</th>
+      <th>Deductions</th>
+      <th>Amount (RM)</th>
+    </tr>
+
+    <tr>
+      <td>Basic Pay</td>
+      <td id="salary"></td>
+      <td>EPF</td>
+      <td id="epf"></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td>SOCSO</td>
+      <td id="socso"></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td>EIS</td>
+      <td id="eis"></td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td></td>
+      <td>PCB</td>
+      <td id="pcb"></td>
+    </tr>
+
+    <tr>
+      <th>Total</th>
+      <th id="gross"></th>
+      <th>Total Deduction</th>
+      <th id="total"></th>
+    </tr>
+
+    <tr>
+      <th colspan="3">Net Pay</th>
+      <th id="net"></th>
+    </tr>
+
+  </table>
+
+</div>
+
+<div style="text-align: center; margin-top: 20px;">
+  <button class="btn" onclick="downloadDoc()">Download DOCX</button>
+  <button class="btn" onclick="window.print()" style="background-color: #64748b;">Print to PDF</button>
+</div>
+
+<script>
+
+  // TODAY DATE
+  document.getElementById("date").innerText =
+    new Date().toLocaleDateString("en-MY");
+
+  // GET DATA FROM URL
+  const params = new URLSearchParams(window.location.search);
+
+  function loadData() {
+    const salary = params.get("salary") || 0;
+    const epf = params.get("epf") || 0;
+    const socso = params.get("socso") || 0;
+    const eis = params.get("eis") || 0;
+    const pcb = params.get("pcb") || 0;
+    const total = params.get("total") || 0;
+    const net = params.get("net") || 0;
+    const company = params.get("company") || "COMPANY LOGO & NAME";
+
+    document.getElementById("salary").innerText = salary;
+    document.getElementById("gross").innerText = salary;
+
+    document.getElementById("epf").innerText = epf;
+    document.getElementById("socso").innerText = socso;
+    document.getElementById("eis").innerText = eis;
+    document.getElementById("pcb").innerText = pcb;
+
+    document.getElementById("total").innerText = total;
+    document.getElementById("net").innerText = net;
+    document.getElementById("displayCompanyName").innerText = company;
+  }
+
+  function downloadDoc() {
+    // Replace inputs with spans for the docx export
+    const inputs = document.querySelectorAll('input');
+    inputs.forEach(input => {
+      const span = document.createElement('span');
+      span.innerText = input.value;
+      input.parentNode.replaceChild(span, input);
+    });
+
+    var header = "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Payslip</title></head><body>";
+    var footer = "</body></html>";
+    var sourceHTML = header + document.getElementById("payslip").innerHTML + footer;
+    
+    var source = 'data:application/vnd.ms-word;charset=utf-8,' + encodeURIComponent(sourceHTML);
+    var fileDownload = document.createElement("a");
+    document.body.appendChild(fileDownload);
+    fileDownload.href = source;
+    fileDownload.download = 'payslip.doc';
+    fileDownload.click();
+    document.body.removeChild(fileDownload);
+    
+    // Refresh to restore inputs if needed, or just let it be
+    setTimeout(() => window.location.reload(), 100);
+  }
+
+  loadData();
+
+</script>
+
+</body>
+</html>
