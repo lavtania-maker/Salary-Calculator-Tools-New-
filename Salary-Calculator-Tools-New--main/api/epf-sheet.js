@@ -6,10 +6,10 @@ export default async function handler(req, res) {
   if (req.method === "OPTIONS") return res.status(200).end();
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
-  const APPS_SCRIPT_URL = process.env.EPF_SHEET_URL;
+  const APPS_SCRIPT_URL = process.env.EPF_SHEETS_SCRIPT_URL;
 
   if (!APPS_SCRIPT_URL) {
-    return res.status(500).json({ error: "EPF_SHEET_URL env variable not set" });
+    return res.status(500).json({ error: "EPF_SHEETS_SCRIPT_URL env variable not set" });
   }
 
   try {
