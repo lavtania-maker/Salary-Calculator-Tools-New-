@@ -1,0 +1,4491 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-TMQV1XC09P");
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png"
+    />
+    <title>
+      Salary Calculator Malaysia (Take Home Pay) | EPF, SOCSO, EIS, PCB Calculator
+    </title>
+    <meta
+      name="description"
+      content="Calculate your net salary in Malaysia after EPF, SOCSO, EIS, and PCB deductions instantly. Free tool for employees and employers."
+    />
+    <meta name="keywords" content="salary calculator Malaysia, take home pay calculator, net salary Malaysia, EPF calculator, SOCSO calculator, PCB calculator, gaji calculator" />
+
+    <!-- SEO -->
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://salarycalculator.my/" />
+    <link rel="alternate" hreflang="en-MY" href="https://salarycalculator.my/" />
+    <link rel="alternate" hreflang="ms-MY" href="https://salarycalculator.my/" />
+    <link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/" />
+    <meta property="article:published_time" content="2025-01-01T00:00:00+08:00" />
+    <meta property="article:modified_time" content="2026-05-18T00:00:00+08:00" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://salarycalculator.my/" />
+    <meta property="og:title" content="Salary Calculator Malaysia (Take Home Pay) | EPF, SOCSO, EIS, PCB" />
+    <meta property="og:description" content="Calculate your net salary in Malaysia after EPF, SOCSO, EIS, and PCB deductions instantly. Free tool for employees and employers." />
+    <meta property="og:image" content="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg" />
+    <meta property="og:site_name" content="SalaryCalc MY" />
+    <meta property="og:locale" content="en_MY" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Salary Calculator Malaysia (Take Home Pay) | EPF, SOCSO, EIS, PCB" />
+    <meta name="twitter:description" content="Calculate your net salary in Malaysia after EPF, SOCSO, EIS, and PCB deductions instantly. Free tool for employees and employers." />
+    <meta name="twitter:image" content="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg" />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Salary Calculator Malaysia",
+      "url": "https://salarycalculator.my/",
+      "description": "Calculate your net salary in Malaysia after EPF, SOCSO, EIS, and PCB deductions instantly.",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "MYR"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "SalaryCalc MY",
+        "url": "https://salarycalculator.my/"
+      }
+    }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    
+    <link rel="stylesheet" href="/calculator-styles.css" />
+    <script type="module" crossorigin src="/assets/main-BDqea-IY.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+    <link rel="modulepreload" crossorigin href="/assets/pdf-generator-RNoVd9ok.js">
+  </head>
+
+  <body>
+    <noscript>
+      <div style="background-color: #fef2f2; border: 1px solid #fecaca; color: #dc2626; padding: 16px; text-align: center; font-weight: 500; font-family: ui-sans-serif, system-ui, sans-serif;">
+        JavaScript is required to use this calculator. Please enable JavaScript in your browser settings to calculate your salary, EPF, PCB, and SOCSO.
+      </div>
+    </noscript>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div
+        class="container"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          position: relative;
+        "
+      >
+        <a href="/" class="logo">
+          <img
+            src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
+            alt="SalaryCalc MY"
+            referrerpolicy="no-referrer"
+            class="logo-img"
+          />
+        </a>
+
+        <!-- Desktop Nav -->
+        <nav class="desktop-nav">
+          <a href="/" id="navBtnSalary" class="nav-item active-nav" title="Salary Calculator (Take Home Pay)">
+            Salary Calculator
+          </a>
+          <a href="/socso-perkeso" id="navBtnSocso" class="nav-item" title="SOCSO (PERKESO) Calculator">
+            SOCSO Calculator
+          </a>
+          <a href="/pcb-income-tax.html" id="navBtnPcb" class="nav-item" title="PCB (Monthly Tax Deduction) Calculator">
+            PCB Calculator
+          </a>
+          <a href="/epf-kwsp.html" id="navBtnEpf" class="nav-item" title="EPF (KWSP) Calculator">
+            EPF Calculator
+          </a>
+          <a href="/annual-leave-calculator.html" class="nav-item" title="Annual Leave Calculator">Annual Leave Calculator</a>
+        </nav>
+
+        <!-- Mobile Hamburger Button -->
+        <button
+          class="mobile-menu-btn"
+          id="mobileMenuToggle"
+          aria-label="Toggle Menu"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Dropdown Menu -->
+      <nav class="mobile-nav" id="mobileNavMenu">
+        <a
+          href="/"
+          id="mobileNavBtnSalary"
+          class="mobile-nav-item active-nav"
+        >
+          Salary Calculator (Take Home Pay)
+        </a>
+        <a href="/socso-perkeso" id="mobileNavBtnSocso" class="mobile-nav-item">
+          SOCSO (PERKESO) Calculator
+        </a>
+        <a href="/pcb-income-tax.html" id="mobileNavBtnPcb" class="mobile-nav-item">
+          PCB (Monthly Tax Deduction) Calculator
+        </a>
+        <a href="/epf-kwsp.html" id="mobileNavBtnEpf" class="mobile-nav-item">
+          EPF (KWSP) Calculator
+        </a>
+        <a href="/annual-leave-calculator.html" class="mobile-nav-item">Annual Leave Calculator</a>
+      </nav>
+    </header>
+
+    <!-- No-JS banner -->
+    <noscript>
+      <div style="background:#fef2f2;border-bottom:1px solid #fecaca;padding:12px 20px;text-align:center;font-family:inherit;font-size:0.9rem;color:#dc2626;font-weight:600;">
+        JavaScript is required to use this calculator. Please enable JavaScript in your browser settings.
+      </div>
+    </noscript>
+
+    <!-- Calculator Area -->
+    <div class="calculator-area">
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="container">
+          <h1 id="heroTitle">Salary Calculator Malaysia (Take Home Pay)</h1>
+          <p id="heroSubtitle">
+            Calculate Salary, EPF, SOCSO, EIS and PCB Contributions for FREE.
+          </p>
+        </div>
+      </section>
+
+      <!-- Main Content -->
+      <main class="container">
+        <!-- SALARY CALCULATOR LAYOUT (EXISTING) -->
+        <div class="main-layout" id="layoutSalary">
+          <!-- Left Side: Form Input -->
+          <section class="card">
+            <h2 class="card-title">Enter Salary Details</h2>
+            <form id="salaryForm" action="#resultCard" method="GET">
+              <div class="form-group">
+                <label
+                  class="form-label"
+                  for="grossSalary"
+                  style="display: flex; align-items: center; gap: 6px"
+                >
+                  Gross Monthly Salary
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    style="color: var(--text-muted)"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                </label>
+                <p
+                  style="
+                    font-size: 0.7rem;
+                    color: #dc2626;
+                    margin-top: -2px;
+                    margin-bottom: 4px;
+                    font-weight: 600;
+                  "
+                >
+                  *Required
+                </p>
+                <div class="input-group">
+                  <span class="input-prefix">RM</span>
+                  <input
+                    type="number"
+                    id="grossSalary"
+                    name="grossSalary"
+                    class="form-input"
+                    placeholder="0"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="bonus"
+                  >Bonus / Allowance (RM)</label
+                >
+                <p
+                  style="
+                    font-size: 0.7rem;
+                    color: #9ca3af;
+                    margin-top: -2px;
+                    margin-bottom: 4px;
+                  "
+                >
+                  (Optional)
+                </p>
+                <input
+                  type="number"
+                  id="bonus"
+                  name="bonus"
+                  class="form-input"
+                  placeholder="e.g. 1000"
+                />
+              </div>
+
+              <div
+                class="form-actions"
+                
+              >
+                <button type="reset" id="resetBtn" class="btn btn-outline">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+                    ></path>
+                    <path d="M3 3v5h5"></path>
+                  </svg>
+                  Reset
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect
+                      x="4"
+                      y="2"
+                      width="16"
+                      height="20"
+                      rx="2"
+                      ry="2"
+                    ></rect>
+                    <line x1="8" y1="6" x2="16" y2="6"></line>
+                    <line x1="16" y1="14" x2="16.01" y2="14"></line>
+                    <line x1="16" y1="18" x2="16.01" y2="18"></line>
+                    <line x1="12" y1="14" x2="12.01" y2="14"></line>
+                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                    <line x1="8" y1="14" x2="8.01" y2="14"></line>
+                    <line x1="8" y1="18" x2="8.01" y2="18"></line>
+                  </svg>
+                  Calculate
+                </button>
+              </div>
+
+              <div
+                style="
+                  margin-bottom: 16px;
+                  font-weight: 700;
+                  font-size: 1.1rem;
+                  color: var(--text-main);
+                  border-bottom: 1px solid var(--border);
+                  padding-bottom: 8px;
+                "
+              >
+                Salary Option
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="maritalStatus"
+                  >Marital Status</label
+                >
+                <p
+                  style="
+                    font-size: 0.7rem;
+                    color: #9ca3af;
+                    margin-top: -2px;
+                    margin-bottom: 4px;
+                  "
+                >
+                  (Optional)
+                </p>
+                <select
+                  id="maritalStatus"
+                  name="maritalStatus"
+                  class="form-select"
+                >
+                  <option value="single">Single</option>
+                  <optgroup label="Spouse Not Working">
+                    <option value="married_spouse_not_working_no_child">
+                      Married (Spouse NOT Working, No Child)
+                    </option>
+                    <option value="married_1_child_spouse_not_working">
+                      Married + 1 Child (Spouse NOT Working)
+                    </option>
+                    <option value="married_2_children_spouse_not_working">
+                      Married + 2 Children (Spouse NOT Working)
+                    </option>
+                  </optgroup>
+                  <optgroup label="Spouse Working">
+                    <option value="married_spouse_working_no_child">
+                      Married (Spouse Working, No Child)
+                    </option>
+                    <option value="married_1_child_spouse_working">
+                      Married + 1 Child (Spouse Working)
+                    </option>
+                    <option value="married_2_children_spouse_working">
+                      Married + 2 Children (Spouse Working)
+                    </option>
+                  </optgroup>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="nationality">Nationality</label>
+                <p
+                  style="
+                    font-size: 0.7rem;
+                    color: #9ca3af;
+                    margin-top: -2px;
+                    margin-bottom: 4px;
+                  "
+                >
+                  (Optional)
+                </p>
+                <select id="nationality" name="nationality" class="form-select">
+                  <option value="malaysian">Malaysian</option>
+                  <option value="foreigner">Foreigner</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0">
+                <label class="form-label">Statutory Contributions</label>
+                <p
+                  style="
+                    font-size: 0.7rem;
+                    color: #9ca3af;
+                    margin-top: -2px;
+                    margin-bottom: 4px;
+                  "
+                >
+                  (Optional)
+                </p>
+                <div
+                  class="statutory-grid"
+                  style="
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 15px;
+                  "
+                >
+                  <label
+                    class="checkbox-item"
+                    style="
+                      background: #f9fafb;
+                      border: 1px solid var(--border);
+                      padding: 10px;
+                      border-radius: 6px;
+                    "
+                  >
+                    <input
+                      type="checkbox"
+                      id="includeEpf"
+                      name="includeEpf"
+                      checked
+                    />
+                    EPF
+                  </label>
+                  <label
+                    class="checkbox-item"
+                    style="
+                      background: #f9fafb;
+                      border: 1px solid var(--border);
+                      padding: 10px;
+                      border-radius: 6px;
+                    "
+                  >
+                    <input
+                      type="checkbox"
+                      id="includeSocso"
+                      name="includeSocso"
+                      checked
+                    />
+                    SOCSO
+                  </label>
+                  <label
+                    class="checkbox-item"
+                    style="
+                      background: #f9fafb;
+                      border: 1px solid var(--border);
+                      padding: 10px;
+                      border-radius: 6px;
+                    "
+                  >
+                    <input
+                      type="checkbox"
+                      id="includeEis"
+                      name="includeEis"
+                      checked
+                    />
+                    EIS
+                  </label>
+                  <label
+                    class="checkbox-item"
+                    style="
+                      background: #f9fafb;
+                      border: 1px solid var(--border);
+                      padding: 10px;
+                      border-radius: 6px;
+                    "
+                  >
+                    <input
+                      type="checkbox"
+                      id="includePcb"
+                      name="includePcb"
+                      checked
+                    />
+                    PCB
+                  </label>
+                </div>
+              </div>
+            </form>
+          </section>
+
+          <!-- Right Side: Result Panel -->
+          <aside class="result-panel">
+            <div class="card" id="resultCard">
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 1rem;
+                  padding-bottom: 0.5rem;
+                  border-bottom: 1px solid #f1f5f9;
+                "
+              >
+                <h2 class="card-title" style="margin-bottom: 0">
+                  Calculation Results
+                </h2>
+              </div>
+
+              <!-- Placeholder (Visible by default/No-JS) -->
+              <div id="placeholder" class="placeholder-text">
+                <div
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: 16px;
+                    margin-top: 10px;
+                  "
+                >
+                  <svg
+                    width="160"
+                    height="160"
+                    viewBox="0 0 200 200"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <!-- Background Blob -->
+                    <path
+                      d="M154.5 135.5C168.1 118.7 178.3 98.5 174.1 80.1C169.9 61.7 151.3 45.1 131.5 35.3C111.7 25.5 90.7 22.5 71.9 28.1C53.1 33.7 36.5 47.9 25.7 65.5C14.9 83.1 9.9 104.1 15.5 121.9C21.1 139.7 37.3 154.3 55.7 163.5C74.1 172.7 94.7 176.5 113.1 171.1C131.5 165.7 140.9 152.3 154.5 135.5Z"
+                      fill="#EFF6FF"
+                    />
+
+                    <!-- Calculator Body -->
+                    <rect
+                      x="65"
+                      y="45"
+                      width="70"
+                      height="110"
+                      rx="12"
+                      fill="#FFFFFF"
+                      stroke="#3B82F6"
+                      stroke-width="4"
+                    />
+
+                    <!-- Screen -->
+                    <rect
+                      x="77"
+                      y="60"
+                      width="46"
+                      height="24"
+                      rx="6"
+                      fill="#DBEAFE"
+                    />
+
+                    <!-- Buttons -->
+                    <rect
+                      x="77"
+                      y="95"
+                      width="10"
+                      height="10"
+                      rx="3"
+                      fill="#93C5FD"
+                    />
+                    <rect
+                      x="95"
+                      y="95"
+                      width="10"
+                      height="10"
+                      rx="3"
+                      fill="#93C5FD"
+                    />
+                    <rect
+                      x="113"
+                      y="95"
+                      width="10"
+                      height="10"
+                      rx="3"
+                      fill="#93C5FD"
+                    />
+
+                    <rect
+                      x="77"
+                      y="113"
+                      width="10"
+                      height="10"
+                      rx="3"
+                      fill="#93C5FD"
+                    />
+                    <rect
+                      x="95"
+                      y="113"
+                      width="10"
+                      height="10"
+                      rx="3"
+                      fill="#93C5FD"
+                    />
+                    <rect
+                      x="113"
+                      y="113"
+                      width="10"
+                      height="10"
+                      rx="3"
+                      fill="#3B82F6"
+                    />
+
+                    <rect
+                      x="77"
+                      y="131"
+                      width="10"
+                      height="10"
+                      rx="3"
+                      fill="#93C5FD"
+                    />
+                    <rect
+                      x="95"
+                      y="131"
+                      width="10"
+                      height="10"
+                      rx="3"
+                      fill="#93C5FD"
+                    />
+                    <rect
+                      x="113"
+                      y="131"
+                      width="10"
+                      height="10"
+                      rx="3"
+                      fill="#3B82F6"
+                    />
+
+                    <!-- Floating Elements -->
+                    <circle
+                      cx="155"
+                      cy="75"
+                      r="12"
+                      fill="#FCD34D"
+                      stroke="#F59E0B"
+                      stroke-width="3"
+                    />
+                    <path
+                      d="M155 69V81M151 75H159"
+                      stroke="#F59E0B"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+
+                    <circle
+                      cx="45"
+                      cy="125"
+                      r="10"
+                      fill="#FCD34D"
+                      stroke="#F59E0B"
+                      stroke-width="3"
+                    />
+                    <path
+                      d="M45 120V130M41 125H49"
+                      stroke="#F59E0B"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+
+                    <path
+                      d="M35 65H45M40 60V70"
+                      stroke="#10B981"
+                      stroke-width="4"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M145 145H155M145 153H155"
+                      stroke="#8B5CF6"
+                      stroke-width="4"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </div>
+                <p
+                  style="
+                    font-weight: 600;
+                    font-size: 1.1rem;
+                    color: var(--text-main);
+                    margin-bottom: 6px;
+                  "
+                >
+                  Your results are just one step away
+                </p>
+                <p style="color: var(--text-muted); font-size: 0.95rem">
+                  Complete the form to continue
+                </p>
+                <noscript>
+                  <p style="color: #dc2626; font-weight: 600; margin-top: 10px">
+                    ⚠️ JavaScript is required to calculate your salary. Please
+                    enable JavaScript in your browser settings to use the
+                    interactive calculator.
+                  </p>
+                </noscript>
+              </div>
+
+              <!-- Results (Hidden until calculated) -->
+              <div id="results" class="result-content">
+                <div class="result-item" style="border-bottom: none; padding-bottom: 4px;">
+                  <span>Gross Monthly Salary</span>
+                  <span id="resGrossMonthly">RM 0.00</span>
+                </div>
+                <div class="result-item" style="border-bottom: none; padding-top: 4px;">
+                  <span>Gross Annual Salary</span>
+                  <span id="resGrossAnnual">RM 0.00</span>
+                </div>
+
+                <div class="visual-bar-container">
+                  <div id="barNet" class="bar-net" style="width: 70%"></div>
+                  <div
+                    id="barDeduction"
+                    class="bar-deduction"
+                    style="width: 30%"
+                  ></div>
+                </div>
+
+                <div
+                  class="result-section result-section-employee collapsed"
+                  id="sectionEmployee"
+                >
+                  <h4
+                    class="result-section-title"
+                    onclick="toggleResultSection('sectionEmployee')"
+                  >
+                    <span class="indicator-dot indicator-red"></span>
+                    <span>Employee Deductions</span>
+                    <span class="toggle-indicator">▶</span>
+                  </h4>
+                  <div class="collapsible-content">
+                    <div id="employeeDeductionsContainer">
+                      <!-- Deductions will be dynamically added here -->
+                    </div>
+                  </div>
+                  <div
+                    class="result-item"
+                    style="
+                      margin-top: 12px;
+                      padding-top: 12px;
+                      font-weight: 800;
+                      color: #ef4444;
+                      margin-bottom: 0;
+                      border-bottom: none;
+                    "
+                  >
+                    <span style="color: inherit;">Total Employee Deductions</span>
+                    <span id="resTotalDeductions" style="color: inherit;">- RM 0.00</span>
+                  </div>
+                </div>
+
+                <div
+                  class="result-section result-section-employer collapsed"
+                  id="sectionEmployer"
+                >
+                  <h4
+                    class="result-section-title"
+                    onclick="toggleResultSection('sectionEmployer')"
+                  >
+                    <span class="indicator-dot indicator-blue"></span>
+                    <span>Employer Contributions</span>
+                    <span class="toggle-indicator">▶</span>
+                  </h4>
+                  <div class="collapsible-content">
+                    <div id="employerContributionsContainer">
+                      <!-- Contributions will be dynamically added here -->
+                    </div>
+                  </div>
+                  <div
+                    class="result-item"
+                    style="
+                      margin-top: 12px;
+                      padding-top: 12px;
+                      font-weight: 800;
+                      color: #3b82f6;
+                      margin-bottom: 0;
+                      border-bottom: none;
+                    "
+                  >
+                    <span style="color: inherit;">Total Employer Contributions</span>
+                    <span id="resTotalEmployerContribution" style="color: inherit;">RM 0.00</span>
+                  </div>
+                  <div
+                    class="result-item"
+                    style="font-weight: 800; color: #3b82f6; margin-bottom: 0; border-bottom: none; padding-top: 4px;"
+                  >
+                    <span style="color: inherit;">Total Cost to Employer</span>
+                    <span id="resTotalEmployerCost" style="color: inherit;">RM 0.00</span>
+                  </div>
+                </div>
+
+                <div class="take-home-card">
+                  <!-- Monthly Take Home -->
+                  <div class="col-monthly">
+                    <div class="label">MONTHLY TAKE HOME</div>
+                    <div class="val-row">
+                      <span class="pay-tag">PAY</span>
+                      <div class="val-container">
+                        <span id="resNetMonthly" class="monthly-val">RM 0.00</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Vertical Separator -->
+                  <div class="divider"></div>
+
+                  <!-- Annual Take Home -->
+                  <div class="col-annual">
+                    <div class="label">ANNUAL TAKE HOME</div>
+                    <div class="val-row">
+                      <span class="pay-tag">PAY</span>
+                      <div class="val-container">
+                        <span id="resNetAnnual" class="annual-val">RM 0.00</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <p
+                  style="
+                    font-size: 0.65rem;
+                    color: var(--text-muted);
+                    text-align: center;
+                    font-style: italic;
+                    margin-top: 10px;
+                  "
+                >
+                  Estimated values for reference
+                </p>
+
+                <div class="cta-group">
+                  <button id="downloadReportBtn" class="btn btn-primary">
+                    Download Salary Report
+                  </button>
+                  <button id="downloadPayslipBtn" class="btn btn-primary">
+                    Download Salary Payslip
+                  </button>
+                </div>
+
+                <div
+                  id="incomeGroupSection"
+                  class="highlight-box"
+                  style="
+                    display: none;
+                    text-align: left;
+                    padding: 20px;
+                    border-radius: 16px;
+                    border: 1px solid;
+                    margin-top: 24px;
+                  "
+                >
+                  <div
+                    style="
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                      margin-bottom: 12px;
+                    "
+                  >
+                    <span
+                      style="
+                        font-size: 0.85rem;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        letter-spacing: 0.05em;
+                        color: #1e293b;
+                      "
+                      >Your Income Group</span
+                    >
+                    <span
+                      id="resIncomeGroupLabel"
+                      style="
+                        color: white;
+                        padding: 6px 14px;
+                        border-radius: 9999px;
+                        font-size: 0.85rem;
+                        font-weight: 800;
+                        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                        letter-spacing: 0.025em;
+                      "
+                      >B40</span
+                    >
+                  </div>
+                  <p
+                    id="resIncomeGroupDescription"
+                    style="
+                      font-size: 0.95rem;
+                      color: #334155;
+                      line-height: 1.5;
+                      margin: 0;
+                    "
+                  >
+                    With your total monthly income, you’re in the
+                    <strong id="resIncomeGroupText"
+                      >B40 (lower income group)</strong
+                    >
+                    in Malaysia.
+                  </p>
+                  
+                  <div
+                    style="
+                      display: flex;
+                      height: 6px;
+                      border-radius: 9999px;
+                      overflow: hidden;
+                      margin-top: 16px;
+                      background-color: #e2e8f0;
+                      gap: 2px;
+                    "
+                  >
+                    <div id="groupBarB40" style="flex: 4; background-color: #ef4444; opacity: 0.2; transition: opacity 0.3s"></div>
+                    <div id="groupBarM40" style="flex: 4; background-color: #ca8a04; opacity: 0.2; transition: opacity 0.3s"></div>
+                    <div id="groupBarT20" style="flex: 2; background-color: #16a34a; opacity: 0.2; transition: opacity 0.3s"></div>
+                  </div>
+                  <p
+                    style="
+                      font-size: 0.75rem;
+                      color: #64748b;
+                      margin-top: 16px;
+                      font-style: italic;
+                      border-top: 1px solid rgba(0, 0, 0, 0.05);
+                      padding-top: 12px;
+                    "
+                  >
+                    This is an estimate based on individual salary. Actual group
+                    depends on household income.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <!-- PREMIUM INCOME JOURNEY SECTION -->
+        <div id="premiumIncomeJourneySection" style="display: none; opacity: 0; transition: opacity 0.5s ease; width: 100%; margin-top: 24px; font-family: 'Inter', sans-serif;">
+            <!-- Main Journey Card -->
+            <div class="card" style="padding: 24px 32px; border-radius: 20px; border: 1px solid #e2e8f0; background: linear-gradient(135deg, #f8fafc 0%, #ffffff 100%); margin-bottom: 16px;">
+                <!-- Header -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
+                    <div>
+                        <h2>Your Income Journey 🚀</h2>
+                        <p style="color: #64748b; font-size: 0.95rem;">Track your progress towards the next household income group.</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span id="journeyCurrentBadge" style="display: inline-block; padding: 6px 20px; border-radius: 9999px; background: #eab308; color: white; font-weight: 700; font-size: 1rem; box-shadow: 0 4px 14px -4px rgba(202, 138, 4, 0.4);">M40</span>
+                        <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 6px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em;">Your Current Group</div>
+                    </div>
+                </div>
+
+                <!-- Tracker & Next Goal -->
+                <div style="display: flex; gap: 24px; align-items: stretch; flex-wrap: wrap;">
+                    
+                    <!-- Progress Tracker -->
+                    <div style="flex: 1.5; min-width: 320px; position: relative; display: flex; align-items: center; padding-top: 10px;">
+                        <div style="position: relative; height: 80px; width: 100%; max-width: 500px; margin: 0 auto; margin-top: 16px;">
+                            <!-- Track Line Parent -->
+                            <div style="position: absolute; top: 13px; left: 16px; right: 16px; height: 6px; z-index: 1;">
+                                <!-- Track Background -->
+                                <div style="width: 100%; height: 100%; background: #e2e8f0; border-radius: 3px;"></div>
+                                <!-- Track Filled -->
+                                <div id="journeyTrackFill" style="position: absolute; top: 0; left: 0; width: 50%; height: 100%; background: #eab308; border-radius: 3px; z-index: 2; transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);"></div>
+                                <!-- You are here label -->
+                                <div id="journeyYouAreHere" style="position: absolute; top: -36px; left: 50%; transform: translateX(-50%); text-align: center; color: #eab308; font-weight: 700; font-size: 0.8rem; transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 4; white-space: nowrap;">
+                                    You are here
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: 2px auto 0;"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </div>
+                            </div>
+                            <!-- Nodes -->
+                            <div style="display: flex; justify-content: space-between; position: relative; z-index: 3;">
+                                <div id="nodeB40" style="width: 32px; height: 32px; border-radius: 50%; background: #ffffff; border: 4px solid #eab308; transition: border-color 0.3s; box-shadow: 0 0 0 4px #ffffff, 0 2px 4px rgba(0,0,0,0.05);"></div>
+                                <div id="nodeM40" style="width: 32px; height: 32px; border-radius: 50%; background: #ffffff; border: 4px solid #e2e8f0; transition: border-color 0.3s; box-shadow: 0 0 0 4px #ffffff, 0 2px 4px rgba(0,0,0,0.05);"></div>
+                                <div id="nodeT20" style="width: 32px; height: 32px; border-radius: 50%; background: #ffffff; border: 4px solid #e2e8f0; transition: border-color 0.3s; box-shadow: 0 0 0 4px #ffffff, 0 2px 4px rgba(0,0,0,0.05);"></div>
+                            </div>
+                            <!-- Labels -->
+                            <div style="position: absolute; left: 16px; top: 40px; transform: translateX(-50%); text-align: center; width: 100px;">
+                                <div style="font-weight: 700; font-size: 0.95rem; color: #1e293b;">B40</div>
+                                <div style="font-size: 0.75rem; color: #64748b; margin-top: 2px; font-weight: 500;">Up to<br/>RM5,249</div>
+                            </div>
+                            <div style="position: absolute; left: 50%; top: 40px; transform: translateX(-50%); text-align: center; width: 120px;">
+                                <div style="font-weight: 700; font-size: 0.95rem; color: #1e293b;">M40</div>
+                                <div style="font-size: 0.75rem; color: #64748b; margin-top: 2px; font-weight: 500;">RM5,250 -<br/>RM11,819</div>
+                            </div>
+                            <div style="position: absolute; right: 16px; top: 40px; transform: translateX(50%); text-align: center; width: 100px;">
+                                <div style="font-weight: 700; font-size: 0.95rem; color: #1e293b;">T20</div>
+                                <div style="font-size: 0.75rem; color: #64748b; margin-top: 2px; font-weight: 500;">RM11,820<br/>& above</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Next Goal Side Card -->
+                    <div id="nextGoalSideCard" style="flex: 1; min-width: 250px; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 20px; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.02); position: relative; display: flex; flex-direction: column; justify-content: center;">
+                        <div id="nextGoalContent">
+                            <div style="font-weight: 700; font-size: 1rem; color: #0f172a; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center;">
+                                <span id="nextGoalTitle">Next Goal: M40</span> 
+                                <span style="font-size: 1.25rem;">🎯</span>
+                            </div>
+                            <div style="font-size: 0.85rem; color: #64748b; margin-bottom: 2px;">You need</div>
+                            <div style="display: flex; align-items: baseline; gap: 6px;">
+                                <span id="nextGoalAmount" style="font-size: 1.75rem; font-weight: 800; color: #16a34a; letter-spacing: -0.025em;">RM500</span>
+                            </div>
+                            <div style="font-size: 0.85rem; color: #64748b;">more per month</div>
+                        </div>
+                        <div id="maxGoalContent" style="display: none; text-align: center; padding: 8px 0;">
+                            <div style="font-size: 2.5rem; margin-bottom: 8px;">🎉</div>
+                            <div style="font-weight: 700; font-size: 1.05rem; color: #0f172a; line-height: 1.4;">You're in the top household income group!</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Social Share -->
+                <div style="margin-top: 24px; padding-top: 16px; border-top: 1px dashed #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                    <div style="font-size: 0.85rem; color: #64748b; font-weight: 500;">Share your progress</div>
+                    <div style="display: flex; gap: 6px;" id="socialShareButtons">
+                        <a href="javascript:void(0)" onclick="shareProgress('linkedin')" class="social-btn" aria-label="Share on LinkedIn" style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: #f1f5f9; color: #0077b5; text-decoration: none;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                        </a>
+                        <a href="javascript:void(0)" onclick="shareProgress('facebook')" class="social-btn" aria-label="Share on Facebook" style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: #f1f5f9; color: #1877F2; text-decoration: none;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M9.198 21.5h4V12h3.003l.483-3.5H13.2V6.52c0-.98.243-1.603 1.516-1.603h1.83V1.758A21.1 21.1 0 0 0 13.926 1.6c-2.613 0-4.485 1.572-4.485 4.605V8.5H6.5V12h2.698v9.5z"/></svg>
+                        </a>
+                        <a href="javascript:void(0)" onclick="shareProgress('twitter')" class="social-btn" aria-label="Share on X (Twitter)" style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: #f1f5f9; color: #0f1419; text-decoration: none;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                        </a>
+                        <a href="javascript:void(0)" onclick="shareProgress('whatsapp')" class="social-btn" aria-label="Share on WhatsApp" style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: #f1f5f9; color: #25D366; text-decoration: none;">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                        </a>
+                        <a href="javascript:void(0)" onclick="shareProgress('threads')" class="social-btn" aria-label="Share on Threads" style="display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 50%; background: #f1f5f9; color: #000000; text-decoration: none;">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.586-1.308-.883-2.359-.89h-.029c-.844 0-1.992.232-2.721 1.32L7.734 7.847c.98-1.454 2.568-2.256 4.478-2.256h.044c3.194.02 5.097 1.975 5.287 5.388.108.046.216.094.321.142 1.49.7 2.58 1.761 3.154 3.07.797 1.82.871 4.79-1.548 7.158-1.85 1.81-4.094 2.628-7.277 2.65Zm1.003-11.69c-.242 0-.487.007-.739.021-1.836.103-2.98.946-2.916 2.143.067 1.256 1.452 1.839 2.784 1.767 1.224-.065 2.818-.543 3.086-3.71a10.5 10.5 0 0 0-2.215-.221z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insight Cards -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+                <!-- Next Milestone -->
+                <div class="card" style="padding: 24px; text-align: center; border-radius: 20px; display: flex; flex-direction: column; justify-content: center;">
+                    <div id="insightMilestoneIconBg" style="background: #e0e7ff; width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 1.5rem;">
+                        🏔️
+                    </div>
+                    <div style="font-weight: 700; color: #0f172a; margin-bottom: 6px; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.05em;" id="insightMilestoneLabelTop">Next Milestone</div>
+                    <div id="insightMilestoneGroup" style="font-size: 1.3rem; font-weight: 800; color: #4f46e5; margin-bottom: 4px;">M40 Income Group</div>
+                    <div id="insightMilestoneRange" style="font-size: 0.85rem; color: #64748b; margin-bottom: 8px;">RM5,250 - RM11,819</div>
+                    <div id="insightMilestoneMsg" style="font-size: 0.9rem; color: #475569; font-weight: 500;">Keep going! You're getting closer.</div>
+                </div>
+
+                <!-- Progress Details -->
+                <div class="card" style="padding: 24px; border-radius: 20px; display: flex; flex-direction: column; justify-content: center;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+                        <div id="insightProgressBg" style="background: #dcfce7; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem;">
+                            📈
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-weight: 700; color: #0f172a; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em;">Your Progress</div>
+                            <div style="font-size: 2rem; font-weight: 800; color: #16a34a; line-height: 1; margin-top: 4px;" id="insightProgressPctWrapper"><span id="insightProgressPct">0</span>%</div>
+                        </div>
+                    </div>
+                    <div style="height: 8px; background: #f1f5f9; border-radius: 4px; overflow: hidden; margin-bottom: 12px; position: relative;" id="insightProgressBarWrapper">
+                        <div id="insightProgressBar" style="height: 100%; background: #16a34a; border-radius: 4px; width: 0%; transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <span id="insightProgressRemaining" style="font-size: 0.85rem; color: #475569; font-weight: 500;">RM500 more to go</span>
+                        <span id="insightProgressLabel" style="font-size: 0.8rem; color: #94a3b8; font-weight: 500;">to reach M40</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SOCSO CALCULATOR LAYOUT (NEW) -->
+        <div
+          class="main-layout"
+          id="layoutSocso"
+          style="display: none; opacity: 0; transition: opacity 0.3s ease"
+        >
+          <!-- Left Side: Form Input -->
+          <section class="card">
+            <h2 class="card-title">Enter Details</h2>
+            <form id="socsoForm" action="#socsoResultCard">
+              <div class="form-group">
+                <label
+                  class="form-label"
+                  for="socsoGrossSalary"
+                  style="display: flex; align-items: center; gap: 6px"
+                >
+                  Gross Monthly Salary
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    style="color: var(--text-muted)"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="16" x2="12" y2="12"></line>
+                    <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                  </svg>
+                </label>
+                <p
+                  style="
+                    font-size: 0.7rem;
+                    color: #dc2626;
+                    margin-top: -2px;
+                    margin-bottom: 4px;
+                    font-weight: 600;
+                  "
+                >
+                  *Required
+                </p>
+                <div class="input-group">
+                  <span class="input-prefix">RM</span>
+                  <input
+                    type="number"
+                    id="socsoGrossSalary"
+                    class="form-input"
+                    placeholder="0"
+                    min="0.01"
+                    step="0.01"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" style="margin-bottom: 12px"
+                  >Age Group</label
+                >
+                <div style="display: flex; gap: 24px">
+                  <label
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 10px;
+                      cursor: pointer;
+                      font-size: 1rem;
+                      color: var(--text-main);
+                      font-weight: 500;
+                    "
+                  >
+                    <input
+                      type="radio"
+                      name="socsoAge"
+                      value="below60"
+                      checked
+                      style="width: 20px; height: 20px; accent-color: var(--primary);"
+                    />
+                    Below 60
+                  </label>
+                  <label
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 10px;
+                      cursor: pointer;
+                      font-size: 1rem;
+                      color: var(--text-main);
+                      font-weight: 500;
+                    "
+                  >
+                    <input
+                      type="radio"
+                      name="socsoAge"
+                      value="above60"
+                      style="width: 20px; height: 20px; accent-color: var(--primary);"
+                    />
+                    Above 60
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" style="margin-bottom: 12px"
+                  >Nationality</label
+                >
+                <div style="display: flex; gap: 24px">
+                  <label
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 10px;
+                      cursor: pointer;
+                      font-size: 1rem;
+                      color: var(--text-main);
+                      font-weight: 500;
+                    "
+                  >
+                    <input
+                      type="radio"
+                      name="socsoNationality"
+                      value="malaysian"
+                      checked
+                      style="width: 20px; height: 20px; accent-color: var(--primary);"
+                    />
+                    Malaysian
+                  </label>
+                  <label
+                    style="
+                      display: flex;
+                      align-items: center;
+                      gap: 10px;
+                      cursor: pointer;
+                      font-size: 1rem;
+                      color: var(--text-main);
+                      font-weight: 500;
+                    "
+                  >
+                    <input
+                      type="radio"
+                      name="socsoNationality"
+                      value="foreigner"
+                      style="width: 20px; height: 20px; accent-color: var(--primary);"
+                    />
+                    Foreigner
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-actions" >
+                <button
+                  type="reset"
+                  id="socsoResetBtn"
+                  class="btn btn-outline"
+                  
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+                    ></path>
+                    <path d="M3 3v5h5"></path>
+                  </svg>
+                  Reset
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect
+                      x="4"
+                      y="2"
+                      width="16"
+                      height="20"
+                      rx="2"
+                      ry="2"
+                    ></rect>
+                    <line x1="8" y1="6" x2="16" y2="6"></line>
+                    <line x1="16" y1="14" x2="16.01" y2="14"></line>
+                    <line x1="16" y1="18" x2="16.01" y2="18"></line>
+                    <line x1="12" y1="14" x2="12.01" y2="14"></line>
+                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                    <line x1="8" y1="14" x2="8.01" y2="14"></line>
+                    <line x1="8" y1="18" x2="8.01" y2="18"></line>
+                  </svg>
+                  Calculate
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <!-- Right Side: Result Panel -->
+          <aside class="result-panel">
+            <div
+              class="card" id="socsoResultCard"
+            >
+              <div
+                style="
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 1rem;
+                  padding-bottom: 0.5rem;
+                  border-bottom: 1px solid #f1f5f9;
+                "
+              >
+                <h2 class="card-title" style="margin-bottom: 0">Calculation Results</h2>
+              </div>
+
+              <!-- Placeholder -->
+              <div
+                id="socsoPlaceholder"
+                class="placeholder-text"
+              >
+                <div
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: 16px;
+                    margin-top: 10px;
+                  "
+                >
+                  <svg
+                    width="160"
+                    height="160"
+                    viewBox="0 0 200 200"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M154.5 135.5C168.1 118.7 178.3 98.5 174.1 80.1C169.9 61.7 151.3 45.1 131.5 35.3C111.7 25.5 90.7 22.5 71.9 28.1C53.1 33.7 36.5 47.9 25.7 65.5C14.9 83.1 9.9 104.1 15.5 121.9C21.1 139.7 37.3 154.3 55.7 163.5C74.1 172.7 94.7 176.5 113.1 171.1C131.5 165.7 140.9 152.3 154.5 135.5Z"
+                      fill="#EFF6FF"
+                    />
+                    <!-- Matching Salary SVG exactly would be good but standardizing size is key -->
+                    <rect
+                      x="65"
+                      y="45"
+                      width="70"
+                      height="110"
+                      rx="12"
+                      fill="#FFFFFF"
+                      stroke="#3B82F6"
+                      stroke-width="4"
+                    />
+                    <rect
+                      x="77"
+                      y="60"
+                      width="46"
+                      height="24"
+                      rx="6"
+                      fill="#DBEAFE"
+                    />
+                    <rect x="77" y="95" width="10" height="10" rx="3" fill="#93C5FD" />
+                    <rect x="95" y="95" width="10" height="10" rx="3" fill="#93C5FD" />
+                    <rect x="113" y="95" width="10" height="10" rx="3" fill="#93C5FD" />
+                    <rect x="77" y="113" width="10" height="10" rx="3" fill="#93C5FD" />
+                    <rect x="95" y="113" width="10" height="10" rx="3" fill="#93C5FD" />
+                    <rect x="113" y="113" width="10" height="10" rx="3" fill="#3B82F6" />
+                    <rect x="77" y="131" width="10" height="10" rx="3" fill="#93C5FD" />
+                    <rect x="95" y="131" width="10" height="10" rx="3" fill="#93C5FD" />
+                    <rect x="113" y="131" width="10" height="10" rx="3" fill="#3B82F6" />
+                  </svg>
+                </div>
+                <p
+                  style="
+                    font-weight: 600;
+                    font-size: 1.1rem;
+                    color: var(--text-main);
+                    margin-bottom: 6px;
+                  "
+                >
+                  Your results are just one step away
+                </p>
+                <p style="color: var(--text-muted); font-size: 0.95rem">
+                  Complete the form to continue
+                </p>
+              </div>
+
+              <!-- Results -->
+              <div
+                id="socsoResultsContent" class="result-content"
+              >
+                <div class="result-section">
+                  <!-- Employee Row -->
+                  <div class="result-item">
+                    <div style="display: flex; align-items: center; gap: 12px">
+                      <span class="indicator-dot indicator-green"></span>
+                      <span>Employee contribution</span>
+                    </div>
+                    <span id="socsoEmployeeCardVal">RM 0.00</span>
+                  </div>
+                  <!-- Employer Row -->
+                  <div class="result-item">
+                    <div style="display: flex; align-items: center; gap: 12px">
+                      <span class="indicator-dot indicator-blue"></span>
+                      <span>Employer contribution</span>
+                    </div>
+                    <span id="socsoEmployerCardVal">RM 0.00</span>
+                  </div>
+                  <!-- Total Row -->
+                  <div class="result-item total">
+                    <span>Total Contribution</span>
+                    <span id="socsoTotalCardVal">RM 0.00</span>
+                  </div>
+                  <!-- Disclaimer -->
+                  <p
+                    style="
+                      font-size: 0.75rem;
+                      color: #94a3b8;
+                      text-align: center;
+                      margin: 16px 0 0;
+                      line-height: 1.4;
+                    "
+                  >
+                    This calculator is for reference only.<br /><span style="display: block; margin-top: 4px;">Please check official PERKESO guidelines for accurate deductions.</span>
+                  </p>
+                </div>
+
+                <!-- Download Button -->
+                <div class="cta-group">
+                  <button id="downloadSocsoReportBtn" class="btn btn-primary" style="width: 100%;">
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
+                  Download SOCSO Report
+                  </button>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <!-- SEO Content Sections - Salary -->
+    
+    <section class="content-section" id="salarySeoContent">
+      <div class="container">
+        
+        <!-- Section 1: Formula -->
+        <div class="seo-card">
+          <h2 class="seo-title"><span>📐</span> What are the components of a salary calculator?</h2>
+          <p class="seo-subtitle">
+            Calculating your take-home pay involves subtracting all statutory deductions from your total earnings. Use this standard formula to verify your payslip.
+          </p>
+          <div class="seo-formula-box">
+            <span class="seo-formula-text">Net Salary = Gross Salary – Total Deductions</span>
+            <div class="seo-formula-desc">Standard Malaysian payroll calculation logic</div>
+          </div>
+          <p style="color: #64748b; font-size: 0.95rem; line-height: 1.6; text-align: center;">
+            <strong>Total Deductions</strong> typically include contributions to <strong>EPF</strong>, <strong>SOCSO</strong>, <strong>EIS</strong>, and <strong>PCB (Monthly Tax Deduction)</strong>.
+          </p>
+        </div>
+
+        <!-- Section 2: Comparison Table -->
+        <div class="seo-card">
+          <h2 class="seo-title"><span>📑</span> Salary Terms Comparison</h2>
+          <p class="seo-subtitle">
+            Quick reference guide to the most common statutory terms found on Malaysian payslips.
+          </p>
+          <div class="seo-table-wrapper">
+            <table class="seo-table">
+              <thead>
+                <tr>
+                  <th>Term</th>
+                  <th>Description</th>
+                  <th>Impact on Net Pay</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>EPF (KWSP)</strong></td>
+                  <td>Employee Provident Fund for retirement savings.</td>
+                  <td>Reduces current net pay; increases long-term savings.</td>
+                </tr>
+                <tr>
+                  <td><strong>SOCSO (PERKESO)</strong></td>
+                  <td>Social security protection for workplace injuries.</td>
+                  <td>Small deduction for comprehensive insurance coverage.</td>
+                </tr>
+                <tr>
+                  <td><strong>EIS (SIP)</strong></td>
+                  <td>Employment Insurance System for job loss protection.</td>
+                  <td>Minimal deduction to provide a safety net during unemployment.</td>
+                </tr>
+                <tr>
+                  <td><strong>PCB (MTD)</strong></td>
+                  <td>Monthly Tax Deduction for income tax payments.</td>
+                  <td>Varies based on your specific annual income bracket.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Section 3: Contribution Tables -->
+        <div class="seo-card">
+          <h2 class="seo-title"><span>📊</span> Contribution Tables (2026 Updated)</h2>
+          <p class="seo-subtitle">
+            Quick reference for employer and employee statutory contribution rates in Malaysia.
+          </p>
+
+          <div class="seo-tabs">
+            <div class="seo-tab active" onclick="openTab(event, 'epf')">EPF (KWSP)</div>
+            <div class="seo-tab" onclick="openTab(event, 'socso')">SOCSO (PERKESO)</div>
+            <div class="seo-tab" onclick="openTab(event, 'eis')">EIS</div>
+          </div>
+
+          <div id="epf" class="contribution-content active">
+            <div class="seo-table-wrapper">
+              <table class="seo-table">
+                <thead>
+                  <tr>
+                    <th>Salary Range</th>
+                    <th>Employee (%)</th>
+                    <th>Employer (%)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>≤ RM5,000</td>
+                    <td>11%</td>
+                    <td>13%</td>
+                  </tr>
+                  <tr>
+                    <td>> RM5,000</td>
+                    <td>11%</td>
+                    <td>12%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="socso" class="contribution-content">
+            <div class="seo-table-wrapper">
+              <table class="seo-table">
+                <thead>
+                  <tr>
+                    <th>Monthly Wages (RM)</th>
+                    <th>Employee (RM)</th>
+                    <th>Employer (RM)</th>
+                    <th>Total (RM)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>RM1,000 – RM2,000</td><td>4.75</td><td>16.65</td><td>21.40</td></tr>
+                  <tr><td>RM3,000 – RM4,000</td><td>14.75</td><td>51.65</td><td>66.40</td></tr>
+                  <tr><td>RM5,000 – RM6,000</td><td>24.75</td><td>86.65</td><td>111.40</td></tr>
+                  <tr><td>RM6,000</td><td>29.75</td><td>104.15</td><td>133.90</td></tr>
+                  <tr><td>> RM6,000</td><td>30.00</td><td>105.00</td><td>135.00</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="eis" class="contribution-content">
+            <div class="seo-table-wrapper">
+              <table class="seo-table">
+                <thead>
+                  <tr>
+                    <th>Salary Range (RM)</th>
+                    <th>Employee (RM)</th>
+                    <th>Employer (RM)</th>
+                    <th>Total (RM)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td>Up to 300</td><td>0.50</td><td>0.50</td><td>1.00</td></tr>
+                  <tr><td>2,000 – 2,100</td><td>4.10</td><td>4.10</td><td>8.20</td></tr>
+                  <tr><td>4,000 – 4,100</td><td>8.10</td><td>8.10</td><td>16.20</td></tr>
+                  <tr><td>4,900 – 5,000</td><td>9.90</td><td>9.90</td><td>19.80</td></tr>
+                  <tr><td>> 6,000</td><td>11.90</td><td>11.90</td><td>23.80</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 4: What is Subject to EPF/SOCSO/EIS -->
+        <div class="seo-card">
+          <h2 class="seo-title"><span>📋</span> Salary Inclusions & Exclusions</h2>
+          <p class="seo-subtitle">
+            A precise breakdown of which salary components are subject to statutory deductions.
+          </p>
+
+          <div style="margin-bottom: 32px;">
+            <h3>1. EPF (KWSP)</h3>
+            <div class="seo-grid-2">
+              <div class="seo-info-box" style="background:#f0fdf4;">
+                <div class="seo-info-box-title"><span style="color: #059669; font-size:1.1rem;">✓</span> Included Items</div>
+                <ul class="seo-list">
+                  <li>Basic salary</li>
+                  <li>Bonuses and incentives</li>
+                  <li>Commissions</li>
+                  <li>Allowances (unless exempted)</li>
+                  <li>Arrears of wages</li>
+                </ul>
+              </div>
+              <div class="seo-info-box" style="background:#fef2f2;">
+                <div class="seo-info-box-title"><span style="color: #dc2626; font-size:1.1rem;">✕</span> Excluded Items</div>
+                <ul class="seo-list">
+                  <li>Service charges</li>
+                  <li>Overtime payments</li>
+                  <li>Gratuity and retirement benefits</li>
+                  <li>Travel allowances</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-bottom: 32px;">
+            <h3>2. SOCSO & EIS</h3>
+            <p style="font-size: 0.9rem; color: #64748b; margin-bottom: 16px;">Both SOCSO and EIS follow the same definition of "wages" for contribution purposes.</p>
+            <div class="seo-grid-2">
+              <div class="seo-info-box" style="background:#f0fdf4;">
+                <div class="seo-info-box-title"><span style="color: #059669; font-size:1.1rem;">✓</span> Included Items</div>
+                <ul class="seo-list">
+                  <li>Basic salary</li>
+                  <li>Overtime payments</li>
+                  <li>Commissions and service charges</li>
+                  <li>Paid leave payments</li>
+                  <li>Fixed or variable allowances</li>
+                </ul>
+              </div>
+              <div class="seo-info-box" style="background:#fef2f2;">
+                <div class="seo-info-box-title"><span style="color: #dc2626; font-size:1.1rem;">✕</span> Excluded Items</div>
+                <ul class="seo-list">
+                  <li>EPF contributions</li>
+                  <li>Traveling allowances</li>
+                  <li>Gratuity and retirement benefits</li>
+                  <li>Annual bonus</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5: PCB (Monthly Tax Deduction) -->
+        <div class="seo-card">
+          <h2 class="seo-title"><span>🏛️</span> PCB (Monthly Tax Deduction)</h2>
+          <p class="seo-subtitle">
+            Estimate how much income tax is deducted from your salary automatically every month.
+          </p>
+
+          <div class="seo-table-wrapper">
+            <table class="seo-table">
+              <thead>
+                <tr>
+                  <th>Monthly Salary (RM)</th>
+                  <th>PCB Range (Indicative)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>RM2,000</td><td><span class="seo-tag">No PCB</span></td></tr>
+                <tr><td>RM4,000</td><td><span class="seo-tag" style="background:#fcf8ff;color:#7e22ce;">RM10 – RM50</span></td></tr>
+                <tr><td>RM6,000</td><td><span class="seo-tag" style="background:#fff7ed;color:#c2410c;">RM80 – RM250</span></td></tr>
+                <tr><td>RM10,000</td><td><span class="seo-tag" style="background:#fef2f2;color:#b91c1c;">RM400 – RM800</span></td></tr>
+                <tr><td>RM15,000+</td><td><span class="seo-tag" style="background:#fef2f2;color:#b91c1c;">RM1,000+</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; margin-bottom: 24px;">
+            <h3>Understanding Your Yearly Income Tax</h3>
+            <div class="pcb-calc-grid">
+              <div class="pcb-calc-box">
+                <span class="pcb-calc-label">Monthly Salary</span>
+                <span class="pcb-calc-value">RM5,000</span>
+              </div>
+              <div class="pcb-calc-box">
+                <span class="pcb-calc-label">Total Yearly</span>
+                <span class="pcb-calc-value">RM60,000</span>
+              </div>
+              <div class="pcb-calc-box pcb-calc-highlight">
+                <span class="pcb-calc-label">Estimated Tax</span>
+                <span class="pcb-calc-value">~RM1,500/yr</span>
+              </div>
+            </div>
+            <p style="font-size: 0.85rem; color: #64748b; margin-top: 16px; line-height: 1.5;">
+              <strong>Calculation Logic:</strong> With a yearly income of RM60,000, you get a standard <strong>RM9,000 personal relief</strong>. Your taxable income becomes <strong>RM51,000</strong>, which falls into the 8% bracket.
+            </p>
+          </div>
+
+          <div class="seo-highlight-box">
+            <div class="seo-highlight-icon">⚠️</div>
+            <div class="seo-highlight-content">
+              <div class="seo-highlight-title">Important Notice</div>
+              <div class="seo-highlight-text">
+                PCB is only an estimate. The actual amount depends on individual tax reliefs, marital status, and total income combinations. Always use our calculator for precision.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 6: Tax Deductions & Logistics -->
+        <div class="seo-card">
+          <h2 class="seo-title"><span>🛡️</span> Tax Relief & Compliance</h2>
+          <p class="seo-subtitle">
+            Common allowable tax deductions to reduce your taxable income.
+          </p>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin-bottom: 32px;">
+            <div class="seo-deduction-item">
+              <span class="seo-deduction-label">EPF Contribution</span>
+              <span class="seo-deduction-value" style="color: #2563eb; background: #eff6ff;">Statutory</span>
+            </div>
+            <div class="seo-deduction-item">
+              <span class="seo-deduction-label">SOCSO Contribution</span>
+              <span class="seo-deduction-value" style="color: #2563eb; background: #eff6ff;">Statutory</span>
+            </div>
+            <div class="seo-deduction-item">
+              <span class="seo-deduction-label">Lifestyle Relief</span>
+              <span class="seo-deduction-value">Up to RM2,500</span>
+            </div>
+            <div class="seo-deduction-item">
+              <span class="seo-deduction-label">Medical Expenses</span>
+              <span class="seo-deduction-value">Up to RM10,000</span>
+            </div>
+            <div class="seo-deduction-item">
+              <span class="seo-deduction-label">Education Fees</span>
+              <span class="seo-deduction-value">Up to RM7,000</span>
+            </div>
+            <div class="seo-deduction-item">
+              <span class="seo-deduction-label">Insurance / Takaful</span>
+              <span class="seo-deduction-value">Up to RM3,000</span>
+            </div>
+          </div>
+
+          <div class="seo-highlight-box" style="background: #f0fdf4; border-color: #bbf7d0;">
+            <div class="seo-highlight-icon" style="font-size:1.75rem;">📅</div>
+            <div class="seo-highlight-content">
+              <div class="seo-highlight-title" style="color: #166534;">Submission Deadlines</div>
+              <div class="seo-highlight-text" style="color: #15803d; font-size: 0.95rem;">
+                EPF, SOCSO, and EIS contributions <strong style="color:#14532d;">must be submitted on or before the 15th of the following month</strong>. Late payments result in stringent penalties (e.g., +10% late payment fines).
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 6: Official Calculators -->
+        <div class="seo-card">
+        <h2 class="seo-title">Official Government Salary Calculators</h2>
+        <p class="seo-subtitle">
+            For official verification and precise statutory calculations, visit
+            these government portals:
+          </p>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+            <!-- CARD 1: SOCSO (Green) -->
+            <a
+              href="https://www.perkeso.gov.my/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="
+                padding: 20px;
+                background: #f0fdf4;
+                border: 1px solid #bbf7d0;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                text-decoration: none;
+                color: inherit;
+                box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+                transition: transform 0.2s, box-shadow 0.2s;
+              "
+              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 10px -3px rgba(0, 0, 0, 0.1)';"
+              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px -1px rgba(0, 0, 0, 0.05)';"
+            >
+              <img
+                src="https://vectorseek.com/wp-content/uploads/2023/09/Perkeso-Socso-Logo-Vector.svg-.png"
+                alt="SOCSO Logo"
+                style="width: 48px; height: 48px; object-fit: contain; flex-shrink: 0; margin-bottom: 4px;"
+              />
+              <div style="flex: 1;">
+                <h3 style="color: #15803d; margin-top: 0; margin-bottom: 8px;">
+                  Official SOCSO Website
+                </h3>
+                <p style="font-size: 0.85rem; color: #166534; margin: 0; line-height: 1.3;">
+                  Official PERKESO contribution reference portal.
+                </p>
+              </div>
+              <span
+                style="
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 4px;
+                  padding: 6px 12px;
+                  background: #15803d;
+                  color: white;
+                  font-size: 0.8rem;
+                  font-weight: 700;
+                  border-radius: 6px;
+                  align-self: flex-start;
+                "
+              >
+                Visit SOCSO
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </span>
+            </a>
+
+            <!-- CARD 2: LHDN (Blue) -->
+            <a
+              href="https://calc.hasil.gov.my/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="
+                padding: 20px;
+                background: #f0f9ff;
+                border: 1px solid #bae6fd;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                text-decoration: none;
+                color: inherit;
+                box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+                transition: transform 0.2s, box-shadow 0.2s;
+              "
+              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 10px -3px rgba(0, 0, 0, 0.1)';"
+              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px -1px rgba(0, 0, 0, 0.05)';"
+            >
+              <img
+                src="https://www.ajobthing.com/resources/blog/data/blog/images/2026/05/LHDN_logo%20(1).png"
+                alt="LHDN Logo"
+                style="width: 48px; height: 48px; object-fit: contain; flex-shrink: 0; margin-bottom: 4px;"
+              />
+              <div style="flex: 1;">
+                <h3 style="color: #0284c7; margin-top: 0; margin-bottom: 8px;">
+                  Official LHDN PCB Calculator
+                </h3>
+                <p style="font-size: 0.85rem; color: #075985; margin: 0; line-height: 1.3;">
+                  Official LHDN PCB tax calculation tool.
+                </p>
+              </div>
+              <span
+                style="
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 4px;
+                  padding: 6px 12px;
+                  background: #0284c7;
+                  color: white;
+                  font-size: 0.8rem;
+                  font-weight: 700;
+                  border-radius: 6px;
+                  align-self: flex-start;
+                "
+              >
+                Open PCB Calculator
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </span>
+            </a>
+
+            <!-- CARD 3: EPF (Red) -->
+            <a
+              href="https://www.kwsp.gov.my/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="
+                padding: 20px;
+                background: #fef2f2;
+                border: 1px solid #fecaca;
+                border-radius: 12px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                text-decoration: none;
+                color: inherit;
+                box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+                transition: transform 0.2s, box-shadow 0.2s;
+              "
+              onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 10px -3px rgba(0, 0, 0, 0.1)';"
+              onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px -1px rgba(0, 0, 0, 0.05)';"
+            >
+              <img
+                src="https://upload.wikimedia.org/wikipedia/en/thumb/6/64/Employees_Provident_Fund_%28Malaysia%29_logo.svg/1280px-Employees_Provident_Fund_%28Malaysia%29_logo.svg.png"
+                alt="EPF Logo"
+                style="width: 48px; height: 48px; object-fit: contain; flex-shrink: 0; margin-bottom: 4px;"
+              />
+              <div style="flex: 1;">
+                <h3 style="color: #dc2626; margin-top: 0; margin-bottom: 8px;">
+                  Official EPF Website
+                </h3>
+                <p style="font-size: 0.85rem; color: #991b1b; margin: 0; line-height: 1.3;">
+                  Official EPF contribution & savings portal.
+                </p>
+              </div>
+              <span
+                style="
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 4px;
+                  padding: 6px 12px;
+                  background: #dc2626;
+                  color: white;
+                  font-size: 0.8rem;
+                  font-weight: 700;
+                  border-radius: 6px;
+                  align-self: flex-start;
+                "
+              >
+                Visit EPF
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO Content Sections - SOCSO -->
+    <section class="content-section" id="socsoSeoContent">
+      <div class="container">
+        <!-- Section 1: What is SOCSO (PERKESO) -->
+        <div
+          class="content-card"
+        >
+          <h2><span>🛡️</span> What is SOCSO (PERKESO)?</h2>
+          <p>
+            SOCSO (Social Security Organization), known as PERKESO, provides
+            essential social security protection to Malaysian employees through
+            comprehensive coverage schemes.
+          </p>
+          <div class="content-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px;
+                background: #f8fafc;
+                border-radius: 12px;
+              "
+            >
+              <span
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 32px;
+                  height: 32px;
+                  background: #dcfce7;
+                  font-size: 1.2rem;
+                  border-radius: 8px;
+                "
+                >🏥</span
+              >
+              <span style="color: #334155; font-weight: 600; font-size: 0.95rem"
+                >Work-related injuries</span
+              >
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px;
+                background: #f8fafc;
+                border-radius: 12px;
+              "
+            >
+              <span
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 32px;
+                  height: 32px;
+                  background: #dcfce7;
+                  font-size: 1.2rem;
+                  border-radius: 8px;
+                "
+                >♿</span
+              >
+              <span style="color: #334155; font-weight: 600; font-size: 0.95rem"
+                >Disability protection</span
+              >
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px;
+                background: #f8fafc;
+                border-radius: 12px;
+              "
+            >
+              <span
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 32px;
+                  height: 32px;
+                  background: #dcfce7;
+                  font-size: 1.2rem;
+                  border-radius: 8px;
+                "
+                >🩺</span
+              >
+              <span style="color: #334155; font-weight: 600; font-size: 0.95rem"
+                >Medical support</span
+              >
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px;
+                background: #f8fafc;
+                border-radius: 12px;
+              "
+            >
+              <span
+                style="
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  width: 32px;
+                  height: 32px;
+                  background: #dcfce7;
+                  font-size: 1.2rem;
+                  border-radius: 8px;
+                "
+                >💰</span
+              >
+              <span style="color: #334155; font-weight: 600; font-size: 0.95rem"
+                >Loss of income coverage</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 2: How SOCSO Contribution Works -->
+        <div
+          class="content-card"
+        >
+          <h2>
+            How SOCSO Contribution Works
+          </h2>
+          <p>
+            SOCSO contribution is calculated based on two main variables: your
+            monthly gross salary and your age.
+          </p>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+              gap: 20px;
+            "
+          >
+            <!-- Salary Factor -->
+            <div
+              style="
+                background: #f8fafc;
+                padding: 24px;
+                border-radius: 16px;
+                border: 1px solid #f1f5f9;
+              "
+            >
+              <h3>
+                💰 Gross Monthly Salary
+              </h3>
+              <p>
+                SOCSO is structured by contribution bands:
+              </p>
+              <ul
+                style="list-style-type: none; padding-left: 0; margin-bottom: 0"
+              >
+                <li
+                  style="
+                    display: flex;
+                    align-items: start;
+                    gap: 10px;
+                    margin-bottom: 10px;
+                    color: #475569;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <span style="color: #10b981">✓</span> Uses
+                  <strong>official contribution tables</strong>.
+                </li>
+                <li
+                  style="
+                    display: flex;
+                    align-items: start;
+                    gap: 10px;
+                    margin-bottom: 10px;
+                    color: #475569;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <span style="color: #10b981">✓</span> Salaries mapped to
+                  <strong>specific bands</strong>.
+                </li>
+                <li
+                  style="
+                    display: flex;
+                    align-items: start;
+                    gap: 10px;
+                    margin-bottom: 0;
+                    color: #475569;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <span style="color: #10b981">✓</span> Ceiling capped at
+                  <strong>RM6,000</strong>.
+                </li>
+              </ul>
+            </div>
+            <!-- Age Factor -->
+            <div
+              style="
+                background: #f8fafc;
+                padding: 24px;
+                border-radius: 16px;
+                border: 1px solid #f1f5f9;
+              "
+            >
+              <h3>
+                👤 Age Factor
+              </h3>
+              <p>
+                Your age determines protection scope:
+              </p>
+              <ul
+                style="list-style-type: none; padding-left: 0; margin-bottom: 0"
+              >
+                <li
+                  style="
+                    display: flex;
+                    align-items: start;
+                    gap: 10px;
+                    margin-bottom: 10px;
+                    color: #475569;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <span style="color: #10b981">✓</span>
+                  <strong>Below 60:</strong> Full protection coverage.
+                </li>
+                <li
+                  style="
+                    display: flex;
+                    align-items: start;
+                    gap: 10px;
+                    margin-bottom: 0;
+                    color: #475569;
+                    font-size: 0.9rem;
+                    line-height: 1.6;
+                  "
+                >
+                  <span style="color: #10b981">✓</span>
+                  <strong>60 & Above:</strong> Employment injury only.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3: Coverage Categories -->
+        <div
+          class="content-card"
+        >
+          <h2>
+            Coverage Categories (Act 4)
+          </h2>
+          <p>
+            The Employees’ Social Security Act 1969 provides protection to all
+            Malaysian employees, regardless of religion, nationality, or
+            permanent status.
+          </p>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+              gap: 24px;
+            "
+          >
+            <!-- Below 60 -->
+            <div
+              style="
+                padding: 28px;
+                background: #f8fafc;
+                border: 1px solid #f1f5f9;
+                border-radius: 20px;
+              "
+            >
+              <div
+                style="
+                  display: inline-block;
+                  background: #eff6ff;
+                  color: var(--primary);
+                  padding: 6px 16px;
+                  border-radius: 8px;
+                  font-size: 0.8rem;
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  margin-bottom: 16px;
+                "
+              >
+                Category 1
+              </div>
+              <h3>
+                Below 60 Years Old
+              </h3>
+              <p>
+                Full coverage: Employment Injury & Invalidity Schemes. Employer
+                and employee contribute.
+              </p>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 12px;
+                  padding-top: 20px;
+                  border-top: 1px solid #e2e8f0;
+                "
+              >
+                <div
+                  style="
+                    background: #fff;
+                    padding: 12px;
+                    border-radius: 12px;
+                    text-align: center;
+                  "
+                >
+                  <div
+                    style="
+                      font-size: 0.75rem;
+                      color: #64748b;
+                      font-weight: 600;
+                      text-transform: uppercase;
+                      margin-bottom: 4px;
+                    "
+                  >
+                    Employer
+                  </div>
+                  <div
+                    style="
+                      font-size: 1.2rem;
+                      font-weight: 800;
+                      color: var(--primary);
+                    "
+                  >
+                    ~1.75%
+                  </div>
+                </div>
+                <div
+                  style="
+                    background: #fff;
+                    padding: 12px;
+                    border-radius: 12px;
+                    text-align: center;
+                  "
+                >
+                  <div
+                    style="
+                      font-size: 0.75rem;
+                      color: #64748b;
+                      font-weight: 600;
+                      text-transform: uppercase;
+                      margin-bottom: 4px;
+                    "
+                  >
+                    Employee
+                  </div>
+                  <div
+                    style="
+                      font-size: 1.2rem;
+                      font-weight: 800;
+                      color: var(--primary);
+                    "
+                  >
+                    ~0.5%
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 60 & Above -->
+            <div
+              style="
+                padding: 28px;
+                background: #f8fafc;
+                border: 1px solid #f1f5f9;
+                border-radius: 20px;
+              "
+            >
+              <div
+                style="
+                  display: inline-block;
+                  background: #f0fdf4;
+                  color: #166534;
+                  padding: 6px 16px;
+                  border-radius: 8px;
+                  font-size: 0.8rem;
+                  font-weight: 700;
+                  text-transform: uppercase;
+                  margin-bottom: 16px;
+                "
+              >
+                Category 2
+              </div>
+              <h3>
+                60 Years & Above
+              </h3>
+              <p>
+                Limited coverage: Employment Injury Scheme only. Only employer
+                contributes; <strong>Employee pays RM0</strong>.
+              </p>
+              <div
+                style="
+                  display: grid;
+                  grid-template-columns: 1fr 1fr;
+                  gap: 12px;
+                  padding-top: 20px;
+                  border-top: 1px solid #e2e8f0;
+                "
+              >
+                <div
+                  style="
+                    background: #fff;
+                    padding: 12px;
+                    border-radius: 12px;
+                    text-align: center;
+                  "
+                >
+                  <div
+                    style="
+                      font-size: 0.75rem;
+                      color: #64748b;
+                      font-weight: 600;
+                      text-transform: uppercase;
+                      margin-bottom: 4px;
+                    "
+                  >
+                    Employer
+                  </div>
+                  <div
+                    style="font-size: 1.2rem; font-weight: 800; color: #166534"
+                  >
+                    ~1.25%
+                  </div>
+                </div>
+                <div
+                  style="
+                    background: #fff;
+                    padding: 12px;
+                    border-radius: 12px;
+                    text-align: center;
+                  "
+                >
+                  <div
+                    style="
+                      font-size: 0.75rem;
+                      color: #64748b;
+                      font-weight: 600;
+                      text-transform: uppercase;
+                      margin-bottom: 4px;
+                    "
+                  >
+                    Employee
+                  </div>
+                  <div
+                    style="font-size: 1.2rem; font-weight: 800; color: #166534"
+                  >
+                    0%
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3.5: 10 Types of SOCSO Claims -->
+        <div
+          class="content-card"
+        >
+          <h2>
+            The 10 Types of SOCSO Claims in Malaysia
+          </h2>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+              gap: 32px 24px;
+            "
+          >
+            <div
+              style="border-left: 3px solid var(--primary); padding-left: 16px"
+            >
+              <h3>
+                1. Temporary Disablement Benefit
+                <span
+                  style="
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                    color: #64748b;
+                    display: inline-block;
+                  "
+                  >(Faedah Hilang Upaya Sementara)</span
+                >
+              </h3>
+              <div
+                style="
+                  font-size: 0.95rem;
+                  color: var(--text-muted);
+                  line-height: 1.5;
+                "
+              >
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">When:</strong> Employee
+                  temporarily unable to work due to work-related injury or
+                  illness
+                </div>
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">Benefit:</strong> Daily cash
+                  allowance until recovery
+                </div>
+                <div>
+                  <strong style="color: #334155">Example:</strong> Arm injury
+                  during machine operation requiring rest
+                </div>
+              </div>
+            </div>
+
+            <div
+              style="border-left: 3px solid var(--primary); padding-left: 16px"
+            >
+              <h3>
+                2. Permanent Disablement Benefit
+                <span
+                  style="
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                    color: #64748b;
+                    display: inline-block;
+                  "
+                  >(Faedah Hilang Upaya Kekal)</span
+                >
+              </h3>
+              <div
+                style="
+                  font-size: 0.95rem;
+                  color: var(--text-muted);
+                  line-height: 1.5;
+                "
+              >
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">When:</strong> Permanent loss
+                  of function due to workplace accident
+                </div>
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">Benefit:</strong> Monthly
+                  pension or lump sum based on disability level
+                </div>
+                <div>
+                  <strong style="color: #334155">Example:</strong> Permanent
+                  hearing loss from loud machinery
+                </div>
+              </div>
+            </div>
+
+            <div
+              style="border-left: 3px solid var(--primary); padding-left: 16px"
+            >
+              <h3>
+                3. Dependants’ Benefit
+                <span
+                  style="
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                    color: #64748b;
+                    display: inline-block;
+                  "
+                  >(Faedah Orang Tanggungan)</span
+                >
+              </h3>
+              <div
+                style="
+                  font-size: 0.95rem;
+                  color: var(--text-muted);
+                  line-height: 1.5;
+                "
+              >
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">When:</strong> Employee dies
+                  due to work-related accident or disease
+                </div>
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">Benefit:</strong> Monthly
+                  pension for dependants
+                </div>
+                <div>
+                  <strong style="color: #334155">Example:</strong> Family
+                  supported after workplace accident death
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            id="hiddenClaims"
+            style="
+              display: none;
+              grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+              gap: 32px 24px;
+              margin-top: 32px;
+            "
+          >
+            <div
+              style="border-left: 3px solid var(--primary); padding-left: 16px"
+            >
+              <h3>
+                4. Funeral Benefit
+                <span
+                  style="
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                    color: #64748b;
+                    display: inline-block;
+                  "
+                  >(Faedah Pengurusan Mayat)</span
+                >
+              </h3>
+              <div
+                style="
+                  font-size: 0.95rem;
+                  color: var(--text-muted);
+                  line-height: 1.5;
+                "
+              >
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">When:</strong> Death due to
+                  work-related causes
+                </div>
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">Benefit:</strong> One-off
+                  payment for funeral costs
+                </div>
+                <div>
+                  <strong style="color: #334155">Example:</strong> Financial aid
+                  for funeral arrangements
+                </div>
+              </div>
+            </div>
+
+            <div
+              style="border-left: 3px solid var(--primary); padding-left: 16px"
+            >
+              <h3>
+                5. Education Benefit
+                <span
+                  style="
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                    color: #64748b;
+                    display: inline-block;
+                  "
+                  >(Faedah Pendidikan)</span
+                >
+              </h3>
+              <div
+                style="
+                  font-size: 0.95rem;
+                  color: var(--text-muted);
+                  line-height: 1.5;
+                "
+              >
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">When:</strong> Children of
+                  eligible employees receive support
+                </div>
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">Benefit:</strong> Covers
+                  education fees and expenses
+                </div>
+                <div>
+                  <strong style="color: #334155">Example:</strong> University
+                  tuition support for employee’s child
+                </div>
+              </div>
+            </div>
+
+            <div
+              style="border-left: 3px solid var(--primary); padding-left: 16px"
+            >
+              <h3>
+                6. Medical Benefit
+                <span
+                  style="
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                    color: #64748b;
+                    display: inline-block;
+                  "
+                  >(Faedah Perubatan)</span
+                >
+              </h3>
+              <div
+                style="
+                  font-size: 0.95rem;
+                  color: var(--text-muted);
+                  line-height: 1.5;
+                "
+              >
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">When:</strong> Treatment for
+                  work-related injuries or diseases
+                </div>
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">Benefit:</strong> Covers
+                  hospital, surgery, and medication
+                </div>
+                <div>
+                  <strong style="color: #334155">Example:</strong> Surgery for
+                  work-related injury
+                </div>
+              </div>
+            </div>
+
+            <div
+              style="border-left: 3px solid var(--primary); padding-left: 16px"
+            >
+              <h3>
+                7. Rehabilitation Benefit
+                <span
+                  style="
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                    color: #64748b;
+                    display: inline-block;
+                  "
+                  >(Faedah Pemulihan)</span
+                >
+              </h3>
+              <div
+                style="
+                  font-size: 0.95rem;
+                  color: var(--text-muted);
+                  line-height: 1.5;
+                "
+              >
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">When:</strong> Employee needs
+                  recovery support after injury
+                </div>
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">Benefit:</strong> Rehab
+                  services, training, or prosthetics
+                </div>
+                <div>
+                  <strong style="color: #334155">Example:</strong> Physiotherapy
+                  or prosthetic support
+                </div>
+              </div>
+            </div>
+
+            <div
+              style="border-left: 3px solid var(--primary); padding-left: 16px"
+            >
+              <h3>
+                8. Constant Attendance Allowance
+                <span
+                  style="
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                    color: #64748b;
+                    display: inline-block;
+                  "
+                  >(Elaun Layan Sentiasa)</span
+                >
+              </h3>
+              <div
+                style="
+                  font-size: 0.95rem;
+                  color: var(--text-muted);
+                  line-height: 1.5;
+                "
+              >
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">When:</strong> Employee
+                  requires constant care due to disability
+                </div>
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">Benefit:</strong> Monthly
+                  allowance for caregiver support
+                </div>
+                <div>
+                  <strong style="color: #334155">Example:</strong> Paralysis
+                  requiring full-time care
+                </div>
+              </div>
+            </div>
+
+            <div
+              style="border-left: 3px solid var(--primary); padding-left: 16px"
+            >
+              <h3>
+                9. Invalidity Pension
+                <span
+                  style="
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                    color: #64748b;
+                    display: inline-block;
+                  "
+                  >(Pencen Ilat)</span
+                >
+              </h3>
+              <div
+                style="
+                  font-size: 0.95rem;
+                  color: var(--text-muted);
+                  line-height: 1.5;
+                "
+              >
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">When:</strong> Unable to work
+                  due to non-work-related illness
+                </div>
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">Benefit:</strong> Monthly
+                  pension
+                </div>
+                <div>
+                  <strong style="color: #334155">Example:</strong> Severe
+                  illness preventing continued work
+                </div>
+              </div>
+            </div>
+
+            <div
+              style="border-left: 3px solid var(--primary); padding-left: 16px"
+            >
+              <h3>
+                10. Invalidity Grant
+                <span
+                  style="
+                    font-weight: 500;
+                    font-size: 0.9rem;
+                    color: #64748b;
+                    display: inline-block;
+                  "
+                  >(Geran Ilat)</span
+                >
+              </h3>
+              <div
+                style="
+                  font-size: 0.95rem;
+                  color: var(--text-muted);
+                  line-height: 1.5;
+                "
+              >
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">When:</strong> Does not qualify
+                  for invalidity pension
+                </div>
+                <div style="margin-bottom: 4px">
+                  <strong style="color: #334155">Benefit:</strong> One-off lump
+                  sum
+                </div>
+                <div>
+                  <strong style="color: #334155">Example:</strong> Early
+                  financial support due to illness
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: center; margin-top: 32px">
+            <button
+              type="button"
+              id="toggleClaimsBtn"
+              class="btn btn-outline"
+              
+            >
+              Show More
+            </button>
+          </div>
+        </div>
+
+        <!-- Section 4: Compliance & Rules -->
+        <div
+          class="content-card"
+        >
+          <h2>
+            Payment Schedule & Compliance
+          </h2>
+          <div
+            style="
+              display: grid;
+              grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+              gap: 24px;
+            "
+          >
+            <div
+              style="
+                display: flex;
+                gap: 20px;
+                align-items: flex-start;
+                padding: 20px;
+                background: #f8fafc;
+                border-radius: 16px;
+              "
+            >
+              <div
+                style="
+                  background: #eff6ff;
+                  padding: 12px;
+                  border-radius: 12px;
+                  font-size: 1.5rem;
+                "
+              >
+                📅
+              </div>
+              <div>
+                <strong
+                  style="
+                    display: block;
+                    font-size: 1.05rem;
+                    color: var(--text-main);
+                    margin-bottom: 6px;
+                  "
+                  >Monthly Deadline</strong
+                >
+                <p>
+                  Contributions must be paid by the
+                  <strong>15th of the following month</strong>.
+                </p>
+              </div>
+            </div>
+            <div
+              style="
+                display: flex;
+                gap: 20px;
+                align-items: flex-start;
+                padding: 20px;
+                background: #f8fafc;
+                border-radius: 16px;
+              "
+            >
+              <div
+                style="
+                  background: #fef2f2;
+                  padding: 12px;
+                  border-radius: 12px;
+                  font-size: 1.5rem;
+                "
+              >
+                ⚠️
+              </div>
+              <div>
+                <strong
+                  style="
+                    display: block;
+                    font-size: 1.05rem;
+                    color: var(--text-main);
+                    margin-bottom: 6px;
+                  "
+                  >Late Payment Penalty</strong
+                >
+                <p>
+                  Late interest of <strong>6% per annum</strong> applies to
+                  overdue payments.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 5: Ceiling Update -->
+        <div
+          class="content-card"
+        >
+          <div
+            style="
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: space-between;
+              align-items: center;
+              gap: 24px;
+            "
+          >
+            <div style="flex: 1; min-width: 280px">
+              <h2>
+                SOCSO & EIS Salary Ceiling Update
+              </h2>
+              <p>
+                Effective <strong>1st October 2024</strong>, the monthly salary
+                ceiling for both SOCSO and EIS contributions has increased.
+              </p>
+            </div>
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 20px;
+                background: #fff;
+                padding: 16px 28px;
+                border-radius: 16px;
+                border: 1px solid #fbbf24;
+              "
+            >
+              <div style="text-align: center">
+                <div
+                  style="
+                    font-size: 0.75rem;
+                    color: #94a3b8;
+                    font-weight: 750;
+                    text-transform: uppercase;
+                    margin-bottom: 2px;
+                  "
+                >
+                  Old
+                </div>
+                <div
+                  style="
+                    font-size: 1.05rem;
+                    color: #94a3b8;
+                    text-decoration: line-through;
+                    font-weight: 700;
+                  "
+                >
+                  RM5,000
+                </div>
+              </div>
+              <div style="font-size: 1.75rem; color: #fbbf24">→</div>
+              <div style="text-align: center">
+                <div
+                  style="
+                    font-size: 0.75rem;
+                    color: var(--primary);
+                    font-weight: 750;
+                    text-transform: uppercase;
+                    margin-bottom: 2px;
+                  "
+                >
+                  New
+                </div>
+                <div
+                  style="
+                    font-size: 1.75rem;
+                    font-weight: 800;
+                    color: var(--primary);
+                  "
+                >
+                  RM6,000
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 6: SOCSO Contribution Table -->
+        <div
+          class="content-card"
+        >
+          <div style="margin-bottom: 24px">
+            <h2>
+              SOCSO Contribution Table (2026 Updated)
+            </h2>
+            <p>
+              Official contribution rates mapped to salary bands.
+            </p>
+          </div>
+
+          <div
+            class="socso-table-wrapper"
+            id="socsoTableWrapper"
+            style="
+              position: relative;
+              max-height: 480px;
+              overflow: hidden;
+              transition: max-height 0.4s ease-in-out;
+              border-radius: 16px;
+              border: 1px solid #f1f5f9;
+            "
+          >
+            <div class="table-container">
+              <table
+                class="styled-table"
+                id="socsoAct4Table"
+              >
+                <thead
+                  style="
+                    background: #f8fafc;
+                    position: sticky;
+                    top: 0;
+                    z-index: 10;
+                  "
+                >
+                  <tr>
+                    <th
+                      style="
+                        padding: 16px;
+                        font-size: 0.85rem;
+                        color: #64748b;
+                        text-align: center;
+                        border-bottom: 1px solid #e2e8f0;
+                      "
+                    >
+                      No
+                    </th>
+                    <th
+                      style="
+                        padding: 16px;
+                        text-align: left;
+                        font-size: 0.85rem;
+                        color: #64748b;
+                        border-bottom: 1px solid #e2e8f0;
+                      "
+                    >
+                      Salary Range
+                    </th>
+                    <th
+                      style="
+                        padding: 16px;
+                        font-size: 0.85rem;
+                        color: #64748b;
+                        text-align: center;
+                        border-bottom: 1px solid #e2e8f0;
+                      "
+                    >
+                      Employer
+                    </th>
+                    <th
+                      style="
+                        padding: 16px;
+                        font-size: 0.85rem;
+                        color: #64748b;
+                        text-align: center;
+                        border-bottom: 1px solid #e2e8f0;
+                      "
+                    >
+                      Employee
+                    </th>
+                    <th
+                      style="
+                        padding: 16px;
+                        font-size: 0.85rem;
+                        color: #64748b;
+                        text-align: center;
+                        border-bottom: 1px solid #e2e8f0;
+                      "
+                    >
+                      Total
+                    </th>
+                    <th
+                      style="
+                        padding: 16px;
+                        font-size: 0.85rem;
+                        color: #64748b;
+                        text-align: center;
+                        border-bottom: 1px solid #e2e8f0;
+                      "
+                    >
+                      Employer Only
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style="font-size: 0.9rem; color: #334155">
+                  <tr>
+                    <td>1</td>
+                    <td>Wages up to RM30</td>
+                    <td>RM0.40</td>
+                    <td>RM0.10</td>
+                    <td>RM0.50</td>
+                    <td>RM0.30</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>Exceed RM30 but not exceed RM50</td>
+                    <td>RM0.70</td>
+                    <td>RM0.20</td>
+                    <td>RM0.90</td>
+                    <td>RM0.50</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>Exceed RM50 but not exceed RM70</td>
+                    <td>RM1.10</td>
+                    <td>RM0.30</td>
+                    <td>RM1.40</td>
+                    <td>RM0.80</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td>Exceed RM70 but not exceed RM100</td>
+                    <td>RM1.50</td>
+                    <td>RM0.40</td>
+                    <td>RM1.90</td>
+                    <td>RM1.10</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td>Exceed RM100 but not exceed RM140</td>
+                    <td>RM2.10</td>
+                    <td>RM0.60</td>
+                    <td>RM2.70</td>
+                    <td>RM1.50</td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td>Exceed RM140 but not exceed RM200</td>
+                    <td>RM2.95</td>
+                    <td>RM0.85</td>
+                    <td>RM3.80</td>
+                    <td>RM2.10</td>
+                  </tr>
+                  <tr>
+                    <td>7</td>
+                    <td>Exceed RM200 but not exceed RM300</td>
+                    <td>RM4.35</td>
+                    <td>RM1.25</td>
+                    <td>RM5.60</td>
+                    <td>RM3.10</td>
+                  </tr>
+                  <tr>
+                    <td>8</td>
+                    <td>Exceed RM300 but not exceed RM400</td>
+                    <td>RM6.15</td>
+                    <td>RM1.75</td>
+                    <td>RM7.90</td>
+                    <td>RM4.40</td>
+                  </tr>
+                  <tr>
+                    <td>9</td>
+                    <td>Exceed RM400 but not exceed RM500</td>
+                    <td>RM7.85</td>
+                    <td>RM2.25</td>
+                    <td>RM10.10</td>
+                    <td>RM5.60</td>
+                  </tr>
+                  <tr>
+                    <td>10</td>
+                    <td>Exceed RM500 but not exceed RM600</td>
+                    <td>RM9.65</td>
+                    <td>RM2.75</td>
+                    <td>RM12.40</td>
+                    <td>RM6.90</td>
+                  </tr>
+                  <tr>
+                    <td>11</td>
+                    <td>Exceed RM600 but not exceed RM700</td>
+                    <td>RM11.35</td>
+                    <td>RM3.25</td>
+                    <td>RM14.60</td>
+                    <td>RM8.10</td>
+                  </tr>
+                  <tr>
+                    <td>12</td>
+                    <td>Exceed RM700 but not exceed RM800</td>
+                    <td>RM13.15</td>
+                    <td>RM3.75</td>
+                    <td>RM16.90</td>
+                    <td>RM9.40</td>
+                  </tr>
+                  <tr>
+                    <td>13</td>
+                    <td>Exceed RM800 but not exceed RM900</td>
+                    <td>RM14.85</td>
+                    <td>RM4.25</td>
+                    <td>RM19.10</td>
+                    <td>RM10.60</td>
+                  </tr>
+                  <tr>
+                    <td>14</td>
+                    <td>Exceed RM900 but not exceed RM1,000</td>
+                    <td>RM16.65</td>
+                    <td>RM4.75</td>
+                    <td>RM21.40</td>
+                    <td>RM11.90</td>
+                  </tr>
+                  <tr>
+                    <td>15</td>
+                    <td>Exceed RM1,000 but not exceed RM1,100</td>
+                    <td>RM18.35</td>
+                    <td>RM5.25</td>
+                    <td>RM23.60</td>
+                    <td>RM13.10</td>
+                  </tr>
+                  <tr>
+                    <td>16</td>
+                    <td>Exceed RM1,100 but not exceed RM1,200</td>
+                    <td>RM20.15</td>
+                    <td>RM5.75</td>
+                    <td>RM25.90</td>
+                    <td>RM14.40</td>
+                  </tr>
+                  <tr>
+                    <td>17</td>
+                    <td>Exceed RM1,200 but not exceed RM1,300</td>
+                    <td>RM21.85</td>
+                    <td>RM6.25</td>
+                    <td>RM28.10</td>
+                    <td>RM15.60</td>
+                  </tr>
+                  <tr>
+                    <td>18</td>
+                    <td>Exceed RM1,300 but not exceed RM1,400</td>
+                    <td>RM23.65</td>
+                    <td>RM6.75</td>
+                    <td>RM30.40</td>
+                    <td>RM16.90</td>
+                  </tr>
+                  <tr>
+                    <td>19</td>
+                    <td>Exceed RM1,400 but not exceed RM1,500</td>
+                    <td>RM25.35</td>
+                    <td>RM7.25</td>
+                    <td>RM32.60</td>
+                    <td>RM18.10</td>
+                  </tr>
+                  <tr>
+                    <td>20</td>
+                    <td>Exceed RM1,500 but not exceed RM1,600</td>
+                    <td>RM27.15</td>
+                    <td>RM7.75</td>
+                    <td>RM34.90</td>
+                    <td>RM19.40</td>
+                  </tr>
+                  <tr>
+                    <td>21</td>
+                    <td>Exceed RM1,600 but not exceed RM1,700</td>
+                    <td>RM28.85</td>
+                    <td>RM8.25</td>
+                    <td>RM37.10</td>
+                    <td>RM20.60</td>
+                  </tr>
+                  <tr>
+                    <td>22</td>
+                    <td>Exceed RM1,700 but not exceed RM1,800</td>
+                    <td>RM30.65</td>
+                    <td>RM8.75</td>
+                    <td>RM39.40</td>
+                    <td>RM21.90</td>
+                  </tr>
+                  <tr>
+                    <td>23</td>
+                    <td>Exceed RM1,800 but not exceed RM1,900</td>
+                    <td>RM32.35</td>
+                    <td>RM9.25</td>
+                    <td>RM41.60</td>
+                    <td>RM23.10</td>
+                  </tr>
+                  <tr>
+                    <td>24</td>
+                    <td>Exceed RM1,900 but not exceed RM2,000</td>
+                    <td>RM34.15</td>
+                    <td>RM9.75</td>
+                    <td>RM43.90</td>
+                    <td>RM24.40</td>
+                  </tr>
+                  <tr>
+                    <td>25</td>
+                    <td>Exceed RM2,000 but not exceed RM2,100</td>
+                    <td>RM35.85</td>
+                    <td>RM10.25</td>
+                    <td>RM46.10</td>
+                    <td>RM25.60</td>
+                  </tr>
+                  <tr>
+                    <td>26</td>
+                    <td>Exceed RM2,100 but not exceed RM2,200</td>
+                    <td>RM37.65</td>
+                    <td>RM10.75</td>
+                    <td>RM48.40</td>
+                    <td>RM26.90</td>
+                  </tr>
+                  <tr>
+                    <td>27</td>
+                    <td>Exceed RM2,200 but not exceed RM2,300</td>
+                    <td>RM39.35</td>
+                    <td>RM11.25</td>
+                    <td>RM50.60</td>
+                    <td>RM28.10</td>
+                  </tr>
+                  <tr>
+                    <td>28</td>
+                    <td>Exceed RM2,300 but not exceed RM2,400</td>
+                    <td>RM41.15</td>
+                    <td>RM11.75</td>
+                    <td>RM52.90</td>
+                    <td>RM29.40</td>
+                  </tr>
+                  <tr>
+                    <td>29</td>
+                    <td>Exceed RM2,400 but not exceed RM2,500</td>
+                    <td>RM42.85</td>
+                    <td>RM12.25</td>
+                    <td>RM55.10</td>
+                    <td>RM30.60</td>
+                  </tr>
+                  <tr>
+                    <td>30</td>
+                    <td>Exceed RM2,500 but not exceed RM2,600</td>
+                    <td>RM44.65</td>
+                    <td>RM12.75</td>
+                    <td>RM57.40</td>
+                    <td>RM31.90</td>
+                  </tr>
+                  <tr>
+                    <td>31</td>
+                    <td>Exceed RM2,600 but not exceed RM2,700</td>
+                    <td>RM46.35</td>
+                    <td>RM13.25</td>
+                    <td>RM59.60</td>
+                    <td>RM33.10</td>
+                  </tr>
+                  <tr>
+                    <td>32</td>
+                    <td>Exceed RM2,700 but not exceed RM2,800</td>
+                    <td>RM48.15</td>
+                    <td>RM13.75</td>
+                    <td>RM61.90</td>
+                    <td>RM34.40</td>
+                  </tr>
+                  <tr>
+                    <td>33</td>
+                    <td>Exceed RM2,800 but not exceed RM2,900</td>
+                    <td>RM49.85</td>
+                    <td>RM14.25</td>
+                    <td>RM64.10</td>
+                    <td>RM35.60</td>
+                  </tr>
+                  <tr>
+                    <td>34</td>
+                    <td>Exceed RM2,900 but not exceed RM3,000</td>
+                    <td>RM51.65</td>
+                    <td>RM14.75</td>
+                    <td>RM66.40</td>
+                    <td>RM36.90</td>
+                  </tr>
+                  <tr>
+                    <td>35</td>
+                    <td>Exceed RM3,000 but not exceed RM3,100</td>
+                    <td>RM53.35</td>
+                    <td>RM15.25</td>
+                    <td>RM68.60</td>
+                    <td>RM38.10</td>
+                  </tr>
+                  <tr>
+                    <td>36</td>
+                    <td>Exceed RM3,100 but not exceed RM3,200</td>
+                    <td>RM55.15</td>
+                    <td>RM15.75</td>
+                    <td>RM70.90</td>
+                    <td>RM39.40</td>
+                  </tr>
+                  <tr>
+                    <td>37</td>
+                    <td>Exceed RM3,200 but not exceed RM3,300</td>
+                    <td>RM56.85</td>
+                    <td>RM16.25</td>
+                    <td>RM73.10</td>
+                    <td>RM40.60</td>
+                  </tr>
+                  <tr>
+                    <td>38</td>
+                    <td>Exceed RM3,300 but not exceed RM3,400</td>
+                    <td>RM58.65</td>
+                    <td>RM16.75</td>
+                    <td>RM75.40</td>
+                    <td>RM41.90</td>
+                  </tr>
+                  <tr>
+                    <td>39</td>
+                    <td>Exceed RM3,400 but not exceed RM3,500</td>
+                    <td>RM60.35</td>
+                    <td>RM17.25</td>
+                    <td>RM77.60</td>
+                    <td>RM43.10</td>
+                  </tr>
+                  <tr>
+                    <td>40</td>
+                    <td>Exceed RM3,500 but not exceed RM3,600</td>
+                    <td>RM62.15</td>
+                    <td>RM17.75</td>
+                    <td>RM79.90</td>
+                    <td>RM44.40</td>
+                  </tr>
+                  <tr>
+                    <td>41</td>
+                    <td>Exceed RM3,600 but not exceed RM3,700</td>
+                    <td>RM63.85</td>
+                    <td>RM18.25</td>
+                    <td>RM82.10</td>
+                    <td>RM45.60</td>
+                  </tr>
+                  <tr>
+                    <td>42</td>
+                    <td>Exceed RM3,700 but not exceed RM3,800</td>
+                    <td>RM65.65</td>
+                    <td>RM18.75</td>
+                    <td>RM84.40</td>
+                    <td>RM46.90</td>
+                  </tr>
+                  <tr>
+                    <td>43</td>
+                    <td>Exceed RM3,800 but not exceed RM3,900</td>
+                    <td>RM67.35</td>
+                    <td>RM19.25</td>
+                    <td>RM86.60</td>
+                    <td>RM48.10</td>
+                  </tr>
+                  <tr>
+                    <td>44</td>
+                    <td>Exceed RM3,900 but not exceed RM4,000</td>
+                    <td>RM69.15</td>
+                    <td>RM19.75</td>
+                    <td>RM88.90</td>
+                    <td>RM49.40</td>
+                  </tr>
+                  <tr>
+                    <td>45</td>
+                    <td>Exceed RM4,000 but not exceed RM4,100</td>
+                    <td>RM70.85</td>
+                    <td>RM20.25</td>
+                    <td>RM91.10</td>
+                    <td>RM50.60</td>
+                  </tr>
+                  <tr>
+                    <td>46</td>
+                    <td>Exceed RM4,100 but not exceed RM4,200</td>
+                    <td>RM72.65</td>
+                    <td>RM20.75</td>
+                    <td>RM93.40</td>
+                    <td>RM51.90</td>
+                  </tr>
+                  <tr>
+                    <td>47</td>
+                    <td>Exceed RM4,200 but not exceed RM4,300</td>
+                    <td>RM74.35</td>
+                    <td>RM21.25</td>
+                    <td>RM95.60</td>
+                    <td>RM53.10</td>
+                  </tr>
+                  <tr>
+                    <td>48</td>
+                    <td>Exceed RM4,300 but not exceed RM4,400</td>
+                    <td>RM76.15</td>
+                    <td>RM21.75</td>
+                    <td>RM97.90</td>
+                    <td>RM54.40</td>
+                  </tr>
+                  <tr>
+                    <td>49</td>
+                    <td>Exceed RM4,400 but not exceed RM4,500</td>
+                    <td>RM77.85</td>
+                    <td>RM22.25</td>
+                    <td>RM100.10</td>
+                    <td>RM55.60</td>
+                  </tr>
+                  <tr>
+                    <td>50</td>
+                    <td>Exceed RM4,500 but not exceed RM4,600</td>
+                    <td>RM79.65</td>
+                    <td>RM22.75</td>
+                    <td>RM102.40</td>
+                    <td>RM56.90</td>
+                  </tr>
+                  <tr>
+                    <td>51</td>
+                    <td>Exceed RM4,600 but not exceed RM4,700</td>
+                    <td>RM81.35</td>
+                    <td>RM23.25</td>
+                    <td>RM104.60</td>
+                    <td>RM58.10</td>
+                  </tr>
+                  <tr>
+                    <td>52</td>
+                    <td>Exceed RM4,700 but not exceed RM4,800</td>
+                    <td>RM83.15</td>
+                    <td>RM23.75</td>
+                    <td>RM106.90</td>
+                    <td>RM59.40</td>
+                  </tr>
+                  <tr>
+                    <td>53</td>
+                    <td>Exceed RM4,800 but not exceed RM4,900</td>
+                    <td>RM84.85</td>
+                    <td>RM24.25</td>
+                    <td>RM109.10</td>
+                    <td>RM60.60</td>
+                  </tr>
+                  <tr>
+                    <td>54</td>
+                    <td>Exceed RM4,900 but not exceed RM5,000</td>
+                    <td>RM86.65</td>
+                    <td>RM24.75</td>
+                    <td>RM111.40</td>
+                    <td>RM61.90</td>
+                  </tr>
+                  <tr>
+                    <td>55</td>
+                    <td>Exceed RM5,000 but not exceed RM5,100</td>
+                    <td>RM88.35</td>
+                    <td>RM25.25</td>
+                    <td>RM113.60</td>
+                    <td>RM63.10</td>
+                  </tr>
+                  <tr>
+                    <td>56</td>
+                    <td>Exceed RM5,100 but not exceed RM5,200</td>
+                    <td>RM90.15</td>
+                    <td>RM25.75</td>
+                    <td>RM115.90</td>
+                    <td>RM64.40</td>
+                  </tr>
+                  <tr>
+                    <td>57</td>
+                    <td>Exceed RM5,200 but not exceed RM5,300</td>
+                    <td>RM91.85</td>
+                    <td>RM26.25</td>
+                    <td>RM118.10</td>
+                    <td>RM65.60</td>
+                  </tr>
+                  <tr>
+                    <td>58</td>
+                    <td>Exceed RM5,300 but not exceed RM5,400</td>
+                    <td>RM93.65</td>
+                    <td>RM26.75</td>
+                    <td>RM120.40</td>
+                    <td>RM66.90</td>
+                  </tr>
+                  <tr>
+                    <td>59</td>
+                    <td>Exceed RM5,400 but not exceed RM5,500</td>
+                    <td>RM95.35</td>
+                    <td>RM27.25</td>
+                    <td>RM122.60</td>
+                    <td>RM68.10</td>
+                  </tr>
+                  <tr>
+                    <td>60</td>
+                    <td>Exceed RM5,500 but not exceed RM5,600</td>
+                    <td>RM97.15</td>
+                    <td>RM27.75</td>
+                    <td>RM124.90</td>
+                    <td>RM69.40</td>
+                  </tr>
+                  <tr>
+                    <td>61</td>
+                    <td>Exceed RM5,600 but not exceed RM5,700</td>
+                    <td>RM98.85</td>
+                    <td>RM28.25</td>
+                    <td>RM127.10</td>
+                    <td>RM70.60</td>
+                  </tr>
+                  <tr>
+                    <td>62</td>
+                    <td>Exceed RM5,700 but not exceed RM5,800</td>
+                    <td>RM100.65</td>
+                    <td>RM28.75</td>
+                    <td>RM129.40</td>
+                    <td>RM71.90</td>
+                  </tr>
+                  <tr>
+                    <td>63</td>
+                    <td>Exceed RM5,800 but not exceed RM5,900</td>
+                    <td>RM102.35</td>
+                    <td>RM29.25</td>
+                    <td>RM131.60</td>
+                    <td>RM73.10</td>
+                  </tr>
+                  <tr>
+                    <td>64</td>
+                    <td>Exceed RM5,900 but not exceed RM6,000</td>
+                    <td>RM104.15</td>
+                    <td>RM29.75</td>
+                    <td>RM133.90</td>
+                    <td>RM74.40</td>
+                  </tr>
+                  <tr>
+                    <td>65</td>
+                    <td>Wages exceed RM6,000</td>
+                    <td>RM104.15</td>
+                    <td>RM29.75</td>
+                    <td>RM133.90</td>
+                    <td>RM74.40</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div
+              class="table-fade"
+              id="socsoTableFade"
+              style="
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 120px;
+                background: linear-gradient(
+                  to bottom,
+                  rgba(255, 255, 255, 0),
+                  rgba(255, 255, 255, 1)
+                );
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+              "
+            ></div>
+          </div>
+
+          <div style="text-align: center; margin-top: 24px">
+            <button
+              type="button"
+              id="toggleSocsoTableBtn"
+              class="btn btn-outline"
+              
+            >
+              Show All Contribution Table
+            </button>
+          </div>
+        </div>
+
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 48px;
+            align-items: stretch;
+          "
+        >
+          <!-- Section 7: Payment Methods -->
+          <div
+            class="content-card"
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                margin-bottom: 20px;
+              "
+            >
+              <span
+                style="
+                  font-size: 1.5rem;
+                  background: #f1f5f9;
+                  padding: 10px;
+                  border-radius: 12px;
+                "
+                >💳</span
+              >
+              <h2>
+                Payment Methods
+              </h2>
+            </div>
+            <ul
+              style="
+                list-style-type: none;
+                padding: 0;
+                line-height: 1.8;
+                color: #475569;
+                font-size: 0.95rem;
+              "
+            >
+              <li
+                style="
+                  margin-bottom: 10px;
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                "
+              >
+                <span style="color: var(--primary); font-size: 1.2rem">•</span>
+                FPX online banking
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                "
+              >
+                <span style="color: var(--primary); font-size: 1.2rem">•</span>
+                PERKESO ASSIST Portal
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                "
+              >
+                <span style="color: var(--primary); font-size: 1.2rem">•</span>
+                Direct Debit Authorisation
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                "
+              >
+                <span style="color: var(--primary); font-size: 1.2rem">•</span>
+                Bank portals (Maybank, CIMB)
+              </li>
+              <li style="display: flex; align-items: center; gap: 10px">
+                <span style="color: var(--primary); font-size: 1.2rem">•</span>
+                Over-the-counter payments
+              </li>
+            </ul>
+          </div>
+
+          <!-- Section 8: ASSIST Portal -->
+          <div
+            class="content-card"
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                margin-bottom: 20px;
+              "
+            >
+              <span
+                style="
+                  font-size: 1.5rem;
+                  background: #fdf2f8;
+                  padding: 10px;
+                  border-radius: 12px;
+                "
+                >💻</span
+              >
+              <h2>
+                ASSIST Portal
+              </h2>
+            </div>
+            <ul
+              style="
+                list-style-type: none;
+                padding: 0;
+                line-height: 1.8;
+                color: #475569;
+                font-size: 0.95rem;
+              "
+            >
+              <li
+                style="
+                  margin-bottom: 10px;
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                "
+              >
+                <span style="color: #db2777; font-size: 1.2rem">•</span>
+                Register new employees
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                "
+              >
+                <span style="color: #db2777; font-size: 1.2rem">•</span> Submit
+                monthly contributions
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                "
+              >
+                <span style="color: #db2777; font-size: 1.2rem">•</span> Track
+                payment history
+              </li>
+              <li style="display: flex; align-items: center; gap: 10px">
+                <span style="color: #db2777; font-size: 1.2rem">•</span> Manage
+                employer records
+              </li>
+            </ul>
+          </div>
+
+          <!-- Section 9: Who Should Use -->
+          <div
+            class="content-card"
+          >
+            <div
+              style="
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                margin-bottom: 20px;
+              "
+            >
+              <span
+                style="
+                  font-size: 1.5rem;
+                  background: #ecfdf5;
+                  padding: 10px;
+                  border-radius: 12px;
+                "
+                >🎯</span
+              >
+              <h2>
+                Who Should Use This?
+              </h2>
+            </div>
+            <ul
+              style="
+                list-style-type: none;
+                padding: 0;
+                line-height: 1.8;
+                color: #475569;
+                font-size: 0.95rem;
+              "
+            >
+              <li
+                style="
+                  margin-bottom: 10px;
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                "
+              >
+                <span style="color: #059669; font-size: 1.2rem">•</span> HR
+                Managers & Payroll Teams
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                "
+              >
+                <span style="color: #059669; font-size: 1.2rem">•</span>
+                Business Owners & SMEs
+              </li>
+              <li
+                style="
+                  margin-bottom: 10px;
+                  display: flex;
+                  align-items: center;
+                  gap: 10px;
+                "
+              >
+                <span style="color: #059669; font-size: 1.2rem">•</span>
+                Accounting Professionals
+              </li>
+              <li style="display: flex; align-items: center; gap: 10px">
+                <span style="color: #059669; font-size: 1.2rem">•</span>
+                Employees verifying deductions
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Section 10: Official PERKESO Calculator -->
+        <div
+          style="
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            align-items: stretch;
+            margin-bottom: 32px;
+          "
+        >
+          <!-- Left: Calculator -->
+          <a
+            href="https://www.perkeso.gov.my/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="content-card"
+            style="display: flex; gap: 24px; align-items: center; text-decoration: none; flex: 1 1 60%; margin-bottom: 0; background: #f0fdf4; border: 1px solid #bbf7d0;"
+            onmouseover="this.style.transform='translateY(-2px)';"
+            onmouseout="this.style.transform='translateY(0)';"
+          >
+            <img
+              src="https://vectorseek.com/wp-content/uploads/2023/09/Perkeso-Socso-Logo-Vector.svg-.png"
+              alt="PERKESO Logo"
+              style="width: 72px; height: 72px; object-fit: contain; flex-shrink: 0;"
+            />
+            <div style="flex: 1;">
+              <h2 style="font-size: 1.35rem; font-weight: 800; color: #166534; margin-bottom: 6px; border: none; padding-bottom: 0;">
+                Official PERKESO Calculator
+              </h2>
+              <p style="font-size: 0.95rem; color: #15803d; margin-bottom: 16px; line-height: 1.5;">
+                Use the official PERKESO calculator for the most accurate SOCSO
+                contribution reference.
+              </p>
+              <span
+                style="
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 8px;
+                  padding: 10px 20px;
+                  background: #16a34a;
+                  color: white;
+                  font-size: 0.95rem;
+                  font-weight: 700;
+                  border-radius: 8px;
+                  transition: background 0.2s;
+                "
+                onmouseover="this.style.background='#15803d'"
+                onmouseout="this.style.background='#16a34a'"
+              >
+                Go to PERKESO Calculator
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path
+                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
+                  ></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
+                </svg>
+              </span>
+            </div>
+          </a>
+
+          <!-- Right: Social Cards -->
+          <div
+            style="
+              flex: 1 1 35%;
+              min-width: 250px;
+              display: flex;
+              flex-direction: column;
+              gap: 16px;
+            "
+          >
+            <a
+              href="https://www.facebook.com/PERKESO.Official"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                padding: 16px 20px;
+                background: #fff;
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                text-decoration: none;
+                color: #334155;
+                font-size: 0.95rem;
+                font-weight: 600;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                transition: background 0.2s, transform 0.2s;
+              "
+              onmouseover="this.style.background='#f8fafc'; this.style.transform='translateY(-2px)';"
+              onmouseout="this.style.background='#fff'; this.style.transform='translateY(0)';"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="#0866FF"
+                stroke="none"
+              >
+                <path
+                  d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07"
+                ></path>
+              </svg>
+              Facebook
+            </a>
+            <a
+              href="https://www.instagram.com/perkeso.official/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                padding: 16px 20px;
+                background: #fff;
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                text-decoration: none;
+                color: #334155;
+                font-size: 0.95rem;
+                font-weight: 600;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                transition: background 0.2s, transform 0.2s;
+              "
+              onmouseover="this.style.background='#f8fafc'; this.style.transform='translateY(-2px)';"
+              onmouseout="this.style.background='#fff'; this.style.transform='translateY(0)';"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="color: #e1306c"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              Instagram
+            </a>
+            <a
+              href="https://www.youtube.com/@PERKESOofficial"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                padding: 16px 20px;
+                background: #fff;
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                text-decoration: none;
+                color: #334155;
+                font-size: 0.95rem;
+                font-weight: 600;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                transition: background 0.2s, transform 0.2s;
+              "
+              onmouseover="this.style.background='#f8fafc'; this.style.transform='translateY(-2px)';"
+              onmouseout="this.style.background='#fff'; this.style.transform='translateY(0)';"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="#FF0000"
+                stroke="none"
+              >
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                ></path>
+              </svg>
+              YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Logo + Description -->
+          <div class="footer-col">
+            <a
+              href="/"
+              class="logo"
+              style="margin-bottom: 20px; display: block"
+            >
+              <img
+                src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
+                alt="SalaryCalc MY"
+                referrerpolicy="no-referrer"
+                style="
+                  height: 60px;
+                  width: auto;
+                  object-fit: contain;
+                  border-radius: 4px;
+                  mix-blend-mode: screen;
+                  opacity: 0.9;
+                "
+              />
+            </a>
+            <p style="color: #94a3b8; font-size: 0.9375rem; line-height: 1.6">
+              Accurate Malaysia salary calculator.<br />
+              Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
+            </p>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="footer-col footer-col-links">
+            <h4>Quick Links</h4>
+            <a href="/" class="footer-link">Salary Calculator</a>
+            <a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
+            <a href="/pcb-income-tax.html" class="footer-link">PCB Calculator</a>
+            <a href="/epf-kwsp.html" class="footer-link">EPF Calculator</a>
+          <a href="/annual-leave-calculator.html" class="footer-link">Annual Leave Calculator</a>
+            <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>&copy; 2026 SalaryCalc MY</p>
+          <p style="margin-top: 8px; font-size: 0.75rem; color: #64748b">
+            Data is estimated for reference only
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Error Log Viewer Modal -->
+    <div
+      id="errorLogModal"
+      style="
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 9999;
+        overflow-y: auto;
+        padding: 20px;
+      "
+    >
+      <div
+        style="
+          background: #fff;
+          max-width: 820px;
+          margin: 40px auto;
+          border-radius: 12px;
+          overflow: hidden;
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        "
+      >
+        <div
+          style="
+            background: #0f172a;
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          "
+        >
+          <span style="color: #fff; font-weight: 600; font-size: 1rem"
+            >Error Logs</span
+          >
+          <div style="display: flex; gap: 10px; align-items: center">
+            <button
+              onclick="clearAndRefreshLogs()"
+              style="
+                background: #ef4444;
+                color: #fff;
+                border: none;
+                padding: 6px 14px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 0.8rem;
+              "
+            >
+              Clear All Logs
+            </button>
+            <button
+              onclick="
+                document.getElementById('errorLogModal').style.display = 'none'
+              "
+              style="
+                background: #334155;
+                color: #fff;
+                border: none;
+                padding: 6px 14px;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 0.8rem;
+              "
+            >
+              Close
+            </button>
+          </div>
+        </div>
+        <div
+          id="errorLogContent"
+          style="padding: 20px; font-family: monospace; font-size: 0.82rem"
+        ></div>
+      </div>
+    </div>
+
+    <!-- Email Modal -->
+    <div id="emailModal" class="modal-overlay">
+      <div class="modal">
+        <span class="modal-close" id="closeModal">&times;</span>
+
+        <div id="modalFormContent">
+          <h2 id="modalTitle">Download Full Report</h2>
+          <p id="modalDescription">
+            Enter your email address to receive the detailed salary breakdown
+            and tax report.
+          </p>
+          <form id="emailForm">
+            <div class="form-group">
+              <label class="form-label" for="userEmail"
+                >Email Address <span style="color: red">*</span></label
+              >
+              <input
+                type="email"
+                id="userEmail"
+                class="form-input"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="userType"
+                >Who are you? <span style="color: red">*</span></label
+              >
+              <select id="userType" class="form-input" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="Employer / HR">Employer / HR</option>
+                <option value="Employee">Employee</option>
+                <option value="Jobseeker">Jobseeker</option>
+              </select>
+            </div>
+            <div
+              class="form-group"
+              id="hiringQuestionGroup"
+              style="display: none"
+            >
+              <label class="form-label" for="hiringStatus"
+                >Are you currently hiring?
+                <span style="color: red">*</span></label
+              >
+              <select id="hiringStatus" class="form-input">
+                <option value="" disabled selected>Select an option</option>
+                <option value="Hiring Now">Hiring now</option>
+                <option value="Hiring Next Month">Hiring next month</option>
+                <option value="Within 3 Months">Within 3 months</option>
+                <option value="Not Hiring Yet">Not hiring yet</option>
+              </select>
+              <div
+                id="hiringError"
+                style="
+                  color: #dc2626;
+                  font-size: 0.75rem;
+                  margin-top: 4px;
+                  display: none;
+                "
+              >
+                Please select your hiring status to continue.
+              </div>
+            </div>
+            <div class="form-group" id="companyNameGroup" style="display: none">
+              <label class="form-label" for="companyName"
+                >Company Name <span style="color: red">*</span></label
+              >
+              <input
+                type="text"
+                id="companyName"
+                class="form-input"
+                placeholder="Your Company Name"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="userPhone"
+                >Contact Number (Optional)</label
+              >
+              <input
+                type="tel"
+                id="userPhone"
+                class="form-input"
+                placeholder="e.g. +60123456789"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary" >
+              Submit & Download
+            </button>
+          </form>
+        </div>
+
+        <div id="modalSuccessContent" style="display: none; padding: 20px 0">
+          <svg
+            class="success-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          <div id="modalFeedback">
+            Thank you! The report has been sent to your email.
+          </div>
+          <div
+            id="mobileActionButtons"
+            style="
+              display: none;
+              margin-top: 20px;
+              flex-direction: column;
+              gap: 10px;
+            "
+          >
+            <a
+              id="viewFileBtn"
+              href="#"
+              target="_blank"
+              class="btn btn-primary"
+              style="
+                width: 100%;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+              "
+              >View File Now</a
+            >
+            <p
+              style="
+                font-size: 0.75rem;
+                color: var(--text-muted);
+                margin-top: 5px;
+              "
+            >
+              Works on Android & iPhone
+            </p>
+          </div>
+          <div
+            id="mobileFallbackText"
+            style="
+              display: none;
+              margin-top: 15px;
+              font-size: 0.875rem;
+              color: var(--text-muted);
+            "
+          >
+            Your file has been downloaded. Open it using your PDF or Docs app.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    
+    <div id="shareCardTemplateContainer" style="position: absolute; left: -9999px; top: 0; opacity: 0; pointer-events: none;">
+        <!-- Landscape Template -->
+        <div id="shareCardLandscape" style="width: 1200px; height: 630px; background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); display: flex; align-items: center; justify-content: space-between; font-family: 'Inter', sans-serif; padding: 60px; box-sizing: border-box; position: relative;">
+            
+            <div style="flex: 1; margin-right: 60px;">
+                <h1 style="font-size: 52px; font-weight: 800; color: #0f172a; margin: 0 0 16px 0; line-height: 1.1;">MY INCOME JOURNEY 🚀</h1>
+                <p style="font-size: 24px; color: #475569; font-weight: 500; margin: 0 0 40px 0; line-height: 1.4;">Tracking my progress towards a better future</p>
+                <div style="background: white; border-radius: 20px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+                    <h2 id="lsFooterText" style="font-size: 32px; font-weight: 800; color: #1e293b; margin: 0;">I'm 95% on the way to M40! 🚀</h2>
+                    <p style="font-size: 20px; color: #64748b; margin: 10px 0 0 0;">Calculate yours at SalaryCalculator.my</p>
+                </div>
+            </div>
+            
+            <div style="background: white; border-radius: 40px; padding: 50px; width: 600px; box-shadow: 0 20px 40px rgba(0,0,0,0.05); position: relative; text-align: left; box-sizing: border-box;">
+                <div id="lsCurrentBadge" style="position: absolute; top: 30px; right: 30px; background: #ef4444; color: white; padding: 8px 24px; border-radius: 100px; font-weight: 800; font-size: 22px;">B40</div>
+                <div style="font-size: 14px; color: #94a3b8; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; position: absolute; top: 80px; right: 35px;">Current Group</div>
+                
+                <!-- Timeline -->
+                <div style="margin-top: 60px; display: flex; justify-content: space-between; align-items: flex-start; position: relative;">
+                    <div style="position: absolute; top: 20px; left: 30px; right: 30px; height: 8px; background: #e2e8f0; z-index: 1;"></div>
+                    <div id="lsTimelineFill" style="position: absolute; top: 20px; left: 30px; width: 50%; height: 8px; background: #ef4444; z-index: 2;"></div>
+                    <!-- Nodes -->
+                    <div style="width: 30%; position: relative; z-index: 3;">
+                        <div id="lsNode1" style="width: 48px; height: 48px; border-radius: 50%; background: white; border: 10px solid #ef4444; box-sizing: border-box;"></div>
+                        <div style="font-weight: 800; font-size: 22px; color: #0f172a; margin-top: 16px;">B40</div>
+                        <div style="font-size: 16px; color: #64748b; font-weight: 500;">Up to<br>RM5,249</div>
+                    </div>
+                    <div style="width: 30%; position: relative; z-index: 3; text-align: center;">
+                        <div id="lsNode2" style="width: 48px; height: 48px; border-radius: 50%; background: white; border: 10px solid #e2e8f0; margin: 0 auto; box-sizing: border-box;"></div>
+                        <div style="font-weight: 800; font-size: 22px; color: #0f172a; margin-top: 16px;">M40</div>
+                        <div style="font-size: 16px; color: #64748b; font-weight: 500;">RM5,250 -<br>RM11,819</div>
+                    </div>
+                    <div style="width: 30%; position: relative; z-index: 3; text-align: right;">
+                        <div id="lsNode3" style="width: 48px; height: 48px; border-radius: 50%; background: white; border: 10px solid #e2e8f0; margin-left: auto; box-sizing: border-box;"></div>
+                        <div style="font-weight: 800; font-size: 22px; color: #0f172a; margin-top: 16px;">T20</div>
+                        <div style="font-size: 16px; color: #64748b; font-weight: 500;">RM11,820<br>&amp; above</div>
+                    </div>
+                </div>
+                
+                <!-- Next Goal & Progress Container -->
+                <div style="display: flex; gap: 20px; margin-top: 40px;">
+                    <div style="flex: 1; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 20px; padding: 20px; text-align: center;">
+                        <div style="font-size: 14px; color: #64748b; font-weight: 700; text-transform: uppercase;">Next Goal</div>
+                        <div id="lsNextGoal" style="font-size: 32px; font-weight: 800; color: #eab308; margin: 10px 0;">M40</div>
+                        <div id="lsNextGoalRange" style="font-size: 14px; color: #64748b; font-weight: 500;">RM5,250 - RM11,819</div>
+                    </div>
+                    
+                    <div style="flex: 1.2; background: #f8fafc; border: 2px solid #e2e8f0; border-radius: 20px; padding: 20px; text-align: center;">
+                        <div style="font-size: 14px; color: #64748b; font-weight: 700; text-transform: uppercase;">Your Progress</div>
+                        <div style="font-size: 40px; font-weight: 800; color: #16a34a; margin: 4px 0;">
+                            <span id="lsProgressPct">95</span>%
+                        </div>
+                        <div style="width: 100%; height: 10px; background: #e2e8f0; border-radius: 20px; margin-bottom: 10px; overflow: hidden;">
+                            <div id="lsProgressBar" style="width: 95%; height: 100%; background: #16a34a; border-radius: 20px;"></div>
+                        </div>
+                        <div id="lsMoreToGo" style="font-size: 14px; color: #475569; font-weight: 500;">RM 250.00 more</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Vertical Template -->
+        <div id="shareCardVertical" style="width: 1080px; height: 1920px; background: linear-gradient(180deg, #c4b5fd 0%, #fbcfe8 50%, #fde047 100%); display: flex; flex-direction: column; align-items: center; border-radius: 60px; font-family: 'Inter', sans-serif; padding: 120px 80px; box-sizing: border-box; text-align: center; position: relative; overflow: hidden;">
+            <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.95) 100%);"></div>
+            
+            <div style="position: relative; z-index: 10; width: 100%; display: flex; flex-direction: column; align-items: center;">
+                <h1 style="font-size: 72px; font-weight: 900; color: #1e3a8a; margin: 0 0 20px 0; line-height: 1.1; letter-spacing: -2px;">MY INCOME<br>JOURNEY 🚀</h1>
+                <div style="background: rgba(255,255,255,0.8); padding: 20px 40px; border-radius: 100px; margin-bottom: 80px;">
+                    <p style="font-size: 32px; color: #334155; font-weight: 600; margin: 0;">Tracking my progress towards<br>a better future</p>
+                </div>
+                
+                <div id="vtCurrentBadge" style="background: #ef4444; color: white; padding: 15px 50px; border-radius: 100px; font-weight: 800; font-size: 36px; box-shadow: 0 10px 30px rgba(239,68,68,0.3); margin-bottom: 20px;">B40</div>
+                <div style="font-size: 20px; color: #475569; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 100px;">Current Group</div>
+                
+                <!-- Timeline -->
+                <div style="width: 100%; display: flex; justify-content: space-between; align-items: flex-start; position: relative; margin-bottom: 100px;">
+                    <div style="position: absolute; top: 30px; left: 40px; right: 40px; height: 12px; background: rgba(0,0,0,0.1); z-index: 1;"></div>
+                    <div id="vtTimelineFill" style="position: absolute; top: 30px; left: 40px; width: 50%; height: 12px; background: #ef4444; z-index: 2;"></div>
+                    <!-- Nodes -->
+                    <div style="width: 30%; position: relative; z-index: 3;">
+                        <div id="vtNode1" style="width: 72px; height: 72px; border-radius: 50%; background: white; border: 16px solid #ef4444; box-sizing: border-box;"></div>
+                        <div style="font-weight: 800; font-size: 32px; color: #0f172a; margin-top: 24px;">B40</div>
+                        <div style="font-size: 24px; color: #64748b; font-weight: 600;">Up to<br>RM5,249</div>
+                    </div>
+                    <div style="width: 30%; position: relative; z-index: 3; text-align: center;">
+                        <div id="vtNode2" style="width: 72px; height: 72px; border-radius: 50%; background: white; border: 16px solid rgba(0,0,0,0.1); margin: 0 auto; box-sizing: border-box;"></div>
+                        <div style="font-weight: 800; font-size: 32px; color: #0f172a; margin-top: 24px;">M40</div>
+                        <div style="font-size: 24px; color: #64748b; font-weight: 600;">RM5,250 -<br>RM11,819</div>
+                    </div>
+                    <div style="width: 30%; position: relative; z-index: 3; text-align: right;">
+                        <div id="vtNode3" style="width: 72px; height: 72px; border-radius: 50%; background: white; border: 16px solid rgba(0,0,0,0.1); margin-left: auto; box-sizing: border-box;"></div>
+                        <div style="font-weight: 800; font-size: 32px; color: #0f172a; margin-top: 24px;">T20</div>
+                        <div style="font-size: 24px; color: #64748b; font-weight: 600;">RM11,820<br>&amp; above</div>
+                    </div>
+                </div>
+                
+                <!-- Next Goal -->
+                <div style="width: 100%; background: white; border-radius: 40px; padding: 60px; text-align: center; margin-bottom: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.05);">
+                    <div style="font-size: 24px; color: #64748b; font-weight: 800; text-transform: uppercase; letter-spacing: 3px;">Next Goal</div>
+                    <div id="vtNextGoal" style="font-size: 80px; font-weight: 900; color: #eab308; margin: 20px 0;">M40</div>
+                    <div id="vtNextGoalRange" style="font-size: 28px; color: #64748b; font-weight: 600;">RM5,250 - RM11,819</div>
+                </div>
+                
+                <!-- Your Progress -->
+                <div style="width: 100%; background: white; border-radius: 40px; padding: 60px; text-align: center; margin-bottom: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.05);">
+                    <div style="font-size: 24px; color: #64748b; font-weight: 800; text-transform: uppercase; letter-spacing: 3px;">Your Progress</div>
+                    <div style="font-size: 100px; font-weight: 900; color: #16a34a; margin: 20px 0;">
+                        <span id="vtProgressPct">95</span>%
+                    </div>
+                    <div style="width: 100%; height: 24px; background: #e2e8f0; border-radius: 40px; margin-bottom: 30px; overflow: hidden;">
+                        <div id="vtProgressBar" style="width: 95%; height: 100%; background: #16a34a; border-radius: 40px;"></div>
+                    </div>
+                    <div id="vtMoreToGo" style="font-size: 28px; color: #475569; font-weight: 600;">RM 250.00 more to go</div>
+                </div>
+            </div>
+            
+            <div style="position: absolute; bottom: 0; left: 0; right: 0; height: 350px; background: linear-gradient(180deg, transparent 0%, rgba(15,23,42,0.9) 100%); z-index: 5; display: flex; flex-direction: column; justify-content: flex-end; padding: 80px; align-items: center; color: white;">
+                <h2 id="vtFooterText" style="font-size: 48px; font-weight: 800; margin: 0 0 20px 0;">I'm 95% on the way to M40! 🚀</h2>
+                <p style="font-size: 32px; font-weight: 500; margin: 0; opacity: 0.9;">What's your next milestone?</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- shareDownloadModal removed as now we copy directly to clipboard -->
+
+    <div id="shareLoadingModal" style="display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); align-items: center; justify-content: center;">
+        <div style="background: white; padding: 30px 40px; border-radius: 16px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+            <div style="display: inline-block; width: 40px; height: 40px; border: 4px solid #e2e8f0; border-top-color: #2563eb; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 16px;"></div>
+            <div style="font-weight: 600; color: #0f172a;">Generating your card...</div>
+            <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+        </div>
+    </div>
+  </body>
+</html>
