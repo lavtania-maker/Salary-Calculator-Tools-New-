@@ -22,6 +22,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const resAnnualIncome = document.getElementById("resAnnualIncome") as HTMLElement;
   const resAnnualTax = document.getElementById("resAnnualTax") as HTMLElement;
   const resAnnualPcb = document.getElementById("resAnnualPcb") as HTMLElement;
+  
+  const resTakeHomeSalary = document.getElementById("resTakeHomeSalary") as HTMLElement;
+  const resTakeHomeGross = document.getElementById("resTakeHomeGross") as HTMLElement;
+  const resTakeHomeEpf = document.getElementById("resTakeHomeEpf") as HTMLElement;
+  const resTakeHomePcb = document.getElementById("resTakeHomePcb") as HTMLElement;
+  const resTakeHomeTaxRate = document.getElementById("resTakeHomeTaxRate") as HTMLElement;
 
   const downloadReportBtn = document.getElementById("downloadReportBtn") as HTMLButtonElement | null;
   const emailModal = document.getElementById("emailModal") as HTMLElement | null;
@@ -153,6 +159,14 @@ document.addEventListener("DOMContentLoaded", () => {
     resAnnualIncome.textContent = formatRM(totalIncome * 12);
     resAnnualTax.textContent = formatRM(tax * 12);
     resAnnualPcb.textContent = formatRM(tax * 12);
+    
+    // Take Home Salary updates
+    const takeHomeSalary = totalIncome - epfDeduction - tax;
+    resTakeHomeSalary.textContent = formatRM(takeHomeSalary);
+    resTakeHomeGross.textContent = formatRM(totalIncome);
+    resTakeHomeEpf.textContent = "-" + formatRM(epfDeduction);
+    resTakeHomePcb.textContent = "-" + formatRM(tax);
+    resTakeHomeTaxRate.textContent = effectiveRate.toFixed(1) + "% of gross salary";
     
     lastCalculation = {
       salary: salary.toFixed(2),
@@ -294,7 +308,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 { label: "Tax Bracket", value: lastCalculation.taxBracket },
                 { label: "Effective Tax Rate", value: `${lastCalculation.effectiveRate}%` },
                 { label: "Monthly PCB Deducted", value: `-RM ${parseFloat(lastCalculation.pcb).toFixed(2)}` },
-                { label: "Net Salary", value: `RM ${parseFloat(lastCalculation.netSalary).toFixed(2)}` }
+                { label: "Take Home Salary", value: `RM ${parseFloat(lastCalculation.netSalary).toFixed(2)}` }
               ]
             });
         }

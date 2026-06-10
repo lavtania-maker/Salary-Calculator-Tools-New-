@@ -171,6 +171,10 @@
       <span>Monthly PCB Deduction</span>
       <span id="pcb">RM 0.00</span>
     </div>
+    <div class="row bold" style="font-size: 18px; background-color: #e0f2fe; padding: 15px 10px; margin-top: 10px;">
+      <span>Take Home Salary</span>
+      <span id="takeHomeSalary">RM 0.00</span>
+    </div>
 
     <div class="section-title">Annual Summary</div>
     <div class="row">
@@ -250,6 +254,12 @@
       document.getElementById("epf").innerText = "- " + formatRM(params.get("epf"));
       document.getElementById("relief").innerText = "- " + formatRM(params.get("relief"));
       document.getElementById("pcb").innerText = formatRM(params.get("pcb"));
+
+      const salaryVal = parseFloat(params.get("salary") || 0);
+      const bonusVal = parseFloat(params.get("bonus") || 0);
+      const epfVal = parseFloat(params.get("epf") || 0);
+      const pcbVal = parseFloat(params.get("pcb") || 0);
+      document.getElementById("takeHomeSalary").innerText = formatRM(salaryVal + bonusVal - epfVal - pcbVal);
 
       document.getElementById("annualIncome").innerText = formatRM(params.get("annualIncome"));
       document.getElementById("annualPcb").innerText = formatRM(params.get("annualPcb"));
