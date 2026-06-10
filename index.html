@@ -123,13 +123,13 @@
           <a href="/socso-perkeso" id="navBtnSocso" class="nav-item" title="SOCSO (PERKESO) Calculator">
             SOCSO Calculator
           </a>
-          <a href="/pcb-income-tax.html" id="navBtnPcb" class="nav-item" title="PCB (Monthly Tax Deduction) Calculator">
+          <a href="/pcb-income-tax" id="navBtnPcb" class="nav-item" title="PCB (Monthly Tax Deduction) Calculator">
             PCB Calculator
           </a>
-          <a href="/epf-kwsp.html" id="navBtnEpf" class="nav-item" title="EPF (KWSP) Calculator">
+          <a href="/epf-kwsp" id="navBtnEpf" class="nav-item" title="EPF (KWSP) Calculator">
             EPF Calculator
           </a>
-          <a href="/annual-leave-calculator.html" class="nav-item" title="Annual Leave Calculator">Annual Leave Calculator</a>
+          <a href="/annual-leave-calculator" class="nav-item" title="Annual Leave Calculator">Annual Leave Calculator</a>
         </nav>
 
         <!-- Mobile Hamburger Button -->
@@ -167,13 +167,13 @@
         <a href="/socso-perkeso" id="mobileNavBtnSocso" class="mobile-nav-item">
           SOCSO (PERKESO) Calculator
         </a>
-        <a href="/pcb-income-tax.html" id="mobileNavBtnPcb" class="mobile-nav-item">
+        <a href="/pcb-income-tax" id="mobileNavBtnPcb" class="mobile-nav-item">
           PCB (Monthly Tax Deduction) Calculator
         </a>
-        <a href="/epf-kwsp.html" id="mobileNavBtnEpf" class="mobile-nav-item">
+        <a href="/epf-kwsp" id="mobileNavBtnEpf" class="mobile-nav-item">
           EPF (KWSP) Calculator
         </a>
-        <a href="/annual-leave-calculator.html" class="mobile-nav-item">Annual Leave Calculator</a>
+        <a href="/annual-leave-calculator" class="mobile-nav-item">Annual Leave Calculator</a>
       </nav>
     </header>
 
@@ -4121,9 +4121,9 @@
             <h4>Quick Links</h4>
             <a href="/" class="footer-link">Salary Calculator</a>
             <a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
-            <a href="/pcb-income-tax.html" class="footer-link">PCB Calculator</a>
-            <a href="/epf-kwsp.html" class="footer-link">EPF Calculator</a>
-          <a href="/annual-leave-calculator.html" class="footer-link">Annual Leave Calculator</a>
+            <a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
+            <a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
+          <a href="/annual-leave-calculator" class="footer-link">Annual Leave Calculator</a>
             <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
           </div>
         </div>
@@ -4792,6 +4792,7 @@
         } else {
           switchToolTab("salary", false, false);
         }
+        window.scrollTo(0, 0);
 
         // Popstate handling for browser back/forward
         window.addEventListener("popstate", (event) => {
@@ -4803,18 +4804,13 @@
           }
         });
 
-  if (navBtnSalary) navBtnSalary.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("salary"); });
-  if (navBtnSocso) navBtnSocso.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("socso"); });
-  if (navBtnPcb) navBtnPcb.addEventListener("click", (e) => { e.preventDefault(); window.location.href = "/pcb-income-tax.html"; });
-        
         const footerLinkSocso = document.getElementById("footerLinkSocso");
         if (footerLinkSocso) {
-          footerLinkSocso.addEventListener("click", () => switchToolTab("socso"));
+          footerLinkSocso.addEventListener("click", () => {
+			window.location.href = "/socso-perkeso";
+		  });
         }
         
-  if (mobileNavBtnSalary) mobileNavBtnSalary.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("salary"); });
-  if (mobileNavBtnSocso) mobileNavBtnSocso.addEventListener("click", (e) => { e.preventDefault(); switchToolTab("socso"); });
-  if (mobileNavBtnPcb) mobileNavBtnPcb.addEventListener("click", (e) => { e.preventDefault(); window.location.href = "/pcb-income-tax.html"; });
         // --- End SOCSO Tool Logic ---
 
         // --- SOCSO Table Expand/Collapse Logic ---
