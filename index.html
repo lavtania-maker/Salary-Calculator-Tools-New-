@@ -1378,17 +1378,23 @@
                 <div class="result-section">
                   <!-- Employee Row -->
                   <div class="result-item">
-                    <div style="display: flex; align-items: center; gap: 12px">
-                      <span class="indicator-dot indicator-green"></span>
-                      <span>Employee contribution</span>
+                    <div style="display: flex; align-items: flex-start; gap: 12px">
+                      <span class="indicator-dot indicator-green" style="margin-top: 6px;"></span>
+                      <div style="display: flex; flex-direction: column; line-height: 1.4;">
+                        <span style="font-weight: 600; color: #1e293b;">Employee contribution</span>
+                        <span style="font-size: 0.75rem; color: #94a3b8; font-weight: 400; text-align: left;">(Monthly)</span>
+                      </div>
                     </div>
                     <span id="socsoEmployeeCardVal">RM 0.00</span>
                   </div>
                   <!-- Employer Row -->
                   <div class="result-item">
-                    <div style="display: flex; align-items: center; gap: 12px">
-                      <span class="indicator-dot indicator-blue"></span>
-                      <span>Employer contribution</span>
+                    <div style="display: flex; align-items: flex-start; gap: 12px">
+                      <span class="indicator-dot indicator-blue" style="margin-top: 6px;"></span>
+                      <div style="display: flex; flex-direction: column; line-height: 1.4;">
+                        <span style="font-weight: 600; color: #1e293b;">Employer contribution</span>
+                        <span style="font-size: 0.75rem; color: #94a3b8; font-weight: 400; text-align: left;">(Monthly)</span>
+                      </div>
                     </div>
                     <span id="socsoEmployerCardVal">RM 0.00</span>
                   </div>
@@ -1396,6 +1402,15 @@
                   <div class="result-item total">
                     <span>Total Contribution</span>
                     <span id="socsoTotalCardVal">RM 0.00</span>
+                  </div>
+                  <!-- Annual Rows -->
+                  <div class="result-item" style="margin-top: 12px; padding-top: 12px; border-top: 1px solid #f1f5f9; border-bottom: none;">
+                    <span style="color: #10b981; font-weight: 700;">Annual Employee Contribution</span>
+                    <span id="socsoAnnualEmployeeCardVal" style="color: #10b981; font-weight: 700;">RM 0.00</span>
+                  </div>
+                  <div class="result-item" style="border-top: none;">
+                    <span style="color: #3b82f6; font-weight: 700;">Annual Employer Contribution</span>
+                    <span id="socsoAnnualEmployerCardVal" style="color: #3b82f6; font-weight: 700;">RM 0.00</span>
                   </div>
                   <!-- Disclaimer -->
                   <p
@@ -1433,6 +1448,9 @@
                 </div>
               </div>
             </div>
+
+
+            
           </aside>
         </div>
       </main>
@@ -4589,6 +4607,10 @@
             "RM " + socsoEmployer.toFixed(2);
           document.getElementById("socsoTotalCardVal").textContent =
             "RM " + socsoRates.total.toFixed(2);
+          document.getElementById("socsoAnnualEmployeeCardVal").textContent =
+            "RM " + (socsoEmployee * 12).toFixed(2);
+          document.getElementById("socsoAnnualEmployerCardVal").textContent =
+            "RM " + (socsoEmployer * 12).toFixed(2);
         }
 
         // Tab Switcher Logic
