@@ -7,12 +7,41 @@ import { Resend } from "resend";
 import dotenv from "dotenv";
 
 dotenv.config();
+
+function normalizeSheetPayload(body: any) {
+  const payload: any = { ...body };
+
+  // Map incoming keys to the exact headers in Google Sheets
+  if (payload["Email"]) payload.email = payload["Email"];
+  if (payload["User Type"]) payload.userType = payload["User Type"];
+  if (payload["Company Name"]) payload.companyName = payload["Company Name"];
+  if (payload["Hiring Status"]) payload.hiringStatus = payload["Hiring Status"];
+  if (payload["User Phone"]) payload.userPhone = payload["User Phone"];
+  if (payload.phoneNumber) payload.userPhone = payload.phoneNumber;
+
+  // Cleanup uppercase exact keys
+  delete payload["Email"];
+  delete payload["User Type"];
+  delete payload["Company Name"];
+  delete payload["Hiring Status"];
+  delete payload["User Phone"];
+  delete payload.phoneNumber;
+
+  return payload;
+}
+
 // In the Vercel sandbox, project env vars live in /vercel/share/.env.project
 dotenv.config({ path: "/vercel/share/.env.project", override: false });
 dotenv.config({ path: "/vercel/share/.env.snowflake", override: false });
 
-const CURRENT_FILENAME = typeof import.meta.url !== "undefined" ? fileURLToPath(import.meta.url) : __filename;
-const CURRENT_DIRNAME = typeof import.meta.url !== "undefined" ? path.dirname(CURRENT_FILENAME) : __dirname;
+const CURRENT_FILENAME =
+  typeof import.meta.url !== "undefined"
+    ? fileURLToPath(import.meta.url)
+    : __filename;
+const CURRENT_DIRNAME =
+  typeof import.meta.url !== "undefined"
+    ? path.dirname(CURRENT_FILENAME)
+    : __dirname;
 
 // Lazy initialization of Resend to avoid crash if key is missing
 let resendClient: Resend | null = null;
@@ -38,10 +67,10 @@ async function startServer() {
   app.get("/api/config", (req, res) => {
     res.json({
       googleSheetsScriptUrl: process.env.GOOGLE_SHEETS_SCRIPT_URL || "",
-      socsoSheetsScriptUrl:  process.env.SOCSO_SHEETS_SCRIPT_URL  || "",
-      epfSheetsScriptUrl:    process.env.EPF_SHEETS_SCRIPT_URL    || "",
-      epfSheetId:            process.env.EPF_SHEET_ID             || "",
-      epfSheetName:          process.env.EPF_SHEET_NAME           || "",
+      socsoSheetsScriptUrl: process.env.SOCSO_SHEETS_SCRIPT_URL || "",
+      epfSheetsScriptUrl: process.env.EPF_SHEETS_SCRIPT_URL || "",
+      epfSheetId: process.env.EPF_SHEET_ID || "",
+      epfSheetName: process.env.EPF_SHEET_NAME || "",
     });
   });
 
@@ -49,28 +78,41 @@ async function startServer() {
   app.post("/api/salary-sheet", async (req, res) => {
     try {
       const scriptUrl = process.env.GOOGLE_SHEETS_SCRIPT_URL;
-      const sheetId   = "1lkK2LBrFUPtRZMDGgHdnaYw-IcPGUtylVhp7fpe_I_0"; // Salary Calculator ID
+      const sheetId = "1lkK2LBrFUPtRZMDGgHdnaYw-IcPGUtylVhp7fpe_I_0"; // Salary Calculator ID
 
       if (!scriptUrl) {
-        return res.status(500).json({ error: "GOOGLE_SHEETS_SCRIPT_URL not configured" });
+        return res
+          .status(500)
+          .json({ error: "GOOGLE_SHEETS_SCRIPT_URL not configured" });
       }
 
       // Check if it's from Annual Leave Calculator
       let targetSheetId = sheetId;
       let targetScriptUrl = scriptUrl;
-      const actn = typeof req.body.action === "string" ? req.body.action.toLowerCase() : "";
-      const dl = typeof req.body.download_via === "string" ? req.body.download_via.toLowerCase() : "";
+      const actn =
+        typeof req.body.action === "string"
+          ? req.body.action.toLowerCase()
+          : "";
+      const dl =
+        typeof req.body.download_via === "string"
+          ? req.body.download_via.toLowerCase()
+          : "";
 
       if (actn.includes("annual leave") || dl.includes("annual leave")) {
         targetSheetId = "14qNhk_A8THVB_eWsUi3Hyve7Sw6NLJRY-oF4HIqpDwA";
-        targetScriptUrl = process.env.ANNUAL_LEAVE_SHEETS_SCRIPT_URL || process.env.GOOGLE_SHEETS_SCRIPT_URL;
+        targetScriptUrl =
+          process.env.ANNUAL_LEAVE_SHEETS_SCRIPT_URL ||
+          process.env.GOOGLE_SHEETS_SCRIPT_URL;
       }
 
       if (!targetScriptUrl) {
         return res.status(500).json({ error: "Script URL not configured" });
       }
 
-      const payload = { ...req.body, sheetId: targetSheetId };
+      const payload = {
+        ...normalizeSheetPayload(req.body),
+        sheetId: targetSheetId,
+      };
 
       const appsRes = await fetch(targetScriptUrl, {
         method: "POST",
@@ -78,7 +120,11 @@ async function startServer() {
         body: JSON.stringify(payload),
       });
       const appsText = await appsRes.text();
-      console.log("[API] salary-sheet response:", appsRes.status, appsText.slice(0, 100));
+      console.log(
+        "[API] salary-sheet response:",
+        appsRes.status,
+        appsText.slice(0, 100),
+      );
 
       res.status(200).json({ success: true });
     } catch (err: any) {
@@ -90,7 +136,15 @@ async function startServer() {
   // Server-side proxy for PCB sheet submission
   app.post("/api/pcb-sheet", async (req, res) => {
     try {
-      const scriptUrl = process.env.VITE_PCB_SHEETS_SCRIPT_URL || process.env.GOOGLE_SHEETS_SCRIPT_URL;
+      console.log("[INCOMING] /api/pcb-sheet payload:", req.body);
+      fs.appendFileSync(
+        "server_logs.txt",
+        "PCB Payload: " + JSON.stringify(req.body) + "\n",
+      );
+
+      const scriptUrl =
+        process.env.VITE_PCB_SHEETS_SCRIPT_URL ||
+        process.env.GOOGLE_SHEETS_SCRIPT_URL;
 
       const targetSheetId = "1T6QfXmRl-0T2b_dog8_VSXVYCVJj-ifcH4Jf-Uv_dTw"; // PCB Calculator ID
 
@@ -98,7 +152,10 @@ async function startServer() {
         return res.status(500).json({ error: "Script URL not configured" });
       }
 
-      const payload = { ...req.body, sheetId: targetSheetId };
+      const payload = {
+        ...normalizeSheetPayload(req.body),
+        sheetId: targetSheetId,
+      };
 
       const appsRes = await fetch(scriptUrl, {
         method: "POST",
@@ -106,7 +163,11 @@ async function startServer() {
         body: JSON.stringify(payload),
       });
       const appsText = await appsRes.text();
-      console.log("[API] pcb-sheet response:", appsRes.status, appsText.slice(0, 100));
+      console.log(
+        "[API] pcb-sheet response:",
+        appsRes.status,
+        appsText.slice(0, 100),
+      );
 
       res.status(200).json({ success: true });
     } catch (err: any) {
@@ -118,8 +179,11 @@ async function startServer() {
   // Server-side proxy for EPF sheet submission — avoids CORS preflight
   app.post("/api/epf-sheet", async (req, res) => {
     try {
-      const scriptUrl = process.env.EPF_SHEETS_SCRIPT_URL || process.env.GOOGLE_SHEETS_SCRIPT_URL;
-      const sheetId   = "1ZjzvFhb1xA5x1SB8OJgUgkUwlaSnIHrMWeqjte2uw7k"; // EPF Calculator ID
+      console.log("[INCOMING] /api/epf-sheet payload:", req.body);
+      const scriptUrl =
+        process.env.EPF_SHEETS_SCRIPT_URL ||
+        process.env.GOOGLE_SHEETS_SCRIPT_URL;
+      const sheetId = "1ZjzvFhb1xA5x1SB8OJgUgkUwlaSnIHrMWeqjte2uw7k"; // EPF Calculator ID
       const sheetName = process.env.EPF_SHEET_NAME || "Sheet1";
 
       console.log("[v0] /api/epf-sheet called");
@@ -130,12 +194,15 @@ async function startServer() {
       }
 
       const payload = {
-        ...req.body,
+        ...normalizeSheetPayload(req.body),
         sheetId,
         sheetName,
       };
 
-      console.log("[v0] Forwarding to Apps Script:", scriptUrl.slice(0, 60) + "...");
+      console.log(
+        "[v0] Forwarding to Apps Script:",
+        scriptUrl.slice(0, 60) + "...",
+      );
       const appsRes = await fetch(scriptUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -155,14 +222,16 @@ async function startServer() {
   // Server-side proxy for SOCSO sheet submission — avoids CORS preflight
   app.post("/api/socso-sheet", async (req, res) => {
     try {
-      const scriptUrl = process.env.SOCSO_SHEETS_SCRIPT_URL || process.env.GOOGLE_SHEETS_SCRIPT_URL;
-      const sheetId   = "1rUCrHGE6kdfw17iQgtC1K426JdQZWbBZPl-uwTy3CkE"; // SOCSO Calculator ID
+      const scriptUrl =
+        process.env.SOCSO_SHEETS_SCRIPT_URL ||
+        process.env.GOOGLE_SHEETS_SCRIPT_URL;
+      const sheetId = "1rUCrHGE6kdfw17iQgtC1K426JdQZWbBZPl-uwTy3CkE"; // SOCSO Calculator ID
 
       if (!scriptUrl) {
         return res.status(500).json({ error: "Script URL not configured" });
       }
 
-      const payload = { ...req.body, sheetId };
+      const payload = { ...normalizeSheetPayload(req.body), sheetId };
 
       const appsRes = await fetch(scriptUrl, {
         method: "POST",
@@ -170,7 +239,11 @@ async function startServer() {
         body: JSON.stringify(payload),
       });
       const appsText = await appsRes.text();
-      console.log("[API] socso-sheet response:", appsRes.status, appsText.slice(0, 100));
+      console.log(
+        "[API] socso-sheet response:",
+        appsRes.status,
+        appsText.slice(0, 100),
+      );
 
       res.status(200).json({ success: true });
     } catch (err: any) {
@@ -182,9 +255,11 @@ async function startServer() {
   app.post("/api/deliver-document", async (req, res) => {
     try {
       const { email, type, data } = req.body;
-      
-      console.log(`[API] Delivery request received for ${email}, type: ${type}`);
-      
+
+      console.log(
+        `[API] Delivery request received for ${email}, type: ${type}`,
+      );
+
       if (!email) {
         return res.status(400).json({ error: "Email is required" });
       }
@@ -194,36 +269,43 @@ async function startServer() {
       // Send email if Resend is configured
       if (resend) {
         let subject = "Your Documents from SalaryCalc Malaysia";
-        let typeName = type === 'socsoreport' ? 'SOCSO Report' : (type === 'payslip' ? 'Salary Payslip' : 'Salary Report');
-        
+        let typeName =
+          type === "socsoreport"
+            ? "SOCSO Report"
+            : type === "payslip"
+              ? "Salary Payslip"
+              : "Salary Report";
+
         let text = `Hello,\n\nYou have successfully generated your ${typeName}.\n\n`;
-        
+
         if (data) {
-           text += `--- Summary ---\n`;
-           text += `Salary: RM ${parseFloat(data.salary || 0).toLocaleString('en-MY', {minimumFractionDigits: 2})}\n`;
-           
-           if (type === 'socsoreport') {
-             text += `Employee Contribution: RM ${parseFloat(data.socso || 0).toLocaleString('en-MY', {minimumFractionDigits: 2})}\n`;
-             text += `Employer Contribution: RM ${parseFloat(data.socsoEmployer || 0).toLocaleString('en-MY', {minimumFractionDigits: 2})}\n`;
-             text += `Total Contribution: RM ${parseFloat(data.socsoTotal || 0).toLocaleString('en-MY', {minimumFractionDigits: 2})}\n`;
-           } else {
-             text += `Total Deductions: RM ${parseFloat(data.totalDeductions || 0).toLocaleString('en-MY', {minimumFractionDigits: 2})}\n`;
-             text += `Net Salary: RM ${parseFloat(data.netSalary || 0).toLocaleString('en-MY', {minimumFractionDigits: 2})}\n`;
-           }
+          text += `--- Summary ---\n`;
+          text += `Salary: RM ${parseFloat(data.salary || 0).toLocaleString("en-MY", { minimumFractionDigits: 2 })}\n`;
+
+          if (type === "socsoreport") {
+            text += `Employee Contribution: RM ${parseFloat(data.socso || 0).toLocaleString("en-MY", { minimumFractionDigits: 2 })}\n`;
+            text += `Employer Contribution: RM ${parseFloat(data.socsoEmployer || 0).toLocaleString("en-MY", { minimumFractionDigits: 2 })}\n`;
+            text += `Total Contribution: RM ${parseFloat(data.socsoTotal || 0).toLocaleString("en-MY", { minimumFractionDigits: 2 })}\n`;
+          } else {
+            text += `Total Deductions: RM ${parseFloat(data.totalDeductions || 0).toLocaleString("en-MY", { minimumFractionDigits: 2 })}\n`;
+            text += `Net Salary: RM ${parseFloat(data.netSalary || 0).toLocaleString("en-MY", { minimumFractionDigits: 2 })}\n`;
+          }
         }
-        
+
         text += `\nYou can also find more details on our website.\n\nBest regards,\nSalaryCalc MY Team`;
 
         await resend.emails.send({
-          from: 'SalaryCalc <onboarding@resend.dev>',
+          from: "SalaryCalc <onboarding@resend.dev>",
           to: email,
           subject: subject,
-          text: text
+          text: text,
         });
-        
+
         console.log(`[API] Email sent successfully to ${email}`);
       } else {
-        console.warn("[API] RESEND_API_KEY not configured or placeholder detected. Skipping email send.");
+        console.warn(
+          "[API] RESEND_API_KEY not configured or placeholder detected. Skipping email send.",
+        );
       }
 
       // Always return success if we reached this point to satisfy the client
@@ -239,7 +321,7 @@ async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       configFile: path.join(CURRENT_DIRNAME, "vite.config.ts"),
-      server: { 
+      server: {
         middlewareMode: true,
         hmr: false,
         watch: { usePolling: false },
@@ -283,7 +365,9 @@ async function startServer() {
     };
 
     app.use(async (req, res, next) => {
-      console.log(`[DEBUG] Received request: ${req.method} ${req.url} (originalUrl: ${req.originalUrl}, path: ${req.path})`);
+      console.log(
+        `[DEBUG] Received request: ${req.method} ${req.url} (originalUrl: ${req.originalUrl}, path: ${req.path})`,
+      );
       const urlPath = req.path;
       const htmlFile = htmlPages[urlPath];
       if (!htmlFile) return next();
@@ -293,7 +377,10 @@ async function startServer() {
         let html = fs.readFileSync(filePath, "utf-8");
         html = await vite.transformIndexHtml(req.originalUrl, html);
         // Strip @vite/client WebSocket script — it cannot connect through the v0 proxy
-        html = html.replace(/<script type="module" src="\/@vite\/client"><\/script>\n?/g, "");
+        html = html.replace(
+          /<script type="module" src="\/@vite\/client"><\/script>\n?/g,
+          "",
+        );
         res.setHeader("Content-Type", "text/html");
         res.end(html);
       } catch (e) {
@@ -303,7 +390,7 @@ async function startServer() {
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath, { extensions: ["html"] }));
-    
+
     // For MPA, we don't necessarily want a single catch-all that returns index.html
     // unless it's truly a fallback.
     app.get("*all", (req, res) => {

@@ -1,31 +1,81 @@
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "./firebase";
 import { generatePDFReport } from "./lib/pdf-generator";
 
 document.addEventListener("DOMContentLoaded", () => {
-
   const form = document.getElementById("leaveForm") as HTMLFormElement;
-  const resetBtn = document.getElementById("leaveResetBtn") as HTMLButtonElement;
+  const resetBtn = document.getElementById(
+    "leaveResetBtn",
+  ) as HTMLButtonElement;
   const resultCard = document.getElementById("leaveResultCard") as HTMLElement;
-  const resultContent = document.getElementById("leaveResultsContent") as HTMLElement;
-  const placeholderText = document.getElementById("leavePlaceholder") as HTMLElement;
+  const resultContent = document.getElementById(
+    "leaveResultsContent",
+  ) as HTMLElement;
+  const placeholderText = document.getElementById(
+    "leavePlaceholder",
+  ) as HTMLElement;
 
-  const resTotalEntitlement = document.getElementById("resTotalEntitlement") as HTMLElement;
-  const resProratedLeave = document.getElementById("resProratedLeave") as HTMLElement;
+  const resTotalEntitlement = document.getElementById(
+    "resTotalEntitlement",
+  ) as HTMLElement;
+  const resProratedLeave = document.getElementById(
+    "resProratedLeave",
+  ) as HTMLElement;
   const resLeaveTaken = document.getElementById("resLeaveTaken") as HTMLElement;
-  const resRemainingBalance = document.getElementById("resRemainingBalance") as HTMLElement;
-  const resSuggestedAction = document.getElementById("resSuggestedAction") as HTMLElement;
-  const resYearsOfService = document.getElementById("resYearsOfService") as HTMLElement;
+  const resRemainingBalance = document.getElementById(
+    "resRemainingBalance",
+  ) as HTMLElement;
+  const resSuggestedAction = document.getElementById(
+    "resSuggestedAction",
+  ) as HTMLElement;
+  const resYearsOfService = document.getElementById(
+    "resYearsOfService",
+  ) as HTMLElement;
 
-  const startDateInput = document.getElementById("leaveStartDate") as HTMLInputElement;
-  const calcYearSelect = document.getElementById("leaveCalcYear") as HTMLSelectElement;
-  const customYearInput = document.getElementById("leaveCustomYearInput") as HTMLInputElement;
-  const entitlementInput = document.getElementById("leaveEntitlement") as HTMLInputElement;
+  const startDateInput = document.getElementById(
+    "leaveStartDate",
+  ) as HTMLInputElement;
+  const calcYearSelect = document.getElementById(
+    "leaveCalcYear",
+  ) as HTMLSelectElement;
+  const customYearInput = document.getElementById(
+    "leaveCustomYearInput",
+  ) as HTMLInputElement;
+  const entitlementInput = document.getElementById(
+    "leaveEntitlement",
+  ) as HTMLInputElement;
   const takenInput = document.getElementById("leaveTaken") as HTMLInputElement;
-  const submitBtn = document.getElementById("leaveSubmitBtn") as HTMLButtonElement;
+  const submitBtn = document.getElementById(
+    "leaveSubmitBtn",
+  ) as HTMLButtonElement;
 
-  const downloadReportBtn = document.getElementById("downloadLeaveReportBtn") as HTMLButtonElement | null;
-  const emailModal = document.getElementById("emailModal") as HTMLElement | null;
-  const closeModalBtn = document.getElementById("closeModal") as HTMLElement | null;
-  const emailForm = document.getElementById("emailForm") as HTMLFormElement | null;
+  const categorySelect = document.getElementById(
+    "employeeCategory",
+  ) as HTMLSelectElement | null;
+  const employmentTypeSelect = document.getElementById(
+    "employmentType",
+  ) as HTMLSelectElement | null;
+  
+  if (categorySelect) {
+    categorySelect.addEventListener("change", () => {
+      if (categorySelect.value === "below-2") entitlementInput.value = "8";
+      else if (categorySelect.value === "2-5") entitlementInput.value = "12";
+      else if (categorySelect.value === "above-5") entitlementInput.value = "16";
+    });
+  }
+
+  const downloadReportBtn = document.getElementById(
+    "downloadLeaveReportBtn",
+  ) as HTMLButtonElement | null;
+  const emailModal = document.getElementById(
+    "emailModal",
+  ) as HTMLElement | null;
+  const closeModalBtn = document.getElementById(
+    "closeModal",
+  ) as HTMLElement | null;
+  const emailForm = document.getElementById(
+    "emailForm",
+  ) as HTMLFormElement | null;
 
   // Mobile menu toggle
   const mobileMenuToggle = document.getElementById("mobileMenuToggle");
@@ -65,7 +115,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const startDate = new Date(startDateInput.value);
     const targetYear = getTargetYear();
-    const warningEl = document.getElementById("leaveWarning") as HTMLElement | null;
+    const warningEl = document.getElementById(
+      "leaveWarning",
+    ) as HTMLElement | null;
     let warningMsg = "";
 
     const today = new Date();
@@ -74,18 +126,21 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (targetYear < startDate.getFullYear()) {
-         entitlementInput.value = "0";
-         if (warningEl) {
-             warningEl.style.display = "block";
-             warningEl.textContent = "Error: Employee joined after the selected calculation year.";
-         }
-         submitBtn.disabled = true;
-         return;
+      entitlementInput.value = "0";
+      if (warningEl) {
+        warningEl.style.display = "block";
+        warningEl.textContent =
+          "Error: Employee joined after the selected calculation year.";
+      }
+      submitBtn.disabled = true;
+      return;
     }
 
     // Calculate completed years and months by end of target year
     const currentDate = new Date(targetYear, 11, 31);
-    let totalMonths = (currentDate.getFullYear() - startDate.getFullYear()) * 12 + (currentDate.getMonth() - startDate.getMonth());
+    let totalMonths =
+      (currentDate.getFullYear() - startDate.getFullYear()) * 12 +
+      (currentDate.getMonth() - startDate.getMonth());
     if (currentDate.getDate() < startDate.getDate()) {
       totalMonths--;
     }
@@ -94,24 +149,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const years = Math.floor(totalMonths / 12);
 
     const yearsOfService = years;
-
+    let categoryVal = "below-2";
     if (yearsOfService < 2) {
       entitlementInput.value = "8";
+      categoryVal = "below-2";
     } else if (yearsOfService >= 2 && yearsOfService < 5) {
       entitlementInput.value = "12";
+      categoryVal = "2-5";
     } else {
       entitlementInput.value = "16";
+      categoryVal = "above-5";
     }
-    
+    if (categorySelect) {
+      categorySelect.value = categoryVal;
+    }
+
     if (warningEl) {
-        if (warningMsg) {
-            warningEl.style.display = "block";
-            warningEl.textContent = warningMsg;
-        } else {
-            warningEl.style.display = "none";
-        }
+      if (warningMsg) {
+        warningEl.style.display = "block";
+        warningEl.textContent = warningMsg;
+      } else {
+        warningEl.style.display = "none";
+      }
     }
-    
+
     submitBtn.disabled = false;
   };
 
@@ -120,7 +181,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const startDate = new Date(startDateInput.value);
     const targetYear = getTargetYear();
-    const warningEl = document.getElementById("leaveWarning") as HTMLElement | null;
+    const warningEl = document.getElementById(
+      "leaveWarning",
+    ) as HTMLElement | null;
     let warningMsgs: string[] = [];
 
     const baseEntitlement = parseFloat(entitlementInput.value) || 0;
@@ -132,7 +195,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const currentDate = new Date(targetYear, 11, 31);
-    let totalMonths = (currentDate.getFullYear() - startDate.getFullYear()) * 12 + (currentDate.getMonth() - startDate.getMonth());
+    let totalMonths =
+      (currentDate.getFullYear() - startDate.getFullYear()) * 12 +
+      (currentDate.getMonth() - startDate.getMonth());
     if (currentDate.getDate() < startDate.getDate()) {
       totalMonths--;
     }
@@ -145,7 +210,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (yearsOfService >= 5) minEntitlement = 16;
 
     if (baseEntitlement < minEntitlement) {
-      warningMsgs.push(`Custom entitlement (${baseEntitlement} days) is below the Malaysian minimum requirement (${minEntitlement} days).`);
+      warningMsgs.push(
+        `Custom entitlement (${baseEntitlement} days) is below the Malaysian minimum requirement (${minEntitlement} days).`,
+      );
     }
 
     let proratedLeave = baseEntitlement;
@@ -154,15 +221,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // Pro-rated rule: ONLY use pro-rated calculation if employee joined DURING the selected calculation year
     if (startDate.getFullYear() === targetYear) {
       if (proratedItem) proratedItem.style.display = "flex";
-      
+
       // Calculate months worked this year
       let monthsWorked = 12 - startDate.getMonth();
       if (startDate.getDate() > 15) {
         monthsWorked -= 0.5;
       }
       if (monthsWorked < 0) monthsWorked = 0;
-      
-      proratedLeave = Math.round(((monthsWorked / 12) * baseEntitlement) * 10) / 10;
+
+      proratedLeave =
+        Math.round((monthsWorked / 12) * baseEntitlement * 10) / 10;
     } else if (targetYear < startDate.getFullYear()) {
       proratedLeave = 0;
       if (proratedItem) proratedItem.style.display = "none";
@@ -180,7 +248,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (warningEl) {
       if (warningMsgs.length > 0) {
         warningEl.style.display = "block";
-        warningEl.innerHTML = `<strong>Warnings:</strong><ul style="margin: 4px 0 0 16px; padding: 0;">` + warningMsgs.map(msg => `<li>${msg}</li>`).join('') + `</ul>`;
+        warningEl.innerHTML =
+          `<strong>Warnings:</strong><ul style="margin: 4px 0 0 16px; padding: 0;">` +
+          warningMsgs.map((msg) => `<li>${msg}</li>`).join("") +
+          `</ul>`;
       } else {
         warningEl.style.display = "none";
       }
@@ -189,7 +260,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const remainingBalance = Math.round((proratedLeave - leaveTaken) * 10) / 10;
     const months = totalMonths % 12;
 
-    resYearsOfService.textContent = `${yearsOfService} Year${yearsOfService !== 1 ? 's' : ''} ${months} Month${months !== 1 ? 's' : ''}`;
+    resYearsOfService.textContent = `${yearsOfService} Year${yearsOfService !== 1 ? "s" : ""} ${months} Month${months !== 1 ? "s" : ""}`;
     resTotalEntitlement.textContent = `${baseEntitlement} Days`;
     resProratedLeave.textContent = `${proratedLeave} Days`;
     resLeaveTaken.textContent = `${leaveTaken} Days`;
@@ -212,19 +283,19 @@ document.addEventListener("DOMContentLoaded", () => {
     lastCalculation = {
       startDate: startDateInput.value,
       targetYear,
-      yearsOfServiceText: `${yearsOfService} Year${yearsOfService !== 1 ? 's' : ''} ${months} Month${months !== 1 ? 's' : ''}`,
+      yearsOfServiceText: `${yearsOfService} Year${yearsOfService !== 1 ? "s" : ""} ${months} Month${months !== 1 ? "s" : ""}`,
       baseEntitlement,
       proratedLeave,
       leaveTaken,
-      remainingBalance
+      remainingBalance,
     };
 
     placeholderText.style.display = "none";
     resultContent.style.display = "block";
 
-    if (typeof (window as any).gtag === 'function') {
-      (window as any).gtag('event', 'click_calculate_leave', {
-        event_category: 'calculator',
+    if (typeof (window as any).gtag === "function") {
+      (window as any).gtag("event", "click_calculate_leave", {
+        event_category: "calculator",
       });
     }
   };
@@ -232,6 +303,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
+      const warningEl = document.getElementById("leaveWarning");
+      if (!startDateInput.value) {
+        if (warningEl) {
+          warningEl.style.display = "block";
+          warningEl.textContent = "Please enter an Employment Start Date.";
+        }
+        return;
+      }
       const originalText = submitBtn.textContent || "Calculate";
       submitBtn.textContent = "Calculating...";
       submitBtn.disabled = true;
@@ -252,9 +331,16 @@ document.addEventListener("DOMContentLoaded", () => {
           Calculate
         `;
         submitBtn.disabled = false;
-        
+
         if (window.innerWidth < 768) {
-          setTimeout(() => resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+          setTimeout(
+            () =>
+              resultCard.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+              }),
+            100,
+          );
         }
       }, 300);
     });
@@ -262,8 +348,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
-      if (typeof (window as any).gtag === 'function') {
-        (window as any).gtag('event', 'click_reset_leave', { event_category: 'calculator' });
+      if (typeof (window as any).gtag === "function") {
+        (window as any).gtag("event", "click_reset_leave", {
+          event_category: "calculator",
+        });
       }
       setTimeout(() => {
         placeholderText.style.display = "block";
@@ -275,17 +363,45 @@ document.addEventListener("DOMContentLoaded", () => {
   // Modal logic
   if (downloadReportBtn && emailModal) {
     downloadReportBtn.addEventListener("click", () => {
-      if (typeof (window as any).gtag === 'function') {
-        (window as any).gtag('event', 'click_download_leave', { event_category: 'calculator' });
+      if (typeof (window as any).gtag === "function") {
+        (window as any).gtag("event", "click_download_leave", {
+          event_category: "calculator",
+        });
       }
       const modalFormContent = document.getElementById("modalFormContent");
-      const modalSuccessContent = document.getElementById("modalSuccessContent");
-      
+      const modalSuccessContent = document.getElementById(
+        "modalSuccessContent",
+      );
+
       if (modalFormContent && modalSuccessContent) {
         modalFormContent.style.display = "block";
         modalSuccessContent.style.display = "none";
       }
       emailModal.style.display = "flex";
+
+      const companyGroup = document.getElementById("companyNameGroup");
+      const companyInput = document.getElementById(
+        "companyName",
+      ) as HTMLInputElement;
+      const hiringGroup = document.getElementById("hiringQuestionGroup");
+      const hiringInput = document.getElementById(
+        "hiringStatus",
+      ) as HTMLSelectElement;
+
+      if (companyGroup) companyGroup.style.display = "none";
+      if (companyInput) {
+        companyInput.required = false;
+        companyInput.value = "";
+      }
+      if (hiringGroup) hiringGroup.style.display = "none";
+      if (hiringInput) {
+        hiringInput.required = false;
+        hiringInput.value = "";
+      }
+      const userTypeNode = document.getElementById(
+        "userType",
+      ) as HTMLSelectElement;
+      if (userTypeNode) userTypeNode.value = "";
     });
   }
 
@@ -310,12 +426,44 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const userType = document.getElementById("userType") as HTMLSelectElement;
+  if (userType) {
+    userType.addEventListener("change", function () {
+      const companyGroup = document.getElementById("companyNameGroup");
+      const companyInput = document.getElementById(
+        "companyName",
+      ) as HTMLInputElement;
+      const hiringGroup = document.getElementById("hiringQuestionGroup");
+      const hiringInput = document.getElementById(
+        "hiringStatus",
+      ) as HTMLSelectElement;
+
+      if (this.value === "Employer / HR" || this.value === "Employer/HR") {
+        if (companyGroup) companyGroup.style.display = "block";
+        if (companyInput) companyInput.required = true;
+        if (hiringGroup) hiringGroup.style.display = "block";
+        if (hiringInput) hiringInput.required = true;
+      } else {
+        if (companyGroup) companyGroup.style.display = "none";
+        if (companyInput) {
+          companyInput.required = false;
+          companyInput.value = "";
+        }
+        if (hiringGroup) hiringGroup.style.display = "none";
+        if (hiringInput) {
+          hiringInput.required = false;
+          hiringInput.value = "";
+        }
+      }
+    });
+  }
 
   if (emailForm) {
     emailForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      
-      const submitBtn = emailForm.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+
+      const submitBtn = emailForm.querySelector(
+        'button[type="submit"]',
+      ) as HTMLButtonElement | null;
       let originalText = "Submit & Download";
       if (submitBtn) {
         originalText = submitBtn.textContent || "Submit & Download";
@@ -324,26 +472,69 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        const emailInput = document.getElementById("userEmail") as HTMLInputElement;
-        const userTypeSelect = document.getElementById("userType") as HTMLSelectElement;
-        const phoneInput = document.getElementById("userPhone") as HTMLInputElement;
-        
+        const emailInput = document.getElementById(
+          "userEmail",
+        ) as HTMLInputElement;
+        const userTypeSelect = document.getElementById(
+          "userType",
+        ) as HTMLSelectElement;
+        const phoneInput = document.getElementById(
+          "userPhone",
+        ) as HTMLInputElement;
+
+        const companyInputExt = document.getElementById(
+          "companyName",
+        ) as HTMLInputElement;
+        const hiringInputExt = document.getElementById(
+          "hiringStatus",
+        ) as HTMLSelectElement;
+
+        const email = emailInput?.value || "";
+        const role = userTypeSelect?.value || "";
+
         const sheetPayload = {
           timestamp: new Date().toISOString(),
-          email: emailInput?.value || "",
-          userType: userTypeSelect?.value || "",
-          userPhone: phoneInput?.value || "",
-          download_via: "Annual Leave Calculator"
+          Email: email,
+          "User Type": role,
+          "Hiring Status": hiringInputExt?.value || "",
+          "Company Name": companyInputExt?.value?.trim() || "",
+          "User Phone": phoneInput?.value || "",
+          download_via: "Annual Leave Calculator",
         };
-        
-        await fetch("/api/salary-sheet", {
-          method: "POST", 
-          headers: { "Content-Type": "application/json" }, 
-          body: JSON.stringify(sheetPayload)
-        });
 
-        if (typeof (window as any).gtag === 'function') {
-          (window as any).gtag('event', 'submit_lead_leave', { event_category: 'lead' });
+        const dbPayload = {
+          email: email,
+          userType: role,
+          action: "Download Annual Leave Report",
+          createdAt: new Date().toISOString(),
+        };
+        if (companyInputExt?.value?.trim())
+          (dbPayload as any).companyName = companyInputExt?.value?.trim();
+        if (hiringInputExt?.value)
+          (dbPayload as any).hiringStatus = hiringInputExt?.value;
+        if (phoneInput?.value)
+          (dbPayload as any).phoneNumber = phoneInput.value;
+
+        try {
+          await addDoc(collection(db, "leads"), dbPayload);
+        } catch (err) {
+          console.error("Firestore error:", err);
+        }
+
+        try {
+          await fetch("/api/salary-sheet", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(sheetPayload),
+          });
+        } catch (err) {
+          console.error("Google Sheets Webhook error:", err);
+        }
+
+        if (typeof (window as any).gtag === "function") {
+          (window as any).gtag("event", "submit_lead_leave", {
+            event_category: "lead",
+          });
         }
 
         if (lastCalculation) {
@@ -353,24 +544,48 @@ document.addEventListener("DOMContentLoaded", () => {
             data: [
               { label: "Join Date", value: lastCalculation.startDate },
               { label: "Calculation Year", value: lastCalculation.targetYear },
-              { label: "Years of Service", value: lastCalculation.yearsOfServiceText },
-              { label: "Base Entitlement", value: `${lastCalculation.baseEntitlement} Days` },
-              { label: "Pro-Rated Entitlement", value: `${lastCalculation.proratedLeave} Days` },
-              { label: "Leave Taken", value: `${lastCalculation.leaveTaken} Days` },
-              { label: "Remaining Leave Balance", value: `${lastCalculation.remainingBalance} Days` }
-            ]
+              {
+                label: "Years of Service",
+                value: lastCalculation.yearsOfServiceText,
+              },
+              {
+                label: "Base Entitlement",
+                value: `${lastCalculation.baseEntitlement} Days`,
+              },
+              {
+                label: "Pro-Rated Entitlement",
+                value: `${lastCalculation.proratedLeave} Days`,
+              },
+              {
+                label: "Leave Taken",
+                value: `${lastCalculation.leaveTaken} Days`,
+              },
+              {
+                label: "Remaining Leave Balance",
+                value: `${lastCalculation.remainingBalance} Days`,
+              },
+            ],
           });
         }
 
-        
         const modalFormContent = document.getElementById("modalFormContent");
-        const modalSuccessContent = document.getElementById("modalSuccessContent");
-        
+        const modalSuccessContent = document.getElementById(
+          "modalSuccessContent",
+        );
+
         if (modalFormContent && modalSuccessContent) {
           modalFormContent.style.display = "none";
-          if(emailModal) emailModal.style.display = "none";
+          if (emailModal) emailModal.style.display = "none";
+
+          if (role === "Employer / HR" || role === "Employer/HR") {
+            const hiringModal = document.getElementById("hiringIntentModal");
+            if (hiringModal) {
+              hiringModal.style.display = "flex";
+              (window as any)._currentLeadEmail = email;
+              (window as any)._currentLeadType = "Annual Leave Calculator";
+            }
+          }
         }
-        
       } catch (err) {
         console.error("Submission error:", err);
       } finally {

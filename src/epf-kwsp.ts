@@ -1,42 +1,90 @@
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "./firebase";
 import { generatePDFReport } from "./lib/pdf-generator";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("epfForm") as HTMLFormElement;
   const resetBtn = document.getElementById("epfResetBtn") as HTMLButtonElement;
   const resultCard = document.getElementById("epfResultCard") as HTMLElement;
-  const resultContent = document.getElementById("epfResultsContent") as HTMLElement;
-  const placeholderText = document.getElementById("epfPlaceholder") as HTMLElement;
+  const resultContent = document.getElementById(
+    "epfResultsContent",
+  ) as HTMLElement;
+  const placeholderText = document.getElementById(
+    "epfPlaceholder",
+  ) as HTMLElement;
 
   const resTotalEpf = document.getElementById("epfTotalCardVal") as HTMLElement;
-  const resEmployeeEpf = document.getElementById("epfEmployeeCardVal") as HTMLElement;
-  const resEmployerEpf = document.getElementById("epfEmployerCardVal") as HTMLElement;
+  const resEmployeeEpf = document.getElementById(
+    "epfEmployeeCardVal",
+  ) as HTMLElement;
+  const resEmployerEpf = document.getElementById(
+    "epfEmployerCardVal",
+  ) as HTMLElement;
 
-  const resSalarySummary = document.getElementById("epfSalarySummaryVal") as HTMLElement;
-  const resNetSalary = document.getElementById("epfNetSalaryVal") as HTMLElement;
-  const resEmployeeRate = document.getElementById("epfEmployeeRate") as HTMLElement;
-  const resEmployerRate = document.getElementById("epfEmployerRate") as HTMLElement;
-  
+  const resSalarySummary = document.getElementById(
+    "epfSalarySummaryVal",
+  ) as HTMLElement;
+  const resNetSalary = document.getElementById(
+    "epfNetSalaryVal",
+  ) as HTMLElement;
+  const resEmployeeRate = document.getElementById(
+    "epfEmployeeRate",
+  ) as HTMLElement;
+  const resEmployerRate = document.getElementById(
+    "epfEmployerRate",
+  ) as HTMLElement;
+
   const barEmp = document.getElementById("epfEmpBar") as HTMLElement;
   const barEmpr = document.getElementById("epfEmprBar") as HTMLElement;
 
-  const downloadReportBtn = document.getElementById("downloadEpfReportBtn") as HTMLButtonElement | null;
-  const emailModal = document.getElementById("emailModal") as HTMLElement | null;
-  const closeModalBtn = document.getElementById("closeModal") as HTMLElement | null;
+  const downloadReportBtn = document.getElementById(
+    "downloadEpfReportBtn",
+  ) as HTMLButtonElement | null;
+  const emailModal = document.getElementById(
+    "emailModal",
+  ) as HTMLElement | null;
+  const closeModalBtn = document.getElementById(
+    "closeModal",
+  ) as HTMLElement | null;
 
-  const emailForm = document.getElementById("emailForm") as HTMLFormElement | null;
-  const userEmail = document.getElementById("userEmail") as HTMLInputElement | null;
-  const userType = document.getElementById("userType") as HTMLSelectElement | null;
-  const userPhone = document.getElementById("userPhone") as HTMLInputElement | null;
+  const emailForm = document.getElementById(
+    "emailForm",
+  ) as HTMLFormElement | null;
+  const userEmail = document.getElementById(
+    "userEmail",
+  ) as HTMLInputElement | null;
+  const userType = document.getElementById(
+    "userType",
+  ) as HTMLSelectElement | null;
+  const userPhone = document.getElementById(
+    "userPhone",
+  ) as HTMLInputElement | null;
 
-  const hiringQuestionGroup = document.getElementById("hiringQuestionGroup") as HTMLElement | null;
-  const hiringStatus = document.getElementById("hiringStatus") as HTMLSelectElement | null;
-  const companyNameGroup = document.getElementById("companyNameGroup") as HTMLElement | null;
-  const companyName = document.getElementById("companyName") as HTMLInputElement | null;
+  const hiringQuestionGroup = document.getElementById(
+    "hiringQuestionGroup",
+  ) as HTMLElement | null;
+  const hiringStatus = document.getElementById(
+    "hiringStatus",
+  ) as HTMLSelectElement | null;
+  const companyNameGroup = document.getElementById(
+    "companyNameGroup",
+  ) as HTMLElement | null;
+  const companyName = document.getElementById(
+    "companyName",
+  ) as HTMLInputElement | null;
 
-  const modalFormContent = document.getElementById("modalFormContent") as HTMLElement | null;
-  const modalSuccessContent = document.getElementById("modalSuccessContent") as HTMLElement | null;
-  const modalFeedback = document.getElementById("modalFeedback") as HTMLElement | null;
-  const viewFileBtn = document.getElementById("viewFileBtn") as HTMLAnchorElement | null;
+  const modalFormContent = document.getElementById(
+    "modalFormContent",
+  ) as HTMLElement | null;
+  const modalSuccessContent = document.getElementById(
+    "modalSuccessContent",
+  ) as HTMLElement | null;
+  const modalFeedback = document.getElementById(
+    "modalFeedback",
+  ) as HTMLElement | null;
+  const viewFileBtn = document.getElementById(
+    "viewFileBtn",
+  ) as HTMLAnchorElement | null;
 
   // Mobile menu toggle
   const mobileMenuToggle = document.getElementById("mobileMenuToggle");
@@ -50,11 +98,19 @@ document.addEventListener("DOMContentLoaded", () => {
   let lastCalculation: any = null;
 
   const formatRM = (val: number) => {
-    return "RM " + val.toLocaleString("en-MY", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return (
+      "RM " +
+      val.toLocaleString("en-MY", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })
+    );
   };
 
   const calculateEpf = () => {
-    const salaryStr = (document.getElementById("epfGrossSalary") as HTMLInputElement).value;
+    const salaryStr = (
+      document.getElementById("epfGrossSalary") as HTMLInputElement
+    ).value;
     const salary = parseFloat(salaryStr) || 0;
 
     if (salary <= 0) {
@@ -63,8 +119,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const age = (document.querySelector('input[name="epfAge"]:checked') as HTMLInputElement).value;
-    const nationality = (document.querySelector('input[name="epfNationality"]:checked') as HTMLInputElement).value;
+    const age = (
+      document.querySelector('input[name="epfAge"]:checked') as HTMLInputElement
+    ).value;
+    const nationality = (
+      document.querySelector(
+        'input[name="epfNationality"]:checked',
+      ) as HTMLInputElement
+    ).value;
 
     const isMalaysian = nationality === "malaysian";
     const isAbove60 = age === "above60";
@@ -78,7 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (isMalaysian) {
       if (isAbove60) {
-        employeeRate = 0.00;
+        employeeRate = 0.0;
         employerRate = 0.04;
         empRateStr = "0%";
         emprRateStr = "4%";
@@ -111,12 +173,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (resTotalEpf) resTotalEpf.textContent = formatRM(totalEpf);
     if (resEmployeeEpf) resEmployeeEpf.textContent = formatRM(employeeEpf);
     if (resEmployerEpf) resEmployerEpf.textContent = formatRM(employerEpf);
-    
+
     if (resSalarySummary) resSalarySummary.textContent = formatRM(salary);
     if (resNetSalary) resNetSalary.textContent = formatRM(netSalary);
     if (resEmployeeRate) resEmployeeRate.textContent = `(${empRateStr})`;
     if (resEmployerRate) resEmployerRate.textContent = `(${emprRateStr})`;
-    
+
     if (barEmp && barEmpr && totalEpf > 0) {
       const empPct = (employeeEpf / totalEpf) * 100;
       const emprPct = 100 - empPct;
@@ -133,23 +195,27 @@ document.addEventListener("DOMContentLoaded", () => {
       empRateStr,
       emprRateStr,
       age,
-      nationality
+      nationality,
     };
 
     placeholderText.style.display = "none";
     resultContent.style.display = "block";
 
     // trigger GA4
-    if (typeof (window as any).gtag === 'function') {
-      (window as any).gtag('event', 'click_calculate_epf', {
-        event_category: 'calculator',
-        value: lastCalculation.salary
+    if (typeof (window as any).gtag === "function") {
+      (window as any).gtag("event", "click_calculate_epf", {
+        event_category: "calculator",
+        value: lastCalculation.salary,
       });
     }
   };
 
-  const grossSalaryInput = document.getElementById("epfGrossSalary") as HTMLInputElement;
-  const calculateBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+  const grossSalaryInput = document.getElementById(
+    "epfGrossSalary",
+  ) as HTMLInputElement;
+  const calculateBtn = form.querySelector(
+    'button[type="submit"]',
+  ) as HTMLButtonElement;
 
   if (grossSalaryInput && calculateBtn) {
     grossSalaryInput.addEventListener("input", () => {
@@ -192,9 +258,16 @@ document.addEventListener("DOMContentLoaded", () => {
                   Calculate
         `;
         calculateBtn.disabled = false;
-        
+
         if (window.innerWidth < 768) {
-          setTimeout(() => resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+          setTimeout(
+            () =>
+              resultCard.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+              }),
+            100,
+          );
         }
       }, 300);
     });
@@ -202,8 +275,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
-      if (typeof (window as any).gtag === 'function') {
-        (window as any).gtag('event', 'click_reset_epf', { event_category: 'calculator' });
+      if (typeof (window as any).gtag === "function") {
+        (window as any).gtag("event", "click_reset_epf", {
+          event_category: "calculator",
+        });
       }
       setTimeout(() => {
         placeholderText.style.display = "block";
@@ -216,14 +291,40 @@ document.addEventListener("DOMContentLoaded", () => {
   // Modal logic
   if (downloadReportBtn && emailModal) {
     downloadReportBtn.addEventListener("click", () => {
-      if (typeof (window as any).gtag === 'function') {
-        (window as any).gtag('event', 'click_download_epf', { event_category: 'calculator' });
+      if (typeof (window as any).gtag === "function") {
+        (window as any).gtag("event", "click_download_epf", {
+          event_category: "calculator",
+        });
       }
       if (modalFormContent && modalSuccessContent) {
         modalFormContent.style.display = "block";
         modalSuccessContent.style.display = "none";
       }
       emailModal.style.display = "flex";
+
+      const companyGroup = document.getElementById("companyNameGroup");
+      const companyInput = document.getElementById(
+        "companyName",
+      ) as HTMLInputElement;
+      const hiringGroup = document.getElementById("hiringQuestionGroup");
+      const hiringInput = document.getElementById(
+        "hiringStatus",
+      ) as HTMLSelectElement;
+
+      if (companyGroup) companyGroup.style.display = "none";
+      if (companyInput) {
+        companyInput.required = false;
+        companyInput.value = "";
+      }
+      if (hiringGroup) hiringGroup.style.display = "none";
+      if (hiringInput) {
+        hiringInput.required = false;
+        hiringInput.value = "";
+      }
+      const userTypeNode = document.getElementById(
+        "userType",
+      ) as HTMLSelectElement;
+      if (userTypeNode) userTypeNode.value = "";
     });
   }
 
@@ -239,17 +340,56 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  const userTypeNodeExt = document.getElementById(
+    "userType",
+  ) as HTMLSelectElement | null;
+  if (userTypeNodeExt) {
+    userTypeNodeExt.addEventListener(
+      "change",
+      function (this: HTMLSelectElement) {
+        const companyGroup = document.getElementById("companyNameGroup");
+        const companyInput = document.getElementById(
+          "companyName",
+        ) as HTMLInputElement;
+        const hiringGroup = document.getElementById("hiringQuestionGroup");
+        const hiringInput = document.getElementById(
+          "hiringStatus",
+        ) as HTMLSelectElement;
+
+        if (this.value === "Employer / HR" || this.value === "Employer/HR") {
+          if (companyGroup) companyGroup.style.display = "block";
+          if (companyInput) companyInput.required = true;
+          if (hiringGroup) hiringGroup.style.display = "block";
+          if (hiringInput) hiringInput.required = true;
+        } else {
+          if (companyGroup) companyGroup.style.display = "none";
+          if (companyInput) {
+            companyInput.required = false;
+            companyInput.value = "";
+          }
+          if (hiringGroup) hiringGroup.style.display = "none";
+          if (hiringInput) {
+            hiringInput.required = false;
+            hiringInput.value = "";
+          }
+        }
+      },
+    );
+  }
+
   if (emailForm) {
     emailForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      
+
       const email = userEmail ? userEmail.value : "";
       const role = userType ? userType.value : "";
       const isHiring = "";
       const company = "";
       const phone = userPhone ? userPhone.value : "";
-  
-      const submitBtn = emailForm.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+
+      const submitBtn = emailForm.querySelector(
+        'button[type="submit"]',
+      ) as HTMLButtonElement | null;
       let originalText = "Submit & Download";
       if (submitBtn) {
         originalText = submitBtn.textContent || "Submit & Download";
@@ -258,60 +398,132 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
+        const companyInputExt = document.getElementById(
+          "companyName",
+        ) as HTMLInputElement;
+        const hiringInputExt = document.getElementById(
+          "hiringStatus",
+        ) as HTMLSelectElement;
         const sheetPayload = {
           timestamp: new Date().toISOString(),
+          Email: email,
+          "User Type": role,
+          "Hiring Status": hiringInputExt?.value || "",
+          "Company Name": companyInputExt?.value?.trim() || "",
+          "User Phone": phone,
+          download_via: "EPF Calculator",
+        };
+
+        const dbPayload = {
           email: email,
           userType: role,
-          userPhone: phone,
-          download_via: "EPF Calculator"
+          action: "Download EPF Report",
+          createdAt: new Date().toISOString(),
         };
-        await fetch("/api/epf-sheet", {
-          method: "POST", 
-          headers: { "Content-Type": "application/json" }, 
-          body: JSON.stringify(sheetPayload)
-        });
+        if (companyInputExt?.value?.trim())
+          (dbPayload as any).companyName = companyInputExt?.value?.trim();
+        if (hiringInputExt?.value)
+          (dbPayload as any).hiringStatus = hiringInputExt?.value;
+        if (phone) (dbPayload as any).phoneNumber = phone;
 
-        if (typeof (window as any).gtag === 'function') {
-          (window as any).gtag('event', 'submit_lead_epf', { event_category: 'lead' });
+        try {
+          await addDoc(collection(db, "leads"), dbPayload);
+        } catch (err) {
+          console.error("Firestore error:", err);
         }
-        
+
+        try {
+          await fetch("/api/epf-sheet", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(sheetPayload),
+          });
+        } catch (err) {
+          console.error("Google Sheets Webhook error:", err);
+        }
+
+        if (typeof (window as any).gtag === "function") {
+          (window as any).gtag("event", "submit_lead_epf", {
+            event_category: "lead",
+          });
+        }
+
         if (lastCalculation) {
-            generatePDFReport({
-              title: "EPF Contribution Report",
-              fileName: "EPF_Report",
-              data: [
-                { label: "Gross Salary", value: `RM ${parseFloat(lastCalculation.salary).toFixed(2)}` },
-                { label: "Age Group", value: lastCalculation.age === 'above60' ? 'Above 60' : 'Below 60' },
-                { label: "Nationality", value: lastCalculation.nationality === 'malaysian' ? 'Malaysian' : 'Foreigner' },
-                { label: "Employee Rate", value: lastCalculation.empRateStr },
-                { label: "Employer Rate", value: lastCalculation.emprRateStr },
-                { label: "Employee Contribution", value: `-RM ${parseFloat(lastCalculation.employeeEpf).toFixed(2)}` },
-                { label: "Employer Contribution", value: `RM ${parseFloat(lastCalculation.employerEpf).toFixed(2)}` },
-                { label: "Total EPF Contribution", value: `RM ${parseFloat(lastCalculation.totalEpf).toFixed(2)}` },
-                { label: "Net Salary (After EPF)", value: `RM ${parseFloat(lastCalculation.netSalary).toFixed(2)}` }
-              ]
-            });
+          generatePDFReport({
+            title: "EPF Contribution Report",
+            fileName: "EPF_Report",
+            data: [
+              {
+                label: "Gross Salary",
+                value: `RM ${parseFloat(lastCalculation.salary).toFixed(2)}`,
+              },
+              {
+                label: "Age Group",
+                value:
+                  lastCalculation.age === "above60" ? "Above 60" : "Below 60",
+              },
+              {
+                label: "Nationality",
+                value:
+                  lastCalculation.nationality === "malaysian"
+                    ? "Malaysian"
+                    : "Foreigner",
+              },
+              { label: "Employee Rate", value: lastCalculation.empRateStr },
+              { label: "Employer Rate", value: lastCalculation.emprRateStr },
+              {
+                label: "Employee Contribution",
+                value: `-RM ${parseFloat(lastCalculation.employeeEpf).toFixed(2)}`,
+              },
+              {
+                label: "Employer Contribution",
+                value: `RM ${parseFloat(lastCalculation.employerEpf).toFixed(2)}`,
+              },
+              {
+                label: "Total EPF Contribution",
+                value: `RM ${parseFloat(lastCalculation.totalEpf).toFixed(2)}`,
+              },
+              {
+                label: "Net Salary (After EPF)",
+                value: `RM ${parseFloat(lastCalculation.netSalary).toFixed(2)}`,
+              },
+            ],
+          });
         }
 
+        await new Promise((resolve) => setTimeout(resolve, 800));
 
-        await new Promise(resolve => setTimeout(resolve, 800));
-        
         if (modalFormContent && modalSuccessContent) {
           modalFormContent.style.display = "none";
-          if(emailModal) emailModal.style.display = "none";
-          if (modalFeedback) {
-             modalFeedback.textContent = "Thank you! Your EPF report has been downloaded.";
-             modalFeedback.style.display = "block";
+          if (emailModal) emailModal.style.display = "none";
+
+          if (role === "Employer / HR" || role === "Employer/HR") {
+            const hiringModal = document.getElementById("hiringIntentModal");
+            if (hiringModal) {
+              hiringModal.style.display = "flex";
+              (window as any)._currentLeadEmail = email;
+              (window as any)._currentLeadType = "EPF Calculator";
+            }
           }
-          
-          const mobileActionButtons = document.getElementById("mobileActionButtons");
-          const mobileFallbackText = document.getElementById("mobileFallbackText");
+          if (modalFeedback) {
+            modalFeedback.textContent =
+              "Thank you! Your EPF report has been downloaded.";
+            modalFeedback.style.display = "block";
+          }
+
+          const mobileActionButtons = document.getElementById(
+            "mobileActionButtons",
+          );
+          const mobileFallbackText =
+            document.getElementById("mobileFallbackText");
           if (mobileActionButtons) mobileActionButtons.style.display = "none";
           if (mobileFallbackText) mobileFallbackText.style.display = "none";
         }
       } catch (err) {
         console.error("Submission error:", err);
-        alert("An error occurred while generating the report. Please try again.");
+        alert(
+          "An error occurred while generating the report. Please try again.",
+        );
       } finally {
         if (submitBtn) {
           submitBtn.textContent = originalText;

@@ -43,7 +43,7 @@ service cloud.firestore {
              data.email is string && isValidEmail(data.email) &&
              data.action is string && data.action.size() > 0 && data.action.size() <= 100 &&
              data.createdAt is string && // App sends ISO string
-             data.userType is string && data.userType in ['Employer / HR', 'Employee', 'Jobseeker'] &&
+             data.userType is string && data.userType in ['Employer / HR', 'Employer/HR', 'Employee', 'Jobseeker', 'Job Seeker'] &&
              
              // 3. Optional Fields Validation
              (!('phoneNumber' in data) || (data.phoneNumber is string && data.phoneNumber.size() <= 50)) &&

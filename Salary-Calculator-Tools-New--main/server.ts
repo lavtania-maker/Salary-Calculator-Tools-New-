@@ -11,8 +11,14 @@ dotenv.config();
 dotenv.config({ path: "/vercel/share/.env.project", override: false });
 dotenv.config({ path: "/vercel/share/.env.snowflake", override: false });
 
-const CURRENT_FILENAME = typeof import.meta.url !== "undefined" ? fileURLToPath(import.meta.url) : __filename;
-const CURRENT_DIRNAME = typeof import.meta.url !== "undefined" ? path.dirname(CURRENT_FILENAME) : __dirname;
+const CURRENT_FILENAME =
+  typeof import.meta.url !== "undefined"
+    ? fileURLToPath(import.meta.url)
+    : __filename;
+const CURRENT_DIRNAME =
+  typeof import.meta.url !== "undefined"
+    ? path.dirname(CURRENT_FILENAME)
+    : __dirname;
 
 // Lazy initialization of Resend to avoid crash if key is missing
 let resendClient: Resend | null = null;
@@ -38,10 +44,10 @@ async function startServer() {
   app.get("/api/config", (req, res) => {
     res.json({
       googleSheetsScriptUrl: process.env.GOOGLE_SHEETS_SCRIPT_URL || "",
-      socsoSheetsScriptUrl:  process.env.SOCSO_SHEETS_SCRIPT_URL  || "",
-      epfSheetsScriptUrl:    process.env.EPF_SHEETS_SCRIPT_URL    || "",
-      epfSheetId:            process.env.EPF_SHEET_ID             || "",
-      epfSheetName:          process.env.EPF_SHEET_NAME           || "",
+      socsoSheetsScriptUrl: process.env.SOCSO_SHEETS_SCRIPT_URL || "",
+      epfSheetsScriptUrl: process.env.EPF_SHEETS_SCRIPT_URL || "",
+      epfSheetId: process.env.EPF_SHEET_ID || "",
+      epfSheetName: process.env.EPF_SHEET_NAME || "",
     });
   });
 
@@ -49,13 +55,17 @@ async function startServer() {
   app.post("/api/salary-sheet", async (req, res) => {
     try {
       const scriptUrl = process.env.GOOGLE_SHEETS_SCRIPT_URL;
-      const sheetId   = process.env.GOOGLE_SHEET_ID;
+      const sheetId = process.env.GOOGLE_SHEET_ID;
 
       if (!scriptUrl) {
-        return res.status(500).json({ error: "GOOGLE_SHEETS_SCRIPT_URL not configured" });
+        return res
+          .status(500)
+          .json({ error: "GOOGLE_SHEETS_SCRIPT_URL not configured" });
       }
       if (!sheetId) {
-        return res.status(500).json({ error: "GOOGLE_SHEET_ID not configured" });
+        return res
+          .status(500)
+          .json({ error: "GOOGLE_SHEET_ID not configured" });
       }
 
       const payload = { ...req.body, sheetId };
@@ -66,7 +76,11 @@ async function startServer() {
         body: JSON.stringify(payload),
       });
       const appsText = await appsRes.text();
-      console.log("[API] salary-sheet response:", appsRes.status, appsText.slice(0, 100));
+      console.log(
+        "[API] salary-sheet response:",
+        appsRes.status,
+        appsText.slice(0, 100),
+      );
 
       res.status(200).json({ success: true });
     } catch (err: any) {
@@ -81,7 +95,9 @@ async function startServer() {
       const scriptUrl = process.env.VITE_PCB_SHEETS_SCRIPT_URL;
 
       if (!scriptUrl) {
-        return res.status(500).json({ error: "VITE_PCB_SHEETS_SCRIPT_URL not configured" });
+        return res
+          .status(500)
+          .json({ error: "VITE_PCB_SHEETS_SCRIPT_URL not configured" });
       }
 
       const appsRes = await fetch(scriptUrl, {
@@ -90,7 +106,11 @@ async function startServer() {
         body: JSON.stringify(req.body),
       });
       const appsText = await appsRes.text();
-      console.log("[API] pcb-sheet response:", appsRes.status, appsText.slice(0, 100));
+      console.log(
+        "[API] pcb-sheet response:",
+        appsRes.status,
+        appsText.slice(0, 100),
+      );
 
       res.status(200).json({ success: true });
     } catch (err: any) {
@@ -103,7 +123,7 @@ async function startServer() {
   app.post("/api/epf-sheet", async (req, res) => {
     try {
       const scriptUrl = process.env.EPF_SHEETS_SCRIPT_URL;
-      const sheetId   = process.env.EPF_SHEET_ID;
+      const sheetId = process.env.EPF_SHEET_ID;
       const sheetName = process.env.EPF_SHEET_NAME;
 
       console.log("[v0] /api/epf-sheet called");
@@ -112,7 +132,9 @@ async function startServer() {
       console.log("[v0] EPF_SHEET_NAME set:", !!sheetName);
 
       if (!scriptUrl) {
-        return res.status(500).json({ error: "EPF_SHEETS_SCRIPT_URL not configured" });
+        return res
+          .status(500)
+          .json({ error: "EPF_SHEETS_SCRIPT_URL not configured" });
       }
       if (!sheetId) {
         return res.status(500).json({ error: "EPF_SHEET_ID not configured" });
@@ -127,7 +149,10 @@ async function startServer() {
         sheetName,
       };
 
-      console.log("[v0] Forwarding to Apps Script:", scriptUrl.slice(0, 60) + "...");
+      console.log(
+        "[v0] Forwarding to Apps Script:",
+        scriptUrl.slice(0, 60) + "...",
+      );
       const appsRes = await fetch(scriptUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -148,13 +173,17 @@ async function startServer() {
   app.post("/api/socso-sheet", async (req, res) => {
     try {
       const scriptUrl = process.env.SOCSO_SHEETS_SCRIPT_URL;
-      const sheetId   = process.env.SOCSO_SPREADSHEET_ID;
+      const sheetId = process.env.SOCSO_SPREADSHEET_ID;
 
       if (!scriptUrl) {
-        return res.status(500).json({ error: "SOCSO_SHEETS_SCRIPT_URL not configured" });
+        return res
+          .status(500)
+          .json({ error: "SOCSO_SHEETS_SCRIPT_URL not configured" });
       }
       if (!sheetId) {
-        return res.status(500).json({ error: "SOCSO_SPREADSHEET_ID not configured" });
+        return res
+          .status(500)
+          .json({ error: "SOCSO_SPREADSHEET_ID not configured" });
       }
 
       const payload = { ...req.body, sheetId };
@@ -165,7 +194,11 @@ async function startServer() {
         body: JSON.stringify(payload),
       });
       const appsText = await appsRes.text();
-      console.log("[API] socso-sheet response:", appsRes.status, appsText.slice(0, 100));
+      console.log(
+        "[API] socso-sheet response:",
+        appsRes.status,
+        appsText.slice(0, 100),
+      );
 
       res.status(200).json({ success: true });
     } catch (err: any) {
@@ -177,9 +210,11 @@ async function startServer() {
   app.post("/api/deliver-document", async (req, res) => {
     try {
       const { email, type, data } = req.body;
-      
-      console.log(`[API] Delivery request received for ${email}, type: ${type}`);
-      
+
+      console.log(
+        `[API] Delivery request received for ${email}, type: ${type}`,
+      );
+
       if (!email) {
         return res.status(400).json({ error: "Email is required" });
       }
@@ -189,36 +224,43 @@ async function startServer() {
       // Send email if Resend is configured
       if (resend) {
         let subject = "Your Documents from SalaryCalc Malaysia";
-        let typeName = type === 'socsoreport' ? 'SOCSO Report' : (type === 'payslip' ? 'Salary Payslip' : 'Salary Report');
-        
+        let typeName =
+          type === "socsoreport"
+            ? "SOCSO Report"
+            : type === "payslip"
+              ? "Salary Payslip"
+              : "Salary Report";
+
         let text = `Hello,\n\nYou have successfully generated your ${typeName}.\n\n`;
-        
+
         if (data) {
-           text += `--- Summary ---\n`;
-           text += `Salary: RM ${parseFloat(data.salary || 0).toLocaleString('en-MY', {minimumFractionDigits: 2})}\n`;
-           
-           if (type === 'socsoreport') {
-             text += `Employee Contribution: RM ${parseFloat(data.socso || 0).toLocaleString('en-MY', {minimumFractionDigits: 2})}\n`;
-             text += `Employer Contribution: RM ${parseFloat(data.socsoEmployer || 0).toLocaleString('en-MY', {minimumFractionDigits: 2})}\n`;
-             text += `Total Contribution: RM ${parseFloat(data.socsoTotal || 0).toLocaleString('en-MY', {minimumFractionDigits: 2})}\n`;
-           } else {
-             text += `Total Deductions: RM ${parseFloat(data.totalDeductions || 0).toLocaleString('en-MY', {minimumFractionDigits: 2})}\n`;
-             text += `Net Salary: RM ${parseFloat(data.netSalary || 0).toLocaleString('en-MY', {minimumFractionDigits: 2})}\n`;
-           }
+          text += `--- Summary ---\n`;
+          text += `Salary: RM ${parseFloat(data.salary || 0).toLocaleString("en-MY", { minimumFractionDigits: 2 })}\n`;
+
+          if (type === "socsoreport") {
+            text += `Employee Contribution: RM ${parseFloat(data.socso || 0).toLocaleString("en-MY", { minimumFractionDigits: 2 })}\n`;
+            text += `Employer Contribution: RM ${parseFloat(data.socsoEmployer || 0).toLocaleString("en-MY", { minimumFractionDigits: 2 })}\n`;
+            text += `Total Contribution: RM ${parseFloat(data.socsoTotal || 0).toLocaleString("en-MY", { minimumFractionDigits: 2 })}\n`;
+          } else {
+            text += `Total Deductions: RM ${parseFloat(data.totalDeductions || 0).toLocaleString("en-MY", { minimumFractionDigits: 2 })}\n`;
+            text += `Net Salary: RM ${parseFloat(data.netSalary || 0).toLocaleString("en-MY", { minimumFractionDigits: 2 })}\n`;
+          }
         }
-        
+
         text += `\nYou can also find more details on our website.\n\nBest regards,\nSalaryCalc MY Team`;
 
         await resend.emails.send({
-          from: 'SalaryCalc <onboarding@resend.dev>',
+          from: "SalaryCalc <onboarding@resend.dev>",
           to: email,
           subject: subject,
-          text: text
+          text: text,
         });
-        
+
         console.log(`[API] Email sent successfully to ${email}`);
       } else {
-        console.warn("[API] RESEND_API_KEY not configured or placeholder detected. Skipping email send.");
+        console.warn(
+          "[API] RESEND_API_KEY not configured or placeholder detected. Skipping email send.",
+        );
       }
 
       // Always return success if we reached this point to satisfy the client
@@ -234,7 +276,7 @@ async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
       configFile: path.join(CURRENT_DIRNAME, "vite.config.ts"),
-      server: { 
+      server: {
         middlewareMode: true,
         hmr: false,
         watch: { usePolling: false },
@@ -284,7 +326,10 @@ async function startServer() {
         let html = fs.readFileSync(filePath, "utf-8");
         html = await vite.transformIndexHtml(req.originalUrl, html);
         // Strip @vite/client WebSocket script — it cannot connect through the v0 proxy
-        html = html.replace(/<script type="module" src="\/@vite\/client"><\/script>\n?/g, "");
+        html = html.replace(
+          /<script type="module" src="\/@vite\/client"><\/script>\n?/g,
+          "",
+        );
         res.setHeader("Content-Type", "text/html");
         res.end(html);
       } catch (e) {
@@ -294,7 +339,7 @@ async function startServer() {
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath, { extensions: ["html"] }));
-    
+
     // For MPA, we don't necessarily want a single catch-all that returns index.html
     // unless it's truly a fallback.
     app.get("*all", (req, res) => {

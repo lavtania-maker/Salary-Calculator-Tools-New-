@@ -2,39 +2,85 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("epfForm") as HTMLFormElement;
   const resetBtn = document.getElementById("epfResetBtn") as HTMLButtonElement;
   const resultCard = document.getElementById("epfResultCard") as HTMLElement;
-  const resultContent = document.getElementById("epfResultsContent") as HTMLElement;
-  const placeholderText = document.getElementById("epfPlaceholder") as HTMLElement;
+  const resultContent = document.getElementById(
+    "epfResultsContent",
+  ) as HTMLElement;
+  const placeholderText = document.getElementById(
+    "epfPlaceholder",
+  ) as HTMLElement;
 
   const resTotalEpf = document.getElementById("epfTotalCardVal") as HTMLElement;
-  const resEmployeeEpf = document.getElementById("epfEmployeeCardVal") as HTMLElement;
-  const resEmployerEpf = document.getElementById("epfEmployerCardVal") as HTMLElement;
+  const resEmployeeEpf = document.getElementById(
+    "epfEmployeeCardVal",
+  ) as HTMLElement;
+  const resEmployerEpf = document.getElementById(
+    "epfEmployerCardVal",
+  ) as HTMLElement;
 
-  const resSalarySummary = document.getElementById("epfSalarySummaryVal") as HTMLElement;
-  const resNetSalary = document.getElementById("epfNetSalaryVal") as HTMLElement;
-  const resEmployeeRate = document.getElementById("epfEmployeeRate") as HTMLElement;
-  const resEmployerRate = document.getElementById("epfEmployerRate") as HTMLElement;
-  
+  const resSalarySummary = document.getElementById(
+    "epfSalarySummaryVal",
+  ) as HTMLElement;
+  const resNetSalary = document.getElementById(
+    "epfNetSalaryVal",
+  ) as HTMLElement;
+  const resEmployeeRate = document.getElementById(
+    "epfEmployeeRate",
+  ) as HTMLElement;
+  const resEmployerRate = document.getElementById(
+    "epfEmployerRate",
+  ) as HTMLElement;
+
   const barEmp = document.getElementById("epfEmpBar") as HTMLElement;
   const barEmpr = document.getElementById("epfEmprBar") as HTMLElement;
 
-  const downloadReportBtn = document.getElementById("downloadEpfReportBtn") as HTMLButtonElement | null;
-  const emailModal = document.getElementById("emailModal") as HTMLElement | null;
-  const closeModalBtn = document.getElementById("closeModal") as HTMLElement | null;
+  const downloadReportBtn = document.getElementById(
+    "downloadEpfReportBtn",
+  ) as HTMLButtonElement | null;
+  const emailModal = document.getElementById(
+    "emailModal",
+  ) as HTMLElement | null;
+  const closeModalBtn = document.getElementById(
+    "closeModal",
+  ) as HTMLElement | null;
 
-  const emailForm = document.getElementById("emailForm") as HTMLFormElement | null;
-  const userEmail = document.getElementById("userEmail") as HTMLInputElement | null;
-  const userType = document.getElementById("userType") as HTMLSelectElement | null;
-  const userPhone = document.getElementById("userPhone") as HTMLInputElement | null;
+  const emailForm = document.getElementById(
+    "emailForm",
+  ) as HTMLFormElement | null;
+  const userEmail = document.getElementById(
+    "userEmail",
+  ) as HTMLInputElement | null;
+  const userType = document.getElementById(
+    "userType",
+  ) as HTMLSelectElement | null;
+  const userPhone = document.getElementById(
+    "userPhone",
+  ) as HTMLInputElement | null;
 
-  const hiringQuestionGroup = document.getElementById("hiringQuestionGroup") as HTMLElement | null;
-  const hiringStatus = document.getElementById("hiringStatus") as HTMLSelectElement | null;
-  const companyNameGroup = document.getElementById("companyNameGroup") as HTMLElement | null;
-  const companyName = document.getElementById("companyName") as HTMLInputElement | null;
+  const hiringQuestionGroup = document.getElementById(
+    "hiringQuestionGroup",
+  ) as HTMLElement | null;
+  const hiringStatus = document.getElementById(
+    "hiringStatus",
+  ) as HTMLSelectElement | null;
+  const companyNameGroup = document.getElementById(
+    "companyNameGroup",
+  ) as HTMLElement | null;
+  const companyName = document.getElementById(
+    "companyName",
+  ) as HTMLInputElement | null;
 
-  const modalFormContent = document.getElementById("modalFormContent") as HTMLElement | null;
-  const modalSuccessContent = document.getElementById("modalSuccessContent") as HTMLElement | null;
-  const modalFeedback = document.getElementById("modalFeedback") as HTMLElement | null;
-  const viewFileBtn = document.getElementById("viewFileBtn") as HTMLAnchorElement | null;
+  const modalFormContent = document.getElementById(
+    "modalFormContent",
+  ) as HTMLElement | null;
+  const modalSuccessContent = document.getElementById(
+    "modalSuccessContent",
+  ) as HTMLElement | null;
+  const modalFeedback = document.getElementById(
+    "modalFeedback",
+  ) as HTMLElement | null;
+  const viewFileBtn = document.getElementById(
+    "viewFileBtn",
+  ) as HTMLAnchorElement | null;
 
   // Mobile menu toggle
   const mobileMenuToggle = document.getElementById("mobileMenuToggle");
@@ -48,11 +94,19 @@ document.addEventListener("DOMContentLoaded", () => {
   let lastCalculation: any = null;
 
   const formatRM = (val: number) => {
-    return "RM " + val.toLocaleString("en-MY", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return (
+      "RM " +
+      val.toLocaleString("en-MY", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      })
+    );
   };
 
   const calculateEpf = () => {
-    const salaryStr = (document.getElementById("epfGrossSalary") as HTMLInputElement).value;
+    const salaryStr = (
+      document.getElementById("epfGrossSalary") as HTMLInputElement
+    ).value;
     const salary = parseFloat(salaryStr) || 0;
 
     if (salary <= 0) {
@@ -61,8 +115,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const age = (document.querySelector('input[name="epfAge"]:checked') as HTMLInputElement).value;
-    const nationality = (document.querySelector('input[name="epfNationality"]:checked') as HTMLInputElement).value;
+    const age = (
+      document.querySelector('input[name="epfAge"]:checked') as HTMLInputElement
+    ).value;
+    const nationality = (
+      document.querySelector(
+        'input[name="epfNationality"]:checked',
+      ) as HTMLInputElement
+    ).value;
 
     const isMalaysian = nationality === "malaysian";
     const isAbove60 = age === "above60";
@@ -76,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (isMalaysian) {
       if (isAbove60) {
-        employeeRate = 0.00;
+        employeeRate = 0.0;
         employerRate = 0.04;
         empRateStr = "0%";
         emprRateStr = "4%";
@@ -109,12 +169,12 @@ document.addEventListener("DOMContentLoaded", () => {
     if (resTotalEpf) resTotalEpf.textContent = formatRM(totalEpf);
     if (resEmployeeEpf) resEmployeeEpf.textContent = formatRM(employeeEpf);
     if (resEmployerEpf) resEmployerEpf.textContent = formatRM(employerEpf);
-    
+
     if (resSalarySummary) resSalarySummary.textContent = formatRM(salary);
     if (resNetSalary) resNetSalary.textContent = formatRM(netSalary);
     if (resEmployeeRate) resEmployeeRate.textContent = `(${empRateStr})`;
     if (resEmployerRate) resEmployerRate.textContent = `(${emprRateStr})`;
-    
+
     if (barEmp && barEmpr && totalEpf > 0) {
       const empPct = (employeeEpf / totalEpf) * 100;
       const emprPct = 100 - empPct;
@@ -131,23 +191,27 @@ document.addEventListener("DOMContentLoaded", () => {
       empRateStr,
       emprRateStr,
       age,
-      nationality
+      nationality,
     };
 
     placeholderText.style.display = "none";
     resultContent.style.display = "block";
 
     // trigger GA4
-    if (typeof (window as any).gtag === 'function') {
-      (window as any).gtag('event', 'click_calculate_epf', {
-        event_category: 'calculator',
-        value: lastCalculation.salary
+    if (typeof (window as any).gtag === "function") {
+      (window as any).gtag("event", "click_calculate_epf", {
+        event_category: "calculator",
+        value: lastCalculation.salary,
       });
     }
   };
 
-  const grossSalaryInput = document.getElementById("epfGrossSalary") as HTMLInputElement;
-  const calculateBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+  const grossSalaryInput = document.getElementById(
+    "epfGrossSalary",
+  ) as HTMLInputElement;
+  const calculateBtn = form.querySelector(
+    'button[type="submit"]',
+  ) as HTMLButtonElement;
 
   if (grossSalaryInput && calculateBtn) {
     grossSalaryInput.addEventListener("input", () => {
@@ -190,9 +254,16 @@ document.addEventListener("DOMContentLoaded", () => {
                   Calculate
         `;
         calculateBtn.disabled = false;
-        
+
         if (window.innerWidth < 768) {
-          setTimeout(() => resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 100);
+          setTimeout(
+            () =>
+              resultCard.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+              }),
+            100,
+          );
         }
       }, 300);
     });
@@ -200,8 +271,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (resetBtn) {
     resetBtn.addEventListener("click", () => {
-      if (typeof (window as any).gtag === 'function') {
-        (window as any).gtag('event', 'click_reset_epf', { event_category: 'calculator' });
+      if (typeof (window as any).gtag === "function") {
+        (window as any).gtag("event", "click_reset_epf", {
+          event_category: "calculator",
+        });
       }
       setTimeout(() => {
         placeholderText.style.display = "block";
@@ -214,8 +287,10 @@ document.addEventListener("DOMContentLoaded", () => {
   // Modal logic
   if (downloadReportBtn && emailModal) {
     downloadReportBtn.addEventListener("click", () => {
-      if (typeof (window as any).gtag === 'function') {
-        (window as any).gtag('event', 'click_download_epf', { event_category: 'calculator' });
+      if (typeof (window as any).gtag === "function") {
+        (window as any).gtag("event", "click_download_epf", {
+          event_category: "calculator",
+        });
       }
       if (modalFormContent && modalSuccessContent) {
         modalFormContent.style.display = "block";
@@ -239,7 +314,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (userType) {
     userType.addEventListener("change", function () {
-      if (!hiringQuestionGroup || !hiringStatus || !companyNameGroup || !companyName) return;
+      if (
+        !hiringQuestionGroup ||
+        !hiringStatus ||
+        !companyNameGroup ||
+        !companyName
+      )
+        return;
       if (this.value === "Employer / HR") {
         hiringQuestionGroup.style.display = "block";
         hiringStatus.required = true;
@@ -257,26 +338,28 @@ document.addEventListener("DOMContentLoaded", () => {
   if (emailForm) {
     emailForm.addEventListener("submit", async (e) => {
       e.preventDefault();
-      
+
       const email = userEmail ? userEmail.value : "";
       const role = userType ? userType.value : "";
       const isHiring = hiringStatus ? hiringStatus.value : "";
       const company = companyName ? companyName.value : "";
       const phone = userPhone ? userPhone.value : "";
-  
-      const submitBtn = emailForm.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+
+      const submitBtn = emailForm.querySelector(
+        'button[type="submit"]',
+      ) as HTMLButtonElement | null;
       let originalText = "Submit & Download";
       if (submitBtn) {
         originalText = submitBtn.textContent || "Submit & Download";
         submitBtn.textContent = "Generating your report...";
         submitBtn.disabled = true;
       }
-      
+
       // Open new window immediately to bypass popup blockers
-      const popup = window.open('about:blank', '_blank');
-      
+      const popup = window.open("about:blank", "_blank");
+
       try {
-      const savePromise = (async () => {
+        const savePromise = (async () => {
           try {
             console.log("[v0] EPF sheet submission starting...");
             const payload = {
@@ -295,7 +378,11 @@ document.addEventListener("DOMContentLoaded", () => {
               body: JSON.stringify(payload),
             });
             const result = await response.json();
-            console.log("[v0] EPF sheet response:", response.status, JSON.stringify(result));
+            console.log(
+              "[v0] EPF sheet response:",
+              response.status,
+              JSON.stringify(result),
+            );
             if (!response.ok) {
               console.error("[v0] EPF sheet API error:", result);
             }
@@ -304,66 +391,72 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         })();
 
-        if (typeof (window as any).gtag === 'function') {
-          (window as any).gtag('event', 'submit_lead_epf', { event_category: 'lead' });
+        if (typeof (window as any).gtag === "function") {
+          (window as any).gtag("event", "submit_lead_epf", {
+            event_category: "lead",
+          });
         }
 
-        await new Promise(resolve => setTimeout(resolve, 800));
-        
+        await new Promise((resolve) => setTimeout(resolve, 800));
+
         if (modalFormContent && modalSuccessContent) {
           modalFormContent.style.display = "none";
           modalSuccessContent.style.display = "block";
           if (modalFeedback) modalFeedback.style.display = "block";
-          
-          const mobileActionButtons = document.getElementById("mobileActionButtons");
-          const mobileFallbackText = document.getElementById("mobileFallbackText");
+
+          const mobileActionButtons = document.getElementById(
+            "mobileActionButtons",
+          );
+          const mobileFallbackText =
+            document.getElementById("mobileFallbackText");
           if (mobileActionButtons) mobileActionButtons.style.display = "flex";
           if (mobileFallbackText) mobileFallbackText.style.display = "block";
         }
-        
+
         if (lastCalculation) {
-            const queryParams = new URLSearchParams({
-              salary: lastCalculation.salary,
-              employeeEpf: lastCalculation.employeeEpf,
-              employerEpf: lastCalculation.employerEpf,
-              totalEpf: lastCalculation.totalEpf,
-              netSalary: lastCalculation.netSalary,
-              empRateStr: lastCalculation.empRateStr,
-              emprRateStr: lastCalculation.emprRateStr,
-              age: lastCalculation.age,
-              nationality: lastCalculation.nationality,
-              company: company || "SalaryCalculator.my"
-            }).toString();
-            
-            const reportUrl = `/epfreport.html?${queryParams}`;
-            if (popup) {
-              popup.location.href = reportUrl;
-            } else {
-              // Fallback if popup blocked
-              if (viewFileBtn) {
-                viewFileBtn.href = reportUrl;
-                viewFileBtn.click();
-              } else {
-                window.location.href = reportUrl;
-              }
-            }
-            
+          const queryParams = new URLSearchParams({
+            salary: lastCalculation.salary,
+            employeeEpf: lastCalculation.employeeEpf,
+            employerEpf: lastCalculation.employerEpf,
+            totalEpf: lastCalculation.totalEpf,
+            netSalary: lastCalculation.netSalary,
+            empRateStr: lastCalculation.empRateStr,
+            emprRateStr: lastCalculation.emprRateStr,
+            age: lastCalculation.age,
+            nationality: lastCalculation.nationality,
+            company: company || "SalaryCalculator.my",
+          }).toString();
+
+          const reportUrl = `/epfreport.html?${queryParams}`;
+          if (popup) {
+            popup.location.href = reportUrl;
+          } else {
+            // Fallback if popup blocked
             if (viewFileBtn) {
               viewFileBtn.href = reportUrl;
-              viewFileBtn.addEventListener("click", () => {
-                if (emailModal) emailModal.style.display = "none";
-              });
+              viewFileBtn.click();
+            } else {
+              window.location.href = reportUrl;
             }
+          }
+
+          if (viewFileBtn) {
+            viewFileBtn.href = reportUrl;
+            viewFileBtn.addEventListener("click", () => {
+              if (emailModal) emailModal.style.display = "none";
+            });
+          }
         } else {
           if (popup) popup.close();
         }
-        
-        await savePromise;
 
+        await savePromise;
       } catch (err) {
         console.error("Submission error:", err);
         if (popup) popup.close();
-        alert("An error occurred while generating the report. Please try again.");
+        alert(
+          "An error occurred while generating the report. Please try again.",
+        );
       } finally {
         if (submitBtn) {
           submitBtn.textContent = originalText;

@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from "fs";
 
 const additionalCSS = `
 /* Interactive Elements & Specific Layouts */
@@ -291,8 +291,7 @@ details[open] .faq-title::after {
 
 `;
 
-fs.appendFileSync('calculator-styles.css', additionalCSS, 'utf8');
+fs.appendFileSync("calculator-styles.css", additionalCSS, "utf8");
 
 // I also need to ensure card-title does not have bottom margin and border everywhere if not needed,
 // but the prompt says standard card layout. I will just rely on the CSS generated above.
-

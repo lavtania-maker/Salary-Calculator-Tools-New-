@@ -1,7 +1,7 @@
-import fs from 'fs';
+import fs from "fs";
 
-const cssFile = 'public/calculator-styles.css';
-let css = fs.readFileSync(cssFile, 'utf8');
+const cssFile = "public/calculator-styles.css";
+let css = fs.readFileSync(cssFile, "utf8");
 
 const supplement = `
 .form-actions {
@@ -18,6 +18,6 @@ const supplement = `
 }
 `;
 
-if (!css.includes('.form-actions {')) {
-  fs.appendFileSync(cssFile, supplement, 'utf8');
+if (!css.includes(".form-actions {")) {
+  fs.appendFileSync(cssFile, supplement, "utf8");
 }

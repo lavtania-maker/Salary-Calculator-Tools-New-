@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from "fs";
 
 const css = `
 /* CSS Variables for easy maintenance */
@@ -235,22 +235,22 @@ h1, h2, h3, h4 { color: var(--text-main); letter-spacing: -0.02em; }
 .footer-bottom { text-align: center; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; color: #64748b; }
 `;
 
-fs.writeFileSync('calculator-styles.css', css, 'utf8');
+fs.writeFileSync("calculator-styles.css", css, "utf8");
 
-const files = ['index.html', 'pcb-calculator.html', 'epf-kwsp.html'];
+const files = ["index.html", "pcb-calculator.html", "epf-kwsp.html"];
 const headLink = '<link rel="stylesheet" href="/calculator-styles.css" />';
 
-files.forEach(file => {
-  let content = fs.readFileSync(file, 'utf8');
-  
+files.forEach((file) => {
+  let content = fs.readFileSync(file, "utf8");
+
   // Replace <style>*</style> recursively because some files have multiple.
-  content = content.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
-  
+  content = content.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, "");
+
   // Insert the link before </head> if not already present
-  if (!content.includes('calculator-styles.css')) {
-     content = content.replace('</head>', `  ${headLink}\n  </head>`);
+  if (!content.includes("calculator-styles.css")) {
+    content = content.replace("</head>", `  ${headLink}\n  </head>`);
   }
-  
-  fs.writeFileSync(file, content, 'utf8');
-  console.log('Updated ' + file);
+
+  fs.writeFileSync(file, content, "utf8");
+  console.log("Updated " + file);
 });

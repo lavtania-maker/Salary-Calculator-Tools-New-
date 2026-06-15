@@ -2,10 +2,7 @@
 <html lang="en">
   <head>
     <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P"
-    ></script>
+    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() {
@@ -32,11 +29,29 @@
     <!-- SEO -->
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://salarycalculator.my/" />
-    <link rel="alternate" hreflang="en-MY" href="https://salarycalculator.my/" />
-    <link rel="alternate" hreflang="ms-MY" href="https://salarycalculator.my/" />
-    <link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/" />
-    <meta property="article:published_time" content="2025-01-01T00:00:00+08:00" />
-    <meta property="article:modified_time" content="2026-04-27T00:00:00+08:00" />
+    <link
+      rel="alternate"
+      hreflang="en-MY"
+      href="https://salarycalculator.my/"
+    />
+    <link
+      rel="alternate"
+      hreflang="ms-MY"
+      href="https://salarycalculator.my/"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://salarycalculator.my/"
+    />
+    <meta
+      property="article:published_time"
+      content="2025-01-01T00:00:00+08:00"
+    />
+    <meta
+      property="article:modified_time"
+      content="2026-04-27T00:00:00+08:00"
+    />
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -46,14 +61,24 @@
       rel="stylesheet"
     />
 
-    
     <link rel="stylesheet" href="/calculator-styles.css" />
   </head>
 
   <body>
     <noscript>
-      <div style="background-color: #fef2f2; border: 1px solid #fecaca; color: #dc2626; padding: 16px; text-align: center; font-weight: 500; font-family: ui-sans-serif, system-ui, sans-serif;">
-        JavaScript is required to use this calculator. Please enable JavaScript in your browser settings to calculate your salary, EPF, PCB, and SOCSO.
+      <div
+        style="
+          background-color: #fef2f2;
+          border: 1px solid #fecaca;
+          color: #dc2626;
+          padding: 16px;
+          text-align: center;
+          font-weight: 500;
+          font-family: ui-sans-serif, system-ui, sans-serif;
+        "
+      >
+        JavaScript is required to use this calculator. Please enable JavaScript
+        in your browser settings to calculate your salary, EPF, PCB, and SOCSO.
       </div>
     </noscript>
     <!-- Navbar -->
@@ -78,19 +103,44 @@
 
         <!-- Desktop Nav -->
         <nav class="desktop-nav">
-          <a href="/" id="navBtnSalary" class="nav-item" title="Salary Calculator (Take Home Pay)">
+          <a
+            href="/"
+            id="navBtnSalary"
+            class="nav-item"
+            title="Salary Calculator (Take Home Pay)"
+          >
             Salary Calculator
           </a>
-          <a href="/socso-perkeso" id="navBtnSocso" class="nav-item" title="SOCSO (PERKESO) Calculator">
+          <a
+            href="/socso-perkeso"
+            id="navBtnSocso"
+            class="nav-item"
+            title="SOCSO (PERKESO) Calculator"
+          >
             SOCSO Calculator
           </a>
-          <a href="/pcb-income-tax" id="navBtnPcb" class="nav-item active-nav" title="PCB (Monthly Tax Deduction) Calculator">
+          <a
+            href="/pcb-income-tax"
+            id="navBtnPcb"
+            class="nav-item active-nav"
+            title="PCB (Monthly Tax Deduction) Calculator"
+          >
             PCB Calculator
           </a>
-          <a href="/epf-kwsp" id="navBtnEpf" class="nav-item" title="EPF (KWSP) Calculator">
+          <a
+            href="/epf-kwsp"
+            id="navBtnEpf"
+            class="nav-item"
+            title="EPF (KWSP) Calculator"
+          >
             EPF Calculator
           </a>
-          <a href="/annual-leave-calculator" class="nav-item" title="Annual Leave Calculator">Annual Leave Calculator</a>
+          <a
+            href="/annual-leave-calculator"
+            class="nav-item"
+            title="Annual Leave Calculator"
+            >Annual Leave Calculator</a
+          >
         </nav>
 
         <!-- Mobile Hamburger Button -->
@@ -118,30 +168,44 @@
 
       <!-- Mobile Dropdown Menu -->
       <nav class="mobile-nav" id="mobileNavMenu">
-        <a
-          href="/"
-          id="mobileNavBtnSalary"
-          class="mobile-nav-item"
-        >
+        <a href="/" id="mobileNavBtnSalary" class="mobile-nav-item">
           Salary Calculator (Take Home Pay)
         </a>
         <a href="/socso-perkeso" id="mobileNavBtnSocso" class="mobile-nav-item">
           SOCSO (PERKESO) Calculator
         </a>
-        <a href="/pcb-income-tax" id="mobileNavBtnPcb" class="mobile-nav-item active-nav">
+        <a
+          href="/pcb-income-tax"
+          id="mobileNavBtnPcb"
+          class="mobile-nav-item active-nav"
+        >
           PCB (Monthly Tax Deduction) Calculator
         </a>
         <a href="/epf-kwsp" id="mobileNavBtnEpf" class="mobile-nav-item">
           EPF (KWSP) Calculator
         </a>
-        <a href="/annual-leave-calculator" class="mobile-nav-item">Annual Leave Calculator</a>
+        <a href="/annual-leave-calculator" class="mobile-nav-item"
+          >Annual Leave Calculator</a
+        >
       </nav>
     </header>
 
     <!-- No-JS banner -->
     <noscript>
-      <div style="background:#fef2f2;border-bottom:1px solid #fecaca;padding:12px 20px;text-align:center;font-family:inherit;font-size:0.9rem;color:#dc2626;font-weight:600;">
-        JavaScript is required to use this calculator. Please enable JavaScript in your browser settings.
+      <div
+        style="
+          background: #fef2f2;
+          border-bottom: 1px solid #fecaca;
+          padding: 12px 20px;
+          text-align: center;
+          font-family: inherit;
+          font-size: 0.9rem;
+          color: #dc2626;
+          font-weight: 600;
+        "
+      >
+        JavaScript is required to use this calculator. Please enable JavaScript
+        in your browser settings.
       </div>
     </noscript>
 
@@ -164,36 +228,96 @@
           <section class="card">
             <h2 class="card-title">Enter Details</h2>
             <form id="pcbForm" action="#resultCard" method="GET">
-              
               <div class="form-group">
-                <label class="form-label" for="grossSalary" style="display: flex; align-items: center; gap: 6px">
+                <label
+                  class="form-label"
+                  for="grossSalary"
+                  style="display: flex; align-items: center; gap: 6px"
+                >
                   Gross Monthly Salary
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-muted)">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    style="color: var(--text-muted)"
+                  >
                     <circle cx="12" cy="12" r="10"></circle>
                     <line x1="12" y1="16" x2="12" y2="12"></line>
                     <line x1="12" y1="8" x2="12.01" y2="8"></line>
                   </svg>
                 </label>
-                <p style="font-size: 0.7rem; color: #dc2626; margin-top: -2px; margin-bottom: 4px; font-weight: 600;">
+                <p
+                  style="
+                    font-size: 0.7rem;
+                    color: #dc2626;
+                    margin-top: -2px;
+                    margin-bottom: 4px;
+                    font-weight: 600;
+                  "
+                >
                   *Required
                 </p>
                 <div class="input-group">
                   <span class="input-prefix">RM</span>
-                  <input type="number" id="grossSalary" name="grossSalary" class="form-input" placeholder="0" min="0" required />
+                  <input
+                    type="number"
+                    id="grossSalary"
+                    name="grossSalary"
+                    class="form-input"
+                    placeholder="0"
+                    min="0"
+                    required
+                  />
                 </div>
               </div>
 
               <div class="form-actions">
                 <button type="reset" id="resetBtn" class="btn btn-outline">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
+                    ></path>
                     <path d="M3 3v5h5"></path>
                   </svg>
                   Reset
                 </button>
-                <button type="submit" class="btn btn-primary" id="calculatePcbBtn">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  id="calculatePcbBtn"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect
+                      x="4"
+                      y="2"
+                      width="16"
+                      height="20"
+                      rx="2"
+                      ry="2"
+                    ></rect>
                     <line x1="8" y1="6" x2="16" y2="6"></line>
                     <line x1="16" y1="14" x2="16.01" y2="14"></line>
                     <line x1="16" y1="18" x2="16.01" y2="18"></line>
@@ -207,7 +331,9 @@
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="bonus">Bonus / Additional Income (RM)</label>
+                <label class="form-label" for="bonus"
+                  >Bonus / Additional Income (RM)</label
+                >
                 <p
                   style="
                     font-size: 0.7rem;
@@ -220,12 +346,21 @@
                 </p>
                 <div class="input-group">
                   <span class="input-prefix">RM</span>
-                  <input type="number" id="bonus" name="bonus" class="form-input" placeholder="e.g. 1000" min="0" />
+                  <input
+                    type="number"
+                    id="bonus"
+                    name="bonus"
+                    class="form-input"
+                    placeholder="e.g. 1000"
+                    min="0"
+                  />
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="epfRate">EPF Contribution Rate</label>
+                <label class="form-label" for="epfRate"
+                  >EPF Contribution Rate</label
+                >
                 <p
                   style="
                     font-size: 0.7rem;
@@ -261,7 +396,9 @@
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="zakat">Zakat / Tax Rebate (RM)</label>
+                <label class="form-label" for="zakat"
+                  >Zakat / Tax Rebate (RM)</label
+                >
                 <p
                   style="
                     font-size: 0.7rem;
@@ -274,7 +411,14 @@
                 </p>
                 <div class="input-group">
                   <span class="input-prefix">RM</span>
-                  <input type="number" id="zakat" name="zakat" class="form-input" placeholder="0" min="0" />
+                  <input
+                    type="number"
+                    id="zakat"
+                    name="zakat"
+                    class="form-input"
+                    placeholder="0"
+                    min="0"
+                  />
                 </div>
               </div>
             </form>
@@ -292,7 +436,9 @@
                 border-bottom: 1px solid #f1f5f9;
               "
             >
-              <h2 class="card-title" style="margin-bottom: 0">PCB Calculation Result</h2>
+              <h2 class="card-title" style="margin-bottom: 0">
+                PCB Calculation Result
+              </h2>
             </div>
             <div id="placeholderText" class="placeholder-text">
               <div
@@ -317,88 +463,236 @@
                   />
 
                   <!-- Document Base -->
-                  <path d="M105 40H60a10 10 0 0 0-10 10v95a10 10 0 0 0 10 10h70a10 10 0 0 0 10-10V65H110a5 5 0 0 1-5-5V40z" fill="#FFFFFF" stroke="#3B82F6" stroke-width="4" stroke-linejoin="round"/>
+                  <path
+                    d="M105 40H60a10 10 0 0 0-10 10v95a10 10 0 0 0 10 10h70a10 10 0 0 0 10-10V65H110a5 5 0 0 1-5-5V40z"
+                    fill="#FFFFFF"
+                    stroke="#3B82F6"
+                    stroke-width="4"
+                    stroke-linejoin="round"
+                  />
                   <!-- Folded Corner -->
-                  <path d="M105 40v20a5 5 0 0 0 5 5h20L105 40z" fill="#3B82F6"/>
+                  <path
+                    d="M105 40v20a5 5 0 0 0 5 5h20L105 40z"
+                    fill="#3B82F6"
+                  />
 
                   <!-- % Circle -->
-                  <circle cx="90" cy="80" r="18" fill="#3B82F6"/>
-                  <circle cx="85" cy="76" r="2.5" fill="#FFFFFF"/>
-                  <circle cx="95" cy="84" r="2.5" fill="#FFFFFF"/>
-                  <path d="M94 74L86 86" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+                  <circle cx="90" cy="80" r="18" fill="#3B82F6" />
+                  <circle cx="85" cy="76" r="2.5" fill="#FFFFFF" />
+                  <circle cx="95" cy="84" r="2.5" fill="#FFFFFF" />
+                  <path
+                    d="M94 74L86 86"
+                    stroke="#FFFFFF"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                  />
 
                   <!-- Lines under % -->
-                  <rect x="68" y="108" width="44" height="6" rx="3" fill="#BFDBFE"/>
-                  
+                  <rect
+                    x="68"
+                    y="108"
+                    width="44"
+                    height="6"
+                    rx="3"
+                    fill="#BFDBFE"
+                  />
+
                   <!-- List item 1 -->
-                  <circle cx="70" cy="123" r="3" fill="#93C5FD"/>
-                  <rect x="78" y="120" width="28" height="6" rx="3" fill="#DBEAFE"/>
-                  <rect x="111" y="120" width="10" height="6" rx="3" fill="#3B82F6"/>
+                  <circle cx="70" cy="123" r="3" fill="#93C5FD" />
+                  <rect
+                    x="78"
+                    y="120"
+                    width="28"
+                    height="6"
+                    rx="3"
+                    fill="#DBEAFE"
+                  />
+                  <rect
+                    x="111"
+                    y="120"
+                    width="10"
+                    height="6"
+                    rx="3"
+                    fill="#3B82F6"
+                  />
 
                   <!-- List item 2 -->
-                  <circle cx="70" cy="133" r="3" fill="#93C5FD"/>
-                  <rect x="78" y="130" width="28" height="6" rx="3" fill="#DBEAFE"/>
-                  <rect x="111" y="130" width="10" height="6" rx="3" fill="#3B82F6"/>
+                  <circle cx="70" cy="133" r="3" fill="#93C5FD" />
+                  <rect
+                    x="78"
+                    y="130"
+                    width="28"
+                    height="6"
+                    rx="3"
+                    fill="#DBEAFE"
+                  />
+                  <rect
+                    x="111"
+                    y="130"
+                    width="10"
+                    height="6"
+                    rx="3"
+                    fill="#3B82F6"
+                  />
 
                   <!-- List item 3 -->
-                  <circle cx="70" cy="143" r="3" fill="#93C5FD"/>
-                  <rect x="78" y="140" width="28" height="6" rx="3" fill="#DBEAFE"/>
-                  <rect x="111" y="140" width="10" height="6" rx="3" fill="#3B82F6"/>
+                  <circle cx="70" cy="143" r="3" fill="#93C5FD" />
+                  <rect
+                    x="78"
+                    y="140"
+                    width="28"
+                    height="6"
+                    rx="3"
+                    fill="#DBEAFE"
+                  />
+                  <rect
+                    x="111"
+                    y="140"
+                    width="10"
+                    height="6"
+                    rx="3"
+                    fill="#3B82F6"
+                  />
 
                   <!-- Pen Right -->
-                  <path d="M144 75v45a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V75a6 6 0 0 0-12 0z" fill="#EFF6FF" stroke="#3B82F6" stroke-width="4"/>
+                  <path
+                    d="M144 75v45a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V75a6 6 0 0 0-12 0z"
+                    fill="#EFF6FF"
+                    stroke="#3B82F6"
+                    stroke-width="4"
+                  />
                   <!-- Pen clip -->
-                  <path d="M156 82h4a3 3 0 0 1 3 3v20" fill="none" stroke="#3B82F6" stroke-width="3" stroke-linecap="round"/>
+                  <path
+                    d="M156 82h4a3 3 0 0 1 3 3v20"
+                    fill="none"
+                    stroke="#3B82F6"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                  />
                   <!-- Pen tip -->
-                  <path d="M144 125l6 12 6-12Z" fill="#3B82F6" stroke="#3B82F6" stroke-width="4" stroke-linejoin="round"/>
+                  <path
+                    d="M144 125l6 12 6-12Z"
+                    fill="#3B82F6"
+                    stroke="#3B82F6"
+                    stroke-width="4"
+                    stroke-linejoin="round"
+                  />
                   <!-- Pen Clicker -->
-                  <rect x="147" y="65" width="6" height="8" rx="3" fill="#3B82F6"/>
+                  <rect
+                    x="147"
+                    y="65"
+                    width="6"
+                    height="8"
+                    rx="3"
+                    fill="#3B82F6"
+                  />
 
                   <!-- Checkmark Bottom Left -->
-                  <circle cx="55" cy="135" r="18" fill="#10B981" stroke="#FFFFFF" stroke-width="3"/>
-                  <path d="M48 135l5 5 10-10" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle
+                    cx="55"
+                    cy="135"
+                    r="18"
+                    fill="#10B981"
+                    stroke="#FFFFFF"
+                    stroke-width="3"
+                  />
+                  <path
+                    d="M48 135l5 5 10-10"
+                    fill="none"
+                    stroke="#FFFFFF"
+                    stroke-width="4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
 
                   <!-- Stars & Dots -->
-                  <path d="M30 65 Q33 70 38 70 Q33 70 33 75 Q30 70 25 70 Q30 70 30 65Z" fill="#8B5CF6"/>
-                  <path d="M155 42 Q158 48 164 48 Q158 48 158 54 Q155 48 149 48 Q155 48 155 42Z" fill="#F59E0B"/>
-                  <circle cx="40" cy="100" r="3.5" fill="#3B82F6"/>
-                  <circle cx="150" cy="135" r="2.5" fill="#F59E0B"/>
+                  <path
+                    d="M30 65 Q33 70 38 70 Q33 70 33 75 Q30 70 25 70 Q30 70 30 65Z"
+                    fill="#8B5CF6"
+                  />
+                  <path
+                    d="M155 42 Q158 48 164 48 Q158 48 158 54 Q155 48 149 48 Q155 48 155 42Z"
+                    fill="#F59E0B"
+                  />
+                  <circle cx="40" cy="100" r="3.5" fill="#3B82F6" />
+                  <circle cx="150" cy="135" r="2.5" fill="#F59E0B" />
                 </svg>
               </div>
-              <div style="font-weight: 700; font-size: 1.1rem; color: #1f2937; margin-bottom: 6px;">Input your salary to get instant results</div>
-              <div style="font-size: 0.95rem; color: #6b7280;">Your PCB deduction will appear here</div>
+              <div
+                style="
+                  font-weight: 700;
+                  font-size: 1.1rem;
+                  color: #1f2937;
+                  margin-bottom: 6px;
+                "
+              >
+                Input your salary to get instant results
+              </div>
+              <div style="font-size: 0.95rem; color: #6b7280">
+                Your PCB deduction will appear here
+              </div>
             </div>
 
             <div id="resultContent" class="result-content">
-              
               <!-- 1. MONTHLY SECTION -->
               <h3>Monthly PCB Deduction</h3>
               <div class="result-section">
-                <div class="highlight-box center" style="margin-bottom: 24px;">
-                  <span class="highlight-label" title="Monthly tax deduction set by LHDN" style="cursor: help; text-decoration: underline dotted #9ca3af; text-underline-offset: 4px;">PCB (MTD) DEDUCTION</span>
+                <div class="highlight-box center" style="margin-bottom: 24px">
+                  <span
+                    class="highlight-label"
+                    title="Monthly tax deduction set by LHDN"
+                    style="
+                      cursor: help;
+                      text-decoration: underline dotted #9ca3af;
+                      text-underline-offset: 4px;
+                    "
+                    >PCB (MTD) DEDUCTION</span
+                  >
                   <span class="highlight-value" id="resPcb">RM 0.00</span>
-                  <div style="font-size: 0.8rem; margin-top: 4px; color: #1e3a8a; opacity: 0.8; font-weight: 500;">Per Month</div>
+                  <div
+                    style="
+                      font-size: 0.8rem;
+                      margin-top: 4px;
+                      color: #1e3a8a;
+                      opacity: 0.8;
+                      font-weight: 500;
+                    "
+                  >
+                    Per Month
+                  </div>
                 </div>
-                
+
                 <div>
                   <div class="result-item">
                     <span>Gross Salary & Bonus</span>
-                    <span id="resGross" style="font-weight: 600;">RM 0.00</span>
+                    <span id="resGross" style="font-weight: 600">RM 0.00</span>
                   </div>
                   <div class="result-item">
-                    <span title="Default employee contribution rate" style="cursor: help; border-bottom: 1px dotted #9ca3af;">EPF Deduction</span>
-                    <span id="resEpf" style="font-weight: 600; color: var(--danger)">RM 0.00</span>
+                    <span
+                      title="Default employee contribution rate"
+                      style="cursor: help; border-bottom: 1px dotted #9ca3af"
+                      >EPF Deduction</span
+                    >
+                    <span
+                      id="resEpf"
+                      style="font-weight: 600; color: var(--danger)"
+                      >RM 0.00</span
+                    >
                   </div>
                   <div class="result-item">
                     <span>Tax Relief & Zakat</span>
-                    <span id="resRelief" style="font-weight: 600; color: var(--text-main)">RM 0.00</span>
+                    <span
+                      id="resRelief"
+                      style="font-weight: 600; color: var(--text-main)"
+                      >RM 0.00</span
+                    >
                   </div>
                   <div class="result-item total">
                     <span>Chargeable Income (Monthly)</span>
                     <span id="resChargeable">RM 0.00</span>
                   </div>
 
-                  <div class="result-item" style="margin-top: 16px;">
+                  <div class="result-item" style="margin-top: 16px">
                     <span>Effective Tax Rate</span>
                     <span id="resEffectiveRate">0.00%</span>
                   </div>
@@ -408,16 +702,33 @@
                   </div>
                 </div>
               </div>
-              
 
-              
               <!-- 2. ANNUAL SECTION -->
               <h3>Estimated Annual Summary</h3>
               <div class="result-section">
-                <div class="highlight-box center" style="margin-bottom: 24px;">
-                  <span class="highlight-label" title="Annual tax deduction" style="cursor: help; text-decoration: underline dotted #9ca3af; text-underline-offset: 4px;">TOTAL PCB (YEARLY)</span>
+                <div class="highlight-box center" style="margin-bottom: 24px">
+                  <span
+                    class="highlight-label"
+                    title="Annual tax deduction"
+                    style="
+                      cursor: help;
+                      text-decoration: underline dotted #9ca3af;
+                      text-underline-offset: 4px;
+                    "
+                    >TOTAL PCB (YEARLY)</span
+                  >
                   <span class="highlight-value" id="resAnnualPcb">RM 0.00</span>
-                  <div style="font-size: 0.8rem; margin-top: 4px; color: #1e3a8a; opacity: 0.8; font-weight: 500;">Per Year</div>
+                  <div
+                    style="
+                      font-size: 0.8rem;
+                      margin-top: 4px;
+                      color: #1e3a8a;
+                      opacity: 0.8;
+                      font-weight: 500;
+                    "
+                  >
+                    Per Year
+                  </div>
                 </div>
 
                 <div>
@@ -435,16 +746,41 @@
               <!-- CTA Group -->
 
               <div class="cta-group">
-                <button class="btn btn-primary" id="downloadReportBtn" >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                <button class="btn btn-primary" id="downloadReportBtn">
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    style="margin-right: 6px"
+                  >
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
+                  </svg>
                   Download PCB Report
                 </button>
               </div>
             </div>
-            
-             <p id="pcbDisclaimer" style="font-size: 0.8rem; color: #6b7280; margin-top: 20px; line-height: 1.4; text-align: center; display: none;">
+
+            <p
+              id="pcbDisclaimer"
+              style="
+                font-size: 0.8rem;
+                color: #6b7280;
+                margin-top: 20px;
+                line-height: 1.4;
+                text-align: center;
+                display: none;
+              "
+            >
               This calculator is for reference only.<br />
-              Please refer to official LHDN guidelines for accurate PCB deductions.
+              Please refer to official LHDN guidelines for accurate PCB
+              deductions.
             </p>
           </section>
         </div>
@@ -454,378 +790,550 @@
     <!-- SEO Content Section -->
     <section class="content-section">
       <div class="container">
-        
         <!-- What is PCB -->
-          <div class="content-card">
-            <h2><span>📑</span> What is PCB (Monthly Tax Deduction)?</h2>
-            <p>PCB (Potongan Cukai Bulanan) is a system where your income tax is deducted automatically from your salary every month.</p>
-            <p>Instead of paying a large amount at the end of the year, your employer deducts a portion of your income and submits it to LHDN on your behalf.</p>
-            <p>This helps:</p>
-            <ul>
-              <li>Spread out your tax payments</li>
-              <li>Avoid large year-end tax bills</li>
-              <li>Keep your tax obligations consistent</li>
-            </ul>
-            <div class="info-highlight">
-              💡 PCB is not an extra tax — it is an advance payment of your annual income tax.
-            </div>
+        <div class="content-card">
+          <h2><span>📑</span> What is PCB (Monthly Tax Deduction)?</h2>
+          <p>
+            PCB (Potongan Cukai Bulanan) is a system where your income tax is
+            deducted automatically from your salary every month.
+          </p>
+          <p>
+            Instead of paying a large amount at the end of the year, your
+            employer deducts a portion of your income and submits it to LHDN on
+            your behalf.
+          </p>
+          <p>This helps:</p>
+          <ul>
+            <li>Spread out your tax payments</li>
+            <li>Avoid large year-end tax bills</li>
+            <li>Keep your tax obligations consistent</li>
+          </ul>
+          <div class="info-highlight">
+            💡 PCB is not an extra tax — it is an advance payment of your annual
+            income tax.
+          </div>
+        </div>
+
+        <!-- How to Calculate PCB -->
+        <div class="content-card">
+          <h2><span>🧮</span> How to Calculate PCB</h2>
+          <p>
+            PCB is calculated based on your estimated annual income, not just
+            your monthly salary.
+          </p>
+          <p>Here’s a simple breakdown:</p>
+          <p>
+            <strong>Step 1: Calculate Total Income</strong><br />Include:
+            Monthly salary, Bonus or additional income
+          </p>
+          <p>
+            <strong>Step 2: Deduct EPF Contribution</strong><br />EPF reduces
+            your taxable income.
+          </p>
+          <p>
+            <strong>Example:</strong> Salary RM5,000 - EPF (11%) RM550 =
+            Remaining income RM4,450
+          </p>
+          <p>
+            <strong>Step 3: Apply Tax Reliefs</strong><br />Tax reliefs may
+            include Individual relief, Spouse or child relief, or Zakat (if
+            applicable).
+          </p>
+          <p>
+            <strong>Step 4: Estimate Annual Income</strong><br />Multiply
+            monthly income by 12.
+          </p>
+          <p>
+            <strong>Step 5: Apply Tax Rate</strong><br />Your income is taxed
+            based on Malaysia’s progressive tax rates.
+          </p>
+          <p>
+            <strong>Step 6: Convert to Monthly PCB</strong><br />Total annual
+            tax ÷ 12 = Monthly PCB deduction
+          </p>
+          <div class="info-highlight">
+            💡 <strong>Example:</strong> If your annual tax is RM1,320 → PCB =
+            RM110/month<br />
+            👉 Use the PCB calculator above to get instant results without
+            manual calculation.
+          </div>
+        </div>
+
+        <!-- Who Needs to Pay PCB -->
+        <div class="content-card">
+          <h2><span>👤</span> Who Needs to Pay PCB & Taxable Income</h2>
+          <p>
+            Not all employees are required to pay PCB. You become taxable when
+            your annual income exceeds a certain threshold after applying basic
+            tax reliefs.
+          </p>
+
+          <h3>Basic Tax Reliefs</h3>
+          <ul>
+            <li>Individual: RM9,000</li>
+            <li>Spouse: RM4,000</li>
+            <li>Child: RM2,000 (per child under 18)</li>
+          </ul>
+
+          <h3>Estimated Income Threshold</h3>
+          <div class="table-container">
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th>Situation</th>
+                  <th>Monthly Income (RM)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Single / No spouse income</td>
+                  <td>3,111</td>
+                </tr>
+                <tr>
+                  <td>Married (No child)</td>
+                  <td>3,111</td>
+                </tr>
+                <tr>
+                  <td>Married (2 children)</td>
+                  <td>3,444</td>
+                </tr>
+                <tr>
+                  <td>Joint Assessment (No child)</td>
+                  <td>4,000</td>
+                </tr>
+                <tr>
+                  <td>Joint Assessment (2 children)</td>
+                  <td>4,333</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
-          <!-- How to Calculate PCB -->
-          <div class="content-card">
-            <h2><span>🧮</span> How to Calculate PCB</h2>
-            <p>PCB is calculated based on your estimated annual income, not just your monthly salary.</p>
-            <p>Here’s a simple breakdown:</p>
-            <p><strong>Step 1: Calculate Total Income</strong><br>Include: Monthly salary, Bonus or additional income</p>
-            <p><strong>Step 2: Deduct EPF Contribution</strong><br>EPF reduces your taxable income.</p>
-            <p><strong>Example:</strong> Salary RM5,000 - EPF (11%) RM550 = Remaining income RM4,450</p>
-            <p><strong>Step 3: Apply Tax Reliefs</strong><br>Tax reliefs may include Individual relief, Spouse or child relief, or Zakat (if applicable).</p>
-            <p><strong>Step 4: Estimate Annual Income</strong><br>Multiply monthly income by 12.</p>
-            <p><strong>Step 5: Apply Tax Rate</strong><br>Your income is taxed based on Malaysia’s progressive tax rates.</p>
-            <p><strong>Step 6: Convert to Monthly PCB</strong><br>Total annual tax ÷ 12 = Monthly PCB deduction</p>
-            <div class="info-highlight">
-              💡 <strong>Example:</strong> If your annual tax is RM1,320 → PCB = RM110/month<br>
-              👉 Use the PCB calculator above to get instant results without manual calculation.
-            </div>
+          <div class="info-highlight" style="margin-top: 16px">
+            <strong>What This Means:</strong><br />
+            Below these levels → PCB may not apply<br />
+            Above these levels → PCB will likely be deducted
           </div>
+        </div>
 
-          <!-- Who Needs to Pay PCB -->
-          <div class="content-card">
-            <h2><span>👤</span> Who Needs to Pay PCB & Taxable Income</h2>
-            <p>Not all employees are required to pay PCB. You become taxable when your annual income exceeds a certain threshold after applying basic tax reliefs.</p>
-            
-            <h3>Basic Tax Reliefs</h3>
-            <ul>
-              <li>Individual: RM9,000</li>
-              <li>Spouse: RM4,000</li>
-              <li>Child: RM2,000 (per child under 18)</li>
-            </ul>
+        <!-- Types of Income -->
+        <div class="content-card">
+          <h2><span>💼</span> Types of Income Subject to PCB</h2>
+          <p>Most regular employment income is taxable, including:</p>
+          <ul>
+            <li>Salary and wages</li>
+            <li>Bonus and commissions</li>
+            <li>Allowances (transport, housing, etc.)</li>
+            <li>Overtime payments</li>
+          </ul>
+        </div>
 
-            <h3>Estimated Income Threshold</h3>
-            <div class="table-container">
-              <table class="styled-table">
-                <thead>
-                  <tr>
-                    <th>Situation</th>
-                    <th>Monthly Income (RM)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td>Single / No spouse income</td><td>3,111</td></tr>
-                  <tr><td>Married (No child)</td><td>3,111</td></tr>
-                  <tr><td>Married (2 children)</td><td>3,444</td></tr>
-                  <tr><td>Joint Assessment (No child)</td><td>4,000</td></tr>
-                  <tr><td>Joint Assessment (2 children)</td><td>4,333</td></tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div class="info-highlight" style="margin-top: 16px;">
-              <strong>What This Means:</strong><br>
-              Below these levels → PCB may not apply<br>
-              Above these levels → PCB will likely be deducted
-            </div>
+        <!-- Why PCB Different -->
+        <div class="content-card">
+          <h2><span>📈</span> Why PCB Amount is Different Each Month</h2>
+          <p>
+            Your PCB is not fixed and may change depending on your income and
+            deductions.
+          </p>
+          <p><strong>Common Reasons:</strong></p>
+          <ul>
+            <li>
+              <strong>1. Salary Changes:</strong> Higher salary → higher PCB
+            </li>
+            <li>
+              <strong>2. Bonus or Additional Income:</strong> Extra income
+              increases your taxable amount
+            </li>
+            <li>
+              <strong>3. EPF Contribution Rate:</strong> 11% (slightly lower
+              PCB) vs 9% (slightly higher PCB)
+            </li>
+            <li>
+              <strong>4. Zakat or Tax Rebates:</strong> Reduces your overall tax
+            </li>
+            <li>
+              <strong>5. Year-to-Date Adjustments:</strong> PCB is adjusted
+              based on your total income for the year
+            </li>
+          </ul>
+          <div class="info-highlight">
+            💡 <strong>Example:</strong> If you receive a bonus, your PCB for
+            that month will increase.
           </div>
+        </div>
 
-          <!-- Types of Income -->
-          <div class="content-card">
-            <h2><span>💼</span> Types of Income Subject to PCB</h2>
-            <p>Most regular employment income is taxable, including:</p>
-            <ul>
-              <li>Salary and wages</li>
-              <li>Bonus and commissions</li>
-              <li>Allowances (transport, housing, etc.)</li>
-              <li>Overtime payments</li>
-            </ul>
+        <!-- tax rate -->
+        <div class="content-card">
+          <h2><span>📊</span> PCB Tax Rate Malaysia (LHDN) (2026 Updated)</h2>
+          <p>
+            Malaysia uses a progressive tax system, where higher income is taxed
+            at higher rates.
+          </p>
+          <div class="table-container">
+            <table class="styled-table">
+              <thead>
+                <tr>
+                  <th>Chargeable Income (RM)</th>
+                  <th>Tax Rate</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0 – 5,000</td>
+                  <td>0%</td>
+                </tr>
+                <tr>
+                  <td>5,001 – 20,000</td>
+                  <td>1%</td>
+                </tr>
+                <tr>
+                  <td>20,001 – 35,000</td>
+                  <td>3%</td>
+                </tr>
+                <tr>
+                  <td>35,001 – 50,000</td>
+                  <td>6%</td>
+                </tr>
+                <tr>
+                  <td>50,001 – 70,000</td>
+                  <td>11%</td>
+                </tr>
+                <tr>
+                  <td>70,001 – 100,000</td>
+                  <td>19%</td>
+                </tr>
+                <tr>
+                  <td>100,001 – 400,000</td>
+                  <td>25%</td>
+                </tr>
+                <tr>
+                  <td>400,001 – 600,000</td>
+                  <td>26%</td>
+                </tr>
+                <tr>
+                  <td>600,001 – 2,000,000</td>
+                  <td>28%</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+          <p style="margin-top: 16px"><strong>How It Works</strong></p>
+          <p>
+            You are only taxed on the portion within each range, not your entire
+            income. (Example: First RM50,000 at lower rates, remainder at higher
+            rate).
+          </p>
+        </div>
 
-          <!-- Why PCB Different -->
-          <div class="content-card">
-            <h2><span>📈</span> Why PCB Amount is Different Each Month</h2>
-            <p>Your PCB is not fixed and may change depending on your income and deductions.</p>
-            <p><strong>Common Reasons:</strong></p>
-            <ul>
-              <li><strong>1. Salary Changes:</strong> Higher salary → higher PCB</li>
-              <li><strong>2. Bonus or Additional Income:</strong> Extra income increases your taxable amount</li>
-              <li><strong>3. EPF Contribution Rate:</strong> 11% (slightly lower PCB) vs 9% (slightly higher PCB)</li>
-              <li><strong>4. Zakat or Tax Rebates:</strong> Reduces your overall tax</li>
-              <li><strong>5. Year-to-Date Adjustments:</strong> PCB is adjusted based on your total income for the year</li>
-            </ul>
-            <div class="info-highlight">
-              💡 <strong>Example:</strong> If you receive a bonus, your PCB for that month will increase.
-            </div>
+        <!-- How to Pay -->
+        <div class="content-card">
+          <h2><span>💳</span> How to Pay PCB</h2>
+          <p>PCB is handled by employers and paid to LHDN.</p>
+          <p>
+            <strong>For Employers:</strong> Must deduct PCB and submit payment
+            before the 15th of the following month.
+          </p>
+          <p>
+            <strong>Payment Methods:</strong> PCB can be paid via e-PCB system,
+            e-Data PCB, or Online banking (FPX).
+          </p>
+          <div class="info-highlight">
+            <strong>Important Reminder:</strong> Late payment may result in a
+            10% penalty, and an additional 5% if still unpaid after 60 days.
           </div>
+        </div>
 
-          <!-- tax rate -->
-          <div class="content-card">
-            <h2><span>📊</span> PCB Tax Rate Malaysia (LHDN) (2026 Updated)</h2>
-            <p>Malaysia uses a progressive tax system, where higher income is taxed at higher rates.</p>
-            <div class="table-container">
-              <table class="styled-table">
-                <thead>
-                  <tr>
-                    <th>Chargeable Income (RM)</th>
-                    <th>Tax Rate</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr><td>0 – 5,000</td><td>0%</td></tr>
-                  <tr><td>5,001 – 20,000</td><td>1%</td></tr>
-                  <tr><td>20,001 – 35,000</td><td>3%</td></tr>
-                  <tr><td>35,001 – 50,000</td><td>6%</td></tr>
-                  <tr><td>50,001 – 70,000</td><td>11%</td></tr>
-                  <tr><td>70,001 – 100,000</td><td>19%</td></tr>
-                  <tr><td>100,001 – 400,000</td><td>25%</td></tr>
-                  <tr><td>400,001 – 600,000</td><td>26%</td></tr>
-                  <tr><td>600,001 – 2,000,000</td><td>28%</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <p style="margin-top: 16px;"><strong>How It Works</strong></p>
-            <p>You are only taxed on the portion within each range, not your entire income. (Example: First RM50,000 at lower rates, remainder at higher rate).</p>
+        <!-- Penalties -->
+        <div class="content-card">
+          <h2><span>⚖️</span> PCB Penalties & Legal Consequences</h2>
+          <p>
+            Failure to comply with PCB regulations may lead to penalties for
+            both employers and employees.
+          </p>
+
+          <h3>For Employers</h3>
+          <ul>
+            <li>
+              <strong>Late Payment:</strong> 10% penalty (+ additional 5% after
+              60 days)
+            </li>
+            <li>
+              <strong>Failure to Submit PCB:</strong> Fine up to RM20,000 or
+              imprisonment up to 6 months, or both
+            </li>
+            <li>
+              <strong>Late Form E Submission:</strong> Fine between RM200 and
+              RM20,000
+            </li>
+          </ul>
+
+          <h3>For Employees</h3>
+          <ul>
+            <li>
+              <strong>Incorrect Information:</strong> May result in penalties
+            </li>
+            <li>
+              <strong>Late Tax Filing:</strong> 10% increase on tax payable
+            </li>
+          </ul>
+
+          <div class="info-highlight">
+            💡 If PCB is overpaid, LHDN will refund the excess after tax filing.
           </div>
+        </div>
 
-          <!-- How to Pay -->
-          <div class="content-card">
-            <h2><span>💳</span> How to Pay PCB</h2>
-            <p>PCB is handled by employers and paid to LHDN.</p>
-            <p><strong>For Employers:</strong> Must deduct PCB and submit payment before the 15th of the following month.</p>
-            <p><strong>Payment Methods:</strong> PCB can be paid via e-PCB system, e-Data PCB, or Online banking (FPX).</p>
-            <div class="info-highlight">
-              <strong>Important Reminder:</strong> Late payment may result in a 10% penalty, and an additional 5% if still unpaid after 60 days.
-            </div>
-          </div>
-
-          <!-- Penalties -->
-          <div class="content-card">
-            <h2><span>⚖️</span> PCB Penalties & Legal Consequences</h2>
-            <p>Failure to comply with PCB regulations may lead to penalties for both employers and employees.</p>
-            
-            <h3>For Employers</h3>
-            <ul>
-              <li><strong>Late Payment:</strong> 10% penalty (+ additional 5% after 60 days)</li>
-              <li><strong>Failure to Submit PCB:</strong> Fine up to RM20,000 or imprisonment up to 6 months, or both</li>
-              <li><strong>Late Form E Submission:</strong> Fine between RM200 and RM20,000</li>
-            </ul>
-
-            <h3>For Employees</h3>
-            <ul>
-              <li><strong>Incorrect Information:</strong> May result in penalties</li>
-              <li><strong>Late Tax Filing:</strong> 10% increase on tax payable</li>
-            </ul>
-
-            <div class="info-highlight">
-              💡 If PCB is overpaid, LHDN will refund the excess after tax filing.
-            </div>
-          </div>
-
-          <!-- Official LHDN Calculator Section -->
-          <div
+        <!-- Official LHDN Calculator Section -->
+        <div
+          style="
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            align-items: stretch;
+            margin-bottom: 32px;
+          "
+        >
+          <!-- Left: Calculator -->
+          <a
+            href="http://calcpcb.hasil.gov.my/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="content-card"
             style="
               display: flex;
-              flex-wrap: wrap;
               gap: 24px;
-              align-items: stretch;
-              margin-bottom: 32px;
+              align-items: center;
+              text-decoration: none;
+              flex: 1 1 60%;
+              margin-bottom: 0;
+              background: #f0f9ff;
+              border: 1px solid #bae6fd;
+              padding: 24px;
             "
+            onmouseover="this.style.transform = 'translateY(-2px)'"
+            onmouseout="this.style.transform = 'translateY(0)'"
           >
-            <!-- Left: Calculator -->
-            <a
-              href="http://calcpcb.hasil.gov.my/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="content-card"
-              style="display: flex; gap: 24px; align-items: center; text-decoration: none; flex: 1 1 60%; margin-bottom: 0; background: #f0f9ff; border: 1px solid #bae6fd; padding: 24px;"
-              onmouseover="this.style.transform='translateY(-2px)'"
-              onmouseout="this.style.transform='translateY(0)'"
-            >
-              <img
-                src="https://www.ajobthing.com/resources/blog/data/blog/images/2026/05/LHDN_logo%20(1).png"
-                alt="LHDN Logo"
-                style="width: 72px; height: 72px; object-fit: contain; flex-shrink: 0;"
-              />
-              <div style="flex: 1;">
-                <h2
-                  style="
-                    font-size: 1.35rem;
-                    font-weight: 800;
-                    color: #075985;
-                    margin-bottom: 6px;
-                    border-bottom: none;
-                    padding-bottom: 0;
-                  "
-                >
-                  Official LHDN PCB Calculator
-                </h2>
-                <p style="font-size: 0.95rem; color: #0c4a6e; margin: 0 0 16px 0; line-height: 1.5;">
-                  Use the official LHDN PCB calculator for the most accurate monthly tax deduction (PCB) reference.
-                </p>
-                <span
-                  style="
-                    display: inline-flex;
-                    align-items: center;
-                    gap: 8px;
-                    padding: 10px 20px;
-                    background: #0284c7;
-                    color: white;
-                    font-size: 0.95rem;
-                    font-weight: 700;
-                    border-radius: 8px;
-                    transition: background 0.2s;
-                  "
-                  onmouseover="this.style.background='#0369a1'"
-                  onmouseout="this.style.background='#0284c7'"
-                >
-                  Go to LHDN PCB Calculator
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path
-                      d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
-                    ></path>
-                    <polyline points="15 3 21 3 21 9"></polyline>
-                    <line x1="10" y1="14" x2="21" y2="3"></line>
-                  </svg>
-                </span>
-              </div>
-            </a>
-
-            <!-- Right: Social Cards -->
-            <div
+            <img
+              src="https://www.ajobthing.com/resources/blog/data/blog/images/2026/05/LHDN_logo%20(1).png"
+              alt="LHDN Logo"
               style="
-                flex: 1 1 35%;
-                min-width: 250px;
-                display: flex;
-                flex-direction: column;
-                gap: 16px;
+                width: 72px;
+                height: 72px;
+                object-fit: contain;
+                flex-shrink: 0;
               "
-            >
-              <a
-                href="https://www.facebook.com/LHDNM"
-                target="_blank"
-                rel="noopener noreferrer"
+            />
+            <div style="flex: 1">
+              <h2
                 style="
-                  display: flex;
-                  align-items: center;
-                  gap: 16px;
-                  padding: 16px 20px;
-                  background: #fff;
-                  border: 1px solid #e2e8f0;
-                  border-radius: 12px;
-                  text-decoration: none;
-                  color: #334155;
-                  font-size: 0.95rem;
-                  font-weight: 600;
-                  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-                  transition: background 0.2s, transform 0.2s;
+                  font-size: 1.35rem;
+                  font-weight: 800;
+                  color: #075985;
+                  margin-bottom: 6px;
+                  border-bottom: none;
+                  padding-bottom: 0;
                 "
-                onmouseover="this.style.background='#f8fafc'; this.style.transform='translateY(-2px)';"
-                onmouseout="this.style.background='#fff'; this.style.transform='translateY(0)';"
               >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="#0866FF"
-                  stroke="none"
-                >
-                  <path
-                    d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07"
-                  ></path>
-                </svg>
-                Facebook
-              </a>
-              <a
-                href="https://www.instagram.com/lhdnm/"
-                target="_blank"
-                rel="noopener noreferrer"
+                Official LHDN PCB Calculator
+              </h2>
+              <p
                 style="
-                  display: flex;
-                  align-items: center;
-                  gap: 16px;
-                  padding: 16px 20px;
-                  background: #fff;
-                  border: 1px solid #e2e8f0;
-                  border-radius: 12px;
-                  text-decoration: none;
-                  color: #334155;
                   font-size: 0.95rem;
-                  font-weight: 600;
-                  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-                  transition: background 0.2s, transform 0.2s;
+                  color: #0c4a6e;
+                  margin: 0 0 16px 0;
+                  line-height: 1.5;
                 "
-                onmouseover="this.style.background='#f8fafc'; this.style.transform='translateY(-2px)';"
-                onmouseout="this.style.background='#fff'; this.style.transform='translateY(0)';"
               >
+                Use the official LHDN PCB calculator for the most accurate
+                monthly tax deduction (PCB) reference.
+              </p>
+              <span
+                style="
+                  display: inline-flex;
+                  align-items: center;
+                  gap: 8px;
+                  padding: 10px 20px;
+                  background: #0284c7;
+                  color: white;
+                  font-size: 0.95rem;
+                  font-weight: 700;
+                  border-radius: 8px;
+                  transition: background 0.2s;
+                "
+                onmouseover="this.style.background = '#0369a1'"
+                onmouseout="this.style.background = '#0284c7'"
+              >
+                Go to LHDN PCB Calculator
                 <svg
-                  width="20"
-                  height="20"
+                  width="16"
+                  height="16"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  style="color: #e1306c"
-                >
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path
-                    d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
-                  ></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
-                Instagram
-              </a>
-              <a
-                href="https://www.youtube.com/user/LHDNM"
-                target="_blank"
-                rel="noopener noreferrer"
-                style="
-                  display: flex;
-                  align-items: center;
-                  gap: 16px;
-                  padding: 16px 20px;
-                  background: #fff;
-                  border: 1px solid #e2e8f0;
-                  border-radius: 12px;
-                  text-decoration: none;
-                  color: #334155;
-                  font-size: 0.95rem;
-                  font-weight: 600;
-                  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-                  transition: background 0.2s, transform 0.2s;
-                "
-                onmouseover="this.style.background='#f8fafc'; this.style.transform='translateY(-2px)';"
-                onmouseout="this.style.background='#fff'; this.style.transform='translateY(0)';"
-              >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="#FF0000"
-                  stroke="none"
                 >
                   <path
-                    d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                    d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"
                   ></path>
+                  <polyline points="15 3 21 3 21 9"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="3"></line>
                 </svg>
-                YouTube
-              </a>
+              </span>
             </div>
-          </div>
+          </a>
 
+          <!-- Right: Social Cards -->
+          <div
+            style="
+              flex: 1 1 35%;
+              min-width: 250px;
+              display: flex;
+              flex-direction: column;
+              gap: 16px;
+            "
+          >
+            <a
+              href="https://www.facebook.com/LHDNM"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                padding: 16px 20px;
+                background: #fff;
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                text-decoration: none;
+                color: #334155;
+                font-size: 0.95rem;
+                font-weight: 600;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                transition:
+                  background 0.2s,
+                  transform 0.2s;
+              "
+              onmouseover="
+                this.style.background = '#f8fafc';
+                this.style.transform = 'translateY(-2px)';
+              "
+              onmouseout="
+                this.style.background = '#fff';
+                this.style.transform = 'translateY(0)';
+              "
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="#0866FF"
+                stroke="none"
+              >
+                <path
+                  d="M24 12.07C24 5.41 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.1 10.13 24v-8.44H7.08v-3.49h3.04V9.41c0-3.02 1.8-4.7 4.54-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.5c-1.5 0-1.96.93-1.96 1.89v2.26h3.32l-.53 3.5h-2.8V24C19.62 23.1 24 18.1 24 12.07"
+                ></path>
+              </svg>
+              Facebook
+            </a>
+            <a
+              href="https://www.instagram.com/lhdnm/"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                padding: 16px 20px;
+                background: #fff;
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                text-decoration: none;
+                color: #334155;
+                font-size: 0.95rem;
+                font-weight: 600;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                transition:
+                  background 0.2s,
+                  transform 0.2s;
+              "
+              onmouseover="
+                this.style.background = '#f8fafc';
+                this.style.transform = 'translateY(-2px)';
+              "
+              onmouseout="
+                this.style.background = '#fff';
+                this.style.transform = 'translateY(0)';
+              "
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                style="color: #e1306c"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path
+                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
+                ></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+              Instagram
+            </a>
+            <a
+              href="https://www.youtube.com/user/LHDNM"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                padding: 16px 20px;
+                background: #fff;
+                border: 1px solid #e2e8f0;
+                border-radius: 12px;
+                text-decoration: none;
+                color: #334155;
+                font-size: 0.95rem;
+                font-weight: 600;
+                box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+                transition:
+                  background 0.2s,
+                  transform 0.2s;
+              "
+              onmouseover="
+                this.style.background = '#f8fafc';
+                this.style.transform = 'translateY(-2px)';
+              "
+              onmouseout="
+                this.style.background = '#fff';
+                this.style.transform = 'translateY(0)';
+              "
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="#FF0000"
+                stroke="none"
+              >
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                ></path>
+              </svg>
+              YouTube
+            </a>
+          </div>
         </div>
+      </div>
     </section>
 
-
-<footer class="footer">
+    <footer class="footer">
       <div class="container">
         <div class="footer-grid">
           <!-- Logo + Description -->
@@ -862,7 +1370,9 @@
             <a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
             <a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
             <a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
-          <a href="/annual-leave-calculator" class="footer-link">Annual Leave Calculator</a>
+            <a href="/annual-leave-calculator" class="footer-link"
+              >Annual Leave Calculator</a
+            >
             <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
           </div>
         </div>
@@ -1036,7 +1546,7 @@
                 placeholder="e.g. +60123456789"
               />
             </div>
-            <button type="submit" class="btn btn-primary" >
+            <button type="submit" class="btn btn-primary">
               Submit & Download
             </button>
           </form>
@@ -1060,7 +1570,7 @@
           <div id="modalFeedback">
             Thank you! The PCB report has been generated.
           </div>
-          
+
           <div
             id="mobileActionButtons"
             style="
@@ -1110,9 +1620,6 @@
       </div>
     </div>
 
-    
-  
     <script type="module" src="/src/pcb-calculator.ts"></script>
-
   </body>
 </html>
