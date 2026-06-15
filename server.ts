@@ -65,6 +65,7 @@ async function startServer() {
 
   // Expose public config (script URLs) to the static HTML frontend
   app.get("/api/config", (req, res) => {
+    res.setHeader("Cache-Control", "public, max-age=600"); // 10 minutes cache to avoid render blocking dependency chain delay
     res.json({
       googleSheetsScriptUrl: process.env.GOOGLE_SHEETS_SCRIPT_URL || "",
       socsoSheetsScriptUrl: process.env.SOCSO_SHEETS_SCRIPT_URL || "",
@@ -389,7 +390,18 @@ async function startServer() {
     });
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath, { extensions: ["html"] }));
+    app.use(express.static(distPath, {
+      extensions: ["html"],
+      maxAge: "1d",
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith(".html")) {
+          res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+        } else {
+          // Serve all other static assets (images, CSS, JS, fonts) with 1 year cache life to prevent unoptimized bandwidth wastage
+          res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+        }
+      }
+    }));
 
     // For MPA, we don't necessarily want a single catch-all that returns index.html
     // unless it's truly a fallback.

@@ -8,22 +8,31 @@
       window.scrollTo(0, 0);
     </script>
 
-    <!-- Google tag (gtag.js) -->
-    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P"></script>
+    <!-- Latently loaded Google Tag Manager to resolve early execution & unused JS warnings -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-TMQV1XC09P");
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const script = document.createElement('script');
+          script.src = "https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P";
+          script.async = true;
+          document.head.appendChild(script);
+
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          window.gtag = gtag;
+          gtag("js", new Date());
+          gtag("config", "G-TMQV1XC09P");
+        }, 1200);
+      });
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="icon"
       type="image/png"
-      href="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png"
+      href="/favicon-ricebowl.png"
     />
     <title>
       EPF (KWSP) Calculator Malaysia | Calculate Contributions Instantly
@@ -77,7 +86,7 @@
     />
     <meta
       property="og:image"
-      content="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
+      content="/logo-small.png"
     />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
@@ -97,7 +106,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
+      content="/logo-small.png"
     />
 
     <!-- JSON-LD Structured Data -->
@@ -126,12 +135,15 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Asynchronously loaded Google Fonts to prevent render-blocking -->
+    <!-- Optimized Fonts -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
-    <link rel="stylesheet" href="/calculator-styles.css" />
+    <!-- Optimized CSS loading to prevent render-blocking -->
+    <link rel="preload" href="/calculator-styles.css" as="style" />
+    <link rel="stylesheet" href="/calculator-styles.css" media="print" onload="this.media='all'" />
   </head>
   <body>
     <noscript>
@@ -162,11 +174,7 @@
         "
       >
         <a href="/" class="logo">
-          <img
-            src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
-            alt="SalaryCalculator.my"
-            class="logo-img"
-          />
+          <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" class="logo-img" width="250" height="39" />
         </a>
         <nav class="desktop-nav">
           <a href="/" class="nav-item">Salary Calculator</a>
@@ -1155,16 +1163,7 @@
             onmouseover="this.style.transform = 'translateY(-2px)'"
             onmouseout="this.style.transform = 'translateY(0)'"
           >
-            <img
-              src="https://upload.wikimedia.org/wikipedia/en/thumb/6/64/Employees_Provident_Fund_%28Malaysia%29_logo.svg/1280px-Employees_Provident_Fund_%28Malaysia%29_logo.svg.png"
-              alt="EPF Logo"
-              style="
-                width: 72px;
-                height: 72px;
-                object-fit: contain;
-                flex-shrink: 0;
-              "
-            />
+            <img src="/epf-logo.png" alt="EPF Logo" width="48" height="48" style="width: 48px; height: 48px; object-fit: contain;" />
             <div style="flex: 1">
               <h2
                 style="
@@ -1387,7 +1386,7 @@
               style="margin-bottom: 16px; display: block"
             >
               <img
-                src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
+                src="/logo-small.png"
                 alt="SalaryCalculator.my"
                 style="
                   height: 50px;

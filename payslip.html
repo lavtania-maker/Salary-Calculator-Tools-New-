@@ -1,15 +1,24 @@
 <!doctype html>
 <html>
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script defer src="https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P"></script>
+    <!-- Latently loaded Google Tag Manager to resolve early execution & unused JS warnings -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-TMQV1XC09P");
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const script = document.createElement('script');
+          script.src = "https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P";
+          script.async = true;
+          document.head.appendChild(script);
+
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          window.gtag = gtag;
+          gtag("js", new Date());
+          gtag("config", "G-TMQV1XC09P");
+        }, 1200);
+      });
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -21,7 +30,7 @@
     <link
       rel="icon"
       type="image/png"
-      href="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png"
+      href="/favicon-ricebowl.png"
     />
     <title>Payslip Generator</title>
 

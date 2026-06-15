@@ -1,25 +1,31 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Google tag (gtag.js) -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P"
-    ></script>
+    <!-- Latently loaded Google Tag Manager to resolve early execution & unused JS warnings -->
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-TMQV1XC09P");
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          const script = document.createElement('script');
+          script.src = "https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P";
+          script.async = true;
+          document.head.appendChild(script);
+
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          window.gtag = gtag;
+          gtag("js", new Date());
+          gtag("config", "G-TMQV1XC09P");
+        }, 1200);
+      });
     </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="icon"
       type="image/png"
-      href="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-a042dd24-6c42-4872-bcca-15280045d191.png"
+      href="/favicon-ricebowl.png"
     />
     <title>
       Salary Calculator Malaysia (Take Home Pay) | EPF, SOCSO, EIS, PCB
@@ -74,7 +80,7 @@
     />
     <meta
       property="og:image"
-      content="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
+      content="/logo-small.png"
     />
     <meta property="og:site_name" content="SalaryCalc MY" />
     <meta property="og:locale" content="en_MY" />
@@ -91,7 +97,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
+      content="/logo-small.png"
     />
 
     <!-- JSON-LD Structured Data -->
@@ -120,12 +126,15 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <!-- Asynchronously loaded Google Fonts to prevent render-blocking -->
+    <!-- Optimized Fonts -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 
-    <link rel="stylesheet" href="/calculator-styles.css" />
+    <!-- Optimized CSS loading to prevent render-blocking -->
+    <link rel="preload" href="/calculator-styles.css" as="style" />
+    <link rel="stylesheet" href="/calculator-styles.css" media="print" onload="this.media='all'" />
   </head>
 
   <body>
@@ -141,12 +150,7 @@
         "
       >
         <a href="/" class="logo">
-          <img
-            src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
-            alt="SalaryCalc MY"
-            referrerpolicy="no-referrer"
-            class="logo-img"
-          />
+          <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" class="logo-img" width="250" height="39" />
         </a>
 
         <!-- Desktop Nav -->
@@ -2760,17 +2764,7 @@
                 this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';
               "
             >
-              <img
-                src="https://vectorseek.com/wp-content/uploads/2023/09/Perkeso-Socso-Logo-Vector.svg-.png"
-                alt="SOCSO Logo"
-                style="
-                  width: 48px;
-                  height: 48px;
-                  object-fit: contain;
-                  flex-shrink: 0;
-                  margin-bottom: 4px;
-                "
-              />
+              <img src="/perkeso-logo-vector.png" alt="SOCSO Logo" width="48" height="48" style="width: 48px; height: 48px; object-fit: contain;" />
               <div style="flex: 1">
                 <h3 style="color: #15803d; margin-top: 0; margin-bottom: 8px">
                   Official SOCSO Website
@@ -2849,17 +2843,7 @@
                 this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';
               "
             >
-              <img
-                src="https://www.ajobthing.com/resources/blog/data/blog/images/2026/05/LHDN_logo%20(1).png"
-                alt="LHDN Logo"
-                style="
-                  width: 48px;
-                  height: 48px;
-                  object-fit: contain;
-                  flex-shrink: 0;
-                  margin-bottom: 4px;
-                "
-              />
+              <img src="/lhdn-logo.png" alt="LHDN Logo" width="48" height="48" style="width: 48px; height: 48px; object-fit: contain;" />
               <div style="flex: 1">
                 <h3 style="color: #0284c7; margin-top: 0; margin-bottom: 8px">
                   Official LHDN PCB Calculator
@@ -2938,17 +2922,7 @@
                 this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';
               "
             >
-              <img
-                src="https://upload.wikimedia.org/wikipedia/en/thumb/6/64/Employees_Provident_Fund_%28Malaysia%29_logo.svg/1280px-Employees_Provident_Fund_%28Malaysia%29_logo.svg.png"
-                alt="EPF Logo"
-                style="
-                  width: 48px;
-                  height: 48px;
-                  object-fit: contain;
-                  flex-shrink: 0;
-                  margin-bottom: 4px;
-                "
-              />
+              <img src="/epf-logo.png" alt="EPF Logo" width="48" height="48" style="width: 48px; height: 48px; object-fit: contain;" />
               <div style="flex: 1">
                 <h3 style="color: #dc2626; margin-top: 0; margin-bottom: 8px">
                   Official EPF Website
@@ -4933,16 +4907,7 @@
             onmouseover="this.style.transform = 'translateY(-2px)'"
             onmouseout="this.style.transform = 'translateY(0)'"
           >
-            <img
-              src="https://vectorseek.com/wp-content/uploads/2023/09/Perkeso-Socso-Logo-Vector.svg-.png"
-              alt="PERKESO Logo"
-              style="
-                width: 72px;
-                height: 72px;
-                object-fit: contain;
-                flex-shrink: 0;
-              "
-            />
+            <img src="/perkeso-logo-vector.png" alt="PERKESO Logo" width="72" height="72" style="width: 72px; height: 72px; object-fit: contain; border-radius: 8px;" />
             <div style="flex: 1">
               <h2
                 style="
@@ -5165,19 +5130,7 @@
               class="logo"
               style="margin-bottom: 20px; display: block"
             >
-              <img
-                src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
-                alt="SalaryCalc MY"
-                referrerpolicy="no-referrer"
-                style="
-                  height: 60px;
-                  width: auto;
-                  object-fit: contain;
-                  border-radius: 4px;
-                  mix-blend-mode: screen;
-                  opacity: 0.9;
-                "
-              />
+              <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" width="250" height="39" style="height: 60px; width: auto; object-fit: contain; border-radius: 4px; mix-blend-mode: screen; opacity: 0.9;" />
             </a>
             <p style="color: #94a3b8; font-size: 0.9375rem; line-height: 1.6">
               Accurate Malaysia salary calculator.<br />
