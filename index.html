@@ -192,45 +192,15 @@
     <!-- Google Fonts & Stylesheets -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <noscript><!-- Asynchronously loaded Google Fonts to prevent render-blocking -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" /></noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    </noscript>
     <link class="aistudio-custom-target" rel="preload" href="/calculator-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
     <noscript><!-- Optimized CSS loading to prevent render-blocking -->
     <link rel="preload" href="/calculator-styles.css" as="style" />
     <link rel="stylesheet" href="/calculator-styles.css" media="print" onload="this.media='all'" /></noscript>
-    <style>
-    body { font-family: Inter, sans-serif; }
-    </style>
   </head>
 
   <body>
@@ -6052,12 +6022,14 @@
         socsoSheetsScriptUrl: "",
       };
       window.addEventListener('load', function() {
-        fetch("/api/config")
-          .then(res => res.json())
-          .then(config => {
-            window._appConfig = config;
-          })
-          .catch(function () {});
+        (window.requestIdleCallback || setTimeout)(function() {
+          fetch("/api/config")
+            .then(res => res.json())
+            .then(config => {
+              window._appConfig = config;
+            })
+            .catch(function () {});
+        });
       });
 
       document.addEventListener("DOMContentLoaded", function () {
