@@ -33,7 +33,7 @@ ul { list-style: none; }
 
 /* Layout Containers */
 .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-.seo-container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+.seo-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
 /* Navbar */
 .navbar { background: #ffffff; border-bottom: 1px solid var(--border); padding: 12px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
@@ -645,4 +645,221 @@ details[open] .faq-title::after {
   background: #e2e8f0 !important;
   transform: translateY(-2px);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================
+   CLEAN STYLE FIXES FOR ALL CONTENT SECTIONS
+   ========================================== */
+
+/* 1. SECTION SPACING & MAX WIDTH (Requirements 1, 2, 6) */
+.content-section {
+  padding: 40px 0 !important;
+  background-color: #f8fafc !important; /* soft background to make white cards stand out */
+  border-top: 1px solid #e2e8f0 !important;
+}
+
+.content-section .container,
+.content-section .seo-container {
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Base Card Style (Requirements 1 & 2) */
+.content-section .content-card,
+.content-section .seo-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 12px !important;
+  padding: 28px 32px !important;
+  margin-bottom: 20px !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04) !important;
+  box-sizing: border-box !important;
+  transition: transform 0.2s, box-shadow 0.2s !important;
+  text-align: left !important;
+}
+
+.content-section .content-card:hover,
+.content-section .seo-card:hover {
+  transform: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06) !important;
+}
+
+/* 2. HEADINGS & SUBTEXTS (Requirement 3) */
+.content-section h2,
+.content-section .seo-title,
+.content-card h2,
+.seo-card h2 {
+  font-size: 1.2rem !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  margin-top: 0 !important;
+  margin-bottom: 6px !important;
+  letter-spacing: -0.01em !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0 !important;
+}
+
+/* Remove all emoji icons from headings */
+.content-section h2 span,
+.content-section .seo-title span,
+.content-card h2 span,
+.seo-card h2 span {
+  display: none !important;
+}
+
+/* Subtext paragraphs under headings */
+.content-section h2 + p,
+.content-section .seo-subtitle,
+.content-card .seo-subtitle,
+.seo-card .seo-subtitle {
+  font-size: 0.9rem !important;
+  color: #64748b !important;
+  margin-bottom: 20px !important;
+  line-height: 1.6 !important;
+}
+
+/* 4. BODY TEXT (Requirement 3) */
+.content-section p,
+.content-section li,
+.content-card p,
+.seo-card p,
+.content-card li,
+.seo-card li {
+  font-size: 0.9rem !important;
+  line-height: 1.7 !important;
+  color: #374151 !important;
+}
+
+/* 3. TABLES inside cards (Requirement 4) */
+.content-section .seo-table-wrapper,
+.content-section .table-container,
+.content-section .contribution-table-wrapper {
+  border: none !important;
+  border-radius: 0 !important;
+  overflow-x: auto !important; /* support mobile scroll horizontally */
+  background: transparent !important;
+  box-shadow: none !important;
+  margin-top: 16px !important;
+  margin-bottom: 20px !important;
+}
+
+.content-section .seo-table,
+.content-section .styled-table,
+.content-section .contribution-table,
+.content-section table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  font-size: 0.9rem !important;
+  border: none !important;
+}
+
+.content-section th,
+.content-section .seo-table th,
+.content-section .styled-table th,
+.content-section .contribution-table th {
+  background-color: #f8fafc !important;
+  font-size: 0.78rem !important;
+  text-transform: uppercase !important;
+  color: #475569 !important;
+  letter-spacing: 0.04em !important;
+  font-weight: 700 !important;
+  padding: 12px 16px !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  text-align: left !important;
+}
+
+.content-section td,
+.content-section .seo-table td,
+.content-section .styled-table td,
+.content-section .contribution-table td {
+  padding: 12px 16px !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+  font-size: 0.9rem !important;
+  color: #374151 !important;
+}
+
+/* Remove bottom border on last row cell */
+.content-section tr:last-child td,
+.content-section tbody tr:last-child td,
+.content-section .seo-table tr:last-child td,
+.content-section .styled-table tr:last-child td {
+  border-bottom: none !important;
+}
+
+/* Row hover */
+.content-section tr:hover td,
+.content-section tbody tr:hover td {
+  background-color: #f8fafc !important;
+}
+
+/* 5. 3-COLUMN INFO CARDS & Highlight boxes (Requirement 5) */
+/* Target content-cards inside active grid layouts like Section 7, 8, 9 */
+div[style*="display: grid"] > .content-card,
+div[style*="display:grid"] > .content-card,
+div[style*="grid-template-columns"] > .content-card,
+.seo-grid-3 > .content-card,
+.seo-grid-2 > .content-card {
+  background: #f8fafc !important;
+  border-radius: 10px !important;
+  padding: 20px !important;
+  border: 1px solid #e2e8f0 !important;
+  box-shadow: none !important;
+  margin-bottom: 0 !important; /* side-by-side spacing is via grid-gap */
+}
+
+/* Ensure micro cards text styles match */
+div[style*="display: grid"] > .content-card h2,
+div[style*="display:grid"] > .content-card h2,
+div[style*="grid-template-columns"] > .content-card h2 {
+  font-size: 1.1rem !important;
+  margin-bottom: 12px !important;
+}
+
+/* Support other highlighted/info boxes */
+.content-section .seo-formula-box,
+.content-section .seo-info-box,
+.content-section .info-highlight,
+.content-section .example-box,
+.content-section .seo-highlight-box,
+.content-section .highlight-box {
+  border-radius: 10px !important;
+  padding: 20px !important;
+  border: 1px solid #e2e8f0 !important;
+  background: #f8fafc !important;
+  font-size: 0.9rem !important;
+  box-shadow: none !important;
+  margin-top: 16px !important;
+  margin-bottom: 20px !important;
+}
+
+.content-section .seo-formula-text,
+.content-section .seo-info-box-title,
+.content-section .example-box h3,
+.content-section .info-highlight h3,
+.content-section .seo-highlight-title {
+  font-size: 0.9rem !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  margin-bottom: 8px !important;
+}
+
+/* 7. MOBILE RESPONSIVENESS (Requirement 7) */
+@media (max-width: 768px) {
+  .content-section {
+    padding: 20px 0 !important;
+  }
+  .content-section .container,
+  .content-section .seo-container {
+    padding: 0 16px !important;
+  }
+  .content-section .content-card,
+  .content-section .seo-card {
+    padding: 20px !important;
+    margin-bottom: 16px !important;
+  }
 }

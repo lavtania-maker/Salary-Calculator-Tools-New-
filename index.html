@@ -69,7 +69,7 @@
     />
     <meta
       property="og:image"
-      content="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
+      content="/logo-small.png"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -89,7 +89,7 @@
     />
     <meta
       name="twitter:image"
-      content="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
+      content="/logo-small.png"
     />
 
     <!-- JSON-LD Structured Data -->
@@ -192,10 +192,38 @@
     <!-- Google Fonts & Stylesheets -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript><!-- Asynchronously loaded Google Fonts to prevent render-blocking -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" /></noscript>
     <link class="aistudio-custom-target" rel="preload" href="/calculator-styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
-    <noscript><link rel="stylesheet" href="/calculator-styles.css" /></noscript>
+    <noscript><!-- Optimized CSS loading to prevent render-blocking -->
+    <link rel="preload" href="/calculator-styles.css" as="style" />
+    <link rel="stylesheet" href="/calculator-styles.css" media="print" onload="this.media='all'" /></noscript>
     <style>
     body { font-family: Inter, sans-serif; }
     </style>
@@ -230,16 +258,7 @@
         "
       >
         <a href="/" class="logo">
-          <img
-            src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
-            alt="SalaryCalc MY"
-            referrerpolicy="no-referrer"
-            class="logo-img"
-            width="250"
-            height="44"
-            loading="eager"
-            fetchpriority="high"
-          />
+          <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" class="logo-img" width="250" height="39" />
         </a>
 
         <!-- Desktop Nav -->
@@ -3064,236 +3083,247 @@
         <!-- New SEO Section 4: FAQ -->
         <div class="seo-card">
           <h2 class="seo-title">Frequently Asked Questions</h2>
-          <style>
-            .faq-item {
-              border-bottom: 1px solid var(--border-color, #e2e8f0);
-              padding: 16px 0;
-            }
-            .faq-item:last-child {
-              border-bottom: none;
-            }
-            .faq-question {
+          <div
+            class="faq-container"
+            style="
               display: flex;
-              justify-content: space-between;
-              align-items: center;
-              cursor: pointer;
-              font-weight: 600;
-              color: var(--text-main, #0f172a);
-              font-size: 1.05rem;
-              margin: 0;
-              user-select: none;
-            }
-            .faq-icon {
-              transition: transform 0.3s ease;
-              font-size: 1.2rem;
-              color: var(--text-muted, #64748b);
-            }
-            .faq-item.active .faq-icon {
-              transform: rotate(45deg);
-            }
-            .faq-answer {
-              max-height: 0;
-              overflow: hidden;
-              transition: max-height 0.3s ease;
-              color: var(--text-light, #334155);
-              line-height: 1.6;
-              font-size: 0.95rem;
-            }
-            .faq-answer p {
-              margin: 12px 0 0 0;
-            }
-          </style>
-
-          <div class="faq-accordion">
-            <div
-              class="faq-item"
-              onclick="
-                this.classList.toggle('active');
-                const ans = this.querySelector('.faq-answer');
-                ans.style.maxHeight = this.classList.contains('active')
-                  ? ans.scrollHeight + 'px'
-                  : '0';
+              flex-direction: column;
+              gap: 12px;
+              margin-top: 20px;
+            "
+          >
+            <details
+              style="
+                background: #f8fafc;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #e2e8f0;
+                cursor: pointer;
               "
             >
-              <h3 class="faq-question">
+              <summary
+                style="font-weight: 600; font-size: 1rem; color: #1e293b"
+              >
                 How accurate are these calculations?
-                <span class="faq-icon">+</span>
-              </h3>
-              <div class="faq-answer">
-                <p>
-                  All calculations are based on the latest 2026 official rates
-                  published by KWSP (EPF), PERKESO (SOCSO and EIS), and LHDN
-                  (PCB tax). We follow the exact contribution tables and tax
-                  formulas used by these government bodies. Results are
-                  estimates — your actual payslip may differ slightly due to
-                  additional reliefs, allowances, or employer-specific policies.
-                </p>
-              </div>
-            </div>
+              </summary>
+              <p
+                style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 0.95rem;
+                  color: #475569;
+                "
+              >
+                All calculations are based on the latest 2026 official rates
+                published by KWSP (EPF), PERKESO (SOCSO and EIS), and LHDN
+                (PCB tax). We follow the exact contribution tables and tax
+                formulas used by these government bodies. Results are
+                estimates — your actual payslip may differ slightly due to
+                additional reliefs, allowances, or employer-specific policies.
+              </p>
+            </details>
 
-            <div
-              class="faq-item"
-              onclick="
-                this.classList.toggle('active');
-                const ans = this.querySelector('.faq-answer');
-                ans.style.maxHeight = this.classList.contains('active')
-                  ? ans.scrollHeight + 'px'
-                  : '0';
+            <details
+              style="
+                background: #f8fafc;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #e2e8f0;
+                cursor: pointer;
               "
             >
-              <h3 class="faq-question">
+              <summary
+                style="font-weight: 600; font-size: 1rem; color: #1e293b"
+              >
                 Is my salary data saved anywhere?
-                <span class="faq-icon">+</span>
-              </h3>
-              <div class="faq-answer">
-                <p>
-                  No. Every calculation runs entirely in your browser. We do not
-                  store, collect, or share any information you enter. Your
-                  salary details remain completely private.
-                </p>
-              </div>
-            </div>
+              </summary>
+              <p
+                style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 0.95rem;
+                  color: #475569;
+                "
+              >
+                No. Every calculation runs entirely in your browser. We do not
+                store, collect, or share any information you enter. Your
+                salary details remain completely private.
+              </p>
+            </details>
 
-            <div
-              class="faq-item"
-              onclick="
-                this.classList.toggle('active');
-                const ans = this.querySelector('.faq-answer');
-                ans.style.maxHeight = this.classList.contains('active')
-                  ? ans.scrollHeight + 'px'
-                  : '0';
+            <details
+              style="
+                background: #f8fafc;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #e2e8f0;
+                cursor: pointer;
               "
             >
-              <h3 class="faq-question">
+              <summary
+                style="font-weight: 600; font-size: 1rem; color: #1e293b"
+              >
                 What should I enter as gross salary?
-                <span class="faq-icon">+</span>
-              </h3>
-              <div class="faq-answer">
-                <p>
-                  Gross salary is your base pay plus any fixed monthly
-                  allowances such as transport, housing, or meal allowances —
-                  before any deductions. Do not include one-off bonuses or
-                  overtime unless paid every month. For bonus calculations, use
-                  the Bonus/Allowance field provided.
-                </p>
-              </div>
-            </div>
+              </summary>
+              <p
+                style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 0.95rem;
+                  color: #475569;
+                "
+              >
+                Gross salary is your base pay plus any fixed monthly
+                allowances such as transport, housing, or meal allowances —
+                before any deductions. Do not include one-off bonuses or
+                overtime unless paid every month. For bonus calculations, use
+                the Bonus/Allowance field provided.
+              </p>
+            </details>
 
-            <div
-              class="faq-item"
-              onclick="
-                this.classList.toggle('active');
-                const ans = this.querySelector('.faq-answer');
-                ans.style.maxHeight = this.classList.contains('active')
-                  ? ans.scrollHeight + 'px'
-                  : '0';
+            <details
+              style="
+                background: #f8fafc;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #e2e8f0;
+                cursor: pointer;
               "
             >
-              <h3 class="faq-question">
-                Why is my PCB showing RM0? <span class="faq-icon">+</span>
-              </h3>
-              <div class="faq-answer">
-                <p>
-                  PCB only applies once your monthly income after EPF exceeds
-                  RM2,851 (single) or RM3,851 (married). If your salary is below
-                  these thresholds, no monthly tax is deducted. You may still
-                  need to file a tax return with LHDN even if PCB is RM0.
-                </p>
-              </div>
-            </div>
+              <summary
+                style="font-weight: 600; font-size: 1rem; color: #1e293b"
+              >
+                Why is my PCB showing RM0?
+              </summary>
+              <p
+                style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 0.95rem;
+                  color: #475569;
+                "
+              >
+                PCB only applies once your monthly income after EPF exceeds
+                RM2,851 (single) or RM3,851 (married). If your salary is below
+                these thresholds, no monthly tax is deducted. You may still
+                need to file a tax return with LHDN even if PCB is RM0.
+              </p>
+            </details>
 
-            <div
-              class="faq-item"
-              onclick="
-                this.classList.toggle('active');
-                const ans = this.querySelector('.faq-answer');
-                ans.style.maxHeight = this.classList.contains('active')
-                  ? ans.scrollHeight + 'px'
-                  : '0';
+            <details
+              style="
+                background: #f8fafc;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #e2e8f0;
+                cursor: pointer;
               "
             >
-              <h3 class="faq-question">
-                Why does SOCSO stop at RM6,000? <span class="faq-icon">+</span>
-              </h3>
-              <div class="faq-answer">
-                <p>
-                  SOCSO and EIS contributions are capped at RM6,000 per month.
-                  Anyone earning above RM6,000 pays the same fixed maximum as
-                  someone earning exactly RM6,000. The ceiling was raised from
-                  RM5,000 to RM6,000 in October 2024.
-                </p>
-              </div>
-            </div>
+              <summary
+                style="font-weight: 600; font-size: 1rem; color: #1e293b"
+              >
+                Why does SOCSO stop at RM6,000?
+              </summary>
+              <p
+                style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 0.95rem;
+                  color: #475569;
+                "
+              >
+                SOCSO and EIS contributions are capped at RM6,000 per month.
+                Anyone earning above RM6,000 pays the same fixed maximum as
+                someone earning exactly RM6,000. The ceiling was raised from
+                RM5,000 to RM6,000 in October 2024.
+              </p>
+            </details>
 
-            <div
-              class="faq-item"
-              onclick="
-                this.classList.toggle('active');
-                const ans = this.querySelector('.faq-answer');
-                ans.style.maxHeight = this.classList.contains('active')
-                  ? ans.scrollHeight + 'px'
-                  : '0';
+            <details
+              style="
+                background: #f8fafc;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #e2e8f0;
+                cursor: pointer;
               "
             >
-              <h3 class="faq-question">
+              <summary
+                style="font-weight: 600; font-size: 1rem; color: #1e293b"
+              >
                 Does this calculator work for foreigners?
-                <span class="faq-icon">+</span>
-              </h3>
-              <div class="faq-answer">
-                <p>
-                  Yes. Select Foreigner under Nationality. Foreign employees
-                  contribute EPF at 2% (from 2025 onwards). PCB for
-                  non-residents is charged at a flat 30% rate.
-                </p>
-              </div>
-            </div>
+              </summary>
+              <p
+                style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 0.95rem;
+                  color: #475569;
+                "
+              >
+                Yes. Select Foreigner under Nationality. Foreign employees
+                contribute EPF at 2% (from 2025 onwards). PCB for
+                non-residents is charged at a flat 30% rate.
+              </p>
+            </details>
 
-            <div
-              class="faq-item"
-              onclick="
-                this.classList.toggle('active');
-                const ans = this.querySelector('.faq-answer');
-                ans.style.maxHeight = this.classList.contains('active')
-                  ? ans.scrollHeight + 'px'
-                  : '0';
+            <details
+              style="
+                background: #f8fafc;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #e2e8f0;
+                cursor: pointer;
               "
             >
-              <h3 class="faq-question">
-                How often are the rates updated? <span class="faq-icon">+</span>
-              </h3>
-              <div class="faq-answer">
-                <p>
-                  We review and update all rates every January when the new tax
-                  year begins. Any mid-year government changes — such as the
-                  SOCSO ceiling update in October 2024 — are applied as soon as
-                  they take effect.
-                </p>
-              </div>
-            </div>
+              <summary
+                style="font-weight: 600; font-size: 1rem; color: #1e293b"
+              >
+                How often are the rates updated?
+              </summary>
+              <p
+                style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 0.95rem;
+                  color: #475569;
+                "
+              >
+                We review and update all rates every January when the new tax
+                year begins. Any mid-year government changes — such as the
+                SOCSO ceiling update in October 2024 — are applied as soon as
+                they take effect.
+              </p>
+            </details>
 
-            <div
-              class="faq-item"
-              onclick="
-                this.classList.toggle('active');
-                const ans = this.querySelector('.faq-answer');
-                ans.style.maxHeight = this.classList.contains('active')
-                  ? ans.scrollHeight + 'px'
-                  : '0';
+            <details
+              style="
+                background: #f8fafc;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #e2e8f0;
+                cursor: pointer;
               "
             >
-              <h3 class="faq-question">
-                What is the difference between employee and employer
-                contributions? <span class="faq-icon">+</span>
-              </h3>
-              <div class="faq-answer">
-                <p>
-                  Employee contributions are deducted from your gross salary and
-                  reduce your take-home pay. Employer contributions are paid
-                  separately by your company and do not reduce what you receive
-                  — but they represent the true total cost of employing you.
-                </p>
-              </div>
-            </div>
+              <summary
+                style="font-weight: 600; font-size: 1rem; color: #1e293b"
+              >
+                What is the difference between employee and employer contributions?
+              </summary>
+              <p
+                style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 0.95rem;
+                  color: #475569;
+                "
+              >
+                Employee contributions are deducted from your gross salary and
+                reduce your take-home pay. Employer contributions are paid
+                separately by your company and do not reduce what you receive
+                — but they represent the true total cost of employing you.
+              </p>
+            </details>
           </div>
         </div>
         <!-- Section 6: Official Calculators -->
@@ -5705,7 +5735,7 @@
               class="logo"
               style="margin-bottom: 20px; display: block"
             >
-              <img src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg" alt="SalaryCalc MY" referrerpolicy="no-referrer" width="250" height="44" style="height: 60px; width: auto; object-fit: contain; border-radius: 4px; mix-blend-mode: screen; opacity: 0.9;" loading="eager" fetchpriority="high" />
+              <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" width="250" height="39" style="height: 60px; width: auto; object-fit: contain; border-radius: 4px; mix-blend-mode: screen; opacity: 0.9;" />
             </a>
             <p style="color: #94a3b8; font-size: 0.9375rem; line-height: 1.6">
               Accurate Malaysia salary calculator.<br />
