@@ -159,11 +159,11 @@ h1, h2, h3, h4 { color: var(--text-main); letter-spacing: -0.02em; }
 .seo-table tbody tr:hover td, .styled-table tbody tr:hover td, .contribution-table tbody tr:hover td { background-color: #f8fafc; }
 
 /* Result Highlight Cards */
-.result-panel { position: sticky; top: 80px; display: flex; flex-direction: column; min-height: 400px; }
+.result-panel { position: sticky; top: 80px; display: flex; flex-direction: column; min-height: 500px; }
 .result-panel .card { flex-grow: 1; display: flex; flex-direction: column; }
 .placeholder-text { text-align: center; color: var(--text-muted); padding: 20px; font-size: 1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; flex-grow: 1; }
-.result-content { display: none; opacity: 0; transform: translateY(10px); transition: opacity 0.4s ease, transform 0.4s ease; }
-.result-content.show, .contribution-content.active { display: block; opacity: 1; transform: translateY(0); }
+.result-content { display: none; opacity: 0; transition: opacity 0.4s ease; }
+.result-content.show, .contribution-content.active { display: block; opacity: 1; }
 .highlight-box, .seo-highlight-box {
   background: linear-gradient(135deg, #f0f6ff 0%, #e0edff 100%); border: 1px solid #bfdbfe; border-radius: 16px;
   padding: 24px; text-align: left; margin-bottom: 24px; box-shadow: 0 4px 12px rgba(37,99,235,0.05); display: flex; align-items: center; gap: 16px;
@@ -223,7 +223,7 @@ h1, h2, h3, h4 { color: var(--text-main); letter-spacing: -0.02em; }
   .breakdown-grid, .seo-grid-2, .pcb-calc-grid { grid-template-columns: 1fr; gap: 16px; }
 }
 
-@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
 .contribution-content { display: none; animation: fadeIn 0.3s ease forwards; }
 
