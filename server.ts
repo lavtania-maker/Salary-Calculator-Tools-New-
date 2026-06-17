@@ -11,26 +11,36 @@ dotenv.config();
 function normalizeSheetPayload(body: any) {
   const payload: any = { ...body };
 
-  // Map incoming keys to the exact headers in Google Sheets
-  if (payload.email) payload["Email"] = payload.email;
-  if (payload.userType) payload["User Type"] = payload.userType;
-  if (payload.companyName) payload["Company Name"] = payload.companyName;
-  if (payload.hiringStatus) payload["Hiring Status"] = payload.hiringStatus;
-  if (payload.userPhone) payload["User Phone"] = payload.userPhone;
-  if (payload.phoneNumber) payload["User Phone"] = payload.phoneNumber;
+  const email = payload.Email || payload.email || "";
+  const userType = payload["User Type"] || payload.userType || "";
+  const companyName = payload["Company Name"] || payload.companyName || "";
+  const hiringStatus = payload["Hiring Status"] || payload.hiringStatus || "";
+  const userPhone = payload["User Phone"] || payload.userPhone || payload.phoneNumber || "";
+  const timestamp = payload.timestamp || payload.Timestamp || payload.createdAt || new Date().toISOString();
+  const downloadVia = payload.download_via || payload.Action || payload.action || "";
 
-  // Ensure download_via is correctly propagated
-  if (payload.download_via && !payload["Action"]) {
-    // some scripts might expect Action or download_via, keep download_via as is and maybe populate Action
-  }
+  // Provide both formats to maximize compatibility with Google Apps Script
+  payload.Email = email;
+  payload.email = email;
+  
+  payload["User Type"] = userType;
+  payload.userType = userType;
+  
+  payload["Company Name"] = companyName;
+  payload.companyName = companyName;
+  
+  payload["Hiring Status"] = hiringStatus;
+  payload.hiringStatus = hiringStatus;
+  
+  payload["User Phone"] = userPhone;
+  payload.userPhone = userPhone;
 
-  // Cleanup lowercase keys so we don't send duplicates
-  delete payload.email;
-  delete payload.userType;
-  delete payload.companyName;
-  delete payload.hiringStatus;
-  delete payload.userPhone;
-  delete payload.phoneNumber;
+  payload.Timestamp = timestamp;
+  payload.timestamp = timestamp;
+
+  payload.Action = downloadVia;
+  payload.action = downloadVia;
+  payload.download_via = downloadVia;
 
   return payload;
 }
