@@ -12,19 +12,24 @@ function normalizeSheetPayload(body: any) {
   const payload: any = { ...body };
 
   // Map incoming keys to the exact headers in Google Sheets
-  if (payload["Email"]) payload.email = payload["Email"];
-  if (payload["User Type"]) payload.userType = payload["User Type"];
-  if (payload["Company Name"]) payload.companyName = payload["Company Name"];
-  if (payload["Hiring Status"]) payload.hiringStatus = payload["Hiring Status"];
-  if (payload["User Phone"]) payload.userPhone = payload["User Phone"];
-  if (payload.phoneNumber) payload.userPhone = payload.phoneNumber;
+  if (payload.email) payload["Email"] = payload.email;
+  if (payload.userType) payload["User Type"] = payload.userType;
+  if (payload.companyName) payload["Company Name"] = payload.companyName;
+  if (payload.hiringStatus) payload["Hiring Status"] = payload.hiringStatus;
+  if (payload.userPhone) payload["User Phone"] = payload.userPhone;
+  if (payload.phoneNumber) payload["User Phone"] = payload.phoneNumber;
 
-  // Cleanup uppercase exact keys
-  delete payload["Email"];
-  delete payload["User Type"];
-  delete payload["Company Name"];
-  delete payload["Hiring Status"];
-  delete payload["User Phone"];
+  // Ensure download_via is correctly propagated
+  if (payload.download_via && !payload["Action"]) {
+    // some scripts might expect Action or download_via, keep download_via as is and maybe populate Action
+  }
+
+  // Cleanup lowercase keys so we don't send duplicates
+  delete payload.email;
+  delete payload.userType;
+  delete payload.companyName;
+  delete payload.hiringStatus;
+  delete payload.userPhone;
   delete payload.phoneNumber;
 
   return payload;
