@@ -1,0 +1,1 @@
+const fs=require("fs");const {execSync}=require("child_process");try{require("sharp")("./logo-small.png").resize(500,88).webp().toFile("./logo-small.webp")}catch(e){execSync("npm i sharp --no-save");require("sharp")("./logo-small.png").resize(500,88).webp().toFile("./logo-small.webp")}

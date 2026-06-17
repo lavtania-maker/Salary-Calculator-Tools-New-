@@ -10,7 +10,7 @@
         s.async = true;
         document.head.appendChild(s);
         gtag('js', new Date());
-        gtag('config', 'G-TMQV1XC09P');
+        gtag('config', 'G-TMQV1XC09P', { send_page_view: true });
       });
     </script>
     <meta charset="UTF-8" />
@@ -199,21 +199,7 @@
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
@@ -229,21 +215,7 @@
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
@@ -290,15 +262,18 @@
         "
       >
         <a href="/" class="logo">
-          <img
-            src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
-            alt="SalaryCalc MY"
-            referrerpolicy="no-referrer"
-            class="logo-img"
-            width="250"
-            height="44"
-            fetchpriority="high"
-          />
+          <picture>
+            <source srcset="/logo-small.webp" type="image/webp">
+            <img
+              src="/logo-small.png"
+              alt="SalaryCalc MY"
+              referrerpolicy="no-referrer"
+              class="logo-img"
+              width="250"
+              height="44"
+              fetchpriority="high"
+            />
+          </picture>
         </a>
 
         <!-- Desktop Nav -->
@@ -3622,7 +3597,7 @@
     </section>
 
     <!-- SEO Content Sections - SOCSO -->
-    <section class="content-section" id="socsoSeoContent" style="display: none;">
+    <section class="content-section" id="socsoSeoContent">
       <div class="container">
         <!-- Section 1: What is SOCSO (PERKESO) -->
         <div class="content-card">
@@ -5552,7 +5527,7 @@
             onmouseover="this.style.transform = 'translateY(-2px)'"
             onmouseout="this.style.transform = 'translateY(0)'"
           >
-            <img src="/perkeso-logo-vector.png" alt="PERKESO Logo" loading="lazy" width="72" height="72" style="width: 72px; height: 72px; object-fit: contain; border-radius: 8px;" />
+            <img src="/perkeso-logo-vector.png" alt="PERKESO Logo" width="72" height="72" style="width: 72px; height: 72px; object-fit: contain; border-radius: 8px;" />
             <div style="flex: 1">
               <h2
                 style="
@@ -5775,15 +5750,18 @@
               class="logo"
               style="margin-bottom: 20px; display: block"
             >
-              <img
-                src="https://s3-ap-southeast-1.amazonaws.com/ricebowl/images/marketing-campaign/image-3c82ee7b-8135-40c5-80cd-6e1717bf265e.jpg"
-                alt="SalaryCalc MY"
-                referrerpolicy="no-referrer"
-                width="250"
-                height="60"
-                loading="lazy"
-                style="height: 60px; width: auto; object-fit: contain; border-radius: 4px; mix-blend-mode: screen; opacity: 0.9;"
-              />
+              <picture>
+                <source srcset="/logo-small.webp" type="image/webp">
+                <img
+                  src="/logo-small.png"
+                  alt="SalaryCalc MY"
+                  referrerpolicy="no-referrer"
+                  width="250"
+                  height="44"
+                  fetchpriority="high"
+                  style="height: 60px; width: auto; object-fit: contain; border-radius: 4px; mix-blend-mode: screen; opacity: 0.9;"
+                />
+              </picture>
             </a>
             <p style="color: #94a3b8; font-size: 0.9375rem; line-height: 1.6">
               Accurate Malaysia salary calculator.<br />
@@ -6073,14 +6051,14 @@
         googleSheetsScriptUrl: "",
         socsoSheetsScriptUrl: "",
       };
-      fetch("/api/config")
-        .then(function (r) {
-          return r.json();
-        })
-        .then(function (cfg) {
-          window._appConfig = cfg;
-        })
-        .catch(function () {});
+      window.addEventListener('load', function() {
+        fetch("/api/config")
+          .then(res => res.json())
+          .then(config => {
+            window._appConfig = config;
+          })
+          .catch(function () {});
+      });
 
       document.addEventListener("DOMContentLoaded", function () {
         const salaryForm = document.getElementById("salaryForm");
@@ -6557,14 +6535,16 @@
               toggleSocsoTableBtn.textContent = "Show All Contribution Table";
 
               // Preserve scroll - smooth scroll back to table header if viewport is below it
-              const cardRect =
-                socsoTableWrapper.parentElement.getBoundingClientRect();
-              if (cardRect.top < 0) {
-                window.scrollTo({
-                  top: window.scrollY + cardRect.top - 80,
-                  behavior: "smooth",
-                });
-              }
+              requestAnimationFrame(function() {
+                const cardRect =
+                  socsoTableWrapper.parentElement.getBoundingClientRect();
+                if (cardRect.top < 0) {
+                  window.scrollTo({
+                    top: window.scrollY + cardRect.top - 80,
+                    behavior: "smooth",
+                  });
+                }
+              });
             }
           });
         }
