@@ -34,6 +34,17 @@ document.addEventListener("DOMContentLoaded", () => {
     "epfEmployerRate",
   ) as HTMLElement;
 
+  const resTableMonthlyEmp = document.getElementById("tableMonthlyEmp");
+  const resTableYearlyEmp = document.getElementById("tableYearlyEmp");
+  const resTableMonthlyEmpr = document.getElementById("tableMonthlyEmpr");
+  const resTableYearlyEmpr = document.getElementById("tableYearlyEmpr");
+  const resTableMonthlyTotal = document.getElementById("tableMonthlyTotal");
+  const resTableYearlyTotal = document.getElementById("tableYearlyTotal");
+
+  const toggleProjection = document.getElementById("toggleProjection");
+  const projectionContent = document.getElementById("projectionContent");
+  const projectionArrow = document.getElementById("projectionArrow");
+
   const barEmp = document.getElementById("epfEmpBar") as HTMLElement;
   const barEmpr = document.getElementById("epfEmprBar") as HTMLElement;
 
@@ -92,6 +103,16 @@ document.addEventListener("DOMContentLoaded", () => {
   if (mobileMenuToggle && mobileNavMenu) {
     mobileMenuToggle.addEventListener("click", () => {
       mobileNavMenu.classList.toggle("open");
+    });
+  }
+
+  if (toggleProjection && projectionContent && projectionArrow) {
+    toggleProjection.addEventListener("click", () => {
+      const isHidden = projectionContent.style.display === "none";
+      projectionContent.style.display = isHidden ? "block" : "none";
+      projectionArrow.style.transform = isHidden
+        ? "rotate(180deg)"
+        : "rotate(0deg)";
     });
   }
 
@@ -178,6 +199,14 @@ document.addEventListener("DOMContentLoaded", () => {
     if (resNetSalary) resNetSalary.textContent = formatRM(netSalary);
     if (resEmployeeRate) resEmployeeRate.textContent = `(${empRateStr})`;
     if (resEmployerRate) resEmployerRate.textContent = `(${emprRateStr})`;
+
+    // Update Projection Table
+    if (resTableMonthlyEmp) resTableMonthlyEmp.textContent = formatRM(employeeEpf);
+    if (resTableYearlyEmp) resTableYearlyEmp.textContent = formatRM(employeeEpf * 12);
+    if (resTableMonthlyEmpr) resTableMonthlyEmpr.textContent = formatRM(employerEpf);
+    if (resTableYearlyEmpr) resTableYearlyEmpr.textContent = formatRM(employerEpf * 12);
+    if (resTableMonthlyTotal) resTableMonthlyTotal.textContent = formatRM(totalEpf);
+    if (resTableYearlyTotal) resTableYearlyTotal.textContent = formatRM(totalEpf * 12);
 
     if (barEmp && barEmpr && totalEpf > 0) {
       const empPct = (employeeEpf / totalEpf) * 100;
