@@ -36,14 +36,22 @@ service cloud.firestore {
       // 1. Structure & Size (Pillar 2 & 5)
       // Note: Map.keys() returns a list which doesn't support hasOnly. 
       // Using diff({}).affectedKeys() which returns a set (supports hasOnly).
-      return data.diff({}).affectedKeys().hasOnly(['email', 'action', 'createdAt', 'userType', 'phoneNumber', 'companyName', 'hiringStatus']) &&
+      let allowedKeys = [
+        'email', 'action', 'createdAt', 'userType', 'phoneNumber', 'companyName', 'hiringStatus',
+        'salary', 'totalDeductions', 'netSalary', 'employeeEpf', 'employeeSocso', 'employeeEis', 
+        'employeePcb', 'employerEpf', 'employerSocso', 'employerEis', 'download_via',
+        'bonus', 'annualIncome', 'relief', 'taxBracket', 'pcb', 'taxStatus',
+        'startDate', 'targetYear', 'yearsOfService', 'baseEntitlement', 'proratedLeave', 'leaveTaken', 'remainingBalance',
+        'ageGroup', 'nationality', 'totalEpf', 'socsoTotal', 'socsoCategory', 'socsoBracket', 'eisTotal', 'interaction_type'
+      ];
+      return data.diff({}).affectedKeys().hasOnly(allowedKeys) &&
              data.keys().hasAll(['email', 'action', 'createdAt', 'userType']) &&
              
              // 2. Type & Value Validation
              data.email is string && isValidEmail(data.email) &&
              data.action is string && data.action.size() > 0 && data.action.size() <= 100 &&
              data.createdAt is string && // App sends ISO string
-             data.userType is string && data.userType in ['Employer / HR', 'Employer/HR', 'Employee', 'Jobseeker', 'Job Seeker'] &&
+             data.userType is string && data.userType.size() > 0 &&
              
              // 3. Optional Fields Validation
              (!('phoneNumber' in data) || (data.phoneNumber is string && data.phoneNumber.size() <= 50)) &&
@@ -57,13 +65,12 @@ service cloud.firestore {
 
     match /leads/{leadId} {
       // Create: Public leads capture
-      // Note: isValidId(leadId) for create/get/update/delete. Not for list.
-      allow create: if isValidId(leadId) && isValidLead(request.resource.data);
+      allow create: if isValidLead(request.resource.data);
       
       // Read/Update/Delete: Admin only
-      allow get: if isValidId(leadId) && isAdmin();
+      allow get: if isAdmin();
       allow list: if isAdmin();
-      allow update, delete: if isValidId(leadId) && isAdmin();
+      allow update, delete: if isAdmin();
     }
   }
 }

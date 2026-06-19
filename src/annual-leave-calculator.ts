@@ -500,6 +500,15 @@ document.addEventListener("DOMContentLoaded", () => {
           "Company Name": companyInputExt?.value?.trim() || "",
           "User Phone": phoneInput?.value || "",
           download_via: "Annual Leave Calculator",
+          ...(lastCalculation ? {
+            "Join Date": lastCalculation.startDate,
+            "Target Year": lastCalculation.targetYear,
+            "Service Years": lastCalculation.yearsOfServiceText,
+            "Base Entitlement": lastCalculation.baseEntitlement,
+            "Pro-Rated Leaves": lastCalculation.proratedLeave,
+            "Leave Taken": lastCalculation.leaveTaken,
+            "Remaining Balance": lastCalculation.remainingBalance
+          } : {})
         };
 
         const dbPayload = {
@@ -507,6 +516,15 @@ document.addEventListener("DOMContentLoaded", () => {
           userType: role,
           action: "Download Annual Leave Report",
           createdAt: new Date().toISOString(),
+          ...(lastCalculation ? {
+            startDate: lastCalculation.startDate,
+            targetYear: lastCalculation.targetYear,
+            yearsOfService: lastCalculation.yearsOfServiceText,
+            baseEntitlement: lastCalculation.baseEntitlement,
+            proratedLeave: lastCalculation.proratedLeave,
+            leaveTaken: lastCalculation.leaveTaken,
+            remainingBalance: lastCalculation.remainingBalance
+          } : {})
         };
         if (companyInputExt?.value?.trim())
           (dbPayload as any).companyName = companyInputExt?.value?.trim();

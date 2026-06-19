@@ -42,6 +42,7 @@ function normalizeSheetPayload(body: any) {
   payload.action = downloadVia;
   payload.download_via = downloadVia;
 
+  console.log("[SERVER] Normalized payload keys:", Object.keys(payload));
   return payload;
 }
 

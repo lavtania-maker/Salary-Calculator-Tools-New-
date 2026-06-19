@@ -441,6 +441,15 @@ document.addEventListener("DOMContentLoaded", () => {
           "Company Name": companyInputExt?.value?.trim() || "",
           "User Phone": phone,
           download_via: "EPF Calculator",
+          ...(lastCalculation ? {
+            "Gross Salary": lastCalculation.salary,
+            "Employee EPF": lastCalculation.employeeEpf,
+            "Employer EPF": lastCalculation.employerEpf,
+            "Total EPF": lastCalculation.totalEpf,
+            "Net Salary": lastCalculation.netSalary,
+            "Age Group": lastCalculation.age === "above60" ? "Above 60" : "Below 60",
+            "Nationality": lastCalculation.nationality === "malaysian" ? "Malaysian" : "Foreigner"
+          } : {})
         };
 
         const dbPayload = {
@@ -448,6 +457,15 @@ document.addEventListener("DOMContentLoaded", () => {
           userType: role,
           action: "Download EPF Report",
           createdAt: new Date().toISOString(),
+          ...(lastCalculation ? {
+            salary: lastCalculation.salary,
+            employeeEpf: lastCalculation.employeeEpf,
+            employerEpf: lastCalculation.employerEpf,
+            totalEpf: lastCalculation.totalEpf,
+            netSalary: lastCalculation.netSalary,
+            ageGroup: lastCalculation.age,
+            nationality: lastCalculation.nationality
+          } : {})
         };
         if (companyInputExt?.value?.trim())
           (dbPayload as any).companyName = companyInputExt?.value?.trim();

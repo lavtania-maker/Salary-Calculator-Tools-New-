@@ -423,6 +423,16 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
           "Company Name": companyInputExt?.value?.trim() || "",
           "User Phone": phone,
           download_via: "PCB Calculator",
+          ...(lastCalculation ? {
+            "Gross Salary": lastCalculation.salary,
+            "Bonus": lastCalculation.bonus,
+            "Annual Income": lastCalculation.annualIncome,
+            "Total Reliefs": lastCalculation.relief,
+            "Tax Bracket": lastCalculation.taxBracket,
+            "Monthly PCB": lastCalculation.pcb,
+            "Net Salary": lastCalculation.netSalary,
+            "Tax Status": lastCalculation.taxStatus === "resident" ? "Resident" : "Non-Resident"
+          } : {})
         };
 
         const dbPayload = {
@@ -430,6 +440,16 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
           userType: role,
           action: "Download PCB Report",
           createdAt: new Date().toISOString(),
+          ...(lastCalculation ? {
+            salary: lastCalculation.salary,
+            bonus: lastCalculation.bonus,
+            annualIncome: lastCalculation.annualIncome,
+            relief: lastCalculation.relief,
+            taxBracket: lastCalculation.taxBracket,
+            pcb: lastCalculation.pcb,
+            netSalary: lastCalculation.netSalary,
+            taxStatus: lastCalculation.taxStatus
+          } : {})
         };
         if (companyInputExt?.value?.trim())
           (dbPayload as any).companyName = companyInputExt?.value?.trim();
