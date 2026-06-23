@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<title>HR and Salary Blog Malaysia 2026</title>
+<meta name="description" content="Free HR and payroll guides for Malaysian employees and employers." />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href="https://salarycalculator.my/blog" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="/public/calculator-styles.css" />
+<style>
+body{font-family:Inter,sans-serif;margin:0;background:#f8fafc;color:#0f172a;}
+.blog-hero{background:linear-gradient(135deg,#1e1b4b 0%,#312e81 100%);color:white;padding:60px 20px 50px;text-align:center;}
+.blog-hero h1{font-size:2.2rem;font-weight:700;margin:0 0 12px;}
+.blog-hero p{font-size:1.05rem;opacity:.85;margin:0;}
+.blog-container{max-width:1100px;margin:0 auto;padding:40px 20px 60px;}
+.category-filter{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;justify-content:center;}
+.cat-btn{padding:7px 18px;border-radius:20px;border:1.5px solid #e2e8f0;background:white;font-size:.875rem;font-weight:500;cursor:pointer;color:#475569;transition:all .2s;}
+.cat-btn:hover,.cat-btn.active{border-color:#4f46e5;background:#4f46e5;color:white;}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+@media(max-width:900px){.blog-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:580px){.blog-grid{grid-template-columns:1fr;}}
+.blog-card{background:white;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;transition:box-shadow .2s;}
+.blog-card:hover{box-shadow:0 8px 24px rgba(0,0,0,.10);border-color:#a5b4fc;}
+.card-thumb{width:100%;aspect-ratio:16/9;background:#e2e8f0;display:flex;align-items:center;justify-content:center;}
+.card-body{padding:18px 20px 20px;}
+.cat-tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:.75rem;font-weight:600;margin-bottom:10px;text-transform:uppercase;}
+.tag-epf{background:#dbeafe;color:#1d4ed8;}.tag-pcb{background:#ede9fe;color:#6d28d9;}
+.tag-socso{background:#ffedd5;color:#c2410c;}.tag-employment{background:#dcfce7;color:#15803d;}
+.tag-salary{background:#fee2e2;color:#b91c1c;}.tag-minwage{background:#cffafe;color:#0e7490;}
+.card-title{font-size:1rem;font-weight:600;color:#0f172a;margin:0 0 8px;line-height:1.4;}
+.card-desc{font-size:.875rem;color:#64748b;margin:0 0 14px;line-height:1.55;}
+.card-meta{font-size:.8rem;color:#94a3b8;margin-bottom:12px;}
+.read-more{font-size:.875rem;color:#4f46e5;font-weight:500;text-decoration:none;}
+footer{background:#1e1b4b;color:#94a3b8;text-align:center;padding:30px 20px;font-size:.875rem;}
+footer a{color:#a5b4fc;text-decoration:none;margin:0 10px;}
+</style>
+</head>
+<body>
+<nav class="navbar"><div class="nav-container"><a href="/" class="nav-logo"><span class="logo-text">SalaryCalculator<span class="logo-dot">.my</span></span></a><div class="nav-links"><a href="/" class="nav-link">Salary</a><a href="/epf-kwsp" class="nav-link">EPF</a><a href="/socso-perkeso" class="nav-link">SOCSO</a><a href="/pcb-income-tax" class="nav-link">PCB</a><a href="/annual-leave-calculator" class="nav-link">Annual Leave</a><a href="/blog" class="nav-link active">Blog</a></div><button class="nav-toggle">&#9776;</button></div></nav>
+<div class="blog-hero"><h1>HR and Salary Blog Malaysia</h1><p>Guides and tips for Malaysian employees and employers</p></div>
+<div class="blog-container">
+<div class="category-filter">
+<button class="cat-btn active" onclick="filterPosts(this,'all')">All</button>
+<button class="cat-btn" onclick="filterPosts(this,'epf')">EPF</button>
+<button class="cat-btn" onclick="filterPosts(this,'pcb')">PCB</button>
+<button class="cat-btn" onclick="filterPosts(this,'socso')">SOCSO</button>
+<button class="cat-btn" onclick="filterPosts(this,'employment')">Employment Law</button>
+<button class="cat-btn" onclick="filterPosts(this,'salary')">Salary Tips</button>
+<button class="cat-btn" onclick="filterPosts(this,'minwage')">Minimum Wage</button>
+</div>
+<div class="blog-grid" id="blogGrid">
+<div class="blog-card" data-cat="epf"><div class="card-thumb"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div><div class="card-body"><span class="cat-tag tag-epf">EPF</span><div class="card-title">EPF Contribution Guide 2026: Rates, Eligibility and How to Calculate</div><div class="card-desc">Everything about EPF contributions in Malaysia for 2026, employee and employer rates, and how to calculate your monthly deduction.</div><div class="card-meta">June 2026 - 6 min read</div><a href="#" class="read-more">Read More</a></div></div>
+<div class="blog-card" data-cat="pcb"><div class="card-thumb"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div><div class="card-body"><span class="cat-tag tag-pcb">PCB</span><div class="card-title">PCB Tax Deduction Guide 2026: How Monthly Tax is Calculated</div><div class="card-desc">A complete guide to PCB for 2026, how it is calculated, updated tax brackets, reliefs you can claim.</div><div class="card-meta">June 2026 - 7 min read</div><a href="#" class="read-more">Read More</a></div></div>
+<div class="blog-card" data-cat="minwage"><div class="card-thumb"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div><div class="card-body"><span class="cat-tag tag-minwage">Minimum Wage</span><div class="card-title">Minimum Wage Malaysia 2026: Latest Rates and What Employers Must Know</div><div class="card-desc">Malaysia minimum wage has been updated. Find out the current rate and key employer obligations.</div><div class="card-meta">May 2026 - 5 min read</div><a href="#" class="read-more">Read More</a></div></div>
+<div class="blog-card" data-cat="socso"><div class="card-thumb"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div><div class="card-body"><span class="cat-tag tag-socso">SOCSO</span><div class="card-title">SOCSO Guide Malaysia 2026: Contribution Rates, Benefits and How to Claim</div><div class="card-desc">Learn how SOCSO works in Malaysia, who needs to contribute, current rates and benefits.</div><div class="card-meta">May 2026 - 6 min read</div><a href="#" class="read-more">Read More</a></div></div>
+<div class="blog-card" data-cat="employment"><div class="card-thumb"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div><div class="card-body"><span class="cat-tag tag-employment">Employment Law</span><div class="card-title">Annual Leave Entitlement Malaysia 2026: EA 1955 Rules Explained</div><div class="card-desc">How many days of annual leave are Malaysian employees entitled to? Covers EA 1955 rules and employer obligations.</div><div class="card-meta">April 2026 - 5 min read</div><a href="#" class="read-more">Read More</a></div></div>
+<div class="blog-card" data-cat="salary"><div class="card-thumb"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div><div class="card-body"><span class="cat-tag tag-salary">Salary Tips</span><div class="card-title">Malaysia Salary Guide 2026: Average Pay by Industry and Role</div><div class="card-desc">What is the average salary in Malaysia in 2026? Covers median salaries across major industries and top-paying roles.</div><div class="card-meta">April 2026 - 8 min read</div><a href="#" class="read-more">Read More</a></div></div>
+</div>
+</div>
+<footer><p>2026 SalaryCalculator.my</p><p><a href="/privacy-policy">Privacy Policy</a></p></footer>
+<script>
+function filterPosts(btn,cat){document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.blog-card').forEach(card=>{card.style.display=(cat==='all'||card.dataset.cat===cat)?'':'none';});}
+const toggle=document.querySelector('.nav-toggle'),navLinks=document.querySelector('.nav-links');
+if(toggle&&navLinks)toggle.addEventListener('click',()=>navLinks.classList.toggle('open'));
+</script>
+</body>
+</html>
