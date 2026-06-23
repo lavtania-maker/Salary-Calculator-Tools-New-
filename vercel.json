@@ -25,7 +25,8 @@
     { "source": "/socso-perkeso",     "destination": "/#socsoForm" },
     { "source": "/pcb-calculator",    "destination": "/pcb-income-tax.html" },
     { "source": "/pcb-income-tax",    "destination": "/pcb-income-tax.html" },
-    { "source": "/annual-leave-calculator", "destination": "/annual-leave-calculator.html" }
+    { "source": "/annual-leave-calculator", "destination": "/annual-leave-calculator.html" },
+        { "source": "/blog",              "destination": "/blog.html" }
   ],
   "headers": [
     {
