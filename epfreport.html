@@ -1,15 +1,53 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
-    <link rel="canonical" href="https://salarycalculator.my/epf-kwsp" />
-    <link
-      rel="icon"
-      type="image/png"
-      href="/favicon-ricebowl.png"
-    />
+<!DOCTYPE html><html><head>
+    <script>
+      (function() {
+        var ignoreScriptError = function(msg) {
+          if (!msg) return true; // Treat empty message as something to ignore
+          var s = msg.toString().toLowerCase();
+          return s.indexOf("script error") > -1 || s === "script error." || s.indexOf("uncaught script error") > -1;
+        };
+
+        // 1. window.onerror
+        var oldOnError = window.onerror;
+        window.onerror = function (message, source, lineno, colno, error) {
+          if (ignoreScriptError(message)) {
+            console.warn("[SalaryCalc] Script error suppressed (window.onerror).");
+            return true;
+          }
+          if (typeof oldOnError === 'function') {
+            return oldOnError.apply(this, arguments);
+          }
+        };
+
+        // 2. addEventListener('error')
+        window.addEventListener('error', function(event) {
+          if (ignoreScriptError(event.message)) {
+            console.warn("[SalaryCalc] Script error suppressed (addEventListener).");
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+        
+        // 3. handle unhandledrejection
+        window.addEventListener('unhandledrejection', function(event) {
+          if (event.reason && ignoreScriptError(event.reason.message)) {
+            console.warn("[SalaryCalc] Script error suppressed (unhandledrejection).");
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
+    
+    
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://salarycalculator.my/epf-kwsp">
+    <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
     <title>EPF Contribution Report Malaysia</title>
     <style>
       body {
@@ -128,31 +166,169 @@
         }
       }
     </style>
-  </head>
+  <style id="tidy-up-styles">
+/* Global Tidy Up Styles - Depth & Warmth */
+body {
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  background-color: #f8fafc !important;
+}
+
+/* Headings */
+h1 { font-size: 2.25rem !important; line-height: 1.2 !important; margin-bottom: 1rem !important; }
+h2 { font-size: 1.875rem !important; line-height: 1.3 !important; margin-bottom: 1rem !important; }
+h3 { font-size: 1.5rem !important; line-height: 1.4 !important; margin-bottom: 0.75rem !important; }
+h4 { font-size: 1.25rem !important; line-height: 1.4 !important; margin-bottom: 0.5rem !important; }
+
+/* Spacing & Layout */
+section, .section {
+  padding-top: 60px !important;
+  padding-bottom: 60px !important;
+}
+
+.container {
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  box-sizing: border-box !important;
+}
+
+/* Cards */
+.card, .calc-card, .result-card, .blog-card, .stat-card {
+  padding: 32px !important;
+  border-radius: 12px !important;
+  margin-bottom: 24px !important;
+  box-sizing: border-box !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04) !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+/* Section Headings inside cards */
+.card h1, .card h2, .calc-card h2, .result-card h2, .card .card-title, .calc-card .card-title, .result-card .card-title {
+  border-left: 3px solid #2563eb !important;
+  padding-left: 12px !important;
+}
+
+/* Tables */
+table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  text-align: left !important;
+  margin-bottom: 24px !important;
+  border: 1px solid #e2e8f0 !important;
+}
+table thead tr, table tr:first-child:has(th) {
+  background-color: #f1f5f9 !important;
+}
+table th, table td {
+  padding: 16px !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+table tbody tr:nth-child(even), table tr:nth-child(even) {
+  background-color: #fafafa !important;
+}
+
+/* Tab Buttons & Filters */
+.seo-tabs, .blog-filters {
+  background-color: #f1f5f9 !important;
+  border-radius: 10px !important;
+  padding: 4px !important;
+  display: inline-flex !important;
+  gap: 4px !important;
+  margin-bottom: 20px !important;
+  flex-wrap: wrap !important;
+}
+.seo-tab, .filter-btn {
+  background-color: transparent !important;
+  color: #64748b !important;
+  padding: 8px 16px !important;
+  cursor: pointer !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  transition: all 0.2s !important;
+  border: none !important;
+  font-size: 14px !important;
+}
+.seo-tab.active, .filter-btn.active {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+/* Buttons */
+button, .btn {
+  padding: 12px 24px !important;
+  font-size: 16px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Inputs & Form Groups */
+.form-group {
+  margin-bottom: 24px !important;
+}
+input[type="text"], input[type="number"], input[type="email"], select {
+  padding: 12px 16px !important;
+  font-size: 16px !important;
+  border-radius: 8px !important;
+  box-sizing: border-box !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px !important;
+  }
+  h1 { font-size: 1.875rem !important; }
+  h2 { font-size: 1.5rem !important; }
+  
+  section, .section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+  
+  .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  
+  .card, .calc-card, .result-card, .blog-card, .stat-card {
+    padding: 24px !important;
+  }
+  
+  /* Make tables horizontally scrollable on mobile */
+  .table-responsive {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .table-responsive table {
+    width: 100% !important;
+    min-width: 600px !important;
+  }
+  .table-responsive th, .table-responsive td {
+    white-space: nowrap !important;
+  }
+  
+  .footer-grid {
+    gap: 32px !important;
+  }
+}
+</style></head>
   <body>
     <div class="print-controls">
       <button class="btn" onclick="window.print()">Print to PDF</button>
     </div>
 
-    <div
-      class="header"
-      style="border-bottom: none; padding-bottom: 0; margin-bottom: 10px"
-    >
+    <div class="header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 10px">
       <div class="brand-logo">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          width="28"
-          height="28"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z"
-          />
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="28" height="28">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75V18m-7.5-6.75h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V13.5zm0 2.25h.008v.008H8.25v-.008zm0 2.25h.008v.008H8.25V18zm2.498-6.75h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V13.5zm0 2.25h.007v.008h-.007v-.008zm0 2.25h.007v.008h-.007V18zm2.504-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zm0 2.25h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V18zm2.498-6.75h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V13.5zM8.25 6h7.5v2.25h-7.5V6zM12 2.25c-1.892 0-3.758.11-5.593.322C5.307 2.7 4.5 3.65 4.5 4.757V19.5a2.25 2.25 0 002.25 2.25h10.5a2.25 2.25 0 002.25-2.25V4.757c0-1.108-.806-2.057-1.907-2.185A48.507 48.507 0 0012 2.25z"></path>
         </svg>
         Salary Calculator MY
       </div>
@@ -161,14 +337,8 @@
 
     <div class="date-row" id="generatedDate"></div>
     <div style="margin-bottom: 20px">
-      <div
-        style="font-weight: bold; font-size: 16px"
-        id="companyNameDisplay"
-      ></div>
-      <div
-        style="font-weight: bold; font-size: 16px; margin-top: 4px"
-        id="employeeName"
-      ></div>
+      <div style="font-weight: bold; font-size: 16px" id="companyNameDisplay"></div>
+      <div style="font-weight: bold; font-size: 16px; margin-top: 4px" id="employeeName"></div>
     </div>
 
     <div class="section-title">Salary Detail</div>
@@ -186,24 +356,18 @@
       <span>Employer Contribution (<span id="emprRateStr">0%</span>)</span>
       <span id="employerEpf" style="color: #059669">+ RM 0.00</span>
     </div>
-    <div
-      class="row bold"
-      style="
+    <div class="row bold" style="
         font-size: 18px;
         background-color: #f8fafc;
         padding: 15px 10px;
         margin-top: 10px;
-      "
-    >
+      ">
       <span>Total Monthly EPF Remittance</span>
       <span id="totalEpf">RM 0.00</span>
     </div>
 
     <div class="section-title">Net Salary Summary</div>
-    <div
-      class="row bold"
-      style="font-size: 20px; padding-top: 15px; border-bottom: none"
-    >
+    <div class="row bold" style="font-size: 20px; padding-top: 15px; border-bottom: none">
       <span>Estimated Net Salary (After EPF)</span>
       <span id="netSalary" style="color: #0f172a">RM 0.00</span>
     </div>
@@ -220,16 +384,14 @@
 
     <div class="reminder">
       <div class="reminder-title">EMPLOYER REMINDER</div>
-      EPF contributions must be remitted by the 15th of the following month.<br />
-      Late remittance will be subject to penalties and late payment charges.<br />
+      EPF contributions must be remitted by the 15th of the following month.<br>
+      Late remittance will be subject to penalties and late payment charges.<br>
       Ensure correct employee particulars when submitting to KWSP.
     </div>
 
     <div class="footer-brand">
       <div>Generated by <strong>Salary Calculator MY</strong></div>
-      <a href="https://salarycalculator.my" target="_blank"
-        >salarycalculator.my</a
-      >
+      <a href="https://salarycalculator.my" target="_blank">salarycalculator.my</a>
     </div>
 
     <script>
@@ -304,5 +466,5 @@
         window.print();
       }, 500);
     </script>
-  </body>
-</html>
+
+</body></html>

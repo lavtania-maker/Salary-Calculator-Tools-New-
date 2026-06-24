@@ -1,0 +1,280 @@
+<!DOCTYPE html><html lang="en"><head>
+    <script>
+      (function() {
+        var ignoreScriptError = function(msg) {
+          if (!msg) return true; // Treat empty message as something to ignore
+          var s = msg.toString().toLowerCase();
+          return s.indexOf("script error") > -1 || s === "script error." || s.indexOf("uncaught script error") > -1;
+        };
+
+        // 1. window.onerror
+        var oldOnError = window.onerror;
+        window.onerror = function (message, source, lineno, colno, error) {
+          if (ignoreScriptError(message)) {
+            console.warn("[SalaryCalc] Script error suppressed (window.onerror).");
+            return true;
+          }
+          if (typeof oldOnError === 'function') {
+            return oldOnError.apply(this, arguments);
+          }
+        };
+
+        // 2. addEventListener('error')
+        window.addEventListener('error', function(event) {
+          if (ignoreScriptError(event.message)) {
+            console.warn("[SalaryCalc] Script error suppressed (addEventListener).");
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+        
+        // 3. handle unhandledrejection
+        window.addEventListener('unhandledrejection', function(event) {
+          if (event.reason && ignoreScriptError(event.reason.message)) {
+            console.warn("[SalaryCalc] Script error suppressed (unhandledrejection).");
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
+    <title>Malaysia Salary Guide 2026 – Average Salary, Take Home Pay &amp; Income Groups</title>
+    <meta name="description" content="Average salaries by industry, B40 M40 T20 thresholds and take home pay for common salary levels in Malaysia.">
+    
+    <!-- SEO -->
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://salarycalculator.my/malaysia-salary-guide-2026">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <!-- Optimized CSS loading to prevent render-blocking -->
+    <link rel="preload" href="/calculator-styles.css" as="style">
+    <link rel="stylesheet" href="/calculator-styles.css" media="print" onload="this.media='all'">
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Malaysia Salary Guide 2026 – Average Salary, Take Home Pay & Income Groups",
+  "image": [
+    "https://salarycalculator.my/thumbnail.jpg"
+  ],
+  "datePublished": "2026-06-23T08:00:00+08:00",
+  "dateModified": "2026-06-23T08:00:00+08:00",
+  "author": [
+    {
+      "@type": "Organization",
+      "name": "SalaryCalculator.my Team",
+      "url": "https://salarycalculator.my/"
+    }
+  ],
+  "description": "Average salaries by industry, B40 M40 T20 thresholds and take home pay for common salary levels in Malaysia.",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://salarycalculator.my/malaysia-salary-guide-2026"
+  }
+}</script>
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://salarycalculator.my/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://salarycalculator.my/blog"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Malaysia Salary Guide 2026 – Average Salary, Take Home Pay & Income Groups",
+      "item": "https://salarycalculator.my/malaysia-salary-guide-2026"
+    }
+  ]
+}</script>
+    <script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is Malaysia Salary Guide 2026?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Average salaries by industry, B40 M40 T20 thresholds and take home pay for common salary levels in Malaysia."
+      }
+    }
+  ]
+}</script>
+  <meta property="og:type" content="website"><meta property="og:url" content="https://salarycalculator.my/malaysia-salary-guide-2026"><meta property="og:title" content="Malaysia Salary Guide 2026 – Average Salary, Take Home Pay &amp; Income Groups"><meta property="og:description" content="Average salaries by industry, B40 M40 T20 thresholds and take home pay for common salary levels in Malaysia."><meta property="og:image" content="https://salarycalculator.my/logo-small.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:url" content="https://salarycalculator.my/malaysia-salary-guide-2026"><meta name="twitter:title" content="Malaysia Salary Guide 2026 – Average Salary, Take Home Pay &amp; Income Groups"><meta name="twitter:description" content="Average salaries by industry, B40 M40 T20 thresholds and take home pay for common salary levels in Malaysia."><meta name="twitter:image" content="https://salarycalculator.my/logo-small.png"><meta property="article:published_time" content="2026-06-23T08:00:00+08:00"><meta property="article:modified_time" content="2026-06-23T08:00:00+08:00"></head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+        <a href="/" class="logo">
+          <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" class="logo-img" width="250" height="44">
+        </a>
+
+        <nav class="desktop-nav">
+          <a href="/" class="nav-item">Salary Calculator</a>
+          <a href="/socso-perkeso" class="nav-item">SOCSO Calculator</a>
+          <a href="/pcb-income-tax" class="nav-item">PCB Calculator</a>
+          <a href="/epf-kwsp" class="nav-item">EPF Calculator</a>
+          <a href="/annual-leave-calculator" class="nav-item">Annual Leave Calculator</a>
+          <a href="/blog" class="nav-item">Blog</a>
+        </nav>
+
+        <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="mobile-nav" id="mobileNavMenu">
+        <a href="/" class="mobile-nav-item">Salary Calculator (Take Home Pay)</a>
+        <a href="/socso-perkeso" class="mobile-nav-item">SOCSO (PERKESO) Calculator</a>
+        <a href="/pcb-income-tax" class="mobile-nav-item">PCB (Monthly Tax Deduction) Calculator</a>
+        <a href="/epf-kwsp" class="mobile-nav-item">EPF (KWSP) Calculator</a>
+        <a href="/annual-leave-calculator" class="mobile-nav-item">Annual Leave Calculator</a>
+        <a href="/blog" class="mobile-nav-item">Blog</a>
+      </nav>
+    </header>
+
+    <main class="container" style="padding: 40px 20px;">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep">/</span>
+        <a href="/blog">Blog</a>
+        <span class="sep">/</span>
+        <span>Malaysia Salary Guide 2026 – Average Salary, Take Home Pay &amp; Income Groups</span>
+      </nav>
+
+      <article>
+        <header class="article-header">
+          <div class="article-meta">
+            <span class="blog-category category-tips">Salary Tips</span>
+            <span>5 min read</span>
+            <span class="sep">•</span>
+            <span>23 June 2026</span>
+          </div>
+          <h1 class="article-title">Malaysia Salary Guide 2026 – Average Salary, Take Home Pay &amp; Income Groups</h1>
+          <p style="color: #64748b; font-weight: 500;">By SalaryCalculator.my Team</p>
+        </header>
+
+        <div class="article-hero"></div>
+
+        <div class="article-body">
+          <p>[Write article content here. Use paragraphs, H2 headings, and lists to structure your article.]</p>
+          
+          <h2>[Section Heading]</h2>
+          <p>[More content...]</p>
+          
+          <!-- Related Calculator CTA -->
+          <div class="article-cta">
+            <h3>Try our free [Calculator Name]</h3>
+            <p>Calculate your accurate [deductions/entitlement] instantly for 2026.</p>
+            <a href="/[calculator-path]" class="btn" style="background: #2563eb; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none;">Try our free [calculator name] →</a>
+          </div>
+
+          <h2>Frequently Asked Questions</h2>
+          <div class="faq-section">
+            <p><strong>[Question 1]?</strong></p>
+            <p>[Answer 1]</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Related Posts -->
+      <section style="margin-top: 80px; padding-top: 60px; border-top: 1px solid #e2e8f0;">
+        <h2 style="font-size: 1.5rem; font-weight: 700; color: #0f172a; margin-bottom: 32px;">Related Articles</h2>
+        <div class="blog-grid">
+          <!-- Post 1 -->
+          <a href="/epf-contribution-guide-2026" class="blog-card">
+            <div class="blog-thumb"></div>
+            <div class="blog-content">
+              <span class="blog-category category-tips">EPF</span>
+              <h3 class="blog-title">EPF Contribution Guide 2026 – Everything Malaysian Employees Need to Know</h3>
+              <p class="blog-desc">EPF rates, how contributions are calculated, and tips to maximize your retirement savings in Malaysia.</p>
+              <div class="blog-meta">
+                <span>20 June 2026</span>
+                <span>6 min read</span>
+              </div>
+            </div>
+          </a>
+          <!-- More cards here -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <a href="/" class="logo" style="margin-bottom: 20px; display: block">
+              <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" width="250" height="44" style="height: 60px; width: auto; object-fit: contain; border-radius: 4px;">
+            </a>
+            <p style="color: #94a3b8; font-size: 0.9375rem; line-height: 1.6">
+              Accurate Malaysia salary calculator.<br>
+              Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
+            </p>
+          </div>
+          <div class="footer-col footer-col-links">
+            <h4>Quick Links</h4>
+            <a href="/" class="footer-link">Salary Calculator</a>
+            <a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
+            <a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
+            <a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
+            <a href="/annual-leave-calculator" class="footer-link">Annual Leave Calculator</a>
+            <a href="/blog" class="footer-link">Blog</a>
+            <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 SalaryCalc MY</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile Menu Toggle
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const mobileNavMenu = document.getElementById('mobileNavMenu');
+      if (mobileMenuToggle && mobileNavMenu) {
+        mobileMenuToggle.addEventListener('click', () => {
+          mobileNavMenu.classList.toggle('open');
+        });
+      }
+    </script>
+  
+
+</body></html>

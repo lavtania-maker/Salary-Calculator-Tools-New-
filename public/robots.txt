@@ -4,6 +4,7 @@ Allow: /
 
 # Disallow internal/admin pages
 Disallow: /admin
+Disallow: /blog-admin
 Disallow: /mincal
 Disallow: /report
 Disallow: /payslip

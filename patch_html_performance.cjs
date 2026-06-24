@@ -43,6 +43,7 @@ function optimizeHtmlFile(filePath) {
       window.addEventListener('load', function() {
         setTimeout(function() {
           const script = document.createElement('script');
+          script.crossOrigin = "anonymous";
           script.src = "https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P";
           script.async = true;
           document.head.appendChild(script);
@@ -74,12 +75,12 @@ function optimizeHtmlFile(filePath) {
   // Custom replacements for <img> tags
   // Top nav logo (logo-img):
   const headerLogoTarget = new RegExp(`<img[^>]*src="${escapeRegExp(oldLogo)}"[^>]*class="logo-img"[^>]*>`, 'gi');
-  const headerLogoReplacement = `<img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" class="logo-img" width="250" height="39" />`;
+  const headerLogoReplacement = `<img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" class="logo-img" width="250" height="44" />`;
   html = html.replace(headerLogoTarget, headerLogoReplacement);
 
   // Footer logo with height styled:
   const footerLogoTarget = new RegExp(`<img[^>]*src="${escapeRegExp(oldLogo)}"[^>]*style="[^"]*height:\\s*60px[^"]*"[^>]*>`, 'gi');
-  const footerLogoReplacement = `<img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" width="250" height="39" style="height: 60px; width: auto; object-fit: contain; border-radius: 4px; mix-blend-mode: screen; opacity: 0.9;" />`;
+  const footerLogoReplacement = `<img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" width="250" height="44" style="height: 60px; width: auto; object-fit: contain; border-radius: 4px;" />`;
   html = html.replace(footerLogoTarget, footerLogoReplacement);
 
   // Other general logo replacements (replace raw src first)

@@ -22,13 +22,11 @@
     { "source": "/payslip-generator", "destination": "/payslip.html"  },
     { "source": "/report",            "destination": "/report.html"   },
     { "source": "/epf-kwsp",          "destination": "/epf-kwsp.html" },
-    { "source": "/socso-perkeso",     "destination": "/#socsoForm" },
+    { "source": "/socso-perkeso",     "destination": "/socso-perkeso.html" },
     { "source": "/pcb-calculator",    "destination": "/pcb-income-tax.html" },
     { "source": "/pcb-income-tax",    "destination": "/pcb-income-tax.html" },
-    { "source": "/annual-leave-calculator", "destination": "/annual-leave-calculator.html" },
-        { "source": "/blog",              "destination": "/blog.html" },
-        { "source": "/blog-admin",       "destination": "/blog-admin.html" },
-        { "source": "/blog/:slug",         "destination": "/blog-post.html" }
+    { "source": "/blog",               "destination": "/blog.html" },
+    { "source": "/annual-leave-calculator", "destination": "/annual-leave-calculator.html" }
   ],
   "headers": [
     {

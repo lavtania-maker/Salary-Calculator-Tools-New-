@@ -1,6 +1,47 @@
 <!doctype html>
 <html>
   <head>
+    <script>
+      (function() {
+        var ignoreScriptError = function(msg) {
+          if (!msg) return true; // Treat empty message as something to ignore
+          var s = msg.toString().toLowerCase();
+          return s.indexOf("script error") > -1 || s === "script error." || s.indexOf("uncaught script error") > -1;
+        };
+
+        // 1. window.onerror
+        var oldOnError = window.onerror;
+        window.onerror = function (message, source, lineno, colno, error) {
+          if (ignoreScriptError(message)) {
+            console.warn("[SalaryCalc] Script error suppressed (window.onerror).");
+            return true;
+          }
+          if (typeof oldOnError === 'function') {
+            return oldOnError.apply(this, arguments);
+          }
+        };
+
+        // 2. addEventListener('error')
+        window.addEventListener('error', function(event) {
+          if (ignoreScriptError(event.message)) {
+            console.warn("[SalaryCalc] Script error suppressed (addEventListener).");
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+        
+        // 3. handle unhandledrejection
+        window.addEventListener('unhandledrejection', function(event) {
+          if (event.reason && ignoreScriptError(event.reason.message)) {
+            console.warn("[SalaryCalc] Script error suppressed (unhandledrejection).");
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex, nofollow" />

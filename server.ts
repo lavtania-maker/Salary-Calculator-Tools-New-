@@ -366,7 +366,8 @@ async function startServer() {
       "/report.html": "report.html",
       "/epf-kwsp": "epf-kwsp.html",
       "/epf-kwsp.html": "epf-kwsp.html",
-      "/socso-perkeso": "index.html",
+      "/socso-perkeso": "socso-perkeso.html",
+      "/socso-perkeso.html": "socso-perkeso.html",
       "/epfreport": "epfreport.html",
       "/epfreport.html": "epfreport.html",
       "/socsoreport": "socsoreport.html",
@@ -379,6 +380,10 @@ async function startServer() {
       "/pcb-income-tax.html": "pcb-income-tax.html",
       "/annual-leave-calculator": "annual-leave-calculator.html",
       "/annual-leave-calculator.html": "annual-leave-calculator.html",
+      "/blog": "blog.html",
+      "/blog.html": "blog.html",
+      "/blog-post-template": "blog-post-template.html",
+      "/blog-post-template.html": "blog-post-template.html",
     };
 
     app.use(async (req, res, next) => {

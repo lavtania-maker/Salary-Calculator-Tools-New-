@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => {
     },
     appType: "custom",
     server: {
-      hmr: false,
+      hmr: false, // Disable HMR - WebSocket doesn't work through v0 proxy
     },
     build: {
       rollupOptions: {
@@ -33,8 +33,9 @@ export default defineConfig(({ mode }) => {
           privacyPolicy: path.resolve(__dirname, "privacy-policy.html"),
           pcbCalculator: path.resolve(__dirname, "pcb-income-tax.html"),
           annualLeave: path.resolve(__dirname, "annual-leave-calculator.html"),
+          socsoPerkeso: path.resolve(__dirname, "socso-perkeso.html"),
           blog: path.resolve(__dirname, "blog.html"),
-          blogAdmin: path.resolve(__dirname, "blog-admin.html"),
+          blogPostTemplate: path.resolve(__dirname, "blog-post-template.html"),
         },
       },
     },

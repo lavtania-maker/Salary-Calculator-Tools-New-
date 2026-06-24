@@ -1,6 +1,48 @@
-<!doctype html>
-<html lang="en">
-  <head>
+<!DOCTYPE html><html lang="en"><head>
+    <script>
+      (function() {
+        var ignoreScriptError = function(msg) {
+          if (!msg) return true; // Treat empty message as something to ignore
+          var s = msg.toString().toLowerCase();
+          return s.indexOf("script error") > -1 || s === "script error." || s.indexOf("uncaught script error") > -1;
+        };
+
+        // 1. window.onerror
+        var oldOnError = window.onerror;
+        window.onerror = function (message, source, lineno, colno, error) {
+          if (ignoreScriptError(message)) {
+            console.warn("[SalaryCalc] Script error suppressed (window.onerror).");
+            return true;
+          }
+          if (typeof oldOnError === 'function') {
+            return oldOnError.apply(this, arguments);
+          }
+        };
+
+        // 2. addEventListener('error')
+        window.addEventListener('error', function(event) {
+          if (ignoreScriptError(event.message)) {
+            console.warn("[SalaryCalc] Script error suppressed (addEventListener).");
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+        
+        // 3. handle unhandledrejection
+        window.addEventListener('unhandledrejection', function(event) {
+          if (event.reason && ignoreScriptError(event.reason.message)) {
+            console.warn("[SalaryCalc] Script error suppressed (unhandledrejection).");
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
+    
+    
+    
     <script>
       if ("scrollRestoration" in history) {
         history.scrollRestoration = "manual";
@@ -12,8 +54,7 @@
     <script>
       window.addEventListener('load', function() {
         setTimeout(function() {
-          const script = document.createElement('script');
-          script.src = "https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P";
+          const script = document.createElement("script"); script.crossOrigin = "anonymous"; script.src = "https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P";
           script.async = true;
           document.head.appendChild(script);
 
@@ -27,182 +68,43 @@
         }, 1200);
       });
     </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      type="image/png"
-      href="/favicon-ricebowl.png"
-    />
-    <title>Annual Leave Calculator Malaysia 2026 – Employee Leave Entitlement</title>
-    <meta name="description" content="Calculate annual leave entitlement based on Malaysian Employment Act 2026. Free for HR and employees."
-    />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
 
     <!-- SEO -->
-    <meta name="robots" content="index, follow" />
-    <meta
-      name="keywords"
-      content="annual leave calculator malaysia, annual leave entitlement malaysia, calculate annual leave malaysia, prorated annual leave malaysia, annual leave labour law malaysia, leave balance calculator, unused annual leave malaysia"
-    />
-    <link
-      rel="canonical"
-      href="https://salarycalculator.my/annual-leave-calculator"
-    />
-    <link
-      rel="alternate"
-      hreflang="en-MY"
-      href="https://salarycalculator.my/annual-leave-calculator"
-    />
-    <link
-      rel="alternate"
-      hreflang="ms-MY"
-      href="https://salarycalculator.my/annual-leave-calculator"
-    />
-    <link
-      rel="alternate"
-      hreflang="x-default"
-      href="https://salarycalculator.my/annual-leave-calculator"
-    />
+    <meta name="robots" content="index, follow">
+    <meta name="keywords" content="annual leave calculator malaysia, annual leave entitlement malaysia, calculate annual leave malaysia, prorated annual leave malaysia, annual leave labour law malaysia, leave balance calculator, unused annual leave malaysia">
+    <link rel="canonical" href="https://salarycalculator.my/annual-leave-calculator">
+    <link rel="alternate" hreflang="en-MY" href="https://salarycalculator.my/annual-leave-calculator">
+    
+    
 
     <!-- Open Graph -->
-    <meta property="og:type" content="website" />
-    <meta
-      property="og:url"
-      content="https://salarycalculator.my/annual-leave-calculator"
-    />
-    <meta
-      property="og:title"
-      content="Annual Leave Calculator Malaysia | Entitlement & Prorated Leave"
-    />
-    <meta
-      property="og:description"
-      content="Calculate annual leave entitlement based on Malaysian Employment Act. Quickly find remaining leave balances and pro-rated leave days."
-    />
-    <meta
-      property="og:image"
-      content="/logo-small.png"
-    />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content="Salary Calculator Malaysia" />
-    <meta property="og:site_name" content="SalaryCalc MY" />
-    <meta property="og:locale" content="en_MY" />
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://salarycalculator.my/annual-leave-calculator">
+    <meta property="og:title" content="Annual Leave Calculator Malaysia | Pro-Rated Leave Entitlement">
+    <meta property="og:description" content="Calculate accurate pro-rated annual leave entitlement under the Malaysian Employment Act. Free tool for HR and employees.">
+    <meta property="og:image" content="https://salarycalculator.my/logo-small.png">
+      <meta property="og:image:width" content="1200">
+      <meta property="og:image:height" content="630">
+      <meta property="og:image:alt" content="Salary Calculator Malaysia">
+    <meta property="og:site_name" content="SalaryCalc MY">
+    <meta property="og:locale" content="en_MY">
 
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Annual Leave Calculator Malaysia" />
-    <meta
-      name="twitter:description"
-      content="Calculate your prorated annual leave balance instantly with this free calculator based on the Malaysian Labour Law."
-    />
-    <meta
-      name="twitter:image"
-      content="/logo-small.png"
-    />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Annual Leave Calculator Malaysia | Pro-Rated Leave Entitlement">
+    <meta name="twitter:description" content="Calculate accurate pro-rated annual leave entitlement under the Malaysian Employment Act. Free tool for HR and employees.">
+    <meta name="twitter:image" content="https://salarycalculator.my/logo-small.png">
 
     <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Annual Leave Calculator Malaysia",
-        "url": "https://salarycalculator.my/annual-leave-calculator",
-        "description": "Calculate annual leave entitlement and prorated leave balances easily.",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "MYR"
-        },
-        "author": {
-          "@type": "Organization",
-          "name": "SalaryCalc MY",
-          "url": "https://salarycalculator.my/"
-        }
-      }
-    </script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "How do you calculate pro-rated annual leave in Malaysia?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "The formula is (Months Worked ÷ 12) × Annual Leave Entitlement. For example, if you worked 6 months and are entitled to 12 days, you get 6 days of pro-rated leave."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can annual leave expire in Malaysia?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, unless company policy allows carry-forward, unutilized annual leave typically expires at the end of the year or cut-off period."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Can employers reject annual leave?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, employers have the right to approve or reject leave applications based on operational requirements, provided they adhere to the minimum notice periods in your contract."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is unused annual leave paid after resignation?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, under the Employment Act, an employer must compensate you for unused pro-rated annual leave balance in your final paycheck."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Does annual leave include weekends?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "No, annual leave only counts towards working days. Rest days and public holidays do not count as annual leave."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Is annual leave mandatory in Malaysia?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Yes, under the Employment Act 1955, employees must be given a minimum of 8 days per year for less than 2 years of service, 12 days for 2-5 years, and 16 days for 5 or more years."
-            }
-          }
-        ]
-      }
-    </script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://salarycalculator.my/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Annual Leave Calculator",
-            "item": "https://salarycalculator.my/annual-leave-calculator"
-          }
-        ]
-      }
-    </script>
 
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <!-- Asynchronously loaded Google Fonts to prevent render-blocking -->
+
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
@@ -213,40 +115,54 @@
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
     <!-- Optimized CSS loading to prevent render-blocking -->
-    <link rel="preload" href="/calculator-styles.css" as="style" />
-    <link rel="stylesheet" href="/calculator-styles.css" media="print" onload="this.media='all'" />
+    <link rel="preload" href="/calculator-styles.css" as="style">
+    <link rel="stylesheet" href="/calculator-styles.css" media="print" onload="this.media='all'">
   
 <script>
   (function() {
@@ -291,8 +207,197 @@
     });
   })();
 </script>
-</head>
-  <body>
+<title>Annual Leave Calculator Malaysia | Pro-Rated Leave Entitlement</title><meta name="description" content="Calculate accurate pro-rated annual leave entitlement under the Malaysian Employment Act. Free tool for HR and employees."><style id="tidy-up-styles">
+/* Global Tidy Up Styles - Depth & Warmth */
+body {
+  font-size: 16px !important;
+  line-height: 1.6 !important;
+  background-color: #f8fafc !important;
+}
+
+/* Headings */
+h1 { font-size: 2.25rem !important; line-height: 1.2 !important; margin-bottom: 1rem !important; }
+h2 { font-size: 1.875rem !important; line-height: 1.3 !important; margin-bottom: 1rem !important; }
+h3 { font-size: 1.5rem !important; line-height: 1.4 !important; margin-bottom: 0.75rem !important; }
+h4 { font-size: 1.25rem !important; line-height: 1.4 !important; margin-bottom: 0.5rem !important; }
+
+/* Spacing & Layout */
+section, .section {
+  padding-top: 60px !important;
+  padding-bottom: 60px !important;
+}
+
+.container {
+  width: 100% !important;
+  max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+  box-sizing: border-box !important;
+}
+
+/* Cards */
+.card, .calc-card, .result-card, .blog-card, .stat-card {
+  padding: 32px !important;
+  border-radius: 12px !important;
+  margin-bottom: 24px !important;
+  box-sizing: border-box !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04) !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+/* Section Headings inside cards */
+.card h1, .card h2, .calc-card h2, .result-card h2, .card .card-title, .calc-card .card-title, .result-card .card-title {
+  border-left: 3px solid #2563eb !important;
+  padding-left: 12px !important;
+}
+
+/* Tables */
+table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  text-align: left !important;
+  margin-bottom: 24px !important;
+  border: 1px solid #e2e8f0 !important;
+}
+table thead tr, table tr:first-child:has(th) {
+  background-color: #f1f5f9 !important;
+}
+table th, table td {
+  padding: 16px !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+table tbody tr:nth-child(even), table tr:nth-child(even) {
+  background-color: #fafafa !important;
+}
+
+/* Tab Buttons & Filters */
+.seo-tabs, .blog-filters {
+  background-color: #f1f5f9 !important;
+  border-radius: 10px !important;
+  padding: 4px !important;
+  display: inline-flex !important;
+  gap: 4px !important;
+  margin-bottom: 20px !important;
+  flex-wrap: wrap !important;
+}
+.seo-tab, .filter-btn {
+  background-color: transparent !important;
+  color: #64748b !important;
+  padding: 8px 16px !important;
+  cursor: pointer !important;
+  font-weight: 600 !important;
+  border-radius: 8px !important;
+  transition: all 0.2s !important;
+  border: none !important;
+  font-size: 14px !important;
+}
+.seo-tab.active, .filter-btn.active {
+  background-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+/* Buttons */
+button, .btn {
+  padding: 12px 24px !important;
+  font-size: 16px !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Inputs & Form Groups */
+.form-group {
+  margin-bottom: 24px !important;
+}
+input[type="text"], input[type="number"], input[type="email"], select {
+  padding: 12px 16px !important;
+  font-size: 16px !important;
+  border-radius: 8px !important;
+  box-sizing: border-box !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px !important;
+  }
+  h1 { font-size: 1.875rem !important; }
+  h2 { font-size: 1.5rem !important; }
+  
+  section, .section {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+  
+  .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  
+  .card, .calc-card, .result-card, .blog-card, .stat-card {
+    padding: 24px !important;
+  }
+  
+  /* Make tables horizontally scrollable on mobile */
+  .table-responsive {
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+  .table-responsive table {
+    width: 100% !important;
+    min-width: 600px !important;
+  }
+  .table-responsive th, .table-responsive td {
+    white-space: nowrap !important;
+  }
+  
+  .footer-grid {
+    gap: 32px !important;
+  }
+}
+</style><meta name="twitter:url" content="https://salarycalculator.my/annual-leave-calculator"><meta property="article:published_time" content="2026-06-10T00:00:00+08:00"><meta property="article:modified_time" content="2026-06-23T00:00:00+08:00"></head><body>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "Annual Leave Calculator Malaysia 2026 – Calculate Employee Leave Entitlement FREE",
+  "description": "Calculate annual leave entitlement based on Malaysian Employment Act 2026. Free for HR teams and employees. Supports pro-rated leave calculation.",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "All",
+  "url": "https://salarycalculator.my/annual-leave-calculator",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "MYR"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://salarycalculator.my/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Annual Leave Calculator",
+      "item": "https://salarycalculator.my/annual-leave-calculator"
+    }
+  ]
+}
+</script>
+  
     <noscript>
       <div
         style="
@@ -311,42 +416,25 @@
     </noscript>
     <!-- Navbar -->
     <header class="navbar">
-      <div
-        class="container"
-        style="
+      <div class="container" style="
           display: flex;
           justify-content: space-between;
           align-items: center;
           position: relative;
-        "
-      >
+        ">
         <a href="/" class="logo">
-          <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" class="logo-img" width="250" height="44" />
+          <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" class="logo-img" width="250" height="44">
         </a>
         <nav class="desktop-nav">
           <a href="/" class="nav-item">Salary Calculator</a>
           <a href="/socso-perkeso" class="nav-item">SOCSO Calculator</a>
           <a href="/pcb-income-tax" class="nav-item">PCB Calculator</a>
           <a href="/epf-kwsp" class="nav-item">EPF Calculator</a>
-          <a href="/annual-leave-calculator" class="nav-item active-nav"
-            >Annual Leave Calculator</a
-          >
+          <a href="/annual-leave-calculator" class="nav-item active-nav">Annual Leave Calculator</a>
+          <a href="/blog" class="nav-item" title="HR &amp; Salary Blog Malaysia">Blog</a>
         </nav>
-        <button
-          class="mobile-menu-btn"
-          id="mobileMenuToggle"
-          aria-label="Toggle Menu"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+        <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -356,16 +444,11 @@
       <!-- Mobile Dropdown Menu -->
       <nav class="mobile-nav" id="mobileNavMenu">
         <a href="/" class="mobile-nav-item">Salary Calculator</a>
-        <a href="/socso-perkeso" class="mobile-nav-item"
-          >SOCSO (PERKESO) Calculator</a
-        >
-        <a href="/pcb-income-tax" class="mobile-nav-item"
-          >PCB (Monthly Tax Deduction) Calculator</a
-        >
+        <a href="/socso-perkeso" class="mobile-nav-item">SOCSO (PERKESO) Calculator</a>
+        <a href="/pcb-income-tax" class="mobile-nav-item">PCB (Monthly Tax Deduction) Calculator</a>
         <a href="/epf-kwsp" class="mobile-nav-item">EPF (KWSP) Calculator</a>
-        <a href="/annual-leave-calculator" class="mobile-nav-item active-nav"
-          >Annual Leave Calculator</a
-        >
+        <a href="/annual-leave-calculator" class="mobile-nav-item active-nav">Annual Leave Calculator</a>
+        <a href="/blog" class="mobile-nav-item">Blog</a>
       </nav>
     </header>
 
@@ -388,9 +471,7 @@
           <section class="card">
             <h2 class="card-title">Enter Details</h2>
             <form id="leaveForm" action="#leaveResultCard">
-              <div
-                id="leaveWarning"
-                style="
+              <div id="leaveWarning" style="
                   display: none;
                   background: #fff1f2;
                   border: 1px solid #ffe4e6;
@@ -401,28 +482,19 @@
                   font-size: 0.95rem;
                   font-weight: 500;
                   line-height: 1.5;
-                "
-              ></div>
+                "></div>
               <div class="form-group">
-                <label class="form-label" for="leaveStartDate"
-                  >Employee Start Date</label
-                >
-                <div
-                  style="
+                <label class="form-label" for="leaveStartDate">Employee Start Date</label>
+                <div style="
                     color: var(--danger);
                     font-size: 0.85rem;
                     font-weight: 500;
                     margin-bottom: 10px;
                     margin-top: -6px;
-                  "
-                >
+                  ">
                   *Required
                 </div>
-                <input
-                  type="date"
-                  id="leaveStartDate"
-                  class="form-input"
-                />
+                <input type="date" id="leaveStartDate" class="form-input">
               </div>
 
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px">
@@ -450,60 +522,32 @@
                     <input type="radio" name="publicHolidayIncluded" value="yes"> Yes
                   </label>
                   <label style="display: flex; align-items: center; gap: 8px;">
-                    <input type="radio" name="publicHolidayIncluded" value="no" checked> No
+                    <input type="radio" name="publicHolidayIncluded" value="no" checked=""> No
                   </label>
                 </div>
               </div>
 
-              <div
-                style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px"
-              >
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px">
                 <div class="form-group">
-                  <label class="form-label" for="leaveCalcYear"
-                    >Calculation Year</label
-                  >
+                  <label class="form-label" for="leaveCalcYear">Calculation Year</label>
                   <select id="leaveCalcYear" class="form-select">
                     <option value="current">Current Year</option>
                     <option value="custom">Custom Year</option>
                   </select>
                 </div>
                 <!-- Custom year input (hidden by default) -->
-                <div
-                  class="form-group"
-                  id="customYearGroup"
-                  style="display: none"
-                >
-                  <label class="form-label" for="leaveCustomYearInput"
-                    >Enter Year</label
-                  >
-                  <input
-                    type="number"
-                    id="leaveCustomYearInput"
-                    class="form-input"
-                    min="2000"
-                    max="2100"
-                  />
+                <div class="form-group" id="customYearGroup" style="display: none">
+                  <label class="form-label" for="leaveCustomYearInput">Enter Year</label>
+                  <input type="number" id="leaveCustomYearInput" class="form-input" min="2000" max="2100">
                 </div>
               </div>
 
-              <div
-                style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px"
-              >
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px">
                 <div class="form-group" style="margin-bottom: 0">
-                  <label class="form-label" for="leaveEntitlement"
-                    >Annual Leave Entitlement</label
-                  >
+                  <label class="form-label" for="leaveEntitlement">Annual Leave Entitlement</label>
                   <div class="input-group">
-                    <input
-                      type="number"
-                      id="leaveEntitlement"
-                      class="form-input"
-                      min="0"
-                      step="0.5"
-                    />
-                    <span
-                      class="input-postfix"
-                      style="
+                    <input type="number" id="leaveEntitlement" class="form-input" min="0" step="0.5">
+                    <span class="input-postfix" style="
                         padding: 0 16px;
                         color: #64748b;
                         background: #ffffff;
@@ -511,9 +555,7 @@
                         display: flex;
                         align-items: center;
                         font-weight: 500;
-                      "
-                      >Days</span
-                    >
+                      ">Days</span>
                   </div>
                   <p style="font-size: 0.8rem; color: #64748b; margin-top: 8px">
                     Based on Malaysian Employment Act minimum entitlement.
@@ -521,24 +563,11 @@
                 </div>
 
                 <div class="form-group" style="margin-bottom: 0">
-                  <label class="form-label" for="leaveTaken"
-                    >Leave Taken
-                    <span style="font-weight: 400; color: #64748b"
-                      >(Optional)</span
-                    ></label
-                  >
+                  <label class="form-label" for="leaveTaken">Leave Taken
+                    <span style="font-weight: 400; color: #64748b">(Optional)</span></label>
                   <div class="input-group">
-                    <input
-                      type="number"
-                      id="leaveTaken"
-                      class="form-input"
-                      placeholder="0"
-                      min="0"
-                      step="0.5"
-                    />
-                    <span
-                      class="input-postfix"
-                      style="
+                    <input type="number" id="leaveTaken" class="form-input" placeholder="0" min="0" step="0.5">
+                    <span class="input-postfix" style="
                         padding: 0 16px;
                         color: #64748b;
                         background: #ffffff;
@@ -546,59 +575,22 @@
                         display: flex;
                         align-items: center;
                         font-weight: 500;
-                      "
-                      >Days</span
-                    >
+                      ">Days</span>
                   </div>
                 </div>
               </div>
 
-              <div
-                class="form-actions"
-                style="gap: 20px; align-items: stretch; margin-top: 40px"
-              >
+              <div class="form-actions" style="gap: 20px; align-items: stretch; margin-top: 40px">
                 <button type="reset" id="leaveResetBtn" class="btn btn-outline">
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path
-                      d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"
-                    ></path>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
                     <path d="M3 3v5h5"></path>
                   </svg>
                   Reset
                 </button>
-                <button
-                  type="submit"
-                  class="btn btn-primary"
-                  id="leaveSubmitBtn"
-                  style="font-size: 1.05rem"
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <rect
-                      x="4"
-                      y="2"
-                      width="16"
-                      height="20"
-                      rx="2"
-                      ry="2"
-                    ></rect>
+                <button type="submit" class="btn btn-primary" id="leaveSubmitBtn" style="font-size: 1.05rem">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
                     <line x1="8" y1="6" x2="16" y2="6"></line>
                     <line x1="16" y1="14" x2="16.01" y2="14"></line>
                     <line x1="16" y1="18" x2="16.01" y2="18"></line>
@@ -616,85 +608,44 @@
           <!-- Right Side: Result Panel -->
           <aside class="result-panel">
             <div class="card" id="leaveResultCard">
-              <div
-                style="
+              <div style="
                   display: flex;
                   justify-content: space-between;
                   align-items: center;
                   margin-bottom: 1rem;
                   padding-bottom: 0.5rem;
-                  border-bottom: 1px solid #f1f5f9;
-                "
-              >
+                  border-bottom: 1px solid #ffffff;
+                ">
                 <h2 class="card-title" style="margin-bottom: 0">Leave Results</h2>
               </div>
 
               <!-- Placeholder -->
               <div id="leavePlaceholder" class="placeholder-text">
-                <div
-                  style="
+                <div style="
                     display: flex;
                     justify-content: center;
                     margin-bottom: 16px;
                     margin-top: 10px;
-                  "
-                >
-                  <svg
-                    width="160"
-                    height="160"
-                    viewBox="0 0 200 200"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M154.5 135.5C168.1 118.7 178.3 98.5 174.1 80.1C169.9 61.7 151.3 45.1 131.5 35.3C111.7 25.5 90.7 22.5 71.9 28.1C53.1 33.7 36.5 47.9 25.7 65.5C14.9 83.1 9.9 104.1 15.5 121.9C21.1 139.7 37.3 154.3 55.7 163.5C74.1 172.7 94.7 176.5 113.1 171.1C131.5 165.7 140.9 152.3 154.5 135.5Z"
-                      fill="#EFF6FF"
-                    />
+                  ">
+                  <svg width="160" height="160" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M154.5 135.5C168.1 118.7 178.3 98.5 174.1 80.1C169.9 61.7 151.3 45.1 131.5 35.3C111.7 25.5 90.7 22.5 71.9 28.1C53.1 33.7 36.5 47.9 25.7 65.5C14.9 83.1 9.9 104.1 15.5 121.9C21.1 139.7 37.3 154.3 55.7 163.5C74.1 172.7 94.7 176.5 113.1 171.1C131.5 165.7 140.9 152.3 154.5 135.5Z" fill="#ffffff"></path>
                     <!-- Calendar Illustration -->
-                    <rect
-                      x="60"
-                      y="60"
-                      width="80"
-                      height="80"
-                      rx="8"
-                      fill="#FFFFFF"
-                      stroke="#3B82F6"
-                      stroke-width="4"
-                      stroke-linejoin="round"
-                    />
-                    <path d="M60 85 H 140" stroke="#3B82F6" stroke-width="4" />
-                    <line
-                      x1="80"
-                      y1="50"
-                      x2="80"
-                      y2="70"
-                      stroke="#EF4444"
-                      stroke-width="5"
-                      stroke-linecap="round"
-                    />
-                    <line
-                      x1="120"
-                      y1="50"
-                      x2="120"
-                      y2="70"
-                      stroke="#EF4444"
-                      stroke-width="5"
-                      stroke-linecap="round"
-                    />
-                    <circle cx="80" cy="105" r="5" fill="#3B82F6" />
-                    <circle cx="100" cy="105" r="5" fill="#3B82F6" />
-                    <circle cx="120" cy="105" r="5" fill="#10B981" />
-                    <circle cx="80" cy="125" r="5" fill="#10B981" />
+                    <rect x="60" y="60" width="80" height="80" rx="8" fill="#FFFFFF" stroke="#3B82F6" stroke-width="4" stroke-linejoin="round"></rect>
+                    <path d="M60 85 H 140" stroke="#3B82F6" stroke-width="4"></path>
+                    <line x1="80" y1="50" x2="80" y2="70" stroke="#EF4444" stroke-width="5" stroke-linecap="round"></line>
+                    <line x1="120" y1="50" x2="120" y2="70" stroke="#EF4444" stroke-width="5" stroke-linecap="round"></line>
+                    <circle cx="80" cy="105" r="5" fill="#3B82F6"></circle>
+                    <circle cx="100" cy="105" r="5" fill="#3B82F6"></circle>
+                    <circle cx="120" cy="105" r="5" fill="#10B981"></circle>
+                    <circle cx="80" cy="125" r="5" fill="#10B981"></circle>
                   </svg>
                 </div>
-                <div
-                  style="
+                <div style="
                     font-weight: 700;
                     font-size: 1.1rem;
                     color: #1f2937;
                     margin-bottom: 6px;
-                  "
-                >
+                  ">
                   Fill employee details to calculate annual leave
                 </div>
                 <div style="font-size: 0.95rem; color: #475569">
@@ -703,22 +654,11 @@
               </div>
 
               <!-- Results -->
-              <div
-                id="leaveResultsContent"
-                class="results-content"
-                style="display: none; padding: 0"
-              >
-                <div
-                  class="result-section"
-                  style="padding: 24px; border-radius: 16px"
-                >
-                  <div
-                    class="result-item"
-                    style="padding-top: 0; padding-bottom: 16px"
-                  >
+              <div id="leaveResultsContent" class="results-content" style="display: none; padding: 0">
+                <div class="result-section" style="padding: 24px; border-radius: 16px">
+                  <div class="result-item" style="padding-top: 0; padding-bottom: 16px">
                     <div style="display: flex; align-items: center; gap: 16px">
-                      <div
-                        style="
+                      <div style="
                           width: 36px;
                           height: 36px;
                           background: #ffffff;
@@ -728,51 +668,33 @@
                           justify-content: center;
                           color: #64748b;
                           flex-shrink: 0;
-                        "
-                      >
-                        <svg
-                          width="18"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
+                        ">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                           <circle cx="12" cy="12" r="10"></circle>
                           <polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
                       </div>
                       <div style="display: flex; flex-direction: column">
-                        <span
-                          style="
+                        <span style="
                             font-weight: 600;
                             color: #334155;
                             font-size: 1rem;
-                          "
-                          >Years of Service</span
-                        >
+                          ">Years of Service</span>
                       </div>
                     </div>
-                    <span
-                      id="resYearsOfService"
-                      style="
+                    <span id="resYearsOfService" style="
                         font-weight: 700;
                         color: #1e293b;
                         font-size: 1.05rem;
                         font-variant-numeric: tabular-nums;
                         min-width: 60px;
                         text-align: right;
-                      "
-                      >-</span
-                    >
+                      ">-</span>
                   </div>
 
                   <div class="result-item" style="padding: 16px 0">
                     <div style="display: flex; align-items: center; gap: 16px">
-                      <div
-                        style="
+                      <div style="
                           width: 36px;
                           height: 36px;
                           background: #ffffff;
@@ -782,64 +704,35 @@
                           justify-content: center;
                           color: #3b82f6;
                           flex-shrink: 0;
-                        "
-                      >
-                        <svg
-                          width="18"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <rect
-                            x="3"
-                            y="4"
-                            width="18"
-                            height="18"
-                            rx="2"
-                            ry="2"
-                          ></rect>
+                        ">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                           <line x1="16" y1="2" x2="16" y2="6"></line>
                           <line x1="8" y1="2" x2="8" y2="6"></line>
                           <line x1="3" y1="10" x2="21" y2="10"></line>
                         </svg>
                       </div>
                       <div style="display: flex; flex-direction: column">
-                        <span
-                          style="
+                        <span style="
                             font-weight: 600;
                             color: #334155;
                             font-size: 1rem;
-                          "
-                          >Annual Leave Entitlement</span
-                        >
+                          ">Annual Leave Entitlement</span>
                       </div>
                     </div>
-                    <span
-                      id="resTotalEntitlement"
-                      style="
+                    <span id="resTotalEntitlement" style="
                         font-weight: 700;
                         color: #1e293b;
                         font-size: 1.05rem;
                         font-variant-numeric: tabular-nums;
                         min-width: 60px;
                         text-align: right;
-                      "
-                      >12 Days</span
-                    >
+                      ">12 Days</span>
                   </div>
 
-                  <div
-                    class="result-item"
-                    id="resProratedItem"
-                    style="padding: 16px 0; display: none"
-                  >
+                  <div class="result-item" id="resProratedItem" style="padding: 16px 0; display: none">
                     <div style="display: flex; align-items: center; gap: 16px">
-                      <div
-                        style="
+                      <div style="
                           width: 36px;
                           height: 36px;
                           background: #fef2f2;
@@ -849,66 +742,40 @@
                           justify-content: center;
                           color: #ef4444;
                           flex-shrink: 0;
-                        "
-                      >
-                        <svg
-                          width="18"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path
-                            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
-                          ></path>
+                        ">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
                           <polyline points="3.29 7 12 12 20.71 7"></polyline>
                           <line x1="12" y1="22" x2="12" y2="12"></line>
                         </svg>
                       </div>
                       <div style="display: flex; flex-direction: column">
-                        <span
-                          style="
+                        <span style="
                             font-weight: 600;
                             color: #334155;
                             font-size: 1rem;
-                          "
-                          >Pro-rated Leave</span
-                        >
-                        <span
-                          style="
+                          ">Pro-rated Leave</span>
+                        <span style="
                             font-size: 0.8rem;
                             color: #64748b;
                             font-weight: 500;
                             margin-top: 4px;
-                          "
-                          >For calculation year</span
-                        >
+                          ">For calculation year</span>
                       </div>
                     </div>
-                    <span
-                      id="resProratedLeave"
-                      style="
+                    <span id="resProratedLeave" style="
                         font-weight: 700;
                         color: #1e293b;
                         font-size: 1.05rem;
                         font-variant-numeric: tabular-nums;
                         min-width: 60px;
                         text-align: right;
-                      "
-                      >9.5 Days</span
-                    >
+                      ">9.5 Days</span>
                   </div>
 
-                  <div
-                    class="result-item"
-                    style="padding: 16px 0; border-bottom: none"
-                  >
+                  <div class="result-item" style="padding: 16px 0; border-bottom: none">
                     <div style="display: flex; align-items: center; gap: 16px">
-                      <div
-                        style="
+                      <div style="
                           width: 36px;
                           height: 36px;
                           background: #fffbeb;
@@ -918,50 +785,32 @@
                           justify-content: center;
                           color: #b45309;
                           flex-shrink: 0;
-                        "
-                      >
-                        <svg
-                          width="18"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
+                        ">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                           <line x1="18" y1="6" x2="6" y2="18"></line>
                           <line x1="6" y1="6" x2="18" y2="18"></line>
                         </svg>
                       </div>
                       <div style="display: flex; flex-direction: column">
-                        <span
-                          style="
+                        <span style="
                             font-weight: 600;
                             color: #334155;
                             font-size: 1rem;
-                          "
-                          >Leave Taken</span
-                        >
+                          ">Leave Taken</span>
                       </div>
                     </div>
-                    <span
-                      id="resLeaveTaken"
-                      style="
+                    <span id="resLeaveTaken" style="
                         font-weight: 700;
                         color: #1e293b;
                         font-size: 1.05rem;
                         font-variant-numeric: tabular-nums;
                         min-width: 60px;
                         text-align: right;
-                      "
-                      >0 Days</span
-                    >
+                      ">0 Days</span>
                   </div>
 
                   <!-- Highlight Card -->
-                  <div
-                    style="
+                  <div style="
                       display: flex;
                       align-items: center;
                       justify-content: space-between;
@@ -970,52 +819,39 @@
                       border-radius: 12px;
                       margin-top: 20px;
                       border: 1px solid #bbf7d0;
-                    "
-                  >
-                    <span
-                      style="
+                    ">
+                    <span style="
                         font-weight: 700;
                         color: #166534;
                         font-size: 1.05rem;
-                      "
-                      >Remaining Balance</span
-                    >
-                    <span
-                      id="resRemainingBalance"
-                      style="
+                      ">Remaining Balance</span>
+                    <span id="resRemainingBalance" style="
                         font-weight: 800;
                         color: #14532d;
                         font-size: 1.5rem;
                         font-variant-numeric: tabular-nums;
                         text-align: right;
-                      "
-                      >0 Days</span
-                    >
+                      ">0 Days</span>
                   </div>
 
-                  <p
-                    id="resSuggestedAction"
-                    style="
+                  <p id="resSuggestedAction" style="
                       font-size: 0.95rem;
                       color: #0f172a;
                       text-align: center;
                       margin-top: 24px;
                       font-weight: 500;
                       line-height: 1.5;
-                    "
-                  >
+                    ">
                     Employee still has leave remaining.
                   </p>
 
-                  <p
-                    style="
+                  <p style="
                       font-size: 0.8rem;
                       color: var(--text-muted);
                       text-align: center;
                       margin-top: 12px;
                       line-height: 1.5;
-                    "
-                  >
+                    ">
                     Calculation is based on Malaysian Employment Act. Company
                     policy may differ.
                   </p>
@@ -1024,19 +860,8 @@
                 <!-- Download Group Button -->
                 <div class="cta-group" style="margin-top: 24px">
                   <button id="downloadLeaveReportBtn" class="btn btn-primary">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path
-                        d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"
-                      ></path>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                       <polyline points="7 10 12 15 17 10"></polyline>
                       <line x1="12" y1="15" x2="12" y2="3"></line>
                     </svg>
@@ -1071,7 +896,7 @@
             guidelines for paid leaves:
           </p>
           <div class="table-container">
-            <table class="styled-table">
+            <div class="table-responsive" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 24px;"><table class="styled-table">
               <thead>
                 <tr>
                   <th>Years of Service</th>
@@ -1092,7 +917,7 @@
                   <td>16 Days / year</td>
                 </tr>
               </tbody>
-            </table>
+            </table></div>
           </div>
         </div>
 
@@ -1106,15 +931,13 @@
           <div class="example-box">
             <h3>Pro-rated Annual Leave Formula</h3>
             <p>
-              <code
-                >Pro-rated Leave = (Months Worked ÷ 12) × Annual Leave
-                Entitlement</code
-              >
+              <code>Pro-rated Leave = (Months Worked ÷ 12) × Annual Leave
+                Entitlement</code>
             </p>
             <p style="margin-top: 10px">
-              <strong>Example Calculation:</strong><br />An employee with an
+              <strong>Example Calculation:</strong><br>An employee with an
               entitlement of 12 days joins on July 1st. They will work exactly 6
-              months of the year.<br /><code>6 ÷ 12 × 12 = 6 days</code>
+              months of the year.<br><code>6 ÷ 12 × 12 = 6 days</code>
             </p>
           </div>
         </div>
@@ -1125,36 +948,30 @@
             While both are paid time off, their legal definitions in Malaysia
             differ:
           </p>
-          <div
-            style="
+          <div style="
               display: grid;
               grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
               gap: 16px;
               margin-top: 20px;
-            "
-          >
-            <div
-              style="
+            ">
+            <div style="
                 background: #f0fdf4;
                 padding: 20px;
                 border-radius: 12px;
                 border: 1px solid #dcfce7;
-              "
-            >
+              ">
               <h3>Annual Leave</h3>
               <p style="margin-bottom: 0; color: #14532d">
                 Used for rest, vacation, or personal errands. Usually requires
                 advanced approval from the employer depending on company policy.
               </p>
             </div>
-            <div
-              style="
+            <div style="
                 background: #ffffff;
                 padding: 20px;
                 border-radius: 12px;
                 border: 1px solid #dbeafe;
-              "
-            >
+              ">
               <h3>Medical Leave (Sick Leave)</h3>
               <p style="margin-bottom: 0; color: #1e3a8a">
                 Used only when unfit for work due to illness. Requires a medical
@@ -1226,27 +1043,14 @@
         <!-- Annual Leave Entitlement Table Malaysia -->
     
         <div class="content-card" style="margin-top: 32px; margin-bottom: 40px;">
-          <script type="application/ld+json">
-          {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [{
-              "@type": "Question",
-              "name": "How is annual leave calculated in Malaysia?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Under the Employment Act 1955, minimum entitlement is 8 days (less than 2 years), 12 days (2-5 years), and 16 days (5+ years). If joined mid-year, it is pro-rated: (Entitlement Days ÷ 12) × Months Worked."
-              }
-            }]
-          }
-          </script>
+          
           <h2>Annual Leave Entitlement Under Malaysian Law</h2>
           <p>
             Under the Malaysian Employment Act 1955, annual leave entitlement increases with years of service. Here is the minimum entitlement employers must provide.
           </p>
 
           <div class="seo-table-wrapper" style="margin-top: 24px;">
-            <table class="seo-table">
+            <div class="table-responsive" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 24px;"><table class="seo-table">
               <thead>
                 <tr>
                   <th>Years of Service</th>
@@ -1258,7 +1062,7 @@
                 <tr><td>2 years to less than 5 years</td><td>12 days per year</td></tr>
                 <tr><td>5 years and above</td><td>16 days per year</td></tr>
               </tbody>
-            </table>
+            </table></div>
           </div>
           <p style="margin-top: 12px; font-size: 0.9em; color: var(--text-muted);">
             These are minimum entitlements. Employers may provide more leave at their discretion.
@@ -1287,7 +1091,7 @@
 
           <p style="margin-top: 24px; font-weight: 600;">Pro-Rated Leave Examples:</p>
           <div class="seo-table-wrapper" style="margin-top: 12px;">
-            <table class="seo-table">
+            <div class="table-responsive" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 24px;"><table class="seo-table">
               <thead>
                 <tr>
                   <th>Start Month</th>
@@ -1302,174 +1106,133 @@
                 <tr><td>July</td><td>4 days</td><td>6 days</td><td>8 days</td></tr>
                 <tr><td>October</td><td>2 days</td><td>3 days</td><td>4 days</td></tr>
               </tbody>
-            </table>
+            </table></div>
           </div>
         </div>
-      
-
 
         <div class="content-card">
           <h2>Frequently Asked Questions</h2>
-          <div
-            class="faq-container"
-            style="
+          <div class="faq-container" style="
               display: flex;
               flex-direction: column;
               gap: 12px;
               margin-top: 20px;
-            "
-          >
-            <details
-              style="
+            ">
+            <details style="
                 background: #ffffff;
                 padding: 16px;
                 border-radius: 8px;
                 border: 1px solid #e2e8f0;
                 cursor: pointer;
-              "
-            >
-              <summary
-                style="font-weight: 600; font-size: 1rem; color: #1e293b"
-              >
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 How do you calculate pro-rated annual leave in Malaysia?
               </summary>
-              <p
-                style="
+              <p style="
                   margin-top: 10px;
                   margin-bottom: 0;
                   font-size: 0.95rem;
                   color: #475569;
-                "
-              >
+                ">
                 The formula is (Months Worked ÷ 12) × Annual Leave Entitlement.
               </p>
             </details>
-            <details
-              style="
+            <details style="
                 background: #ffffff;
                 padding: 16px;
                 border-radius: 8px;
                 border: 1px solid #e2e8f0;
                 cursor: pointer;
-              "
-            >
-              <summary
-                style="font-weight: 600; font-size: 1rem; color: #1e293b"
-              >
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 Can annual leave expire in Malaysia?
               </summary>
-              <p
-                style="
+              <p style="
                   margin-top: 10px;
                   margin-bottom: 0;
                   font-size: 0.95rem;
                   color: #475569;
-                "
-              >
+                ">
                 Yes, unless company policy allows carry-forward, unutilized
                 annual leave typically expires.
               </p>
             </details>
-            <details
-              style="
+            <details style="
                 background: #ffffff;
                 padding: 16px;
                 border-radius: 8px;
                 border: 1px solid #e2e8f0;
                 cursor: pointer;
-              "
-            >
-              <summary
-                style="font-weight: 600; font-size: 1rem; color: #1e293b"
-              >
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 Can employers reject annual leave?
               </summary>
-              <p
-                style="
+              <p style="
                   margin-top: 10px;
                   margin-bottom: 0;
                   font-size: 0.95rem;
                   color: #475569;
-                "
-              >
+                ">
                 Yes, employers can approve or reject based on operational needs,
                 provided they adhere to the minimum notice periods.
               </p>
             </details>
-            <details
-              style="
+            <details style="
                 background: #ffffff;
                 padding: 16px;
                 border-radius: 8px;
                 border: 1px solid #e2e8f0;
                 cursor: pointer;
-              "
-            >
-              <summary
-                style="font-weight: 600; font-size: 1rem; color: #1e293b"
-              >
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 Is unused annual leave paid after resignation?
               </summary>
-              <p
-                style="
+              <p style="
                   margin-top: 10px;
                   margin-bottom: 0;
                   font-size: 0.95rem;
                   color: #475569;
-                "
-              >
+                ">
                 Under the Employment Act, an employer must compensate you for
                 unused pro-rated annual leave balance.
               </p>
             </details>
-            <details
-              style="
+            <details style="
                 background: #ffffff;
                 padding: 16px;
                 border-radius: 8px;
                 border: 1px solid #e2e8f0;
                 cursor: pointer;
-              "
-            >
-              <summary
-                style="font-weight: 600; font-size: 1rem; color: #1e293b"
-              >
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 Does annual leave include weekends?
               </summary>
-              <p
-                style="
+              <p style="
                   margin-top: 10px;
                   margin-bottom: 0;
                   font-size: 0.95rem;
                   color: #475569;
-                "
-              >
+                ">
                 No, annual leave only counts towards working days. Rest days do
                 not count.
               </p>
             </details>
-            <details
-              style="
+            <details style="
                 background: #ffffff;
                 padding: 16px;
                 border-radius: 8px;
                 border: 1px solid #e2e8f0;
                 cursor: pointer;
-              "
-            >
-              <summary
-                style="font-weight: 600; font-size: 1rem; color: #1e293b"
-              >
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 Is annual leave mandatory in Malaysia?
               </summary>
-              <p
-                style="
+              <p style="
                   margin-top: 10px;
                   margin-bottom: 0;
                   font-size: 0.95rem;
                   color: #475569;
-                "
-              >
+                ">
                 Yes, under the Employment Act 1955, employees must be given a
                 minimum amount (8 to 16 days depending on tenure).
               </p>
@@ -1479,18 +1242,14 @@
 
     <div class="content-card">
           <h2 style="font-size: 1.5rem; text-align: center">Try Other HR Calculators</h2>
-          <div
-            style="
+          <div style="
               display: grid;
               grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
               gap: 16px;
               margin-top: 24px;
               align-items: stretch;
-            "
-          >
-            <a
-              href="/"
-              style="
+            ">
+            <a href="/" style="
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -1505,20 +1264,14 @@
                 font-weight: 700;
                 transition: all 0.2s;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-              "
-              onmouseover="
+              " onmouseover="
                 this.style.background = '#ca8a04';
                 this.style.transform = 'translateY(-2px)';
-              "
-              onmouseout="
+              " onmouseout="
                 this.style.background = '#eab308';
                 this.style.transform = 'translateY(0)';
-              "
-              >Salary Calculator</a
-            >
-            <a
-              href="/socso-perkeso"
-              style="
+              ">Salary Calculator</a>
+            <a href="/socso-perkeso" style="
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -1533,20 +1286,14 @@
                 font-weight: 600;
                 transition: all 0.2s;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-              "
-              onmouseover="
+              " onmouseover="
                 this.style.background = '#16a34a';
                 this.style.transform = 'translateY(-2px)';
-              "
-              onmouseout="
+              " onmouseout="
                 this.style.background = '#22c55e';
                 this.style.transform = 'translateY(0)';
-              "
-              >SOCSO Calculator</a
-            >
-            <a
-              href="/pcb-income-tax"
-              style="
+              ">SOCSO Calculator</a>
+            <a href="/pcb-income-tax" style="
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -1561,20 +1308,14 @@
                 font-weight: 600;
                 transition: all 0.2s;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-              "
-              onmouseover="
+              " onmouseover="
                 this.style.background = '#2563eb';
                 this.style.transform = 'translateY(-2px)';
-              "
-              onmouseout="
+              " onmouseout="
                 this.style.background = '#3b82f6';
                 this.style.transform = 'translateY(0)';
-              "
-              >PCB Calculator</a
-            >
-            <a
-              href="/epf-kwsp"
-              style="
+              ">PCB Calculator</a>
+            <a href="/epf-kwsp" style="
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -1589,22 +1330,17 @@
                 font-weight: 600;
                 transition: all 0.2s;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-              "
-              onmouseover="
+              " onmouseover="
                 this.style.background = '#dc2626';
                 this.style.transform = 'translateY(-2px)';
-              "
-              onmouseout="
+              " onmouseout="
                 this.style.background = '#ef4444';
                 this.style.transform = 'translateY(0)';
-              "
-              >EPF Calculator</a
-            >
+              ">EPF Calculator</a>
           </div>
         </div>
 
-        <div
-          style="
+        <div style="
             background: #ffffff;
             padding: 48px 32px;
             border-radius: 20px;
@@ -1615,10 +1351,8 @@
             box-shadow:
               0 4px 6px -1px rgba(0, 0, 0, 0.05),
               0 2px 4px -2px rgba(0, 0, 0, 0.05);
-          "
-        >
-          <h2
-            style="
+          ">
+          <h2 style="
               font-size: 1.875rem;
               color: #1e3a8a;
               margin-bottom: 12px;
@@ -1630,10 +1364,8 @@
               width: 100% !important;
               margin-left: auto !important;
               margin-right: auto !important;
-            "
-          >Need Better HR & Payroll Management?</h2>
-          <p
-            style="
+            ">Need Better HR &amp; Payroll Management?</h2>
+          <p style="
               font-size: 1.1rem;
               color: #1e40af;
               margin-bottom: 28px;
@@ -1641,76 +1373,125 @@
               margin-left: auto;
               margin-right: auto;
               line-height: 1.6;
-            "
-          >
+            ">
             Manage leave, payroll, and employee benefits more easily with HR
             tools built for Malaysian employers.
           </p>
-          <div
-            style="
+          <div style="
               display: flex;
               gap: 16px;
               justify-content: center;
               flex-wrap: wrap;
-            "
-          >
-            <a
-              href="#"
-              class="btn btn-primary"
-              style="
+            ">
+            <a href="#" class="btn btn-primary" style="
                 background: #2563eb;
                 color: white;
                 border-color: #2563eb;
                 font-weight: 600;
                 box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
-              "
-              >Try HR Tools</a
-            >
-            <a
-              href="#"
-              class="btn btn-outline"
-              style="
+              ">Try HR Tools</a>
+            <a href="#" class="btn btn-outline" style="
                 background: white;
                 color: #1e40af;
                 border-color: #bfdbfe;
                 font-weight: 600;
-              "
-              >Explore Payroll Tools</a
-            >
+              ">Explore Payroll Tools</a>
           </div>
         </div>
       </div>
     </section>
 
-    
+    <!-- Related Articles Section -->
+    <section class="blog-section" style="border-top: 1px solid #e2e8f0;">
+      <div class="container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px;">
+          <div>
+            <h2 style="font-size: 1.875rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Related Articles</h2>
+            <p style="color: #64748b; font-size: 1rem;">Guides and tips for Malaysian employees and employers.</p>
+          </div>
+          <a href="/blog" class="btn" style="background: white; border: 1px solid #e2e8f0; color: #2563eb; padding: 10px 20px; border-radius: 8px; font-weight: 600; text-decoration: none;">View All Articles →</a>
+        </div>
+
+        <div class="blog-grid">
+          <!-- Post 1 -->
+          <a href="/malaysia-salary-guide-2026" class="blog-card">
+            <div class="blog-thumb"></div>
+            <div class="blog-content">
+              <span class="blog-category category-law">Employment Law</span>
+              <h3 class="blog-title">Malaysia Salary Guide 2026 – Average Salary, Take Home Pay &amp; Income Groups</h3>
+              <p class="blog-desc">Average salaries by industry, B40 M40 T20 thresholds and take home pay for common salary levels in Malaysia.</p>
+              <div class="blog-meta">
+                <span>10 June 2026</span>
+                <span>5 min read</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Post 2 -->
+          <a href="/epf-contribution-guide-2026" class="blog-card">
+            <div class="blog-thumb"></div>
+            <div class="blog-content">
+              <span class="blog-category category-law">Employment Law</span>
+              <h3 class="blog-title">EPF Contribution Guide 2026 – Everything Malaysian Employees Need to Know</h3>
+              <p class="blog-desc">EPF rates, how contributions are calculated, and tips to maximize your retirement savings in Malaysia.</p>
+              <div class="blog-meta">
+                <span>02 May 2026</span>
+                <span>6 min read</span>
+              </div>
+            </div>
+          </a>
+
+          <!-- Post 3 -->
+          <a href="/pcb-tax-deduction-2026" class="blog-card">
+            <div class="blog-thumb"></div>
+            <div class="blog-content">
+              <span class="blog-category category-law">Employment Law</span>
+              <h3 class="blog-title">PCB Tax Deduction 2026 – How to Calculate Your Monthly Income Tax</h3>
+              <p class="blog-desc">Step-by-step guide to PCB deduction, 2026 tax brackets and how to legally reduce your monthly tax.</p>
+              <div class="blog-meta">
+                <span>18 April 2026</span>
+                <span>5 min read</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <!-- Other Calculators Section --><!-- Other Calculators Section --><!-- Other Calculators Section -->
+  <style>
+    .hover-lift:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    }
+  </style><!-- Other Calculators Section -->
+  <style>
+    .hover-lift:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    }
+  </style><!-- Other Calculators Section --><section class="blog-section other-calculators-section" style="border-top: 1px solid #e2e8f0; background: #f8fafc; padding: 40px 0;"><div class="container"><div style="margin-bottom: 32px;"><h2 style="font-size: 1.875rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Try Our Other Free Calculators</h2><p style="color: #64748b; font-size: 1rem;">Free, instant and accurate HR calculation tools for Malaysia.</p></div><div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;"><a href="/" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background: white; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #eff6ff; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path><circle cx="14" cy="9" r="1"></circle></svg></div><h3 style="color: #2563eb; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">Salary Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Calculate your exact take home pay after EPF, SOCSO, EIS &amp; PCB deductions.</p></a><a href="/socso-perkeso" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #dcfce7; border-radius: 12px; background: #f0fdf4; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #f0fdf4; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><h3 style="color: #166534; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">SOCSO Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Check employee and employer PERKESO &amp; EIS contribution rates.</p></a><a href="/pcb-income-tax" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #e0f2fe; border-radius: 12px; background: #f0f9ff; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #f0f9ff; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#075985" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"></path><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 17.5V6.5"></path></svg></div><h3 style="color: #075985; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">PCB Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Calculate your monthly tax deduction (MTD) for employees &amp; employers.</p></a><a href="/epf-kwsp" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #fee2e2; border-radius: 12px; background: #fef2f2; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #fef2f2; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#991b1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M3 7v1a3 3 0 0 0 6 0V7m6 0v1a3 3 0 0 0 6 0V7M9 7h6"></path><path d="M5 21V10.85M19 21V10.85M9 21V14M15 21V14"></path><path d="M10.22 2.72a2 2 0 0 1 3.56 0L15 5H9l1.22-2.28Z"></path></svg></div><h3 style="color: #991b1b; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">EPF Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Calculate Employee 11% and Employer 13% KWSP contribution rates.</p></a></div></div></section>
+  <style>
+    .hover-lift:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+    }
+  </style><footer class="footer">
       <div class="container">
         <div class="footer-grid">
           <div class="footer-col">
-            <a
-              href="/"
-              class="logo"
-              style="margin-bottom: 16px; display: block"
-            >
-              <img
-                src="/logo-small.png"
-                alt="SalaryCalculator.my"
-                width="250"
-                height="44"
-                style="
+            <a href="/" class="logo" style="margin-bottom: 16px; display: block">
+              <img src="/logo-small.png" alt="SalaryCalculator.my" width="250" height="44" style="
                   height: 50px;
                   width: auto;
                   object-fit: contain;
                   border-radius: 4px;
-                  mix-blend-mode: screen;
-                  opacity: 0.9;
-                "
-              />
+
+                ">
             </a>
             <p>
-              Accurate Malaysia calculators.<br />Calculated leave based on
+              Accurate Malaysia calculators.<br>Calculated leave based on
               Malaysian Employment Act.
             </p>
           </div>
@@ -1720,14 +1501,13 @@
             <a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
             <a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
             <a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
-            <a href="/annual-leave-calculator" class="footer-link"
-              >Annual Leave Calculator</a
-            >
+            <a href="/annual-leave-calculator" class="footer-link">Annual Leave Calculator</a>
+            <a href="/blog" class="footer-link">Blog</a>
             <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
           </div>
         </div>
         <div class="footer-bottom">
-          <p>&copy; 2026 SalaryCalculator.my. All rights reserved.</p>
+          <p>© 2026 SalaryCalculator.my. All rights reserved.</p>
         </div>
       </div>
     </footer>
@@ -1735,7 +1515,7 @@
     <!-- Lead Capture Modal -->
     <div id="emailModal" class="modal-overlay">
       <div class="modal">
-        <span class="modal-close" id="closeModal">&times;</span>
+        <span class="modal-close" id="closeModal">×</span>
         <div id="modalFormContent">
           <h2 id="modalTitle">Download Leave Report</h2>
           <p id="modalDescription">
@@ -1743,23 +1523,13 @@
           </p>
           <form id="emailForm">
             <div class="form-group">
-              <label class="form-label" for="userEmail"
-                >Email Address <span style="color: #ef4444">*</span></label
-              >
-              <input
-                type="email"
-                id="userEmail"
-                class="form-input"
-                placeholder="you@example.com"
-                required
-              />
+              <label class="form-label" for="userEmail">Email Address <span style="color: #ef4444">*</span></label>
+              <input type="email" id="userEmail" class="form-input" placeholder="you@example.com" required="">
             </div>
             <div class="form-group">
-              <label class="form-label" for="userType"
-                >Who are you? <span style="color: #ef4444">*</span></label
-              >
-              <select id="userType" class="form-select" required>
-                <option value="" disabled selected>Select an option</option>
+              <label class="form-label" for="userType">Who are you? <span style="color: #ef4444">*</span></label>
+              <select id="userType" class="form-select" required="">
+                <option value="" disabled="" selected="">Select an option</option>
                 <option value="Employer / HR">Employer / HR</option>
                 <option value="Employee">Employee</option>
                 <option value="Job Seeker">Job Seeker</option>
@@ -1767,27 +1537,14 @@
             </div>
 
             <div class="form-group" id="companyNameGroup" style="display: none">
-              <label class="form-label" for="companyName"
-                >Company Name <span style="color: red">*</span></label
-              >
-              <input
-                type="text"
-                id="companyName"
-                class="form-input"
-                placeholder="Your Company Name"
-              />
+              <label class="form-label" for="companyName">Company Name <span style="color: red">*</span></label>
+              <input type="text" id="companyName" class="form-input" placeholder="Your Company Name">
             </div>
 
-            <div
-              class="form-group"
-              id="hiringQuestionGroup"
-              style="display: none"
-            >
-              <label class="form-label" for="hiringStatus"
-                >Hiring Status <span style="color: red">*</span></label
-              >
+            <div class="form-group" id="hiringQuestionGroup" style="display: none">
+              <label class="form-label" for="hiringStatus">Hiring Status <span style="color: red">*</span></label>
               <select id="hiringStatus" class="form-select">
-                <option value="" disabled selected>Select status</option>
+                <option value="" disabled="" selected="">Select status</option>
                 <option value="Hiring Now">Hiring Now</option>
                 <option value="Planning to Hire Within 3 Months">
                   Planning to Hire Within 3 Months
@@ -1797,42 +1554,25 @@
             </div>
 
             <div class="form-group">
-              <label class="form-label" for="userPhone"
-                >Contact Number (Optional)</label
-              >
-              <input
-                type="tel"
-                id="userPhone"
-                class="form-input"
-                placeholder="+60123456789"
-              />
+              <label class="form-label" for="userPhone">Contact Number (Optional)</label>
+              <input type="tel" id="userPhone" class="form-input" placeholder="+60123456789">
             </div>
-            <p
-              style="
+            <p style="
                 font-size: 0.75rem;
                 color: #64748b;
                 margin-top: 16px;
                 margin-bottom: 24px;
-              "
-            >
+              ">
               By continuing, you agree to our privacy policy and terms of
               service. We may send you relevant HR materials.
             </p>
-            <button
-              type="submit"
-              class="btn btn-primary"
-              style="width: 100%; justify-content: center"
-            >
-              Submit & Download
+            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center">
+              Submit &amp; Download
             </button>
           </form>
         </div>
-        <div
-          id="modalSuccessContent"
-          style="display: none; text-align: center; padding: 20px 0"
-        >
-          <div
-            style="
+        <div id="modalSuccessContent" style="display: none; text-align: center; padding: 20px 0">
+          <div style="
               width: 60px;
               height: 60px;
               background: #dcfce7;
@@ -1841,18 +1581,8 @@
               align-items: center;
               justify-content: center;
               margin: 0 auto 16px;
-            "
-          >
-            <svg
-              width="30"
-              height="30"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#16a34a"
-              stroke-width="3"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
+            ">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
           </div>
@@ -1860,11 +1590,7 @@
           <p style="color: #475569; margin-bottom: 24px">
             Your leave report is ready to download.
           </p>
-          <button
-            id="closeSuccessModal"
-            class="btn btn-primary"
-            style="width: 100%; justify-content: center"
-          >
+          <button id="closeSuccessModal" class="btn btn-primary" style="width: 100%; justify-content: center">
             Close
           </button>
         </div>
@@ -1896,6 +1622,7 @@
     </script>
 
     <!-- Hiring Intent Modal -->
-    \n
-  </body>
-</html>
+    
+
+
+</body></html>
