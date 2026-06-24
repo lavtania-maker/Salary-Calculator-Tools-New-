@@ -14,20 +14,19 @@
     }
   ],
   "rewrites": [
-    { "source": "/sitemap.xml", "destination": "/public/sitemap.xml" },
-    { "source": "/robots.txt", "destination": "/public/robots.txt" },
-    { "source": "/privacy-policy", "destination": "/privacy-policy.html" },
-    { "source": "/admin", "destination": "/admin.html" },
-    { "source": "/mincal", "destination": "/mincal.html" },
-    { "source": "/payslip-generator", "destination": "/payslip.html" },
-    { "source": "/report", "destination": "/report.html" },
-    { "source": "/epf-kwsp", "destination": "/epf-kwsp.html" },
-    { "source": "/socso-perkeso", "destination": "/socso-perkeso.html" },
-    { "source": "/pcb-calculator", "destination": "/pcb-income-tax.html" },
-    { "source": "/pcb-income-tax", "destination": "/pcb-income-tax.html" },
-    { "source": "/blog", "destination": "/blog.html" },
-    { "source": "/annual-leave-calculator", "destination": "/annual-leave-calculator.html" },
-    { "source": "/:slug((?!blog$)[^/]+)", "destination": "/blog-post-template.html" }
+    { "source": "/sitemap.xml",       "destination": "/public/sitemap.xml" },
+    { "source": "/robots.txt",        "destination": "/public/robots.txt" },
+    { "source": "/privacy-policy",    "destination": "/privacy-policy.html" },
+    { "source": "/admin",             "destination": "/admin.html"    },
+    { "source": "/mincal",            "destination": "/mincal.html"   },
+    { "source": "/payslip-generator", "destination": "/payslip.html"  },
+    { "source": "/report",            "destination": "/report.html"   },
+    { "source": "/epf-kwsp",          "destination": "/epf-kwsp.html" },
+    { "source": "/socso-perkeso",     "destination": "/socso-perkeso.html" },
+    { "source": "/pcb-calculator",    "destination": "/pcb-income-tax.html" },
+    { "source": "/pcb-income-tax",    "destination": "/pcb-income-tax.html" },
+    { "source": "/blog",               "destination": "/blog.html" },
+    { "source": "/annual-leave-calculator", "destination": "/annual-leave-calculator.html" }
   ],
   "headers": [
     {
