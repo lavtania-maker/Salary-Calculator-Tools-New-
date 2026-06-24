@@ -27,7 +27,8 @@
     { "source": "/pcb-income-tax",    "destination": "/pcb-income-tax.html" },
     { "source": "/annual-leave-calculator", "destination": "/annual-leave-calculator.html" },
         { "source": "/blog",              "destination": "/blog.html" },
-        { "source": "/blog-admin",       "destination": "/blog-admin.html" }
+        { "source": "/blog-admin",       "destination": "/blog-admin.html" },
+        { "source": "/blog/:slug",         "destination": "/blog-post.html" }
   ],
   "headers": [
     {
