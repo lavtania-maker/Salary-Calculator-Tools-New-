@@ -1,535 +1,280 @@
 <!DOCTYPE html><html lang="en"><head>
-    <script>
-      (function() {
-        var ignoreScriptError = function(msg) {
-          if (!msg) return true; // Treat empty message as something to ignore
-          var s = msg.toString().toLowerCase();
-          return s.indexOf("script error") > -1 || s === "script error." || s.indexOf("uncaught script error") > -1;
-        };
-
-        // 1. window.onerror
-        var oldOnError = window.onerror;
-        window.onerror = function (message, source, lineno, colno, error) {
-          if (ignoreScriptError(message)) {
-            console.warn("[SalaryCalc] Script error suppressed (window.onerror).");
-            return true;
-          }
-          if (typeof oldOnError === 'function') {
-            return oldOnError.apply(this, arguments);
-          }
-        };
-
-        // 2. addEventListener('error')
-        window.addEventListener('error', function(event) {
-          if (ignoreScriptError(event.message)) {
-            console.warn("[SalaryCalc] Script error suppressed (addEventListener).");
-            event.stopImmediatePropagation();
-            event.preventDefault();
-            return true;
-          }
-        }, true);
-        
-        // 3. handle unhandledrejection
-        window.addEventListener('unhandledrejection', function(event) {
-          if (event.reason && ignoreScriptError(event.reason.message)) {
-            console.warn("[SalaryCalc] Script error suppressed (unhandledrejection).");
-            event.stopImmediatePropagation();
-            event.preventDefault();
-            return true;
-          }
-        }, true);
-      })();
-    </script>
-    
-    
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
-    <title>HR & Salary Blog Malaysia 2026 – EPF, PCB, SOCSO & Employment Law Guides</title>
-    <meta name="description" content="Free HR and payroll guides for Malaysian employees and employers. Learn about EPF, SOCSO, PCB, minimum wage and employment law.">
-    
-    <!-- SEO -->
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://salarycalculator.my/blog">
-    
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://salarycalculator.my/blog">
-    <meta property="og:title" content="HR & Salary Blog Malaysia 2026 – EPF, PCB, SOCSO & Employment Law Guides">
-    <meta property="og:description" content="Free HR and payroll guides for Malaysian employees and employers. Learn about EPF, SOCSO, PCB, minimum wage and employment law.">
-    <meta property="og:image" content="https://salarycalculator.my/logo-small.png">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://salarycalculator.my/blog">
-    <meta name="twitter:title" content="HR & Salary Blog Malaysia 2026 – EPF, PCB, SOCSO & Employment Law Guides">
-    <meta name="twitter:description" content="Free HR and payroll guides for Malaysian employees and employers. Learn about EPF, SOCSO, PCB, minimum wage and employment law.">
-    <meta name="twitter:image" content="https://salarycalculator.my/logo-small.png">
-
-    <!-- Structured Data -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "url": "https://salarycalculator.my/",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://salarycalculator.my/search?q={search_term_string}",
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Blog",
-      "name": "HR & Salary Blog Malaysia",
-      "description": "Guides and tips for Malaysian employees and employers on EPF, SOCSO, PCB, and Employment Law.",
-      "url": "https://salarycalculator.my/blog",
-      "publisher": {
-        "@type": "Organization",
-        "name": "SalaryCalculator.my"
-      }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "url": "https://salarycalculator.my/malaysia-salary-guide-2026"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "url": "https://salarycalculator.my/epf-contribution-guide-2026"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "url": "https://salarycalculator.my/pcb-tax-deduction-2026"
-        },
-        {
-          "@type": "ListItem",
-          "position": 4,
-          "url": "https://salarycalculator.my/minimum-wage-malaysia-2026"
-        },
-        {
-          "@type": "ListItem",
-          "position": 5,
-          "url": "https://salarycalculator.my/socso-malaysia-2026"
-        },
-        {
-          "@type": "ListItem",
-          "position": 6,
-          "url": "https://salarycalculator.my/annual-leave-malaysia-2026"
-        }
-      ]
-    }
-    </script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    
-    
-    <!-- Optimized CSS loading to prevent render-blocking -->
-    <link rel="preload" href="/calculator-styles.css" as="style">
-    <link rel="stylesheet" href="/calculator-styles.css" media="print" onload="this.media='all'">
-  <style id="tidy-up-styles">
-/* Global Tidy Up Styles - Depth & Warmth */
-body {
-  font-size: 16px !important;
-  line-height: 1.6 !important;
-  background-color: #f8fafc !important;
-}
-
-/* Headings */
-h1 { font-size: 2.25rem !important; line-height: 1.2 !important; margin-bottom: 1rem !important; }
-h2 { font-size: 1.875rem !important; line-height: 1.3 !important; margin-bottom: 1rem !important; }
-h3 { font-size: 1.5rem !important; line-height: 1.4 !important; margin-bottom: 0.75rem !important; }
-h4 { font-size: 1.25rem !important; line-height: 1.4 !important; margin-bottom: 0.5rem !important; }
-
-/* Spacing & Layout */
-section, .section {
-  padding-top: 60px !important;
-  padding-bottom: 60px !important;
-}
-
-.container {
-  width: 100% !important;
-  max-width: 1200px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
-  padding-left: 24px !important;
-  padding-right: 24px !important;
-  box-sizing: border-box !important;
-}
-
-/* Cards */
-.card, .calc-card, .result-card, .blog-card, .stat-card {
-  padding: 32px !important;
-  border-radius: 12px !important;
-  margin-bottom: 24px !important;
-  box-sizing: border-box !important;
-  background-color: #ffffff !important;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04) !important;
-  border: 1px solid #e2e8f0 !important;
-}
-
-/* Section Headings inside cards */
-.card h1, .card h2, .calc-card h2, .result-card h2, .card .card-title, .calc-card .card-title, .result-card .card-title {
-  border-left: 3px solid #2563eb !important;
-  padding-left: 12px !important;
-}
-
-/* Tables */
-table {
-  width: 100% !important;
-  border-collapse: collapse !important;
-  text-align: left !important;
-  margin-bottom: 24px !important;
-  border: 1px solid #e2e8f0 !important;
-}
-table thead tr, table tr:first-child:has(th) {
-  background-color: #f1f5f9 !important;
-}
-table th, table td {
-  padding: 16px !important;
-  border-bottom: 1px solid #f1f5f9 !important;
-}
-table tbody tr:nth-child(even), table tr:nth-child(even) {
-  background-color: #fafafa !important;
-}
-
-/* Tab Buttons & Filters */
-.seo-tabs, .blog-filters {
-  background-color: #f1f5f9 !important;
-  border-radius: 10px !important;
-  padding: 4px !important;
-  display: inline-flex !important;
-  gap: 4px !important;
-  margin-bottom: 20px !important;
-  flex-wrap: wrap !important;
-}
-.seo-tab, .filter-btn {
-  background-color: transparent !important;
-  color: #64748b !important;
-  padding: 8px 16px !important;
-  cursor: pointer !important;
-  font-weight: 600 !important;
-  border-radius: 8px !important;
-  transition: all 0.2s !important;
-  border: none !important;
-  font-size: 14px !important;
-}
-.seo-tab.active, .filter-btn.active {
-  background-color: #2563eb !important;
-  color: #ffffff !important;
-}
-
-/* Buttons */
-button, .btn {
-  padding: 12px 24px !important;
-  font-size: 16px !important;
-  border-radius: 8px !important;
-  font-weight: 600 !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-
-/* Inputs & Form Groups */
-.form-group {
-  margin-bottom: 24px !important;
-}
-input[type="text"], input[type="number"], input[type="email"], select {
-  padding: 12px 16px !important;
-  font-size: 16px !important;
-  border-radius: 8px !important;
-  box-sizing: border-box !important;
-}
-
-/* Mobile Responsiveness */
-@media (max-width: 768px) {
-  body {
-    font-size: 16px !important;
-  }
-  h1 { font-size: 1.875rem !important; }
-  h2 { font-size: 1.5rem !important; }
-  
-  section, .section {
-    padding-top: 40px !important;
-    padding-bottom: 40px !important;
-  }
-  
-  .container {
-    padding-left: 16px !important;
-    padding-right: 16px !important;
-  }
-  
-  .card, .calc-card, .result-card, .blog-card, .stat-card {
-    padding: 24px !important;
-  }
-  
-  /* Make tables horizontally scrollable on mobile */
-  .table-responsive {
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch !important;
-  }
-  .table-responsive table {
-    width: 100% !important;
-    min-width: 600px !important;
-  }
-  .table-responsive th, .table-responsive td {
-    white-space: nowrap !important;
-  }
-  
-  .footer-grid {
-    gap: 32px !important;
-  }
+<script>
+(function() {
+var ignoreScriptError = function(msg) {
+if (!msg) return true;
+var s = msg.toString().toLowerCase();
+return s.indexOf("script error") > -1 || s === "script error." || s.indexOf("uncaught script error") > -1;
+};
+var oldOnError = window.onerror;
+window.onerror = function (message, source, lineno, colno, error) {
+if (ignoreScriptError(message)) { console.warn("[SalaryCalc] Script error suppressed (window.onerror)."); return true; }
+if (typeof oldOnError === 'function') { return oldOnError.apply(this, arguments); }
+};
+window.addEventListener('error', function(event) {
+if (ignoreScriptError(event.message)) { console.warn("[SalaryCalc] Script error suppressed (addEventListener)."); event.stopImmediatePropagation(); event.preventDefault(); return true; }
+}, true);
+window.addEventListener('unhandledrejection', function(event) {
+if (event.reason && ignoreScriptError(event.reason.message)) { console.warn("[SalaryCalc] Script error suppressed (unhandledrejection)."); event.stopImmediatePropagation(); event.preventDefault(); return true; }
+}, true);
+})();
+</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="/favicon-ricebowl.png">
+<title>HR & Salary Blog Malaysia 2026 – EPF, PCB, SOCSO & Employment Law Guides</title>
+<meta name="description" content="Free HR and payroll guides for Malaysian employees and employers. Learn about EPF, SOCSO, PCB, minimum wage and employment law.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://salarycalculator.my/blog">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://salarycalculator.my/blog">
+<meta property="og:title" content="HR & Salary Blog Malaysia 2026 – EPF, PCB, SOCSO & Employment Law Guides">
+<meta property="og:description" content="Free HR and payroll guides for Malaysian employees and employers. Learn about EPF, SOCSO, PCB, minimum wage and employment law.">
+<meta property="og:image" content="https://salarycalculator.my/logo-small.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="https://salarycalculator.my/blog">
+<meta name="twitter:title" content="HR & Salary Blog Malaysia 2026 – EPF, PCB, SOCSO & Employment Law Guides">
+<meta name="twitter:description" content="Free HR and payroll guides for Malaysian employees and employers. Learn about EPF, SOCSO, PCB, minimum wage and employment law.">
+<meta name="twitter:image" content="https://salarycalculator.my/logo-small.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"HR & Salary Blog Malaysia","url":"https://salarycalculator.my/blog","publisher":{"@type":"Organization","name":"SalaryCalculator.my"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/calculator-styles.css">
+<style id="tidy-up-styles">
+body { font-size: 16px; line-height: 1.6; background-color: #f8fafc; }
+h1 { font-size: 2.25rem; line-height: 1.2; margin-bottom: 1rem; }
+h2 { font-size: 1.875rem; line-height: 1.3; margin-bottom: 1rem; }
+h3 { font-size: 1.5rem; line-height: 1.4; margin-bottom: 0.75rem; }
+h4 { font-size: 1.25rem; line-height: 1.4; margin-bottom: 0.5rem; }
+section, .section { padding-top: 60px; padding-bottom: 60px; }
+.container { width: 100%; max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 24px; padding-right: 24px; box-sizing: border-box; }
+.calc-card, .result-card, .stat-card { padding: 32px; border-radius: 12px; margin-bottom: 24px; box-sizing: border-box; background-color: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; }
+.blog-card { border-radius: 12px; margin-bottom: 24px; box-sizing: border-box; background-color: #ffffff; box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04); border: 1px solid #e2e8f0; overflow: hidden; text-decoration: none; display: block; color: inherit; }
+.blog-thumb { width: 100%; height: 180px; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.blog-content { padding: 20px 24px 24px; }
+.blog-featured { display: flex; flex-direction: row; margin-bottom: 32px; }
+.blog-featured .blog-thumb { width: 360px; height: auto; min-height: 200px; flex-shrink: 0; }
+.blog-featured .blog-content { padding: 28px 32px; }
+.blog-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-bottom: 40px; }
+@media(max-width:900px){ .blog-grid{grid-template-columns:repeat(2,1fr);} .blog-featured{flex-direction:column;} .blog-featured .blog-thumb{width:100%;height:180px;} }
+@media(max-width:580px){ .blog-grid{grid-template-columns:1fr;} }
+.blog-title { font-size: 1.1rem; font-weight: 600; color: #0f172a; margin: 0 0 8px; line-height: 1.4; }
+.blog-desc { font-size: 0.875rem; color: #64748b; margin: 0 0 12px; line-height: 1.55; }
+.blog-meta { font-size: 0.8rem; color: #94a3b8; display: flex; gap: 12px; }
+.blog-category { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: .75rem; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; }
+.category-epf { background:#dbeafe;color:#1d4ed8; }
+.category-pcb { background:#ede9fe;color:#6d28d9; }
+.category-socso { background:#ffedd5;color:#c2410c; }
+.category-law { background:#dcfce7;color:#15803d; }
+.category-tips { background:#fee2e2;color:#b91c1c; }
+.read-more-link { font-size:.875rem;color:#2563eb;font-weight:500; }
+.blog-filters { display:flex;flex-wrap:wrap;gap:8px;margin-bottom:32px; }
+.filter-btn { padding:6px 16px;border-radius:20px;border:1.5px solid #e2e8f0;background:white;font-size:.875rem;font-weight:500;cursor:pointer;color:#475569; }
+.filter-btn.active { border-color:#2563eb;background:#2563eb;color:white; }
+table { width:100%;border-collapse:collapse;text-align:left;margin-bottom:24px;border:1px solid #e2e8f0; }
+table thead tr { background-color:#f1f5f9; }
+table th, table td { padding:16px;border-bottom:1px solid #f1f5f9; }
+table tbody tr:nth-child(even) { background-color:#fafafa; }
+button, .btn { padding:12px 24px;font-size:16px;border-radius:8px;font-weight:600;display:inline-flex;align-items:center;justify-content:center; }
+.form-group { margin-bottom:24px; }
+input[type="text"], input[type="number"], input[type="email"], select { padding:12px 16px;font-size:16px;border-radius:8px;box-sizing:border-box; }
+.hover-lift:hover { transform:translateY(-2px);box-shadow:0 4px 6px -1px rgba(0,0,0,0.1),0 2px 4px -1px rgba(0,0,0,0.06) !important; }
+@media(max-width:768px){
+  body{font-size:16px;} h1{font-size:1.875rem;} h2{font-size:1.5rem;}
+  section,.section{padding-top:40px;padding-bottom:40px;}
+  .container{padding-left:16px;padding-right:16px;}
+  .calc-card,.result-card,.stat-card{padding:24px;}
+  .table-responsive{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .table-responsive table{width:100%;min-width:600px;}
+  .table-responsive th,.table-responsive td{white-space:nowrap;}
+  .footer-grid{gap:32px;}
 }
 </style></head>
-  <body>
-    <!-- Navbar -->
-    <header class="navbar">
-      <div class="container" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
-        <a href="/" class="logo">
-          <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" class="logo-img" width="250" height="44">
-        </a>
+<body>
+<header class="navbar">
+<div class="container" style="display:flex;justify-content:space-between;align-items:center;position:relative;">
+<a href="/" class="logo"><img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" class="logo-img" width="250" height="44"></a>
+<nav class="desktop-nav">
+<a href="/" class="nav-item">Salary Calculator</a>
+<a href="/socso-perkeso" class="nav-item">SOCSO Calculator</a>
+<a href="/pcb-income-tax" class="nav-item">PCB Calculator</a>
+<a href="/epf-kwsp" class="nav-item">EPF Calculator</a>
+<a href="/annual-leave-calculator" class="nav-item">Annual Leave Calculator</a>
+<a href="/blog" class="nav-item active-nav">Blog</a>
+</nav>
+<button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Menu">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+</button>
+</div>
+<nav class="mobile-nav" id="mobileNavMenu">
+<a href="/" class="mobile-nav-item">Salary Calculator (Take Home Pay)</a>
+<a href="/socso-perkeso" class="mobile-nav-item">SOCSO (PERKESO) Calculator</a>
+<a href="/pcb-income-tax" class="mobile-nav-item">PCB (Monthly Tax Deduction) Calculator</a>
+<a href="/epf-kwsp" class="mobile-nav-item">EPF (KWSP) Calculator</a>
+<a href="/annual-leave-calculator" class="mobile-nav-item">Annual Leave Calculator</a>
+<a href="/blog" class="mobile-nav-item active-nav">Blog</a>
+</nav>
+</header>
 
-        <nav class="desktop-nav">
-          <a href="/" class="nav-item">Salary Calculator</a>
-          <a href="/socso-perkeso" class="nav-item">SOCSO Calculator</a>
-          <a href="/pcb-income-tax" class="nav-item">PCB Calculator</a>
-          <a href="/epf-kwsp" class="nav-item">EPF Calculator</a>
-          <a href="/annual-leave-calculator" class="nav-item">Annual Leave Calculator</a>
-          <a href="/blog" class="nav-item active-nav">Blog</a>
-        </nav>
+<main class="blog-section">
+<div class="container">
+<nav class="breadcrumb" style="margin-bottom:24px;font-size:0.875rem;color:#64748b;">
+<a href="/" style="color:#2563eb;text-decoration:none;">Home</a>
+<span style="margin:0 8px;">/</span>
+<span>Blog</span>
+</nav>
+<div style="margin-bottom:48px;text-align:center;">
+<h1 style="font-size:2.5rem;font-weight:800;color:#0f172a;margin-bottom:12px;letter-spacing:-0.02em;">HR &amp; Salary Blog Malaysia</h1>
+<p style="font-size:1.125rem;color:#64748b;">Guides and tips for Malaysian employees and employers.</p>
+</div>
+<div class="blog-filters">
+<button class="filter-btn active">All</button>
+<button class="filter-btn">EPF</button>
+<button class="filter-btn">PCB</button>
+<button class="filter-btn">SOCSO</button>
+<button class="filter-btn">Employment Law</button>
+<button class="filter-btn">Salary Tips</button>
+</div>
+<a href="/malaysia-salary-guide-2026" class="blog-featured blog-card">
+<div class="blog-thumb" style="background:linear-gradient(135deg,#1d4ed8 0%,#2563eb 100%);display:flex;align-items:center;justify-content:center;">
+<svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+</div>
+<div class="blog-content">
+<span class="blog-category category-tips">Salary Tips</span>
+<h2 class="blog-title" style="font-size:1.5rem;">Malaysia Salary Guide 2026 – Average Salary, Take Home Pay &amp; Income Groups</h2>
+<p class="blog-desc">Average salaries by industry, B40 M40 T20 thresholds and take home pay for common salary levels in Malaysia.</p>
+<div class="blog-meta"><span>23 June 2026</span><span>5 min read</span></div>
+<div style="margin-top:20px;"><span class="read-more-link">Read More →</span></div>
+</div>
+</a>
+<div class="blog-grid">
+<a href="/epf-contribution-guide-2026" class="blog-card">
+<div class="blog-thumb" style="background:linear-gradient(135deg,#dbeafe 0%,#bfdbfe 100%);display:flex;align-items:center;justify-content:center;">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="1.5"><path d="M3 21h18"></path><path d="M9 8h1m5 0h1M9 12h1m5 0h1M9 16h6"></path><rect x="2" y="3" width="20" height="18" rx="2"></rect></svg>
+</div>
+<div class="blog-content">
+<span class="blog-category category-epf">EPF</span>
+<h3 class="blog-title">EPF Contribution Guide 2026 – Everything Malaysian Employees Need to Know</h3>
+<p class="blog-desc">EPF rates, how contributions are calculated, and tips to maximize your retirement savings in Malaysia.</p>
+<div class="blog-meta"><span>20 June 2026</span><span>6 min read</span></div>
+</div>
+</a>
+<a href="/pcb-tax-deduction-2026" class="blog-card">
+<div class="blog-thumb" style="background:linear-gradient(135deg,#ede9fe 0%,#ddd6fe 100%);display:flex;align-items:center;justify-content:center;">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#6d28d9" stroke-width="1.5"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"></path><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 17.5V6.5"></path></svg>
+</div>
+<div class="blog-content">
+<span class="blog-category category-pcb">PCB</span>
+<h3 class="blog-title">PCB Tax Deduction 2026 – How to Calculate Your Monthly Income Tax</h3>
+<p class="blog-desc">Step-by-step guide to PCB deduction, 2026 tax brackets and how to legally reduce your monthly tax.</p>
+<div class="blog-meta"><span>18 June 2026</span><span>7 min read</span></div>
+</div>
+</a>
+<a href="/minimum-wage-malaysia-2026" class="blog-card">
+<div class="blog-thumb" style="background:linear-gradient(135deg,#fee2e2 0%,#fecaca 100%);display:flex;align-items:center;justify-content:center;">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#b91c1c" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+</div>
+<div class="blog-content">
+<span class="blog-category category-tips">Salary Tips</span>
+<h3 class="blog-title">Minimum Wage Malaysia 2026 – RM1,700 Rate, Who It Applies To &amp; Take Home Pay</h3>
+<p class="blog-desc">Everything about the current minimum wage, daily rate, take home pay after deductions and employer obligations.</p>
+<div class="blog-meta"><span>15 June 2026</span><span>5 min read</span></div>
+</div>
+</a>
+<a href="/socso-malaysia-2026" class="blog-card">
+<div class="blog-thumb" style="background:linear-gradient(135deg,#ffedd5 0%,#fed7aa 100%);display:flex;align-items:center;justify-content:center;">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#c2410c" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+</div>
+<div class="blog-content">
+<span class="blog-category category-socso">SOCSO</span>
+<h3 class="blog-title">SOCSO Malaysia 2026 – Rates, Coverage &amp; How to Make a Claim</h3>
+<p class="blog-desc">Complete guide to SOCSO and EIS contributions, what they cover and how to claim with PERKESO Malaysia.</p>
+<div class="blog-meta"><span>12 June 2026</span><span>6 min read</span></div>
+</div>
+</a>
+<a href="/annual-leave-malaysia-2026" class="blog-card">
+<div class="blog-thumb" style="background:linear-gradient(135deg,#dcfce7 0%,#bbf7d0 100%);display:flex;align-items:center;justify-content:center;">
+<svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="1.5"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+</div>
+<div class="blog-content">
+<span class="blog-category category-law">Employment Law</span>
+<h3 class="blog-title">Annual Leave Malaysia 2026 – Entitlement, Pro-Rated Leave &amp; Employer Rules</h3>
+<p class="blog-desc">Your rights to annual leave under the Malaysian Employment Act and what happens to unused leave.</p>
+<div class="blog-meta"><span>10 June 2026</span><span>5 min read</span></div>
+</div>
+</a>
+</div>
+</div>
+</main>
 
-        <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-        </button>
-      </div>
+<section style="border-top:1px solid #e2e8f0;background:#f8fafc;padding:40px 0;">
+<div class="container">
+<div style="margin-bottom:32px;"><h2 style="font-size:1.875rem;font-weight:700;color:#0f172a;margin-bottom:8px;">Try Our Other Free Calculators</h2><p style="color:#64748b;font-size:1rem;">Free, instant and accurate HR calculation tools for Malaysia.</p></div>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;">
+<a href="/" class="hover-lift" style="padding:24px;border:1px solid #e2e8f0;border-radius:12px;background:white;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:all 0.2s;display:block;">
+<div style="background:#eff6ff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path></svg></div>
+<h3 style="color:#2563eb;font-size:1.125rem;font-weight:700;margin-bottom:8px;">Salary Calculator</h3>
+<p style="color:#64748b;font-size:0.875rem;line-height:1.5;margin:0;">Calculate your exact take home pay after EPF, SOCSO, EIS &amp; PCB deductions.</p>
+</a>
+<a href="/socso-perkeso" class="hover-lift" style="padding:24px;border:1px solid #dcfce7;border-radius:12px;background:#f0fdf4;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:all 0.2s;display:block;">
+<div style="background:#f0fdf4;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div>
+<h3 style="color:#166534;font-size:1.125rem;font-weight:700;margin-bottom:8px;">SOCSO Calculator</h3>
+<p style="color:#64748b;font-size:0.875rem;line-height:1.5;margin:0;">Check employee and employer PERKESO &amp; EIS contribution rates.</p>
+</a>
+<a href="/pcb-income-tax" class="hover-lift" style="padding:24px;border:1px solid #e0f2fe;border-radius:12px;background:#f0f9ff;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:all 0.2s;display:block;">
+<div style="background:#f0f9ff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#075985" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"></path><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 17.5V6.5"></path></svg></div>
+<h3 style="color:#075985;font-size:1.125rem;font-weight:700;margin-bottom:8px;">PCB Calculator</h3>
+<p style="color:#64748b;font-size:0.875rem;line-height:1.5;margin:0;">Calculate your monthly tax deduction (MTD) for employees &amp; employers.</p>
+</a>
+<a href="/epf-kwsp" class="hover-lift" style="padding:24px;border:1px solid #fee2e2;border-radius:12px;background:#fef2f2;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:all 0.2s;display:block;">
+<div style="background:#fef2f2;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#991b1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M3 7v1a3 3 0 0 0 6 0V7m6 0v1a3 3 0 0 0 6 0V7M9 7h6"></path><path d="M5 21V10.85M19 21V10.85M9 21V14M15 21V14"></path></svg></div>
+<h3 style="color:#991b1b;font-size:1.125rem;font-weight:700;margin-bottom:8px;">EPF Calculator</h3>
+<p style="color:#64748b;font-size:0.875rem;line-height:1.5;margin:0;">Calculate Employee 11% and Employer 13% KWSP contribution rates.</p>
+</a>
+<a href="/annual-leave-calculator" class="hover-lift" style="padding:24px;border:1px solid #e2e8f0;border-radius:12px;background:white;text-decoration:none;box-shadow:0 1px 3px rgba(0,0,0,0.05);transition:all 0.2s;display:block;">
+<div style="background:#eff6ff;width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg></div>
+<h3 style="color:#2563eb;font-size:1.125rem;font-weight:700;margin-bottom:8px;">Annual Leave Calculator</h3>
+<p style="color:#64748b;font-size:0.875rem;line-height:1.5;margin:0;">Calculate accurate pro-rated annual leave entitlement under Employment Act.</p>
+</a>
+</div>
+</div>
+</section>
 
-      <nav class="mobile-nav" id="mobileNavMenu">
-        <a href="/" class="mobile-nav-item">Salary Calculator (Take Home Pay)</a>
-        <a href="/socso-perkeso" class="mobile-nav-item">SOCSO (PERKESO) Calculator</a>
-        <a href="/pcb-income-tax" class="mobile-nav-item">PCB (Monthly Tax Deduction) Calculator</a>
-        <a href="/epf-kwsp" class="mobile-nav-item">EPF (KWSP) Calculator</a>
-        <a href="/annual-leave-calculator" class="mobile-nav-item">Annual Leave Calculator</a>
-        <a href="/blog" class="mobile-nav-item active-nav">Blog</a>
-      </nav>
-    </header>
+<footer class="footer">
+<div class="container">
+<div class="footer-grid">
+<div class="footer-col">
+<a href="/" class="logo" style="margin-bottom:20px;display:block"><img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" width="250" height="44" style="height:60px;width:auto;object-fit:contain;border-radius:4px;"></a>
+<p style="color:#94a3b8;font-size:0.9375rem;line-height:1.6">Accurate Malaysia salary calculator.<br>Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.</p>
+</div>
+<div class="footer-col footer-col-links">
+<h4>Quick Links</h4>
+<a href="/" class="footer-link">Salary Calculator</a>
+<a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
+<a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
+<a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
+<a href="/annual-leave-calculator" class="footer-link">Annual Leave Calculator</a>
+<a href="/blog" class="footer-link">Blog</a>
+<a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+</div>
+</div>
+<div class="footer-bottom"><p>© 2026 SalaryCalc MY</p></div>
+</div>
+</footer>
 
-    <main class="blog-section">
-      <div class="container">
-        <!-- Breadcrumb -->
-        <nav class="breadcrumb" style="margin-bottom: 24px; font-size: 0.875rem; color: #64748b;">
-          <a href="/" style="color: #2563eb; text-decoration: none;">Home</a>
-          <span style="margin: 0 8px;">/</span>
-          <span>Blog</span>
-        </nav>
-
-        <div style="margin-bottom: 48px; text-align: center;">
-          <h1 style="font-size: 2.5rem; font-weight: 800; color: #0f172a; margin-bottom: 12px; letter-spacing: -0.02em;">HR &amp; Salary Blog Malaysia</h1>
-          <p style="font-size: 1.125rem; color: #64748b;">Guides and tips for Malaysian employees and employers.</p>
-        </div>
-
-        <!-- Filter Tabs -->
-        <div class="blog-filters">
-          <button class="filter-btn active">All</button>
-          <button class="filter-btn">EPF</button>
-          <button class="filter-btn">PCB</button>
-          <button class="filter-btn">SOCSO</button>
-          <button class="filter-btn">Employment Law</button>
-          <button class="filter-btn">Salary Tips</button>
-        </div>
-
-        <!-- Featured Post -->
-        <a href="/malaysia-salary-guide-2026" class="blog-featured blog-card">
-          <div class="blog-thumb"></div>
-          <div class="blog-content">
-            <span class="blog-category category-tips">Salary Tips</span>
-            <h2 class="blog-title" style="font-size: 1.5rem;">Malaysia Salary Guide 2026 – Average Salary, Take Home Pay &amp; Income Groups</h2>
-            <p class="blog-desc">Average salaries by industry, B40 M40 T20 thresholds and take home pay for common salary levels in Malaysia.</p>
-            <div class="blog-meta">
-              <span>23 June 2026</span>
-              <span>5 min read</span>
-            </div>
-            <div style="margin-top: 20px;">
-              <span class="read-more-link">Read More →</span>
-            </div>
-          </div>
-        </a>
-
-        <!-- Regular Grid -->
-        <div class="blog-grid">
-          <!-- Post 2 -->
-          <a href="/epf-contribution-guide-2026" class="blog-card">
-            <div class="blog-thumb"></div>
-            <div class="blog-content">
-              <span class="blog-category category-epf">EPF</span>
-              <h3 class="blog-title">EPF Contribution Guide 2026 – Everything Malaysian Employees Need to Know</h3>
-              <p class="blog-desc">EPF rates, how contributions are calculated, and tips to maximize your retirement savings in Malaysia.</p>
-              <div class="blog-meta">
-                <span>20 June 2026</span>
-                <span>6 min read</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Post 3 -->
-          <a href="/pcb-tax-deduction-2026" class="blog-card">
-            <div class="blog-thumb"></div>
-            <div class="blog-content">
-              <span class="blog-category category-pcb">PCB</span>
-              <h3 class="blog-title">PCB Tax Deduction 2026 – How to Calculate Your Monthly Income Tax</h3>
-              <p class="blog-desc">Step-by-step guide to PCB deduction, 2026 tax brackets and how to legally reduce your monthly tax.</p>
-              <div class="blog-meta">
-                <span>18 June 2026</span>
-                <span>7 min read</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Post 4 -->
-          <a href="/minimum-wage-malaysia-2026" class="blog-card">
-            <div class="blog-thumb"></div>
-            <div class="blog-content">
-              <span class="blog-category category-tips">Salary Tips</span>
-              <h3 class="blog-title">Minimum Wage Malaysia 2026 – RM1,700 Rate, Who It Applies To &amp; Take Home Pay</h3>
-              <p class="blog-desc">Everything about the current minimum wage, daily rate, take home pay after deductions and employer obligations.</p>
-              <div class="blog-meta">
-                <span>15 June 2026</span>
-                <span>5 min read</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Post 5 -->
-          <a href="/socso-malaysia-2026" class="blog-card">
-            <div class="blog-thumb"></div>
-            <div class="blog-content">
-              <span class="blog-category category-socso">SOCSO</span>
-              <h3 class="blog-title">SOCSO Malaysia 2026 – Rates, Coverage &amp; How to Make a Claim</h3>
-              <p class="blog-desc">Complete guide to SOCSO and EIS contributions, what they cover and how to claim with PERKESO Malaysia.</p>
-              <div class="blog-meta">
-                <span>12 June 2026</span>
-                <span>6 min read</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Post 6 -->
-          <a href="/annual-leave-malaysia-2026" class="blog-card">
-            <div class="blog-thumb"></div>
-            <div class="blog-content">
-              <span class="blog-category category-law">Employment Law</span>
-              <h3 class="blog-title">Annual Leave Malaysia 2026 – Entitlement, Pro-Rated Leave &amp; Employer Rules</h3>
-              <p class="blog-desc">Your rights to annual leave under the Malaysian Employment Act and what happens to unused leave.</p>
-              <div class="blog-meta">
-                <span>10 June 2026</span>
-                <span>5 min read</span>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </main>
-
-    <!-- Footer -->
-    <!-- Other Calculators Section -->
-  <style>
-    .hover-lift:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
-    }
-  </style><!-- Other Calculators Section --><section class="blog-section other-calculators-section" style="border-top: 1px solid #e2e8f0; background: #f8fafc; padding: 40px 0;"><div class="container"><div style="margin-bottom: 32px;"><h2 style="font-size: 1.875rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Try Our Other Free Calculators</h2><p style="color: #64748b; font-size: 1rem;">Free, instant and accurate HR calculation tools for Malaysia.</p></div><div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;"><a href="/" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background: white; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #eff6ff; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path><circle cx="14" cy="9" r="1"></circle></svg></div><h3 style="color: #2563eb; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">Salary Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Calculate your exact take home pay after EPF, SOCSO, EIS &amp; PCB deductions.</p></a><a href="/socso-perkeso" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #dcfce7; border-radius: 12px; background: #f0fdf4; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #f0fdf4; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></div><h3 style="color: #166534; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">SOCSO Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Check employee and employer PERKESO &amp; EIS contribution rates.</p></a><a href="/pcb-income-tax" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #e0f2fe; border-radius: 12px; background: #f0f9ff; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #f0f9ff; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#075985" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"></path><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 17.5V6.5"></path></svg></div><h3 style="color: #075985; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">PCB Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Calculate your monthly tax deduction (MTD) for employees &amp; employers.</p></a><a href="/epf-kwsp" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #fee2e2; border-radius: 12px; background: #fef2f2; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #fef2f2; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#991b1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M3 7v1a3 3 0 0 0 6 0V7m6 0v1a3 3 0 0 0 6 0V7M9 7h6"></path><path d="M5 21V10.85M19 21V10.85M9 21V14M15 21V14"></path><path d="M10.22 2.72a2 2 0 0 1 3.56 0L15 5H9l1.22-2.28Z"></path></svg></div><h3 style="color: #991b1b; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">EPF Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Calculate Employee 11% and Employer 13% KWSP contribution rates.</p></a><a href="/annual-leave-calculator" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background: white; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #eff6ff; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg></div><h3 style="color: #2563eb; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">Annual Leave Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Calculate accurate pro-rated annual leave entitlement under Employment Act.</p></a></div></div></section>
-  <style>
-    .hover-lift:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
-    }
-  </style><footer class="footer">
-      <div class="container">
-        <div class="footer-grid">
-          <div class="footer-col">
-            <a href="/" class="logo" style="margin-bottom: 20px; display: block">
-              <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" width="250" height="44" style="height: 60px; width: auto; object-fit: contain; border-radius: 4px;">
-            </a>
-            <p style="color: #94a3b8; font-size: 0.9375rem; line-height: 1.6">
-              Accurate Malaysia salary calculator.<br>
-              Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
-            </p>
-          </div>
-          <div class="footer-col footer-col-links">
-            <h4>Quick Links</h4>
-            <a href="/" class="footer-link">Salary Calculator</a>
-            <a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
-            <a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
-            <a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
-            <a href="/annual-leave-calculator" class="footer-link">Annual Leave Calculator</a>
-            <a href="/blog" class="footer-link">Blog</a>
-            <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p>© 2026 SalaryCalc MY</p>
-        </div>
-      </div>
-    </footer>
-
-    <script>
-      // Category Filter Toggle
-      const filterBtns = document.querySelectorAll('.filter-btn');
-      filterBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          filterBtns.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          // For now, this is just visual as requested placeholders
-        });
-      });
-
-      // Mobile Menu Toggle
-      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-      const mobileNavMenu = document.getElementById('mobileNavMenu');
-      if (mobileMenuToggle && mobileNavMenu) {
-        mobileMenuToggle.addEventListener('click', () => {
-          mobileNavMenu.classList.toggle('open');
-        });
-      }
-    </script>
-
+<script>
+const filterBtns = document.querySelectorAll('.filter-btn');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+const mobileNavMenu = document.getElementById('mobileNavMenu');
+if (mobileMenuToggle && mobileNavMenu) {
+  mobileMenuToggle.addEventListener('click', () => { mobileNavMenu.classList.toggle('open'); });
+}
+</script>
 </body></html>
