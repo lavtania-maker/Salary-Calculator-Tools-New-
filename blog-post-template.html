@@ -1,58 +1,84 @@
-<!DOCTYPE html><html lang="en"><head>
+<!doctype html>
+<html lang="en">
+  <head>
     <script>
-      (function() {
-        var ignoreScriptError = function(msg) {
+      (function () {
+        var ignoreScriptError = function (msg) {
           if (!msg) return true; // Treat empty message as something to ignore
           var s = msg.toString().toLowerCase();
-          return s.indexOf("script error") > -1 || s === "script error." || s.indexOf("uncaught script error") > -1;
+          return (
+            s.indexOf("script error") > -1 ||
+            s === "script error." ||
+            s.indexOf("uncaught script error") > -1
+          );
         };
 
         // 1. window.onerror
         var oldOnError = window.onerror;
         window.onerror = function (message, source, lineno, colno, error) {
           if (ignoreScriptError(message)) {
-            console.warn("[SalaryCalc] Script error suppressed (window.onerror).");
+            console.warn(
+              "[SalaryCalc] Script error suppressed (window.onerror).",
+            );
             return true;
           }
-          if (typeof oldOnError === 'function') {
+          if (typeof oldOnError === "function") {
             return oldOnError.apply(this, arguments);
           }
         };
 
         // 2. addEventListener('error')
-        window.addEventListener('error', function(event) {
-          if (ignoreScriptError(event.message)) {
-            console.warn("[SalaryCalc] Script error suppressed (addEventListener).");
-            event.stopImmediatePropagation();
-            event.preventDefault();
-            return true;
-          }
-        }, true);
-        
+        window.addEventListener(
+          "error",
+          function (event) {
+            if (ignoreScriptError(event.message)) {
+              console.warn(
+                "[SalaryCalc] Script error suppressed (addEventListener).",
+              );
+              event.stopImmediatePropagation();
+              event.preventDefault();
+              return true;
+            }
+          },
+          true,
+        );
+
         // 3. handle unhandledrejection
-        window.addEventListener('unhandledrejection', function(event) {
-          if (event.reason && ignoreScriptError(event.reason.message)) {
-            console.warn("[SalaryCalc] Script error suppressed (unhandledrejection).");
-            event.stopImmediatePropagation();
-            event.preventDefault();
-            return true;
-          }
-        }, true);
+        window.addEventListener(
+          "unhandledrejection",
+          function (event) {
+            if (event.reason && ignoreScriptError(event.reason.message)) {
+              console.warn(
+                "[SalaryCalc] Script error suppressed (unhandledrejection).",
+              );
+              event.stopImmediatePropagation();
+              event.preventDefault();
+              return true;
+            }
+          },
+          true,
+        );
       })();
     </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
-    <title>[Post Title] – HR &amp; Salary Blog Malaysia</title>
-    <meta name="description" content="[Post Description Here]">
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/favicon-ricebowl.png" />
+    <title>Loading Article... – HR &amp; Salary Blog Malaysia</title>
+    <meta name="description" content="Loading article description" />
+
     <!-- SEO -->
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://salarycalculator.my/blog/post-slug">
-    
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://salarycalculator.my/blog/post-slug" />
+
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
@@ -77,82 +103,249 @@
     <!-- Optimized Fonts -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
     <!-- Optimized CSS loading to prevent render-blocking -->
-    <link rel="preload" href="/calculator-styles.css" as="style">
-    <link rel="stylesheet" href="/calculator-styles.css" media="print" onload="this.media='all'">
+    <link rel="preload" href="/calculator-styles.css" as="style" />
+    <link
+      rel="stylesheet"
+      href="/calculator-styles.css"
+      media="print"
+      onload="this.media = 'all'"
+    />
 
     <!-- Schema Markup -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "headline": "[Post Title Here]",
-      "image": ["https://salarycalculator.my/thumbnail.jpg"],
-      "datePublished": "2026-06-23T08:00:00+08:00",
-      "dateModified": "2026-06-23T08:00:00+08:00",
-      "author": [{
-          "@type": "Organization",
-          "name": "SalaryCalculator.my Team",
-          "url": "https://salarycalculator.my/"
-        }]
-    }
+    <script type="application/ld+json" id="schema-article">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Loading...",
+        "image": ["https://salarycalculator.my/thumbnail.jpg"],
+        "datePublished": "2026-06-23T08:00:00+08:00",
+        "dateModified": "2026-06-23T08:00:00+08:00",
+        "author": [
+          {
+            "@type": "Organization",
+            "name": "SalaryCalculator.my Team",
+            "url": "https://salarycalculator.my/"
+          }
+        ]
+      }
+    </script>
+    <script type="application/ld+json" id="schema-breadcrumb">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://salarycalculator.my/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Blog",
+            "item": "https://salarycalculator.my/blog"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Loading..."
+          }
+        ]
+      }
     </script>
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [{
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Home",
-        "item": "https://salarycalculator.my/"
-      },{
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Blog",
-        "item": "https://salarycalculator.my/blog"
-      },{
-        "@type": "ListItem",
-        "position": 3,
-        "name": "[Post Title]"
-      }]
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": []
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": []
+      }
     </script>
   </head>
   <body>
     <!-- Navbar -->
     <header class="navbar">
-      <div class="container" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+      <div
+        class="container"
+        style="
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          position: relative;
+        "
+      >
         <a href="/" class="logo">
-          <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" class="logo-img" width="250" height="44">
+          <img
+            src="/logo-small.png"
+            alt="SalaryCalc MY"
+            referrerpolicy="no-referrer"
+            class="logo-img"
+            width="250"
+            height="44"
+          />
         </a>
 
         <nav class="desktop-nav">
@@ -160,12 +353,27 @@
           <a href="/socso-perkeso" class="nav-item">SOCSO Calculator</a>
           <a href="/pcb-income-tax" class="nav-item">PCB Calculator</a>
           <a href="/epf-kwsp" class="nav-item">EPF Calculator</a>
-          <a href="/annual-leave-calculator" class="nav-item">Annual Leave Calculator</a>
+          <a href="/annual-leave-calculator" class="nav-item"
+            >Annual Leave Calculator</a
+          >
           <a href="/blog" class="nav-item">Blog</a>
         </nav>
 
-        <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Menu">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <button
+          class="mobile-menu-btn"
+          id="mobileMenuToggle"
+          aria-label="Toggle Menu"
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -174,62 +382,58 @@
       </div>
 
       <nav class="mobile-nav" id="mobileNavMenu">
-        <a href="/" class="mobile-nav-item">Salary Calculator (Take Home Pay)</a>
-        <a href="/socso-perkeso" class="mobile-nav-item">SOCSO (PERKESO) Calculator</a>
-        <a href="/pcb-income-tax" class="mobile-nav-item">PCB (Monthly Tax Deduction) Calculator</a>
+        <a href="/" class="mobile-nav-item"
+          >Salary Calculator (Take Home Pay)</a
+        >
+        <a href="/socso-perkeso" class="mobile-nav-item"
+          >SOCSO (PERKESO) Calculator</a
+        >
+        <a href="/pcb-income-tax" class="mobile-nav-item"
+          >PCB (Monthly Tax Deduction) Calculator</a
+        >
         <a href="/epf-kwsp" class="mobile-nav-item">EPF (KWSP) Calculator</a>
-        <a href="/annual-leave-calculator" class="mobile-nav-item">Annual Leave Calculator</a>
+        <a href="/annual-leave-calculator" class="mobile-nav-item"
+          >Annual Leave Calculator</a
+        >
         <a href="/blog" class="mobile-nav-item">Blog</a>
       </nav>
     </header>
 
-    <main class="container" style="padding: 40px 20px;">
+    <main class="container" style="padding: 40px 20px">
       <!-- Breadcrumb -->
       <nav class="breadcrumb">
         <a href="/">Home</a>
         <span class="sep">/</span>
         <a href="/blog">Blog</a>
         <span class="sep">/</span>
-        <span>[Post Title]</span>
+        <span id="breadcrumb-title">Loading...</span>
       </nav>
 
       <article>
         <header class="article-header">
           <div class="article-meta">
-            <span class="blog-category category-tips">[Category]</span>
-            <span>[X] min read</span>
-            <span class="sep">•</span>
-            <span>[Date]</span>
+            <span
+              id="article-category"
+              class="blog-category category-tips"
+            ></span>
+            <span id="article-read-time"></span>
+            <span class="sep" id="meta-sep" style="display: none">•</span>
+            <span id="article-date"></span>
           </div>
-          <h1 class="article-title">[Post Title Here]</h1>
-          <p style="color: #64748b; font-weight: 500;">By SalaryCalculator.my Team</p>
+          <h1 id="article-title" class="article-title">Loading Article...</h1>
+          <p style="color: #64748b; font-weight: 500">
+            By SalaryCalculator.my Team
+          </p>
         </header>
 
         <div class="article-hero"></div>
 
-        <div class="article-body">
-          <p>[Write article content here. Use paragraphs, H2 headings, and lists to structure your article.]</p>
-          
-          <h2 style="color: #2563eb !important;">[Section Heading]</h2>
-          <p>[More content...]</p>
-          
-          <!-- Related Calculator CTA -->
-          <div class="article-cta">
-            <h3>Try our free [Calculator Name]</h3>
-            <p>Calculate your accurate [deductions/entitlement] instantly for 2026.</p>
-            <a href="/[calculator-path]" class="btn" style="background: #2563eb; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none;">Try our free [calculator name] →</a>
-          </div>
-
-          <h2 style="color: #2563eb !important;">Frequently Asked Questions</h2>
-          <div class="faq-section">
-            <p><strong>[Question 1]?</strong></p>
-            <p>[Answer 1]</p>
-          </div>
+        <div id="article-content" class="article-body">
+          <p style="text-align: center; color: #64748b">
+            Please wait while we load the article...
+          </p>
         </div>
       </article>
-
-      
-      
     </main>
 
     <!-- Footer -->
@@ -237,11 +441,27 @@
       <div class="container">
         <div class="footer-grid">
           <div class="footer-col">
-            <a href="/" class="logo" style="margin-bottom: 20px; display: block">
-              <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" width="250" height="44" style="height: 60px; width: auto; object-fit: contain; border-radius: 4px;">
+            <a
+              href="/"
+              class="logo"
+              style="margin-bottom: 20px; display: block"
+            >
+              <img
+                src="/logo-small.png"
+                alt="SalaryCalc MY"
+                referrerpolicy="no-referrer"
+                width="250"
+                height="44"
+                style="
+                  height: 60px;
+                  width: auto;
+                  object-fit: contain;
+                  border-radius: 4px;
+                "
+              />
             </a>
             <p style="color: #94a3b8; font-size: 0.9375rem; line-height: 1.6">
-              Accurate Malaysia salary calculator.<br>
+              Accurate Malaysia salary calculator.<br />
               Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
             </p>
           </div>
@@ -251,7 +471,9 @@
             <a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
             <a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
             <a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
-            <a href="/annual-leave-calculator" class="footer-link">Annual Leave Calculator</a>
+            <a href="/annual-leave-calculator" class="footer-link"
+              >Annual Leave Calculator</a
+            >
             <a href="/blog" class="footer-link">Blog</a>
             <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
           </div>
@@ -264,39 +486,77 @@
 
     <script>
       // Extract slug from URL
-      var slug = window.location.pathname.replace(/^\/blog\//, '').replace(/^\//, '').replace(/\/$/, '');
+      var slug = window.location.pathname
+        .replace(/^\/blog\//, "")
+        .replace(/^\//, "")
+        .replace(/\/$/, "");
       console.log("Current post slug:", slug);
 
-      // Example logic for Google Sheets integration
-      const GOOGLE_SHEETS_API_URL = ''; // Add your Google Apps Script Web App URL here
-      
+      const GOOGLE_SHEETS_API_URL =
+        "https://script.google.com/macros/s/AKfycbyTPw8wCwuGBnyilrs76sF30miUCf1WreXe2ETKKzsaUXlECfquGMlw6juC7--XMu3YVg/exec";
+
       async function loadArticle() {
-          if (!slug) return;
-          try {
-              if (!GOOGLE_SHEETS_API_URL) {
-                  console.log("No Google Sheets API URL provided. Mocking data for:", slug);
-                  return;
-              }
-              const response = await fetch(`${GOOGLE_SHEETS_API_URL}?slug=${slug}`);
-              const data = await response.json();
-              console.log("Loaded article:", data);
-              // Render article content here
-          } catch (error) {
-              console.error('Error loading article:', error);
+        if (!slug) return;
+        try {
+          const response = await fetch(
+            `${GOOGLE_SHEETS_API_URL}?action=getPost&slug=${slug}`,
+          );
+          const data = await response.json();
+          console.log("Loaded article:", data);
+
+          if (data && data.post) {
+            document.title = data.post.title + " – HR & Salary Blog Malaysia";
+            document.getElementById("breadcrumb-title").textContent =
+              data.post.title;
+            document.getElementById("article-title").textContent = data.post.title;
+            document.getElementById("article-category").textContent =
+              data.post.category || "";
+
+            if (data.post.date) {
+              document.getElementById("article-date").textContent = new Date(
+                data.post.date,
+              ).toLocaleDateString();
+              document.getElementById("meta-sep").style.display = "inline";
+            }
+
+            if (data.post.readTime) {
+              document.getElementById("article-read-time").textContent =
+                data.post.readTime + " min read";
+            } else {
+              // Calculate read time roughly
+              const words = (data.post.content || "").split(" ").length;
+              const readTime = Math.ceil(words / 200); // 200 words per minute
+              document.getElementById("article-read-time").textContent =
+                readTime + " min read";
+            }
+
+            document.getElementById("article-content").innerHTML =
+              data.post.content || "";
+          } else {
+            document.getElementById("article-title").textContent =
+              "Article Not Found";
+            document.getElementById("article-content").innerHTML =
+              "<p>The article you are looking for does not exist.</p>";
           }
+        } catch (error) {
+          console.error("Error loading article:", error);
+          document.getElementById("article-title").textContent =
+            "Error Loading Article";
+          document.getElementById("article-content").innerHTML =
+            "<p>There was an error loading the article. Please try again later.</p>";
+        }
       }
-      
+
       loadArticle();
 
       // Mobile Menu Toggle
-      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-      const mobileNavMenu = document.getElementById('mobileNavMenu');
+      const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+      const mobileNavMenu = document.getElementById("mobileNavMenu");
       if (mobileMenuToggle && mobileNavMenu) {
-        mobileMenuToggle.addEventListener('click', () => {
-          mobileNavMenu.classList.toggle('open');
+        mobileMenuToggle.addEventListener("click", () => {
+          mobileNavMenu.classList.toggle("open");
         });
       }
     </script>
-  
-
-</body></html>
+  </body>
+</html>
