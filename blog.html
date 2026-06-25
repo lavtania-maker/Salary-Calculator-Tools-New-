@@ -9,7 +9,6 @@
       window.addEventListener('unhandledrejection', function(e){ if(e.reason&&ise(e.reason.message)){e.stopImmediatePropagation();e.preventDefault();return true;} }, true);
     })();
   </script>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
@@ -51,18 +50,9 @@
     .cat-socso { background: #dcfce7; color: #15803d; }
     .cat-law { background: #fef9c3; color: #a16207; }
     .cat-tips { background: #f3e8ff; color: #7c3aed; }
-    .cat-default { background: #f1f5f9; color: #475569; }
     .blog-title { font-size: 1rem; font-weight: 700; color: #0f172a; line-height: 1.45; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
     .blog-desc { font-size: 0.875rem; color: #64748b; line-height: 1.6; margin-bottom: 16px; flex: 1; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     .blog-meta { display: flex; gap: 12px; font-size: 0.8rem; color: #94a3b8; margin-top: auto; padding-top: 12px; border-top: 1px solid #f1f5f9; }
-    .blog-skeleton { background: #f1f5f9; border-radius: 14px; border: 1px solid #e2e8f0; overflow: hidden; }
-    .blog-skeleton .skel-thumb { height: 180px; background: linear-gradient(90deg,#e2e8f0 25%,#f1f5f9 50%,#e2e8f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; }
-    .blog-skeleton .skel-body { padding: 20px; }
-    .blog-skeleton .skel-line { height: 14px; background: linear-gradient(90deg,#e2e8f0 25%,#f1f5f9 50%,#e2e8f0 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; margin-bottom: 12px; }
-    .blog-skeleton .skel-line.short { width: 40%; }
-    .blog-skeleton .skel-line.medium { width: 80%; }
-    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
-    .blog-empty { grid-column: 1 / -1; text-align: center; padding: 60px 20px; color: #94a3b8; }
     .calc-section { border-top: 1px solid #e2e8f0; background: #f8fafc; padding: 56px 0; }
     .calc-section-inner { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
     .calc-section h2 { font-size: 1.5rem; font-weight: 700; color: #2563eb; margin-bottom: 8px; }
@@ -111,12 +101,75 @@
         <button class="filter-btn" data-cat="Employment Law">Employment Law</button>
         <button class="filter-btn" data-cat="Salary Tips">Salary Tips</button>
       </div>
+
+      <!-- Static HTML cards — crawlable by Google, replaced by JS when loaded -->
       <div class="blog-grid" id="blogGrid">
-        <div class="blog-skeleton"><div class="skel-thumb"></div><div class="skel-body"><div class="skel-line short"></div><div class="skel-line medium"></div><div class="skel-line"></div><div class="skel-line short"></div></div></div>
-        <div class="blog-skeleton"><div class="skel-thumb"></div><div class="skel-body"><div class="skel-line short"></div><div class="skel-line medium"></div><div class="skel-line"></div><div class="skel-line short"></div></div></div>
-        <div class="blog-skeleton"><div class="skel-thumb"></div><div class="skel-body"><div class="skel-line short"></div><div class="skel-line medium"></div><div class="skel-line"></div><div class="skel-line short"></div></div></div>
+        <a href="/blog/epf-contribution-rates-2026" class="blog-card" data-cat="EPF">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#dbeafe,#93c5fd)"></div>
+          <div class="blog-content">
+            <span class="blog-category cat-epf">EPF</span>
+            <h3 class="blog-title">EPF (KWSP) Contribution Rates 2026</h3>
+            <p class="blog-desc">EPF rates, how contributions are calculated, and tips to maximize your retirement savings in Malaysia.</p>
+            <div class="blog-meta"><span>24 June 2026</span><span>6 min read</span></div>
+          </div>
+        </a>
+        <a href="/blog/malaysia-salary-guide-2026" class="blog-card" data-cat="Salary Tips">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#f3e8ff,#d8b4fe)"></div>
+          <div class="blog-content">
+            <span class="blog-category cat-tips">Salary Tips</span>
+            <h3 class="blog-title">Malaysia Salary Guide 2026 – Average Salary, Take Home Pay &amp; Income Groups</h3>
+            <p class="blog-desc">Average salaries by industry, B40 M40 T20 thresholds and take home pay for common salary levels in Malaysia.</p>
+            <div class="blog-meta"><span>23 June 2026</span><span>5 min read</span></div>
+          </div>
+        </a>
+        <a href="/blog/epf-contribution-guide-2026" class="blog-card" data-cat="EPF">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#dbeafe,#93c5fd)"></div>
+          <div class="blog-content">
+            <span class="blog-category cat-epf">EPF</span>
+            <h3 class="blog-title">EPF Contribution Guide 2026 – Everything Malaysian Employees Need to Know</h3>
+            <p class="blog-desc">EPF rates, account structure, dividends and tips to maximize your retirement savings.</p>
+            <div class="blog-meta"><span>20 June 2026</span><span>6 min read</span></div>
+          </div>
+        </a>
+        <a href="/blog/pcb-tax-deduction-2026" class="blog-card" data-cat="PCB">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#e0f2fe,#7dd3fc)"></div>
+          <div class="blog-content">
+            <span class="blog-category cat-pcb">PCB</span>
+            <h3 class="blog-title">PCB Tax Deduction 2026 – How to Calculate Your Monthly Income Tax</h3>
+            <p class="blog-desc">Step-by-step guide to PCB deduction, 2026 tax brackets and how to legally reduce your monthly tax.</p>
+            <div class="blog-meta"><span>18 June 2026</span><span>7 min read</span></div>
+          </div>
+        </a>
+        <a href="/blog/minimum-wage-malaysia-2026" class="blog-card" data-cat="Salary Tips">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#f3e8ff,#d8b4fe)"></div>
+          <div class="blog-content">
+            <span class="blog-category cat-tips">Salary Tips</span>
+            <h3 class="blog-title">Minimum Wage Malaysia 2026 – RM1,700 Rate, Who It Applies To &amp; Take Home Pay</h3>
+            <p class="blog-desc">Everything about the current minimum wage, daily rate, take home pay after deductions and employer obligations.</p>
+            <div class="blog-meta"><span>15 June 2026</span><span>5 min read</span></div>
+          </div>
+        </a>
+        <a href="/blog/socso-malaysia-2026" class="blog-card" data-cat="SOCSO">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#dcfce7,#86efac)"></div>
+          <div class="blog-content">
+            <span class="blog-category cat-socso">SOCSO</span>
+            <h3 class="blog-title">SOCSO Malaysia 2026 – Rates, Coverage &amp; How to Make a Claim</h3>
+            <p class="blog-desc">Complete guide to SOCSO and EIS contributions, what they cover and how to claim with PERKESO Malaysia.</p>
+            <div class="blog-meta"><span>12 June 2026</span><span>6 min read</span></div>
+          </div>
+        </a>
+        <a href="/blog/annual-leave-malaysia-2026" class="blog-card" data-cat="Employment Law">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#fef9c3,#fde047)"></div>
+          <div class="blog-content">
+            <span class="blog-category cat-law">Employment Law</span>
+            <h3 class="blog-title">Annual Leave Malaysia 2026 – Entitlement, Pro-Rated Leave &amp; Employer Rules</h3>
+            <p class="blog-desc">Your rights to annual leave under the Malaysian Employment Act and what happens to unused leave.</p>
+            <div class="blog-meta"><span>10 June 2026</span><span>5 min read</span></div>
+          </div>
+        </a>
       </div>
     </div>
+
     <section class="calc-section">
       <div class="calc-section-inner">
         <h2>Try Our Other Free Calculators</h2>
@@ -158,22 +211,17 @@
     const API = "https://script.google.com/macros/s/AKfycbyTPw8wCwuGBnyilrs76sF30miUCf1WreXe2ETKKzsaUXlECfquGMlw6juC7--XMu3YVg/exec";
     const CAT_CLASS = { "EPF": "cat-epf", "PCB": "cat-pcb", "SOCSO": "cat-socso", "Employment Law": "cat-law", "Salary Tips": "cat-tips" };
     const CAT_BG = { "EPF": "linear-gradient(135deg,#dbeafe,#93c5fd)", "PCB": "linear-gradient(135deg,#e0f2fe,#7dd3fc)", "SOCSO": "linear-gradient(135deg,#dcfce7,#86efac)", "Employment Law": "linear-gradient(135deg,#fef9c3,#fde047)", "Salary Tips": "linear-gradient(135deg,#f3e8ff,#d8b4fe)", "default": "linear-gradient(135deg,#f1f5f9,#cbd5e1)" };
-
-    // These are always shown — Sheets data overrides matching slugs
     const BASE_POSTS = [
-      { slug: "epf-contribution-rates-2026", category: "EPF", title: "EPF (KWSP) Contribution Rates 2026", excerpt: "EPF rates, how contributions are calculated, and tips to maximize your retirement savings in Malaysia.", date: "2026-06-24", readTime: "6", thumbnail: "" },
-      { slug: "malaysia-salary-guide-2026", category: "Salary Tips", title: "Malaysia Salary Guide 2026 – Average Salary, Take Home Pay & Income Groups", excerpt: "Average salaries by industry, B40 M40 T20 thresholds and take home pay for common salary levels.", date: "2026-06-23", readTime: "5", thumbnail: "" },
-      { slug: "epf-contribution-guide-2026", category: "EPF", title: "EPF Contribution Guide 2026 – Everything Malaysian Employees Need to Know", excerpt: "EPF rates, account structure, dividends and tips to maximize your retirement savings.", date: "2026-06-20", readTime: "6", thumbnail: "" },
-      { slug: "pcb-tax-deduction-2026", category: "PCB", title: "PCB Tax Deduction 2026 – How to Calculate Your Monthly Income Tax", excerpt: "Step-by-step guide to PCB deduction, 2026 tax brackets and how to legally reduce your monthly tax.", date: "2026-06-18", readTime: "7", thumbnail: "" },
-      { slug: "minimum-wage-malaysia-2026", category: "Salary Tips", title: "Minimum Wage Malaysia 2026 – RM1,700 Rate, Who It Applies To & Take Home Pay", excerpt: "Everything about the current minimum wage, daily rate, take home pay after deductions.", date: "2026-06-15", readTime: "5", thumbnail: "" },
-      { slug: "socso-malaysia-2026", category: "SOCSO", title: "SOCSO Malaysia 2026 – Rates, Coverage & How to Make a Claim", excerpt: "Complete guide to SOCSO and EIS contributions, what they cover and how to claim.", date: "2026-06-12", readTime: "6", thumbnail: "" },
-      { slug: "annual-leave-malaysia-2026", category: "Employment Law", title: "Annual Leave Malaysia 2026 – Entitlement, Pro-Rated Leave & Employer Rules", excerpt: "Your rights to annual leave under the Malaysian Employment Act.", date: "2026-06-10", readTime: "5", thumbnail: "" }
+      { slug: "epf-contribution-rates-2026", category: "EPF", title: "EPF (KWSP) Contribution Rates 2026", excerpt: "EPF rates, how contributions are calculated, and tips to maximize your retirement savings in Malaysia.", date: "2026-06-24", readTime: "6" },
+      { slug: "malaysia-salary-guide-2026", category: "Salary Tips", title: "Malaysia Salary Guide 2026 – Average Salary, Take Home Pay & Income Groups", excerpt: "Average salaries by industry, B40 M40 T20 thresholds and take home pay for common salary levels in Malaysia.", date: "2026-06-23", readTime: "5" },
+      { slug: "epf-contribution-guide-2026", category: "EPF", title: "EPF Contribution Guide 2026 – Everything Malaysian Employees Need to Know", excerpt: "EPF rates, account structure, dividends and tips to maximize your retirement savings.", date: "2026-06-20", readTime: "6" },
+      { slug: "pcb-tax-deduction-2026", category: "PCB", title: "PCB Tax Deduction 2026 – How to Calculate Your Monthly Income Tax", excerpt: "Step-by-step guide to PCB deduction, 2026 tax brackets and how to legally reduce your monthly tax.", date: "2026-06-18", readTime: "7" },
+      { slug: "minimum-wage-malaysia-2026", category: "Salary Tips", title: "Minimum Wage Malaysia 2026 – RM1,700 Rate, Who It Applies To & Take Home Pay", excerpt: "Everything about the current minimum wage, daily rate, take home pay after deductions and employer obligations.", date: "2026-06-15", readTime: "5" },
+      { slug: "socso-malaysia-2026", category: "SOCSO", title: "SOCSO Malaysia 2026 – Rates, Coverage & How to Make a Claim", excerpt: "Complete guide to SOCSO and EIS contributions, what they cover and how to claim with PERKESO Malaysia.", date: "2026-06-12", readTime: "6" },
+      { slug: "annual-leave-malaysia-2026", category: "Employment Law", title: "Annual Leave Malaysia 2026 – Entitlement, Pro-Rated Leave & Employer Rules", excerpt: "Your rights to annual leave under the Malaysian Employment Act and what happens to unused leave.", date: "2026-06-10", readTime: "5" }
     ];
-
-    let allPosts = []; let currentFilter = "all";
-
+    let allPosts = BASE_POSTS; let currentFilter = "all";
     function formatDate(d) { if (!d) return ""; const dt = new Date(d); if (isNaN(dt)) return d; return dt.toLocaleDateString("en-MY", { day: "numeric", month: "long", year: "numeric" }); }
-
     function buildCard(post) {
       const cc = CAT_CLASS[post.category] || "cat-default";
       const bg = CAT_BG[post.category] || CAT_BG["default"];
@@ -183,39 +231,30 @@
       const ds = formatDate(post.date);
       return `<a href="/blog/${post.slug}" class="blog-card" data-cat="${post.category||''}"><div class="blog-thumb" ${ts}>${th}</div><div class="blog-content"><span class="blog-category ${cc}">${post.category||''}</span><h3 class="blog-title">${post.title}</h3><p class="blog-desc">${post.excerpt||post.summary||''}</p><div class="blog-meta">${ds?`<span>${ds}</span>`:''} ${rt?`<span>${rt}</span>`:''}</div></div></a>`;
     }
-
     function renderPosts(posts) {
       const grid = document.getElementById("blogGrid");
-      if (!posts.length) { grid.innerHTML = '<div class="blog-empty"><p>No articles found.</p></div>'; return; }
+      if (!posts.length) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;color:#94a3b8;">No articles found.</div>'; return; }
       grid.innerHTML = posts.map(buildCard).join("");
     }
-
     function applyFilter(cat) {
       currentFilter = cat;
       document.querySelectorAll(".filter-btn").forEach(b => b.classList.toggle("active", b.dataset.cat === cat));
-      renderPosts(cat === "all" ? allPosts : allPosts.filter(p => p.category === cat));
+      const filtered = cat === "all" ? allPosts : allPosts.filter(p => p.category === cat);
+      renderPosts(filtered);
     }
-
     function mergePosts(sheetPosts) {
-      // Start with BASE_POSTS, override any matching slugs with live Sheet data
       const map = {};
       BASE_POSTS.forEach(p => map[p.slug] = p);
       (sheetPosts || []).forEach(p => { if (p.slug) map[p.slug] = { ...map[p.slug], ...p }; });
-      // Sort by date descending
       return Object.values(map).sort((a,b) => new Date(b.date||0) - new Date(a.date||0));
     }
-
     async function loadPosts() {
       try {
         const res = await fetch(API + "?action=getPosts");
         const data = await res.json();
-        allPosts = mergePosts(data && data.posts ? data.posts : []);
-      } catch(e) {
-        allPosts = mergePosts([]);
-      }
-      renderPosts(allPosts);
+        if (data && data.posts) { allPosts = mergePosts(data.posts); renderPosts(allPosts); }
+      } catch(e) { /* keep static cards */ }
     }
-
     document.getElementById("blogFilters").addEventListener("click", function(e) { if (e.target.classList.contains("filter-btn")) applyFilter(e.target.dataset.cat); });
     const mmT = document.getElementById("mobileMenuToggle"); const mmN = document.getElementById("mobileNavMenu");
     if (mmT && mmN) mmT.addEventListener("click", () => mmN.classList.toggle("open"));
