@@ -72,7 +72,13 @@
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
@@ -258,11 +264,29 @@
 
     <script>
       // Extract slug from URL
-      var path = window.location.pathname;
-      var slug = path.startsWith('/blog/') ? path.replace('/blog/', '') : path.replace('/', '');
-      slug = slug.replace(/\/$/, '');
-      
+      var slug = window.location.pathname.replace(/^\/blog\//, '').replace(/^\//, '').replace(/\/$/, '');
       console.log("Current post slug:", slug);
+
+      // Example logic for Google Sheets integration
+      const GOOGLE_SHEETS_API_URL = ''; // Add your Google Apps Script Web App URL here
+      
+      async function loadArticle() {
+          if (!slug) return;
+          try {
+              if (!GOOGLE_SHEETS_API_URL) {
+                  console.log("No Google Sheets API URL provided. Mocking data for:", slug);
+                  return;
+              }
+              const response = await fetch(`${GOOGLE_SHEETS_API_URL}?slug=${slug}`);
+              const data = await response.json();
+              console.log("Loaded article:", data);
+              // Render article content here
+          } catch (error) {
+              console.error('Error loading article:', error);
+          }
+      }
+      
+      loadArticle();
 
       // Mobile Menu Toggle
       const mobileMenuToggle = document.getElementById('mobileMenuToggle');
