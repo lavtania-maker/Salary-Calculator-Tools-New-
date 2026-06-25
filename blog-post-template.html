@@ -60,7 +60,31 @@
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -233,6 +257,13 @@
     </footer>
 
     <script>
+      // Extract slug from URL
+      var path = window.location.pathname;
+      var slug = path.startsWith('/blog/') ? path.replace('/blog/', '') : path.replace('/', '');
+      slug = slug.replace(/\/$/, '');
+      
+      console.log("Current post slug:", slug);
+
       // Mobile Menu Toggle
       const mobileMenuToggle = document.getElementById('mobileMenuToggle');
       const mobileNavMenu = document.getElementById('mobileNavMenu');
