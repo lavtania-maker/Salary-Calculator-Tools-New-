@@ -1,143 +1,247 @@
 <!DOCTYPE html><html lang="en"><head>
-<script>(function(){var ig=function(m){if(!m)return true;var s=m.toString().toLowerCase();return s.indexOf("script error")>-1||s==="script error."||s.indexOf("uncaught script error")>-1;};var oe=window.onerror;window.onerror=function(m,s,l,c,e){if(ig(m)){return true;}if(typeof oe==='function')return oe.apply(this,arguments);};window.addEventListener('error',function(e){if(ig(e.message)){e.stopImmediatePropagation();e.preventDefault();return true;}},true);window.addEventListener('unhandledrejection',function(e){if(e.reason&&ig(e.reason.message)){e.stopImmediatePropagation();e.preventDefault();return true;}},true);})();</script>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" type="image/png" href="/favicon-ricebowl.png">
-<title id="pageTitle">Loading... – HR & Salary Blog Malaysia</title>
-<meta name="description" id="pageDesc" content="Free HR and payroll guides for Malaysian employees and employers.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" id="pageCanonical" href="https://salarycalculator.my/blog">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/calculator-styles.css">
-<style>
-.article-container{max-width:780px;margin:0 auto;padding:40px 20px 80px;}
-.breadcrumb{font-size:0.875rem;color:#64748b;margin-bottom:28px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
-.breadcrumb a{color:#2563eb;text-decoration:none;}
-.article-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px;}
-.article-cat{display:inline-block;padding:3px 12px;border-radius:20px;font-size:.75rem;font-weight:600;text-transform:uppercase;}
-.cat-epf{background:#dbeafe;color:#1d4ed8;}.cat-pcb{background:#ede9fe;color:#6d28d9;}.cat-socso{background:#ffedd5;color:#c2410c;}.cat-employment{background:#dcfce7;color:#15803d;}.cat-salary{background:#fee2e2;color:#b91c1c;}.cat-default{background:#f1f5f9;color:#475569;}
-.article-meta span{font-size:0.875rem;color:#64748b;}
-.article-title{font-size:2rem;font-weight:800;color:#0f172a;line-height:1.25;margin:0 0 12px;letter-spacing:-0.02em;}
-.article-byline{color:#64748b;font-size:0.875rem;margin-bottom:32px;}
-.article-hero{width:100%;height:220px;background:linear-gradient(135deg,#1d4ed8 0%,#3b82f6 100%);border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:36px;}
-.article-body{font-size:1rem;line-height:1.8;color:#334155;}
-.article-body h2{font-size:1.375rem;font-weight:700;color:#0f172a;margin:36px 0 12px;border-left:3px solid #2563eb;padding-left:12px;}
-.article-body h3{font-size:1.125rem;font-weight:600;color:#0f172a;margin:28px 0 10px;}
-.article-body p{margin:0 0 18px;}
-.article-body ul,.article-body ol{margin:0 0 18px;padding-left:24px;}
-.article-body li{margin-bottom:8px;}
-.article-body table{width:100%;border-collapse:collapse;margin:24px 0;font-size:0.9rem;}
-.article-body th{background:#f1f5f9;padding:12px 16px;text-align:left;font-weight:600;border:1px solid #e2e8f0;}
-.article-body td{padding:12px 16px;border:1px solid #e2e8f0;}
-.article-body tr:nth-child(even) td{background:#fafafa;}
-.article-cta{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1px solid #bfdbfe;border-radius:12px;padding:28px 32px;margin:36px 0;text-align:center;}
-.article-cta h3{color:#1d4ed8;font-size:1.125rem;margin:0 0 8px;}
-.article-cta p{color:#475569;margin:0 0 16px;}
-.cta-btn{background:#2563eb;color:white;padding:12px 24px;border-radius:8px;font-weight:600;text-decoration:none;display:inline-block;}
-.related-section{margin-top:60px;padding-top:40px;border-top:1px solid #e2e8f0;}
-.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:24px;}
-@media(max-width:768px){.related-grid{grid-template-columns:1fr;}.article-title{font-size:1.5rem;}}
-.related-card{background:white;border:1px solid #e2e8f0;border-radius:10px;overflow:hidden;text-decoration:none;color:inherit;display:block;}
-.related-card:hover{box-shadow:0 4px 12px rgba(37,99,235,.1);border-color:#93c5fd;}
-.related-thumb{height:100px;background:linear-gradient(135deg,#eff6ff,#dbeafe);display:flex;align-items:center;justify-content:center;}
-.related-body{padding:14px 16px;}
-.related-title{font-size:0.9rem;font-weight:600;color:#0f172a;line-height:1.4;}
-.loading-state{text-align:center;padding:80px 20px;color:#64748b;}
-.error-state{text-align:center;padding:80px 20px;}
-</style>
-</head>
-<body>
-<header class="navbar">
-<div class="container" style="display:flex;justify-content:space-between;align-items:center;position:relative;">
-<a href="/" class="logo"><img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" class="logo-img" width="250" height="44"></a>
-<nav class="desktop-nav">
-<a href="/" class="nav-item">Salary Calculator</a>
-<a href="/socso-perkeso" class="nav-item">SOCSO Calculator</a>
-<a href="/pcb-income-tax" class="nav-item">PCB Calculator</a>
-<a href="/epf-kwsp" class="nav-item">EPF Calculator</a>
-<a href="/annual-leave-calculator" class="nav-item">Annual Leave Calculator</a>
-<a href="/blog" class="nav-item">Blog</a>
-</nav>
-<button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Menu">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-</button>
-</div>
-<nav class="mobile-nav" id="mobileNavMenu">
-<a href="/" class="mobile-nav-item">Salary Calculator (Take Home Pay)</a>
-<a href="/socso-perkeso" class="mobile-nav-item">SOCSO (PERKESO) Calculator</a>
-<a href="/pcb-income-tax" class="mobile-nav-item">PCB (Monthly Tax Deduction) Calculator</a>
-<a href="/epf-kwsp" class="mobile-nav-item">EPF (KWSP) Calculator</a>
-<a href="/annual-leave-calculator" class="mobile-nav-item">Annual Leave Calculator</a>
-<a href="/blog" class="mobile-nav-item">Blog</a>
-</nav>
-</header>
-<div class="article-container">
-<div id="articleContent"><div class="loading-state"><p>Loading article...</p></div></div>
-</div>
-<footer class="footer">
-<div class="container">
-<div class="footer-grid">
-<div class="footer-col">
-<a href="/" class="logo" style="margin-bottom:20px;display:block"><img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" width="250" height="44" style="height:60px;width:auto;object-fit:contain;border-radius:4px;"></a>
-<p style="color:#94a3b8;font-size:0.9375rem;line-height:1.6">Accurate Malaysia salary calculator.<br>Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.</p>
-</div>
-<div class="footer-col footer-col-links">
-<h4>Quick Links</h4>
-<a href="/" class="footer-link">Salary Calculator</a>
-<a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
-<a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
-<a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
-<a href="/annual-leave-calculator" class="footer-link">Annual Leave Calculator</a>
-<a href="/blog" class="footer-link">Blog</a>
-<a href="/privacy-policy" class="footer-link">Privacy Policy</a>
-</div>
-</div>
-<div class="footer-bottom"><p>© 2026 SalaryCalc MY</p></div>
-</div>
-</footer>
-<script>
-var SU='https://script.google.com/macros/s/AKfycbyTPw8wCwuGBnyilrs76sF30miUCf1WreXe2ETKKzsaUXlECfquGMlw6juC7--XMu3YVg/exec';
-function getCatClass(cat){var v=(cat||'').toLowerCase();if(v.indexOf('epf')>-1)return 'cat-epf';if(v.indexOf('pcb')>-1)return 'cat-pcb';if(v.indexOf('socso')>-1)return 'cat-socso';if(v.indexOf('employment')>-1||v.indexOf('law')>-1)return 'cat-employment';if(v.indexOf('salary')>-1||v.indexOf('wage')>-1)return 'cat-salary';return 'cat-default';}
-function renderArticle(post,allPosts){
-  document.title=post.title+' – HR & Salary Blog Malaysia';
-  document.getElementById('pageDesc').content=post.metaDesc||post.summary||'';
-  document.getElementById('pageCanonical').href='https://salarycalculator.my/'+post.slug;
-  var related=allPosts.filter(function(p){return p.slug!==post.slug&&p.status==='published';}).slice(0,3);
-  var relatedHTML='';
-  if(related.length>0){
-    relatedHTML='<div class="related-section"><h2 style="font-size:1.25rem;font-weight:700;color:#0f172a;">Related Articles</h2><div class="related-grid">'+
-    related.map(function(r){return '<a href="/'+r.slug+'" class="related-card"><div class="related-thumb"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#93c5fd" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div><div class="related-body"><div class="related-title">'+r.title+'</div><div style="font-size:0.75rem;color:#94a3b8;margin-top:6px;">'+(r.readTime||5)+' min read</div></div></a>';}).join('')+
-    '</div></div>';
-  }
-  var content=post.content||('<p>'+(post.summary||'')+'</p>');
-  document.getElementById('articleContent').innerHTML=
-    '<nav class="breadcrumb"><a href="/">Home</a><span>/</span><a href="/blog">Blog</a><span>/</span><span>'+post.title+'</span></nav>'+
-    '<article>'+
-    '<div class="article-meta"><span class="article-cat '+getCatClass(post.category)+'">'+(post.category||'')+'</span><span>'+(post.date||'')+'</span><span>·</span><span>'+(post.readTime||5)+' min read</span></div>'+
-    '<h1 class="article-title">'+post.title+'</h1>'+
-    '<p class="article-byline">By SalaryCalculator.my Team</p>'+
-    '<div class="article-hero"><svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1.2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path></svg></div>'+
-    '<div class="article-body">'+content+'</div>'+
-    '</article>'+relatedHTML;
-}
-function renderError(msg){document.getElementById('articleContent').innerHTML='<div class="error-state"><p style="color:#ef4444;font-size:1.1rem;margin-bottom:16px;">'+msg+'</p><a href="/blog" style="color:#2563eb;font-weight:600;">← Back to Blog</a></div>';}
-var slug=window.location.pathname.replace(/^\/,'').replace(/\/$/,'');
-fetch(SU+'?action=getPost&slug='+encodeURIComponent(slug))
-  .then(function(r){return r.json();})
-  .then(function(d){
-    if(d.post){
-      fetch(SU+'?action=getPosts')
-        .then(function(r2){return r2.json();})
-        .then(function(d2){renderArticle(d.post,d2.posts||[]);})
-        .catch(function(){renderArticle(d.post,[]);});
-    } else {
-      renderError('Article not found.');
+    <script>
+      (function() {
+        var ignoreScriptError = function(msg) {
+          if (!msg) return true; // Treat empty message as something to ignore
+          var s = msg.toString().toLowerCase();
+          return s.indexOf("script error") > -1 || s === "script error." || s.indexOf("uncaught script error") > -1;
+        };
+
+        // 1. window.onerror
+        var oldOnError = window.onerror;
+        window.onerror = function (message, source, lineno, colno, error) {
+          if (ignoreScriptError(message)) {
+            console.warn("[SalaryCalc] Script error suppressed (window.onerror).");
+            return true;
+          }
+          if (typeof oldOnError === 'function') {
+            return oldOnError.apply(this, arguments);
+          }
+        };
+
+        // 2. addEventListener('error')
+        window.addEventListener('error', function(event) {
+          if (ignoreScriptError(event.message)) {
+            console.warn("[SalaryCalc] Script error suppressed (addEventListener).");
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+        
+        // 3. handle unhandledrejection
+        window.addEventListener('unhandledrejection', function(event) {
+          if (event.reason && ignoreScriptError(event.reason.message)) {
+            console.warn("[SalaryCalc] Script error suppressed (unhandledrejection).");
+            event.stopImmediatePropagation();
+            event.preventDefault();
+            return true;
+          }
+        }, true);
+      })();
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
+    <title>[Post Title] – HR &amp; Salary Blog Malaysia</title>
+    <meta name="description" content="[Post Description Here]">
+    
+    <!-- SEO -->
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://salarycalculator.my/blog/post-slug">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <!-- Optimized CSS loading to prevent render-blocking -->
+    <link rel="preload" href="/calculator-styles.css" as="style">
+    <link rel="stylesheet" href="/calculator-styles.css" media="print" onload="this.media='all'">
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "[Post Title Here]",
+      "image": ["https://salarycalculator.my/thumbnail.jpg"],
+      "datePublished": "2026-06-23T08:00:00+08:00",
+      "dateModified": "2026-06-23T08:00:00+08:00",
+      "author": [{
+          "@type": "Organization",
+          "name": "SalaryCalculator.my Team",
+          "url": "https://salarycalculator.my/"
+        }]
     }
-  })
-  .catch(function(){renderError('Could not load article. Please try again.');});
-var mt=document.getElementById('mobileMenuToggle'),mn=document.getElementById('mobileNavMenu');
-if(mt&&mn)mt.addEventListener('click',function(){mn.classList.toggle('open');});
-</script>
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://salarycalculator.my/"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://salarycalculator.my/blog"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "[Post Title]"
+      }]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": []
+    }
+    </script>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center; position: relative;">
+        <a href="/" class="logo">
+          <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" class="logo-img" width="250" height="44">
+        </a>
+
+        <nav class="desktop-nav">
+          <a href="/" class="nav-item">Salary Calculator</a>
+          <a href="/socso-perkeso" class="nav-item">SOCSO Calculator</a>
+          <a href="/pcb-income-tax" class="nav-item">PCB Calculator</a>
+          <a href="/epf-kwsp" class="nav-item">EPF Calculator</a>
+          <a href="/annual-leave-calculator" class="nav-item">Annual Leave Calculator</a>
+          <a href="/blog" class="nav-item">Blog</a>
+        </nav>
+
+        <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="mobile-nav" id="mobileNavMenu">
+        <a href="/" class="mobile-nav-item">Salary Calculator (Take Home Pay)</a>
+        <a href="/socso-perkeso" class="mobile-nav-item">SOCSO (PERKESO) Calculator</a>
+        <a href="/pcb-income-tax" class="mobile-nav-item">PCB (Monthly Tax Deduction) Calculator</a>
+        <a href="/epf-kwsp" class="mobile-nav-item">EPF (KWSP) Calculator</a>
+        <a href="/annual-leave-calculator" class="mobile-nav-item">Annual Leave Calculator</a>
+        <a href="/blog" class="mobile-nav-item">Blog</a>
+      </nav>
+    </header>
+
+    <main class="container" style="padding: 40px 20px;">
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb">
+        <a href="/">Home</a>
+        <span class="sep">/</span>
+        <a href="/blog">Blog</a>
+        <span class="sep">/</span>
+        <span>[Post Title]</span>
+      </nav>
+
+      <article>
+        <header class="article-header">
+          <div class="article-meta">
+            <span class="blog-category category-tips">[Category]</span>
+            <span>[X] min read</span>
+            <span class="sep">•</span>
+            <span>[Date]</span>
+          </div>
+          <h1 class="article-title">[Post Title Here]</h1>
+          <p style="color: #64748b; font-weight: 500;">By SalaryCalculator.my Team</p>
+        </header>
+
+        <div class="article-hero"></div>
+
+        <div class="article-body">
+          <p>[Write article content here. Use paragraphs, H2 headings, and lists to structure your article.]</p>
+          
+          <h2 style="color: #2563eb !important;">[Section Heading]</h2>
+          <p>[More content...]</p>
+          
+          <!-- Related Calculator CTA -->
+          <div class="article-cta">
+            <h3>Try our free [Calculator Name]</h3>
+            <p>Calculate your accurate [deductions/entitlement] instantly for 2026.</p>
+            <a href="/[calculator-path]" class="btn" style="background: #2563eb; color: white; padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none;">Try our free [calculator name] →</a>
+          </div>
+
+          <h2 style="color: #2563eb !important;">Frequently Asked Questions</h2>
+          <div class="faq-section">
+            <p><strong>[Question 1]?</strong></p>
+            <p>[Answer 1]</p>
+          </div>
+        </div>
+      </article>
+
+      
+      
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-col">
+            <a href="/" class="logo" style="margin-bottom: 20px; display: block">
+              <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" width="250" height="44" style="height: 60px; width: auto; object-fit: contain; border-radius: 4px;">
+            </a>
+            <p style="color: #94a3b8; font-size: 0.9375rem; line-height: 1.6">
+              Accurate Malaysia salary calculator.<br>
+              Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
+            </p>
+          </div>
+          <div class="footer-col footer-col-links">
+            <h4>Quick Links</h4>
+            <a href="/" class="footer-link">Salary Calculator</a>
+            <a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
+            <a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
+            <a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
+            <a href="/annual-leave-calculator" class="footer-link">Annual Leave Calculator</a>
+            <a href="/blog" class="footer-link">Blog</a>
+            <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2026 SalaryCalc MY</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Mobile Menu Toggle
+      const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+      const mobileNavMenu = document.getElementById('mobileNavMenu');
+      if (mobileMenuToggle && mobileNavMenu) {
+        mobileMenuToggle.addEventListener('click', () => {
+          mobileNavMenu.classList.toggle('open');
+        });
+      }
+    </script>
+  
+
 </body></html>

@@ -182,10 +182,13 @@ ul {
 
 /* Typography */
 h1,
-h2,
 h3,
 h4 {
   color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+h2 {
+  color: #2563eb !important;
   letter-spacing: -0.02em;
 }
 .hero {
@@ -898,7 +901,7 @@ h4 {
 
 .blog-card {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #f1f5f9;
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.2s ease;
@@ -982,12 +985,8 @@ h4 {
 
 /* Featured Post */
 .blog-featured {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 1.4fr 1fr;
-  gap: 0;
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #f1f5f9;
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 32px;
@@ -1012,7 +1011,7 @@ h4 {
 .filter-btn {
   padding: 8px 16px;
   background: white;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #f1f5f9;
   border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 500;
@@ -1363,7 +1362,7 @@ h4 {
 
 .example-box {
   background: #ffffff;
-  border-left: 4px solid var(--primary);
+  border-left: 2px solid var(--primary);
   padding: 20px 24px;
   border-radius: 4px 16px 16px 4px;
   margin-top: 20px;
@@ -1378,7 +1377,7 @@ h4 {
 
 .faq-item {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #f1f5f9;
   border-radius: 16px;
   overflow: hidden;
   font-size: 1rem;
@@ -1579,7 +1578,7 @@ details[open] .faq-title::after {
 .content-section .content-card,
 .content-section .seo-card {
   background: #ffffff !important;
-  border: 1px solid #e2e8f0 !important;
+  border: 1px solid #f1f5f9 !important;
   border-radius: 12px !important;
   padding: 28px 32px !important;
   margin-bottom: 20px !important;
@@ -1717,7 +1716,7 @@ div[style*="grid-template-columns"] > .content-card,
   background: #ffffff !important;
   border-radius: 10px !important;
   padding: 20px !important;
-  border: 1px solid #e2e8f0 !important;
+  border: 1px solid #f1f5f9 !important;
   box-shadow: none !important;
   margin-bottom: 0 !important; /* side-by-side spacing is via grid-gap */
 }
@@ -1739,7 +1738,7 @@ div[style*="grid-template-columns"] > .content-card h2 {
 .content-section .highlight-box {
   border-radius: 10px !important;
   padding: 20px !important;
-  border: 1px solid #e2e8f0 !important;
+  border: 1px solid #f1f5f9 !important;
   background: #ffffff !important;
   font-size: 0.9rem !important;
   box-shadow: none !important;
@@ -1839,7 +1838,7 @@ section.content-section:first-of-type {
 section.content-section > .container > .content-card,
 section.content-section > .container > .seo-card {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #f1f5f9;
   border-radius: 12px;
   padding: 24px 28px;
   margin-bottom: 16px;
@@ -1848,7 +1847,7 @@ section.content-section > .container > .seo-card {
 
 /* TABLES */
 .content-section table {
-  border: 1px solid #e2e8f0;
+  border: 1px solid #f1f5f9;
   border-radius: 10px;
   overflow: hidden;
   border-collapse: separate;
@@ -1887,7 +1886,7 @@ section.content-section > .container > .seo-card {
 .content-section .note-box,
 .content-section .disclaimer-box {
   background: #ffffff;
-  border-left: 3px solid #3b82f6;
+  border-left: 2px solid #3b82f6;
   padding: 12px 16px;
   border-radius: 0 8px 8px 0;
   font-size: 0.85rem;
@@ -1898,7 +1897,7 @@ section.content-section > .container > .seo-card {
 /* FAQ ACCORDION */
 .faq-container details {
   background: #ffffff;
-  border: 1px solid #e2e8f0;
+  border: 1px solid #f1f5f9;
   border-radius: 8px;
   padding: 14px 18px;
   margin-bottom: 8px;

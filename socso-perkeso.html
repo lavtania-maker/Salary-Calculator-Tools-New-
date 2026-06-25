@@ -105,7 +105,11 @@
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -180,7 +184,11 @@
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
@@ -451,13 +459,13 @@ section, .section {
   margin-bottom: 24px !important;
   box-sizing: border-box !important;
   background-color: #ffffff !important;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.04) !important;
-  border: 1px solid #e2e8f0 !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05), 0 2px 6px rgba(0,0,0,0.02) !important;
+  border: 1px solid #f1f5f9 !important;
 }
 
 /* Section Headings inside cards */
 .card h1, .card h2, .calc-card h2, .result-card h2, .card .card-title, .calc-card .card-title, .result-card .card-title {
-  border-left: 3px solid #2563eb !important;
+  border-left: 2px solid #2563eb !important;
   padding-left: 12px !important;
 }
 
@@ -467,7 +475,7 @@ table {
   border-collapse: collapse !important;
   text-align: left !important;
   margin-bottom: 24px !important;
-  border: 1px solid #e2e8f0 !important;
+  border: 1px solid #f1f5f9 !important;
 }
 table thead tr, table tr:first-child:has(th) {
   background-color: #f1f5f9 !important;
@@ -717,7 +725,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
         <div class="main-layout" id="layoutSalary">
           <!-- Left Side: Form Input -->
           <section class="card">
-            <h2 class="card-title">Enter Salary Details</h2>
+            <h2 class="card-title" style="color: #2563eb !important;">Enter Salary Details</h2>
             <form id="salaryForm" action="#resultCard" method="GET">
               <div class="form-group">
                 <label class="form-label" for="grossSalary" style="display: flex; align-items: center; gap: 6px">
@@ -910,7 +918,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                   padding-bottom: 0.5rem;
                   border-bottom: 1px solid #ffffff;
                 ">
-                <h2 class="card-title" style="margin-bottom: 0">Calculation Results</h2>
+                <h2 class="card-title" style="margin-bottom: 0; color: #2563eb !important;">Calculation Results</h2>
               </div>
 
               <!-- Placeholder (Visible by default/No-JS) -->
@@ -1334,7 +1342,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
           <div class="card" style="
               padding: 24px 32px;
               border-radius: 20px;
-              border: 1px solid #e2e8f0;
+              border: 1px solid #f1f5f9;
               background: #ffffff;
               margin-bottom: 16px;
             ">
@@ -1348,7 +1356,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                 gap: 16px;
               ">
               <div>
-                <h2>Your Income Journey</h2>
+                <h2 style="color: #2563eb !important;">Your Income Journey</h2>
                 <p style="color: #64748b; font-size: 0.95rem">
                   Track your progress towards the next household income group.
                 </p>
@@ -1461,7 +1469,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                         height: 32px;
                         border-radius: 50%;
                         background: #ffffff;
-                        border: 4px solid #eab308;
+                        border: 2px solid #eab308;
                         transition: border-color 0.3s;
                         box-shadow:
                           0 0 0 4px #ffffff,
@@ -1472,7 +1480,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                         height: 32px;
                         border-radius: 50%;
                         background: #ffffff;
-                        border: 4px solid #e2e8f0;
+                        border: 2px solid #e2e8f0;
                         transition: border-color 0.3s;
                         box-shadow:
                           0 0 0 4px #ffffff,
@@ -1483,7 +1491,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                         height: 32px;
                         border-radius: 50%;
                         background: #ffffff;
-                        border: 4px solid #e2e8f0;
+                        border: 2px solid #e2e8f0;
                         transition: border-color 0.3s;
                         box-shadow:
                           0 0 0 4px #ffffff,
@@ -1571,7 +1579,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                   flex: 1;
                   min-width: 250px;
                   background: #ffffff;
-                  border: 1px solid #e2e8f0;
+                  border: 1px solid #f1f5f9;
                   border-radius: 16px;
                   padding: 20px;
                   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.02);
@@ -1855,7 +1863,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
         <div class="main-layout" id="layoutSocso" style="display: none; opacity: 0; transition: opacity 0.3s ease">
           <!-- Left Side: Form Input -->
           <section class="card">
-            <h2 class="card-title">Enter Details</h2>
+            <h2 class="card-title" style="color: #2563eb !important;">Enter Details</h2>
             <form id="socsoForm" action="#socsoResultCard">
               <div class="form-group">
                 <label class="form-label" for="socsoGrossSalary" style="display: flex; align-items: center; gap: 6px">
@@ -1993,7 +2001,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                   padding-bottom: 0.5rem;
                   border-bottom: 1px solid #ffffff;
                 ">
-                <h2 class="card-title" style="margin-bottom: 0">Calculation Results</h2>
+                <h2 class="card-title" style="margin-bottom: 0; color: #2563eb !important;">Calculation Results</h2>
               </div>
 
               <!-- Placeholder -->
@@ -2132,7 +2140,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
       <div class="container">
         <!-- Section 1: Formula -->
         <div class="seo-card">
-          <h2 class="seo-title">What are the components of a salary calculator?</h2>
+          <h2 class="seo-title" style="color: #2563eb !important;">What are the components of a salary calculator?</h2>
           <p class="seo-subtitle">
             Calculating your take-home pay involves subtracting all statutory
             deductions from your total earnings. Use this standard formula to
@@ -2158,7 +2166,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
 
         <!-- Section 2: Comparison Table -->
         <div class="seo-card">
-          <h2 class="seo-title">Salary Terms Comparison</h2>
+          <h2 class="seo-title" style="color: #2563eb !important;">Salary Terms Comparison</h2>
           <p class="seo-subtitle">
             Quick reference guide to the most common statutory terms found on
             Malaysian payslips.
@@ -2203,7 +2211,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
 
         <!-- Section 3: Contribution Tables -->
         <div class="seo-card">
-          <h2 class="seo-title">Contribution Tables (2026 Updated)</h2>
+          <h2 class="seo-title" style="color: #2563eb !important;">Contribution Tables (2026 Updated)</h2>
           <p class="seo-subtitle">
             Quick reference for employer and employee statutory contribution
             rates in Malaysia.
@@ -2342,7 +2350,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
 
         <!-- Section 4: What is Subject to EPF/SOCSO/EIS -->
         <div class="seo-card">
-          <h2 class="seo-title">Salary Inclusions &amp; Exclusions</h2>
+          <h2 class="seo-title" style="color: #2563eb !important;">Salary Inclusions &amp; Exclusions</h2>
           <p class="seo-subtitle">
             A precise breakdown of which salary components are subject to
             statutory deductions.
@@ -2417,7 +2425,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
 
         <!-- Section 5: PCB (Monthly Tax Deduction) -->
         <div class="seo-card">
-          <h2 class="seo-title">PCB (Monthly Tax Deduction) – Exact Amounts</h2>
+          <h2 class="seo-title" style="color: #2563eb !important;">PCB (Monthly Tax Deduction) – Exact Amounts</h2>
           <p class="seo-subtitle">
             Exact monthly PCB deduction for a single Malaysian citizen with
             standard RM9,000 individual relief. Use the calculator above for
@@ -2481,7 +2489,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
 
           <div style="
               background: #ffffff;
-              border: 1px solid #e2e8f0;
+              border: 1px solid #f1f5f9;
               border-radius: 16px;
               padding: 24px;
               margin-bottom: 24px;
@@ -2530,7 +2538,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
 
         <!-- Section 6: Tax Deductions & Logistics -->
         <div class="seo-card">
-          <h2 class="seo-title">Tax Relief &amp; Compliance</h2>
+          <h2 class="seo-title" style="color: #2563eb !important;">Tax Relief &amp; Compliance</h2>
           <p class="seo-subtitle">
             Common allowable tax deductions to reduce your taxable income.
           </p>
@@ -2585,7 +2593,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
 
         <!-- New SEO Section 2: Step-by-Step Calculation Example -->
         <div class="seo-card">
-          <h2 class="seo-title">How Your Salary is Calculated – RM5,000 Example</h2>
+          <h2 class="seo-title" style="color: #2563eb !important;">How Your Salary is Calculated – RM5,000 Example</h2>
           <p class="seo-subtitle" style="text-align: left; margin-bottom: 24px">
             Want to understand exactly what gets deducted from your payslip?
             Here is a real example using a gross monthly salary of RM5,000,
@@ -2731,7 +2739,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
         <!-- Section 1: Minimum Wage Malaysia 2026 -->
         <div class="content-card" style="margin-top: 32px">
           
-          <h2>Minimum Wage Malaysia 2026</h2>
+          <h2 style="color: #2563eb !important;">Minimum Wage Malaysia 2026</h2>
           <p>
             Malaysia's minimum wage is RM1,700 per month, effective 1 February 2025 under the Minimum Wages Order 2024. This applies to all private sector employees nationwide including part-time and foreign workers.
           </p>
@@ -2813,7 +2821,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
 
         <!-- Section 2: Malaysia Income Tax Rate 2026 -->
         <div class="content-card" style="margin-top: 32px">
-          <h2>Malaysia Income Tax Rate 2026</h2>
+          <h2 style="color: #2563eb !important;">Malaysia Income Tax Rate 2026</h2>
           <p>
             Malaysia uses a progressive tax system. Rates range from 0% to 30% for tax residents. Non-residents pay a flat 30% on all income. Your PCB deduction is calculated based on these brackets every month.
           </p>
@@ -2867,7 +2875,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
 
         <!-- Section 3: Malaysia Tax Relief 2026 -->
         <div class="content-card" style="margin-top: 32px">
-          <h2>Malaysia Tax Relief 2026 – Complete List</h2>
+          <h2 style="color: #2563eb !important;">Malaysia Tax Relief 2026 – Complete List</h2>
           <p>
             Tax reliefs reduce your chargeable income and lower your PCB deduction. The more reliefs you claim, the less tax you pay each month.
           </p>
@@ -2906,7 +2914,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
 
 <!-- New SEO Section 4: FAQ -->
         <div class="seo-card">
-          <h2 class="seo-title">Frequently Asked Questions</h2>
+          <h2 class="seo-title" style="color: #2563eb !important;">Frequently Asked Questions</h2>
           <div class="faq-container" style="
               display: flex;
               flex-direction: column;
@@ -2917,7 +2925,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                 background: #ffffff;
                 padding: 16px;
                 border-radius: 8px;
-                border: 1px solid #e2e8f0;
+                border: 1px solid #f1f5f9;
                 cursor: pointer;
               ">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
@@ -2942,7 +2950,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                 background: #ffffff;
                 padding: 16px;
                 border-radius: 8px;
-                border: 1px solid #e2e8f0;
+                border: 1px solid #f1f5f9;
                 cursor: pointer;
               ">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
@@ -2964,7 +2972,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                 background: #ffffff;
                 padding: 16px;
                 border-radius: 8px;
-                border: 1px solid #e2e8f0;
+                border: 1px solid #f1f5f9;
                 cursor: pointer;
               ">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
@@ -2988,7 +2996,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                 background: #ffffff;
                 padding: 16px;
                 border-radius: 8px;
-                border: 1px solid #e2e8f0;
+                border: 1px solid #f1f5f9;
                 cursor: pointer;
               ">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
@@ -3011,7 +3019,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                 background: #ffffff;
                 padding: 16px;
                 border-radius: 8px;
-                border: 1px solid #e2e8f0;
+                border: 1px solid #f1f5f9;
                 cursor: pointer;
               ">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
@@ -3034,7 +3042,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                 background: #ffffff;
                 padding: 16px;
                 border-radius: 8px;
-                border: 1px solid #e2e8f0;
+                border: 1px solid #f1f5f9;
                 cursor: pointer;
               ">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
@@ -3056,7 +3064,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                 background: #ffffff;
                 padding: 16px;
                 border-radius: 8px;
-                border: 1px solid #e2e8f0;
+                border: 1px solid #f1f5f9;
                 cursor: pointer;
               ">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
@@ -3079,7 +3087,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                 background: #ffffff;
                 padding: 16px;
                 border-radius: 8px;
-                border: 1px solid #e2e8f0;
+                border: 1px solid #f1f5f9;
                 cursor: pointer;
               ">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
@@ -3102,7 +3110,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
         </div>
         <!-- Section 6: Official Calculators -->
         <div class="seo-card">
-          <h2 class="seo-title">Official Government Salary Calculators</h2>
+          <h2 class="seo-title" style="color: #2563eb !important;">Official Government Salary Calculators</h2>
           <p class="seo-subtitle">
             For official verification and precise statutory calculations, visit
             these government portals:
@@ -3286,7 +3294,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
       <div class="container">
         <!-- Section 1: What is SOCSO (PERKESO) -->
         <div class="content-card">
-          <h2>What is SOCSO (PERKESO)?</h2>
+          <h2 style="color: #2563eb !important;">What is SOCSO (PERKESO)?</h2>
           <p>
             SOCSO (Social Security Organization), known as PERKESO, provides
             essential social security protection to Malaysian employees through
@@ -3382,7 +3390,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
 
         <!-- Section 2: How SOCSO Contribution Works -->
         <div class="content-card">
-          <h2>How SOCSO Contribution Works</h2>
+          <h2 style="color: #2563eb !important;">How SOCSO Contribution Works</h2>
           <p>
             SOCSO contribution is calculated based on two main variables: your
             monthly gross salary and your age.
@@ -3481,7 +3489,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
 
         <!-- Section 3: Coverage Categories -->
         <div class="content-card">
-          <h2>Coverage Categories (Act 4)</h2>
+          <h2 style="color: #2563eb !important;">Coverage Categories (Act 4)</h2>
           <p>
             The Employees’ Social Security Act 1969 provides protection to all
             Malaysian employees, regardless of religion, nationality, or
@@ -3649,13 +3657,13 @@ input[type="text"], input[type="number"], input[type="email"], select {
 
         <!-- Section 3.5: 10 Types of SOCSO Claims -->
         <div class="content-card">
-          <h2>The 10 Types of SOCSO Claims in Malaysia</h2>
+          <h2 style="color: #2563eb !important;">The 10 Types of SOCSO Claims in Malaysia</h2>
           <div style="
               display: grid;
               grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
               gap: 32px 24px;
             ">
-            <div style="border-left: 3px solid var(--primary); padding-left: 16px">
+            <div style="border-left: 2px solid var(--primary); padding-left: 16px">
               <h3>1. Temporary Disablement Benefit
                 <span style="
                     font-weight: 500;
@@ -3684,7 +3692,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
               </div>
             </div>
 
-            <div style="border-left: 3px solid var(--primary); padding-left: 16px">
+            <div style="border-left: 2px solid var(--primary); padding-left: 16px">
               <h3>2. Permanent Disablement Benefit
                 <span style="
                     font-weight: 500;
@@ -3712,7 +3720,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
               </div>
             </div>
 
-            <div style="border-left: 3px solid var(--primary); padding-left: 16px">
+            <div style="border-left: 2px solid var(--primary); padding-left: 16px">
               <h3>3. Dependants’ Benefit
                 <span style="
                     font-weight: 500;
@@ -3747,7 +3755,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
               gap: 32px 24px;
               margin-top: 32px;
             ">
-            <div style="border-left: 3px solid var(--primary); padding-left: 16px">
+            <div style="border-left: 2px solid var(--primary); padding-left: 16px">
               <h3>4. Funeral Benefit
                 <span style="
                     font-weight: 500;
@@ -3775,7 +3783,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
               </div>
             </div>
 
-            <div style="border-left: 3px solid var(--primary); padding-left: 16px">
+            <div style="border-left: 2px solid var(--primary); padding-left: 16px">
               <h3>5. Education Benefit
                 <span style="
                     font-weight: 500;
@@ -3803,7 +3811,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
               </div>
             </div>
 
-            <div style="border-left: 3px solid var(--primary); padding-left: 16px">
+            <div style="border-left: 2px solid var(--primary); padding-left: 16px">
               <h3>6. Medical Benefit
                 <span style="
                     font-weight: 500;
@@ -3831,7 +3839,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
               </div>
             </div>
 
-            <div style="border-left: 3px solid var(--primary); padding-left: 16px">
+            <div style="border-left: 2px solid var(--primary); padding-left: 16px">
               <h3>7. Rehabilitation Benefit
                 <span style="
                     font-weight: 500;
@@ -3859,7 +3867,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
               </div>
             </div>
 
-            <div style="border-left: 3px solid var(--primary); padding-left: 16px">
+            <div style="border-left: 2px solid var(--primary); padding-left: 16px">
               <h3>8. Constant Attendance Allowance
                 <span style="
                     font-weight: 500;
@@ -3887,7 +3895,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
               </div>
             </div>
 
-            <div style="border-left: 3px solid var(--primary); padding-left: 16px">
+            <div style="border-left: 2px solid var(--primary); padding-left: 16px">
               <h3>9. Invalidity Pension
                 <span style="
                     font-weight: 500;
@@ -3915,7 +3923,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
               </div>
             </div>
 
-            <div style="border-left: 3px solid var(--primary); padding-left: 16px">
+            <div style="border-left: 2px solid var(--primary); padding-left: 16px">
               <h3>10. Invalidity Grant
                 <span style="
                     font-weight: 500;
@@ -3953,7 +3961,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
 
         <!-- Section 4: Compliance & Rules -->
         <div class="content-card">
-          <h2>Payment Schedule &amp; Compliance</h2>
+          <h2 style="color: #2563eb !important;">Payment Schedule &amp; Compliance</h2>
           <div style="
               display: grid;
               grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -4030,7 +4038,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
               gap: 24px;
             ">
             <div style="flex: 1; min-width: 280px">
-              <h2>SOCSO &amp; EIS Salary Ceiling Update</h2>
+              <h2 style="color: #2563eb !important;">SOCSO &amp; EIS Salary Ceiling Update</h2>
               <p>
                 Effective <strong>1st October 2024</strong>, the monthly salary
                 ceiling for both SOCSO and EIS contributions has increased.
@@ -4090,7 +4098,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
         <!-- Section 6: SOCSO Contribution Table -->
         <div class="content-card">
           <div style="margin-bottom: 24px">
-            <h2>SOCSO Contribution Table (2026 Updated)</h2>
+            <h2 style="color: #2563eb !important;">SOCSO Contribution Table (2026 Updated)</h2>
             <p>Official contribution rates mapped to salary bands.</p>
           </div>
 
@@ -4716,7 +4724,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
 
         <!-- Section: SOCSO Contribution Table 2026 -->
         <div class="content-card" style="margin-top: 32px; margin-bottom: 40px;">
-          <h2>SOCSO Contribution Table 2026 (PERKESO)</h2>
+          <h2 style="color: #2563eb !important;">SOCSO Contribution Table 2026 (PERKESO)</h2>
           <p>
             SOCSO contributions are based on your monthly salary bracket. The contribution ceiling was updated from RM5,000 to RM6,000 in October 2024. Employees earning above RM6,000 pay the same maximum amount as RM6,000.
           </p>
@@ -4805,7 +4813,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                   padding: 10px;
                   border-radius: 12px;
                 ">💳</span>
-              <h2>Payment Methods</h2>
+              <h2 style="color: #2563eb !important;">Payment Methods</h2>
             </div>
             <ul style="
                 list-style-type: none;
@@ -4871,7 +4879,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                   padding: 10px;
                   border-radius: 12px;
                 ">💻</span>
-              <h2>ASSIST Portal</h2>
+              <h2 style="color: #2563eb !important;">ASSIST Portal</h2>
             </div>
             <ul style="
                 list-style-type: none;
@@ -4928,7 +4936,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                   padding: 10px;
                   border-radius: 12px;
                 ">🎯</span>
-              <h2>Who Should Use This?</h2>
+              <h2 style="color: #2563eb !important;">Who Should Use This?</h2>
             </div>
             <ul style="
                 list-style-type: none;
@@ -4998,14 +5006,12 @@ input[type="text"], input[type="number"], input[type="email"], select {
                 border-radius: 8px;
               ">
             <div style="flex: 1">
-              <h2 style="
-                  font-size: 1.35rem;
+              <h2 style="font-size: 1.35rem;
                   font-weight: 800;
-                  color: #166534;
+                  
                   margin-bottom: 6px;
                   border: none;
-                  padding-bottom: 0;
-                ">Official PERKESO Calculator</h2>
+                  padding-bottom: 0; color: #2563eb !important;">Official PERKESO Calculator</h2>
               <p style="
                   font-size: 0.95rem;
                   color: #15803d;
@@ -5051,7 +5057,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                 gap: 16px;
                 padding: 16px 20px;
                 background: #fff;
-                border: 1px solid #e2e8f0;
+                border: 1px solid #f1f5f9;
                 border-radius: 12px;
                 text-decoration: none;
                 color: #334155;
@@ -5079,7 +5085,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                 gap: 16px;
                 padding: 16px 20px;
                 background: #fff;
-                border: 1px solid #e2e8f0;
+                border: 1px solid #f1f5f9;
                 border-radius: 12px;
                 text-decoration: none;
                 color: #334155;
@@ -5109,7 +5115,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
                 gap: 16px;
                 padding: 16px 20px;
                 background: #fff;
-                border: 1px solid #e2e8f0;
+                border: 1px solid #f1f5f9;
                 border-radius: 12px;
                 text-decoration: none;
                 color: #334155;
@@ -5136,106 +5142,8 @@ input[type="text"], input[type="number"], input[type="email"], select {
       </div>
     </section>
 
-    <!-- Blog Preview Section -->
-    <section class="blog-section" style="border-top: 1px solid #e2e8f0;">
-      <div class="container">
-        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px;">
-          <div>
-            <h2 style="font-size: 1.875rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Related Articles</h2>
-            <p style="color: #64748b; font-size: 1rem;">Guides and tips for Malaysian employees and employers.</p>
-          </div>
-          <a href="/blog" class="btn" style="background: white; border: 1px solid #e2e8f0; color: #2563eb; padding: 10px 20px; border-radius: 8px; font-weight: 600; text-decoration: none;">View All Articles →</a>
-        </div>
-
-        <div class="blog-grid" id="blogGridSalary">
-          <!-- Post 1 -->
-          <a href="/malaysia-salary-guide-2026" class="blog-card">
-            <div class="blog-thumb"></div>
-            <div class="blog-content">
-              <span class="blog-category category-tips">Salary Tips</span>
-              <h3 class="blog-title">Malaysia Salary Guide 2026 – Average Salary, Take Home Pay &amp; Income Groups</h3>
-              <p class="blog-desc">Average salaries by industry, B40 M40 T20 thresholds and take home pay for common salary levels in Malaysia.</p>
-              <div class="blog-meta">
-                <span>23 June 2026</span>
-                <span>5 min read</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Post 2 -->
-          <a href="/epf-contribution-guide-2026" class="blog-card">
-            <div class="blog-thumb"></div>
-            <div class="blog-content">
-              <span class="blog-category category-epf">EPF</span>
-              <h3 class="blog-title">EPF Contribution Guide 2026 – Everything Malaysian Employees Need to Know</h3>
-              <p class="blog-desc">EPF rates, how contributions are calculated, and tips to maximize your retirement savings in Malaysia.</p>
-              <div class="blog-meta">
-                <span>20 June 2026</span>
-                <span>6 min read</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Post 3 -->
-          <a href="/pcb-tax-deduction-2026" class="blog-card">
-            <div class="blog-thumb"></div>
-            <div class="blog-content">
-              <span class="blog-category category-pcb">PCB</span>
-              <h3 class="blog-title">PCB Tax Deduction 2026 – How to Calculate Your Monthly Income Tax</h3>
-              <p class="blog-desc">Step-by-step guide to PCB deduction, 2026 tax brackets and how to legally reduce your monthly tax.</p>
-              <div class="blog-meta">
-                <span>18 June 2026</span>
-                <span>7 min read</span>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        <div class="blog-grid" id="blogGridSocso" style="display: none;">
-          <!-- Post 1 -->
-          <a href="/minimum-wage-malaysia-2026" class="blog-card">
-            <div class="blog-thumb"></div>
-            <div class="blog-content">
-              <span class="blog-category category-socso">SOCSO</span>
-              <h3 class="blog-title">Minimum Wage Malaysia 2026 – RM1,700 Rate, Who It Applies To &amp; Take Home Pay</h3>
-              <p class="blog-desc">Everything about the current minimum wage, daily rate, take home pay after deductions and employer obligations.</p>
-              <div class="blog-meta">
-                <span>12 June 2026</span>
-                <span>6 min read</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Post 2 -->
-          <a href="/socso-malaysia-2026" class="blog-card">
-            <div class="blog-thumb"></div>
-            <div class="blog-content">
-              <span class="blog-category category-socso">SOCSO</span>
-              <h3 class="blog-title">SOCSO Malaysia 2026 – Rates, Coverage &amp; How to Make a Claim</h3>
-              <p class="blog-desc">Complete guide to SOCSO and EIS contributions, what they cover and how to claim with PERKESO Malaysia.</p>
-              <div class="blog-meta">
-                <span>05 May 2026</span>
-                <span>5 min read</span>
-              </div>
-            </div>
-          </a>
-
-          <!-- Post 3 -->
-          <a href="/annual-leave-malaysia-2026" class="blog-card">
-            <div class="blog-thumb"></div>
-            <div class="blog-content">
-              <span class="blog-category category-socso">SOCSO</span>
-              <h3 class="blog-title">Annual Leave Malaysia 2026 – Entitlement, Pro-Rated Leave &amp; Employer Rules</h3>
-              <p class="blog-desc">Your rights to annual leave under the Malaysian Employment Act and what happens to unused leave.</p>
-              <div class="blog-meta">
-                <span>28 March 2026</span>
-                <span>7 min read</span>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
+    
+    
 
     <!-- Footer -->
     <!-- Other Calculators Section --><!-- Other Calculators Section --><!-- Other Calculators Section -->
@@ -5250,7 +5158,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
       transform: translateY(-2px);
       box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
     }
-  </style><!-- Other Calculators Section --><section class="blog-section other-calculators-section" style="border-top: 1px solid #e2e8f0; background: #f8fafc; padding: 40px 0;"><div class="container"><div style="margin-bottom: 32px;"><h2 style="font-size: 1.875rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;">Try Our Other Free Calculators</h2><p style="color: #64748b; font-size: 1rem;">Free, instant and accurate HR calculation tools for Malaysia.</p></div><div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;"><a href="/" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background: white; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #eff6ff; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path><circle cx="14" cy="9" r="1"></circle></svg></div><h3 style="color: #2563eb; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">Salary Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Calculate your exact take home pay after EPF, SOCSO, EIS &amp; PCB deductions.</p></a><a href="/pcb-income-tax" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #e0f2fe; border-radius: 12px; background: #f0f9ff; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #f0f9ff; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#075985" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"></path><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 17.5V6.5"></path></svg></div><h3 style="color: #075985; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">PCB Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Calculate your monthly tax deduction (MTD) for employees &amp; employers.</p></a><a href="/epf-kwsp" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #fee2e2; border-radius: 12px; background: #fef2f2; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #fef2f2; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#991b1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M3 7v1a3 3 0 0 0 6 0V7m6 0v1a3 3 0 0 0 6 0V7M9 7h6"></path><path d="M5 21V10.85M19 21V10.85M9 21V14M15 21V14"></path><path d="M10.22 2.72a2 2 0 0 1 3.56 0L15 5H9l1.22-2.28Z"></path></svg></div><h3 style="color: #991b1b; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">EPF Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Calculate Employee 11% and Employer 13% KWSP contribution rates.</p></a><a href="/annual-leave-calculator" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px; background: white; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #eff6ff; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg></div><h3 style="color: #2563eb; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">Annual Leave Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Calculate accurate pro-rated annual leave entitlement under Employment Act.</p></a></div></div></section>
+  </style><!-- Other Calculators Section --><section class="blog-section other-calculators-section" style="border-top: 1px solid #e2e8f0; background: #f8fafc; padding: 40px 0;"><div class="container"><div style="margin-bottom: 32px;"><h2 style="font-size: 1.875rem; font-weight: 700;  margin-bottom: 8px; color: #2563eb !important;">Try Our Other Free Calculators</h2><p style="color: #64748b; font-size: 1rem;">Free, instant and accurate HR calculation tools for Malaysia.</p></div><div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px;"><a href="/" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #f1f5f9; border-radius: 12px; background: white; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #eff6ff; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path><circle cx="14" cy="9" r="1"></circle></svg></div><h3 style="color: #2563eb; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">Salary Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Calculate your exact take home pay after EPF, SOCSO, EIS &amp; PCB deductions.</p></a><a href="/pcb-income-tax" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #e0f2fe; border-radius: 12px; background: #f0f9ff; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #f0f9ff; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#075985" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"></path><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 17.5V6.5"></path></svg></div><h3 style="color: #075985; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">PCB Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Calculate your monthly tax deduction (MTD) for employees &amp; employers.</p></a><a href="/epf-kwsp" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #fee2e2; border-radius: 12px; background: #fef2f2; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #fef2f2; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#991b1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M3 7v1a3 3 0 0 0 6 0V7m6 0v1a3 3 0 0 0 6 0V7M9 7h6"></path><path d="M5 21V10.85M19 21V10.85M9 21V14M15 21V14"></path><path d="M10.22 2.72a2 2 0 0 1 3.56 0L15 5H9l1.22-2.28Z"></path></svg></div><h3 style="color: #991b1b; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">EPF Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Calculate Employee 11% and Employer 13% KWSP contribution rates.</p></a><a href="/annual-leave-calculator" class="calc-card hover-lift" style="padding: 24px; border: 1px solid #f1f5f9; border-radius: 12px; background: white; text-decoration: none; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.2s; display: block;"><div style="background: #eff6ff; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg></div><h3 style="color: #2563eb; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">Annual Leave Calculator</h3><p style="color: #64748b; font-size: 0.875rem; line-height: 1.5; margin: 0;">Calculate accurate pro-rated annual leave entitlement under Employment Act.</p></a></div></div></section>
   <style>
     .hover-lift:hover {
       transform: translateY(-2px);
@@ -5361,7 +5269,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
         <span class="modal-close" id="closeModal">×</span>
 
         <div id="modalFormContent">
-          <h2 id="modalTitle">Download Full Report</h2>
+          <h2 id="modalTitle" style="color: #2563eb !important;">Download Full Report</h2>
           <p id="modalDescription">
             Enter your email address to receive the detailed salary breakdown
             and tax report.
@@ -7718,12 +7626,10 @@ input[type="text"], input[type="number"], input[type="email"], select {
               padding: 30px;
               box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             ">
-            <h2 id="lsFooterText" style="
-                font-size: 32px;
+            <h2 id="lsFooterText" style="font-size: 32px;
                 font-weight: 800;
-                color: #1e293b;
-                margin: 0;
-              ">I'm 95% on the way to M40!</h2>
+                
+                margin: 0; color: #2563eb !important;">I'm 95% on the way to M40!</h2>
             <p style="font-size: 20px; color: #64748b; margin: 10px 0 0 0">
               Calculate yours at SalaryCalculator.my
             </p>
@@ -8240,7 +8146,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
             align-items: center;
             color: white;
           ">
-          <h2 id="vtFooterText" style="font-size: 48px; font-weight: 800; margin: 0 0 20px 0">I'm 95% on the way to M40!</h2>
+          <h2 id="vtFooterText" style="font-size: 48px; font-weight: 800; margin: 0 0 20px 0; color: #2563eb !important;">I'm 95% on the way to M40!</h2>
           <p style="font-size: 32px; font-weight: 500; margin: 0; opacity: 0.9">
             What's your next milestone?
           </p>
@@ -8271,7 +8177,7 @@ input[type="text"], input[type="number"], input[type="email"], select {
             display: inline-block;
             width: 40px;
             height: 40px;
-            border: 4px solid #e2e8f0;
+            border: 2px solid #e2e8f0;
             border-top-color: #2563eb;
             border-radius: 50%;
             animation: spin 1s linear infinite;

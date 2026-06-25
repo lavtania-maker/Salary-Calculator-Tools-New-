@@ -1,6 +1,4 @@
-<!doctype html>
-<html lang="en">
-  <head>
+<!DOCTYPE html><html lang="en"><head>
     <script>
       (function() {
         var ignoreScriptError = function(msg) {
@@ -63,14 +61,10 @@
         }, 1200);
       });
     </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow" />
-    <link
-      rel="icon"
-      type="image/png"
-      href="/favicon-ricebowl.png"
-    />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
     <title>Admin Panel - Leads</title>
     <!-- Asynchronously loaded Google Fonts to prevent render-blocking -->
     <!-- Optimized Fonts -->
@@ -84,19 +78,19 @@
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
     <!-- Optimized Fonts -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <style>
       :root {
         --primary: #2563eb;
@@ -182,64 +176,38 @@
         <p style="color: var(--text-muted); margin-bottom: 20px">
           Please sign in with your Admin ID and password.
         </p>
-        <form
-          id="loginForm"
-          style="display: flex; flex-direction: column; gap: 15px"
-        >
+        <form id="loginForm" style="display: flex; flex-direction: column; gap: 15px">
           <div>
-            <label
-              for="adminEmail"
-              style="
+            <label for="adminEmail" style="
                 display: block;
                 margin-bottom: 5px;
                 font-size: 0.9rem;
                 font-weight: 500;
-              "
-              >Admin ID (Email)</label
-            >
-            <input
-              type="email"
-              id="adminEmail"
-              required
-              style="
+              ">Admin ID (Email)</label>
+            <input type="email" id="adminEmail" required="" style="
                 width: 100%;
                 padding: 10px;
                 border: 1px solid var(--border);
                 border-radius: 8px;
                 box-sizing: border-box;
-              "
-            />
+              ">
           </div>
           <div>
-            <label
-              for="adminPassword"
-              style="
+            <label for="adminPassword" style="
                 display: block;
                 margin-bottom: 5px;
                 font-size: 0.9rem;
                 font-weight: 500;
-              "
-              >Password</label
-            >
-            <input
-              type="password"
-              id="adminPassword"
-              required
-              style="
+              ">Password</label>
+            <input type="password" id="adminPassword" required="" style="
                 width: 100%;
                 padding: 10px;
                 border: 1px solid var(--border);
                 border-radius: 8px;
                 box-sizing: border-box;
-              "
-            />
+              ">
           </div>
-          <button
-            type="submit"
-            id="loginBtn"
-            class="btn"
-            style="margin-top: 10px"
-          >
+          <button type="submit" id="loginBtn" class="btn" style="margin-top: 10px">
             Sign In
           </button>
         </form>
@@ -247,14 +215,12 @@
       </div>
 
       <div class="card" id="adminSection">
-        <div
-          style="
+        <div style="
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
-          "
-        >
+          ">
           <h1 style="margin: 0">Captured Leads</h1>
           <div style="display: flex; gap: 10px">
             <button id="exportBtn" class="btn" style="background: #10b981">
@@ -279,10 +245,7 @@
             </thead>
             <tbody id="leadsTableBody">
               <tr>
-                <td
-                  colspan="3"
-                  style="text-align: center; color: var(--text-muted)"
-                >
+                <td colspan="3" style="text-align: center; color: var(--text-muted)">
                   Loading...
                 </td>
               </tr>
@@ -293,5 +256,6 @@
     </div>
 
     <script type="module" src="/src/admin.ts"></script>
-  </body>
-</html>
+  
+
+</body></html>
