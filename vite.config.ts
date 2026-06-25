@@ -17,13 +17,14 @@ export default defineConfig(({ mode }) => {
     },
     appType: "custom",
     server: {
-      hmr: false, // Disable HMR - WebSocket doesn't work through v0 proxy
+      hmr: false,
     },
     build: {
       rollupOptions: {
         input: {
           main: path.resolve(__dirname, "index.html"),
           admin: path.resolve(__dirname, "admin.html"),
+          blogAdmin: path.resolve(__dirname, "blog-admin.html"),
           mincal: path.resolve(__dirname, "mincal.html"),
           payslip: path.resolve(__dirname, "payslip.html"),
           report: path.resolve(__dirname, "report.html"),
