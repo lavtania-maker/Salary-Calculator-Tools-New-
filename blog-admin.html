@@ -8,225 +8,483 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="/calculator-styles.css" rel="stylesheet" />
 </head>
-<body class="bg-slate-50 p-8">
-    <!-- Login Section -->
-    <div id="login-section" class="max-w-md mx-auto mt-20 bg-white p-8 rounded-xl shadow-sm border border-slate-200">
-        <h2 class="text-2xl font-bold text-slate-900 mb-6 text-center">Admin Login</h2>
-        <form id="login-form" class="space-y-4">
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>Blog Admin – SalaryCalculator.my</title>
+      <meta name="robots" content="noindex, nofollow">
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script type="module">
+          import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+          import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+                    from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+          import { getFirestore, collection, addDoc, updateDoc, deleteDoc,
+                               doc, getDocs, getDoc, serverTimestamp, query, orderBy }
+                    from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+      
+          const firebaseConfig = {
+                    apiKey:            window.__FIREBASE_API_KEY__            || "AIzaSyBkRCqM0JHx1N4rEJBu4xWkUDNdmpCrjDc",
+                    authDomain:        window.__FIREBASE_AUTH_DOMAIN__        || "salary-calculator-my.firebaseapp.com",
+                    projectId:         window.__FIREBASE_PROJECT_ID__         || "salary-calculator-my",
+                    storageBucket:     window.__FIREBASE_STORAGE_BUCKET__     || "salary-calculator-my.appspot.com",
+                    messagingSenderId: window.__FIREBASE_MESSAGING_SENDER_ID__|| "594083898907",
+                    appId:             window.__FIREBASE_APP_ID__             || "1:594083898907:web:placeholder",
+          };
+      
+          const app  = initializeApp(firebaseConfig);
+          const auth = getAuth(app);
+          const db   = getFirestore(app);
+          const COLL = 'blog_posts';
+      
+          const $  = id => document.getElementById(id);
+          const show = id => $(id).classList.remove('hidden');
+          const hide = id => $(id).classList.add('hidden');
+          const toast = (msg, ok=true) => {
+                    const t = $('toast');
+                    t.textContent = msg;
+                    t.className = `fixed bottom-6 right-6 px-5 py-3 rounded-xl text-white text-sm font-medium shadow-xl z-50 ${ok?'bg-green-600':'bg-red-500'}`;
+                    t.classList.remove('hidden');
+                    setTimeout(() => t.classList.add('hidden'), 3000);
+          };
+      
+          let editingId = null;
+          let allPosts  = [];
+      
+          onAuthStateChanged(auth, user => {
+                    if (user) {
+                                hide('loginWrap');
+                                show('adminWrap');
+                                $('userEmail').textContent = user.email;
+                                loadPosts();
+                    } else {
+                                show('loginWrap');
+                                hide('adminWrap');
+                    }
+          });
+      
+          $('loginForm').addEventListener('submit', async e => {
+                    e.preventDefault();
+                    const btn = $('loginBtn');
+                    btn.textContent = 'Signing in...';
+                    btn.disabled = true;
+                    try {
+                                await signInWithEmailAndPassword(auth,
+                                                                           $('loginEmail').value.trim(),
+                                                                           $('loginPass').value);
+                    } catch(err) {
+                                $('loginErr').textContent = 'Invalid email or password.';
+                                show('loginErr');
+                                btn.textContent = 'Sign In';
+                                btn.disabled = false;
+                    }
+          });
+      
+          $('logoutBtn').addEventListener('click', () => signOut(auth));
+      
+          async function loadPosts() {
+                    $('tableBody').innerHTML = '<tr><td colspan="6" class="py-10 text-center text-slate-400">Loading...</td></tr>';
+                    try {
+                                const q = query(collection(db, COLL), orderBy('createdAt', 'desc'));
+                                const snap = await getDocs(q);
+                                allPosts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                                renderTable(allPosts);
+                    } catch(err) {
+                                $('tableBody').innerHTML = '<tr><td colspan="6" class="py-10 text-center text-red-500">'+err.message+'</td></tr>';
+                    }
+          }
+      
+          function renderTable(posts) {
+                    if (!posts.length) {
+                                $('tableBody').innerHTML = '<tr><td colspan="6" class="py-10 text-center text-slate-400">No articles yet.</td></tr>';
+                                return;
+                    }
+                              $('tableBody').innerHTML = posts.map(p => {
+                                          const date = p.publishedAt ? new Date(p.publishedAt).toLocaleDateString('en-MY',{day:'numeric',month:'short',year:'numeric'}) : '-';
+                                          const badge = p.status === 'published'
+                                                        ? '<span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-700">Published</span>'
+                                                        : '<span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-700">Draft</span>';
+                                          return '<tr class="hover:bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900 max-w-xs truncate">'+(p.title||'-')+'</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">'+(p.category||'-')+'</span></td><td class="px-4 py-3 font-mono text-xs text-slate-500">'+(p.slug||'-')+'</td><td class="px-4 py-3 text-sm text-slate-500">'+date+'</td><td class="px-4 py-3">'+badge+'</td><td class="px-4 py-3 text-right space-x-3"><button onclick="window._editPost(\''+p.id+'\')" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Edit</button><button onclick="window._deletePost(\''+p.id+'\',\''+((p.title||'').replace(/'/g,"\\'"))+'\')" class="text-red-500 hover:text-red-700 text-sm font-medium">Delete</button></td></tr>';
+                              }).join('');
+          }
+      
+          $('searchInput').addEventListener('input', e => {
+                    const q = e.target.value.toLowerCase();
+                    renderTable(allPosts.filter(p =>
+                                (p.title||'').toLowerCase().includes(q) ||
+                                (p.category||'').toLowerCase().includes(q) ||
+                                (p.slug||'').toLowerCase().includes(q)
+                              ));
+          });
+      
+          $('catFilter').addEventListener('change', e => {
+                    const cat = e.target.value;
+                    renderTable(cat ? allPosts.filter(p => p.category === cat) : allPosts);
+          });
+      
+          $('newPostBtn').addEventListener('click', () => openModal());
+          $('modalClose').addEventListener('click', closeModal);
+          $('cancelBtn').addEventListener('click', closeModal);
+          $('modalOverlay').addEventListener('click', e => { if(e.target===$('modalOverlay')) closeModal(); });
+      
+          function openModal(post=null) {
+                    editingId = post ? post.id : null;
+                    $('modalTitle').textContent = post ? 'Edit Article' : 'New Article';
+                    $('fTitle').value    = post?.title    || '';
+                    $('fSlug').value     = post?.slug     || '';
+                    $('fCategory').value = post?.category || '';
+                    $('fExcerpt').value  = post?.excerpt  || '';
+                    $('fThumb').value    = post?.thumbnail|| '';
+                    $('fReadTime').value = post?.readTime || '';
+                    $('fMetaDesc').value = post?.metaDesc || '';
+                    $('fStatus').value   = post?.status   || 'draft';
+                    $('fDate').value     = post?.publishedAt ? post.publishedAt.substring(0,10) : new Date().toISOString().substring(0,10);
+                    $('fContent').value  = post?.content  || '';
+                    $('saveErr').classList.add('hidden');
+                    $('modalOverlay').classList.remove('hidden');
+                    $('modalOverlay').classList.add('flex');
+                    setTimeout(() => $('fTitle').focus(), 50);
+          }
+      
+          function closeModal() {
+                    $('modalOverlay').classList.add('hidden');
+                    $('modalOverlay').classList.remove('flex');
+                    editingId = null;
+          }
+      
+          $('fTitle').addEventListener('input', () => {
+                    if (!editingId) {
+                                $('fSlug').value = $('fTitle').value
+                                              .toLowerCase().trim()
+                                              .replace(/[^a-z0-9\s-]/g,'')
+                                              .replace(/\s+/g,'-')
+                                              .replace(/-+/g,'-');
+                    }
+          });
+      
+          $('postForm').addEventListener('submit', async e => {
+                    e.preventDefault();
+                    const saveBtn = $('saveBtn');
+                    saveBtn.textContent = 'Saving...';
+                    saveBtn.disabled = true;
+                    const data = {
+                                title:       $('fTitle').value.trim(),
+                                slug:        $('fSlug').value.trim(),
+                                category:    $('fCategory').value.trim(),
+                                excerpt:     $('fExcerpt').value.trim(),
+                                thumbnail:   $('fThumb').value.trim(),
+                                readTime:    parseInt($('fReadTime').value) || 5,
+                                metaDesc:    $('fMetaDesc').value.trim(),
+                                status:      $('fStatus').value,
+                                publishedAt: $('fDate').value,
+                                content:     $('fContent').value.trim(),
+                                updatedAt:   serverTimestamp(),
+                    };
+                    if (!data.title || !data.slug || !data.content) {
+                                $('saveErr').textContent = 'Title, slug and content are required.';
+                                $('saveErr').classList.remove('hidden');
+                                saveBtn.textContent = 'Save Article';
+                                saveBtn.disabled = false;
+                                return;
+                    }
+                    try {
+                                if (editingId) {
+                                              await updateDoc(doc(db, COLL, editingId), data);
+                                              toast('Article updated');
+                                } else {
+                                              data.createdAt = serverTimestamp();
+                                              await addDoc(collection(db, COLL), data);
+                                              toast('Article published');
+                                }
+                                closeModal();
+                                await loadPosts();
+                    } catch(err) {
+                                $('saveErr').textContent = err.message;
+                                $('saveErr').classList.remove('hidden');
+                                toast(err.message, false);
+                    }
+                    saveBtn.textContent = 'Save Article';
+                    saveBtn.disabled = false;
+          });
+      
+          window._editPost = async id => {
+                    const snap = await getDoc(doc(db, COLL, id));
+                    if (snap.exists()) openModal({ id, ...snap.data() });
+          };
+      
+          window._deletePost = async (id, title) => {
+                    if (!confirm('Delete "'+title+'"? This cannot be undone.')) return;
+                    try {
+                                await deleteDoc(doc(db, COLL, id));
+                                toast('Article deleted');
+                                await loadPosts();
+                    } catch(err) {
+                                toast(err.message, false);
+                    }
+          };
+      </script>
+    </head>
+<body class="bg-slate-50 min-h-screen font-sans antialiased">
+<div id="toast" class="hidden fixed bottom-6 right-6 px-5 py-3 rounded-xl text-white text-sm font-medium shadow-xl z-50"></div>div>
+<div id="loginWrap" class="min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-sm bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+      <div class="text-center mb-8">
+            <img src="/logo-small.png" alt="SalaryCalc MY" class="h-8 mx-auto mb-4" onerror="this.style.display='none'">
+            <h1 class="text-2xl font-bold text-slate-900">Blog Admin</h1>h1>
+            <p class="text-slate-500 text-sm mt-1">Sign in to manage articles</p>p>
+      </div>div>
+      <form id="loginForm" class="space-y-4">
             <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Username</label>
-                <input type="text" id="login-username" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none" required>
+                        <label class="block text-sm font-medium text-slate-700 mb-1.5">Email</label>label>
+                        <input id="loginEmail" type="email" placeholder="your@email.com" required class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
             </div>
-            <div>
-                <label class="block text-sm font-medium text-slate-700 mb-1">Password</label>
-                <input type="password" id="login-password" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none" required>
-            </div>
-            <div id="login-error" class="text-red-500 text-sm hidden">Invalid username or password</div>
-            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-medium transition-colors">
-                Login
-            </button>
-        </form>
+                <div>
+                            <label class="block text-sm font-medium text-slate-700 mb-1.5">Password</label>label>
+                            <input id="loginPass" type="password" placeholder="password" required class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <p id="loginErr" class="hidden text-red-500 text-sm"></p>p>
+                <button id="loginBtn" type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg font-medium text-sm">Sign In</button>button>
+      </form>form>
+  </div>
+</div>
+    <div id="adminWrap" class="hidden min-h-screen">
+          <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+                  <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                        <img src="/logo-small.png" alt="SalaryCalc MY" class="h-6" onerror="this.style.display='none'">
+                                        <span class="text-slate-300">|</span>span>
+                                        <span class="text-sm font-semibold text-slate-700">Blog Admin</span>span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                        <span id="userEmail" class="text-xs text-slate-500 hidden sm:block"></span>span>
+                                        <a href="/blog" target="_blank" class="text-xs text-slate-500 hover:text-slate-800">View Blog</a>a>
+                                        <button id="logoutBtn" class="text-xs border border-slate-300 text-slate-600 px-3 py-1.5 rounded-lg hover:bg-slate-50">Sign Out</button>button>
+                            </div>
+                  </div>
+          </header>header>
+          <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+                  <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                            <div>
+                                        <h1 class="text-2xl font-bold text-slate-900">Articles</h1>h1>
+                                        <p class="text-slate-500 text-sm mt-0.5">Manage and publish blog content</p>p>
+                            </div>
+                            <button id="newPostBtn" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl font-medium text-sm shadow-sm">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>svg>
+                                        New Article
+                            </button>button>
+                  </div>
+                  <div class="flex flex-col sm:flex-row gap-3 mb-4">
+                            <div class="relative flex-1 max-w-sm">
+                                        <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>svg>
+                                        <input id="searchInput" type="search" placeholder="Search articles..." class="w-full pl-9 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none">
+                            </div>
+                            <select id="catFilter" class="border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-700 focus:ring-2 focus:ring-blue-500 outline-none">
+                                        <option value="">All categories</option>option>
+                                        <option>EPF</option><option>PCB</option><option>SOCSO</option><option>Employment Law</option><option>Salary Tips</option>
+                            </select>select>
+                  </div>
+              <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <table class="w-full text-left text-sm">
+                            <thead class="bg-slate-50 border-b border-slate-200">
+                                      <tr class="text-slate-500 text-xs font-semibold uppercase tracking-wide">
+                                        <th class="px-4 py-3">Title</th>th><th class="px-4 py-3">Category</th>th><th class="px-4 py-3">Slug</th>th><th class="px-4 py-3">Date</th>th><th class="px-4 py-3">Status</th>th><th class="px-4 py-3 text-right">Actions</th>th>
+                                      </tr>tr>
+                            </thead>thead>
+                            <tbody id="tableBody" class="divide-y divide-slate-100">
+                              <tr><td colspan="6" class="py-10 text-center text-slate-400">Loading...</td>td></tr>
+                            </tbody>tbody>
+                    </table>table>
+              </div>
+          </main>main>
     </div>
-
-    <!-- Admin Dashboard Section -->
-    <div id="admin-section" class="max-w-6xl mx-auto hidden">
-        <div class="flex justify-between items-center mb-8">
+<div id="modalOverlay" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 items-center justify-center p-4">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[92vh] flex flex-col">
+      <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 flex-shrink-0">
+            <h2 id="modalTitle" class="text-lg font-bold text-slate-900">New Article</h2>h2>
+            <button id="modalClose" class="text-slate-400 hover:text-slate-600 p-1">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>svg>
+            </button>button>
+      </div>
+      <form id="postForm" class="flex-1 overflow-y-auto px-6 py-5 space-y-5">
             <div>
-                <h1 class="text-3xl font-bold text-slate-900">Blog Admin</h1>
-                <p class="text-slate-500 mt-2">Manage articles loaded from Google Sheets</p>
+                    <label class="block text-sm font-medium text-slate-700 mb-1.5">Title *</label>label>
+                    <input id="fTitle" type="text" placeholder="e.g. EPF Contribution Rates 2026" required class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
             </div>
-            <div class="space-x-3">
-                <button onclick="logoutAdmin()" class="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 font-medium transition-colors">
-                    Logout
-                </button>
-                <button onclick="openModal()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors">
-                    + Add New Article
-                </button>
-            </div>
-        </div>
-
-        <div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-slate-50 border-b border-slate-200 text-slate-600 text-sm">
-                            <th class="p-4 font-semibold">Title</th>
-                            <th class="p-4 font-semibold">Category</th>
-                            <th class="p-4 font-semibold">Slug</th>
-                            <th class="p-4 font-semibold">Date</th>
-                            <th class="p-4 font-semibold text-right">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="articles-table-body" class="divide-y divide-slate-100">
-                        <!-- Articles will be loaded here -->
-                        <tr>
-                            <td colspan="5" class="p-8 text-center text-slate-500">
-                                Loading articles from Google Sheets...
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- Add/Edit Modal (Hidden by default) -->
-    <div id="article-modal" class="fixed inset-0 bg-slate-900/50 hidden items-center justify-center p-4 z-50">
-        <div class="bg-white rounded-xl shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
-            <div class="p-6 border-b border-slate-100 flex justify-between items-center">
-                <h2 id="modal-title" class="text-xl font-bold text-slate-900 m-0">Add New Article</h2>
-                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-            <div class="p-6">
-                <form id="article-form" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Title</label>
-                        <input type="text" id="article-title" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none" required>
-                    </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Category</label>
-                            <input type="text" id="article-category" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none" required>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-slate-700 mb-1">Slug</label>
-                            <input type="text" id="article-slug" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none" required>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-1">Content (Markdown/HTML)</label>
-                        <textarea id="article-content" rows="6" class="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500 outline-none" required></textarea>
-                    </div>
-                    <div class="pt-4 flex justify-end space-x-3">
-                        <button type="button" onclick="closeModal()" class="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg hover:bg-slate-50 transition-colors">Cancel</button>
-                        <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Save Article</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Admin - SalaryCalculator.my</title>
+  <meta name="robots" content="noindex, nofollow">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
+      from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js';
+    import { getFirestore, collection, addDoc, updateDoc, deleteDoc,
+             doc, getDocs, getDoc, serverTimestamp, query, orderBy }
+      from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
+    const firebaseConfig = {
+      apiKey: window.__FIREBASE_API_KEY__ || "AIzaSyBkRCqM0JHx1N4rEJBu4xWkUDNdmpCrjDc",
+      authDomain: window.__FIREBASE_AUTH_DOMAIN__ || "salary-calculator-my.firebaseapp.com",
+      projectId: window.__FIREBASE_PROJECT_ID__ || "salary-calculator-my",
+      storageBucket: window.__FIREBASE_STORAGE_BUCKET__ || "salary-calculator-my.appspot.com",
+      messagingSenderId: window.__FIREBASE_MESSAGING_SENDER_ID__ || "594083898907",
+      appId: window.__FIREBASE_APP_ID__ || "1:594083898907:web:placeholder",
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const COLL = 'blog_posts';
+    const $ = id => document.getElementById(id);
+    const show = id => $(id).classList.remove('hidden');
+    const hide = id => $(id).classList.add('hidden');
+    const toast = (msg, ok=true) => {
+      const t = $('toast');
+      t.textContent = msg;
+      t.className = 'fixed bottom-6 right-6 px-5 py-3 rounded-xl text-white text-sm font-medium shadow-xl z-50 ' + (ok ? 'bg-green-600' : 'bg-red-500');
+      t.classList.remove('hidden');
+      setTimeout(() => t.classList.add('hidden'), 3000);
+    };
+    let editingId = null, allPosts = [];
+    onAuthStateChanged(auth, user => {
+      if (user) { hide('loginWrap'); show('adminWrap'); $('userEmail').textContent = user.email; loadPosts(); }
+      else { show('loginWrap'); hide('adminWrap'); }
+    });
+    $('loginForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const btn = $('loginBtn'); btn.textContent = 'Signing in...'; btn.disabled = true;
+      try { await signInWithEmailAndPassword(auth, $('loginEmail').value.trim(), $('loginPass').value); }
+      catch(err) { $('loginErr').textContent = 'Invalid email or password.'; show('loginErr'); btn.textContent = 'Sign In'; btn.disabled = false; }
+    });
+    $('logoutBtn').addEventListener('click', () => signOut(auth));
+    async function loadPosts() {
+      $('tableBody').innerHTML = '<tr><td colspan="6" class="py-10 text-center text-slate-400">Loading...</td></tr>';
+      try {
+        const q = query(collection(db, COLL), orderBy('createdAt', 'desc'));
+        const snap = await getDocs(q);
+        allPosts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderTable(allPosts);
+      } catch(err) { $('tableBody').innerHTML = '<tr><td colspan="6" class="py-10 text-center text-red-500">'+err.message+'</td></tr>'; }
+    }
+    function renderTable(posts) {
+      if (!posts.length) { $('tableBody').innerHTML = '<tr><td colspan="6" class="py-10 text-center text-slate-400">No articles yet. Click New Article to start.</td></tr>'; return; }
+      $('tableBody').innerHTML = posts.map(p => {
+        const date = p.publishedAt ? new Date(p.publishedAt).toLocaleDateString('en-MY',{day:'numeric',month:'short',year:'numeric'}) : '-';
+        const badge = p.status === 'published' ? '<span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-green-100 text-green-700">Published</span>' : '<span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-700">Draft</span>';
+        return '<tr class="hover:bg-slate-50"><td class="px-4 py-3 font-medium text-slate-900 max-w-xs truncate">'+(p.title||'-')+'</td><td class="px-4 py-3"><span class="px-2 py-0.5 rounded-full text-xs font-semibold bg-blue-100 text-blue-700">'+(p.category||'-')+'</span></td><td class="px-4 py-3 font-mono text-xs text-slate-500">'+(p.slug||'-')+'</td><td class="px-4 py-3 text-sm text-slate-500">'+date+'</td><td class="px-4 py-3">'+badge+'</td><td class="px-4 py-3 text-right space-x-3"><button onclick="window._editPost(''+p.id+'')" class="text-blue-600 text-sm font-medium">Edit</button><button onclick="window._deletePost(''+p.id+'',''+((p.title||'').replace(/'/g,"\'"))+'')" class="text-red-500 text-sm font-medium">Delete</button></td></tr>';
+      }).join('');
+    }
+    $('searchInput').addEventListener('input', e => { const q = e.target.value.toLowerCase(); renderTable(allPosts.filter(p => (p.title||'').toLowerCase().includes(q)||(p.category||'').toLowerCase().includes(q)||(p.slug||'').toLowerCase().includes(q))); });
+    $('catFilter').addEventListener('change', e => { const cat = e.target.value; renderTable(cat ? allPosts.filter(p => p.category === cat) : allPosts); });
+    $('newPostBtn').addEventListener('click', () => openModal());
+    $('modalClose').addEventListener('click', closeModal);
+    $('cancelBtn').addEventListener('click', closeModal);
+    $('modalOverlay').addEventListener('click', e => { if(e.target===$('modalOverlay')) closeModal(); });
+    function openModal(post=null) {
+      editingId = post ? post.id : null;
+      $('modalTitle').textContent = post ? 'Edit Article' : 'New Article';
+      $('fTitle').value = post?.title||''; $('fSlug').value = post?.slug||''; $('fCategory').value = post?.category||'';
+      $('fExcerpt').value = post?.excerpt||''; $('fThumb').value = post?.thumbnail||''; $('fReadTime').value = post?.readTime||'';
+      $('fMetaDesc').value = post?.metaDesc||''; $('fStatus').value = post?.status||'draft';
+      $('fDate').value = post?.publishedAt ? post.publishedAt.substring(0,10) : new Date().toISOString().substring(0,10);
+      $('fContent').value = post?.content||''; $('saveErr').classList.add('hidden');
+      $('modalOverlay').classList.remove('hidden'); $('modalOverlay').classList.add('flex');
+      setTimeout(() => $('fTitle').focus(), 50);
+    }
+    function closeModal() { $('modalOverlay').classList.add('hidden'); $('modalOverlay').classList.remove('flex'); editingId = null; }
+    $('fTitle').addEventListener('input', () => { if (!editingId) $('fSlug').value = $('fTitle').value.toLowerCase().trim().replace(/[^a-z0-9s-]/g,'').replace(/s+/g,'-').replace(/-+/g,'-'); });
+    $('postForm').addEventListener('submit', async e => {
+      e.preventDefault();
+      const saveBtn = $('saveBtn'); saveBtn.textContent = 'Saving...'; saveBtn.disabled = true;
+      const data = { title: $('fTitle').value.trim(), slug: $('fSlug').value.trim(), category: $('fCategory').value.trim(), excerpt: $('fExcerpt').value.trim(), thumbnail: $('fThumb').value.trim(), readTime: parseInt($('fReadTime').value)||5, metaDesc: $('fMetaDesc').value.trim(), status: $('fStatus').value, publishedAt: $('fDate').value, content: $('fContent').value.trim(), updatedAt: serverTimestamp() };
+      if (!data.title || !data.slug || !data.content) { $('saveErr').textContent = 'Title, slug and content are required.'; $('saveErr').classList.remove('hidden'); saveBtn.textContent = 'Save Article'; saveBtn.disabled = false; return; }
+      try {
+        if (editingId) { await updateDoc(doc(db, COLL, editingId), data); toast('Article updated'); }
+        else { data.createdAt = serverTimestamp(); await addDoc(collection(db, COLL), data); toast('Article published'); }
+        closeModal(); await loadPosts();
+      } catch(err) { $('saveErr').textContent = err.message; $('saveErr').classList.remove('hidden'); toast(err.message, false); }
+      saveBtn.textContent = 'Save Article'; saveBtn.disabled = false;
+    });
+    window._editPost = async id => { const snap = await getDoc(doc(db, COLL, id)); if (snap.exists()) openModal({ id, ...snap.data() }); };
+    window._deletePost = async (id, title) => {
+      if (!confirm('Delete "'+title+'"? Cannot be undone.')) return;
+      try { await deleteDoc(doc(db, COLL, id)); toast('Article deleted'); await loadPosts(); }
+      catch(err) { toast(err.message, false); }
+    };
+  </script>
+</head>
+<body class="bg-slate-50 min-h-screen font-sans antialiased">
+<div id="toast" class="hidden fixed bottom-6 right-6 px-5 py-3 rounded-xl text-white text-sm font-medium shadow-xl z-50"></div>
+<div id="loginWrap" class="min-h-screen flex items-center justify-center p-4">
+  <div class="w-full max-w-sm bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+    <div class="text-center mb-8">
+      <img src="/logo-small.png" alt="SalaryCalc MY" class="h-8 mx-auto mb-4" onerror="this.style.display='none'">
+      <h1 class="text-2xl font-bold text-slate-900">Blog Admin</h1>
+      <p class="text-slate-500 text-sm mt-1">Sign in to manage articles</p>
     </div>
-
-    <script>
-        // --- Authentication Logic ---
-        function checkAuth() {
-            if (sessionStorage.getItem('blog_admin_logged_in') === 'true') {
-                document.getElementById('login-section').classList.add('hidden');
-                document.getElementById('admin-section').classList.remove('hidden');
-                loadArticles();
-            } else {
-                document.getElementById('admin-section').classList.add('hidden');
-                document.getElementById('login-section').classList.remove('hidden');
-            }
-        }
-
-        document.getElementById('login-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const user = document.getElementById('login-username').value;
-            const pass = document.getElementById('login-password').value;
-            const errorDiv = document.getElementById('login-error');
-
-            if (user === 'salarymy' && pass === 'salary2026admin') {
-                sessionStorage.setItem('blog_admin_logged_in', 'true');
-                errorDiv.classList.add('hidden');
-                document.getElementById('login-form').reset();
-                checkAuth();
-            } else {
-                errorDiv.classList.remove('hidden');
-            }
-        });
-
-        function logoutAdmin() {
-            sessionStorage.removeItem('blog_admin_logged_in');
-            checkAuth();
-        }
-
-        // --- Google Sheets integration ---
-        const GOOGLE_SHEETS_API_URL = ''; // Add your Google Apps Script Web App URL here
-        
-        async function loadArticles() {
-            const tbody = document.getElementById('articles-table-body');
-            
-            try {
-                if (!GOOGLE_SHEETS_API_URL) {
-                    // Mock data if no URL provided
-                    const mockData = [
-                        { id: 1, title: 'Malaysia Salary Guide 2026', category: 'Salary Tips', slug: 'malaysia-salary-guide-2026', date: '2026-06-23' },
-                        { id: 2, title: 'EPF Contribution Rates', category: 'Compliance', slug: 'epf-contribution-guide-2026', date: '2026-06-20' },
-                    ];
-                    renderTable(mockData);
-                    return;
-                }
-
-                const response = await fetch(GOOGLE_SHEETS_API_URL);
-                const data = await response.json();
-                renderTable(data);
-            } catch (error) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-red-500">Failed to load articles.</td></tr>`;
-                console.error('Error loading articles:', error);
-            }
-        }
-
-        function renderTable(articles) {
-            const tbody = document.getElementById('articles-table-body');
-            tbody.innerHTML = '';
-            
-            if (!articles || articles.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="5" class="p-8 text-center text-slate-500">No articles found.</td></tr>`;
-                return;
-            }
-
-            articles.forEach(article => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td class="p-4 font-medium text-slate-900">${article.title}</td>
-                    <td class="p-4 text-slate-600"><span class="bg-blue-50 text-blue-700 px-2 py-1 rounded text-xs font-medium">${article.category}</span></td>
-                    <td class="p-4 text-slate-500 font-mono text-sm">${article.slug}</td>
-                    <td class="p-4 text-slate-500">${article.date}</td>
-                    <td class="p-4 text-right space-x-2">
-                        <button onclick="editArticle(${article.id})" class="text-blue-600 hover:text-blue-800 text-sm font-medium">Edit</button>
-                        <button onclick="deleteArticle(${article.id})" class="text-red-600 hover:text-red-800 text-sm font-medium">Delete</button>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-
-        function openModal(isEdit = false) {
-            document.getElementById('modal-title').textContent = isEdit ? 'Edit Article' : 'Add New Article';
-            document.getElementById('article-modal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('article-modal').style.display = 'none';
-            document.getElementById('article-form').reset();
-        }
-
-        function editArticle(id) {
-            openModal(true);
-            // In a real app, you would fetch the article details and populate the form
-            console.log('Editing article', id);
-        }
-
-        function deleteArticle(id) {
-            if (confirm('Are you sure you want to delete this article?')) {
-                console.log('Deleting article', id);
-                // In a real app, you would call the API to delete
-                loadArticles(); // Reload table
-            }
-        }
-
-        document.getElementById('article-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            console.log('Saving article...');
-            // In a real app, you would call the API to save/update
-            closeModal();
-            loadArticles(); // Reload table
-        });
-
-        // Initialize Auth Check
-        checkAuth();
-    </script>
+    <form id="loginForm" class="space-y-4">
+      <div><label class="block text-sm font-medium text-slate-700 mb-1.5">Email</label><input id="loginEmail" type="email" placeholder="your@email.com" required class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none"></div>
+      <div><label class="block text-sm font-medium text-slate-700 mb-1.5">Password</label><input id="loginPass" type="password" placeholder="password" required class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none"></div>
+      <p id="loginErr" class="hidden text-red-500 text-sm"></p>
+      <button id="loginBtn" type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2.5 rounded-lg font-medium text-sm">Sign In</button>
+    </form>
+  </div>
+</div>
+<div id="adminWrap" class="hidden min-h-screen">
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
+      <div class="flex items-center gap-3"><img src="/logo-small.png" alt="SalaryCalc MY" class="h-6" onerror="this.style.display='none'"><span class="text-slate-300">|</span><span class="text-sm font-semibold text-slate-700">Blog Admin</span></div>
+      <div class="flex items-center gap-4"><span id="userEmail" class="text-xs text-slate-500 hidden sm:block"></span><a href="/blog" target="_blank" class="text-xs text-slate-500 hover:text-slate-800">View Blog</a><button id="logoutBtn" class="text-xs border border-slate-300 text-slate-600 px-3 py-1.5 rounded-lg hover:bg-slate-50">Sign Out</button></div>
+    </div>
+  </header>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+      <div><h1 class="text-2xl font-bold text-slate-900">Articles</h1><p class="text-slate-500 text-sm mt-0.5">Manage and publish blog content</p></div>
+      <button id="newPostBtn" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl font-medium text-sm shadow-sm"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>New Article</button>
+    </div>
+    <div class="flex flex-col sm:flex-row gap-3 mb-4">
+      <div class="relative flex-1 max-w-sm"><svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><input id="searchInput" type="search" placeholder="Search articles..." class="w-full pl-9 pr-4 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"></div>
+      <select id="catFilter" class="border border-slate-300 rounded-lg px-3 py-2 text-sm text-slate-700 focus:ring-2 focus:ring-blue-500 outline-none"><option value="">All categories</option><option>EPF</option><option>PCB</option><option>SOCSO</option><option>Employment Law</option><option>Salary Tips</option></select>
+    </div>
+    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+      <table class="w-full text-left text-sm">
+        <thead class="bg-slate-50 border-b border-slate-200"><tr class="text-slate-500 text-xs font-semibold uppercase tracking-wide"><th class="px-4 py-3">Title</th><th class="px-4 py-3">Category</th><th class="px-4 py-3">Slug</th><th class="px-4 py-3">Date</th><th class="px-4 py-3">Status</th><th class="px-4 py-3 text-right">Actions</th></tr></thead>
+        <tbody id="tableBody" class="divide-y divide-slate-100"><tr><td colspan="6" class="py-10 text-center text-slate-400">Loading...</td></tr></tbody>
+      </table>
+    </div>
+  </main>
+</div>
+<div id="modalOverlay" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-40 items-center justify-center p-4">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[92vh] flex flex-col">
+    <div class="flex items-center justify-between px-6 py-4 border-b border-slate-100 flex-shrink-0"><h2 id="modalTitle" class="text-lg font-bold text-slate-900">New Article</h2><button id="modalClose" class="text-slate-400 hover:text-slate-600 p-1"><svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg></button></div>
+    <form id="postForm" class="flex-1 overflow-y-auto px-6 py-5 space-y-5">
+      <div><label class="block text-sm font-medium text-slate-700 mb-1.5">Title *</label><input id="fTitle" type="text" placeholder="e.g. EPF Contribution Rates 2026" required class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none"></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div><label class="block text-sm font-medium text-slate-700 mb-1.5">Slug * (auto-generated)</label><input id="fSlug" type="text" placeholder="epf-contribution-rates-2026" required class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-mono focus:ring-2 focus:ring-blue-500 outline-none"></div>
+        <div><label class="block text-sm font-medium text-slate-700 mb-1.5">Category</label><select id="fCategory" class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none"><option value="">Select category</option><option>EPF</option><option>PCB</option><option>SOCSO</option><option>Employment Law</option><option>Salary Tips</option></select></div>
+      </div>
+      <div><label class="block text-sm font-medium text-slate-700 mb-1.5">Excerpt</label><textarea id="fExcerpt" rows="2" placeholder="Short summary 150-160 chars..." class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none resize-none"></textarea></div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <div class="sm:col-span-2"><label class="block text-sm font-medium text-slate-700 mb-1.5">Featured Image URL</label><input id="fThumb" type="url" placeholder="https://..." class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none"></div>
+        <div><label class="block text-sm font-medium text-slate-700 mb-1.5">Read time (min)</label><input id="fReadTime" type="number" min="1" max="60" placeholder="5" class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none"></div>
+      </div>
+      <div><label class="block text-sm font-medium text-slate-700 mb-1.5">Meta Description (SEO)</label><input id="fMetaDesc" type="text" placeholder="SEO meta description..." class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none"></div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div><label class="block text-sm font-medium text-slate-700 mb-1.5">Status</label><select id="fStatus" class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none"><option value="draft">Draft</option><option value="published">Published</option></select></div>
+        <div><label class="block text-sm font-medium text-slate-700 mb-1.5">Publish Date</label><input id="fDate" type="date" class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-blue-500 outline-none"></div>
+      </div>
+      <div><label class="block text-sm font-medium text-slate-700 mb-1.5">Content (HTML) * - use h2, p, ul, table tags</label><textarea id="fContent" rows="14" required placeholder="&lt;h2&gt;What is EPF?&lt;/h2&gt;" class="w-full border border-slate-300 rounded-lg px-3 py-2.5 text-sm font-mono focus:ring-2 focus:ring-blue-500 outline-none resize-y"></textarea></div>
+      <p id="saveErr" class="hidden text-red-500 text-sm"></p>
+    </form>
+    <div class="flex items-center justify-end gap-3 px-6 py-4 border-t border-slate-100 flex-shrink-0">
+      <button id="cancelBtn" type="button" class="px-4 py-2 border border-slate-300 text-slate-700 rounded-lg text-sm font-medium hover:bg-slate-50">Cancel</button>
+      <button id="saveBtn" type="submit" form="postForm" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium shadow-sm">Save Article</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
