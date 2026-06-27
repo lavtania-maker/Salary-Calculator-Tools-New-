@@ -14,24 +14,39 @@
     }
   ],
   "rewrites": [
-    { "source": "/sitemap.xml",       "destination": "/public/sitemap.xml" },
-    { "source": "/robots.txt",        "destination": "/public/robots.txt" },
-    { "source": "/privacy-policy",    "destination": "/privacy-policy.html" },
-    { "source": "/admin",             "destination": "/admin.html" },
-    { "source": "/blog-admin",        "destination": "/blog-admin.html" },
-    { "source": "/mincal",            "destination": "/mincal.html" },
-    { "source": "/payslip-generator", "destination": "/payslip.html" },
-    { "source": "/report",            "destination": "/report.html" },
-    { "source": "/epf-kwsp",          "destination": "/epf-kwsp.html" },
-    { "source": "/socso-perkeso",     "destination": "/socso-perkeso.html" },
-    { "source": "/pcb-calculator",    "destination": "/pcb-income-tax.html" },
-    { "source": "/pcb-income-tax",    "destination": "/pcb-income-tax.html" },
-    { "source": "/blog",              "destination": "/blog.html" },
-    { "source": "/annual-leave-calculator", "destination": "/annual-leave-calculator.html" },
+    { "source": "/sitemap.xml",            "destination": "/public/sitemap.xml" },
+    { "source": "/robots.txt",             "destination": "/public/robots.txt" },
+    { "source": "/privacy-policy",         "destination": "/privacy-policy.html" },
+    { "source": "/admin",                  "destination": "/admin.html" },
+    { "source": "/blog-admin",             "destination": "/blog-admin.html" },
+    { "source": "/mincal",                 "destination": "/mincal.html" },
+    { "source": "/payslip-generator",      "destination": "/payslip.html" },
+    { "source": "/report",                 "destination": "/report.html" },
+    { "source": "/epf-kwsp",               "destination": "/epf-kwsp.html" },
+    { "source": "/socso-perkeso",          "destination": "/socso-perkeso.html" },
+    { "source": "/pcb-calculator",         "destination": "/pcb-income-tax.html" },
+    { "source": "/blog",                   "destination": "/blog.html" },
+    { "source": "/annual-leave-calculator","destination": "/annual-leave-calculator.html" },
     { "source": "/blog/epf-contribution-rates-2026", "destination": "/blog/epf-contribution-rates-2026.html" },
-    { "source": "/blog/:slug",         "destination": "/blog-post-template.html" },
+    { "source": "/blog/:slug",             "destination": "/blog-post-template.html" },
     { "source": "/:slug((?!.*\\.html$|blog$|epf-kwsp$|socso-perkeso$|pcb-income-tax$|annual-leave-calculator$|privacy-policy$|admin$|blog-admin$|mincal$|payslip-generator$|report$)[^/]+)", "destination": "/blog-post-template.html" }
   ],
   "headers": [
     {
       "source": "/public/calculator-styles.css",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/calculator-styles.css",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/(.*)\\.js",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/(.*)\\.html",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+    }
+  ]
+}
