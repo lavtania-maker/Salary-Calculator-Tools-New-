@@ -38,6 +38,7 @@ export default defineConfig(({ mode }) => {
           blog: path.resolve(__dirname, "blog.html"),
           blogPostTemplate: path.resolve(__dirname, "blog-post-template.html"),
         },
+        external: (id) => id.startsWith("https://"),
       },
     },
   };
