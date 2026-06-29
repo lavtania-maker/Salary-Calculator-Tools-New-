@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Admin — SalaryCalculator.my</title>
+  <title>Blog Admin - SalaryCalculator.my</title>
   <meta name="robots" content="noindex, nofollow">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f6fa;color:#1a1d23;min-height:100vh;font-size:14px;line-height:1.5}
-    /* Login */
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI*,sans-serif;background:#f5f6fa;color:#1a1d23;min-height:100vh;font-size:14px;line-height:1.5}
     #loginWrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);padding:20px}
     .login-card{background:#fff;border-radius:16px;padding:40px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
     .login-logo{display:block;margin:0 auto 24px;height:36px;width:auto}
@@ -22,7 +21,6 @@
     .btn-primary{width:100%;background:#2563eb;color:#fff;border:none;border-radius:8px;padding:12px;font-size:14px;font-weight:600;cursor:pointer;transition:background .15s}
     .btn-primary:hover{background:#1d4ed8}
     .btn-primary:disabled{opacity:.6;cursor:default}
-    /* Header */
     #adminWrap{display:none;flex-direction:column;min-height:100vh}
     .admin-header{background:#fff;border-bottom:1px solid #e2e8f0;height:56px;display:flex;align-items:center;padding:0 24px;position:sticky;top:0;z-index:50;gap:12px}
     .admin-header img{height:28px;width:auto}
@@ -32,23 +30,18 @@
     .header-email{font-size:12px;color:#94a3b8}
     .btn-link{background:none;border:1.5px solid #e2e8f0;color:#374151;border-radius:6px;padding:6px 12px;font-size:12px;font-weight:500;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:background .12s}
     .btn-link:hover{background:#f8fafc}
-    /* Main */
     .admin-main{flex:1;padding:28px 24px;max-width:1200px;width:100%;margin:0 auto}
     .page-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;gap:12px;flex-wrap:wrap}
     .page-header h1{font-size:22px;font-weight:700;color:#0f172a}
     .page-header p{font-size:13px;color:#64748b;margin-top:2px}
     .btn-new{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:background .15s;white-space:nowrap}
     .btn-new:hover{background:#1d4ed8}
-    .btn-new svg{width:16px;height:16px;flex-shrink:0}
-    /* Filters */
     .filters{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap}
     .search-wrap{position:relative;flex:1;min-width:200px;max-width:320px}
     .search-wrap svg{position:absolute;left:10px;top:50%;transform:translateY(-50%);width:15px;height:15px;color:#94a3b8;pointer-events:none}
     .search-wrap input{width:100%;border:1.5px solid #e2e8f0;border-radius:8px;padding:8px 12px 8px 34px;font-size:13px;outline:none;background:#fff;transition:border-color .15s}
     .search-wrap input:focus{border-color:#2563eb}
     select.filter-select{border:1.5px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:13px;background:#fff;outline:none;color:#374151;cursor:pointer}
-    select.filter-select:focus{border-color:#2563eb}
-    /* Table */
     .table-card{background:#fff;border-radius:12px;border:1px solid #e2e8f0;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.04)}
     table{width:100%;border-collapse:collapse;font-size:13px}
     thead{background:#f8fafc;border-bottom:1px solid #e2e8f0}
@@ -58,57 +51,43 @@
     tbody tr:hover{background:#fafbff}
     tbody td{padding:14px 16px;vertical-align:middle}
     .td-title{font-weight:600;color:#0f172a;max-width:260px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .td-slug{font-family:monospace;font-size:11px;color:#94a3b8;max-width:160px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .td-slug{font-family:monospace;font-size:11px;color:#94a3b8}
     .td-date{color:#64748b;white-space:nowrap}
-    .badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.02em}
-    .badge-published{background:#dcfce7;color:#15803d}
+    .badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700}
+    .badge-pub{background:#dcfce7;color:#15803d}
     .badge-draft{background:#fef9c3;color:#a16207}
     .badge-cat{background:#dbeafe;color:#1d4ed8}
-    .td-actions{text-align:right;white-space:nowrap}
-    .btn-edit{background:none;border:none;color:#2563eb;font-size:12px;font-weight:600;cursor:pointer;padding:4px 8px;border-radius:5px;transition:background .1s}
+    .td-act{text-align:right;white-space:nowrap}
+    .btn-edit{background:none;border:none;color:#2563eb;font-size:12px;font-weight:600;cursor:pointer;padding:4px 8px;border-radius:5px}
     .btn-edit:hover{background:#eff6ff}
-    .btn-del{background:none;border:none;color:#ef4444;font-size:12px;font-weight:600;cursor:pointer;padding:4px 8px;border-radius:5px;transition:background .1s}
+    .btn-del{background:none;border:none;color:#ef4444;font-size:12px;font-weight:600;cursor:pointer;padding:4px 8px;border-radius:5px}
     .btn-del:hover{background:#fef2f2}
-    .table-empty{text-align:center;padding:60px 20px;color:#94a3b8}
-    .table-empty svg{width:40px;height:40px;margin:0 auto 12px;display:block;color:#cbd5e1}
-    /* Modal */
-    #modalOverlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:100;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+    .empty-row{text-align:center;padding:60px 20px;color:#94a3b8}
+    #modalOverlay{display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:100;align-items:center;justify-content:center;padding:20px}
     #modalOverlay.open{display:flex}
     .modal{background:#fff;border-radius:16px;width:100%;max-width:680px;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 25px 80px rgba(0,0,0,.3)}
     .modal-head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid #f1f5f9;flex-shrink:0}
     .modal-head h2{font-size:16px;font-weight:700;color:#0f172a}
-    .modal-close{background:none;border:none;cursor:pointer;color:#94a3b8;padding:4px;border-radius:6px;transition:color .1s,background .1s;display:flex;align-items:center}
-    .modal-close:hover{color:#374151;background:#f1f5f9}
+    .modal-close{background:none;border:none;cursor:pointer;color:#94a3b8;padding:4px;border-radius:6px;display:flex;align-items:center}
     .modal-body{flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:16px}
     .form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-    .form-row.triple{grid-template-columns:1fr 1fr 1fr}
     .form-field label{display:block;font-size:12px;font-weight:600;color:#374151;margin-bottom:6px;text-transform:uppercase;letter-spacing:.04em}
-    .form-field label span{color:#ef4444;margin-left:2px}
     .form-field input,.form-field select,.form-field textarea{width:100%;border:1.5px solid #e2e8f0;border-radius:8px;padding:9px 12px;font-size:13px;outline:none;font-family:inherit;transition:border-color .15s;background:#fff;color:#0f172a}
     .form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-color:#2563eb}
     .form-field textarea{resize:vertical;min-height:80px}
-    .form-field .mono{font-family:monospace;font-size:12px}
-    .form-field .hint{font-size:11px;color:#94a3b8;margin-top:4px}
+    .hint{font-size:11px;color:#94a3b8;margin-top:4px}
     #saveErr{background:#fef2f2;border:1px solid #fecaca;color:#dc2626;border-radius:8px;padding:10px 12px;font-size:13px;display:none}
     .modal-foot{display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:16px 24px;border-top:1px solid #f1f5f9;flex-shrink:0}
-    .btn-cancel{background:#fff;border:1.5px solid #e2e8f0;color:#374151;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer;transition:background .12s}
-    .btn-cancel:hover{background:#f8fafc}
-    .btn-save{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s}
-    .btn-save:hover{background:#1d4ed8}
+    .btn-cancel{background:#fff;border:1.5px solid #e2e8f0;color:#374151;border-radius:8px;padding:9px 18px;font-size:13px;font-weight:600;cursor:pointer}
+    .btn-save{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:13px;font-weight:600;cursor:pointer}
     .btn-save:disabled{opacity:.6;cursor:default}
-    /* Toast */
-    #toast{position:fixed;bottom:24px;right:24px;padding:12px 18px;border-radius:10px;font-size:13px;font-weight:600;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:200;display:none;max-width:320px;animation:slideUp .2s ease}
-    @keyframes slideUp{from{transform:translateY(12px);opacity:0}to{transform:translateY(0);opacity:1}}
-    .toast-ok{background:#16a34a}
-    .toast-err{background:#dc2626}
-    @media(max-width:640px){.form-row,.form-row.triple{grid-template-columns:1fr}.admin-header{padding:0 16px}.admin-main{padding:20px 16px}}
+    #toast{position:fixed;bottom:24px;right:24px;padding:12px 18px;border-radius:10px;font-size:13px;font-weight:600;color:#fff;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:200;display:none}
+    .tok{background:#16a34a} .tok-err{background:#dc2626}
+    @media(max-width:640px){.form-row{grid-template-columns:1fr}.admin-header{padding:0 16px}.admin-main{padding:20px 16px}}
   </style>
 </head>
 <body>
-<!-- Toast -->
 <div id="toast"></div>
-
-<!-- LOGIN -->
 <div id="loginWrap">
   <div class="login-card">
     <img src="/logo-small.png" alt="SalaryCalculator.my" class="login-logo" onerror="this.style.display='none'">
@@ -116,20 +95,12 @@
     <p>Sign in to manage articles</p>
     <div id="loginErr"></div>
     <form id="loginForm">
-      <div class="field-group">
-        <label>Email</label>
-        <input id="loginEmail" type="email" value="blog-admin@salarycalculator.my" required autocomplete="email">
-      </div>
-      <div class="field-group">
-        <label>Password</label>
-        <input id="loginPass" type="password" placeholder="Enter your password" required autocomplete="current-password">
-      </div>
+      <div class="field-group"><label>Email</label><input id="lEmail" type="email" value="blog-admin@salarycalculator.my" required autocomplete="email"></div>
+      <div class="field-group"><label>Password</label><input id="lPass" type="password" placeholder="Enter your password" required autocomplete="current-password"></div>
       <button class="btn-primary" id="loginBtn" type="submit">Sign In</button>
     </form>
   </div>
 </div>
-
-<!-- ADMIN -->
 <div id="adminWrap">
   <header class="admin-header">
     <img src="/logo-small.png" alt="SalaryCalc MY" onerror="this.style.display='none'">
@@ -137,121 +108,52 @@
     <span class="header-title">Blog Admin</span>
     <span class="header-spacer"></span>
     <span class="header-email" id="userEmail"></span>
-    <a href="/blog" target="_blank" class="btn-link">
-      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      View Blog
-    </a>
+    <a href="/blog" target="_blank" class="btn-link">View Blog</a>
     <button class="btn-link" id="logoutBtn">Sign Out</button>
   </header>
-
   <main class="admin-main">
     <div class="page-header">
-      <div>
-        <h1>Articles</h1>
-        <p>Manage and publish blog content</p>
-      </div>
-      <button class="btn-new" id="newPostBtn">
-        <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4"/></svg>
-        New Article
-      </button>
+      <div><h1>Articles</h1><p>Manage and publish blog content</p></div>
+      <button class="btn-new" id="newPostBtn">+ New Article</button>
     </div>
-
     <div class="filters">
       <div class="search-wrap">
         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        <input id="searchInput" type="search" placeholder="Search articles…">
+        <input id="searchInput" type="search" placeholder="Search articles...">
       </div>
       <select id="catFilter" class="filter-select">
         <option value="">All categories</option>
-        <option>EPF</option><option>PCB</option><option>SOCSO</option>
-        <option>Employment Law</option><option>Salary Tips</option>
+        <option>EPF</option><option>PCB</option><option>SOCSO</option><option>Employment Law</option><option>Salary Tips</option>
       </select>
     </div>
-
     <div class="table-card">
       <table>
-        <thead>
-          <tr>
-            <th>Title</th>
-            <th>Category</th>
-            <th>Slug</th>
-            <th>Date</th>
-            <th>Status</th>
-            <th style="text-align:right">Actions</th>
-          </tr>
-        </thead>
-        <tbody id="tableBody">
-          <tr><td colspan="6" class="table-empty">Loading articles…</td></tr>
-        </tbody>
+        <thead><tr><th>Title</th><th>Category</th><th>Slug</th><th>Date</th><th>Status</th><th style="text-align:right">Actions</th></tr></thead>
+        <tbody id="tableBody"><tr><td colspan="6" class="empty-row">Loading...</td></tr></tbody>
       </table>
     </div>
   </main>
 </div>
-
-<!-- MODAL -->
 <div id="modalOverlay">
   <div class="modal">
-    <div class="modal-head">
-      <h2 id="modalTitle">New Article</h2>
-      <button class="modal-close" id="modalClose" aria-label="Close">
-        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/></svg>
-      </button>
-    </div>
+    <div class="modal-head"><h2 id="modalTitle">New Article</h2><button class="modal-close" id="modalClose">&#x2715;</button></div>
     <div class="modal-body">
-      <div class="form-field">
-        <label>Title <span>*</span></label>
-        <input id="fTitle" type="text" placeholder="e.g. EPF Contribution Rates 2026">
-      </div>
+      <div class="form-field"><label>Title *</label><input id="fTitle" type="text" placeholder="e.g. EPF Contribution Rates 2026"></div>
       <div class="form-row">
-        <div class="form-field">
-          <label>Slug <span>*</span></label>
-          <input id="fSlug" type="text" class="mono" placeholder="auto-generated">
-          <div class="hint">URL: /blog/your-slug</div>
-        </div>
-        <div class="form-field">
-          <label>Category</label>
-          <select id="fCategory">
-            <option value="">Select…</option>
-            <option>EPF</option><option>PCB</option><option>SOCSO</option>
-            <option>Employment Law</option><option>Salary Tips</option>
-          </select>
-        </div>
+        <div class="form-field"><label>Slug *</label><input id="fSlug" type="text" style="font-family:monospace;font-size:12px" placeholder="auto-generated"><div class="hint">URL: /blog/your-slug</div></div>
+        <div class="form-field"><label>Category</label><select id="fCategory"><option value="">Select...</option><option>EPF</option><option>PCB</option><option>SOCSO</option><option>Employment Law</option><option>Salary Tips</option></select></div>
       </div>
-      <div class="form-field">
-        <label>Excerpt <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#94a3b8;font-size:11px">(shown on blog listing)</span></label>
-        <textarea id="fExcerpt" rows="2" placeholder="Short summary, 150–160 characters…"></textarea>
-      </div>
+      <div class="form-field"><label>Excerpt</label><textarea id="fExcerpt" rows="2" placeholder="Short summary, 150-160 characters..."></textarea></div>
       <div class="form-row">
-        <div class="form-field">
-          <label>Featured Image URL</label>
-          <input id="fThumb" type="url" placeholder="https://…">
-        </div>
-        <div class="form-field">
-          <label>Read Time (min)</label>
-          <input id="fReadTime" type="number" min="1" max="60" placeholder="5">
-        </div>
+        <div class="form-field"><label>Featured Image URL</label><input id="fThumb" type="url" placeholder="https://..."></div>
+        <div class="form-field"><label>Read Time (min)</label><input id="fReadTime" type="number" min="1" max="60" placeholder="5"></div>
       </div>
-      <div class="form-field">
-        <label>Meta Description <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#94a3b8;font-size:11px">(SEO, 150–160 chars)</span></label>
-        <input id="fMetaDesc" type="text" placeholder="Describe this article for search engines…">
-      </div>
+      <div class="form-field"><label>Meta Description (SEO)</label><input id="fMetaDesc" type="text" placeholder="150-160 chars for search engines..."></div>
       <div class="form-row">
-        <div class="form-field">
-          <label>Status</label>
-          <select id="fStatus">
-            <option value="draft">Draft</option>
-            <option value="published">Published</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label>Publish Date</label>
-          <input id="fDate" type="date">
-        </div>
+        <div class="form-field"><label>Status</label><select id="fStatus"><option value="draft">Draft</option><option value="published">Published</option></select></div>
+        <div class="form-field"><label>Publish Date</label><input id="fDate" type="date"></div>
       </div>
-      <div class="form-field">
-        <label>Content (HTML) <span>*</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;color:#94a3b8;font-size:11px">Use h2, p, ul, table tags</span></label>
-        <textarea id="fContent" rows="12" class="mono" placeholder="<h2>Introduction</h2>&#10;<p>Your article content here...</p>"></textarea>
-      </div>
+      <div class="form-field"><label>Content (HTML) *</label><textarea id="fContent" rows="12" style="font-family:monospace;font-size:12px" placeholder="Write your HTML content here..."></textarea></div>
       <div id="saveErr"></div>
     </div>
     <div class="modal-foot">
@@ -260,216 +162,142 @@
     </div>
   </div>
 </div>
-
 <script>
 (async function() {
   var FB = 'https://www.gstatic.com/firebasejs/10.12.0/';
-  var cfg = {
-    apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",
-    authDomain: "gen-lang-client-0273291777.firebaseapp.com",
-    projectId: "gen-lang-client-0273291777",
-    storageBucket: "gen-lang-client-0273291777.firebasestorage.app",
-    messagingSenderId: "235978759653",
-    appId: "1:235978759653:web:fb82260c62f98fc80ce30c"
-  };
+  var cfg = {apiKey:"AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",authDomain:"gen-lang-client-0273291777.firebaseapp.com",projectId:"gen-lang-client-0273291777",storageBucket:"gen-lang-client-0273291777.firebasestorage.app",messagingSenderId:"235978759653",appId:"1:235978759653:web:fb82260c62f98fc80ce30c"};
   var DB_ID = "ai-studio-f7c7f3ec-1f6a-45a9-a332-4733fe85d918";
   var COLL = "blog_posts";
-
-  var App  = await import(FB + 'firebase-app.js');
+  var App = await import(FB + 'firebase-app.js');
   var Auth = await import(FB + 'firebase-auth.js');
-  var FS   = await import(FB + 'firebase-firestore.js');
-
-  var app  = App.initializeApp(cfg);
+  var FS = await import(FB + 'firebase-firestore.js');
+  var app = App.initializeApp(cfg);
   var auth = Auth.getAuth(app);
-  var db   = FS.getFirestore(app, DB_ID);
-
-  var $ = function(id){ return document.getElementById(id); };
-
+  var db = FS.getFirestore(app, DB_ID);
+  var G = function(id){return document.getElementById(id);};
+  var allPosts = [], editingId = null;
   function toast(msg, ok) {
-    var t = $('toast');
-    t.textContent = msg;
-    t.className = ok === false ? 'toast-err' : 'toast-ok';
+    var t = G('toast'); t.textContent = msg;
+    t.className = (ok === false) ? 'tok-err' : 'tok';
     t.style.display = 'block';
-    clearTimeout(t._timer);
-    t._timer = setTimeout(function(){ t.style.display='none'; }, 3200);
+    clearTimeout(t._t); t._t = setTimeout(function(){ t.style.display='none'; }, 3000);
   }
-
-  var editingId = null, allPosts = [];
-
   Auth.onAuthStateChanged(auth, function(user) {
-    if (user) {
-      $('loginWrap').style.display = 'none';
-      $('adminWrap').style.display = 'flex';
-      $('userEmail').textContent = user.email;
-      loadPosts();
-    } else {
-      $('loginWrap').style.display = 'flex';
-      $('adminWrap').style.display = 'none';
-    }
+    if (user) { G('loginWrap').style.display='none'; G('adminWrap').style.display='flex'; G('userEmail').textContent=user.email; loadPosts(); }
+    else { G('loginWrap').style.display='flex'; G('adminWrap').style.display='none'; }
   });
-
-  $('loginForm').addEventListener('submit', async function(e) {
+  G('loginForm').addEventListener('submit', async function(e) {
     e.preventDefault();
-    var btn = $('loginBtn');
-    var err = $('loginErr');
-    btn.textContent = 'Signing in…';
-    btn.disabled = true;
-    err.style.display = 'none';
-    try {
-      await Auth.signInWithEmailAndPassword(auth, $('loginEmail').value.trim(), $('loginPass').value);
-    } catch(ex) {
-      err.textContent = 'Incorrect email or password. Please try again.';
-      err.style.display = 'block';
-      btn.textContent = 'Sign In';
-      btn.disabled = false;
-    }
+    var btn=G('loginBtn'), err=G('loginErr');
+    btn.textContent='Signing in...'; btn.disabled=true; err.style.display='none';
+    try { await Auth.signInWithEmailAndPassword(auth, G('lEmail').value.trim(), G('lPass').value); }
+    catch(ex) { err.textContent='Incorrect email or password.'; err.style.display='block'; btn.textContent='Sign In'; btn.disabled=false; }
   });
-
-  $('logoutBtn').addEventListener('click', function(){ Auth.signOut(auth); });
-
+  G('logoutBtn').addEventListener('click', function(){ Auth.signOut(auth); });
   async function loadPosts() {
-    $('tableBody').innerHTML = '<tr><td colspan="6" class="table-empty">Loading articles…</td></tr>';
+    G('tableBody').innerHTML='<tr><td colspan="6" class="empty-row">Loading...</td></tr>';
     try {
-      var q = FS.query(FS.collection(db, COLL), FS.orderBy('createdAt', 'desc'));
-      var snap = await FS.getDocs(q);
-      allPosts = snap.docs.map(function(d){ return Object.assign({id: d.id}, d.data()); });
+      var q=FS.query(FS.collection(db,COLL),FS.orderBy('createdAt','desc'));
+      var snap=await FS.getDocs(q);
+      allPosts=snap.docs.map(function(d){ return Object.assign({id:d.id},d.data()); });
       renderTable(allPosts);
-    } catch(ex) {
-      $('tableBody').innerHTML = '<tr><td colspan="6" class="table-empty" style="color:#ef4444">' + ex.message + '</td></tr>';
-    }
+    } catch(ex) { G('tableBody').innerHTML='<tr><td colspan="6" class="empty-row" style="color:#ef4444">'+ex.message+'</td></tr>'; }
   }
-
-  function fmt(d) {
-    if (!d) return '—';
-    var dt = new Date(d);
-    return isNaN(dt) ? d : dt.toLocaleDateString('en-MY', {day:'numeric', month:'short', year:'numeric'});
+  function fmtDate(d) {
+    if (!d) return '-';
+    var dt=new Date(d);
+    return isNaN(dt) ? d : dt.toLocaleDateString('en-MY*,{day:'numeric',month:'short',year:'numeric'});
   }
-
   function renderTable(posts) {
-    if (!posts.length) {
-      $('tableBody').innerHTML = '<tr><td colspan="6" class="table-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z"/></svg>No articles yet. Click <strong>New Article</strong> to create one.</td></tr>';
-      return;
-    }
-    $('tableBody').innerHTML = posts.map(function(p) {
-      var badge = p.status === 'published'
-        ? '<span class="badge badge-published">Published</span>'
-        : '<span class="badge badge-draft">Draft</span>';
+    if (!posts.length) { G('tableBody').innerHTML='<tr><td colspan="6" class="empty-row">No articles yet. Click <b>+ New Article</b> to get started.</td></tr>'; return; }
+    G('tableBody').innerHTML=posts.map(function(p) {
+      var pub=p.status==='published';
+      var badge=pub ? '<span class="badge badge-pub">Published</span>' : '<span class="badge badge-draft">Draft</span>';
       return '<tr>'
-        + '<td class="td-title" title="' + (p.title||'') + '">' + (p.title || '—') + '</td>'
-        + '<td><span class="badge badge-cat">' + (p.category || '—') + '</span></td>'
-        + '<td class="td-slug">' + (p.slug || '—') + '</td>'
-        + '<td class="td-date">' + fmt(p.publishedAt) + '</td>'
-        + '<td>' + badge + '</td>'
-        + '<td class="td-actions">'
-        + '<button class="btn-edit" onclick="window.__edit('' + p.id + '')">Edit</button>'
-        + '<button class="btn-del" onclick="window.__del('' + p.id + '','' + (p.title||'').replace(/'/g,"\'") + '')">Delete</button>'
-        + '</td></tr>';
+        +'<td class="td-title">'+(p.title||'-')+'</td>'
+        +'<td><span class="badge badge-cat">'+(p.category||'-')+'</span></td>'
+        +'<td class="td-slug">'+(p.slug||'-')+'</td>'
+        +'<td class="td-date">'+fmtDate(p.publishedAt)+'</td>'
+        +'<td>'+badge+'</td>'
+        +'<td class="td-act">'
+        +'<button class="btn-edit" data-id="'+p.id+'" data-action="edit">Edit</button> '
+        +'<button class="btn-del" data-id="'+p.id+'" data-title="'+(p.title||'').replace(/"/g,'')+'" data-action="del">Delete</button>'
+        +'</td></tr>';
     }).join('');
   }
-
-  $('searchInput').addEventListener('input', function(e) {
-    var q = e.target.value.toLowerCase();
-    renderTable(allPosts.filter(function(p) {
-      return (p.title||'').toLowerCase().includes(q) || (p.slug||'').toLowerCase().includes(q) || (p.category||'').toLowerCase().includes(q);
-    }));
+  G('tableBody').addEventListener('click', async function(e) {
+    var btn=e.target.closest('[data-action]');
+    if (!btn) return;
+    var id=btn.dataset.id;
+    if (btn.dataset.action==='edit') {
+      var snap=await FS.getDoc(FS.doc(db,COLL,id));
+      if (snap.exists()) openModal(Object.assign({id:snap.id},snap.data()));
+    } else if (btn.dataset.action==='del') {
+      if (!confirm('Delete "'+btn.dataset.title+'"? Cannot be undone.')) return;
+      try { await FS.deleteDoc(FS.doc(db,COLL,id)); toast('Article deleted'); await loadPosts(); }
+      catch(ex) { toast(ex.message,false); }
+    }
   });
-
-  $('catFilter').addEventListener('change', function(e) {
-    var cat = e.target.value;
-    renderTable(cat ? allPosts.filter(function(p){ return p.category === cat; }) : allPosts);
+  G('searchInput').addEventListener('input', function(e) {
+    var q=e.target.value.toLowerCase();
+    renderTable(allPosts.filter(function(p){ return (p.title||'').toLowerCase().indexOf(q)>-1||(p.slug||'').toLowerCase().indexOf(q)>-1; }));
   });
-
+  G('catFilter').addEventListener('change', function(e) {
+    var cat=e.target.value;
+    renderTable(cat ? allPosts.filter(function(p){ return p.category===cat; }) : allPosts);
+  });
+  function makeSlug(title) {
+    var s=title.toLowerCase().trim(), result='';
+    for (var i=0;i<s.length;i++) {
+      var c=s[i];
+      if ((c>='a'&&c<='z')||(c>='0'&&c<='9')||c==='-') result+=c;
+      else if (c===' ') result+='-';
+    }
+    while (result.indexOf('--')>-1) result=result.split('--').join('-');
+    return result;
+  }
   function openModal(post) {
-    editingId = post ? post.id : null;
-    $('modalTitle').textContent = post ? 'Edit Article' : 'New Article';
-    $('fTitle').value    = post && post.title    || '';
-    $('fSlug').value     = post && post.slug     || '';
-    $('fCategory').value = post && post.category || '';
-    $('fExcerpt').value  = post && post.excerpt  || '';
-    $('fThumb').value    = post && post.thumbnail|| '';
-    $('fReadTime').value = post && post.readTime || '';
-    $('fMetaDesc').value = post && post.metaDesc || '';
-    $('fStatus').value   = post && post.status   || 'draft';
-    $('fDate').value     = post && post.publishedAt ? post.publishedAt.substring(0,10) : new Date().toISOString().substring(0,10);
-    $('fContent').value  = post && post.content  || '';
-    $('saveErr').style.display = 'none';
-    $('modalOverlay').classList.add('open');
-    setTimeout(function(){ $('fTitle').focus(); }, 60);
+    editingId=post ? post.id : null;
+    G('modalTitle').textContent=post ? 'Edit Article' : 'New Article';
+    G('fTitle').value=(post&&post.title)||'';
+    G('fSlug').value=(post&&post.slug)||'';
+    G('fCategory').value=(post&&post.category)||'';
+    G('fExcerpt').value=(post&&post.excerpt)||'';
+    G('fThumb').value=(post&&post.thumbnail)||'';
+    G('fReadTime').value=(post&&post.readTime)||'';
+    G('fMetaDesc').value=(post&&post.metaDesc)||'';
+    G('fStatus').value=(post&&post.status)||'draft';
+    G('fDate').value=(post&&post.publishedAt) ? post.publishedAt.substring(0,10) : new Date().toISOString().substring(0,10);
+    G('fContent').value=(post&&post.content)||'';
+    G('saveErr').style.display='none';
+    G('modalOverlay').classList.add('open');
+    setTimeout(function(){ G('fTitle').focus(); },60);
   }
-
-  function closeModal() {
-    $('modalOverlay').classList.remove('open');
-    editingId = null;
-  }
-
-  $('fTitle').addEventListener('input', function() {
-    if (!editingId) {
-      $('fSlug').value = $('fTitle').value.toLowerCase().trim()
-        .replace(/[^a-z0-9s-]/g,'').replace(/s+/g,'-').replace(/-+/g,'-');
-    }
-  });
-
-  $('newPostBtn').addEventListener('click', function(){ openModal(null); });
-  $('modalClose').addEventListener('click', closeModal);
-  $('cancelBtn').addEventListener('click', closeModal);
-  $('modalOverlay').addEventListener('click', function(e){ if (e.target === $('modalOverlay')) closeModal(); });
-
-  $('saveBtn').addEventListener('click', async function() {
-    var btn = $('saveBtn');
-    var err = $('saveErr');
-    var data = {
-      title:       $('fTitle').value.trim(),
-      slug:        $('fSlug').value.trim(),
-      category:    $('fCategory').value.trim(),
-      excerpt:     $('fExcerpt').value.trim(),
-      thumbnail:   $('fThumb').value.trim(),
-      readTime:    parseInt($('fReadTime').value) || 5,
-      metaDesc:    $('fMetaDesc').value.trim(),
-      status:      $('fStatus').value,
-      publishedAt: $('fDate').value,
-      content:     $('fContent').value.trim(),
-      updatedAt:   FS.serverTimestamp()
+  function closeModal() { G('modalOverlay').classList.remove('open'); editingId=null; }
+  G('fTitle').addEventListener('input', function(){ if (!editingId) G('fSlug').value=makeSlug(G('fTitle').value); });
+  G('newPostBtn').addEventListener('click', function(){ openModal(null); });
+  G('modalClose').addEventListener('click', closeModal);
+  G('cancelBtn').addEventListener('click', closeModal);
+  G('modalOverlay').addEventListener('click', function(e){ if (e.target===G('modalOverlay')) closeModal(); });
+  G('saveBtn').addEventListener('click', async function() {
+    var btn=G('saveBtn'), err=G('saveErr');
+    var data={
+      title:G('fTitle').value.trim(), slug:G('fSlug').value.trim(),
+      category:G('fCategory').value.trim(), excerpt:G('fExcerpt').value.trim(),
+      thumbnail:G('fThumb').value.trim(), readTime:parseInt(G('fReadTime').value)||5,
+      metaDesc:G('fMetaDesc').value.trim(), status:G('fStatus').value,
+      publishedAt:G('fDate').value, content:G('fContent').value.trim(),
+      updatedAt:FS.serverTimestamp()
     };
-    if (!data.title || !data.slug || !data.content) {
-      err.textContent = 'Title, slug, and content are required.';
-      err.style.display = 'block';
-      return;
-    }
-    btn.textContent = 'Saving…'; btn.disabled = true;
+    if (!data.title||!data.slug||!data.content) { err.textContent='Title, slug, and content are required.'; err.style.display='block'; return; }
+    btn.textContent='Saving...'; btn.disabled=true;
     try {
-      if (editingId) {
-        await FS.updateDoc(FS.doc(db, COLL, editingId), data);
-        toast('Article updated successfully');
-      } else {
-        data.createdAt = FS.serverTimestamp();
-        await FS.addDoc(FS.collection(db, COLL), data);
-        toast('Article published');
-      }
-      closeModal();
-      await loadPosts();
-    } catch(ex) {
-      err.textContent = ex.message;
-      err.style.display = 'block';
-      toast(ex.message, false);
-    }
-    btn.textContent = 'Save Article'; btn.disabled = false;
+      if (editingId) { await FS.updateDoc(FS.doc(db,COLL,editingId),data); toast('Article updated'); }
+      else { data.createdAt=FS.serverTimestamp(); await FS.addDoc(FS.collection(db,COLL),data); toast('Article published'); }
+      closeModal(); await loadPosts();
+    } catch(ex) { err.textContent=ex.message; err.style.display='block'; toast(ex.message,false); }
+    btn.textContent='Save Article'; btn.disabled=false;
   });
-
-  window.__edit = async function(id) {
-    var snap = await FS.getDoc(FS.doc(db, COLL, id));
-    if (snap.exists()) openModal(Object.assign({id: snap.id}, snap.data()));
-  };
-
-  window.__del = async function(id, title) {
-    if (!confirm('Delete "' + title + '"?
-
-This cannot be undone.')) return;
-    try {
-      await FS.deleteDoc(FS.doc(db, COLL, id));
-      toast('Article deleted');
-      await loadPosts();
-    } catch(ex) { toast(ex.message, false); }
-  };
 })();
 </script>
 </body>
