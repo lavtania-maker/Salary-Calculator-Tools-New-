@@ -3,123 +3,196 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
-  <title>HR &amp; Salary Blog Malaysia - EPF, PCB, SOCSO &amp; Employment Law Guides</title>
-  <meta name="description" content="Free HR and payroll guides for Malaysian employees and employers. Learn about EPF, SOCSO, PCB, minimum wage and employment law.">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://salarycalculator.my/blog">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://salarycalculator.my/blog">
-  <meta property="og:title" content="HR &amp; Salary Blog Malaysia">
-  <meta property="og:description" content="Free HR and payroll guides for Malaysian employees and employers.">
-  <meta property="og:image" content="https://salarycalculator.my/logo-small.png">
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"HR & Salary Blog Malaysia","url":"https://salarycalculator.my/blog","publisher":{"@type":"Organization","name":"SalaryCalculator.my","url":"https://salarycalculator.my"}}</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <link rel="preload" href="/calculator-styles.css" as="style">
-  <link rel="stylesheet" href="/calculator-styles.css" media="print" onload="this.media='all'">
+  <title>HR & Salary Blog Malaysia - EPF, PCB, SOCSO & Employment Law Guides</title>
+  <meta name="description" content="Free guides on EPF, PCB, SOCSO, employment law and payroll for Malaysian employees and employers.">
+  <link rel="icon" href="/favicon.ico">
   <style>
-    .blog-wrap{max-width:860px;margin:0 auto;padding:0 24px 100px}
-    .blog-hero{background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);color:white;text-align:center;padding:72px 24px 80px}
-    .blog-hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;letter-spacing:-0.03em;line-height:1.15;margin-bottom:16px}
-    .blog-hero p{font-size:1.1rem;opacity:0.82;max-width:520px;margin:0 auto;line-height:1.7}
-    .filter-bar{background:white;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:20}
-    .filter-inner{max-width:860px;margin:0 auto;padding:0 24px;display:flex;gap:0;overflow-x:auto;scrollbar-width:none}
-    .filter-inner::-webkit-scrollbar{display:none}
-    .filter-btn{flex-shrink:0;padding:14px 18px;font-size:0.875rem;font-weight:600;color:#64748b;border:none;background:transparent;cursor:pointer;border-bottom:3px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap}
-    .filter-btn:hover{color:#1e40af}
-    .filter-btn.active{color:#1e40af;border-bottom-color:#2563eb}
-    .post-featured{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;padding:48px 0 40px;border-bottom:1px solid #e2e8f0;text-decoration:none;color:inherit}
-    .post-featured:hover .post-title{color:#2563eb}
-    .post-featured-thumb{border-radius:14px;overflow:hidden;aspect-ratio:16/10;background:linear-gradient(135deg,#dbeafe,#93c5fd);order:1}
-    .post-featured-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .post-featured-body{order:0}
-    .post-cat{font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#2563eb;margin-bottom:12px;display:block}
-    .post-title{font-size:1.5rem;font-weight:800;color:#0f172a;line-height:1.3;margin-bottom:14px;letter-spacing:-0.02em;transition:color .15s}
-    .post-featured .post-title{font-size:1.75rem}
-    .post-excerpt{font-size:0.9375rem;color:#64748b;line-height:1.7;margin-bottom:18px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-    .post-meta{font-size:0.8125rem;color:#94a3b8;display:flex;align-items:center;gap:8px}
-    .post-meta .sep{color:#cbd5e1}
-    .post-list{padding-top:0}
-    .post-item{display:grid;grid-template-columns:1fr 200px;gap:28px;align-items:center;padding:32px 0;border-bottom:1px solid #e2e8f0;text-decoration:none;color:inherit}
-    .post-item:hover .post-title{color:#2563eb}
-    .post-item-thumb{border-radius:10px;overflow:hidden;aspect-ratio:16/10;background:linear-gradient(135deg,#dbeafe,#93c5fd);flex-shrink:0}
-    .post-item-thumb img{width:100%;height:100%;object-fit:cover;display:block}
-    .post-item .post-title{font-size:1.125rem}
-    .post-item .post-excerpt{-webkit-line-clamp:2;font-size:0.875rem}
-    .cat-epf{color:#1d4ed8}.cat-pcb{color:#0369a1}.cat-socso{color:#15803d}.cat-law{color:#a16207}.cat-tips{color:#7c3aed}
-    .post-empty{text-align:center;padding:80px 20px;color:#94a3b8}
-    .cta-section{border-top:1px solid #e2e8f0;background:#f8fafc;padding:64px 24px}
-    .cta-inner{max-width:860px;margin:0 auto}
-    .cta-inner h2{font-size:1.5rem;font-weight:800;color:#0f172a;margin-bottom:8px;letter-spacing:-0.02em}
-    .cta-inner p{color:#64748b;margin-bottom:32px;font-size:0.9375rem}
-    .cta-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
-    .cta-card{background:white;border:1px solid #e2e8f0;border-radius:14px;padding:20px;text-decoration:none;display:block;transition:transform .18s,box-shadow .18s}
-    .cta-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.08)}
-    .cta-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:12px}
-    .cta-card h3{font-size:0.9375rem;font-weight:700;color:#0f172a;margin-bottom:4px}
-    .cta-card p{font-size:0.8125rem;color:#64748b;line-height:1.5;margin:0}
-    @media(max-width:640px){.post-featured{grid-template-columns:1fr}.post-featured-thumb{order:0;aspect-ratio:16/9}.post-featured-body{order:1}.post-featured .post-title{font-size:1.375rem}.post-item{grid-template-columns:1fr}.post-item-thumb{display:none}.blog-wrap{padding:0 16px 80px}}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1a1d23;background:#fff;line-height:1.6}
+    .nav{background:#fff;border-bottom:1px solid #e8e8e8;position:sticky;top:0;z-index:100}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;height:60px;display:flex;align-items:center;gap:32px}
+    .nav-logo{display:flex;align-items:center;text-decoration:none;flex-shrink:0}
+    .nav-logo img{height:32px}
+    .nav-links{display:flex;align-items:center;gap:24px;flex:1}
+    .nav-links a{text-decoration:none;color:#374151;font-size:14px;font-weight:500;white-space:nowrap;transition:color .15s}
+    .nav-links a:hover{color:#2563eb}
+    .nav-blog-btn{background:#2563eb;color:#fff!important;padding:8px 18px;border-radius:6px;font-weight:600!important}
+    .nav-blog-btn:hover{background:#1d4ed8!important}
+    .hero{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#3b82f6 100%);padding:64px 24px 80px;text-align:center;position:relative;overflow:hidden}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40px;background:#fff;clip-path:ellipse(60% 100% at 50% 100%)}
+    .hero h1{font-size:clamp(32px,5vw,56px);font-weight:800;color:#fff;letter-spacing:-1px;line-height:1.1;margin-bottom:16px}
+    .hero p{font-size:18px;color:rgba(255,255,255,.85);max-width:520px;margin:0 auto}
+    .tabs-wrap{background:#fff;border-bottom:2px solid #f1f5f9;position:sticky;top:60px;z-index:90}
+    .tabs{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;overflow-x:auto;scrollbar-width:none}
+    .tabs::-webkit-scrollbar{display:none}
+    .tab{padding:16px 20px;font-size:13px;font-weight:700;color:#64748b;cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;text-transform:uppercase;letter-spacing:.05em;transition:all .15s;text-decoration:none;display:block}
+    .tab:hover{color:#1e3a8a}
+    .tab.active{color:#1e3a8a;border-bottom-color:#2563eb}
+    .blog-main{max-width:1200px;margin:0 auto;padding:48px 24px}
+    .blog-layout{display:grid;grid-template-columns:1fr 300px;gap:40px;align-items:start}
+    .featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#e8e8e8;border:1px solid #e8e8e8;margin-bottom:1px}
+    .featured-card{background:#fff;padding:40px 40px 36px;display:flex;flex-direction:column;gap:12px;text-decoration:none;transition:background .15s}
+    .featured-card:hover{background:#f8faff}
+    .card-cat{font-size:11px;font-weight:800;color:#64748b;text-transform:uppercase;letter-spacing:.08em}
+    .card-title{font-size:clamp(22px,2.5vw,30px);font-weight:800;color:#1e3a8a;line-height:1.2;letter-spacing:-.5px;transition:color .15s}
+    .featured-card:hover .card-title,.post-card:hover .card-title{color:#2563eb}
+    .card-excerpt{font-size:15px;color:#4b5563;line-height:1.6;flex:1}
+    .card-meta{display:flex;align-items:center;gap:10px;margin-top:4px}
+    .card-avatar{width:32px;height:32px;border-radius:50%;background:#dbeafe;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#1e3a8a;flex-shrink:0}
+    .card-date{font-size:13px;color:#6b7280}
+    .posts-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#e8e8e8;border:1px solid #e8e8e8;border-top:none}
+    .post-card{background:#fff;padding:32px 40px 28px;display:flex;flex-direction:column;gap:10px;text-decoration:none;transition:background .15s}
+    .post-card:hover{background:#f8faff}
+    .post-card .card-title{font-size:clamp(18px,2vw,22px)}
+    .empty-state{text-align:center;padding:80px 24px;color:#94a3b8}
+    .empty-state h2{font-size:22px;color:#64748b;margin-bottom:8px}
+    .sidebar{position:sticky;top:120px}
+    .sidebar-card{background:#f8faff;border:1px solid #dbeafe;border-radius:12px;padding:24px;margin-bottom:20px}
+    .sidebar-card h3{font-size:13px;font-weight:700;color:#1e3a8a;margin-bottom:14px;text-transform:uppercase;letter-spacing:.05em}
+    .sidebar-links{display:flex;flex-direction:column;gap:8px}
+    .sidebar-link{display:flex;align-items:center;gap:10px;text-decoration:none;padding:9px 12px;border-radius:8px;background:#fff;border:1px solid #e2e8f0;transition:all .15s}
+    .sidebar-link:hover{border-color:#2563eb;background:#eff6ff}
+    .sidebar-link-icon{font-size:18px;flex-shrink:0}
+    .sidebar-link-text{font-size:13px;font-weight:600;color:#1e3a8a}
+    .sidebar-link-desc{font-size:11px;color:#64748b}
+    .skeleton{background:linear-gradient(90deg,#f1f5f9 25%,#e2e8f0 50%,#f1f5f9 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:4px}
+    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .skeleton-line{height:16px;margin-bottom:8px}
+    .skeleton-title{height:28px;width:80%;margin-bottom:12px}
+    @media(max-width:900px){.featured-grid,.posts-grid{grid-template-columns:1fr}.blog-layout{grid-template-columns:1fr}.sidebar{display:none}.featured-card,.post-card{padding:28px 20px}}
+    @media(max-width:600px){.nav-links{gap:14px}.hero{padding:48px 16px 64px}}
   </style>
 </head>
 <body>
-<header class="navbar"><div class="container" style="display:flex;justify-content:space-between;align-items:center;position:relative;"><a href="/" class="logo"><img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" class="logo-img" width="250" height="44"></a><nav class="desktop-nav"><a href="/" class="nav-item">Salary Calculator</a><a href="/socso-perkeso" class="nav-item">SOCSO Calculator</a><a href="/pcb-income-tax" class="nav-item">PCB Calculator</a><a href="/epf-kwsp" class="nav-item">EPF Calculator</a><a href="/annual-leave-calculator" class="nav-item">Annual Leave Calculator</a><a href="/blog" class="nav-item active-nav">Blog</a></nav><button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button></div><nav class="mobile-nav" id="mobileNavMenu"><a href="/" class="mobile-nav-item">Salary Calculator</a><a href="/socso-perkeso" class="mobile-nav-item">SOCSO Calculator</a><a href="/pcb-income-tax" class="mobile-nav-item">PCB Calculator</a><a href="/epf-kwsp" class="mobile-nav-item">EPF Calculator</a><a href="/annual-leave-calculator" class="mobile-nav-item">Annual Leave Calculator</a><a href="/blog" class="mobile-nav-item active-nav">Blog</a></nav></header>
-<div class="blog-hero"><h1>HR &amp; Salary Blog Malaysia</h1><p>Free guides on EPF, PCB, SOCSO, employment law and payroll for Malaysian employees and employers.</p></div>
-<div class="filter-bar"><div class="filter-inner" id="filterBar"><button class="filter-btn active" data-cat="all">All Articles</button><button class="filter-btn" data-cat="EPF">EPF</button><button class="filter-btn" data-cat="PCB">PCB</button><button class="filter-btn" data-cat="SOCSO">SOCSO</button><button class="filter-btn" data-cat="Employment Law">Employment Law</button><button class="filter-btn" data-cat="Salary Tips">Salary Tips</button></div></div>
-<div class="blog-wrap"><nav class="breadcrumb" style="padding-top:28px;margin-bottom:0;"><a href="/">Home</a><span class="sep">/</span><span>Blog</span></nav><div id="postsContainer" style="margin-top:0;"></div></div>
-<section class="cta-section"><div class="cta-inner"><h2>Free HR Calculators</h2><p>Instantly calculate take-home pay, EPF, SOCSO, PCB and annual leave.</p><div class="cta-grid">
-<a href="/" class="cta-card"><div class="cta-icon" style="background:#eff6ff;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></svg></div><h3 style="color:#2563eb;">Salary Calculator</h3><p>Calculate take-home pay after all deductions.</p></a>
-<a href="/epf-kwsp" class="cta-card" style="background:#fef2f2;border-color:#fee2e2;"><div class="cta-icon" style="background:#fee2e2;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#991b1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M3 7v1a3 3 0 0 0 6 0V7m6 0v1a3 3 0 0 0 6 0V7M9 7h6"/><path d="M5 21V10.85M19 21V10.85M9 21V14M15 21V14"/></svg></div><h3 style="color:#991b1b;">EPF Calculator</h3><p>Calculate EPF employee &amp; employer contributions.</p></a>
-<a href="/socso-perkeso" class="cta-card" style="background:#f0fdf4;border-color:#dcfce7;"><div class="cta-icon" style="background:#dcfce7;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3 style="color:#15803d;">SOCSO Calculator</h3><p>Check PERKESO &amp; EIS contribution rates.</p></a>
-<a href="/pcb-income-tax" class="cta-card" style="background:#f0f9ff;border-color:#e0f2fe;"><div class="cta-icon" style="background:#e0f2fe;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0369a1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 17.5V6.5"/></svg></div><h3 style="color:#0369a1;">PCB Calculator</h3><p>Calculate your monthly income tax deduction.</p></a>
-<a href="/annual-leave-calculator" class="cta-card"><div class="cta-icon" style="background:#eff6ff;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg></div><h3 style="color:#2563eb;">Annual Leave</h3><p>Calculate pro-rated leave under the Employment Act.</p></a>
-</div></div></section>
-<footer class="footer"><div class="container"><div class="footer-grid"><div class="footer-col"><a href="/" class="logo" style="margin-bottom:20px;display:block;"><img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" width="180" height="44" style="height:44px;width:auto;object-fit:contain;"></a><p style="color:#94a3b8;font-size:0.9375rem;line-height:1.6;">Accurate Malaysia salary calculator.<br>Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.</p></div><div class="footer-col footer-col-links"><h4>Quick Links</h4><a href="/" class="footer-link">Salary Calculator</a><a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a><a href="/pcb-income-tax" class="footer-link">PCB Calculator</a><a href="/epf-kwsp" class="footer-link">EPF Calculator</a><a href="/annual-leave-calculator" class="footer-link">Annual Leave Calculator</a><a href="/blog" class="footer-link">Blog</a><a href="/privacy-policy" class="footer-link">Privacy Policy</a></div></div><div class="footer-bottom"><p>2026 SalaryCalc MY</p></div></div></footer>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo"><img src="/logo-small.png" alt="Salary Calculator MY" onerror="this.style.display='none'"></a>
+    <div class="nav-links">
+      <a href="/">Salary Calculator</a>
+      <a href="/socso-perkeso">SOCSO Calculator</a>
+      <a href="/pcb-income-tax">PCB Calculator</a>
+      <a href="/epf-kwsp">EPF Calculator</a>
+      <a href="/annual-leave-calculator">Annual Leave</a>
+      <a href="/blog" class="nav-blog-btn">Blog</a>
+    </div>
+  </div>
+</nav>
+<div class="hero">
+  <h1>HR &amp; Salary Blog Malaysia</h1>
+  <p>Free guides on EPF, PCB, SOCSO, employment law and payroll for Malaysian employees and employers.</p>
+</div>
+<div class="tabs-wrap">
+  <div class="tabs" id="categoryTabs">
+    <a class="tab active" data-cat="" href="#">All Articles</a>
+    <a class="tab" data-cat="EPF" href="#">EPF</a>
+    <a class="tab" data-cat="PCB" href="#">PCB</a>
+    <a class="tab" data-cat="SOCSO" href="#">SOCSO</a>
+    <a class="tab" data-cat="Employment Law" href="#">Employment Law</a>
+    <a class="tab" data-cat="Salary Tips" href="#">Salary Tips</a>
+  </div>
+</div>
+<main class="blog-main">
+  <div class="blog-layout">
+    <div id="articlesContainer">
+      <div class="featured-grid">
+        <div class="featured-card"><div class="skeleton skeleton-line" style="width:30%;height:12px"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-line"></div></div>
+        <div class="featured-card"><div class="skeleton skeleton-line" style="width:30%;height:12px"></div><div class="skeleton skeleton-title"></div><div class="skeleton skeleton-line"></div></div>
+      </div>
+    </div>
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h3>Free HR Calculators</h3>
+        <div class="sidebar-links">
+          <a href="/" class="sidebar-link"><span class="sidebar-link-icon">&#128176;</span><div><div class="sidebar-link-text">Salary Calculator</div><div class="sidebar-link-desc">Take-home pay after EPF, SOCSO &amp; PCB</div></div></a>
+          <a href="/epf-kwsp" class="sidebar-link"><span class="sidebar-link-icon">&#127974;</span><div><div class="sidebar-link-text">EPF Calculator</div><div class="sidebar-link-desc">Employee &amp; employer contributions</div></div></a>
+          <a href="/socso-perkeso" class="sidebar-link"><span class="sidebar-link-icon">&#128737;</span><div><div class="sidebar-link-text">SOCSO Calculator</div><div class="sidebar-link-desc">PERKESO contribution rates</div></div></a>
+          <a href="/pcb-income-tax" class="sidebar-link"><span class="sidebar-link-icon">&#128202;</span><div><div class="sidebar-link-text">PCB / Income Tax</div><div class="sidebar-link-desc">Monthly tax deduction (MTD)</div></div></a>
+          <a href="/annual-leave-calculator" class="sidebar-link"><span class="sidebar-link-icon">&#128197;</span><div><div class="sidebar-link-text">Annual Leave</div><div class="sidebar-link-desc">Leave entitlement calculator</div></div></a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
 <script>
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
-  import { getFirestore, collection, query, where, orderBy, getDocs } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
-  const firebaseConfig = { apiKey: window.__FIREBASE_API_KEY__ || "AIzaSyBkRCqM0JHx1N4rEJBu4xWkUDNdmpCrjDc", authDomain: window.__FIREBASE_AUTH_DOMAIN__ || "salary-calculator-my.firebaseapp.com", projectId: window.__FIREBASE_PROJECT_ID__ || "salary-calculator-my", storageBucket: window.__FIREBASE_STORAGE_BUCKET__ || "salary-calculator-my.appspot.com", messagingSenderId: window.__FIREBASE_MESSAGING_SENDER_ID__ || "594083898907", appId: window.__FIREBASE_APP_ID__ || "1:594083898907:web:placeholder" };
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const CAT_CLASS = {'EPF':'cat-epf','PCB':'cat-pcb','SOCSO':'cat-socso','Employment Law':'cat-law','Salary Tips':'cat-tips'};
-  const CAT_BG = {'EPF':'linear-gradient(135deg,#dbeafe,#93c5fd)','PCB':'linear-gradient(135deg,#e0f2fe,#7dd3fc)','SOCSO':'linear-gradient(135deg,#dcfce7,#86efac)','Employment Law':'linear-gradient(135deg,#fef9c3,#fde047)','Salary Tips':'linear-gradient(135deg,#f3e8ff,#d8b4fe)','default':'linear-gradient(135deg,#f1f5f9,#cbd5e1)'};
-  const STATIC = [
-    {slug:'epf-contribution-rates-2026',category:'EPF',title:'EPF (KWSP) Contribution Rates 2026',excerpt:'EPF rates, how contributions are calculated, and tips to maximize your retirement savings in Malaysia.',publishedAt:'2026-06-24',readTime:6,status:'published'},
-    {slug:'malaysia-salary-guide-2026',category:'Salary Tips',title:'Malaysia Salary Guide 2026 - Average Salary, Take Home Pay & Income Groups',excerpt:'Average salaries by industry, B40 M40 T20 thresholds and take home pay for common salary levels.',publishedAt:'2026-06-23',readTime:5,status:'published'},
-    {slug:'epf-contribution-guide-2026',category:'EPF',title:'EPF Contribution Guide 2026 - Everything Malaysian Employees Need to Know',excerpt:'EPF rates, account structure, dividends and tips to maximize your retirement savings.',publishedAt:'2026-06-20',readTime:6,status:'published'},
-    {slug:'pcb-tax-deduction-2026',category:'PCB',title:'PCB Tax Deduction 2026 - How to Calculate Your Monthly Income Tax',excerpt:'Step-by-step guide to PCB deduction, 2026 tax brackets and how to legally reduce your monthly tax.',publishedAt:'2026-06-18',readTime:7,status:'published'},
-    {slug:'minimum-wage-malaysia-2026',category:'Salary Tips',title:'Minimum Wage Malaysia 2026 - RM1,700 Rate, Who It Applies To & Take Home Pay',excerpt:'Everything about the current minimum wage, daily rate, take home pay after deductions.',publishedAt:'2026-06-15',readTime:5,status:'published'},
-    {slug:'socso-malaysia-2026',category:'SOCSO',title:'SOCSO Malaysia 2026 - Rates, Coverage & How to Make a Claim',excerpt:'Complete guide to SOCSO and EIS contributions, what they cover and how to claim.',publishedAt:'2026-06-12',readTime:6,status:'published'},
-    {slug:'annual-leave-malaysia-2026',category:'Employment Law',title:'Annual Leave Malaysia 2026 - Entitlement, Pro-Rated Leave & Employer Rules',excerpt:'Your rights to annual leave under the Malaysian Employment Act and what happens to unused leave.',publishedAt:'2026-06-10',readTime:5,status:'published'}
-  ];
-  let allPosts=[...STATIC], currentFilter='all';
-  const container = document.getElementById('postsContainer');
-  function fmtDate(d){if(!d)return'';const dt=new Date(d);if(isNaN(dt))return d;return dt.toLocaleDateString('en-MY',{day:'numeric',month:'long',year:'numeric'});}
-  function thumbHtml(p){const bg=CAT_BG[p.category]||CAT_BG['default'];if(p.thumbnail)return '<img src="'+p.thumbnail+'" alt="'+p.title+'" loading="lazy">';return '<div style="width:100%;height:100%;background:'+bg+';"></div>';}
-  function renderPosts(posts){
-    if(!posts.length){container.innerHTML='<div class="post-empty"><p>No articles found in this category.</p></div>';return;}
-    const [featured,...rest]=posts;
-    const cc=CAT_CLASS[featured.category]||'';
-    let html='<a href="/blog/'+featured.slug+'" class="post-featured"><div class="post-featured-body"><span class="post-cat '+cc+'">'+featured.category+'</span><h2 class="post-title">'+featured.title+'</h2><p class="post-excerpt">'+featured.excerpt+'</p><div class="post-meta"><span>'+fmtDate(featured.publishedAt)+'</span>'+(featured.readTime?'<span class="sep">Â·</span><span>'+featured.readTime+' min read</span>':'')+'</div></div><div class="post-featured-thumb">'+thumbHtml(featured)+'</div></a><div class="post-list">';
-    rest.forEach(p=>{const c=CAT_CLASS[p.category]||'';html+='<a href="/blog/'+p.slug+'" class="post-item"><div><span class="post-cat '+c+'">'+p.category+'</span><h3 class="post-title">'+p.title+'</h3><p class="post-excerpt">'+p.excerpt+'</p><div class="post-meta"><span>'+fmtDate(p.publishedAt)+'</span>'+(p.readTime?'<span class="sep">Â·</span><span>'+p.readTime+' min read</span>':'')+'</div></div><div class="post-item-thumb">'+thumbHtml(p)+'</div></a>';});
-    html+='</div>';
-    container.innerHTML=html;
+(async function() {
+  var FB = 'https://www.gstatic.com/firebasejs/10.12.0/';
+  var cfg = {apiKey:"AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",authDomain:"gen-lang-client-0273291777.firebaseapp.com",projectId:"gen-lang-client-0273291777"};
+  var DB_ID = "ai-studio-f7c7f3ec-1f6a-45a9-a332-4733fe85d918";
+  var COLL = "blog_posts";
+  var App = await import(FB + 'firebase-app.js');
+  var FS = await import(FB + 'firebase-firestore.js');
+  var app = App.initializeApp(cfg);
+  var db = FS.getFirestore(app, DB_ID);
+  var allPosts = [], activeCategory = '';
+  function fmtDate(d) {
+    if (!d) return '';
+    var dt = new Date(d);
+    return isNaN(dt) ? d : dt.toLocaleDateString('en-MY', {day:'numeric',month:'long',year:'numeric'});
   }
-  function applyFilter(cat){currentFilter=cat;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.cat===cat));const filtered=cat==='all'?allPosts:allPosts.filter(p=>p.category===cat);renderPosts(filtered);}
-  async function loadFromFirestore(){
-    try{
-      const q=query(collection(db,'blog_posts'),where('status','==','published'),orderBy('publishedAt','desc'));
-      const snap=await getDocs(q);
-      if(!snap.empty){const fp=snap.docs.map(d=>({...d.data(),id:d.id}));const map={};STATIC.forEach(p=>map[p.slug]=p);fp.forEach(p=>{if(p.slug)map[p.slug]=p;});allPosts=Object.values(map).filter(p=>p.status==='published').sort((a,b)=>new Date(b.publishedAt||0)-new Date(a.publishedAt||0));}
-    }catch(e){console.warn('Firestore load failed, using static:',e.message);}
-    applyFilter(currentFilter);
+  function initials(t) { return (t||'SC').split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase(); }
+  function card(p, large) {
+    var cls = large ? 'featured-card' : 'post-card';
+    var cats = (p.category||'').split(',').map(function(c){return c.trim();}).filter(Boolean);
+    return '<a class="'+cls+'" href="/blog/'+(p.slug||p.id)+'">'
+      +'<div class="card-cat">'+cats.map(function(c){return '<span>'+c+'</span>';}).join('')+'</div>'
+      +'<h2 class="card-title">'+(p.title||'Untitled')+'</h2>'
+      +(p.excerpt?'<p class="card-excerpt">'+p.excerpt+'</p>':'')
+      +'<div class="card-meta"><div class="card-avatar">'+initials(p.title)+'</div>'
+      +'<div class="card-date">'+fmtDate(p.publishedAt)+'</div></div></a>';
   }
-  renderPosts(allPosts);
-  loadFromFirestore();
-  document.getElementById('filterBar').addEventListener('click',e=>{if(e.target.classList.contains('filter-btn'))applyFilter(e.target.dataset.cat);});
-  const mmT=document.getElementById('mobileMenuToggle');const mmN=document.getElementById('mobileNavMenu');if(mmT&&mmN)mmT.addEventListener('click',()=>mmN.classList.toggle('open'));
+  function render(posts) {
+    var c = document.getElementById('articlesContainer');
+    if (!posts.length) { c.innerHTML='<div class="empty-state"><h2>No articles yet</h2><p>Check back soon for guides on EPF, PCB, SOCSO and more.</p></div>'; return; }
+    var h = '<div class="featured-grid">'+card(posts[0],true);
+    h += posts.length>=2 ? card(posts[1],true) : '<div class="featured-card" style="background:#f8faff"></div>';
+    h += '</div>';
+    if (posts.length>2) {
+      h += '<div class="posts-grid">';
+      for(var i=2;i<posts.length;i++) h+=card(posts[i],false);
+      if ((posts.length-2)%2!==0) h+='<div class="post-card" style="background:#f8faff"></div>';
+      h += '</div>';
+    }
+    c.innerHTML = h;
+  }
+  function filterAndRender() {
+    var f = activeCategory ? allPosts.filter(function(p){return (p.category||'').indexOf(activeCategory)>-1;}) : allPosts;
+    render(f);
+  }
+  async function loadPosts() {
+    try {
+      var q = FS.query(FS.collection(db,COLL), FS.where('status','==','published'), FS.orderBy('publishedAt','desc'));
+      var s = await FS.getDocs(q);
+      allPosts = s.docs.map(function(d){return Object.assign({id:d.id},d.data());});
+      if (!s.docs.length) {
+        var q2 = FS.query(FS.collection(db,COLL), FS.where('status','==','published'));
+        var s2 = await FS.getDocs(q2);
+        allPosts = s2.docs.map(function(d){return Object.assign({id:d.id},d.data());});
+        allPosts.sort(function(a,b){return (b.publishedAt||'')>(a.publishedAt||'')?1:-1;});
+      }
+      filterAndRender();
+    } catch(e) {
+      try {
+        var q3 = FS.query(FS.collection(db,COLL), FS.orderBy('createdAt','desc'));
+        var s3 = await FS.getDocs(q3);
+        allPosts = s3.docs.map(function(d){return Object.assign({id:d.id},d.data());}).filter(function(p){return p.status==='published';});
+        filterAndRender();
+      } catch(e2) {
+        document.getElementById('articlesContainer').innerHTML='<div class="empty-state"><h2>Load error</h2><p>'+e2.message+'</p></div>';
+      }
+    }
+  }
+  document.getElementById('categoryTabs').addEventListener('click',function(e){
+    var t=e.target.closest('.tab');
+    if(!t) return;
+    e.preventDefault();
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
+    t.classList.add('active');
+    activeCategory=t.dataset.cat;
+    filterAndRender();
+  });
+  await loadPosts();
+})();
 </script>
 </body>
 </html>
