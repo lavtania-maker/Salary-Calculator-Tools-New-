@@ -21,6 +21,9 @@ const oldLhdn = 'https://www.ajobthing.com/resources/blog/data/blog/images/2026/
 
 function optimizeHtmlFile(filePath) {
   if (!fs.existsSync(filePath)) return;
+  // Skip files with complex inline JS to avoid corruption
+  var skipFiles = ['blog-admin.html', 'blog.html'];
+  if (skipFiles.some(function(f){ return filePath.endsWith(f); })) { console.log('Skipping: ' + filePath); return; }
   // Skip blog-admin.html and blog.html - they have complex inline JS
   var skipFiles = ['blog-admin.html', 'blog.html'];
   if (skipFiles.some(function(f){ return filePath.endsWith(f); })) { console.log('Skipping: ' + filePath); return; }
