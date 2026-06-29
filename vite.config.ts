@@ -35,6 +35,8 @@ export default defineConfig(({ mode }) => {
           annualLeave: path.resolve(__dirname, "annual-leave-calculator.html"),
           socsoPerkeso: path.resolve(__dirname, "socso-perkeso.html"),
           blogPostTemplate: path.resolve(__dirname, "blog-post-template.html"),
+          blog: path.resolve(__dirname, "blog.html"),
+          blogAdmin: path.resolve(__dirname, "blog-admin.html"),
         },
       },
     },
