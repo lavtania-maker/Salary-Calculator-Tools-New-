@@ -7,7 +7,7 @@
   <meta name="robots" content="noindex, nofollow">
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI*,sans-serif;background:#f5f6fa;color:#1a1d23;min-height:100vh;font-size:14px;line-height:1.5}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f6fa;color:#1a1d23;min-height:100vh;font-size:14px;line-height:1.5}
     #loginWrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1e3a5f 0%,#2563eb 100%);padding:20px}
     .login-card{background:#fff;border-radius:16px;padding:40px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.25)}
     .login-logo{display:block;margin:0 auto 24px;height:36px;width:auto}
@@ -206,7 +206,7 @@
   function fmtDate(d) {
     if (!d) return '-';
     var dt=new Date(d);
-    return isNaN(dt) ? d : dt.toLocaleDateString('en-MY*,{day:'numeric',month:'short',year:'numeric'});
+    return isNaN(dt) ? d : dt.toLocaleDateString('en-MY',{ day:'numeric',month:'short',year:'numeric' });
   }
   function renderTable(posts) {
     if (!posts.length) { G('tableBody').innerHTML='<tr><td colspan="6" class="empty-row">No articles yet. Click <b>+ New Article</b> to get started.</td></tr>'; return; }
@@ -235,7 +235,7 @@
     } else if (btn.dataset.action==='del') {
       if (!confirm('Delete "'+btn.dataset.title+'"? Cannot be undone.')) return;
       try { await FS.deleteDoc(FS.doc(db,COLL,id)); toast('Article deleted'); await loadPosts(); }
-      catch(ex) { toast(ex.message,false); }
+      catch(ex) { toast(es.message,false); }
     }
   });
   G('searchInput').addEventListener('input', function(e) {
@@ -295,7 +295,7 @@
       if (editingId) { await FS.updateDoc(FS.doc(db,COLL,editingId),data); toast('Article updated'); }
       else { data.createdAt=FS.serverTimestamp(); await FS.addDoc(FS.collection(db,COLL),data); toast('Article published'); }
       closeModal(); await loadPosts();
-    } catch(ex) { err.textContent=ex.message; err.style.display='block'; toast(ex.message,false); }
+    } catch(ex) { err.textContent=ex.message; err.style.display='block'; toast(es.message,false); }
     btn.textContent='Save Article'; btn.disabled=false;
   });
 })();
