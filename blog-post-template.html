@@ -15,7 +15,9 @@
         var oldOnError = window.onerror;
         window.onerror = function (message, source, lineno, colno, error) {
           if (ignoreScriptError(message)) {
-            console.warn("[SalaryCalc] Script error suppressed (window.onerror).");
+            console.warn(
+              "[SalaryCalc] Script error suppressed (window.onerror).",
+            );
             return true;
           }
           if (typeof oldOnError === "function") {
@@ -26,7 +28,9 @@
           "error",
           function (event) {
             if (ignoreScriptError(event.message)) {
-              console.warn("[SalaryCalc] Script error suppressed (addEventListener).");
+              console.warn(
+                "[SalaryCalc] Script error suppressed (addEventListener).",
+              );
               event.stopImmediatePropagation();
               event.preventDefault();
               return true;
@@ -38,7 +42,9 @@
           "unhandledrejection",
           function (event) {
             if (event.reason && ignoreScriptError(event.reason.message)) {
-              console.warn("[SalaryCalc] Script error suppressed (unhandledrejection).");
+              console.warn(
+                "[SalaryCalc] Script error suppressed (unhandledrejection).",
+              );
               event.stopImmediatePropagation();
               event.preventDefault();
               return true;
@@ -61,10 +67,31 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
+    <!-- Optimized Fonts -->
     <link
       rel="preload"
       as="style"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media = 'all'"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
@@ -285,14 +312,36 @@
     </header>
 
     <noscript>
-      <div style="max-width:780px;margin:24px auto;padding:0 20px">
-        <p style="background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:16px;color:#92400e;font-size:14px">
-          This article needs JavaScript enabled to load. In the meantime, try our
-          <a href="/" style="color:#1e3a8a;font-weight:600">Salary Calculator</a>,
-          <a href="/epf-kwsp" style="color:#1e3a8a;font-weight:600">EPF Calculator</a>,
-          <a href="/socso-perkeso" style="color:#1e3a8a;font-weight:600">SOCSO Calculator</a>,
-          <a href="/pcb-income-tax" style="color:#1e3a8a;font-weight:600">PCB Calculator</a>, or
-          <a href="/annual-leave-calculator" style="color:#1e3a8a;font-weight:600">Annual Leave Calculator</a>.
+      <div style="max-width: 780px; margin: 24px auto; padding: 0 20px">
+        <p
+          style="
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 8px;
+            padding: 16px;
+            color: #92400e;
+            font-size: 14px;
+          "
+        >
+          This article needs JavaScript enabled to load. In the meantime, try
+          our
+          <a href="/" style="color: #1e3a8a; font-weight: 600"
+            >Salary Calculator</a
+          >,
+          <a href="/epf-kwsp" style="color: #1e3a8a; font-weight: 600"
+            >EPF Calculator</a
+          >,
+          <a href="/socso-perkeso" style="color: #1e3a8a; font-weight: 600"
+            >SOCSO Calculator</a
+          >,
+          <a href="/pcb-income-tax" style="color: #1e3a8a; font-weight: 600"
+            >PCB Calculator</a
+          >, or
+          <a
+            href="/annual-leave-calculator"
+            style="color: #1e3a8a; font-weight: 600"
+            >Annual Leave Calculator</a
+          >.
         </p>
       </div>
     </noscript>
@@ -330,6 +379,31 @@
           <p style="text-align: center; color: #64748b">
             Please wait while we load the article...
           </p>
+        </div>
+
+        <div
+          id="read-more-container"
+          style="display: none; margin-top: 40px; text-align: center"
+        >
+          <a
+            id="read-more-link"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="
+              display: inline-block;
+              background: #2563eb;
+              color: #fff;
+              padding: 12px 24px;
+              font-weight: 600;
+              border-radius: 8px;
+              text-decoration: none;
+              transition: background 0.15s;
+              box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+            "
+          >
+            Read More
+          </a>
         </div>
       </article>
     </main>
@@ -422,11 +496,17 @@
           if (post) {
             document.title = post.title + " – HR & Salary Blog Malaysia";
             var metaDesc = document.querySelector('meta[name="description"]');
-            if (metaDesc && post.excerpt) metaDesc.setAttribute("content", post.excerpt);
+            if (metaDesc && post.excerpt)
+              metaDesc.setAttribute("content", post.excerpt);
             var canonicalLink = document.querySelector('link[rel="canonical"]');
-            if (canonicalLink) canonicalLink.setAttribute("href", "https://salarycalculator.my/blog/" + slug);
+            if (canonicalLink)
+              canonicalLink.setAttribute(
+                "href",
+                "https://salarycalculator.my/blog/" + slug,
+              );
 
-            document.getElementById("breadcrumb-title").textContent = post.title;
+            document.getElementById("breadcrumb-title").textContent =
+              post.title;
             document.getElementById("article-title").textContent = post.title;
 
             if (post.thumbnail) {
@@ -437,25 +517,43 @@
               }
             }
 
-            document.getElementById("article-category").textContent = post.category || "";
+            document.getElementById("article-category").textContent =
+              post.category || "";
 
             if (post.publishedAt) {
               var dt = new Date(post.publishedAt);
               document.getElementById("article-date").textContent = isNaN(dt)
                 ? post.publishedAt
-                : dt.toLocaleDateString("en-MY", { day: "numeric", month: "long", year: "numeric" });
+                : dt.toLocaleDateString("en-MY", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric",
+                  });
               document.getElementById("meta-sep").style.display = "inline";
             }
 
             if (post.readTime) {
-              document.getElementById("article-read-time").textContent = post.readTime + " min read";
+              document.getElementById("article-read-time").textContent =
+                post.readTime + " min read";
             } else {
               const words = (post.content || "").split(" ").length;
               const readTime = Math.ceil(words / 200);
-              document.getElementById("article-read-time").textContent = readTime + " min read";
+              document.getElementById("article-read-time").textContent =
+                readTime + " min read";
             }
 
-            document.getElementById("article-content").innerHTML = post.content || "";
+            document.getElementById("article-content").innerHTML =
+              post.content || "";
+
+            if (post.readMoreUrl) {
+              const rmLink = document.getElementById("read-more-link");
+              if (rmLink) rmLink.href = post.readMoreUrl;
+              const rmCont = document.getElementById("read-more-container");
+              if (rmCont) rmCont.style.display = "block";
+            } else {
+              const rmCont = document.getElementById("read-more-container");
+              if (rmCont) rmCont.style.display = "none";
+            }
 
             var ld = document.createElement("script");
             ld.type = "application/ld+json";
@@ -466,20 +564,31 @@
               description: post.excerpt || "",
               datePublished: post.publishedAt || "",
               dateModified: post.updatedAt || post.publishedAt || "",
-              author: [{ "@type": "Organization", name: "SalaryCalculator.my Team", url: "https://salarycalculator.my/" }],
-              publisher: { "@type": "Organization", name: "SalaryCalculator.my" },
+              author: [
+                {
+                  "@type": "Organization",
+                  name: "SalaryCalculator.my Team",
+                  url: "https://salarycalculator.my/",
+                },
+              ],
+              publisher: {
+                "@type": "Organization",
+                name: "SalaryCalculator.my",
+              },
               mainEntityOfPage: "https://salarycalculator.my/blog/" + slug,
             });
             document.head.appendChild(ld);
           } else {
             document.title = "Article Not Found – HR & Salary Blog Malaysia";
-            document.getElementById("article-title").textContent = "Article Not Found";
+            document.getElementById("article-title").textContent =
+              "Article Not Found";
             document.getElementById("article-content").innerHTML =
               '<p>The article you are looking for does not exist or may have been removed. Browse the <a href="/blog">full blog</a> instead.</p>';
           }
         } catch (error) {
           console.error("Error loading article:", error);
-          document.getElementById("article-title").textContent = "Error Loading Article";
+          document.getElementById("article-title").textContent =
+            "Error Loading Article";
           document.getElementById("article-content").innerHTML =
             "<p>There was an error loading the article. Please try again later.</p>";
         }
