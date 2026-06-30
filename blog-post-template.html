@@ -4,7 +4,7 @@
     <script>
       (function () {
         var ignoreScriptError = function (msg) {
-          if (!msg) return true; // Treat empty message as something to ignore
+          if (!msg) return true;
           var s = msg.toString().toLowerCase();
           return (
             s.indexOf("script error") > -1 ||
@@ -12,29 +12,21 @@
             s.indexOf("uncaught script error") > -1
           );
         };
-
-        // 1. window.onerror
         var oldOnError = window.onerror;
         window.onerror = function (message, source, lineno, colno, error) {
           if (ignoreScriptError(message)) {
-            console.warn(
-              "[SalaryCalc] Script error suppressed (window.onerror).",
-            );
+            console.warn("[SalaryCalc] Script error suppressed (window.onerror).");
             return true;
           }
           if (typeof oldOnError === "function") {
             return oldOnError.apply(this, arguments);
           }
         };
-
-        // 2. addEventListener('error')
         window.addEventListener(
           "error",
           function (event) {
             if (ignoreScriptError(event.message)) {
-              console.warn(
-                "[SalaryCalc] Script error suppressed (addEventListener).",
-              );
+              console.warn("[SalaryCalc] Script error suppressed (addEventListener).");
               event.stopImmediatePropagation();
               event.preventDefault();
               return true;
@@ -42,15 +34,11 @@
           },
           true,
         );
-
-        // 3. handle unhandledrejection
         window.addEventListener(
           "unhandledrejection",
           function (event) {
             if (event.reason && ignoreScriptError(event.reason.message)) {
-              console.warn(
-                "[SalaryCalc] Script error suppressed (unhandledrejection).",
-              );
+              console.warn("[SalaryCalc] Script error suppressed (unhandledrejection).");
               event.stopImmediatePropagation();
               event.preventDefault();
               return true;
@@ -73,37 +61,6 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
-    <!-- Optimized Fonts -->
     <link
       rel="preload"
       as="style"
@@ -111,186 +68,6 @@
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
-      rel="stylesheet"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap"
       rel="stylesheet"
       media="print"
       onload="this.media = 'all'"
@@ -507,6 +284,19 @@
       </nav>
     </header>
 
+    <noscript>
+      <div style="max-width:780px;margin:24px auto;padding:0 20px">
+        <p style="background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:16px;color:#92400e;font-size:14px">
+          This article needs JavaScript enabled to load. In the meantime, try our
+          <a href="/" style="color:#1e3a8a;font-weight:600">Salary Calculator</a>,
+          <a href="/epf-kwsp" style="color:#1e3a8a;font-weight:600">EPF Calculator</a>,
+          <a href="/socso-perkeso" style="color:#1e3a8a;font-weight:600">SOCSO Calculator</a>,
+          <a href="/pcb-income-tax" style="color:#1e3a8a;font-weight:600">PCB Calculator</a>, or
+          <a href="/annual-leave-calculator" style="color:#1e3a8a;font-weight:600">Annual Leave Calculator</a>.
+        </p>
+      </div>
+    </noscript>
+
     <main class="container" style="padding: 40px 20px">
       <!-- Breadcrumb -->
       <nav class="breadcrumb">
@@ -600,66 +390,96 @@
         .replace(/\/$/, "");
       console.log("Current post slug:", slug);
 
-      const GOOGLE_SHEETS_API_URL =
-        "https://script.google.com/macros/s/AKfycbyTPw8wCwuGBnyilrs76sF30miUCf1WreXe2ETKKzsaUXlECfquGMlw6juC7--XMu3YVg/exec";
-
       async function loadArticle() {
         if (!slug) return;
         try {
-          const response = await fetch(
-            `${GOOGLE_SHEETS_API_URL}?action=getPost&slug=${slug}`,
+          var FB = "https://www.gstatic.com/firebasejs/10.12.0/";
+          var cfg = {
+            apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",
+            authDomain: "gen-lang-client-0273291777.firebaseapp.com",
+            projectId: "gen-lang-client-0273291777",
+          };
+          var DB_ID = "ai-studio-f7c7f3ec-1f6a-45a9-a332-4733fe85d918";
+          var COLL = "blog_posts";
+          var App = await import(FB + "firebase-app.js");
+          var FS = await import(FB + "firebase-firestore.js");
+          var app = App.initializeApp(cfg);
+          var db = FS.getFirestore(app, DB_ID);
+
+          var q = FS.query(
+            FS.collection(db, COLL),
+            FS.where("slug", "==", slug),
+            FS.where("status", "==", "published"),
+            FS.limit(1),
           );
-          const data = await response.json();
-          console.log("Loaded article:", data);
+          var snap = await FS.getDocs(q);
+          var post = null;
+          if (!snap.empty) {
+            var d = snap.docs[0];
+            post = Object.assign({ id: d.id }, d.data());
+          }
 
-          if (data && data.post) {
-            document.title = data.post.title + " – HR & Salary Blog Malaysia";
-            document.getElementById("breadcrumb-title").textContent =
-              data.post.title;
-            document.getElementById("article-title").textContent =
-              data.post.title;
+          if (post) {
+            document.title = post.title + " – HR & Salary Blog Malaysia";
+            var metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc && post.excerpt) metaDesc.setAttribute("content", post.excerpt);
+            var canonicalLink = document.querySelector('link[rel="canonical"]');
+            if (canonicalLink) canonicalLink.setAttribute("href", "https://salarycalculator.my/blog/" + slug);
 
-            if (data.post.thumbnail) {
+            document.getElementById("breadcrumb-title").textContent = post.title;
+            document.getElementById("article-title").textContent = post.title;
+
+            if (post.thumbnail) {
               const heroDiv = document.querySelector(".article-hero");
               if (heroDiv) {
-                heroDiv.innerHTML = `<img src="${data.post.thumbnail}" alt="${data.post.title}" />`;
+                heroDiv.innerHTML = `<img src="${post.thumbnail}" alt="${post.title}" />`;
                 heroDiv.style.background = "transparent";
               }
             }
 
-            document.getElementById("article-category").textContent =
-              data.post.category || "";
+            document.getElementById("article-category").textContent = post.category || "";
 
-            if (data.post.date) {
-              document.getElementById("article-date").textContent = new Date(
-                data.post.date,
-              ).toLocaleDateString();
+            if (post.publishedAt) {
+              var dt = new Date(post.publishedAt);
+              document.getElementById("article-date").textContent = isNaN(dt)
+                ? post.publishedAt
+                : dt.toLocaleDateString("en-MY", { day: "numeric", month: "long", year: "numeric" });
               document.getElementById("meta-sep").style.display = "inline";
             }
 
-            if (data.post.readTime) {
-              document.getElementById("article-read-time").textContent =
-                data.post.readTime + " min read";
+            if (post.readTime) {
+              document.getElementById("article-read-time").textContent = post.readTime + " min read";
             } else {
-              // Calculate read time roughly
-              const words = (data.post.content || "").split(" ").length;
-              const readTime = Math.ceil(words / 200); // 200 words per minute
-              document.getElementById("article-read-time").textContent =
-                readTime + " min read";
+              const words = (post.content || "").split(" ").length;
+              const readTime = Math.ceil(words / 200);
+              document.getElementById("article-read-time").textContent = readTime + " min read";
             }
 
-            document.getElementById("article-content").innerHTML =
-              data.post.content || "";
+            document.getElementById("article-content").innerHTML = post.content || "";
+
+            var ld = document.createElement("script");
+            ld.type = "application/ld+json";
+            ld.text = JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline: post.title,
+              description: post.excerpt || "",
+              datePublished: post.publishedAt || "",
+              dateModified: post.updatedAt || post.publishedAt || "",
+              author: [{ "@type": "Organization", name: "SalaryCalculator.my Team", url: "https://salarycalculator.my/" }],
+              publisher: { "@type": "Organization", name: "SalaryCalculator.my" },
+              mainEntityOfPage: "https://salarycalculator.my/blog/" + slug,
+            });
+            document.head.appendChild(ld);
           } else {
-            document.getElementById("article-title").textContent =
-              "Article Not Found";
+            document.title = "Article Not Found – HR & Salary Blog Malaysia";
+            document.getElementById("article-title").textContent = "Article Not Found";
             document.getElementById("article-content").innerHTML =
-              "<p>The article you are looking for does not exist.</p>";
+              '<p>The article you are looking for does not exist or may have been removed. Browse the <a href="/blog">full blog</a> instead.</p>';
           }
         } catch (error) {
           console.error("Error loading article:", error);
-          document.getElementById("article-title").textContent =
-            "Error Loading Article";
+          document.getElementById("article-title").textContent = "Error Loading Article";
           document.getElementById("article-content").innerHTML =
             "<p>There was an error loading the article. Please try again later.</p>";
         }
