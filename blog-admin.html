@@ -382,7 +382,8 @@
         background: #fff;
         border-radius: 16px;
         width: 100%;
-        max-width: 680px;
+        max-width: 1100px;
+        height: 90vh;
         max-height: 90vh;
         display: flex;
         flex-direction: column;
@@ -535,7 +536,7 @@
         font-size: 13px;
       }
       .ql-editor {
-        min-height: 250px;
+        min-height: 400px;
       }
       /* Table styles in editor */
       .ql-editor table {
@@ -738,14 +739,6 @@
               </select>
             </div>
           </div>
-          <div class="form-field">
-            <label>Excerpt</label
-            ><textarea
-              id="fExcerpt"
-              rows="2"
-              placeholder="Short summary, 150-160 characters..."
-            ></textarea>
-          </div>
           <div class="form-row">
             <div class="form-field">
               <label>Featured Image URL</label
@@ -762,13 +755,23 @@
               />
             </div>
           </div>
-          <div class="form-field">
-            <label>Meta Description (SEO)</label
-            ><input
-              id="fMetaDesc"
-              type="text"
-              placeholder="150-160 chars for search engines..."
-            />
+          <div class="form-row">
+            <div class="form-field">
+              <label>Excerpt</label
+              ><textarea
+                id="fExcerpt"
+                rows="2"
+                placeholder="Short summary..."
+              ></textarea>
+            </div>
+            <div class="form-field">
+              <label>Meta Description (SEO)</label
+              ><textarea
+                id="fMetaDesc"
+                rows="2"
+                placeholder="150-160 chars for search engines..."
+              ></textarea>
+            </div>
           </div>
           <div class="form-row">
             <div class="form-field">
