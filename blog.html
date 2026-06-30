@@ -127,12 +127,13 @@
 </div>
 <div class="tabs-wrap">
   <div class="tabs" id="categoryTabs">
-    <a class="tab active" data-cat="" href="#">All Articles</a>
-    <a class="tab" data-cat="EPF" href="#">EPF</a>
-    <a class="tab" data-cat="PCB" href="#">PCB</a>
-    <a class="tab" data-cat="SOCSO" href="#">SOCSO</a>
-    <a class="tab" data-cat="Employment Law" href="#">Employment Law</a>
-    <a class="tab" data-cat="Salary Tips" href="#">Salary Tips</a>
+    <a class="tab active" href="/blog">All Articles</a>
+    <a class="tab" href="/blog/salary">Salary</a>
+    <a class="tab" href="/blog/epf">EPF</a>
+    <a class="tab" href="/blog/socso">SOCSO</a>
+    <a class="tab" href="/blog/perkeso">PERKESO</a>
+    <a class="tab" href="/blog/pcb-income-tax">PCB / Income Tax</a>
+    <a class="tab" href="/blog/annual-leave">Annual Leave</a>
   </div>
 </div>
 <main class="blog-main">
@@ -225,15 +226,6 @@
       }
     }
   }
-  document.getElementById('categoryTabs').addEventListener('click',function(e){
-    var t=e.target.closest('.tab');
-    if(!t) return;
-    e.preventDefault();
-    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
-    t.classList.add('active');
-    activeCategory=t.dataset.cat;
-    filterAndRender();
-  });
   var navToggle=document.getElementById('navToggle'),navLinks=document.getElementById('navLinks');
   navToggle.addEventListener('click',function(){
     var open=navLinks.classList.toggle('open');
