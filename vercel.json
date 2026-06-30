@@ -27,6 +27,12 @@
     { "source": "/pcb-calculator",         "destination": "/pcb-income-tax.html" },
     { "source": "/blog",                   "destination": "/blog.html" },
     { "source": "/annual-leave-calculator","destination": "/annual-leave-calculator.html" },
+    { "source": "/blog/salary",            "destination": "/blog/salary.html" },
+    { "source": "/blog/epf",               "destination": "/blog/epf.html" },
+    { "source": "/blog/socso",             "destination": "/blog/socso.html" },
+    { "source": "/blog/perkeso",           "destination": "/blog/perkeso.html" },
+    { "source": "/blog/pcb-income-tax",    "destination": "/blog/pcb-income-tax.html" },
+    { "source": "/blog/annual-leave",      "destination": "/blog/annual-leave.html" },
     { "source": "/blog/epf-contribution-rates-2026", "destination": "/blog/epf-contribution-rates-2026.html" },
     { "source": "/blog/:slug",             "destination": "/blog-post-template.html" },
     { "source": "/:slug((?!.*\\.html$|blog$|epf-kwsp$|socso-perkeso$|pcb-income-tax$|annual-leave-calculator$|privacy-policy$|admin$|blog-admin$|mincal$|payslip-generator$|report$)[^/]+)", "destination": "/blog-post-template.html" }
