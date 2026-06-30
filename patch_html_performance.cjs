@@ -18,26 +18,6 @@ function optimizeHtmlFile(filePath) {
   console.log(`Optimizing file: ${filePath}`);
   let html = fs.readFileSync(filePath, 'utf8');
 
-  // 1. Optimize Google Fonts to non-render-blocking
-  const originalFontsPattern = /<link\s+href="https:\/\/fonts\.googleapis\.com\/css2\?family=Inter:wght@400;500;600;700&display=swap"\s+rel="stylesheet"\s*\/?>/gi;
-  const optimizedFonts = `<!-- Asynchronously loaded Google Fonts to prevent render-blocking -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />`;
-  html = html.replace(originalFontsPattern, optimizedFonts);
-
-  // Alternative font pattern matching for possible single-quoted or variations
-  html = html.replace(/<link[^>]*fonts\.googleapis\.com\/css2[^>]*>/gi, (match) => {
-    if (match.includes('media="print"')) return match; // already optimized
-    return `<!-- Optimized Fonts -->
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />`;
-  });
-
-  // 2. Optimize calculator-styles.css to non-render-blocking
-  html = html.replace(/<link\s+rel="stylesheet"\s+href="\/calculator-styles\.css"\s*\/?>/gi, `<!-- Optimized CSS loading to prevent render-blocking -->
-    <link rel="preload" href="/calculator-styles.css" as="style" />
-    <link rel="stylesheet" href="/calculator-styles.css" media="print" onload="this.media='all'" />`);
-
   // 3. Defer GTM/gtag.js to prevent early execution and thread blocks
   // Find and replace the typical inline script block for GTM
   const gtmMatchPattern = /<!-- Google tag \(gtag\.js\) -->[\s\S]*?<script[^>]*src="https:\/\/www\.googletagmanager\.com[\s\S]*?<\/script>\s*<script>[\s\S]*?<\/script>/gi;
