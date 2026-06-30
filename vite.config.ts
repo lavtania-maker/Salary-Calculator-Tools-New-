@@ -24,7 +24,6 @@ export default defineConfig(({ mode }) => {
         input: {
           main: path.resolve(__dirname, "index.html"),
           admin: path.resolve(__dirname, "admin.html"),
-          blogAdmin: path.resolve(__dirname, "blog-admin.html"),
           mincal: path.resolve(__dirname, "mincal.html"),
           payslip: path.resolve(__dirname, "payslip.html"),
           report: path.resolve(__dirname, "report.html"),
@@ -35,8 +34,9 @@ export default defineConfig(({ mode }) => {
           pcbCalculator: path.resolve(__dirname, "pcb-income-tax.html"),
           annualLeave: path.resolve(__dirname, "annual-leave-calculator.html"),
           socsoPerkeso: path.resolve(__dirname, "socso-perkeso.html"),
-          blog: path.resolve(__dirname, "blog.html"),
           blogPostTemplate: path.resolve(__dirname, "blog-post-template.html"),
+          blog: path.resolve(__dirname, "blog.html"),
+          blogAdmin: path.resolve(__dirname, "blog-admin.html"),
         },
       },
     },

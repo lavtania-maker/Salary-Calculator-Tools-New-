@@ -1,3 +1,4 @@
+<!-- Modified for Table Module and Paste Support -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -536,6 +537,21 @@
       .ql-editor {
         min-height: 250px;
       }
+      /* Table styles in editor */
+      .ql-editor table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-bottom: 1rem;
+      }
+      .ql-editor td, .ql-editor th {
+        border: 1px solid #cbd5e1 !important;
+        padding: 8px 12px !important;
+        min-width: 20px;
+      }
+      /* quill-table-better overrides */
+      .ql-table-better-container {
+        margin: 10px 0;
+      }
       @media (max-width: 640px) {
         .form-row {
           grid-template-columns: 1fr;
@@ -552,6 +568,7 @@
       href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css"
       rel="stylesheet"
     />
+    <link href="https://cdn.jsdelivr.net/npm/quill-table-better@1.1.2/dist/quill-table-better.css" rel="stylesheet" />
   
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -783,21 +800,41 @@
       </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quill-table-better@1.1.2/dist/quill-table-better.js"></script>
     <script>
       (async function () {
+        // Register Table module
+        Quill.register({
+          "modules/table-better": QuillTableBetter
+        }, true);
+
         var quill = new Quill("#editor-container", {
           theme: "snow",
           modules: {
-            table: true,
+            table: false, // Disable native table
+            "table-better": {
+              toolbarTable: true,
+            },
             toolbar: [
               [{ header: [2, 3, false] }],
               ["bold", "italic", "underline"],
               [{ list: "ordered" }, { list: "bullet" }],
-              ["link", "image", "video"],
+              ["link", "image", "video", "table-better"],
               ["clean"],
             ],
           },
           placeholder: "Write your content here...",
+        });
+
+        // Custom matcher to help preserve table structure on paste
+        quill.clipboard.addMatcher('TABLE', (node, delta) => {
+          return delta;
+        });
+        quill.clipboard.addMatcher('TR', (node, delta) => {
+          return delta;
+        });
+        quill.clipboard.addMatcher('TD', (node, delta) => {
+          return delta;
         });
 
         var FB = "https://www.gstatic.com/firebasejs/10.12.0/";

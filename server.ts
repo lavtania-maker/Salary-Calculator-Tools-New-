@@ -429,10 +429,10 @@ async function startServer() {
     app.get("*all", (req, res) => {
       // If none of the static files matched, check if it's a blog post
       if (req.path.startsWith('/blog/')) {
-        return res.sendFile(path.join(distPath, blog-post-template.html));
+        return res.sendFile(path.join(distPath, "blog-post-template.html"));
       }
       // fallback to index.html
-      res.sendFile(path.join(distPath, index.html));
+      res.sendFile(path.join(distPath, "index.html"));
     });
   }
 
