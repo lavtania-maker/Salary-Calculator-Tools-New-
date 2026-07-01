@@ -20,7 +20,7 @@
         color: #1a1d23;
         min-height: 100vh;
         font-size: 14px;
-        line-height: 1.5;
+        line-height: 1.6;
       }
       #loginWrap {
         min-height: 100vh;
@@ -381,13 +381,14 @@
       .modal {
         background: #fff;
         border-radius: 16px;
-        width: 100%;
-        max-width: 1100px;
+        width: 90%;
+        max-width: 900px;
         height: 90vh;
         max-height: 90vh;
         display: flex;
         flex-direction: column;
         box-shadow: 0 25px 80px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
       }
       .modal-head {
         display: flex;
@@ -419,6 +420,7 @@
         display: flex;
         flex-direction: column;
         gap: 16px;
+        min-height: 0;
       }
       .form-row {
         display: grid;
@@ -536,7 +538,7 @@
         font-size: 13px;
       }
       .ql-editor {
-        min-height: 400px;
+        min-height: 350px;
       }
       /* Table styles in editor */
       .ql-editor table {
@@ -589,7 +591,7 @@
 </head>
   <body>
     <noscript>
-      <div style="background:#fef2f2;border-bottom:1px solid #fecaca;padding:12px 20px;text-align:center;font-family:inherit;font-size:0.9rem;color:#dc2626;font-weight:600;">
+      <div style="background:#fef2f2;border-bottom:1px solid #fecaca;padding:12px 20px;text-align:center;font-family:inherit;font-size: 15px;color:#dc2626;font-weight:600;">
         JavaScript is required to use the blog admin dashboard. Please enable JavaScript in your browser settings.
       </div>
     </noscript>
@@ -786,7 +788,7 @@
             </div>
           </div>
           <div class="form-field">
-            <label>Read More URL (Optional)</label
+            <label>Read More URL <span class="helper-text">(Optional)</span></label
             ><input id="fReadMore" type="url" placeholder="https://..." />
           </div>
           <div class="form-field">

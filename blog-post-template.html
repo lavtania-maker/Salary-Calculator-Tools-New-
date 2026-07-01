@@ -178,7 +178,7 @@
         width: 100%;
         border-collapse: collapse;
         margin: 24px 0;
-        font-size: 0.9rem;
+        font-size: 15px;
         border: 1px solid #e2e8f0;
         display: block;
         overflow-x: auto;
@@ -220,6 +220,50 @@
         height: 100%;
         object-fit: cover;
         border-radius: 12px;
+      }
+      .toc-box {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 24px;
+        margin: 0 0 32px 0;
+      }
+      .toc-box h3 {
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        color: #0f172a !important;
+        margin: 0 0 16px 0 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .toc-box ul {
+        list-style: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .toc-box li {
+        margin-bottom: 12px !important;
+        display: flex;
+        gap: 8px;
+        line-height: 1.5;
+      }
+      .toc-box li::before {
+        content: "•";
+        color: #94a3b8;
+        font-weight: bold;
+      }
+      .toc-box li:last-child {
+        margin-bottom: 0 !important;
+      }
+      .toc-box a {
+        color: #3b82f6;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.15s;
+      }
+      .toc-box a:hover {
+        color: #1d4ed8;
+        text-decoration: underline;
       }
     </style>
   
@@ -377,8 +421,13 @@
 
         <div class="article-hero"></div>
 
+        <div id="article-toc" class="toc-box" style="display: none;">
+          <h3>Table of Contents</h3>
+          <ul id="toc-list"></ul>
+        </div>
+
         <div id="article-content" class="article-body">
-          <p style="text-align: center; color: #64748b">
+          <p style=" color: #64748b">
             Please wait while we load the article...
           </p>
         </div>
@@ -434,7 +483,7 @@
                 "
               />
             </a>
-            <p style="color: #94a3b8; font-size: 0.9375rem; line-height: 1.6">
+            <p style="color: #94a3b8; font-size: 15px; line-height: 1.6">
               Accurate Malaysia salary calculator.<br />
               Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
             </p>
@@ -560,6 +609,35 @@
 
             document.getElementById("article-content").innerHTML =
               post.content || "";
+
+            // Generate Table of Contents
+            const articleContent = document.getElementById("article-content");
+            const headings = articleContent.querySelectorAll("h2");
+            const tocContainer = document.getElementById("article-toc");
+            const tocList = document.getElementById("toc-list");
+            
+            if (headings.length >= 2) {
+              tocList.innerHTML = "";
+              headings.forEach((heading, index) => {
+                // Ensure heading has an ID
+                if (!heading.id) {
+                  heading.id = "heading-" + index;
+                }
+                const li = document.createElement("li");
+                const a = document.createElement("a");
+                a.href = "#" + heading.id;
+                a.textContent = heading.textContent;
+                a.addEventListener("click", function (e) {
+                  e.preventDefault();
+                  heading.scrollIntoView({ behavior: "smooth" });
+                });
+                li.appendChild(a);
+                tocList.appendChild(li);
+              });
+              tocContainer.style.display = "block";
+            } else {
+              tocContainer.style.display = "none";
+            }
 
             if (post.readMoreUrl) {
               const rmLink = document.getElementById("read-more-link");

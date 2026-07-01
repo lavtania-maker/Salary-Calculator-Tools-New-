@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx server.ts",
-    "build": "node optimize_images.cjs && mv blog-admin.html blog-admin.html.bak && mv blog.html blog.html.bak && node patch_html_performance.cjs && mv blog-admin.html.bak blog-admin.html && mv blog.html.bak blog.html && vite build && cp blog-admin.html dist/ && cp blog.html dist/ && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
+    "build": "node optimize_images.cjs && vite build && cp blog-admin.html dist/ && cp blog.html dist/ && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
     "start": "node dist/server.cjs",
     "preview": "vite preview",
     "clean": "rm -rf dist",

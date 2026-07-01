@@ -15,8 +15,9 @@ body {
   --border-input: #cbd5e1;
   --success: #059669;
   --danger: #dc2626;
-  --shadow-soft: 0 1px 3px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.03);
-  --shadow-hover: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+  --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.03);
+  --shadow-hover:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 }
 
 /* Reset & Base Styles */
@@ -173,7 +174,7 @@ ul {
   font-weight: 500;
   color: var(--text-muted);
   transition: color 0.1s;
-  font-size: 0.85rem;
+  font-size: 15px;
 }
 .nav-link:hover {
   color: var(--primary);
@@ -505,7 +506,7 @@ h2 {
 .contribution-table th {
   background: #ffffff;
   padding: 16px 20px;
-  font-size: 0.85rem;
+  font-size: 15px;
   font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
@@ -698,7 +699,7 @@ h2 {
 }
 .breakdown-rate,
 .seo-tag {
-  font-size: 0.85rem;
+  font-size: 15px;
   color: var(--primary);
   background: #dbeafe;
   padding: 4px 10px;
@@ -737,7 +738,7 @@ h2 {
   padding-left: 24px;
   font-size: 1rem;
   color: #475569;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 .seo-list li::before {
   content: "•";
@@ -947,7 +948,7 @@ h2 {
   display: inline-block;
   padding: 2px 10px;
   border-radius: 9999px;
-  font-size: 0.7rem;
+  font-size: 14px;
   font-weight: 700;
   margin-bottom: 10px;
   width: fit-content;
@@ -985,7 +986,7 @@ h2 {
 }
 
 .blog-desc {
-  font-size: 0.875rem;
+  font-size: 15px;
   color: #64748b;
   margin-bottom: 16px;
   line-height: 1.6;
@@ -1000,14 +1001,14 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.8rem;
+  font-size: 15px;
   color: #94a3b8;
 }
 
 .read-more-link {
   color: #2563eb;
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 15px;
 }
 
 /* Featured Post */
@@ -1040,7 +1041,7 @@ h2 {
   background: white;
   border: 1px solid #f1f5f9;
   border-radius: 8px;
-  font-size: 0.85rem;
+  font-size: 15px;
   font-weight: 500;
   color: #64748b;
   cursor: pointer;
@@ -1064,7 +1065,7 @@ h2 {
   align-items: center;
   gap: 8px;
   margin-bottom: 24px;
-  font-size: 0.85rem;
+  font-size: 15px;
   color: #94a3b8;
 }
 
@@ -1086,7 +1087,7 @@ h2 {
   align-items: center;
   gap: 16px;
   margin-bottom: 16px;
-  font-size: 0.85rem;
+  font-size: 15px;
   color: #94a3b8;
 }
 
@@ -1109,7 +1110,7 @@ h2 {
 
 .article-body {
   font-size: 1.125rem;
-  line-height: 1.8;
+  line-height: 1.6;
   color: #334155;
   max-width: 720px;
   margin: 0 auto;
@@ -1149,7 +1150,7 @@ h2 {
   text-align: center;
   padding-top: 24px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 0.85rem;
+  font-size: 15px;
   color: #64748b;
 }
 
@@ -1173,7 +1174,7 @@ h2 {
 
 .toggle-indicator {
   margin-left: auto;
-  font-size: 0.85rem;
+  font-size: 15px;
   color: var(--primary);
   width: 24px;
   height: 24px;
@@ -1242,7 +1243,7 @@ h2 {
 .bar-legend {
   display: flex;
   justify-content: space-between;
-  font-size: 0.85rem;
+  font-size: 15px;
   color: var(--text-muted);
   font-weight: 500;
   margin-bottom: 8px;
@@ -1272,7 +1273,7 @@ h2 {
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 0.9rem;
+  font-size: 15px;
   font-weight: 600;
   color: #059669;
   background: #ecfdf5;
@@ -1340,7 +1341,7 @@ h2 {
   color: #64748b;
   margin-bottom: 24px;
   font-size: 0.95rem;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 #modalFeedback {
@@ -1451,7 +1452,7 @@ details[open] .faq-title::after {
 .faq-content {
   padding: 0 20px 20px 20px;
   color: #475569;
-  line-height: 1.7;
+  line-height: 1.6;
 }
 
 .form-actions {
@@ -1507,7 +1508,7 @@ details[open] .faq-title::after {
 }
 
 .take-home-card .label {
-  font-size: 0.9rem;
+  font-size: 15px;
   font-weight: 800;
   color: #1e3a8a;
   margin-bottom: 4px;
@@ -1627,15 +1628,15 @@ details[open] .faq-title::after {
 .content-section .seo-title,
 .content-card h2,
 .seo-card h2 {
-  font-size: 1.2rem !important;
+  font-size: 1.5rem !important;
   font-weight: 700 !important;
   color: #0f172a !important;
   margin-top: 0 !important;
-  margin-bottom: 6px !important;
+  margin-bottom: 12px !important;
   letter-spacing: -0.01em !important;
   display: flex !important;
   align-items: center !important;
-  gap: 0 !important;
+  gap: 8px !important;
 }
 
 /* Remove all emoji icons from headings */
@@ -1651,9 +1652,9 @@ details[open] .faq-title::after {
 .content-section .seo-subtitle,
 .content-card .seo-subtitle,
 .seo-card .seo-subtitle {
-  font-size: 0.9rem !important;
+  font-size: 15px !important;
   color: #64748b !important;
-  margin-bottom: 20px !important;
+  margin-bottom: 24px !important;
   line-height: 1.6 !important;
 }
 
@@ -1664,9 +1665,10 @@ details[open] .faq-title::after {
 .seo-card p,
 .content-card li,
 .seo-card li {
-  font-size: 0.9rem !important;
-  line-height: 1.7 !important;
+  font-size: 16px !important;
+  line-height: 1.6 !important;
   color: #374151 !important;
+  text-align: left !important;
 }
 
 /* 3. TABLES inside cards (Requirement 4) */
@@ -1689,7 +1691,7 @@ details[open] .faq-title::after {
   width: 100% !important;
   border-collapse: collapse !important;
   border-spacing: 0 !important;
-  font-size: 0.9rem !important;
+  font-size: 15px !important;
   border: none !important;
 }
 
@@ -1698,7 +1700,7 @@ details[open] .faq-title::after {
 .content-section .styled-table th,
 .content-section .contribution-table th {
   background-color: #ffffff !important;
-  font-size: 0.78rem !important;
+  font-size: 14px !important;
   text-transform: uppercase !important;
   color: #475569 !important;
   letter-spacing: 0.04em !important;
@@ -1714,7 +1716,7 @@ details[open] .faq-title::after {
 .content-section .contribution-table td {
   padding: 12px 16px !important;
   border-bottom: 1px solid #e2e8f0 !important;
-  font-size: 0.9rem !important;
+  font-size: 15px !important;
   color: #374151 !important;
 }
 
@@ -1751,8 +1753,8 @@ div[style*="grid-template-columns"] > .content-card,
 div[style*="display: grid"] > .content-card h2,
 div[style*="display:grid"] > .content-card h2,
 div[style*="grid-template-columns"] > .content-card h2 {
-  font-size: 1.1rem !important;
-  margin-bottom: 12px !important;
+  font-size: 1.25rem !important;
+  margin-bottom: 16px !important;
 }
 
 /* Support other highlighted/info boxes */
@@ -1766,7 +1768,7 @@ div[style*="grid-template-columns"] > .content-card h2 {
   padding: 20px !important;
   border: 1px solid #f1f5f9 !important;
   background: #ffffff !important;
-  font-size: 0.9rem !important;
+  font-size: 15px !important;
   box-shadow: none !important;
   margin-top: 16px !important;
   margin-bottom: 20px !important;
@@ -1777,7 +1779,7 @@ div[style*="grid-template-columns"] > .content-card h2 {
 .content-section .example-box h3,
 .content-section .info-highlight h3,
 .content-section .seo-highlight-title {
-  font-size: 0.9rem !important;
+  font-size: 15px !important;
   font-weight: 700 !important;
   color: #0f172a !important;
   margin-bottom: 8px !important;
@@ -1812,9 +1814,10 @@ body {
 
 /* TASK 2 TYPOGRAPHY */
 .content-section {
-  font-size: 0.925rem;
-  line-height: 1.75;
+  font-size: 16px;
+  line-height: 1.6;
   color: #374151;
+  text-align: left;
 }
 
 .content-section h2,
@@ -1841,10 +1844,11 @@ body {
 .content-section h3 + div > p,
 .content-card h2 + p,
 .seo-card h2 + p {
-  font-size: 0.9rem;
+  font-size: 16px;
   color: #64748b;
   margin-bottom: 20px;
   line-height: 1.6;
+  text-align: left;
 }
 
 /* SPACING */
@@ -1883,7 +1887,7 @@ section.content-section > .container > .seo-card {
 .content-section th,
 .content-section thead td {
   background: #ffffff;
-  font-size: 0.78rem;
+  font-size: 14px;
   text-transform: uppercase;
   color: #475569;
   padding: 12px 16px;
@@ -1891,7 +1895,7 @@ section.content-section > .container > .seo-card {
 .content-section tbody td {
   padding: 12px 16px;
   border-top: 1px solid #f1f5f9;
-  font-size: 0.9rem;
+  font-size: 15px;
 }
 .content-section tbody tr:hover td {
   background: #ffffff;
@@ -1900,8 +1904,8 @@ section.content-section > .container > .seo-card {
 /* LISTS */
 .content-section ul,
 .content-section ol {
-  font-size: 0.9rem;
-  line-height: 1.8;
+  font-size: 15px;
+  line-height: 1.6;
   color: #374151;
   padding-left: 20px;
 }
@@ -1915,7 +1919,7 @@ section.content-section > .container > .seo-card {
   border-left: 2px solid #3b82f6;
   padding: 12px 16px;
   border-radius: 0 8px 8px 0;
-  font-size: 0.85rem;
+  font-size: 15px;
   color: #475569;
   margin-bottom: 16px;
 }
@@ -1929,14 +1933,14 @@ section.content-section > .container > .seo-card {
   margin-bottom: 8px;
 }
 .faq-container details summary {
-  font-size: 0.9rem;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
   outline: none;
 }
 .faq-container details p,
 .faq-container details div {
-  font-size: 0.875rem;
+  font-size: 15px;
   color: #64748b;
   margin-top: 8px;
   line-height: 1.6;
@@ -1968,6 +1972,12 @@ body {
   font-size: 16px !important;
   line-height: 1.6 !important;
   background-color: #f8fafc !important;
+}
+
+p,
+li,
+.body-text {
+  text-align: left;
 }
 
 /* Headings */
@@ -2167,5 +2177,184 @@ select {
 
   .footer-grid {
     gap: 32px !important;
+  }
+}
+
+/* READABILITY IMPROVEMENTS */
+
+/* Form Field Labels */
+.form-label {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+}
+
+/* Helper Text */
+.helper-text,
+.form-label span {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: #64748b !important;
+}
+
+/* Table Headers */
+.seo-table th,
+.styled-table th,
+.contribution-table th {
+  padding: 16px 24px !important;
+  font-size: 14px !important;
+}
+
+/* Table Body Text */
+.seo-table td,
+.styled-table td,
+.contribution-table td {
+  padding: 16px 24px !important;
+  font-size: 15px !important;
+}
+
+/* Section Spacing */
+.card,
+.content-card,
+.seo-card {
+  margin-bottom: 40px !important;
+}
+
+.main-layout {
+  gap: 40px !important;
+}
+
+section,
+.blog-section {
+  padding: 48px 0 !important;
+}
+
+/* Catch-all for any other tables */
+th {
+  font-size: 14px !important;
+  padding: 16px 24px !important;
+}
+
+td {
+  font-size: 15px !important;
+  padding: 16px 24px !important;
+}
+
+/* ========================================================= */
+/* TYPOGRAPHY HIERARCHY FIX                                  */
+/* ========================================================= */
+
+/* H2 section headings */
+h2,
+.section-title,
+.content-section h2,
+.content-card h2,
+.seo-card h2,
+.card h2,
+.result-card h2 {
+  font-size: 22px !important;
+  font-weight: 700 !important; /* Bold */
+  line-height: 1.4 !important;
+}
+
+/* H3 sub-headings */
+h3,
+.content-section h3,
+.content-card h3,
+.seo-card h3 {
+  font-size: 17px !important;
+  font-weight: 700 !important; /* Bold */
+  line-height: 1.4 !important;
+}
+
+/* Body / paragraph text */
+.content-section p,
+.content-card p,
+.seo-card p,
+.article-body p,
+.seo-container p {
+  font-size: 15px !important;
+  font-weight: 400 !important; /* Regular */
+  line-height: 1.6 !important;
+}
+
+/* Bullet point list items */
+.content-section li,
+.content-card li,
+.seo-card li,
+.seo-list li,
+.article-body li,
+.toc-box li {
+  font-size: 15px !important;
+  font-weight: 400 !important; /* Regular */
+  line-height: 1.6 !important;
+}
+
+/* Small descriptive lines under section headings */
+/* E.g. "A precise breakdown of which salary components..." */
+.content-section h2 + p,
+.content-card h2 + p,
+.seo-card h2 + p,
+.content-section h2 + div > p,
+.section-desc,
+.subtitle {
+  font-size: 14px !important;
+  color: #64748b !important; /* Lighter grey */
+  font-weight: 400 !important;
+}
+
+/* Ensure mobile subtitle is nicely scaled */
+@media (max-width: 768px) {
+  h2,
+  .section-title,
+  .content-section h2,
+  .content-card h2,
+  .seo-card h2,
+  .card h2,
+  .result-card h2 {
+    font-size: 20px !important;
+  }
+  h3,
+  .content-section h3,
+  .content-card h3,
+  .seo-card h3 {
+    font-size: 16px !important;
+  }
+  .content-section p,
+  .content-card p,
+  .seo-card p,
+  .article-body p,
+  .seo-container p,
+  .content-section li,
+  .content-card li,
+  .seo-card li,
+  .seo-list li,
+  .article-body li,
+  .toc-box li {
+    font-size: 14px !important;
+  }
+  .content-section h2 + p,
+  .content-card h2 + p,
+  .seo-card h2 + p,
+  .content-section h2 + div > p,
+  .section-desc,
+  .subtitle {
+    font-size: 13px !important;
+  }
+}
+
+/* ========================================================= */
+/* ALIGN "OTHER CALCULATORS" SECTION                         */
+/* ========================================================= */
+
+.other-calculators-section .container {
+  max-width: 1100px !important;
+  padding-left: calc(20px + 32px) !important;
+  padding-right: calc(20px + 32px) !important;
+}
+
+@media (max-width: 768px) {
+  .other-calculators-section .container {
+    padding-left: calc(16px + 20px) !important;
+    padding-right: calc(16px + 20px) !important;
   }
 }
