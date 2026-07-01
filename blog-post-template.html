@@ -198,6 +198,28 @@
         font-weight: 500;
         margin: 0;
       }
+      /* Loading Skeleton */
+      .skeleton {
+        background: #f1f5f9;
+        background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+        background-size: 200% 100%;
+        animation: skeleton-loading 1.5s infinite;
+        border-radius: 4px;
+      }
+      @keyframes skeleton-loading {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+      #loading-skeleton {
+        max-width: 780px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+      .skeleton-title { height: 48px; width: 80%; margin: 20px auto; }
+      .skeleton-meta { height: 20px; width: 40%; margin: 0 auto 20px; }
+      .skeleton-line { height: 16px; width: 100%; margin-bottom: 12px; }
+      .skeleton-line.short { width: 60%; }
+
       .article-body h2 {
         font-size: 1.5rem;
         font-weight: 700;
@@ -257,23 +279,6 @@
       }
       .article-body strong {
         color: #0f172a;
-      }
-      .article-hero {
-        width: 100%;
-        height: 280px;
-        background: linear-gradient(135deg, #1d4ed8, #3b82f6);
-        border-radius: 12px;
-        margin: 24px 0 36px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-      }
-      .article-hero img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 12px;
       }
       .toc-box {
         background: #f8fafc;
@@ -456,7 +461,7 @@
         <span id="breadcrumb-title">Loading...</span>
       </nav>
 
-      <article>
+      <article id="article-main" style="display: none">
         <header class="article-header">
           <div class="article-meta">
             <span id="article-category"></span>
@@ -465,24 +470,18 @@
             <span class="bullet" id="bullet-2" style="display: none">•</span>
             <span id="article-date"></span>
           </div>
-          <h1 id="article-title" class="article-title">Loading Article...</h1>
+          <h1 id="article-title" class="article-title"></h1>
           <p class="article-author">
             By SalaryCalculator.my Team
           </p>
         </header>
-
-        <div class="article-hero"></div>
 
         <div id="article-toc" class="toc-box" style="display: none;">
           <h3>Table of Contents</h3>
           <ul id="toc-list"></ul>
         </div>
 
-        <div id="article-content" class="article-body">
-          <p style=" color: #64748b">
-            Please wait while we load the article...
-          </p>
-        </div>
+        <div id="article-content" class="article-body"></div>
 
         <div
           id="read-more-container"
@@ -509,6 +508,24 @@
           </a>
         </div>
       </article>
+
+      <!-- Loading Skeleton -->
+      <div id="loading-skeleton">
+        <div class="skeleton skeleton-meta"></div>
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-meta" style="width: 20%; margin-top: -10px;"></div>
+        <div style="margin-top: 60px">
+          <div class="skeleton skeleton-line"></div>
+          <div class="skeleton skeleton-line"></div>
+          <div class="skeleton skeleton-line"></div>
+          <div class="skeleton skeleton-line short"></div>
+        </div>
+        <div style="margin-top: 40px">
+          <div class="skeleton skeleton-line"></div>
+          <div class="skeleton skeleton-line"></div>
+          <div class="skeleton skeleton-line short"></div>
+        </div>
+      </div>
     </main>
 
     <!-- Footer -->
@@ -625,14 +642,6 @@
               post.title;
             document.getElementById("article-title").textContent = post.title;
 
-            if (post.thumbnail) {
-              const heroDiv = document.querySelector(".article-hero");
-              if (heroDiv) {
-                heroDiv.innerHTML = `<img src="${post.thumbnail}" alt="${post.title}" />`;
-                heroDiv.style.background = "transparent";
-              }
-            }
-
             const catEl = document.getElementById("article-category");
             let displayCat = post.category || "";
             let catSlug = (post.category || "").toLowerCase()
@@ -741,8 +750,14 @@
               mainEntityOfPage: "https://salarycalculator.my/blog/" + slug,
             });
             document.head.appendChild(ld);
+
+            // Hide skeleton and show content
+            document.getElementById("loading-skeleton").style.display = "none";
+            document.getElementById("article-main").style.display = "block";
           } else {
             document.title = "Article Not Found – HR & Salary Blog Malaysia";
+            document.getElementById("loading-skeleton").style.display = "none";
+            document.getElementById("article-main").style.display = "block";
             document.getElementById("article-title").textContent =
               "Article Not Found";
             document.getElementById("article-content").innerHTML =
@@ -750,6 +765,8 @@
           }
         } catch (error) {
           console.error("Error loading article:", error);
+          document.getElementById("loading-skeleton").style.display = "none";
+          document.getElementById("article-main").style.display = "block";
           document.getElementById("article-title").textContent =
             "Error Loading Article";
           document.getElementById("article-content").innerHTML =
