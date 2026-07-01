@@ -186,13 +186,12 @@
 </div>
 <div class="tabs-wrap">
   <div class="tabs" id="categoryTabs">
-    <a class="tab active" href="/blog">All Articles</a>
-    <a class="tab" href="/blog/salary">Salary</a>
-    <a class="tab" href="/blog/epf">EPF</a>
-    <a class="tab" href="/blog/socso">SOCSO</a>
-    <a class="tab" href="/blog/perkeso">PERKESO</a>
-    <a class="tab" href="/blog/pcb-income-tax">PCB / Income Tax</a>
-    <a class="tab" href="/blog/annual-leave">Annual Leave</a>
+    <a class="tab active" href="/blog" data-cat="">All Articles</a>
+    <a class="tab" href="/blog/category/salary" data-cat="salary">Salary</a>
+    <a class="tab" href="/blog/category/epf" data-cat="epf">EPF</a>
+    <a class="tab" href="/blog/category/socso" data-cat="socso">SOCSO</a>
+    <a class="tab" href="/blog/category/pcb-income-tax" data-cat="pcb-income-tax">PCB / Income Tax</a>
+    <a class="tab" href="/blog/category/annual-leave" data-cat="annual-leave">Annual Leave</a>
   </div>
 </div>
 <main class="blog-main">
@@ -228,6 +227,19 @@
   var app = App.initializeApp(cfg);
   var db = FS.getFirestore(app, DB_ID);
   var allPosts = [], activeCategory = '';
+
+  // Get category from URL
+  var urlParams = new URLSearchParams(window.location.search);
+  activeCategory = urlParams.get('category') || '';
+  
+  // Handle Perkeso to Socso mapping
+  if (activeCategory === 'perkeso') activeCategory = 'socso';
+
+  // Update active tab UI
+  document.querySelectorAll('.tab').forEach(function(t) {
+    t.classList.toggle('active', t.getAttribute('data-cat') === activeCategory);
+  });
+
   function fmtDate(d) {
     if (!d) return '';
     var dt = new Date(d);
@@ -259,7 +271,14 @@
     c.innerHTML = h;
   }
   function filterAndRender() {
-    var f = activeCategory ? allPosts.filter(function(p){return (p.category||'').indexOf(activeCategory)>-1;}) : allPosts;
+    var f = activeCategory ? allPosts.filter(function(p){
+      var pCat = (p.category || '').toLowerCase();
+      // Handle mapping in filter
+      if (activeCategory === 'socso') {
+        return pCat.indexOf('socso') > -1 || pCat.indexOf('perkeso') > -1;
+      }
+      return pCat.indexOf(activeCategory) > -1;
+    }) : allPosts;
     render(f);
   }
   async function loadPosts() {

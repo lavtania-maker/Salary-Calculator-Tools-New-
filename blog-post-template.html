@@ -519,8 +519,22 @@
               }
             }
 
-            document.getElementById("article-category").textContent =
-              post.category || "";
+            const catEl = document.getElementById("article-category");
+            let displayCat = post.category || "";
+            let catSlug = (post.category || "").toLowerCase()
+              .replace(/\//g, '-')
+              .replace(/\s+/g, '-')
+              .replace(/-+/g, '-');
+            
+            // Map perkeso to socso slug/display
+            if (catSlug === 'perkeso') catSlug = 'socso';
+            if (displayCat.toLowerCase() === 'perkeso') displayCat = 'SOCSO';
+
+            if (displayCat) {
+              catEl.innerHTML = `<a href="/blog/category/${catSlug}" style="color: inherit; text-decoration: none;">${displayCat}</a>`;
+            } else {
+              catEl.textContent = "";
+            }
 
             if (post.publishedAt) {
               var dt = new Date(post.publishedAt);
