@@ -49,10 +49,10 @@
       
       
     }
-    .hero{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#3b82f6 100%);padding:64px 24px 80px;text-align:center;position:relative;overflow:hidden}
-    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40px;background:#fff;clip-path:ellipse(60% 100% at 50% 100%)}
-    .hero h1{color:#fff !important;margin-bottom:16px}
-    .hero p{color:rgba(255,255,255,.85) !important;max-width:600px;margin:0 auto}
+    .hero{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#3b82f6 100%);padding:100px 24px 140px;text-align:center;position:relative;overflow:hidden;min-height:320px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:#fff;clip-path:ellipse(60% 100% at 50% 100%)}
+    .hero h1{color:#fff !important;margin-bottom:16px;position:relative;z-index:2}
+    .hero p{color:rgba(255,255,255,.9) !important;max-width:650px;margin:0 auto;position:relative;z-index:2;font-size:17px;font-weight:500}
     .tabs-wrap{background:#fff;border-bottom:2px solid #f1f5f9;position:sticky;top:60px;z-index:90}
     .tabs{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;overflow-x:auto;scrollbar-width:none}
     .tabs::-webkit-scrollbar{display:none}
@@ -91,7 +91,7 @@
     .skeleton-line{height:16px;margin-bottom:8px}
     .skeleton-title{height:28px;width:80%;margin-bottom:12px}
     @media(max-width:900px){.featured-grid,.posts-grid{grid-template-columns:1fr}.blog-layout{grid-template-columns:1fr}.sidebar{display:none}.featured-card,.post-card{padding:28px 20px}}
-    @media(max-width:600px){.hero{padding:48px 16px 64px}}
+    @media(max-width:600px){.hero{padding:80px 16px 110px;min-height:280px}}
   </style>
 
     <!-- Google Fonts -->
@@ -232,12 +232,18 @@
   var urlParams = new URLSearchParams(window.location.search);
   activeCategory = urlParams.get('category') || '';
   
+  // Also check pathname for category/slug structure
+  if (!activeCategory && window.location.pathname.includes('/blog/category/')) {
+    activeCategory = window.location.pathname.split('/blog/category/')[1].split('/')[0];
+  }
+  
   // Handle Perkeso to Socso mapping
   if (activeCategory === 'perkeso') activeCategory = 'socso';
 
   // Update active tab UI
   document.querySelectorAll('.tab').forEach(function(t) {
-    t.classList.toggle('active', t.getAttribute('data-cat') === activeCategory);
+    var tabCat = t.getAttribute('data-cat') || '';
+    t.classList.toggle('active', tabCat === activeCategory);
   });
 
   function fmtDate(d) {
