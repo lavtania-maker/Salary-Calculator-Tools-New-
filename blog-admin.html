@@ -768,7 +768,7 @@
           </div>
           <div class="form-row">
             <div class="form-field">
-              <label>Excerpt</label
+              <label>Summary</label
               ><textarea
                 id="fExcerpt"
                 rows="2"
@@ -776,12 +776,31 @@
               ></textarea>
             </div>
             <div class="form-field">
+              <label>Meta Title (SEO)</label
+              ><input
+                id="fMetaTitle"
+                type="text"
+                placeholder="60-70 chars for search engines..."
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
               <label>Meta Description (SEO)</label
               ><textarea
                 id="fMetaDesc"
                 rows="2"
                 placeholder="150-160 chars for search engines..."
               ></textarea>
+            </div>
+            <div class="form-field">
+              <label>Meta Keywords (SEO)</label
+              ><input
+                id="fMetaKeywords"
+                type="text"
+                placeholder="e.g. EPF contribution, KWSP Malaysia, EPF rates 2026"
+              />
+              <div class="hint">Separate keywords with commas</div>
             </div>
           </div>
           <div class="form-row">
@@ -1057,6 +1076,8 @@
           G("fThumb").value = (post && post.thumbnail) || "";
           G("fReadTime").value = (post && post.readTime) || "";
           G("fMetaDesc").value = (post && post.metaDesc) || "";
+          G("fMetaTitle").value = (post && post.metaTitle) || "";
+          G("fMetaKeywords").value = (post && post.metaKeywords) || "";
           G("fStatus").value = (post && post.status) || "draft";
           G("fDate").value =
             post && post.publishedAt
@@ -1110,6 +1131,8 @@
             thumbnail: G("fThumb").value.trim(),
             readTime: parseInt(G("fReadTime").value) || 5,
             metaDesc: G("fMetaDesc").value.trim(),
+            metaTitle: G("fMetaTitle").value.trim(),
+            metaKeywords: G("fMetaKeywords").value.trim(),
             status: G("fStatus").value,
             publishedAt: G("fDate").value,
             content: G("fContent").value.trim(),
