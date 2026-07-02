@@ -540,6 +540,18 @@
       .ql-editor {
         min-height: 450px;
       }
+      /* Protect list styles from global override */
+      .ql-editor ul {
+        list-style-type: disc !important;
+        padding-left: 1.5em !important;
+      }
+      .ql-editor ol {
+        list-style-type: decimal !important;
+        padding-left: 1.5em !important;
+      }
+      .ql-editor li {
+        display: list-item !important;
+      }
       /* Table styles in editor */
       .ql-editor table {
         border-collapse: collapse;
