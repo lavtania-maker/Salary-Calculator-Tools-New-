@@ -1158,13 +1158,9 @@
               : new Date().toISOString().substring(0, 10);
           G("fReadMore").value = (post && post.readMoreUrl) || "";
           const initialHtml = (post && post.content) || "";
-          try {
+          setTimeout(function () {
             quill.clipboard.dangerouslyPasteHTML(initialHtml);
-          } catch (e) {
-            console.warn("dangerouslyPasteHTML failed, falling back to convert:", e);
-            const delta = quill.clipboard.convert({ html: initialHtml });
-            quill.setContents(delta, "silent");
-          }
+          }, 100);
           G("fContent").value = (post && post.content) || "";
           G("saveErr").style.display = "none";
           G("modalOverlay").classList.add("open");
@@ -1209,13 +1205,8 @@
             err = G("saveErr");
 
           // Sync Quill content to hidden field
-          var htmlContent = quill.getSemanticHTML();
-          var rootHtml = quill.root.innerHTML;
-          
-          if (htmlContent.length < rootHtml.length * 0.8) {
-            console.warn("getSemanticHTML() returned significantly less content (possible table loss). Falling back to quill.root.innerHTML.");
-            htmlContent = rootHtml;
-          }
+          var editorEl = document.querySelector('#editor-container .ql-editor');
+          var htmlContent = editorEl ? editorEl.innerHTML : "";
 
           if (htmlContent === "<p><br></p>" || htmlContent === "")
             htmlContent = "";
