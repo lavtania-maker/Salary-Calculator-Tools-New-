@@ -1017,6 +1017,7 @@
           btn.disabled = true;
           err.style.display = "none";
           try {
+            await Auth.setPersistence(auth, Auth.browserLocalPersistence);
             await Auth.signInWithEmailAndPassword(
               auth,
               G("lEmail").value.trim(),
