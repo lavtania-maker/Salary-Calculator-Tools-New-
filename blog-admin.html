@@ -459,6 +459,29 @@
         resize: vertical;
         min-height: 80px;
       }
+      .checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 4px;
+      }
+      .checkbox-group label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 400;
+        margin: 0;
+        cursor: pointer;
+        font-size: 13px;
+        color: #334155;
+        text-transform: none;
+        letter-spacing: normal;
+      }
+      .checkbox-group input[type="checkbox"] {
+        width: auto;
+        margin: 0;
+        accent-color: #2563eb;
+      }
       .hint {
         font-size: 11px;
         color: #94a3b8;
@@ -831,15 +854,14 @@
               <div class="hint">URL: /blog/your-slug</div>
             </div>
             <div class="form-field">
-              <label>Category</label
-              ><select id="fCategory">
-                <option value="">Select...</option>
-                <option value="salary">Salary</option>
-                <option value="epf">EPF</option>
-                <option value="socso">SOCSO</option>
-                <option value="pcb-income-tax">PCB / Income Tax</option>
-                <option value="annual-leave">Annual Leave</option>
-              </select>
+              <label>Category</label>
+              <div class="checkbox-group" id="fCategoryGroup">
+                <label><input type="checkbox" value="salary" /> Salary</label>
+                <label><input type="checkbox" value="epf" /> EPF</label>
+                <label><input type="checkbox" value="socso" /> SOCSO</label>
+                <label><input type="checkbox" value="pcb-income-tax" /> PCB / Income Tax</label>
+                <label><input type="checkbox" value="annual-leave" /> Annual Leave</label>
+              </div>
             </div>
           </div>
           <div class="form-field">
@@ -1056,9 +1078,14 @@
                 '<td class="td-title">' +
                 (p.title || "-") +
                 "</td>" +
-                '<td><span class="badge badge-cat">' +
-                (p.category || "-") +
-                "</span></td>" +
+                "<td>" +
+                (Array.isArray(p.category) ? p.category : [p.category || "-"]).map(function(c) { 
+                  if (!c || c === "-") return "-";
+                  var catMap = { 'salary': 'Salary', 'epf': 'EPF', 'socso': 'SOCSO', 'annual-leave': 'Annual Leave', 'pcb-income-tax': 'PCB / Income Tax' };
+                  var displayCat = catMap[c] || c;
+                  return '<span class="badge badge-cat">' + displayCat + '</span>';
+                }).join(" ") +
+                "</td>" +
                 '<td class="td-slug">' +
                 (p.slug || "-") +
                 "</td>" +
@@ -1120,7 +1147,7 @@
           renderTable(
             cat
               ? allPosts.filter(function (p) {
-                  return p.category === cat;
+                  return Array.isArray(p.category) ? p.category.indexOf(cat) > -1 : p.category === cat;
                 })
               : allPosts,
           );
@@ -1144,7 +1171,16 @@
           G("fTitle").value = (post && post.title) || "";
           G("fMetaTitle").value = (post && post.metaTitle) || "";
           G("fSlug").value = (post && post.slug) || "";
-          G("fCategory").value = (post && post.category) || "";
+          
+          var catChecks = document.querySelectorAll('#fCategoryGroup input[type="checkbox"]');
+          catChecks.forEach(function(cb) { cb.checked = false; });
+          if (post && post.category) {
+            var cats = Array.isArray(post.category) ? post.category : [post.category];
+            catChecks.forEach(function(cb) {
+              if (cats.indexOf(cb.value) !== -1) cb.checked = true;
+            });
+          }
+
           G("fMetaDesc").value = (post && post.metaDesc) || "";
           
           currentKeywords = (post && post.metaKeywords) ? post.metaKeywords.split(",").map(function(k) { return k.trim(); }).filter(Boolean) : [];
@@ -1212,11 +1248,16 @@
             htmlContent = "";
           G("fContent").value = htmlContent;
 
+          var selectedCats = [];
+          document.querySelectorAll('#fCategoryGroup input[type="checkbox"]:checked').forEach(function(cb) {
+            selectedCats.push(cb.value);
+          });
+
           var data = {
             title: G("fTitle").value.trim(),
             metaTitle: G("fMetaTitle").value.trim(),
             slug: G("fSlug").value.trim(),
-            category: G("fCategory").value.trim(),
+            category: selectedCats,
             metaDesc: G("fMetaDesc").value.trim(),
             metaKeywords: currentKeywords.join(", "),
             status: G("fStatus").value,

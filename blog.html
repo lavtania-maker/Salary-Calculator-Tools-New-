@@ -254,9 +254,22 @@
   function initials(t) { return (t||'SC').split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase(); }
   function card(p, large) {
     var cls = large ? 'featured-card' : 'post-card';
-    var cats = (p.category||'').split(',').map(function(c){return c.trim();}).filter(Boolean);
+    var catMap = {
+      'salary': 'Salary',
+      'epf': 'EPF',
+      'socso': 'SOCSO',
+      'annual-leave': 'Annual Leave',
+      'pcb-income-tax': 'PCB / Income Tax'
+    };
+    var rawCats = Array.isArray(p.category) ? p.category : [p.category || ''];
+    var cats = rawCats.filter(Boolean).map(function(c){
+       var catSlug = c.toLowerCase().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
+       if (catSlug === 'perkeso') catSlug = 'socso';
+       return catMap[catSlug] || c.replace(/-/g, ' ').replace(/\b\w/g, function(char) { return char.toUpperCase(); });
+    });
+    
     return '<a class="'+cls+'" href="/blog/'+(p.slug||p.id)+'">'
-      +'<div class="card-cat">'+cats.map(function(c){return '<span>'+c+'</span>';}).join('')+'</div>'
+      +'<div class="card-cat">'+cats.map(function(c){return '<span>'+c+'</span>';}).join(' <span class="bullet" style="margin: 0 6px; color:#94a3b8; display:inline-block; transform:translateY(-1px);">•</span> ')+'</div>'
       +'<h2 class="card-title">'+(p.title||'Untitled')+'</h2>'
       +(p.excerpt?'<p class="card-excerpt">'+p.excerpt+'</p>':'')
       +'<div class="card-meta"><div class="card-avatar">'+initials(p.title)+'</div>'
@@ -278,8 +291,8 @@
   }
   function filterAndRender() {
     var f = activeCategory ? allPosts.filter(function(p){
-      var pCat = (p.category || '').toLowerCase();
-      // Handle mapping in filter
+      var cats = Array.isArray(p.category) ? p.category : [p.category || ''];
+      var pCat = cats.map(function(c) { return c.toLowerCase(); }).join(' ');
       if (activeCategory === 'socso') {
         return pCat.indexOf('socso') > -1 || pCat.indexOf('perkeso') > -1;
       }

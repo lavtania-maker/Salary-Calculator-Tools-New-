@@ -653,15 +653,6 @@
             document.getElementById("article-title").textContent = post.title;
 
             const catEl = document.getElementById("article-category");
-            let displayCat = post.category || "";
-            let catSlug = (post.category || "").toLowerCase()
-              .replace(/\//g, '-')
-              .replace(/\s+/g, '-')
-              .replace(/-+/g, '-');
-            
-            // Map perkeso to socso slug/display
-            if (catSlug === 'perkeso') catSlug = 'socso';
-            
             const catMap = {
               'salary': 'Salary',
               'epf': 'EPF',
@@ -669,15 +660,17 @@
               'annual-leave': 'Annual Leave',
               'pcb-income-tax': 'PCB / Income Tax'
             };
-            
-            if (catMap[catSlug]) {
-              displayCat = catMap[catSlug];
-            } else if (displayCat) {
-              displayCat = displayCat.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-            }
 
-            if (displayCat) {
-              catEl.innerHTML = `<a href="/blog/category/${catSlug}" style="color: inherit; text-decoration: none;">${displayCat}</a>`;
+            let cats = Array.isArray(post.category) ? post.category : [post.category || ""];
+            let catLinks = cats.filter(c => c).map(function(c) {
+              let catSlug = c.toLowerCase().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
+              if (catSlug === 'perkeso') catSlug = 'socso';
+              let displayCat = catMap[catSlug] || c.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
+              return `<a href="/blog/category/${catSlug}" style="color: inherit; text-decoration: none;">${displayCat}</a>`;
+            });
+
+            if (catLinks.length > 0) {
+              catEl.innerHTML = catLinks.join(' <span class="bullet" style="margin: 0 8px;">•</span> ');
               document.getElementById("bullet-1").style.display = "inline";
             } else {
               catEl.textContent = "";
