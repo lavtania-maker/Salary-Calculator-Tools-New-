@@ -751,6 +751,14 @@
               placeholder="e.g. EPF Contribution Rates 2026"
             />
           </div>
+          <div class="form-field">
+            <label>Meta Title (SEO)</label
+            ><input
+              id="fMetaTitle"
+              type="text"
+              placeholder="60-70 chars for search engines..."
+            />
+          </div>
           <div class="form-row">
             <div class="form-field">
               <label>Slug *</label
@@ -774,58 +782,22 @@
               </select>
             </div>
           </div>
-          <div class="form-row">
-            <div class="form-field">
-              <label>Featured Image URL</label
-              ><input id="fThumb" type="url" placeholder="https://..." />
-            </div>
-            <div class="form-field">
-              <label>Read Time (min)</label
-              ><input
-                id="fReadTime"
-                type="number"
-                min="1"
-                max="60"
-                placeholder="5"
-              />
-            </div>
+          <div class="form-field">
+            <label>Meta Description (SEO)</label
+            ><textarea
+              id="fMetaDesc"
+              rows="2"
+              placeholder="150-160 chars for search engines..."
+            ></textarea>
           </div>
-          <div class="form-row">
-            <div class="form-field">
-              <label>Summary</label
-              ><textarea
-                id="fExcerpt"
-                rows="2"
-                placeholder="Short summary..."
-              ></textarea>
-            </div>
-            <div class="form-field">
-              <label>Meta Title (SEO)</label
-              ><input
-                id="fMetaTitle"
-                type="text"
-                placeholder="60-70 chars for search engines..."
-              />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-field">
-              <label>Meta Description (SEO)</label
-              ><textarea
-                id="fMetaDesc"
-                rows="2"
-                placeholder="150-160 chars for search engines..."
-              ></textarea>
-            </div>
-            <div class="form-field">
-              <label>Meta Keywords (SEO)</label
-              ><input
-                id="fMetaKeywords"
-                type="text"
-                placeholder="e.g. EPF contribution, KWSP Malaysia, EPF rates 2026"
-              />
-              <div class="hint">Separate keywords with commas</div>
-            </div>
+          <div class="form-field">
+            <label>Meta Keywords (SEO)</label
+            ><input
+              id="fMetaKeywords"
+              type="text"
+              placeholder="e.g. EPF contribution, KWSP Malaysia, EPF rates 2026"
+            />
+            <div class="hint">Separate keywords with commas</div>
           </div>
           <div class="form-row">
             <div class="form-field">
@@ -1086,13 +1058,10 @@
           editingId = post ? post.id : null;
           G("modalTitle").textContent = post ? "Edit Article" : "New Article";
           G("fTitle").value = (post && post.title) || "";
+          G("fMetaTitle").value = (post && post.metaTitle) || "";
           G("fSlug").value = (post && post.slug) || "";
           G("fCategory").value = (post && post.category) || "";
-          G("fExcerpt").value = (post && post.excerpt) || "";
-          G("fThumb").value = (post && post.thumbnail) || "";
-          G("fReadTime").value = (post && post.readTime) || "";
           G("fMetaDesc").value = (post && post.metaDesc) || "";
-          G("fMetaTitle").value = (post && post.metaTitle) || "";
           G("fMetaKeywords").value = (post && post.metaKeywords) || "";
           G("fStatus").value = (post && post.status) || "draft";
           G("fDate").value =
@@ -1141,13 +1110,10 @@
 
           var data = {
             title: G("fTitle").value.trim(),
+            metaTitle: G("fMetaTitle").value.trim(),
             slug: G("fSlug").value.trim(),
             category: G("fCategory").value.trim(),
-            excerpt: G("fExcerpt").value.trim(),
-            thumbnail: G("fThumb").value.trim(),
-            readTime: parseInt(G("fReadTime").value) || 5,
             metaDesc: G("fMetaDesc").value.trim(),
-            metaTitle: G("fMetaTitle").value.trim(),
             metaKeywords: G("fMetaKeywords").value.trim(),
             status: G("fStatus").value,
             publishedAt: G("fDate").value,
