@@ -552,6 +552,15 @@
       .ql-editor li {
         display: list-item !important;
       }
+      /* Preserve paragraph and heading spacing */
+      .ql-editor p {
+        margin-bottom: 1em !important;
+      }
+      .ql-editor h1, .ql-editor h2, .ql-editor h3 {
+        margin-top: 1.5em !important;
+        margin-bottom: 0.5em !important;
+        font-weight: 700;
+      }
       /* Table styles in editor */
       .ql-editor table {
         border-collapse: collapse;
@@ -861,25 +870,17 @@
               toolbarTable: true,
             },
             toolbar: [
-              [{ header: [2, 3, false] }],
+              [{ header: [1, 2, 3, false] }],
               ["bold", "italic", "underline"],
               [{ list: "ordered" }, { list: "bullet" }],
               ["link", "image", "video", "table-better"],
               ["clean"],
             ],
+            clipboard: {
+              matchVisual: false
+            }
           },
           placeholder: "Write your content here...",
-        });
-
-        // Custom matcher to help preserve table structure on paste
-        quill.clipboard.addMatcher('TABLE', (node, delta) => {
-          return delta;
-        });
-        quill.clipboard.addMatcher('TR', (node, delta) => {
-          return delta;
-        });
-        quill.clipboard.addMatcher('TD', (node, delta) => {
-          return delta;
         });
 
         var FB = "https://www.gstatic.com/firebasejs/10.12.0/";
