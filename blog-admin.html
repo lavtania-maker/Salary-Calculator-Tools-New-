@@ -1196,11 +1196,11 @@
           G("fReadMore").value = (post && post.readMoreUrl) || "";
           const initialHtml = (post && post.content) || "";
           setTimeout(function () {
-            var editorEl = document.querySelector('#editor-container .ql-editor');
+            const editorEl = document.querySelector('#editor-container .ql-editor');
             if (editorEl) {
               editorEl.innerHTML = initialHtml;
             }
-          }, 150);
+          }, 200);
           G("fContent").value = (post && post.content) || "";
           G("saveErr").style.display = "none";
           G("modalOverlay").classList.add("open");
@@ -1245,8 +1245,8 @@
             err = G("saveErr");
 
           // Sync Quill content to hidden field
-          var editorEl = document.querySelector('#editor-container .ql-editor');
-          var htmlContent = editorEl ? editorEl.innerHTML : "";
+          const editorEl = document.querySelector('#editor-container .ql-editor');
+          let htmlContent = editorEl ? editorEl.innerHTML : "";
 
           if (htmlContent === "<p><br></p>" || htmlContent === "")
             htmlContent = "";
