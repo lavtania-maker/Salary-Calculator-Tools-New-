@@ -1196,8 +1196,11 @@
           G("fReadMore").value = (post && post.readMoreUrl) || "";
           const initialHtml = (post && post.content) || "";
           setTimeout(function () {
-            quill.clipboard.dangerouslyPasteHTML(initialHtml);
-          }, 100);
+            var editorEl = document.querySelector('#editor-container .ql-editor');
+            if (editorEl) {
+              editorEl.innerHTML = initialHtml;
+            }
+          }, 150);
           G("fContent").value = (post && post.content) || "";
           G("saveErr").style.display = "none";
           G("modalOverlay").classList.add("open");
