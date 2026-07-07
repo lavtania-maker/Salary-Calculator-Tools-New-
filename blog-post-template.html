@@ -595,6 +595,7 @@
       console.log("Current post slug:", slug);
 
       async function loadArticle() {
+        if (window.__SSR_COMPLETE) return;
         if (!slug) return;
         try {
           var FB = "https://www.gstatic.com/firebasejs/10.12.0/";
