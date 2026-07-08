@@ -475,6 +475,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const emailInput = document.getElementById(
           "userEmail",
         ) as HTMLInputElement;
+        const nameInput = document.getElementById(
+          "userName",
+        ) as HTMLInputElement;
         const userTypeSelect = document.getElementById(
           "userType",
         ) as HTMLSelectElement;
@@ -490,10 +493,12 @@ document.addEventListener("DOMContentLoaded", () => {
         ) as HTMLSelectElement;
 
         const email = emailInput?.value || "";
+        const name = nameInput?.value || "";
         const role = userTypeSelect?.value || "";
 
         const sheetPayload = {
           timestamp: new Date().toISOString(),
+          Name: name,
           Email: email,
           "User Type": role,
           "Hiring Status": hiringInputExt?.value || "",
@@ -513,6 +518,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const dbPayload = {
           email: email,
+          name: name,
           userType: role,
           action: "Download Annual Leave Report",
           createdAt: new Date().toISOString(),

@@ -1,21 +1,42 @@
-import { initializeApp, getApp, getApps } from "firebase/app";
-import { getFirestore, collection, query, where, getDocs, limit } from "firebase/firestore";
 import * as cheerio from "cheerio";
 import fs from "fs";
 import path from "path";
-import type { VercelRequest, VercelResponse } from '@vercel/node';
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",
-  authDomain: "gen-lang-client-0273291777.firebaseapp.com",
-  projectId: "gen-lang-client-0273291777",
-  storageBucket: "gen-lang-client-0273291777.firebasestorage.app",
-  messagingSenderId: "235978759653",
-  appId: "1:235978759653:web:fb82260c62f98fc80ce30c"
-};
+// Simplified unwrap for the specific Firestore JSON structure
+function unwrapFirestore(doc: any) {
+  const fields = doc.fields || {};
+  const result: any = { id: doc.name.split('/').pop() };
+  
+  for (const key in fields) {
+    const val = fields[key];
+    if (val.stringValue !== undefined) result[key] = val.stringValue;
+    else if (val.integerValue !== undefined) result[key] = parseInt(val.integerValue);
+    else if (val.doubleValue !== undefined) result[key] = parseFloat(val.doubleValue);
+    else if (val.booleanValue !== undefined) result[key] = val.booleanValue;
+    else if (val.timestampValue !== undefined) result[key] = val.timestampValue;
+    else if (val.arrayValue !== undefined) {
+      result[key] = (val.arrayValue.values || []).map((v: any) => {
+        if (v.stringValue !== undefined) return v.stringValue;
+        if (v.integerValue !== undefined) return parseInt(v.integerValue);
+        if (v.mapValue !== undefined) {
+            const nested: any = {};
+            for (const k in v.mapValue.fields) {
+                const nv = v.mapValue.fields[k];
+                if (nv.stringValue !== undefined) nested[k] = nv.stringValue;
+            }
+            return nested;
+        }
+        return null;
+      }).filter((v: any) => v !== null);
+    }
+  }
+  return result;
+}
 
-const DB_ID = "ai-studio-f7c7f3ec-1f6a-45a9-a332-4733fe85d918";
+const PROJECT_ID = "gen-lang-client-0273291777";
+const DATABASE_ID = "ai-studio-f7c7f3ec-1f6a-45a9-a332-4733fe85d918";
 const COLL = "blog_posts";
+const REST_URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/${DATABASE_ID}/documents/${COLL}?pageSize=100`;
 
 const catMap: Record<string, string> = {
   'salary': 'Salary',
@@ -33,18 +54,24 @@ export default async function handler(req: any, res: any) {
   }
 
   try {
-    let app;
-    if (!getApps().length) {
-      app = initializeApp(firebaseConfig);
-    } else {
-      app = getApp();
+    // 1. Fetch from Firestore REST API
+    const response = await fetch(REST_URL);
+    if (!response.ok) {
+        throw new Error(`Firestore REST API returned ${response.status}`);
     }
-    const db = getFirestore(app, DB_ID);
+    const data = await response.json();
+    const documents = data.documents || [];
     
-    const postsRef = collection(db, COLL);
-    const q = query(postsRef, where("slug", "==", slug), where("status", "==", "published"), limit(1));
-    const querySnapshot = await getDocs(q);
+    let post = null;
+    for (const doc of documents) {
+      const unwrapped = unwrapFirestore(doc);
+      if (unwrapped.slug === slug && unwrapped.status === 'published') {
+        post = unwrapped;
+        break;
+      }
+    }
 
+    // 2. Load Template
     let templatePath = path.join(process.cwd(), 'public', 'blog-post-template.html');
     if (!fs.existsSync(templatePath)) {
        templatePath = path.join(process.cwd(), 'dist', 'blog-post-template.html');
@@ -55,23 +82,19 @@ export default async function handler(req: any, res: any) {
     const html = fs.readFileSync(templatePath, 'utf-8');
     const $ = cheerio.load(html);
 
-    if (querySnapshot.empty) {
+    if (!post) {
       // Return 404 populated template
       $('title').text("Article Not Found – HR & Salary Blog Malaysia");
       $('#loading-skeleton').css('display', 'none');
       $('#article-main').css('display', 'block');
       $('#article-title').text("Article Not Found");
       $('#article-content').html('<p>The article you are looking for does not exist or may have been removed. Browse the <a href="/blog">full blog</a> instead.</p>');
-      
       $('head').prepend('<script>window.__SSR_COMPLETE = true;</script>');
-      
       res.setHeader("Content-Type", "text/html");
       return res.status(404).send($.html());
     }
 
-    const doc = querySnapshot.docs[0];
-    const post = doc.data();
-    
+    // 3. Populate Template
     $('title').text(post.title + " – HR & Salary Blog Malaysia");
     
     if (post.metaDesc) $('meta[name="description"]').attr('content', post.metaDesc);
@@ -123,15 +146,11 @@ export default async function handler(req: any, res: any) {
       $('#article-read-time').text(readTime + " min read");
     }
 
-    // Set content
     const $content = cheerio.load(post.content || "", null, false);
-    
-    // Wrap tables
     $content('table').each((i, el) => {
       $(el).wrap('<div class="table-wrapper"></div>');
     });
     
-    // TOC
     const headings = $content('h2');
     if (headings.length >= 2) {
       headings.each((index, el) => {
@@ -158,15 +177,13 @@ export default async function handler(req: any, res: any) {
 
     // Schema
     let dateMod = post.updatedAt || post.publishedAt || "";
-    if (dateMod && dateMod.toDate) {
-      dateMod = dateMod.toDate().toISOString();
-    } else if (dateMod && typeof dateMod === 'string') {
+    if (typeof dateMod === 'string' && dateMod) {
       const d = new Date(dateMod);
       if (!isNaN(d.getTime())) dateMod = d.toISOString();
     }
     
     let datePub = post.publishedAt || "";
-    if (datePub && typeof datePub === 'string') {
+    if (typeof datePub === 'string' && datePub) {
       const d = new Date(datePub);
       if (!isNaN(d.getTime())) datePub = d.toISOString();
     }
@@ -192,15 +209,44 @@ export default async function handler(req: any, res: any) {
       mainEntityOfPage: "https://salarycalculator.my/blog/" + slug,
     };
 
-    $('head').append(`<script type="application/ld+json">${JSON.stringify(schema)}</script>`);
-
+    // Breadcrumb Schema
+    const breadcrumbSchema = {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://salarycalculator.my/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://salarycalculator.my/blog"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": post.title
+        }
+      ]
+    };
+    
+    // Remove existing placeholder schemas
+    $('#schema-article').remove();
+    $('#schema-breadcrumb').remove();
+    
+    $('head').append(`<script type="application/ld+json" id="schema-article">${JSON.stringify(schema)}</script>`);
+    $('head').append(`<script type="application/ld+json" id="schema-breadcrumb">${JSON.stringify(breadcrumbSchema)}</script>`);
+    
     $('#loading-skeleton').css('display', 'none');
     $('#article-main').css('display', 'block');
-
     $('head').prepend('<script>window.__SSR_COMPLETE = true;</script>');
 
     res.setHeader("Content-Type", "text/html");
-    res.setHeader("Cache-Control", "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800");
+    res.setHeader("Cache-Control", "public, s-maxage=3600");
     return res.status(200).send($.html());
   } catch (error) {
     console.error("Error loading article:", error);

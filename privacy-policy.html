@@ -367,7 +367,9 @@
         </a>
         <a href="/" class="nav-back"> ← Back to Calculator </a>
       </div>
-    </nav>
+              <a href="/overtime-pay-calculator" class="nav-item" title="Overtime Pay Calculator">OT Calculator</a>
+        <a href="/overtime-pay-calculator" class="mobile-nav-item">Overtime Pay Calculator</a>
+</nav>
 
     <main>
       <div class="container">
@@ -551,4 +553,184 @@
     </footer>
   
 
+
+    <script>
+      (function() {
+        // Navbar Dropdown Logic
+        const freeToolsTrigger = document.getElementById('freeToolsTrigger');
+        const freeToolsMenu = document.getElementById('freeToolsMenu');
+        const mobileFreeToolsTrigger = document.getElementById('mobileFreeToolsTrigger');
+        const mobileFreeToolsMenu = document.getElementById('mobileFreeToolsMenu');
+
+        if (freeToolsTrigger && freeToolsMenu) {
+          const toggleMenu = (show) => {
+            freeToolsMenu.classList.toggle('show', show);
+            freeToolsTrigger.setAttribute('aria-expanded', show);
+          };
+
+          freeToolsTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isShow = freeToolsMenu.classList.contains('show');
+            toggleMenu(!isShow);
+          });
+
+          document.addEventListener('click', (e) => {
+            if (!freeToolsTrigger.contains(e.target) && !freeToolsMenu.contains(e.target)) {
+              toggleMenu(false);
+            }
+          });
+
+          freeToolsTrigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              toggleMenu(!freeToolsMenu.classList.contains('show'));
+            } else if (e.key === 'Escape') {
+              toggleMenu(false);
+            }
+          });
+
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') toggleMenu(false);
+          });
+        }
+
+        if (mobileFreeToolsTrigger && mobileFreeToolsMenu) {
+          mobileFreeToolsTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isShow = mobileFreeToolsMenu.classList.contains('show');
+            mobileFreeToolsMenu.classList.toggle('show', !isShow);
+            mobileFreeToolsTrigger.querySelector('svg').style.transform = isShow ? 'rotate(0deg)' : 'rotate(180deg)';
+          });
+        }
+
+        // GA4 Tracking
+        const trackNavClick = (toolName) => {
+          if (typeof gtag === 'function') {
+            gtag('event', 'nav_free_tools_click', { tool_name: toolName });
+          }
+        };
+
+        document.querySelectorAll('[data-tool]').forEach(item => {
+          item.addEventListener('click', (e) => {
+            trackNavClick(item.getAttribute('data-tool'));
+          });
+        });
+
+        // Highlight Active Nav
+        const path = window.location.pathname;
+        if (path === '/' || path === '/index.html') {
+          document.getElementById('navSalary')?.classList.add('active-nav');
+          document.getElementById('mobNavSalary')?.classList.add('active-nav');
+        } else if (path.includes('socso-perkeso')) {
+          document.getElementById('navSocso')?.classList.add('active-nav');
+          document.getElementById('mobNavSocso')?.classList.add('active-nav');
+        } else if (path.includes('pcb-income-tax')) {
+          document.getElementById('navPcb')?.classList.add('active-nav');
+          document.getElementById('mobNavPcb')?.classList.add('active-nav');
+        } else if (path.includes('epf-kwsp')) {
+          document.getElementById('navEpf')?.classList.add('active-nav');
+          document.getElementById('mobNavEpf')?.classList.add('active-nav');
+        } else if (path.includes('blog')) {
+          document.getElementById('navBlog')?.classList.add('active-nav');
+          document.getElementById('mobNavBlog')?.classList.add('active-nav');
+        } else if (path.includes('annual-leave-calculator') || path.includes('overtime-pay-calculator')) {
+          document.getElementById('freeToolsTrigger')?.classList.add('active-nav');
+          document.getElementById('mobileFreeToolsTrigger')?.classList.add('active-nav');
+          // If sub-item is active, it stays in the dropdown
+        }
+      })();
+    </script>
+
+    <!-- Navbar Support Script -->
+    <script>
+      (function() {
+        const freeToolsTrigger = document.getElementById('freeToolsTrigger');
+        const freeToolsMenu = document.getElementById('freeToolsMenu');
+        const mobileFreeToolsTrigger = document.getElementById('mobileFreeToolsTrigger');
+        const mobileFreeToolsMenu = document.getElementById('mobileFreeToolsMenu');
+
+        if (freeToolsTrigger && freeToolsMenu) {
+          const toggleMenu = (show) => {
+            freeToolsMenu.classList.toggle('show', show);
+            freeToolsTrigger.setAttribute('aria-expanded', show);
+          };
+
+          freeToolsTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isShow = freeToolsMenu.classList.contains('show');
+            toggleMenu(!isShow);
+          });
+
+          document.addEventListener('click', (e) => {
+            if (!freeToolsTrigger.contains(e.target) && !freeToolsMenu.contains(e.target)) {
+              toggleMenu(false);
+            }
+          });
+
+          freeToolsTrigger.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              toggleMenu(!freeToolsMenu.classList.contains('show'));
+            } else if (e.key === 'Escape') {
+              toggleMenu(false);
+            }
+          });
+        }
+
+        if (mobileFreeToolsTrigger && mobileFreeToolsMenu) {
+          mobileFreeToolsTrigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isShow = mobileFreeToolsMenu.classList.contains('show');
+            mobileFreeToolsMenu.classList.toggle('show', !isShow);
+            const svg = mobileFreeToolsTrigger.querySelector('svg');
+            if (svg) svg.style.transform = isShow ? 'rotate(0deg)' : 'rotate(180deg)';
+          });
+        }
+
+        // GA4 Tracking
+        const trackNavClick = (toolName) => {
+          if (typeof gtag === 'function') {
+            gtag('event', 'nav_free_tools_click', { tool_name: toolName });
+          }
+        };
+
+        document.querySelectorAll('[data-tool]').forEach(item => {
+          item.addEventListener('click', (e) => {
+            trackNavClick(item.getAttribute('data-tool'));
+          });
+        });
+
+        // Highlight Active Nav
+        const path = window.location.pathname;
+        const normalizedPath = path === '/' || path === '' ? '/index.html' : path;
+        
+        // Desktop highlighting
+        const desktopLinks = document.querySelectorAll('.desktop-nav .nav-item');
+        desktopLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href === '/' && (normalizedPath === '/index.html' || normalizedPath === '/')) {
+            link.classList.add('active-nav');
+          } else if (href !== '/' && normalizedPath.includes(href)) {
+            link.classList.add('active-nav');
+          }
+        });
+
+        // If a sub-item is active, also highlight the parent dropdown
+        if (normalizedPath.includes('annual-leave-calculator') || normalizedPath.includes('overtime-pay-calculator')) {
+          freeToolsTrigger?.classList.add('active-nav');
+          mobileFreeToolsTrigger?.classList.add('active-nav');
+        }
+
+        // Mobile highlighting
+        const mobileLinks = document.querySelectorAll('.mobile-nav .mobile-nav-item');
+        mobileLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          if (href === '/' && (normalizedPath === '/index.html' || normalizedPath === '/')) {
+            link.classList.add('active-nav');
+          } else if (href !== '/' && normalizedPath.includes(href)) {
+            link.classList.add('active-nav');
+          }
+        });
+      })();
+    </script>
 </body></html>

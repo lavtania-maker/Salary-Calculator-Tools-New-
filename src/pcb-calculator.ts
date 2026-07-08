@@ -63,6 +63,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const userEmail = document.getElementById(
     "userEmail",
   ) as HTMLInputElement | null;
+  const userName = document.getElementById(
+    "userName",
+  ) as HTMLInputElement | null;
   const userType = document.getElementById(
     "userType",
   ) as HTMLSelectElement | null;
@@ -392,9 +395,8 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
       e.preventDefault();
 
       const email = userEmail ? userEmail.value : "";
+      const name = userName ? userName.value : "";
       const role = userType ? userType.value : "";
-      const isHiring = "";
-      const company = "";
       const phone = userPhone ? userPhone.value : "";
 
       const submitBtn = emailForm.querySelector(
@@ -417,6 +419,7 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
         ) as HTMLSelectElement;
         const sheetPayload = {
           timestamp: new Date().toISOString(),
+          Name: name,
           Email: email,
           "User Type": role,
           "Hiring Status": hiringInputExt?.value || "",
@@ -437,6 +440,7 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
 
         const dbPayload = {
           email: email,
+          name: name,
           userType: role,
           action: "Download PCB Report",
           createdAt: new Date().toISOString(),

@@ -76,7 +76,7 @@ function getResend() {
 
 async function startServer() {
   const app = express();
-  const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
+  const PORT = 3000;
 
   const firebaseConfig = {
     apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",
@@ -460,6 +460,8 @@ async function startServer() {
       "/pcb-income-tax": "pcb-income-tax.html",
       "/pcb-income-tax.html": "pcb-income-tax.html",
       "/annual-leave-calculator": "annual-leave-calculator.html",
+      "/overtime-pay-calculator": "overtime-pay-calculator.html",
+      "/overtime-pay-calculator.html": "overtime-pay-calculator.html",
       "/annual-leave-calculator.html": "annual-leave-calculator.html",
       "/blog": "blog.html",
       "/blog.html": "blog.html",

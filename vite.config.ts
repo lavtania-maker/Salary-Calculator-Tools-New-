@@ -37,6 +37,7 @@ export default defineConfig(({ mode }) => {
           blogPostTemplate: path.resolve(__dirname, "blog-post-template.html"),
           blog: path.resolve(__dirname, "blog.html"),
           blogAdmin: path.resolve(__dirname, "blog-admin.html"),
+          overtimePay: path.resolve(__dirname, "overtime-pay-calculator.html"),
         },
       },
     },

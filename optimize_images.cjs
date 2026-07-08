@@ -39,14 +39,22 @@ async function run() {
   console.log('Starting image optimization with Jimp...');
   for (const img of imagesToOptimize) {
     try {
+      const publicPath = path.join('public', img.filename);
+      const rootPath = img.filename;
+
+      if (fs.existsSync(publicPath)) {
+        console.log(`Skipping download, ${publicPath} already exists.`);
+        if (!fs.existsSync(rootPath)) {
+          fs.copyFileSync(publicPath, rootPath);
+        }
+        continue;
+      }
+
       console.log(`Downloading ${img.url}...`);
       const image = await Jimp.read(img.url);
       
       console.log(`Resizing to width: ${img.width}...`);
       image.resize({ w: img.width });
-      
-      const publicPath = path.join('public', img.filename);
-      const rootPath = img.filename; // also save at root for simple hosting in dev
       
       await image.write(publicPath);
       await image.write(rootPath);

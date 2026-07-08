@@ -64,6 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const userEmail = document.getElementById(
     "userEmail",
   ) as HTMLInputElement | null;
+  const userName = document.getElementById(
+    "userName",
+  ) as HTMLInputElement | null;
   const userType = document.getElementById(
     "userType",
   ) as HTMLSelectElement | null;
@@ -411,9 +414,8 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
 
       const email = userEmail ? userEmail.value : "";
+      const name = userName ? userName.value : "";
       const role = userType ? userType.value : "";
-      const isHiring = "";
-      const company = "";
       const phone = userPhone ? userPhone.value : "";
 
       const submitBtn = emailForm.querySelector(
@@ -435,6 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
         ) as HTMLSelectElement;
         const sheetPayload = {
           timestamp: new Date().toISOString(),
+          Name: name,
           Email: email,
           "User Type": role,
           "Hiring Status": hiringInputExt?.value || "",
@@ -454,6 +457,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const dbPayload = {
           email: email,
+          name: name,
           userType: role,
           action: "Download EPF Report",
           createdAt: new Date().toISOString(),
