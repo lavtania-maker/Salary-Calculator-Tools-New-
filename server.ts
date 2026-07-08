@@ -106,6 +106,16 @@ async function startServer() {
     next();
   });
 
+  app.get("/:slug", (req, res, next) => {
+    const slug = req.params.slug;
+    const reserved = ["blog", "epf-kwsp", "socso-perkeso", "pcb-income-tax", "annual-leave-calculator", "privacy-policy", "admin", "blog-admin", "mincal", "payslip-generator", "report", "overtime-pay-calculator", "epfreport", "socsoreport", "payslip", "api"];
+    if (slug && !slug.includes(".") && !reserved.includes(slug)) {
+      req.query.slug = slug;
+      return blogPostHandler(req as any, res as any);
+    }
+    next();
+  });
+
   app.get("/api/sitemap-blog", async (req, res) => {
     try {
       const postsRef = collection(db, COLL);
@@ -511,8 +521,9 @@ async function startServer() {
     // unless it's truly a fallback.
     app.get("*all", (req, res) => {
       // If none of the static files matched, check if it's a blog post
-      if (req.path.startsWith('/blog/')) {
-        return res.sendFile(path.join(distPath, "blog-post-template.html"));
+      if (req.path.startsWith('/blog/') && !req.path.includes('.')) {
+        req.query.slug = req.path.split('/').pop();
+        return blogPostHandler(req as any, res as any);
       }
       // fallback to index.html
       res.sendFile(path.join(distPath, "index.html"));

@@ -348,7 +348,7 @@ document.addEventListener("DOMContentLoaded", () => {
         hiring_status: hiringStatus
       });
 
-      const appsScriptUrl = import.meta.env.VITE_OVERTIME_SHEETS_SCRIPT_URL;
+      const appsScriptUrl = (import.meta as any).env.VITE_OVERTIME_SHEETS_SCRIPT_URL;
       if (appsScriptUrl) {
         const payload = {
           timestamp: new Date().toISOString(),
