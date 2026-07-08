@@ -78,6 +78,16 @@ ul {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+}
+
+@media (max-width: 1150px) {
+  .desktop-nav {
+    display: none;
+  }
+  .mobile-menu-btn {
+    display: block;
+  }
 }
 .logo {
   display: flex;
@@ -99,11 +109,11 @@ ul {
   background: transparent;
   border: none;
   font-family: inherit;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: var(--text-muted);
   cursor: pointer;
-  padding: 8px 18px;
+  padding: 8px 12px;
   border-radius: 9999px;
   transition: all 0.2s ease;
   display: inline-flex;

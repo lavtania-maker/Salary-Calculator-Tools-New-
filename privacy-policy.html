@@ -362,8 +362,9 @@
     <!-- Navbar -->
     <nav class="navbar">
       <div class="container">
+        
         <a href="/" class="logo">
-          <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" class="logo-img" width="250" height="39">
+          <img src="/logo-small.png" alt="Salary Calculator Malaysia" class="logo-img" width="250" height="44" fetchpriority="high">
         </a>
         <a href="/" class="nav-back"> ← Back to Calculator </a>
       </div>
@@ -641,41 +642,51 @@
       })();
     </script>
 
+    
+
+    
+
+    
+
     <!-- Navbar Support Script -->
     <script>
       (function() {
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileNavMenu = document.getElementById('mobileNavMenu');
+
+        if (mobileMenuToggle && mobileNavMenu) {
+          mobileMenuToggle.addEventListener('click', () => {
+            const isOpened = mobileNavMenu.classList.contains('open');
+            mobileNavMenu.classList.toggle('open', !isOpened);
+            mobileMenuToggle.classList.toggle('active', !isOpened);
+          });
+        }
+
+        // Desktop Dropdown Toggle (for click fallback on touch devices)
         const freeToolsTrigger = document.getElementById('freeToolsTrigger');
         const freeToolsMenu = document.getElementById('freeToolsMenu');
-        const mobileFreeToolsTrigger = document.getElementById('mobileFreeToolsTrigger');
-        const mobileFreeToolsMenu = document.getElementById('mobileFreeToolsMenu');
-
+        
         if (freeToolsTrigger && freeToolsMenu) {
-          const toggleMenu = (show) => {
-            freeToolsMenu.classList.toggle('show', show);
-            freeToolsTrigger.setAttribute('aria-expanded', show);
-          };
-
           freeToolsTrigger.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isShow = freeToolsMenu.classList.contains('show');
-            toggleMenu(!isShow);
-          });
-
-          document.addEventListener('click', (e) => {
-            if (!freeToolsTrigger.contains(e.target) && !freeToolsMenu.contains(e.target)) {
-              toggleMenu(false);
+            if (window.innerWidth > 1150) {
+              e.preventDefault();
+              const isShow = freeToolsMenu.classList.contains('show');
+              freeToolsMenu.classList.toggle('show', !isShow);
             }
           });
 
-          freeToolsTrigger.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              toggleMenu(!freeToolsMenu.classList.contains('show'));
-            } else if (e.key === 'Escape') {
-              toggleMenu(false);
+          // Close menu when clicking outside
+          document.addEventListener('click', (e) => {
+            if (!freeToolsTrigger.contains(e.target) && !freeToolsMenu.contains(e.target)) {
+              freeToolsMenu.classList.remove('show');
             }
           });
         }
+
+        // Mobile Dropdown/Submenu Toggle
+        const mobileFreeToolsTrigger = document.getElementById('mobileFreeToolsTrigger');
+        const mobileFreeToolsMenu = document.getElementById('mobileFreeToolsMenu');
 
         if (mobileFreeToolsTrigger && mobileFreeToolsMenu) {
           mobileFreeToolsTrigger.addEventListener('click', (e) => {
@@ -690,13 +701,13 @@
         // GA4 Tracking
         const trackNavClick = (toolName) => {
           if (typeof gtag === 'function') {
-            gtag('event', 'nav_free_tools_click', { tool_name: toolName });
+            gtag('event', 'nav_click', { tool_name: toolName });
           }
         };
 
-        document.querySelectorAll('[data-tool]').forEach(item => {
-          item.addEventListener('click', (e) => {
-            trackNavClick(item.getAttribute('data-tool'));
+        document.querySelectorAll('.nav-item, .mobile-nav-item, .dropdown-item, .mobile-submenu-item').forEach(item => {
+          item.addEventListener('click', () => {
+            trackNavClick(item.textContent.trim());
           });
         });
 
@@ -704,31 +715,27 @@
         const path = window.location.pathname;
         const normalizedPath = path === '/' || path === '' ? '/index.html' : path;
         
-        // Desktop highlighting
-        const desktopLinks = document.querySelectorAll('.desktop-nav .nav-item');
-        desktopLinks.forEach(link => {
+        // desktop and mobile highlighting
+        const allLinks = document.querySelectorAll('.nav-item, .mobile-nav-item, .dropdown-item, .mobile-submenu-item');
+        allLinks.forEach(link => {
           const href = link.getAttribute('href');
+          if (!href) return;
+          
           if (href === '/' && (normalizedPath === '/index.html' || normalizedPath === '/')) {
             link.classList.add('active-nav');
           } else if (href !== '/' && normalizedPath.includes(href)) {
             link.classList.add('active-nav');
-          }
-        });
-
-        // If a sub-item is active, also highlight the parent dropdown
-        if (normalizedPath.includes('annual-leave-calculator') || normalizedPath.includes('overtime-pay-calculator')) {
-          freeToolsTrigger?.classList.add('active-nav');
-          mobileFreeToolsTrigger?.classList.add('active-nav');
-        }
-
-        // Mobile highlighting
-        const mobileLinks = document.querySelectorAll('.mobile-nav .mobile-nav-item');
-        mobileLinks.forEach(link => {
-          const href = link.getAttribute('href');
-          if (href === '/' && (normalizedPath === '/index.html' || normalizedPath === '/')) {
-            link.classList.add('active-nav');
-          } else if (href !== '/' && normalizedPath.includes(href)) {
-            link.classList.add('active-nav');
+            
+            // If it's a dropdown item, also highlight the trigger
+            if (link.classList.contains('dropdown-item')) {
+              if (freeToolsTrigger) freeToolsTrigger.classList.add('active-nav');
+            }
+            if (link.classList.contains('mobile-submenu-item')) {
+              if (mobileFreeToolsTrigger) mobileFreeToolsTrigger.classList.add('active-nav');
+              if (mobileFreeToolsMenu) mobileFreeToolsMenu.classList.add('show');
+              const svg = mobileFreeToolsTrigger?.querySelector('svg');
+              if (svg) svg.style.transform = 'rotate(180deg)';
+            }
           }
         });
       })();
