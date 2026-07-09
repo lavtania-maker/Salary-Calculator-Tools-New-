@@ -42,18 +42,9 @@ async function run() {
       const publicPath = path.join('public', img.filename);
       const rootPath = img.filename;
 
-      if (fs.existsSync(publicPath)) {
-        console.log(`Skipping download, ${publicPath} already exists.`);
-        if (!fs.existsSync(rootPath)) {
-          fs.copyFileSync(publicPath, rootPath);
-        }
-        continue;
-      }
-
-      console.log(`Downloading ${img.url}...`);
       const image = await Jimp.read(img.url);
       
-      console.log(`Resizing to width: ${img.width}...`);
+      console.log(`Resizing ${img.filename} to width: ${img.width}...`);
       image.resize({ w: img.width });
       
       await image.write(publicPath);
