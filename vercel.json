@@ -31,7 +31,7 @@
     { "source": "/blog/category/:category", "destination": "/blog.html?category=:category" },
     { "source": "/annual-leave-calculator", "destination": "/annual-leave-calculator.html" },
     { "source": "/blog/:slug", "destination": "/api/blog-post" },
-    { "source": "/:slug((?!.*\\.(html|png|jpg|jpeg|gif|css|js|ico|svg|xml|txt|json)$|blog$|epf-kwsp$|socso-perkeso$|pcb-income-tax$|annual-leave-calculator$|privacy-policy$|admin$|blog-admin$|mincal$|payslip-generator$|report$)[^/.]+)", "destination": "/api/blog-post" }
+    { "source": "/((?!.*\\.(?:html|png|jpg|jpeg|gif|css|js|ico|svg|xml|txt|json)$|blog$|epf-kwsp$|socso-perkeso$|pcb-income-tax$|annual-leave-calculator$|privacy-policy$|admin$|blog-admin$|mincal$|payslip-generator$|report$|overtime-pay-calculator$|epfreport$|socsoreport$|payslip$|api$)[^/.]+)", "destination": "/api/blog-post?slug=$1" }
   ],
   "headers": [
     {
