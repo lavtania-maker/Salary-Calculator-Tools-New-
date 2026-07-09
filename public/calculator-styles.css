@@ -2424,15 +2424,20 @@ h3,
   border-radius: 12px;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   padding: 8px 0;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  display: flex;
   flex-direction: column;
   z-index: 1000;
   margin-top: 8px;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
 }
 
 .dropdown-menu.show {
-  display: flex;
-  animation: navFadeIn 0.15s ease-out;
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .dropdown-item {
@@ -2441,19 +2446,15 @@ h3,
   color: var(--text-muted);
   font-weight: 500;
   font-size: 0.95rem;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
   white-space: nowrap;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .dropdown-item:hover {
   background-color: #eff6ff;
-  color: var(--primary);
-}
-
-@keyframes navFadeIn {
-  from { opacity: 0; transform: translateY(-4px); }
-  to { opacity: 1; transform: translateY(0); }
+  color: #2563eb;
 }
 
 /* Mobile Accordion Styles */

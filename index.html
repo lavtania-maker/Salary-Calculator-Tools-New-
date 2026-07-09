@@ -316,11 +316,11 @@
           <div class="nav-dropdown">
             <button class="nav-item dropdown-trigger" id="freeToolsTrigger" aria-haspopup="true" aria-expanded="false">
               Free Tools
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-            <div class="dropdown-menu" id="freeToolsMenu">
-              <a href="/annual-leave-calculator" class="dropdown-item">Annual Leave Calculator</a>
-              <a href="/overtime-pay-calculator" class="dropdown-item">Overtime Pay Calculator</a>
+            <div class="dropdown-menu" id="freeToolsMenu" role="menu" aria-labelledby="freeToolsTrigger">
+              <a href="/annual-leave-calculator" class="dropdown-item" role="menuitem">Annual Leave Calculator</a>
+              <a href="/overtime-pay-calculator" class="dropdown-item" role="menuitem">Overtime Pay Calculator</a>
             </div>
           </div>
           <a href="/blog" class="nav-item" id="navBlog">Blog</a>
@@ -8017,23 +8017,35 @@
           });
         }
 
-        // Desktop Dropdown Toggle (for click fallback on touch devices)
+        // Desktop Dropdown Toggle
         const freeToolsTrigger = document.getElementById('freeToolsTrigger');
         const freeToolsMenu = document.getElementById('freeToolsMenu');
         
         if (freeToolsTrigger && freeToolsMenu) {
+          const toggleDropdown = (show) => {
+            freeToolsMenu.classList.toggle('show', show);
+            freeToolsTrigger.setAttribute('aria-expanded', show);
+            const svg = freeToolsTrigger.querySelector('svg');
+            if (svg) svg.style.transform = show ? 'rotate(180deg)' : 'rotate(0deg)';
+          };
+
           freeToolsTrigger.addEventListener('click', (e) => {
-            if (window.innerWidth > 1150) {
-              e.preventDefault();
-              const isShow = freeToolsMenu.classList.contains('show');
-              freeToolsMenu.classList.toggle('show', !isShow);
-            }
+            e.preventDefault();
+            const isShow = freeToolsMenu.classList.contains('show');
+            toggleDropdown(!isShow);
           });
 
           // Close menu when clicking outside
           document.addEventListener('click', (e) => {
             if (!freeToolsTrigger.contains(e.target) && !freeToolsMenu.contains(e.target)) {
-              freeToolsMenu.classList.remove('show');
+              toggleDropdown(false);
+            }
+          });
+
+          // Close on Esc key
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+              toggleDropdown(false);
             }
           });
         }
@@ -8047,6 +8059,7 @@
             e.preventDefault();
             const isShow = mobileFreeToolsMenu.classList.contains('show');
             mobileFreeToolsMenu.classList.toggle('show', !isShow);
+            mobileFreeToolsTrigger.setAttribute('aria-expanded', !isShow);
             const svg = mobileFreeToolsTrigger.querySelector('svg');
             if (svg) svg.style.transform = isShow ? 'rotate(0deg)' : 'rotate(180deg)';
           });
