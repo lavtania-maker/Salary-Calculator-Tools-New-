@@ -1,43 +1,24 @@
 import * as cheerio from "cheerio";
 import fs from "fs";
 import path from "path";
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 
-// Simplified unwrap for the specific Firestore JSON structure
-function unwrapFirestore(doc: any) {
-  const fields = doc.fields || {};
-  const result: any = { id: doc.name.split('/').pop() };
-  
-  for (const key in fields) {
-    const val = fields[key];
-    if (val.stringValue !== undefined) result[key] = val.stringValue;
-    else if (val.integerValue !== undefined) result[key] = parseInt(val.integerValue);
-    else if (val.doubleValue !== undefined) result[key] = parseFloat(val.doubleValue);
-    else if (val.booleanValue !== undefined) result[key] = val.booleanValue;
-    else if (val.timestampValue !== undefined) result[key] = val.timestampValue;
-    else if (val.arrayValue !== undefined) {
-      result[key] = (val.arrayValue.values || []).map((v: any) => {
-        if (v.stringValue !== undefined) return v.stringValue;
-        if (v.integerValue !== undefined) return parseInt(v.integerValue);
-        if (v.mapValue !== undefined) {
-            const nested: any = {};
-            for (const k in v.mapValue.fields) {
-                const nv = v.mapValue.fields[k];
-                if (nv.stringValue !== undefined) nested[k] = nv.stringValue;
-            }
-            return nested;
-        }
-        return null;
-      }).filter((v: any) => v !== null);
-    }
-  }
-  return result;
-}
+const firebaseConfig = {
+  apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",
+  authDomain: "gen-lang-client-0273291777.firebaseapp.com",
+  projectId: "gen-lang-client-0273291777",
+  storageBucket: "gen-lang-client-0273291777.firebasestorage.app",
+  messagingSenderId: "235978759653",
+  appId: "1:235978759653:web:fb82260c62f98fc80ce30c"
+};
 
-const PROJECT_ID = "gen-lang-client-0273291777";
-const DATABASE_ID = "ai-studio-f7c7f3ec-1f6a-45a9-a332-4733fe85d918";
+const DB_ID = "ai-studio-f7c7f3ec-1f6a-45a9-a332-4733fe85d918";
 const COLL = "blog_posts";
-const API_KEY = "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8";
-const REST_URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/${DATABASE_ID}/documents/${COLL}?pageSize=100&key=${API_KEY}`;
+
+// Initialize Firebase App gracefully
+const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+const db = getFirestore(app, DB_ID);
 
 const catMap: Record<string, string> = {
   'salary': 'Salary',
@@ -55,22 +36,25 @@ export default async function handler(req: any, res: any) {
   }
 
   try {
-    // 1. Fetch from Firestore REST API
-    const response = await fetch(REST_URL);
-    if (!response.ok) {
-        throw new Error(`Firestore REST API returned ${response.status}`);
-    }
-    const data = await response.json();
-    const documents = data.documents || [];
+    // 1. Fetch from Firestore using standard Web SDK
+    const postsRef = collection(db, COLL);
+    const q = query(postsRef, where("status", "==", "published"));
+    const querySnapshot = await getDocs(q);
     
-    let post = null;
-    for (const doc of documents) {
-      const unwrapped = unwrapFirestore(doc);
-      if (unwrapped.slug === slug && unwrapped.status === 'published') {
-        post = unwrapped;
-        break;
+    let post: any = null;
+    querySnapshot.forEach((doc) => {
+      const unwrapped = doc.data();
+      if (unwrapped.slug === slug) {
+        post = { ...unwrapped, id: doc.id };
+        // Normalize Timestamps or objects to ISO strings
+        for (const key in post) {
+          const val = post[key];
+          if (val && typeof val === 'object' && typeof val.toDate === 'function') {
+            post[key] = val.toDate().toISOString();
+          }
+        }
       }
-    }
+    });
 
     // 2. Load Template
     let templatePath = path.join(process.cwd(), 'public', 'blog-post-template.html');

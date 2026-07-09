@@ -10,8 +10,10 @@ async function run() {
   try {
     const querySnapshot = await getDocs(collection(db, "blog_posts"));
     console.log("Success, got docs:", querySnapshot.size);
+    process.exit(0);
   } catch (e) {
     console.error("Error:", e.message);
+    process.exit(1);
   }
 }
 run();
