@@ -19,7 +19,7 @@ const FAQContent = `
             },
             "author": {
               "@type": "Organization",
-              "name": "SalaryCalc MY",
+              "name": "SalaryCalculator.my",
               "url": "https://salarycalculator.my/"
             }
           },

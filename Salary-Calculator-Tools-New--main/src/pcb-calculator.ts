@@ -407,7 +407,7 @@ document.addEventListener("DOMContentLoaded", () => {
             taxStatus: lastCalculation.taxStatus,
             epfRate: lastCalculation.epfRate,
             chargeable: lastCalculation.chargeable,
-            company: company || "SalaryCalc MY",
+            company: company || "SalaryCalculator.my",
           }).toString();
           viewFileBtn.href = `/pcbreport.html?${queryParams}`;
 

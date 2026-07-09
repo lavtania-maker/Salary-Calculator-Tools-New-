@@ -400,7 +400,7 @@ async function startServer() {
           }
         }
 
-        text += `\nYou can also find more details on our website.\n\nBest regards,\nSalaryCalc MY Team`;
+        text += `\nYou can also find more details on our website.\n\nBest regards,\nSalaryCalculator.my Team`;
 
         await resend.emails.send({
           from: "SalaryCalc <onboarding@resend.dev>",
