@@ -80,7 +80,12 @@ export default async function handler(req: any, res: any) {
     }
 
     // 3. Populate Template
-    $('title').text(post.title + " – HR & Salary Blog Malaysia");
+    const titleText = post.title + " – HR & Salary Blog Malaysia";
+    const descText = post.metaDesc || post.excerpt || "";
+    const pageUrl = "https://salarycalculator.my/blog/" + slug;
+    const imageUrl = post.image || "https://salarycalculator.my/logo-small.png";
+
+    $('title').text(titleText);
     
     if (post.metaDesc) $('meta[name="description"]').attr('content', post.metaDesc);
     else if (post.excerpt) $('meta[name="description"]').attr('content', post.excerpt);
@@ -90,7 +95,17 @@ export default async function handler(req: any, res: any) {
 
     if (post.metaKeywords) $('meta[name="keywords"]').attr('content', post.metaKeywords);
 
-    $('link[rel="canonical"]').attr('href', "https://salarycalculator.my/blog/" + slug);
+    $('link[rel="canonical"]').attr('href', pageUrl);
+
+    // Populate OG & Twitter tags
+    $('meta[property="og:title"]').attr('content', titleText);
+    $('meta[property="og:description"]').attr('content', descText);
+    $('meta[property="og:url"]').attr('content', pageUrl);
+    $('meta[property="og:image"]').attr('content', imageUrl);
+
+    $('meta[property="twitter:title"]').attr('content', titleText);
+    $('meta[property="twitter:description"]').attr('content', descText);
+    $('meta[property="twitter:image"]').attr('content', imageUrl);
 
     $('#breadcrumb-title').text(post.title);
     $('#article-title').text(post.title);

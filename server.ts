@@ -8,6 +8,7 @@ import dotenv from "dotenv";
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
 import blogPostHandler from "./api/blog-post";
+import blogHandler from "./api/blog";
 
 dotenv.config();
 
@@ -92,6 +93,19 @@ async function startServer() {
   const db = getFirestore(fbApp, DB_ID);
 
   app.use(express.json());
+
+  app.get("/api/blog", (req, res) => {
+    return blogHandler(req as any, res as any);
+  });
+
+  app.get("/blog", (req, res) => {
+    return blogHandler(req as any, res as any);
+  });
+
+  app.get("/blog/category/:category", (req, res) => {
+    req.query.category = req.params.category;
+    return blogHandler(req as any, res as any);
+  });
 
   app.get("/api/blog-post", (req, res) => {
     // Wrap to match expected signatures if needed, but Express req/res works for the subset used.

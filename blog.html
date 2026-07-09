@@ -209,6 +209,7 @@
 </main>
 <script>
 (async function() {
+  if (window.__SSR_COMPLETE) return;
   var FB = 'https://www.gstatic.com/firebasejs/10.12.0/';
   var cfg = {apiKey:"AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",authDomain:"gen-lang-client-0273291777.firebaseapp.com",projectId:"gen-lang-client-0273291777"};
   var DB_ID = "ai-studio-f7c7f3ec-1f6a-45a9-a332-4733fe85d918";
