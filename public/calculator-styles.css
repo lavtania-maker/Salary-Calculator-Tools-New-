@@ -2417,7 +2417,7 @@ h3,
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  right: 0;
+  left: 0;
   background: white;
   min-width: 240px;
   border: 1px solid var(--border);
@@ -2437,7 +2437,7 @@ h3,
 
 .dropdown-item {
   display: block;
-  padding: 12px 16px;
+  padding: 12px 20px;
   color: var(--text-muted);
   font-weight: 500;
   font-size: 0.95rem;
