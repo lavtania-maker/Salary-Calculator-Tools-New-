@@ -506,13 +506,15 @@ async function startServer() {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath, {
       extensions: ["html"],
-      maxAge: "1d",
       setHeaders: (res, filePath) => {
         if (filePath.endsWith(".html")) {
           res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
-        } else {
-          // Serve all other static assets (images, CSS, JS, fonts) with 1 year cache life to prevent unoptimized bandwidth wastage
+        } else if (filePath.includes(path.sep + "assets" + path.sep) || filePath.includes("/assets/")) {
+          // Serve all compiled hashed assets with 1 year cache life to prevent unoptimized bandwidth wastage
           res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+        } else {
+          // Serve other unhashed assets (e.g., calculator-styles.css, public logos) with immediate revalidation
+          res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
         }
       }
     }));
