@@ -244,6 +244,55 @@
     <noscript>
       <link href="/calculator-styles.css" rel="stylesheet" />
     </noscript>
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between PCB and income tax?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PCB (Potongan Cukai Bulanan) is your monthly income tax deduction paid to LHDN by your employer. It is an advance payment of your annual income tax. Any overpayment may be refunded after you file your tax return."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if my employer does not deduct PCB?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Employers must deduct and submit PCB to LHDN. If they fail to do so, penalties may apply. Employees are still responsible for declaring and paying any tax due when filing their annual tax return."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I reduce my PCB deduction?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Declaring eligible tax reliefs or making voluntary EPF contributions may reduce your monthly PCB deduction."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I still need to file a tax return if PCB has been deducted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Most employees should still submit their annual LHDN tax return to confirm their tax liability, claim reliefs, and receive any eligible refund."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When does PCB start being deducted?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "PCB generally starts when your estimated annual chargeable income exceeds the tax threshold set by LHDN. The exact amount depends on your salary and personal tax reliefs."
+          }
+        }
+      ]
+    }
+    </script>
 </head><body>
 <script type="application/ld+json">
 {
@@ -589,6 +638,11 @@
               <div style="font-size: 16px; color: #6b7280">
                 Your PCB deduction will appear here
               </div>
+              <noscript>
+                <p style="color: #dc2626; font-weight: 600; margin-top: 10px; background-color: #fef2f2; padding: 12px; border-radius: 8px; border: 1px solid #f87171; text-align: left;">
+                  JavaScript is required to calculate your results. Please enable JavaScript to use this calculator.
+                </p>
+              </noscript>
             </div>
 
             <div id="resultContent" class="result-content">
@@ -1066,6 +1120,122 @@
               <li><strong>Total annual tax</strong> = RM 1,164.00</li>
               <li><strong>Monthly PCB</strong> = RM1,164 ÷ 12 = <strong>RM 97.00</strong></li>
             </ol>
+          </div>
+        </div>
+
+        <!-- Section: Frequently Asked Questions -->
+        <div class="seo-card" style="margin-top: 32px; margin-bottom: 40px;">
+          <h2 class="seo-title" style="color: #2563eb !important; margin-bottom: 8px !important;">Frequently Asked Questions</h2>
+          <div class="faq-container" style="
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              margin-top: 20px;
+            ">
+            <!-- FAQ Item 1 -->
+            <details style="
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #f1f5f9;
+                cursor: pointer;
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                What is the difference between PCB and income tax?
+              </summary>
+              <p style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+                  color: #475569;
+                ">
+                PCB (Potongan Cukai Bulanan) is your monthly income tax deduction paid to LHDN by your employer. It is an advance payment of your annual income tax. Any overpayment may be refunded after you file your tax return.
+              </p>
+            </details>
+
+            <!-- FAQ Item 2 -->
+            <details style="
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #f1f5f9;
+                cursor: pointer;
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                What happens if my employer does not deduct PCB?
+              </summary>
+              <p style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+                  color: #475569;
+                ">
+                Employers must deduct and submit PCB to LHDN. If they fail to do so, penalties may apply. Employees are still responsible for declaring and paying any tax due when filing their annual tax return.
+              </p>
+            </details>
+
+            <!-- FAQ Item 3 -->
+            <details style="
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #f1f5f9;
+                cursor: pointer;
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                Can I reduce my PCB deduction?
+              </summary>
+              <p style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+                  color: #475569;
+                ">
+                Yes. Declaring eligible tax reliefs or making voluntary EPF contributions may reduce your monthly PCB deduction.
+              </p>
+            </details>
+
+            <!-- FAQ Item 4 -->
+            <details style="
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #f1f5f9;
+                cursor: pointer;
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                Do I still need to file a tax return if PCB has been deducted?
+              </summary>
+              <p style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+                  color: #475569;
+                ">
+                Yes. Most employees should still submit their annual LHDN tax return to confirm their tax liability, claim reliefs, and receive any eligible refund.
+              </p>
+            </details>
+
+            <!-- FAQ Item 5 -->
+            <details style="
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #f1f5f9;
+                cursor: pointer;
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                When does PCB start being deducted?
+              </summary>
+              <p style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+                  color: #475569;
+                ">
+                PCB generally starts when your estimated annual chargeable income exceeds the tax threshold set by LHDN. The exact amount depends on your salary and personal tax reliefs.
+              </p>
+            </details>
           </div>
         </div>
 

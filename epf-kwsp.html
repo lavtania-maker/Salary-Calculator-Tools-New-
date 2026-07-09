@@ -256,6 +256,55 @@
     <noscript>
       <link href="/calculator-styles.css" rel="stylesheet" />
     </noscript>
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I withdraw my EPF savings before retirement?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. EPF allows partial withdrawals for eligible purposes such as housing, education, medical expenses, and Hajj. Full withdrawals are allowed at age 55 or under specific conditions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to my EPF if I resign or change jobs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your EPF savings remain in the same account. Your new employer will continue contributing using your existing EPF account."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is EPF contribution mandatory for all employees?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "EPF is mandatory for Malaysian citizens and permanent residents in the private sector. Foreign workers and self-employed individuals may contribute voluntarily."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I contribute more than the standard EPF rate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. You can make voluntary EPF contributions above the mandatory rate, subject to EPF rules and applicable tax relief."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between EPF Account 1, Account 2, and Account 3?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "EPF contributions are divided into three accounts: Account 1 for retirement, Account 2 for approved pre-retirement withdrawals, and Account 3 for flexible withdrawals."
+          }
+        }
+      ]
+    }
+    </script>
 </head><body>
 <script type="application/ld+json">
 {
@@ -576,6 +625,11 @@
                 <div style="font-size: 16px; color: #6b7280">
                   Your EPF contribution will appear here
                 </div>
+                <noscript>
+                  <p style="color: #dc2626; font-weight: 600; margin-top: 10px; background-color: #fef2f2; padding: 12px; border-radius: 8px; border: 1px solid #f87171; text-align: left;">
+                    JavaScript is required to calculate your results. Please enable JavaScript to use this calculator.
+                  </p>
+                </noscript>
               </div>
 
               <!-- Results -->
@@ -1124,6 +1178,122 @@
                 <li>Gifts</li>
               </ul>
             </div>
+          </div>
+        </div>
+
+        <!-- Section: Frequently Asked Questions -->
+        <div class="seo-card" style="margin-top: 32px; margin-bottom: 40px;">
+          <h2 class="seo-title" style="color: #2563eb !important; margin-bottom: 8px !important;">Frequently Asked Questions</h2>
+          <div class="faq-container" style="
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              margin-top: 20px;
+            ">
+            <!-- FAQ Item 1 -->
+            <details style="
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #f1f5f9;
+                cursor: pointer;
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                Can I withdraw my EPF savings before retirement?
+              </summary>
+              <p style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+                  color: #475569;
+                ">
+                Yes. EPF allows partial withdrawals for eligible purposes such as housing, education, medical expenses, and Hajj. Full withdrawals are allowed at age 55 or under specific conditions.
+              </p>
+            </details>
+
+            <!-- FAQ Item 2 -->
+            <details style="
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #f1f5f9;
+                cursor: pointer;
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                What happens to my EPF if I resign or change jobs?
+              </summary>
+              <p style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+                  color: #475569;
+                ">
+                Your EPF savings remain in the same account. Your new employer will continue contributing using your existing EPF account.
+              </p>
+            </details>
+
+            <!-- FAQ Item 3 -->
+            <details style="
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #f1f5f9;
+                cursor: pointer;
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                Is EPF contribution mandatory for all employees?
+              </summary>
+              <p style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+                  color: #475569;
+                ">
+                EPF is mandatory for Malaysian citizens and permanent residents in the private sector. Foreign workers and self-employed individuals may contribute voluntarily.
+              </p>
+            </details>
+
+            <!-- FAQ Item 4 -->
+            <details style="
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #f1f5f9;
+                cursor: pointer;
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                Can I contribute more than the standard EPF rate?
+              </summary>
+              <p style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+                  color: #475569;
+                ">
+                Yes. You can make voluntary EPF contributions above the mandatory rate, subject to EPF rules and applicable tax relief.
+              </p>
+            </details>
+
+            <!-- FAQ Item 5 -->
+            <details style="
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #f1f5f9;
+                cursor: pointer;
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                What is the difference between EPF Account 1, Account 2, and Account 3?
+              </summary>
+              <p style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+                  color: #475569;
+                ">
+                EPF contributions are divided into three accounts: Account 1 for retirement, Account 2 for approved pre-retirement withdrawals, and Account 3 for flexible withdrawals.
+              </p>
+            </details>
           </div>
         </div>
 

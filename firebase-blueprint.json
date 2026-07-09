@@ -10,6 +10,10 @@
           "format": "email",
           "description": "The user's email address"
         },
+        "name": {
+          "type": "string",
+          "description": "The user's name"
+        },
         "action": {
           "type": "string",
           "description": "The action they took (e.g., Download Salary Report)"
@@ -37,6 +41,26 @@
         }
       },
       "required": ["email", "action", "createdAt", "userType"]
+    },
+    "BlogPost": {
+      "title": "Blog Post",
+      "description": "An article published on the blog",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "metaTitle": { "type": "string" },
+        "slug": { "type": "string" },
+        "category": { "type": "array" },
+        "metaDesc": { "type": "string" },
+        "metaKeywords": { "type": "string" },
+        "status": { "type": "string" },
+        "publishedAt": { "type": "string" },
+        "content": { "type": "string" },
+        "readMoreUrl": { "type": "string" },
+        "updatedAt": { "type": "timestamp" },
+        "createdAt": { "type": "timestamp" }
+      },
+      "required": ["title", "slug", "content", "updatedAt"]
     }
   },
   "firestore": {
@@ -45,6 +69,12 @@
         "$ref": "#/entities/Lead"
       },
       "description": "Collection of captured leads"
+    },
+    "/blog_posts/{postId}": {
+      "schema": {
+        "$ref": "#/entities/BlogPost"
+      },
+      "description": "Collection of blog posts"
     }
   }
 }

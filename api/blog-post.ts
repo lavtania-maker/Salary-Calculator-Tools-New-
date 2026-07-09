@@ -36,7 +36,8 @@ function unwrapFirestore(doc: any) {
 const PROJECT_ID = "gen-lang-client-0273291777";
 const DATABASE_ID = "ai-studio-f7c7f3ec-1f6a-45a9-a332-4733fe85d918";
 const COLL = "blog_posts";
-const REST_URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/${DATABASE_ID}/documents/${COLL}?pageSize=100`;
+const API_KEY = "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8";
+const REST_URL = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/${DATABASE_ID}/documents/${COLL}?pageSize=100&key=${API_KEY}`;
 
 const catMap: Record<string, string> = {
   'salary': 'Salary',

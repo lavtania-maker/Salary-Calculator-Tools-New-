@@ -33,11 +33,8 @@ service cloud.firestore {
     }
 
     function isValidLead(data) {
-      // 1. Structure & Size (Pillar 2 & 5)
-      // Note: Map.keys() returns a list which doesn't support hasOnly. 
-      // Using diff({}).affectedKeys() which returns a set (supports hasOnly).
       let allowedKeys = [
-        'email', 'action', 'createdAt', 'userType', 'phoneNumber', 'companyName', 'hiringStatus',
+        'email', 'name', 'action', 'createdAt', 'userType', 'phoneNumber', 'companyName', 'hiringStatus',
         'salary', 'totalDeductions', 'netSalary', 'employeeEpf', 'employeeSocso', 'employeeEis', 
         'employeePcb', 'employerEpf', 'employerSocso', 'employerEis', 'download_via',
         'bonus', 'annualIncome', 'relief', 'taxBracket', 'pcb', 'taxStatus',
@@ -46,17 +43,35 @@ service cloud.firestore {
       ];
       return data.diff({}).affectedKeys().hasOnly(allowedKeys) &&
              data.keys().hasAll(['email', 'action', 'createdAt', 'userType']) &&
-             
-             // 2. Type & Value Validation
              data.email is string && isValidEmail(data.email) &&
              data.action is string && data.action.size() > 0 && data.action.size() <= 100 &&
-             data.createdAt is string && // App sends ISO string
+             data.createdAt is string &&
              data.userType is string && data.userType.size() > 0 &&
-             
-             // 3. Optional Fields Validation
+             (!('name' in data) || (data.name is string && data.name.size() <= 150)) &&
              (!('phoneNumber' in data) || (data.phoneNumber is string && data.phoneNumber.size() <= 50)) &&
              (!('companyName' in data) || (data.companyName is string && data.companyName.size() <= 150)) &&
              (!('hiringStatus' in data) || (data.hiringStatus is string && data.hiringStatus.size() <= 50));
+    }
+
+    function isValidBlogPost(data) {
+      let allowedKeys = [
+        'title', 'metaTitle', 'slug', 'category', 'metaDesc', 'metaKeywords',
+        'status', 'publishedAt', 'content', 'readMoreUrl', 'updatedAt', 'createdAt'
+      ];
+      return data.diff({}).affectedKeys().hasOnly(allowedKeys) &&
+             data.keys().hasAll(['title', 'slug', 'content', 'updatedAt']) &&
+             data.title is string && data.title.size() <= 200 &&
+             data.slug is string && data.slug.size() <= 200 &&
+             data.content is string &&
+             data.updatedAt is timestamp &&
+             (!('metaTitle' in data) || data.metaTitle is string) &&
+             (!('category' in data) || (data.category is list && data.category.size() <= 10)) &&
+             (!('metaDesc' in data) || data.metaDesc is string) &&
+             (!('metaKeywords' in data) || data.metaKeywords is string) &&
+             (!('status' in data) || (data.status is string && data.status.size() <= 50)) &&
+             (!('publishedAt' in data) || data.publishedAt is string) &&
+             (!('readMoreUrl' in data) || data.readMoreUrl is string) &&
+             (!('createdAt' in data) || data.createdAt is timestamp);
     }
 
     // ===============================================================
@@ -64,13 +79,17 @@ service cloud.firestore {
     // ===============================================================
 
     match /leads/{leadId} {
-      // Create: Public leads capture
       allow create: if isValidLead(request.resource.data);
-      
-      // Read/Update/Delete: Admin only
       allow get: if isAdmin();
       allow list: if isAdmin();
       allow update, delete: if isAdmin();
+    }
+
+    match /blog_posts/{postId} {
+      allow read: if true;
+      allow create: if isAdmin() && isValidBlogPost(request.resource.data);
+      allow update: if isAdmin() && isValidBlogPost(request.resource.data);
+      allow delete: if isAdmin();
     }
   }
 }

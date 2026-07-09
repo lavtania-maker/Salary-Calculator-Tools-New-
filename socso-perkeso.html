@@ -251,6 +251,55 @@
     <noscript>
       <link href="/calculator-styles.css" rel="stylesheet" />
     </noscript>
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What happens if my employer doesn't pay SOCSO contributions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Employers who fail to register employees or pay SOCSO contributions may face fines of up to RM10,000 and/or imprisonment of up to 2 years under the Employees' Social Security Act 1969. Employees can report non-compliance through PERKESO's ASSIST portal or by visiting any PERKESO branch."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I withdraw my SOCSO contributions like EPF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. SOCSO is an insurance scheme, not a savings account. You cannot withdraw your contributions as a lump sum. Benefits are only paid when you make a valid claim, such as for work injuries, disability, or dependant claims after death."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does SOCSO coverage continue after I resign?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. SOCSO coverage ends when your employment and contributions stop. However, you may still claim for injuries or illnesses that occurred while you were covered."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are self-employed and gig workers eligible for SOCSO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Self-employed individuals, freelancers, and gig workers can voluntarily join the Self-Employment Social Security Scheme (SKSPS) by paying their own contributions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does SOCSO cover foreign workers in Malaysia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Effective 1 October 2025, SOCSO contributions are mandatory for all foreign workers in Malaysia. Employers must register and contribute for all eligible foreign employees."
+          }
+        }
+      ]
+    }
+    </script>
 </head><body style="min-height: 100vh">
 <script type="application/ld+json">
 {
@@ -645,10 +694,8 @@
                   Complete the form to continue
                 </p>
                 <noscript>
-                  <p style="color: #dc2626; font-weight: 600; margin-top: 10px">
-                    ⚠️ JavaScript is required to calculate your salary. Please
-                    enable JavaScript in your browser settings to use the
-                    interactive calculator.
+                  <p style="color: #dc2626; font-weight: 600; margin-top: 10px; background-color: #fef2f2; padding: 12px; border-radius: 8px; border: 1px solid #f87171; text-align: left;">
+                    JavaScript is required to calculate your results. Please enable JavaScript to use this calculator.
                   </p>
                 </noscript>
               </div>
@@ -1707,6 +1754,11 @@
                 <p style="color: var(--text-muted); font-size: 16px">
                   Complete the form to continue
                 </p>
+                <noscript>
+                  <p style="color: #dc2626; font-weight: 600; margin-top: 10px; background-color: #fef2f2; padding: 12px; border-radius: 8px; border: 1px solid #f87171; text-align: left;">
+                    JavaScript is required to calculate your results. Please enable JavaScript to use this calculator.
+                  </p>
+                </noscript>
               </div>
 
               <!-- Results -->
@@ -4645,6 +4697,124 @@
                 Employees verifying deductions
               </li>
             </ul>
+          </div>
+        </div>
+
+        <!-- Section: Frequently Asked Questions -->
+        <div class="seo-card" style="margin-top: 32px; margin-bottom: 40px;">
+          <h2 class="seo-title" style="color: #2563eb !important; margin-bottom: 8px !important;">Frequently Asked Questions</h2>
+          <p class="seo-subtitle" style="color: #64748b; font-size: 15px; margin-bottom: 24px;">Got questions about SOCSO (PERKESO) contributions in Malaysia? Find the answers to the most common questions below.</p>
+          
+          <div class="faq-container" style="
+              display: flex;
+              flex-direction: column;
+              gap: 12px;
+              margin-top: 20px;
+            ">
+            <!-- FAQ Item 1 -->
+            <details style="
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #f1f5f9;
+                cursor: pointer;
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                What happens if my employer doesn't pay SOCSO contributions?
+              </summary>
+              <p style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+                  color: #475569;
+                ">
+                Employers who fail to register employees or pay SOCSO contributions may face fines of up to RM10,000 and/or imprisonment of up to 2 years under the Employees' Social Security Act 1969. Employees can report non-compliance through PERKESO's ASSIST portal or by visiting any PERKESO branch.
+              </p>
+            </details>
+
+            <!-- FAQ Item 2 -->
+            <details style="
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #f1f5f9;
+                cursor: pointer;
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                Can I withdraw my SOCSO contributions like EPF?
+              </summary>
+              <p style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+                  color: #475569;
+                ">
+                No. SOCSO is an insurance scheme, not a savings account. You cannot withdraw your contributions as a lump sum. Benefits are only paid when you make a valid claim, such as for work injuries, disability, or dependant claims after death.
+              </p>
+            </details>
+
+            <!-- FAQ Item 3 -->
+            <details style="
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #f1f5f9;
+                cursor: pointer;
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                Does SOCSO coverage continue after I resign?
+              </summary>
+              <p style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+                  color: #475569;
+                ">
+                No. SOCSO coverage ends when your employment and contributions stop. However, you may still claim for injuries or illnesses that occurred while you were covered.
+              </p>
+            </details>
+
+            <!-- FAQ Item 4 -->
+            <details style="
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #f1f5f9;
+                cursor: pointer;
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                Are self-employed and gig workers eligible for SOCSO?
+              </summary>
+              <p style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+                  color: #475569;
+                ">
+                Yes. Self-employed individuals, freelancers, and gig workers can voluntarily join the Self-Employment Social Security Scheme (SKSPS) by paying their own contributions.
+              </p>
+            </details>
+
+            <!-- FAQ Item 5 -->
+            <details style="
+                background: #ffffff;
+                padding: 16px;
+                border-radius: 8px;
+                border: 1px solid #f1f5f9;
+                cursor: pointer;
+              ">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                Does SOCSO cover foreign workers in Malaysia?
+              </summary>
+              <p style="
+                  margin-top: 10px;
+                  margin-bottom: 0;
+                  font-size: 16px;
+                  color: #475569;
+                ">
+                Yes. Effective 1 October 2025, SOCSO contributions are mandatory for all foreign workers in Malaysia. Employers must register and contribute for all eligible foreign employees.
+              </p>
+            </details>
           </div>
         </div>
 
