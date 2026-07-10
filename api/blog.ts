@@ -1,6 +1,6 @@
 import * as cheerio from "cheerio";
-import fs from "fs";
-import path from "path";
+import * as fs from "fs";
+import * as path from "path";
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore, collection, query, where, getDocs, orderBy } from "firebase/firestore";
 
@@ -43,6 +43,13 @@ const categoryMeta: Record<string, { title: string; desc: string }> = {
   }
 };
 
+interface BlogListCache {
+  posts: any[];
+  timestamp: number;
+}
+let cachedBlogList: BlogListCache | null = null;
+const LIST_CACHE_TTL = 10 * 60 * 1000; // 10 minutes cache TTL
+
 function fmtDate(d: any) {
   if (!d) return '';
   const dt = new Date(d);
@@ -82,31 +89,52 @@ export default async function handler(req: any, res: any) {
   if (category === "perkeso") category = "socso";
 
   try {
-    // 1. Fetch posts from Firestore
+    // 1. Fetch posts from Firestore (or in-memory cache)
     let allPosts: any[] = [];
-    try {
-      const postsRef = collection(db, COLL);
-      const q = query(postsRef, where("status", "==", "published"), orderBy("publishedAt", "desc"));
-      const querySnapshot = await getDocs(q);
-      allPosts = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-    } catch (err) {
-      // Fallback query without orderBy if indexing issue
-      const postsRef = collection(db, COLL);
-      const q = query(postsRef, where("status", "==", "published"));
-      const querySnapshot = await getDocs(q);
-      allPosts = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-      allPosts.sort((a, b) => (b.publishedAt || '') > (a.publishedAt || '') ? 1 : -1);
-    }
-
-    // Normalize Timestamps/objects
-    allPosts.forEach(post => {
-      for (const key in post) {
-        const val = post[key];
-        if (val && typeof val === 'object' && typeof val.toDate === 'function') {
-          post[key] = val.toDate().toISOString();
+    const now = Date.now();
+    if (cachedBlogList && (now - cachedBlogList.timestamp < LIST_CACHE_TTL)) {
+      console.log(`[CACHE HIT] Serving full blog post list from in-memory cache`);
+      allPosts = cachedBlogList.posts;
+    } else {
+      console.log(`[CACHE MISS] Fetching full blog post list from Firestore`);
+      try {
+        const postsRef = collection(db, COLL);
+        const q = query(postsRef, where("status", "==", "published"), orderBy("publishedAt", "desc"));
+        const querySnapshot = await getDocs(q);
+        allPosts = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+      } catch (err) {
+        console.warn(`[FIRESTORE WARNING] orderBy query failed, trying fallback un-ordered query:`, err);
+        // Fallback query without orderBy if indexing issue or first run
+        try {
+          const postsRef = collection(db, COLL);
+          const q = query(postsRef, where("status", "==", "published"));
+          const querySnapshot = await getDocs(q);
+          allPosts = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+          allPosts.sort((a, b) => (b.publishedAt || '') > (a.publishedAt || '') ? 1 : -1);
+        } catch (dbErr) {
+          console.error(`[FIRESTORE ERROR] Failed to fetch blog post list:`, dbErr);
+          if (cachedBlogList) {
+            console.warn(`[CACHE FALLBACK] Serving expired cached blog post list due to Firestore error`);
+            allPosts = cachedBlogList.posts;
+          } else {
+            throw dbErr;
+          }
         }
       }
-    });
+
+      // Normalize Timestamps/objects
+      allPosts.forEach(post => {
+        for (const key in post) {
+          const val = post[key];
+          if (val && typeof val === 'object' && typeof val.toDate === 'function') {
+            post[key] = val.toDate().toISOString();
+          }
+        }
+      });
+
+      // Cache the result even if empty
+      cachedBlogList = { posts: allPosts, timestamp: now };
+    }
 
     // Filter by category if requested
     let filteredPosts = allPosts;

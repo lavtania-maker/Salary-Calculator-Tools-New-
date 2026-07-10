@@ -1,8 +1,8 @@
 import * as cheerio from "cheerio";
-import fs from "fs";
-import path from "path";
+import * as fs from "fs";
+import * as path from "path";
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { getFirestore, collection, query, where, getDocs, limit } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",
@@ -28,33 +28,66 @@ const catMap: Record<string, string> = {
   'pcb-income-tax': 'PCB / Income Tax'
 };
 
+// In-memory cache to prevent quota exhaustion and ensure ultra-fast rendering for Googlebot
+interface BlogPostCacheEntry {
+  post: any;
+  timestamp: number;
+}
+const blogPostCache = new Map<string, BlogPostCacheEntry>();
+const CACHE_TTL = 10 * 60 * 1000; // 10 minutes cache TTL
+
 export default async function handler(req: any, res: any) {
-  const slug = req.query?.slug || req.params?.slug;
+  let slug = req.query?.slug || req.params?.slug;
   
   if (!slug || typeof slug !== 'string') {
     return res.status(400).send("Missing slug");
   }
 
+  // Normalize slug to handle any trailing slash
+  slug = slug.trim().replace(/\/$/, "");
+
   try {
-    // 1. Fetch from Firestore using standard Web SDK
-    const postsRef = collection(db, COLL);
-    const q = query(postsRef, where("status", "==", "published"));
-    const querySnapshot = await getDocs(q);
-    
+    // Check in-memory cache first to guarantee 100% SLA and zero Firestore reads on repeat requests
     let post: any = null;
-    querySnapshot.forEach((doc) => {
-      const unwrapped = doc.data();
-      if (unwrapped.slug === slug) {
-        post = { ...unwrapped, id: doc.id };
-        // Normalize Timestamps or objects to ISO strings
-        for (const key in post) {
-          const val = post[key];
-          if (val && typeof val === 'object' && typeof val.toDate === 'function') {
-            post[key] = val.toDate().toISOString();
+    const now = Date.now();
+    const cached = blogPostCache.get(slug);
+
+    if (cached && (now - cached.timestamp < CACHE_TTL)) {
+      console.log(`[CACHE HIT] Serving blog post from in-memory cache for slug: ${slug}`);
+      post = cached.post;
+    } else {
+      console.log(`[CACHE MISS] Fetching blog post from Firestore for slug: ${slug}`);
+      try {
+        const postsRef = collection(db, COLL);
+        // Query specifically by slug and status, limiting to 1 document (O(1) database cost!)
+        const q = query(postsRef, where("slug", "==", slug), where("status", "==", "published"), limit(1));
+        const querySnapshot = await getDocs(q);
+        
+        querySnapshot.forEach((doc) => {
+          const unwrapped = doc.data();
+          post = { ...unwrapped, id: doc.id };
+          // Normalize Timestamps or objects to ISO strings
+          for (const key in post) {
+            const val = post[key];
+            if (val && typeof val === 'object' && typeof val.toDate === 'function') {
+              post[key] = val.toDate().toISOString();
+            }
           }
+        });
+
+        // Cache the result (including null to avoid repeated database scans for bad URLs)
+        blogPostCache.set(slug, { post, timestamp: now });
+      } catch (firestoreError) {
+        console.error(`[FIRESTORE ERROR] Failed to fetch blog post for slug: ${slug}:`, firestoreError);
+        // Fallback to expired cache if we have it, to guarantee high availability
+        if (cached) {
+          console.warn(`[CACHE FALLBACK] Serving expired cached post for slug: ${slug} due to Firestore error`);
+          post = cached.post;
+        } else {
+          throw firestoreError;
         }
       }
-    });
+    }
 
     // 2. Load Template
     let templatePath = path.join(process.cwd(), 'public', 'blog-post-template.html');
@@ -167,6 +200,14 @@ export default async function handler(req: any, res: any) {
     }
 
     $('#article-content').html($content.html() || "");
+
+    if (post.image) {
+      $('#article-featured-image').attr('src', post.image);
+      $('#article-featured-image').attr('alt', post.title);
+      $('#article-featured-image-container').css('display', 'block');
+    } else {
+      $('#article-featured-image-container').css('display', 'none');
+    }
 
     if (post.readMoreUrl) {
       $('#read-more-link').attr('href', post.readMoreUrl);

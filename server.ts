@@ -538,8 +538,11 @@ async function startServer() {
     app.get("*all", (req, res) => {
       // If none of the static files matched, check if it's a blog post
       if (req.path.startsWith('/blog/') && !req.path.includes('.')) {
-        req.query.slug = req.path.split('/').pop();
-        return blogPostHandler(req as any, res as any);
+        const slug = req.path.replace(/\/$/, '').split('/').pop();
+        if (slug && slug !== 'blog' && slug !== 'category') {
+          req.query.slug = slug;
+          return blogPostHandler(req as any, res as any);
+        }
       }
       // fallback to index.html
       res.sendFile(path.join(distPath, "index.html"));

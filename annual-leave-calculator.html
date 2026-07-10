@@ -245,6 +245,34 @@
     </noscript>
 
     <link rel="preload" as="image" href="/logo-small.png">
+    <noscript>
+      <style>
+        /* Desktop Dropdown Fallback */
+        .nav-dropdown:hover .dropdown-menu,
+        .nav-dropdown:focus-within .dropdown-menu {
+          visibility: visible !important;
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+          display: block !important;
+        }
+        
+        /* Mobile Navigation Fallback */
+        @media (max-width: 1150px) {
+          .mobile-menu-btn {
+            display: none !important;
+          }
+          .mobile-nav {
+            display: flex !important;
+            position: static !important;
+            box-shadow: none !important;
+            border-top: 1px solid #e2e8f0;
+          }
+          .mobile-submenu {
+            display: block !important;
+          }
+        }
+      </style>
+    </noscript>
 </head><body>
 <script type="application/ld+json">
 {

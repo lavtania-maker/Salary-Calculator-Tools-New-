@@ -371,6 +371,34 @@
     </noscript>
 
     <link rel="preload" as="image" href="/logo-small.png">
+    <noscript>
+      <style>
+        /* Desktop Dropdown Fallback */
+        .nav-dropdown:hover .dropdown-menu,
+        .nav-dropdown:focus-within .dropdown-menu {
+          visibility: visible !important;
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+          display: block !important;
+        }
+        
+        /* Mobile Navigation Fallback */
+        @media (max-width: 1150px) {
+          .mobile-menu-btn {
+            display: none !important;
+          }
+          .mobile-nav {
+            display: flex !important;
+            position: static !important;
+            box-shadow: none !important;
+            border-top: 1px solid #e2e8f0;
+          }
+          .mobile-submenu {
+            display: block !important;
+          }
+        }
+      </style>
+    </noscript>
 </head>
   <body>
     <!-- Navbar -->
@@ -454,6 +482,10 @@
             By SalaryCalculator.my Team <span class="bullet" id="bullet-2" style="display: none; margin: 0 8px;">•</span> <span id="article-date"></span>
           </p>
         </header>
+
+        <div id="article-featured-image-container" style="display: none; margin-bottom: 32px; width: 100%;">
+          <img id="article-featured-image" src="" alt="" style="width: 100%; max-height: 480px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);">
+        </div>
 
         <div id="article-toc" class="toc-box" style="display: none;">
           <h3>Table of Contents</h3>
@@ -616,6 +648,19 @@
             document.getElementById("breadcrumb-title").textContent =
               post.title;
             document.getElementById("article-title").textContent = post.title;
+
+            if (post.image) {
+              var imgEl = document.getElementById("article-featured-image");
+              if (imgEl) {
+                imgEl.src = post.image;
+                imgEl.alt = post.title;
+              }
+              var imgCont = document.getElementById("article-featured-image-container");
+              if (imgCont) imgCont.style.display = "block";
+            } else {
+              var imgCont = document.getElementById("article-featured-image-container");
+              if (imgCont) imgCont.style.display = "none";
+            }
 
             const catEl = document.getElementById("article-category");
             const catMap = {
