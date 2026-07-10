@@ -175,6 +175,42 @@ export default async function handler(req: any, res: any) {
       $('#read-more-container').css('display', 'none');
     }
 
+
+    // Parse FAQ for Schema
+    let faqs = [];
+    let inFaq = false;
+    let currentQuestion = null;
+    let currentAnswer = [];
+    
+    $content('*').each((i, el) => {
+      const tag = el.type === "tag" ? el.name.toLowerCase() : "";
+      const text = $content(el).text().trim();
+      
+      if (tag === 'h2') {
+        if (text.toLowerCase().includes('faq') || text.toLowerCase().includes('frequently asked')) {
+          inFaq = true;
+        } else {
+          if (inFaq && currentQuestion) {
+            faqs.push({ question: currentQuestion, answer: currentAnswer.join(' ') });
+            currentQuestion = null;
+            currentAnswer = [];
+          }
+          inFaq = false;
+        }
+      } else if (inFaq && tag === 'h3') {
+        if (currentQuestion) {
+          faqs.push({ question: currentQuestion, answer: currentAnswer.join(' ') });
+        }
+        currentQuestion = text;
+        currentAnswer = [];
+      } else if (inFaq && currentQuestion && (tag === 'p' || tag === 'ul' || tag === 'ol')) {
+        currentAnswer.push($content(el).html());
+      }
+    });
+    if (currentQuestion) {
+      faqs.push({ question: currentQuestion, answer: currentAnswer.join(' ') });
+    }
+    
     // Schema
     let dateMod = post.updatedAt || post.publishedAt || "";
     if (typeof dateMod === 'string' && dateMod) {
@@ -239,7 +275,24 @@ export default async function handler(req: any, res: any) {
     $('#schema-breadcrumb').remove();
     
     $('head').append(`<script type="application/ld+json" id="schema-article">${JSON.stringify(schema)}</script>`);
+
     $('head').append(`<script type="application/ld+json" id="schema-breadcrumb">${JSON.stringify(breadcrumbSchema)}</script>`);
+    
+    if (faqs.length > 0) {
+      const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": faqs.map(f => ({
+          "@type": "Question",
+          "name": f.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.answer
+          }
+        }))
+      };
+      $('head').append(`<script type="application/ld+json" id="schema-faq">${JSON.stringify(faqSchema)}</script>`);
+    }
     
     $('#loading-skeleton').css('display', 'none');
     $('#article-main').css('display', 'block');
