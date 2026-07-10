@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const version = '20260709';
+const version = '20260710';
 const rootDir = process.cwd();
 
 // Find all HTML files in the root directory

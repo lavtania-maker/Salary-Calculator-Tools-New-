@@ -1146,6 +1146,10 @@ h2 {
   letter-spacing: -0.02em;
 }
 
+#article-title {
+  color: #2563eb !important;
+}
+
 .article-hero {
   width: 100%;
   aspect-ratio: 16 / 9;
