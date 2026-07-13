@@ -100,6 +100,40 @@ export default async function handler(req: any, res: any) {
     const html = fs.readFileSync(templatePath, 'utf-8');
     const $ = cheerio.load(html);
 
+    let relatedHtml = '';
+    if (post) {
+      try {
+        const postsRef = collection(db, COLL);
+        const qRelated = query(postsRef, where("status", "==", "published"), limit(10));
+        const relSnap = await getDocs(qRelated);
+        let relatedPosts: any[] = [];
+        relSnap.forEach((d: any) => {
+          const data = d.data();
+          if (data.slug !== slug && relatedPosts.length < 3) {
+            let pCats = Array.isArray(data.category) ? data.category : [data.category || ""];
+            let myCats = Array.isArray(post.category) ? post.category : [post.category || ""];
+            if (myCats.some((c: string) => pCats.includes(c))) {
+              relatedPosts.push(data);
+            }
+          }
+        });
+        if (relatedPosts.length < 3) {
+          relSnap.forEach((d: any) => {
+            const data = d.data();
+            if (data.slug !== slug && relatedPosts.length < 3 && !relatedPosts.find(r => r.slug === data.slug)) {
+              relatedPosts.push(data);
+            }
+          });
+        }
+        relatedHtml = relatedPosts.map((r: any) => `<li><a href="/blog/${r.slug}" style="color: #2563eb; text-decoration: none;">${r.title}</a></li>`).join('');
+      } catch (e) {
+        console.error("Error fetching related posts", e);
+      }
+    }
+    if (relatedHtml) {
+      $('#related-articles-list').html(relatedHtml);
+    }
+
     if (!post) {
       // Return 404 populated template
       $('title').text("Article Not Found – HR & Salary Blog Malaysia");
@@ -267,9 +301,10 @@ export default async function handler(req: any, res: any) {
 
     const schema = {
       "@context": "https://schema.org",
-      "@type": "Article",
+      "@type": "BlogPosting",
       headline: post.title,
       description: post.excerpt || "",
+      image: imageUrl,
       datePublished: datePub,
       dateModified: dateMod,
       author: [
