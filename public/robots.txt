@@ -15,3 +15,4 @@ Disallow: /socsoreport
 
 # Sitemap location
 Sitemap: https://salarycalculator.my/sitemap.xml
+Sitemap: https://salarycalculator.my/sitemap-blog.xml

@@ -130,7 +130,8 @@ async function startServer() {
     next();
   });
 
-  app.get("/api/sitemap-blog", async (req, res) => {
+  // Also expose at /sitemap-blog.xml directly for preview and indexing
+  app.get(["/api/sitemap-blog", "/sitemap-blog.xml"], async (req, res) => {
     try {
       const postsRef = collection(db, COLL);
       const q = query(postsRef, where("status", "==", "published"));
@@ -177,10 +178,6 @@ async function startServer() {
     }
   });
 
-  // Also expose at /sitemap-blog.xml directly for preview
-  app.get("/sitemap-blog.xml", (req, res) => {
-    res.redirect("/api/sitemap-blog");
-  });
 
   // API Routes
 
