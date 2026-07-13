@@ -2,7 +2,7 @@ import * as cheerio from "cheerio";
 import * as fs from "fs";
 import * as path from "path";
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { fetchBlogPostsRest } from "./rest-firebase";
+import { getFirestore, collection, query, where, getDocs, limit } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",
@@ -18,6 +18,7 @@ const COLL = "blog_posts";
 
 // Initialize Firebase App gracefully
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+const db = getFirestore(app, DB_ID);
 
 const catMap: Record<string, string> = {
   'salary': 'Salary',
@@ -57,10 +58,24 @@ export default async function handler(req: any, res: any) {
     } else {
       console.log(`[CACHE MISS] Fetching blog post from Firestore for slug: ${slug}`);
       try {
-        const posts = await fetchBlogPostsRest(slug);
-        if (posts.length > 0) {
-          post = posts[0];
-        }
+        const postsRef = collection(db, COLL);
+        // Query specifically by slug and status, limiting to 1 document (O(1) database cost!)
+        const q = query(postsRef, where("slug", "==", slug), where("status", "==", "published"), limit(1));
+        const querySnapshot = await getDocs(q);
+        
+        querySnapshot.forEach((doc) => {
+          const unwrapped = doc.data();
+          post = { ...unwrapped, id: doc.id };
+          // Normalize Timestamps or objects to ISO strings
+          for (const key in post) {
+            const val = post[key];
+            if (val && typeof val === 'object' && typeof val.toDate === 'function') {
+              post[key] = val.toDate().toISOString();
+            }
+          }
+        });
+
+        // Cache the result (including null to avoid repeated database scans for bad URLs)
         blogPostCache.set(slug, { post, timestamp: now });
       } catch (firestoreError) {
         console.error(`[FIRESTORE ERROR] Failed to fetch blog post for slug: ${slug}:`, firestoreError);

@@ -2,7 +2,7 @@ import * as cheerio from "cheerio";
 import * as fs from "fs";
 import * as path from "path";
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { fetchBlogPostsRest } from "./rest-firebase";
+import { getFirestore, collection, query, where, getDocs, orderBy } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",
@@ -18,6 +18,7 @@ const COLL = "blog_posts";
 
 // Initialize Firebase App gracefully
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+const db = getFirestore(app, DB_ID);
 
 const categoryMeta: Record<string, { title: string; desc: string }> = {
   'salary': {
@@ -97,14 +98,27 @@ export default async function handler(req: any, res: any) {
     } else {
       console.log(`[CACHE MISS] Fetching full blog post list from Firestore`);
       try {
-        allPosts = await fetchBlogPostsRest();
+        const postsRef = collection(db, COLL);
+        const q = query(postsRef, where("status", "==", "published"), orderBy("publishedAt", "desc"));
+        const querySnapshot = await getDocs(q);
+        allPosts = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
       } catch (err) {
-        console.warn(`[FIRESTORE WARNING] REST query failed:`, err);
-        if (cachedBlogList) {
+        console.warn(`[FIRESTORE WARNING] orderBy query failed, trying fallback un-ordered query:`, err);
+        // Fallback query without orderBy if indexing issue or first run
+        try {
+          const postsRef = collection(db, COLL);
+          const q = query(postsRef, where("status", "==", "published"));
+          const querySnapshot = await getDocs(q);
+          allPosts = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
+          allPosts.sort((a, b) => (b.publishedAt || '') > (a.publishedAt || '') ? 1 : -1);
+        } catch (dbErr) {
+          console.error(`[FIRESTORE ERROR] Failed to fetch blog post list:`, dbErr);
+          if (cachedBlogList) {
             console.warn(`[CACHE FALLBACK] Serving expired cached blog post list due to Firestore error`);
             allPosts = cachedBlogList.posts;
-        } else {
-            throw err;
+          } else {
+            throw dbErr;
+          }
         }
       }
 
