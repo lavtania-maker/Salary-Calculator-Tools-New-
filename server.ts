@@ -137,16 +137,11 @@ async function startServer() {
       const q = query(postsRef, where("status", "==", "published"));
       const querySnapshot = await getDocs(q);
 
-      let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-      xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
-
-      // Add blog landing page URL
-      xml += `  <url>\n`;
-      xml += `    <loc>https://salarycalculator.my/blog</loc>\n`;
-      xml += `    <lastmod>2026-06-25</lastmod>\n`;
-      xml += `    <changefreq>weekly</changefreq>\n`;
-      xml += `    <priority>0.8</priority>\n`;
-      xml += `  </url>\n`;
+      const PREDEFINED_CATEGORIES = ["salary", "epf", "socso", "pcb-income-tax", "annual-leave"];
+      const categories = new Set<string>(PREDEFINED_CATEGORIES);
+      const categoryLastMods = new Map<string, string>();
+      const posts: { slug: string; lastmod: string }[] = [];
+      let maxArticleLastmod = "";
 
       querySnapshot.forEach((doc) => {
         const data = doc.data();
@@ -166,10 +161,66 @@ async function startServer() {
           lastmod = new Date(data.updatedAt).toISOString();
         }
 
-        xml += `  <url>\n`;
-        xml += `    <loc>https://salarycalculator.my/blog/${slug}</loc>\n`;
         if (lastmod) {
-          xml += `    <lastmod>${lastmod}</lastmod>\n`;
+          if (!maxArticleLastmod || lastmod > maxArticleLastmod) {
+            maxArticleLastmod = lastmod;
+          }
+        }
+
+        // Collect categories
+        const rawCats = Array.isArray(data.category) ? data.category : [data.category || ''];
+        const articleCats = rawCats.filter(Boolean).map((c: string) => {
+          let catSlug = c.toLowerCase().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
+          if (catSlug === 'perkeso') catSlug = 'socso';
+          return catSlug;
+        });
+
+        articleCats.forEach((catSlug: string) => {
+          categories.add(catSlug);
+          if (lastmod) {
+            const currentMax = categoryLastMods.get(catSlug);
+            if (!currentMax || lastmod > currentMax) {
+              categoryLastMods.set(catSlug, lastmod);
+            }
+          }
+        });
+
+        posts.push({ slug, lastmod });
+      });
+
+      let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+      xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+
+      // 1. Blog landing page
+      const blogLandingLastmod = maxArticleLastmod && maxArticleLastmod > "2026-06-25" 
+        ? maxArticleLastmod 
+        : "2026-06-25";
+
+      xml += `  <url>\n`;
+      xml += `    <loc>https://salarycalculator.my/blog</loc>\n`;
+      xml += `    <lastmod>${blogLandingLastmod}</lastmod>\n`;
+      xml += `    <changefreq>weekly</changefreq>\n`;
+      xml += `    <priority>0.8</priority>\n`;
+      xml += `  </url>\n`;
+
+      // 2. Blog category pages
+      const sortedCategories = Array.from(categories).sort();
+      sortedCategories.forEach((catSlug) => {
+        const catLastmod = categoryLastMods.get(catSlug) || blogLandingLastmod;
+        xml += `  <url>\n`;
+        xml += `    <loc>https://salarycalculator.my/blog/category/${catSlug}</loc>\n`;
+        xml += `    <lastmod>${catLastmod}</lastmod>\n`;
+        xml += `    <changefreq>weekly</changefreq>\n`;
+        xml += `    <priority>0.8</priority>\n`;
+        xml += `  </url>\n`;
+      });
+
+      // 3. Published blog articles
+      posts.forEach((post) => {
+        xml += `  <url>\n`;
+        xml += `    <loc>https://salarycalculator.my/blog/${post.slug}</loc>\n`;
+        if (post.lastmod) {
+          xml += `    <lastmod>${post.lastmod}</lastmod>\n`;
         }
         xml += `    <changefreq>weekly</changefreq>\n`;
         xml += `    <priority>0.8</priority>\n`;
