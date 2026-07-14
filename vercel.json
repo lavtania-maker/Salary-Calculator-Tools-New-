@@ -14,9 +14,7 @@
     }
   ],
   "rewrites": [
-    { "source": "/sitemap.xml",       "destination": "/public/sitemap.xml" },
     { "source": "/sitemap-blog.xml",  "destination": "/api/sitemap-blog" },
-    { "source": "/robots.txt",        "destination": "/public/robots.txt" },
     { "source": "/privacy-policy",    "destination": "/privacy-policy.html" },
     { "source": "/admin",             "destination": "/admin.html" },
     { "source": "/blog-admin",        "destination": "/blog-admin.html" },
