@@ -11,6 +11,41 @@
       "has": [{ "type": "host", "value": "www.salarycalculator.my" }],
       "destination": "https://salarycalculator.my/$1",
       "permanent": true
+    },
+    {
+      "source": "/epf-contribution-guide-2026",
+      "destination": "/blog/how-to-calculate-epf-kwsp-in-malaysia-formula-contribution-rates",
+      "permanent": true
+    },
+    {
+      "source": "/malaysia-salary-guide-2026",
+      "destination": "/blog/how-to-calculate-gaji-bersih-net-salary-in-malaysia-formula-example-salary-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/annual-leave-malaysia-2026",
+      "destination": "/blog/annual-leave-al-in-malaysia-entitlement-rules-how-to-calculate",
+      "permanent": true
+    },
+    {
+      "source": "/socso-malaysia-2026",
+      "destination": "/blog/epf-socso-eis-malaysia-latest-contribution-rates-employer-guide-2026",
+      "permanent": true
+    },
+    {
+      "source": "/pcb-tax-deduction-202",
+      "destination": "/blog/how-to-calculate-pcb-monthly-tax-deduction-in-malaysia-formula-example",
+      "permanent": true
+    },
+    {
+      "source": "/pcb-tax-deduction-2026",
+      "destination": "/blog/how-to-calculate-pcb-monthly-tax-deduction-in-malaysia-formula-example",
+      "permanent": true
+    },
+    {
+      "source": "/calculate-overtime-pay",
+      "destination": "/overtime-pay-calculator",
+      "permanent": true
     }
   ],
   "rewrites": [

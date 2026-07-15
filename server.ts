@@ -94,6 +94,26 @@ async function startServer() {
 
   app.use(express.json());
 
+  // 301 Redirects for retired/404 URLs reported by Google Search Console
+  const redirectsMap: Record<string, string> = {
+    "/epf-contribution-guide-2026": "/blog/how-to-calculate-epf-kwsp-in-malaysia-formula-contribution-rates",
+    "/malaysia-salary-guide-2026": "/blog/how-to-calculate-gaji-bersih-net-salary-in-malaysia-formula-example-salary-calculator",
+    "/annual-leave-malaysia-2026": "/blog/annual-leave-al-in-malaysia-entitlement-rules-how-to-calculate",
+    "/socso-malaysia-2026": "/blog/epf-socso-eis-malaysia-latest-contribution-rates-employer-guide-2026",
+    "/pcb-tax-deduction-202": "/blog/how-to-calculate-pcb-monthly-tax-deduction-in-malaysia-formula-example",
+    "/pcb-tax-deduction-2026": "/blog/how-to-calculate-pcb-monthly-tax-deduction-in-malaysia-formula-example",
+    "/calculate-overtime-pay": "/overtime-pay-calculator"
+  };
+
+  app.use((req, res, next) => {
+    const cleanPath = req.path.toLowerCase().replace(/\/$/, "");
+    if (redirectsMap[cleanPath]) {
+      res.redirect(301, redirectsMap[cleanPath]);
+      return;
+    }
+    next();
+  });
+
   app.get("/api/blog", (req, res) => {
     return blogHandler(req as any, res as any);
   });
