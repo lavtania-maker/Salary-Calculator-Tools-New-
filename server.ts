@@ -130,6 +130,81 @@ async function startServer() {
     next();
   });
 
+  // Expose dynamic sitemap index
+  app.get(["/api/sitemap", "/sitemap.xml"], async (req, res) => {
+    try {
+      const postsRef = collection(db, COLL);
+      const q = query(postsRef, where("status", "==", "published"));
+      const querySnapshot = await getDocs(q);
+
+      let maxArticleLastmod = "";
+
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        let lastmod = '';
+        if (data.updatedAt && data.updatedAt.toDate) {
+          lastmod = data.updatedAt.toDate().toISOString();
+        } else if (data.publishedAt) {
+          if (typeof data.publishedAt === 'string') {
+            lastmod = new Date(data.publishedAt).toISOString();
+          } else if (data.publishedAt.toDate) {
+            lastmod = data.publishedAt.toDate().toISOString();
+          }
+        } else if (data.updatedAt) {
+          lastmod = new Date(data.updatedAt).toISOString();
+        }
+
+        if (lastmod) {
+          if (!maxArticleLastmod || lastmod > maxArticleLastmod) {
+            maxArticleLastmod = lastmod;
+          }
+        }
+      });
+
+      const blogLandingLastmod = maxArticleLastmod && maxArticleLastmod > "2026-06-25" 
+        ? maxArticleLastmod 
+        : "2026-06-25";
+
+      let pagesLastmod = "2026-07-08";
+      try {
+        const filePath = path.join(process.cwd(), "public", "sitemap-pages.xml");
+        if (fs.existsSync(filePath)) {
+          const content = fs.readFileSync(filePath, "utf8");
+          const lastmodRegex = /<lastmod>([^<]+)<\/lastmod>/g;
+          let match;
+          let maxDate = "";
+          while ((match = lastmodRegex.exec(content)) !== null) {
+            const dateStr = match[1].trim();
+            if (dateStr && (!maxDate || dateStr > maxDate)) {
+              maxDate = dateStr;
+            }
+          }
+          if (maxDate) pagesLastmod = maxDate;
+        }
+      } catch (err) {
+        console.error("Error reading sitemap-pages.xml in server.ts:", err);
+      }
+
+      let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+      xml += `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+      xml += `  <sitemap>\n`;
+      xml += `    <loc>https://salarycalculator.my/sitemap-pages.xml</loc>\n`;
+      xml += `    <lastmod>${pagesLastmod}</lastmod>\n`;
+      xml += `  </sitemap>\n`;
+      xml += `  <sitemap>\n`;
+      xml += `    <loc>https://salarycalculator.my/sitemap-blog.xml</loc>\n`;
+      xml += `    <lastmod>${blogLandingLastmod}</lastmod>\n`;
+      xml += `  </sitemap>\n`;
+      xml += `</sitemapindex>`;
+
+      res.setHeader("Content-Type", "application/xml");
+      res.status(200).send(xml);
+    } catch (error) {
+      console.error("Error generating sitemap index in server:", error);
+      res.status(500).send("Error generating sitemap index");
+    }
+  });
+
   // Also expose at /sitemap-blog.xml directly for preview and indexing
   app.get(["/api/sitemap-blog", "/sitemap-blog.xml"], async (req, res) => {
     try {
@@ -211,7 +286,7 @@ async function startServer() {
         xml += `    <loc>https://salarycalculator.my/blog/category/${catSlug}</loc>\n`;
         xml += `    <lastmod>${catLastmod}</lastmod>\n`;
         xml += `    <changefreq>weekly</changefreq>\n`;
-        xml += `    <priority>0.8</priority>\n`;
+        xml += `    <priority>0.6</priority>\n`;
         xml += `  </url>\n`;
       });
 

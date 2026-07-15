@@ -97,7 +97,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       xml += `    <loc>https://salarycalculator.my/blog/category/${catSlug}</loc>\n`;
       xml += `    <lastmod>${catLastmod}</lastmod>\n`;
       xml += `    <changefreq>weekly</changefreq>\n`;
-      xml += `    <priority>0.8</priority>\n`;
+      xml += `    <priority>0.6</priority>\n`;
       xml += `  </url>\n`;
     });
 
