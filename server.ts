@@ -6,7 +6,7 @@ import { fileURLToPath } from "url";
 import { Resend } from "resend";
 import dotenv from "dotenv";
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { initializeFirestore, collection, query, where, getDocs } from "firebase/firestore";
 import blogPostHandler from "./api/blog-post";
 import blogHandler from "./api/blog";
 
@@ -90,7 +90,7 @@ async function startServer() {
   const DB_ID = "ai-studio-f7c7f3ec-1f6a-45a9-a332-4733fe85d918";
   const COLL = "blog_posts";
   const fbApp = initializeApp(firebaseConfig);
-  const db = getFirestore(fbApp, DB_ID);
+  const db = initializeFirestore(fbApp, { experimentalForceLongPolling: true }, DB_ID);
 
   app.use(express.json());
 

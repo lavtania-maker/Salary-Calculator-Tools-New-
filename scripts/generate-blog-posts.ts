@@ -2,7 +2,7 @@ import * as cheerio from "cheerio";
 import * as fs from "fs";
 import * as path from "path";
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { initializeFirestore, collection, query, where, getDocs } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",
@@ -23,9 +23,64 @@ const catMap: Record<string, string> = {
   'pcb-income-tax': 'PCB / Income Tax'
 };
 
+function replaceTextWithLinks(htmlContent: string): string {
+  const $c = cheerio.load(htmlContent, null, false);
+  const linkedCalcs = new Set<string>();
+  
+  // Keywords in order of specificity
+  const keywords = [
+    { phrase: 'Annual Leave Calculator', url: '/annual-leave-calculator', key: 'annual-leave' },
+    { phrase: 'Overtime Pay Calculator', url: '/overtime-pay-calculator', key: 'overtime' },
+    { phrase: 'Overtime Calculator', url: '/overtime-pay-calculator', key: 'overtime' },
+    { phrase: 'Salary Calculator', url: '/', key: 'salary' },
+    { phrase: 'EPF Calculator', url: '/epf-kwsp', key: 'epf' },
+    { phrase: 'SOCSO Calculator', url: '/socso-perkeso', key: 'socso' },
+    { phrase: 'PCB Calculator', url: '/pcb-income-tax', key: 'pcb' },
+    { phrase: 'Monthly Tax Deduction', url: '/pcb-income-tax', key: 'pcb' }
+  ];
+  
+  $c('p, li').each((_, el) => {
+    $c(el).contents().each(function() {
+      if (this.type === 'text') {
+        let text = $c(this).text();
+        
+        for (const item of keywords) {
+          if (linkedCalcs.has(item.key)) continue;
+          
+          const regex = new RegExp(`\\b${item.phrase}\\b`, 'i');
+          if (regex.test(text)) {
+            const match = text.match(regex);
+            if (match && match.index !== undefined) {
+              const matchedStr = match[0];
+              const before = text.substring(0, match.index);
+              const after = text.substring(match.index + matchedStr.length);
+              
+              const parent = $c(this).parent();
+              if (parent.get(0) && parent.get(0).name === 'a') {
+                continue;
+              }
+              
+              const newNodes = [];
+              if (before) newNodes.push(before);
+              newNodes.push($c(`<a href="${item.url}" class="internal-calc-link">${matchedStr}</a>`));
+              if (after) newNodes.push(after);
+              
+              $c(this).replaceWith(newNodes as any);
+              linkedCalcs.add(item.key);
+              break;
+            }
+          }
+        }
+      }
+    });
+  });
+  
+  return $c.html() || "";
+}
+
 async function generate() {
   const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app, DB_ID);
+  const db = initializeFirestore(app, { experimentalForceLongPolling: true }, DB_ID);
   const postsRef = collection(db, COLL);
   const q = query(postsRef, where("status", "==", "published"));
   
@@ -87,7 +142,32 @@ async function generate() {
         }
       }
     }
-    relatedHtml = relatedPosts.map((r: any) => `<li><a href="/blog/${r.slug}" style="color: #2563eb; text-decoration: none;">${r.title}</a></li>`).join('');
+    relatedHtml = relatedPosts.map((r: any) => {
+      let rCats = Array.isArray(r.category) ? r.category : [r.category || ""];
+      let firstCat = rCats.filter((c: string) => c)[0] || "Salary";
+      let catSlug = firstCat.toLowerCase().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
+      if (catSlug === 'perkeso') catSlug = 'socso';
+      let displayCat = catMap[catSlug] || firstCat.replace(/-/g, ' ').replace(/\b\w/g, (char: string) => char.toUpperCase());
+      
+      let readTimeVal = r.readTime;
+      if (!readTimeVal) {
+        const words = (r.content || "").split(" ").length;
+        readTimeVal = Math.ceil(words / 200);
+      }
+      
+      return `
+        <li>
+          <div class="related-card">
+            <div class="related-card-meta">
+              <span class="related-card-category">${displayCat}</span>
+              <span class="related-card-dot">•</span>
+              <span class="related-card-read-time">${readTimeVal} min read</span>
+            </div>
+            <h4 class="related-card-title"><a href="/blog/${r.slug}">${r.title}</a></h4>
+          </div>
+        </li>
+      `;
+    }).join('');
     
     if (relatedHtml) {
       $('#related-articles-list').html(relatedHtml);
@@ -160,9 +240,10 @@ async function generate() {
       $('#article-read-time').text(readTime + " min read");
     }
 
-    const $content = cheerio.load(post.content || "", null, false);
+    const linkedContent = replaceTextWithLinks(post.content || "");
+    const $content = cheerio.load(linkedContent, null, false);
     $content('table').each((i, el) => {
-      $(el).wrap('<div class="table-wrapper"></div>');
+      $content(el).wrap('<div class="table-wrapper"></div>');
     });
     
     const headings = $content('h2');
@@ -195,6 +276,36 @@ async function generate() {
       $('#read-more-container').css('display', 'block');
     } else {
       $('#read-more-container').css('display', 'none');
+    }
+
+    // Dynamic CTA logic
+    const ctaMapping: Record<string, {name: string, url: string}> = {
+      'epf': { name: 'EPF Calculator', url: '/epf-kwsp' },
+      'socso': { name: 'SOCSO Calculator', url: '/socso-perkeso' },
+      'pcb-income-tax': { name: 'PCB Calculator', url: '/pcb-income-tax' },
+      'annual-leave': { name: 'Annual Leave Calculator', url: '/annual-leave-calculator' },
+      'overtime': { name: 'Overtime Pay Calculator', url: '/overtime-pay-calculator' },
+      'salary': { name: 'PCB Calculator', url: '/pcb-income-tax' }
+    };
+    
+    const ctaPriority = ['epf', 'socso', 'pcb-income-tax', 'annual-leave', 'overtime', 'salary'];
+    
+    const catSlugs = cats.filter((c: string) => c).map((c: string) => {
+      let s = c.toLowerCase().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
+      if (s === 'perkeso') return 'socso';
+      return s;
+    });
+
+    let chosenCta = ctaMapping['salary']; // Default
+    for (const p of ctaPriority) {
+      if (catSlugs.includes(p)) {
+        chosenCta = ctaMapping[p];
+        break;
+      }
+    }
+    
+    if (chosenCta) {
+      $('#cta-second-button').text(chosenCta.name).attr('href', chosenCta.url);
     }
 
     // Parse FAQ for Schema

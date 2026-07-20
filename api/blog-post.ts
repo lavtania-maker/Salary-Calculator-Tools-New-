@@ -2,7 +2,7 @@ import * as cheerio from "cheerio";
 import * as fs from "fs";
 import * as path from "path";
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getFirestore, collection, query, where, getDocs, limit } from "firebase/firestore";
+import { initializeFirestore, collection, query, where, getDocs, limit } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",
@@ -18,12 +18,30 @@ const COLL = "blog_posts";
 
 // Initialize Firebase App gracefully
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-const db = getFirestore(app, DB_ID);
+const db = initializeFirestore(app, { experimentalForceLongPolling: true }, DB_ID);
 
 const catMap: Record<string, string> = {
   'salary': 'Salary',
   'epf': 'EPF',
   'socso': 'SOCSO',
+  'annual-leave': 'Annual Leave',
+  'pcb-income-tax': 'PCB / Income Tax'
+};
+
+const catClasses: Record<string, string> = {
+  'salary': 'category-tips',
+  'epf': 'category-epf',
+  'socso': 'category-socso',
+  'eis': 'category-socso',
+  'annual-leave': 'category-law',
+  'pcb-income-tax': 'category-pcb'
+};
+
+const catDisplay: Record<string, string> = {
+  'salary': 'Salary',
+  'epf': 'EPF',
+  'socso': 'SOCSO',
+  'eis': 'EIS',
   'annual-leave': 'Annual Leave',
   'pcb-income-tax': 'PCB / Income Tax'
 };
@@ -35,6 +53,75 @@ interface BlogPostCacheEntry {
 }
 const blogPostCache = new Map<string, BlogPostCacheEntry>();
 const CACHE_TTL = 10 * 60 * 1000; // 10 minutes cache TTL
+
+interface BlogListCache {
+  posts: any[];
+  timestamp: number;
+}
+let cachedBlogList: BlogListCache | null = null;
+const LIST_CACHE_TTL = 10 * 60 * 1000; // 10 minutes cache TTL
+
+function getArticlesForCategory(allPosts: any[], targetCategory: string, count: number = 4, excludeSlug: string = ''): any[] {
+  const targetNorm = targetCategory.toLowerCase().trim();
+
+  // If targetCategory is empty, 'all', 'featured', or 'salary' for homepage/generic
+  if (!targetCategory || targetNorm === 'all' || targetNorm === 'featured') {
+    // Show the latest featured articles from all categories
+    const filtered = excludeSlug ? allPosts.filter(p => (p.slug || p.id) !== excludeSlug) : allPosts;
+    return filtered.slice(0, count);
+  }
+
+  const matched: any[] = [];
+  
+  // Normalization logic: lower case, strip slashes/spaces/dashes
+  const normalize = (cat: string) => cat.toLowerCase().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
+  const targetNormalized = normalize(targetCategory);
+
+  for (const post of allPosts) {
+    if (matched.length >= count) break;
+    const postSlug = post.slug || post.id;
+    if (excludeSlug && postSlug === excludeSlug) continue;
+
+    const postCats = (Array.isArray(post.category) ? post.category : [post.category || '']).map(c => normalize(c));
+    if (postCats.includes(targetNormalized)) {
+      matched.push(post);
+    }
+  }
+
+  return matched;
+}
+
+function renderCard(post: any): string {
+  const slug = post.slug || post.id;
+  
+  let rawCat = 'Salary';
+  if (post.category) {
+    if (Array.isArray(post.category)) {
+      rawCat = post.category[0] || 'Salary';
+    } else {
+      rawCat = post.category;
+    }
+  }
+  const normCat = rawCat.toLowerCase().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
+  const catClass = catClasses[normCat] || 'category-tips';
+  const catName = catDisplay[normCat] || rawCat;
+  
+  const title = post.title || 'Untitled';
+
+  return `
+    <a class="blog-card" href="/blog/${slug}">
+      <div class="blog-content">
+        <div style="margin-bottom: 12px; display: flex; align-items: center;">
+          <span class="blog-category ${catClass}">${catName}</span>
+        </div>
+        <h3 class="blog-title">${title}</h3>
+        <div class="blog-meta">
+          <span class="read-more-link">Read Article →</span>
+        </div>
+      </div>
+    </a>
+  `.trim();
+}
 
 export default async function handler(req: any, res: any) {
   let slug = req.query?.slug || req.params?.slug;
@@ -248,6 +335,36 @@ export default async function handler(req: any, res: any) {
       $('#read-more-container').css('display', 'block');
     } else {
       $('#read-more-container').css('display', 'none');
+    }
+
+    // Dynamic CTA logic
+    const ctaMapping: Record<string, {name: string, url: string}> = {
+      'epf': { name: 'EPF Calculator', url: '/epf-kwsp' },
+      'socso': { name: 'SOCSO Calculator', url: '/socso-perkeso' },
+      'pcb-income-tax': { name: 'PCB Calculator', url: '/pcb-income-tax' },
+      'annual-leave': { name: 'Annual Leave Calculator', url: '/annual-leave-calculator' },
+      'overtime': { name: 'Overtime Pay Calculator', url: '/overtime-pay-calculator' },
+      'salary': { name: 'PCB Calculator', url: '/pcb-income-tax' }
+    };
+    
+    const ctaPriority = ['epf', 'socso', 'pcb-income-tax', 'annual-leave', 'overtime', 'salary'];
+    
+    const catSlugs = cats.filter((c: string) => c).map((c: string) => {
+      let s = c.toLowerCase().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
+      if (s === 'perkeso') return 'socso';
+      return s;
+    });
+
+    let chosenCta = ctaMapping['salary']; // Default
+    for (const p of ctaPriority) {
+      if (catSlugs.includes(p)) {
+        chosenCta = ctaMapping[p];
+        break;
+      }
+    }
+    
+    if (chosenCta) {
+      $('#cta-second-button').text(chosenCta.name).attr('href', chosenCta.url);
     }
 
 

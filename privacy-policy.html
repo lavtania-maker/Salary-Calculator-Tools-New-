@@ -270,7 +270,7 @@
         color: var(--text-muted);
         font-size: 15px;
         line-height: 1.7;
-        margin-bottom: 10px;
+        margin-bottom: 4px;
       }
 
       .privacy-section p:last-child {
@@ -314,7 +314,7 @@
       .footer-col h4 {
         color: #ffffff;
         font-weight: 700;
-        margin-bottom: 16px;
+        margin-bottom: 8px;
         font-size: 15px;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -324,7 +324,7 @@
         display: block;
         color: #94a3b8;
         font-size: 15px;
-        margin-bottom: 10px;
+        margin-bottom: 4px;
         transition: color 0.2s;
       }
 
@@ -392,7 +392,7 @@
       <div class="container">
         
         <a href="/" class="logo">
-          <img src="/logo-small.png" alt="SalaryCalculator.my" class="logo-img" width="250" height="44" fetchpriority="high">
+          <img src="/logo-small.png?v=2" alt="SalaryCalculator.my" class="logo-img" width="250" height="44" fetchpriority="high">
         </a>
         <a href="/" class="nav-back"> ← Back to Calculator </a>
       </div>
@@ -553,35 +553,170 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <!-- START_EXPLORE_MORE_ARTICLES -->
+<section class="explore-more-section" style="padding: 60px 0; background-color: #f8fafc; border-top: 1px solid #e2e8f0;">
+  <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; width: 100%;">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <h2 style="font-size: 2rem; font-weight: 700; color: #2563eb !important; margin: 0 0 12px 0;">Explore More Articles</h2>
+      <p style="font-size: 1.1rem; color: #64748b; margin: 0; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5;">Browse our latest guides, salary tips, and calculator tutorials.</p>
+    </div>
+    <div class="explore-more-grid">
+      <a class="blog-card" href="/blog/annual-leave-al-in-malaysia-entitlement-rules-how-to-calculate">
+      <div class="blog-content">
+        <div style="margin-bottom: 12px; display: flex; align-items: center;">
+          <span class="blog-category category-law">Annual Leave</span>
+        </div>
+        <h3 class="blog-title">Annual Leave (AL) in Malaysia: Entitlement, Rules & How to Calculate</h3>
+        <div class="blog-meta">
+          <span class="read-more-link">Read Article →</span>
+        </div>
+      </div>
+    </a>
+<a class="blog-card" href="/blog/how-to-calculate-pcb-monthly-tax-deduction-in-malaysia-formula-example">
+      <div class="blog-content">
+        <div style="margin-bottom: 12px; display: flex; align-items: center;">
+          <span class="blog-category category-pcb">PCB / Income Tax</span>
+        </div>
+        <h3 class="blog-title">How to Calculate PCB (Monthly Tax Deduction) in Malaysia: Formula & Example</h3>
+        <div class="blog-meta">
+          <span class="read-more-link">Read Article →</span>
+        </div>
+      </div>
+    </a>
+<a class="blog-card" href="/blog/basic-salary-vs-gross-salary-vs-net-salary-in-malaysia-whats-the-difference">
+      <div class="blog-content">
+        <div style="margin-bottom: 12px; display: flex; align-items: center;">
+          <span class="blog-category category-tips">Salary</span>
+        </div>
+        <h3 class="blog-title">Basic Salary vs Gross Salary vs Net Salary in Malaysia: What's the Difference?</h3>
+        <div class="blog-meta">
+          <span class="read-more-link">Read Article →</span>
+        </div>
+      </div>
+    </a>
+<a class="blog-card" href="/blog/how-to-calculate-epf-kwsp-in-malaysia-formula-contribution-rates">
+      <div class="blog-content">
+        <div style="margin-bottom: 12px; display: flex; align-items: center;">
+          <span class="blog-category category-epf">EPF</span>
+        </div>
+        <h3 class="blog-title">How to Calculate EPF (KWSP) in Malaysia: Formula & Contribution Rates</h3>
+        <div class="blog-meta">
+          <span class="read-more-link">Read Article →</span>
+        </div>
+      </div>
+    </a>
+    </div>
+    <div style="text-align: center; margin-top: 40px;">
+      <a class="view-all-articles-link" href="https://salarycalculator.my/blog" style="display: inline-block; font-size: 1.1rem; font-weight: 600; color: #2563eb; text-decoration: none; transition: color 0.2s ease, transform 0.2s ease;">View All Articles →</a>
+    </div>
+  </div>
+</section>
+<style>
+  .explore-more-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 32px !important;
+    margin-top: 32px !important;
+  }
+  @media (max-width: 640px) {
+    .explore-more-grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      gap: 20px !important;
+    }
+  }
+  .explore-more-grid .blog-card {
+    display: flex !important;
+    flex-direction: column !important;
+    text-decoration: none !important;
+    height: 100% !important;
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+  .explore-more-grid .blog-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+  }
+  .explore-more-grid .blog-content {
+    padding: 32px !important;
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+    border-radius: 12px !important;
+  }
+  @media (max-width: 640px) {
+    .explore-more-grid .blog-content {
+      padding: 24px !important;
+    }
+  }
+  .explore-more-grid .blog-title {
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    color: #0f172a !important;
+    margin: 0 0 16px 0 !important;
+    line-height: 1.4 !important;
+    flex-grow: 1 !important;
+  }
+  .explore-more-grid .blog-meta {
+    margin-top: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+  }
+  .explore-more-grid .read-more-link {
+    color: #2563eb !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    transition: color 0.15s ease !important;
+  }
+  .explore-more-grid .blog-card:hover .read-more-link {
+    color: #1d4ed8 !important;
+  }
+  .view-all-articles-link:hover {
+    color: #1d4ed8 !important;
+    text-decoration: underline !important;
+  }
+</style>
+<!-- END_EXPLORE_MORE_ARTICLES -->
+<footer class="footer">
       <div class="container">
         <div class="footer-grid">
-          <div class="footer-col">
-            <a href="/" class="logo" style="margin-bottom: 20px; display: block">
-              <img src="/logo-small.png" alt="SalaryCalculator.my" referrerpolicy="no-referrer" width="250" height="39" style="
-                  height: 60px;
-                  width: auto;
-                  object-fit: contain;
-                  border-radius: 4px;
-                ">
+          <!-- Logo + Description -->
+          <div class="footer-col" style="max-width: max-content; padding-left: 32px; box-sizing: border-box;">
+            <a href="/" class="logo" style="margin-bottom: 8px; display: block;">
+              <img src="/logo-small.png?v=3" alt="SalaryCalculator.my" width="250" height="44" style="height: 44px !important; width: auto !important; max-width: none !important; object-fit: contain; object-position: left center; display: block; margin: 0; padding: 0;">
             </a>
-            <p style="color: #94a3b8; font-size: 15px; line-height: 1.6">
+            <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
               Accurate Malaysia salary calculator.<br>
               Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
             </p>
+            <div style="font-size: 15px; color: #64748b; margin: 0;">
+              <p style="margin: 0 0 8px 0;">© 2026 SalaryCalculator.my. All rights reserved.</p>
+              <p style="margin: 0;">Data is estimated for reference only</p>
+            </div>
           </div>
-          <div class="footer-col">
+
+          <!-- Quick Links -->
+          <div class="footer-col footer-col-links">
             <h4>Quick Links</h4>
             <a href="/" class="footer-link">Salary Calculator</a>
-            <a href="/socso-perkeso" class="footer-link">SOCSO (PERKESO) Calculator</a>
-            <a href="/privacy-policy" class="footer-link" style="color: #ffffff">Privacy Policy</a>
+            <a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
+            <a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
+            <a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
+            <a href="/annual-leave-calculator" class="footer-link">Annual Leave Calculator</a>
+            <a href="/overtime-pay-calculator" class="footer-link">Overtime Pay Calculator</a>
+            <a href="/blog" class="footer-link">Blog</a>
+            <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
           </div>
-        </div>
-        <div class="footer-bottom">
-          <p>© 2026 SalaryCalculator.my. All rights reserved.</p>
-          <p style="margin-top: 8px; font-size: 15px; color: #64748b">
-            Data is estimated for reference only
-          </p>
         </div>
       </div>
     </footer>

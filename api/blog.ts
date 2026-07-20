@@ -2,7 +2,7 @@ import * as cheerio from "cheerio";
 import * as fs from "fs";
 import * as path from "path";
 import { initializeApp, getApps, getApp } from "firebase/app";
-import { getFirestore, collection, query, where, getDocs, orderBy } from "firebase/firestore";
+import { initializeFirestore, collection, query, where, getDocs, orderBy } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",
@@ -18,7 +18,7 @@ const COLL = "blog_posts";
 
 // Initialize Firebase App gracefully
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-const db = getFirestore(app, DB_ID);
+const db = initializeFirestore(app, { experimentalForceLongPolling: true }, DB_ID);
 
 const categoryMeta: Record<string, { title: string; desc: string }> = {
   'salary': {
@@ -42,6 +42,8 @@ const categoryMeta: Record<string, { title: string; desc: string }> = {
     desc: "Understand your rights regarding annual leave entitlements, sick leave, public holidays, and rest days under the Malaysia Employment Act."
   }
 };
+
+
 
 interface BlogListCache {
   posts: any[];
@@ -83,6 +85,8 @@ function card(p: any, large: boolean) {
     descHtml +
     `<div class="card-meta"><div class="card-date">${fmtDate(p.publishedAt)}</div></div></a>`;
 }
+
+
 
 export default async function handler(req: any, res: any) {
   let category = req.query?.category || req.params?.category || "";
@@ -199,6 +203,8 @@ export default async function handler(req: any, res: any) {
     }
 
     $('#articlesContainer').html(renderedHtml);
+
+
 
     // 6. Prepend SSR completed script to prevent client-side double load
     $('head').prepend('<script>window.__SSR_COMPLETE = true;</script>');

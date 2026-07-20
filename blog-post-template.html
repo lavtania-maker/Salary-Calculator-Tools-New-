@@ -88,6 +88,12 @@
         }
       </style>
     </noscript>
+    
+    <style>
+      body {
+        background-color: #f8fafc !important;
+      }
+    </style>
 
     <!-- Google Fonts -->
     
@@ -159,13 +165,21 @@
     </script>
     <style>
       article {
-        max-width: 780px;
+        max-width: 840px;
         margin: 0 auto;
+        background: #FFFFFF;
+        border: 1px solid #E5E7EB;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px -2px rgba(0,0,0,0.05), 0 2px 8px -1px rgba(0,0,0,0.025);
+        padding: 48px;
+        box-sizing: border-box;
       }
       .breadcrumb {
         font-size: 13px;
         color: #64748b;
-        margin-bottom: 40px;
+        margin: 0 auto 24px auto;
+        max-width: 840px;
+        padding: 0 8px;
         text-align: left;
       }
       .breadcrumb a {
@@ -182,35 +196,67 @@
         color: #cbd5e1;
       }
       .article-header {
-        max-width: 850px;
-        margin: 0 auto 48px auto;
+        max-width: 100%;
+        margin: 0 auto 36px auto;
         text-align: center;
-        padding: 0 16px;
+        border-bottom: 1px solid #f1f5f9;
+        padding-bottom: 32px;
       }
       .article-meta {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 8px;
-        font-size: 0.875rem;
-        color: #64748b;
+        gap: 12px;
         margin-bottom: 20px;
       }
-      .article-meta .bullet, .article-author .bullet {
-        color: #cbd5e1;
-        font-size: 10px;
-        margin: 0 8px;
+      #article-category {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      #article-category a {
+        background-color: #eff6ff;
+        color: #2563eb !important;
+        font-weight: 600;
+        font-size: 0.75rem;
+        padding: 6px 14px;
+        border-radius: 9999px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+        transition: all 0.15s ease-in-out;
         display: inline-block;
+        border: 1px solid #dbeafe;
+      }
+      #article-category a:hover {
+        background-color: #dbeafe;
+        text-decoration: none;
+      }
+      #article-read-time {
+        font-size: 0.75rem;
+        color: #475569;
+        font-weight: 600;
+        background-color: #f1f5f9;
+        padding: 6px 14px;
+        border-radius: 9999px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        display: inline-block;
+        border: 1px solid #e2e8f0;
+      }
+      .article-meta .bullet, .article-author .bullet {
+        display: none !important;
       }
       .article-title {
-        font-size: 2.75rem;
+        font-size: clamp(1.8rem, 4.5vw, 2.5rem);
         font-weight: 800;
-        color: #2563eb;
-        margin: 0 0 20px 0;
-        line-height: 1.3;
+        color: #2563eb !important;
+        margin: 16px 0;
+        line-height: 1.25;
         letter-spacing: -0.02em;
         word-wrap: break-word;
+        text-align: center;
       }
       #article-title {
         color: #2563eb !important;
@@ -226,6 +272,10 @@
         font-weight: 500;
         margin: 0;
       }
+      #article-date {
+        color: #475569;
+        font-weight: 600;
+      }
       /* Loading Skeleton */
       .skeleton {
         background: #f1f5f9;
@@ -239,7 +289,7 @@
         100% { background-position: -200% 0; }
       }
       #loading-skeleton {
-        max-width: 780px;
+        max-width: 840px;
         margin: 40px auto;
         padding: 0 20px;
       }
@@ -248,40 +298,55 @@
       .skeleton-line { height: 16px; width: 100%; margin-bottom: 12px; }
       .skeleton-line.short { width: 60%; }
 
+      .article-body h1, .article-body h1 * {
+        color: #2563eb !important;
+      }
+      .article-body h2, .article-body h2 * {
+        color: #2563eb !important;
+      }
       .article-body h2 {
-        font-size: 1.5rem;
+        font-size: 1.625rem;
         font-weight: 700;
-        color: #0f172a;
-        margin: 40px 0 16px;
-        padding-left: 14px;
+        margin: 44px 0 18px;
+        padding-left: 16px;
         border-left: 4px solid #2563eb;
         line-height: 1.3;
       }
+      .article-body h3, .article-body h3 * {
+        color: #2563eb !important;
+      }
       .article-body h3 {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         font-weight: 600;
-        color: #0f172a;
-        margin: 28px 0 12px;
+        margin: 32px 0 14px;
+        line-height: 1.4;
+      }
+      .article-body h4, .article-body h4 *,
+      .article-body h5, .article-body h5 *,
+      .article-body h6, .article-body h6 * {
+        color: #2563eb !important;
       }
       .article-body p {
-        font-size: 1rem;
+        font-size: 1.05rem;
         line-height: 1.8;
         color: #334155;
-        margin-bottom: 20px;
+        margin-bottom: 24px;
       }
       .article-body ul {
         list-style-type: disc !important;
-        padding-left: 1.8em !important;
-        margin-bottom: 1em !important;
+        padding-left: 2em !important;
+        margin-bottom: 24px !important;
       }
       .article-body ol {
         list-style-type: decimal !important;
-        padding-left: 1.8em !important;
-        margin-bottom: 1em !important;
+        padding-left: 2em !important;
+        margin-bottom: 24px !important;
       }
       .article-body li {
         display: list-item !important;
-        margin-bottom: 0.4em !important;
+        margin-bottom: 8px !important;
+        line-height: 1.75;
+        color: #334155;
       }
       .article-body a {
         color: #2563eb !important;
@@ -293,13 +358,13 @@
       .article-body table {
         width: 100%;
         border-collapse: collapse !important;
-        margin-bottom: 1.5em;
-        font-size: 15px;
+        margin-bottom: 0;
+        font-size: 0.95rem;
       }
       .article-body table th,
       .article-body table td {
-        border: 1px solid #e2e8f0 !important;
-        padding: 12px 16px !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+        padding: 14px 18px !important;
         text-align: left;
         vertical-align: middle;
       }
@@ -307,6 +372,7 @@
         background: #f8fafc !important;
         font-weight: 700;
         color: #0f172a;
+        border-bottom: 2px solid #cbd5e1 !important;
       }
       .article-body table tr:nth-child(even) {
         background: #f8fafc !important;
@@ -314,56 +380,327 @@
       .article-body table tr:hover {
         background: #f1f5f9 !important;
       }
+      .article-body table tr:last-child td {
+        border-bottom: none !important;
+      }
       .article-body .table-wrapper {
         overflow-x: auto;
-        margin-bottom: 1.5em;
+        margin-bottom: 28px;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+      }
+      
+      /* Collapsible Table Styles */
+      .article-body .table-wrapper.collapsible-wrapper {
+        position: relative;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+      }
+      .article-body .table-wrapper.collapsible-wrapper::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 30%, rgba(255, 255, 255, 0) 100%);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      .article-body .table-wrapper.collapsible-wrapper.collapsed::after {
+        opacity: 1;
+      }
+      
+      .table-collapse-btn-container {
+        display: flex;
+        justify-content: center;
+        margin-top: -16px;
+        margin-bottom: 32px;
+        position: relative;
+        z-index: 10;
+      }
+      .table-collapse-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #ffffff;
+        color: #2563eb;
+        border: 1px solid #e2e8f0;
+        padding: 10px 24px;
+        border-radius: 9999px;
+        font-weight: 600;
+        font-size: 0.875rem;
+        cursor: pointer;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.025);
+        transition: all 0.2s ease-in-out;
+      }
+      .table-collapse-btn:hover {
+        background-color: #f8fafc;
+        border-color: #cbd5e1;
+        color: #1d4ed8;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.08), 0 3px 6px -1px rgba(0, 0, 0, 0.03);
+      }
+      .table-collapse-btn:active {
+        transform: translateY(1px);
+      }
+      .table-collapse-btn .chevron-icon {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        stroke-width: 2.5;
+        fill: none;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .article-body .table-wrapper.collapsed + .table-collapse-btn-container .table-collapse-btn .chevron-icon {
+        transform: rotate(0deg);
+      }
+      .article-body .table-wrapper:not(.collapsed) + .table-collapse-btn-container .table-collapse-btn .chevron-icon {
+        transform: rotate(180deg);
       }
       .article-body strong {
         color: #0f172a;
+      }
+      .article-body blockquote {
+        border-left: 4px solid #cbd5e1;
+        padding-left: 16px;
+        margin: 24px 0;
+        font-style: italic;
+        color: #475569;
+        background: #f8fafc;
+        padding: 16px;
+        border-radius: 0 8px 8px 0;
       }
       .toc-box {
         background: #f8fafc;
         border: 1px solid #e2e8f0;
         border-radius: 12px;
-        padding: 24px;
-        margin: 0 0 32px 0;
+        padding: 20px;
+        margin: 0 0 36px 0;
       }
       .toc-box h3 {
-        font-size: 15px !important;
+        font-size: 0.875rem !important;
         font-weight: 700 !important;
-        color: #0f172a !important;
-        margin: 0 0 16px 0 !important;
+        color: #2563eb !important;
+        margin: 0 0 12px 0 !important;
         text-transform: uppercase;
         letter-spacing: 0.05em;
+        border: none !important;
+        padding: 0 !important;
       }
       .toc-box ul {
         list-style: none !important;
         margin: 0 !important;
         padding: 0 !important;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
       }
       .toc-box li {
-        margin-bottom: 12px !important;
-        display: flex;
-        gap: 8px;
-        line-height: 1.5;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center;
+        line-height: 1.4;
       }
       .toc-box li::before {
-        content: "•";
-        color: #94a3b8;
-        font-weight: bold;
-      }
-      .toc-box li:last-child {
-        margin-bottom: 0 !important;
+        display: none !important;
       }
       .toc-box a {
-        color: #3b82f6;
+        color: #475569;
         text-decoration: none;
+        font-size: 0.925rem;
         font-weight: 500;
-        transition: color 0.15s;
+        padding: 6px 12px;
+        border-radius: 6px;
+        display: block;
+        width: 100%;
+        transition: all 0.15s ease-in-out;
+        border-left: 2px solid transparent;
       }
       .toc-box a:hover {
-        color: #1d4ed8;
-        text-decoration: underline;
+        color: #2563eb;
+        background: #f1f5f9;
+        text-decoration: none;
+        padding-left: 16px;
+        border-left-color: #2563eb;
+      }
+      .toc-box a.active-toc {
+        color: #2563eb;
+        background: #eff6ff;
+        font-weight: 600;
+        padding-left: 16px;
+        border-left-color: #2563eb;
+      }
+      
+      /* CTA and Related articles styles */
+      .cta-box {
+        margin-top: 56px;
+        padding: 36px;
+        background: #f8fafc;
+        border-radius: 16px;
+        border: 1px solid #e5e7eb;
+      }
+      .cta-box h3 {
+        margin-top: 0 !important;
+        color: #2563eb !important;
+        font-size: 1.35rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 12px !important;
+      }
+      .cta-box p {
+        color: #475569;
+        margin-bottom: 24px;
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+      .cta-buttons {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 36px;
+      }
+      .cta-btn-primary {
+        display: inline-block;
+        background: #2563eb;
+        color: #fff !important;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none !important;
+        transition: background 0.15s;
+      }
+      .cta-btn-primary:hover {
+        background: #1d4ed8;
+        text-decoration: none !important;
+      }
+      .cta-btn-secondary {
+        display: inline-block;
+        background: #fff;
+        color: #2563eb !important;
+        border: 1px solid #2563eb;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none !important;
+        transition: all 0.15s;
+      }
+      .cta-btn-secondary:hover {
+        background: #eff6ff;
+        text-decoration: none !important;
+      }
+      .related-heading {
+        margin-top: 36px !important;
+        color: #2563eb !important;
+        font-size: 1.15rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 16px !important;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      #related-articles-list {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+        gap: 16px !important;
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      #related-articles-list li {
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .related-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 18px;
+        transition: all 0.15s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        box-sizing: border-box;
+      }
+      .related-card:hover {
+        border-color: #2563eb;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.05);
+      }
+      .related-card-meta {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.75rem;
+        color: #64748b;
+        font-weight: 500;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+      }
+      .related-card-category {
+        color: #2563eb;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+      .related-card-dot {
+        color: #cbd5e1;
+      }
+      .related-card-read-time {
+        color: #64748b;
+      }
+      .related-card-title {
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        line-height: 1.45 !important;
+        margin: 0 !important;
+      }
+      .related-card-title a {
+        color: #1e293b !important;
+        text-decoration: none !important;
+        display: block;
+      }
+      .related-card-title a:hover {
+        color: #2563eb !important;
+      }
+      
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+        article {
+          padding: 32px 20px;
+          border-radius: 12px;
+        }
+        .cta-box {
+          padding: 24px 20px;
+        }
+        .cta-buttons {
+          flex-direction: column;
+          gap: 10px;
+        }
+        .cta-btn-primary, .cta-btn-secondary {
+          width: 100%;
+          text-align: center;
+        }
+        .toc-box {
+          padding: 16px;
+        }
+      }
+      @media (max-width: 480px) {
+        article {
+          padding: 24px 16px;
+          border-radius: 8px;
+        }
+        .article-title {
+          font-size: 1.625rem;
+        }
+        .toc-box a {
+          font-size: 0.875rem;
+          padding: 4px 8px;
+        }
       }
     </style>
   
@@ -423,7 +760,7 @@
           position: relative;
         ">
         <a href="/" class="logo">
-          <img src="/logo-small.png" alt="SalaryCalculator.my" class="logo-img" width="250" height="44">
+          <img src="/logo-small.png?v=2" alt="SalaryCalculator.my" class="logo-img" width="250" height="44">
         </a>
 
         
@@ -523,19 +860,17 @@
           </a>
         </div>
 
-        <div id="cta-related" style="margin-top: 60px; padding: 32px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0;">
-          <h3 style="margin-top: 0; color: #0f172a; font-size: 20px; margin-bottom: 16px;">Simplify Your Payroll Today</h3>
-          <p style="color: #475569; margin-bottom: 24px; line-height: 1.6;">Use our free tools to calculate your PCB, EPF, and SOCSO deductions instantly. Stay compliant with Malaysian labor laws.</p>
-          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <a href="/" style="display: inline-block; background: #2563eb; color: #fff; padding: 10px 20px; border-radius: 8px; font-weight: 500; text-decoration: none;">Salary Calculator</a>
-            <a href="/pcb-income-tax" style="display: inline-block; background: #fff; color: #2563eb; border: 1px solid #2563eb; padding: 10px 20px; border-radius: 8px; font-weight: 500; text-decoration: none;">PCB Calculator</a>
+        <div id="cta-related" class="cta-box">
+          <h3>Simplify Your Payroll Today</h3>
+          <p>Use our free tools to calculate your PCB, EPF, and SOCSO deductions instantly. Stay compliant with Malaysian labor laws.</p>
+          <div class="cta-buttons">
+            <a href="/" class="cta-btn-primary">Salary Calculator</a>
+            <a id="cta-second-button" href="/pcb-income-tax" class="cta-btn-secondary">PCB Calculator</a>
           </div>
           
-          <h4 style="margin-top: 32px; color: #0f172a; font-size: 16px; margin-bottom: 12px;">Related Articles</h4>
-          <ul id="related-articles-list" style="list-style: none; padding: 0; margin: 0; display: grid; gap: 8px;">
-            <li><a href="/blog/how-to-calculate-pcb-monthly-tax-deduction-in-malaysia-formula-example" style="color: #2563eb; text-decoration: none;">How to Calculate PCB (Monthly Tax Deduction) in Malaysia</a></li>
-            <li><a href="/blog/how-to-calculate-epf-kwsp-in-malaysia-formula-contribution-rates" style="color: #2563eb; text-decoration: none;">How to Calculate EPF (KWSP) in Malaysia</a></li>
-            <li><a href="/blog/epf-socso-eis-malaysia-latest-contribution-rates-employer-guide-2026" style="color: #2563eb; text-decoration: none;">EPF, SOCSO & EIS Contribution Rates Guide</a></li>
+          <h4 class="related-heading">Related Articles</h4>
+          <ul id="related-articles-list">
+            <!-- Dynamically populated related cards -->
           </ul>
         </div>
 
@@ -561,23 +896,26 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
+
+<footer class="footer">
       <div class="container">
         <div class="footer-grid">
-          <div class="footer-col">
-            <a href="/" class="logo" style="margin-bottom: 20px; display: block">
-              <img src="/logo-small.png" alt="SalaryCalculator.my" referrerpolicy="no-referrer" width="250" height="44" style="
-                  height: 60px;
-                  width: auto;
-                  object-fit: contain;
-                  border-radius: 4px;
-                ">
+          <!-- Logo + Description -->
+          <div class="footer-col" style="max-width: max-content; padding-left: 32px; box-sizing: border-box;">
+            <a href="/" class="logo" style="margin-bottom: 16px; display: block;">
+              <img src="/logo-small.png?v=3" alt="SalaryCalculator.my" width="250" height="44" style="height: 44px !important; width: auto !important; max-width: none !important; object-fit: contain; object-position: left center; display: block; margin: 0; padding: 0;">
             </a>
-            <p style="color: #94a3b8; font-size: 15px; line-height: 1.6">
+            <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
               Accurate Malaysia salary calculator.<br>
               Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
             </p>
+            <div style="font-size: 15px; color: #64748b; margin: 0;">
+              <p style="margin: 0 0 8px 0;">© 2026 SalaryCalculator.my. All rights reserved.</p>
+              <p style="margin: 0;">Data is estimated for reference only</p>
+            </div>
           </div>
+
+          <!-- Quick Links -->
           <div class="footer-col footer-col-links">
             <h4>Quick Links</h4>
             <a href="/" class="footer-link">Salary Calculator</a>
@@ -585,12 +923,10 @@
             <a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
             <a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
             <a href="/annual-leave-calculator" class="footer-link">Annual Leave Calculator</a>
+            <a href="/overtime-pay-calculator" class="footer-link">Overtime Pay Calculator</a>
             <a href="/blog" class="footer-link">Blog</a>
             <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
           </div>
-        </div>
-        <div class="footer-bottom">
-          <p>© 2026 SalaryCalculator.my</p>
         </div>
       </div>
     </footer>
@@ -612,6 +948,156 @@
           mobileNavMenu.classList.toggle("open");
         });
       }
+
+      // Highlight active section in Table of Contents on scroll
+      window.addEventListener("DOMContentLoaded", () => {
+        // Since content might be loaded dynamically, let's run this setup
+        const setupScrollSpy = () => {
+          const headings = Array.from(document.querySelectorAll(".article-body h2"));
+          const tocLinks = Array.from(document.querySelectorAll("#toc-list a"));
+          
+          if (headings.length > 0 && tocLinks.length > 0) {
+            const observerOptions = {
+              root: null,
+              rootMargin: "0px 0px -50% 0px",
+              threshold: 0
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  const id = entry.target.getAttribute("id");
+                  tocLinks.forEach((link) => {
+                    const href = link.getAttribute("href");
+                    if (href === "#" + id || href === id) {
+                      link.classList.add("active-toc");
+                    } else {
+                      link.classList.remove("active-toc");
+                    }
+                  });
+                }
+              });
+            }, observerOptions);
+            
+            headings.forEach((heading) => {
+              observer.observe(heading);
+            });
+          }
+        };
+
+        const setupCollapsibleTables = () => {
+          const wrappers = document.querySelectorAll(".article-body .table-wrapper");
+          
+          wrappers.forEach((wrapper) => {
+            if (wrapper.dataset.collapsibleInitialized) return;
+            
+            const table = wrapper.querySelector("table");
+            if (!table) return;
+            
+            const rows = Array.from(table.querySelectorAll("tr"));
+            const rowCount = rows.length;
+            const initialHeight = wrapper.offsetHeight;
+            
+            // Limit to tables with > 6 rows OR > 400px height
+            if (rowCount > 6 || initialHeight > 400) {
+              wrapper.dataset.collapsibleInitialized = "true";
+              
+              // Calculate height of first 4 rows (header + first 3 data rows)
+              const rowsToShowCount = Math.min(rowCount, 4);
+              let collapsedHeight = 0;
+              
+              const computeCollapsedHeight = () => {
+                let h = 0;
+                for (let i = 0; i < rowsToShowCount; i++) {
+                  h += rows[i].offsetHeight;
+                }
+                return h;
+              };
+              
+              collapsedHeight = computeCollapsedHeight();
+              
+              // Handle edge case where browser has not computed layout yet
+              if (collapsedHeight === 0 || collapsedHeight > 350) {
+                collapsedHeight = 220; // safe default
+                
+                const recalculate = () => {
+                  const h = computeCollapsedHeight();
+                  if (h > 0 && wrapper.classList.contains("collapsed")) {
+                    collapsedHeight = h;
+                    wrapper.style.maxHeight = h + "px";
+                  }
+                };
+                window.addEventListener("load", recalculate);
+                setTimeout(recalculate, 100);
+                setTimeout(recalculate, 500);
+              }
+              
+              wrapper.classList.add("collapsible-wrapper", "collapsed");
+              wrapper.style.maxHeight = collapsedHeight + "px";
+              
+              // Create show more/less button
+              const btnContainer = document.createElement("div");
+              btnContainer.className = "table-collapse-btn-container";
+              
+              const btn = document.createElement("button");
+              btn.className = "table-collapse-btn";
+              btn.setAttribute("aria-expanded", "false");
+              btn.innerHTML = `
+                <span>Show More</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" stroke="currentColor">
+                  <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              `;
+              
+              btnContainer.appendChild(btn);
+              wrapper.parentNode.insertBefore(btnContainer, wrapper.nextSibling);
+              
+              btn.addEventListener("click", () => {
+                const isCollapsed = wrapper.classList.contains("collapsed");
+                
+                if (isCollapsed) {
+                  // Expand
+                  wrapper.classList.remove("collapsed");
+                  btn.setAttribute("aria-expanded", "true");
+                  // Animate to full table height
+                  const fullHeight = table.offsetHeight + 10;
+                  wrapper.style.maxHeight = fullHeight + "px";
+                  btn.querySelector("span").textContent = "Show Less";
+                  
+                  const handleTransitionEnd = () => {
+                    if (!wrapper.classList.contains("collapsed")) {
+                      wrapper.style.maxHeight = "none";
+                    }
+                    wrapper.removeEventListener("transitionend", handleTransitionEnd);
+                  };
+                  wrapper.addEventListener("transitionend", handleTransitionEnd);
+                } else {
+                  // Collapse
+                  // Set height explicitly first so browser can animate down
+                  wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+                  wrapper.offsetHeight; // force reflow
+                  
+                  wrapper.classList.add("collapsed");
+                  btn.setAttribute("aria-expanded", "false");
+                  wrapper.style.maxHeight = collapsedHeight + "px";
+                  btn.querySelector("span").textContent = "Show More";
+                  
+                  // Scroll table wrapper back into view if it was scrolled out of view
+                  const rect = wrapper.getBoundingClientRect();
+                  if (rect.top < 0) {
+                    wrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                }
+              });
+            }
+          });
+        };
+
+        // Run after brief delay to allow dynamic content rendering
+        setTimeout(setupScrollSpy, 500);
+        setTimeout(setupCollapsibleTables, 100);
+        setTimeout(setupCollapsibleTables, 500);
+      });
     </script>
   
     

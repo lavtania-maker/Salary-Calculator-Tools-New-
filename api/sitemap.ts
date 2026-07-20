@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, query, where, getDocs } from "firebase/firestore";
+import { initializeFirestore, collection, query, where, getDocs } from "firebase/firestore";
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import fs from "fs";
 import path from "path";
@@ -43,7 +43,7 @@ function getSitemapPagesLastmod(): string {
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   try {
     const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app, DB_ID);
+    const db = initializeFirestore(app, { experimentalForceLongPolling: true }, DB_ID);
     
     const postsRef = collection(db, COLL);
     const q = query(postsRef, where("status", "==", "published"));

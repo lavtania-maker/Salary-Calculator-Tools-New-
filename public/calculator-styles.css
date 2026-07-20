@@ -206,14 +206,14 @@ ul {
 }
 
 /* Typography */
-h1,
+h1 {
+  color: #2563eb;
+  letter-spacing: -0.02em;
+}
+h2,
 h3,
 h4 {
   color: var(--text-main);
-  letter-spacing: -0.02em;
-}
-h2 {
-  color: #2563eb !important;
   letter-spacing: -0.02em;
 }
 .hero {
@@ -380,7 +380,7 @@ h2 {
 .form-label {
   display: block;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
   font-size: 1rem;
   color: #1e293b;
 }
@@ -421,10 +421,11 @@ h2 {
   height: 48px;
 }
 .input-group .form-input {
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  height: auto;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  height: 48px !important;
+  background: transparent !important;
 }
 .form-input:focus,
 .form-select:focus {
@@ -926,7 +927,7 @@ h2 {
   }
 }
 .footer-col h4 {
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   font-size: 1rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -935,7 +936,7 @@ h2 {
 }
 .footer-link {
   display: block;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
   color: #475569;
   font-size: 0.95rem;
   transition: color 0.2s;
@@ -996,7 +997,7 @@ h2 {
   border-radius: 9999px;
   font-size: 14px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 4px;
   width: fit-content;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -1034,7 +1035,7 @@ h2 {
 .blog-desc {
   font-size: 15px;
   color: #64748b;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   line-height: 1.6;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -1132,7 +1133,7 @@ h2 {
   display: flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   font-size: 15px;
   color: #94a3b8;
 }
@@ -1142,13 +1143,10 @@ h2 {
   font-weight: 800;
   color: #2563eb;
   line-height: 1.2;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   letter-spacing: -0.02em;
 }
 
-#article-title {
-  color: #2563eb !important;
-}
 
 .article-hero {
   width: 100%;
@@ -1637,9 +1635,23 @@ details[open] .faq-title::after {
 
 /* 1. SECTION SPACING & MAX WIDTH (Requirements 1, 2, 6) */
 .content-section {
-  padding: 40px 0 !important;
+  padding: 48px 0 !important;
   background-color: #ffffff !important; /* soft background to make white cards stand out */
   border-top: 1px solid #e2e8f0 !important;
+}
+
+/* Eliminate duplicate margins between adjacent content sections */
+.content-section + .content-section {
+  padding-top: 0 !important;
+  border-top: none !important;
+}
+
+/* Remove margin-bottom from the last card in any section to prevent duplicate spacing */
+.content-section .container > .content-card:last-child,
+.content-section .container > .seo-card:last-child,
+.content-section .seo-container > .content-card:last-child,
+.content-section .seo-container > .seo-card:last-child {
+  margin-bottom: 0 !important;
 }
 
 .content-section .container,
@@ -1838,7 +1850,7 @@ div[style*="grid-template-columns"] > .content-card h2 {
 /* 7. MOBILE RESPONSIVENESS (Requirement 7) */
 @media (max-width: 768px) {
   .content-section {
-    padding: 20px 0 !important;
+    padding: 32px 0 !important;
   }
   .content-section .container,
   .content-section .seo-container {
@@ -1901,17 +1913,6 @@ body {
   text-align: left;
 }
 
-/* SPACING */
-section.content-section {
-  padding-top: 48px !important;
-  padding-bottom: 48px !important;
-  width: 100%;
-  border-top: 1px solid #ffffff;
-}
-section.content-section:first-of-type {
-  border-top: none;
-}
-
 /* CARDS */
 .content-section .content-card,
 .content-section .seo-card,
@@ -1921,7 +1922,7 @@ section.content-section > .container > .seo-card {
   border: 1px solid #f1f5f9;
   border-radius: 12px;
   padding: 24px 28px;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
@@ -1971,7 +1972,7 @@ section.content-section > .container > .seo-card {
   border-radius: 0 8px 8px 0;
   font-size: 15px;
   color: #475569;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 /* FAQ ACCORDION */
@@ -1999,7 +2000,7 @@ section.content-section > .container > .seo-card {
 /* MOBILE */
 @media (max-width: 639.98px) {
   section.content-section {
-    padding: 32px 16px !important;
+    padding-bottom: 32px !important;
   }
   .content-section .seo-table-wrapper,
   .content-section .socso-table-wrapper,
@@ -2399,19 +2400,6 @@ h3,
 /* ALIGN "OTHER CALCULATORS" SECTION                         */
 /* ========================================================= */
 
-.other-calculators-section .container {
-  max-width: 1100px !important;
-  padding-left: calc(20px + 32px) !important;
-  padding-right: calc(20px + 32px) !important;
-}
-
-@media (max-width: 768px) {
-  .other-calculators-section .container {
-    padding-left: calc(16px + 20px) !important;
-    padding-right: calc(16px + 20px) !important;
-  }
-}
-
 /* Dropdown Styles */
 .nav-dropdown {
   position: relative;
@@ -2608,30 +2596,68 @@ h3,
   .input-group .form-input {
     width: 100% !important;
     flex: 1 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    height: 48px !important;
+    background: transparent !important;
   }
 
-  /* Typography minimums */
-  body, p, li, td, th, label, input, select, .form-label, .helper-text {
+  /* Typography minimums & prevention of iOS zoom on input focus */
+  body, p, li, td, th, label, .form-label, .helper-text {
     font-size: 15px !important;
   }
   
-  /* Reduce padding to avoid excessive scrolling */
-  .card, .content-card, .seo-card {
+  /* Form elements full width, min 48px height, 16px font-size to prevent iOS auto-zoom on focus */
+  .form-input, .form-select, select, input[type="text"], input[type="number"], input[type="email"] {
+    width: 100% !important;
+    font-size: 16px !important;
+    min-height: 48px !important;
+  }
+
+  /* Buttons min 48px height for excellent mobile tap targets */
+  .btn, .btn-primary, .btn-outline, .btn-secondary, .table-show-more-btn, button, input[type="button"], input[type="submit"] {
+    min-height: 48px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 16px !important;
+    width: 100% !important;
+  }
+
+  /* Prevent horizontal scrolling completely */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  /* Container padding for optimal mobile screen use */
+  .container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  
+  /* Reduce card padding to maximize content width and avoid excessive scrolling */
+  .card, .content-card, .seo-card, .result-card, .calc-card, .blog-card, .stat-card, .article-cta {
     padding: 16px !important;
   }
   .hero {
     padding: 24px 0 16px !important;
   }
   
-  /* Table wrapping */
+  /* Table wrapping with scroll bar indicators for enhanced touch usability */
   .seo-table-wrapper, .table-container, .contribution-table-wrapper, .table-responsive {
     overflow-x: auto !important;
     -webkit-overflow-scrolling: touch !important;
     display: block !important;
     width: 100% !important;
+    border-radius: 8px !important;
+    border: 1px solid #e2e8f0 !important;
+    box-shadow: inset -8px 0 8px -8px rgba(0, 0, 0, 0.1) !important;
   }
   table {
-    min-width: 500px !important; /* Forces scroll instead of squish */
+    min-width: 580px !important; /* Forces scroll instead of squishing cells */
   }
 
   /* Cross-link cards stack to single column */
@@ -2639,10 +2665,161 @@ h3,
     grid-template-columns: 1fr !important;
     display: flex !important;
     flex-direction: column !important;
+    gap: 16px !important;
   }
   
+  /* Results & breakdown vertical layouts */
   .take-home-card {
     flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 16px !important;
+    padding: 16px !important;
   }
+  .take-home-amount {
+    font-size: 2rem !important;
+    word-break: break-all !important;
+  }
+  .breakdown-row {
+    flex-direction: column !important;
+    align-items: start !important;
+    gap: 4px !important;
+  }
+
+  /* Adjust spacing of sections & headings on mobile */
+  .article-cta {
+    margin: 32px 0 !important;
+  }
+  .section-title, .card-title, .seo-title {
+    font-size: 1.4rem !important;
+    line-height: 1.3 !important;
+    margin-bottom: 16px !important;
+  }
+}
+
+
+/* ==========================================================================
+   GLOBAL UI AUDIT OVERRIDES (RESPONSIVENESS, TYPOGRAPHY, CONSISTENCY)
+   ========================================================================== */
+
+/* --- 1. RESPONSIVE LAYOUT & CONTAINER --- */
+html, body {
+  overflow-x: hidden !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.container, .seo-container, .main-layout {
+  max-width: 1100px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 768px) {
+  .container, .seo-container, .main-layout {
+    padding: 0 16px !important;
+  }
+}
+
+img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+}
+
+/* Fix overlapping/overflowing grids */
+.grid, .tools-grid, .other-calculators-grid, .statutory-grid, .footer-grid, .breakdown-grid, .seo-grid-2, .pcb-calc-grid, .blog-grid, .blog-featured {
+  display: grid !important;
+  gap: 24px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 768px) {
+  .grid, .tools-grid, .other-calculators-grid, .statutory-grid, .footer-grid, .breakdown-grid, .seo-grid-2, .pcb-calc-grid, .blog-grid, .blog-featured {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+
+}
+
+/* --- 5. BUTTONS --- */
+.btn, .btn-primary, .btn-outline, .btn-secondary, button:not(.mobile-menu-btn):not(.table-show-more-btn):not(.nav-toggle):not(.seo-tab):not(.filter-btn):not(.nav-item) {
+  min-height: 48px !important;
+  border-radius: 8px !important;
+  padding: 12px 24px !important;
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  transition: all 0.2s ease !important;
+  white-space: normal !important;
+  height: auto !important;
+  line-height: 1.4 !important;
+  box-sizing: border-box !important;
+  word-wrap: break-word !important;
+  cursor: pointer !important;
+}
+
+@media (max-width: 768px) {
+  .btn, .btn-primary, .btn-outline, .btn-secondary, button:not(.mobile-menu-btn):not(.table-show-more-btn):not(.nav-toggle):not(.seo-tab):not(.filter-btn):not(.nav-item) {
+    width: 100% !important;
+    margin-bottom: 12px !important;
+  }
+}
+
+/* --- 6. MOBILE UX (FORMS & TOUCH TARGETS) --- */
+.form-input, .form-select, input[type="text"], input[type="number"], input[type="email"], select, textarea {
+  min-height: 48px !important;
+  font-size: 16px !important; /* Prevents iOS zoom */
+  border-radius: 8px !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  padding: 12px 16px !important;
+  border: 1px solid #cbd5e1 !important;
+  background-color: #ffffff !important;
+}
+
+.form-input:focus, .form-select:focus, input:focus, select:focus, textarea:focus {
+  outline: none !important;
+  border-color: #2563eb !important;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1) !important;
+}
+
+a.nav-link, a.dropdown-item, a.mobile-submenu-item, a.footer-link, summary.faq-title {
+  min-height: 44px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* --- 7. CONSISTENCY & SECTION SPACING --- */
+.content-section, section {
+  padding: 48px 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+@media (max-width: 768px) {
+  .content-section, section {
+    padding: 32px 0 !important;
+  }
+}
+
+.content-section + .content-section {
+  padding-top: 0 !important;
+  border-top: none !important;
+}
+
+/* Accessibility Focus States */
+*:focus-visible {
+  outline: 2px solid #2563eb !important;
+  outline-offset: 2px !important;
 }
 
