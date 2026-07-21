@@ -104,7 +104,7 @@ function buildExploreMoreSection(posts: any[]): string {
   <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; width: 100%;">
     <div style="text-align: center; margin-bottom: 40px;">
       <h2 style="font-size: 2rem; font-weight: 700; color: #2563eb !important; margin: 0 0 12px 0;">Explore More Articles</h2>
-      <p style="font-size: 1.1rem; color: #64748b; margin: 0; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.5;">Browse our latest guides, salary tips, and calculator tutorials.</p>
+      <p style="font-size: 1.1rem; color: #64748b; margin: 0 auto; max-width: 600px; line-height: 1.5; text-align: center;">Browse our latest guides, salary tips, and calculator tutorials.</p>
     </div>
     <div class="explore-more-grid">
       ${cardsHtml}
