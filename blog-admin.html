@@ -1128,7 +1128,7 @@
               toast("Article deleted");
               await loadPosts();
             } catch (ex) {
-              toast(es.message, false);
+              toast(ex.message, false);
             }
           }
         });
@@ -1291,7 +1291,7 @@
           } catch (ex) {
             err.textContent = ex.message;
             err.style.display = "block";
-            toast(es.message, false);
+            toast(ex.message, false);
           }
           btn.textContent = "Save Article";
           btn.disabled = false;

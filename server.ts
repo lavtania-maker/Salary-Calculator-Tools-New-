@@ -651,6 +651,13 @@ async function startServer() {
       "/blog-post-template.html": "blog-post-template.html",
     };
 
+    app.use((req, res, next) => {
+      if (req.path === '/index.html' || req.path === '/index') {
+        return res.redirect(308, '/');
+      }
+      next();
+    });
+    
     app.use(async (req, res, next) => {
       console.log(
         `[DEBUG] Received request: ${req.method} ${req.url} (originalUrl: ${req.originalUrl}, path: ${req.path})`,
@@ -676,6 +683,17 @@ async function startServer() {
     });
   } else {
     const distPath = path.join(process.cwd(), "dist");
+    app.use((req, res, next) => {
+      if (req.path === '/index.html' || req.path === '/index') {
+        return res.redirect(308, '/');
+      }
+      
+      // Also redirect www if needed
+      if (req.hostname === 'www.salarycalculator.my') {
+        return res.redirect(308, 'https://salarycalculator.my' + req.originalUrl);
+      }
+      next();
+    });
     app.use(express.static(distPath, {
       extensions: ["html"],
       setHeaders: (res, filePath) => {

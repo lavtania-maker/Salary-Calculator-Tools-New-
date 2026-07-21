@@ -1,14 +1,23 @@
 {
   "redirects": [
     {
-      "source": "/(.*)",
-      "has": [{ "type": "header", "key": "x-forwarded-proto", "value": "http" }],
-      "destination": "https://salarycalculator.my/$1",
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "www.salarycalculator.my" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.salarycalculator.my"
+        }
+      ],
       "destination": "https://salarycalculator.my/$1",
       "permanent": true
     },
@@ -49,43 +58,109 @@
     }
   ],
   "rewrites": [
-    { "source": "/sitemap.xml",       "destination": "/api/sitemap" },
-    { "source": "/sitemap-blog.xml",  "destination": "/api/sitemap-blog" },
-    { "source": "/privacy-policy",    "destination": "/privacy-policy.html" },
-    { "source": "/admin",             "destination": "/admin.html" },
-    { "source": "/blog-admin",        "destination": "/blog-admin.html" },
-    { "source": "/mincal",            "destination": "/mincal.html" },
-    { "source": "/payslip-generator", "destination": "/payslip.html" },
-    { "source": "/report",            "destination": "/report.html" },
-    { "source": "/epf-kwsp",          "destination": "/epf-kwsp.html" },
-    { "source": "/socso-perkeso",     "destination": "/socso-perkeso.html" },
-    { "source": "/pcb-calculator",    "destination": "/pcb-income-tax.html" },
-    { "source": "/pcb-income-tax",    "destination": "/pcb-income-tax.html" },
-    { "source": "/blog",              "destination": "/api/blog" },
-    { "source": "/blog/category/:category", "destination": "/api/blog?category=:category" },
-    { "source": "/annual-leave-calculator", "destination": "/annual-leave-calculator.html" },
-    { "source": "/overtime-pay-calculator", "destination": "/overtime-pay-calculator.html" },
-    { "source": "/blog/:slug", "destination": "/api/blog-post" },
-    { "source": "/((?!.*\\.(?:html|png|jpg|jpeg|gif|css|js|ico|svg|xml|txt|json)$|blog$|epf-kwsp$|socso-perkeso$|pcb-income-tax$|annual-leave-calculator$|privacy-policy$|admin$|blog-admin$|mincal$|payslip-generator$|report$|overtime-pay-calculator$|epfreport$|socsoreport$|payslip$|api$)[^/.]+)", "destination": "/api/blog-post?slug=$1" }
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    },
+    {
+      "source": "/sitemap-blog.xml",
+      "destination": "/api/sitemap-blog"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy-policy.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
+      "source": "/blog-admin",
+      "destination": "/blog-admin.html"
+    },
+    {
+      "source": "/mincal",
+      "destination": "/mincal.html"
+    },
+    {
+      "source": "/payslip-generator",
+      "destination": "/payslip.html"
+    },
+    {
+      "source": "/report",
+      "destination": "/report.html"
+    },
+    {
+      "source": "/epf-kwsp",
+      "destination": "/epf-kwsp.html"
+    },
+    {
+      "source": "/socso-perkeso",
+      "destination": "/socso-perkeso.html"
+    },
+    {
+      "source": "/pcb-calculator",
+      "destination": "/pcb-income-tax.html"
+    },
+    {
+      "source": "/pcb-income-tax",
+      "destination": "/pcb-income-tax.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/api/blog"
+    },
+    {
+      "source": "/blog/category/:category",
+      "destination": "/api/blog?category=:category"
+    },
+    {
+      "source": "/annual-leave-calculator",
+      "destination": "/annual-leave-calculator.html"
+    },
+    {
+      "source": "/overtime-pay-calculator",
+      "destination": "/overtime-pay-calculator.html"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/api/blog-post"
+    },
+    {
+      "source": "/((?!.*\\.(?:html|png|jpg|jpeg|gif|css|js|ico|svg|xml|txt|json)$|blog$|epf-kwsp$|socso-perkeso$|pcb-income-tax$|annual-leave-calculator$|privacy-policy$|admin$|blog-admin$|mincal$|payslip-generator$|report$|overtime-pay-calculator$|epfreport$|socsoreport$|payslip$|api$)[^/.]+)",
+      "destination": "/api/blog-post?slug=$1"
+    }
   ],
   "headers": [
     {
       "source": "/(.*)\\.(css|js|png|jpg|jpeg|gif|ico|svg|webp)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*)\\.html",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
       ]
     },
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Robots-Tag", "value": "index, follow" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        }
       ]
     }
   ],
