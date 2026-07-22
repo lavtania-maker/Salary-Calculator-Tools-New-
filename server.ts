@@ -232,7 +232,7 @@ async function startServer() {
       const q = query(postsRef, where("status", "==", "published"));
       const querySnapshot = await getDocs(q);
 
-      const PREDEFINED_CATEGORIES = ["salary", "epf", "socso", "pcb-income-tax", "annual-leave"];
+      const PREDEFINED_CATEGORIES = ["salary", "epf", "socso", "pcb-income-tax", "annual-leave", "overtime"];
       const categories = new Set<string>(PREDEFINED_CATEGORIES);
       const categoryLastMods = new Map<string, string>();
       const posts: { slug: string; lastmod: string }[] = [];

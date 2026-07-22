@@ -22,7 +22,8 @@ const catClasses: Record<string, string> = {
   'socso': 'category-socso',
   'eis': 'category-socso',
   'annual-leave': 'category-law',
-  'pcb-income-tax': 'category-pcb'
+  'pcb-income-tax': 'category-pcb',
+  'overtime': 'category-overtime'
 };
 
 const catDisplay: Record<string, string> = {
@@ -31,7 +32,8 @@ const catDisplay: Record<string, string> = {
   'socso': 'SOCSO',
   'eis': 'EIS',
   'annual-leave': 'Annual Leave',
-  'pcb-income-tax': 'PCB / Income Tax'
+  'pcb-income-tax': 'PCB / Income Tax',
+  'overtime': 'Overtime'
 };
 
 function getArticlesForCategory(allPosts: any[], targetCategory: string, count: number = 4, excludeSlug: string = ''): any[] {

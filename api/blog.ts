@@ -40,6 +40,10 @@ const categoryMeta: Record<string, { title: string; desc: string }> = {
   'annual-leave': {
     title: "Annual Leave & Employment Act Guides – HR Blog Malaysia",
     desc: "Understand your rights regarding annual leave entitlements, sick leave, public holidays, and rest days under the Malaysia Employment Act."
+  },
+  'overtime': {
+    title: "Overtime Pay & Employment Act Guides – HR Blog Malaysia",
+    desc: "Learn about overtime pay rates, normal working hours, public holiday OT calculations, and Employment Act rules in Malaysia."
   }
 };
 
@@ -66,7 +70,8 @@ function card(p: any, large: boolean) {
     'socso': 'SOCSO',
     'eis': 'EIS',
     'annual-leave': 'Annual Leave',
-    'pcb-income-tax': 'PCB / Income Tax'
+    'pcb-income-tax': 'PCB / Income Tax',
+    'overtime': 'Overtime'
   };
   const rawCats = Array.isArray(p.category) ? p.category : [p.category || ''];
   const cats = rawCats.filter(Boolean).map((c: string) => {

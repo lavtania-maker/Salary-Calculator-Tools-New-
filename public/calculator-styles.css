@@ -1047,6 +1047,10 @@ h4 {
   background: #fef2f2;
   color: #991b1b;
 }
+.category-overtime {
+  background: #f0fdfa;
+  color: #0d9488;
+}
 
 .blog-title {
   font-size: 1.1rem;

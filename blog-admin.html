@@ -767,6 +767,7 @@
             <option value="socso">SOCSO</option>
             <option value="pcb-income-tax">PCB / Income Tax</option>
             <option value="annual-leave">Annual Leave</option>
+            <option value="overtime">Overtime</option>
           </select>
         </div>
         <div class="table-card">
@@ -816,6 +817,7 @@
                 <label><input type="checkbox" value="socso"> SOCSO</label>
                 <label><input type="checkbox" value="pcb-income-tax"> PCB / Income Tax</label>
                 <label><input type="checkbox" value="annual-leave"> Annual Leave</label>
+                <label><input type="checkbox" value="overtime"> Overtime</label>
               </div>
             </div>
           </div>
@@ -1044,7 +1046,7 @@
                 "<td>" +
                 (Array.isArray(p.category) ? p.category : [p.category || "-"]).map(function(c) { 
                   if (!c || c === "-") return "-";
-                  var catMap = { 'salary': 'Salary', 'epf': 'EPF', 'socso': 'SOCSO', 'annual-leave': 'Annual Leave', 'pcb-income-tax': 'PCB / Income Tax' };
+                  var catMap = { 'salary': 'Salary', 'epf': 'EPF', 'socso': 'SOCSO', 'annual-leave': 'Annual Leave', 'pcb-income-tax': 'PCB / Income Tax', 'overtime': 'Overtime' };
                   var displayCat = catMap[c] || c;
                   return '<span class="badge badge-cat">' + displayCat + '</span>';
                 }).join(" ") +

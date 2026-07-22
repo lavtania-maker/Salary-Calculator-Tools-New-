@@ -20,7 +20,8 @@ const catMap: Record<string, string> = {
   'epf': 'EPF',
   'socso': 'SOCSO',
   'annual-leave': 'Annual Leave',
-  'pcb-income-tax': 'PCB / Income Tax'
+  'pcb-income-tax': 'PCB / Income Tax',
+  'overtime': 'Overtime'
 };
 
 function replaceTextWithLinks(htmlContent: string): string {
@@ -278,34 +279,59 @@ async function generate() {
       $('#read-more-container').css('display', 'none');
     }
 
-    // Dynamic CTA logic
-    const ctaMapping: Record<string, {name: string, url: string}> = {
+    // Dynamic CTA logic - Show single relevant calculator button based on category or metadata
+    const categoryCtaMap: Record<string, { name: string; url: string }> = {
+      'salary': { name: 'Salary Calculator', url: '/' },
       'epf': { name: 'EPF Calculator', url: '/epf-kwsp' },
+      'kwsp': { name: 'EPF Calculator', url: '/epf-kwsp' },
       'socso': { name: 'SOCSO Calculator', url: '/socso-perkeso' },
+      'perkeso': { name: 'SOCSO Calculator', url: '/socso-perkeso' },
+      'eis': { name: 'SOCSO Calculator', url: '/socso-perkeso' },
+      'pcb': { name: 'PCB Calculator', url: '/pcb-income-tax' },
       'pcb-income-tax': { name: 'PCB Calculator', url: '/pcb-income-tax' },
+      'tax': { name: 'PCB Calculator', url: '/pcb-income-tax' },
       'annual-leave': { name: 'Annual Leave Calculator', url: '/annual-leave-calculator' },
-      'overtime': { name: 'Overtime Pay Calculator', url: '/overtime-pay-calculator' },
-      'salary': { name: 'PCB Calculator', url: '/pcb-income-tax' }
+      'overtime': { name: 'Overtime Pay Calculator', url: '/overtime-pay-calculator' }
     };
-    
-    const ctaPriority = ['epf', 'socso', 'pcb-income-tax', 'annual-leave', 'overtime', 'salary'];
-    
-    const catSlugs = cats.filter((c: string) => c).map((c: string) => {
-      let s = c.toLowerCase().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
+
+    let matchedCta: { name: string; url: string } | null = null;
+
+    // 1. Check assigned categories
+    const articleCats = cats.filter((c: string) => Boolean(c)).map((c: string) => {
+      let s = c.toLowerCase().trim().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
       if (s === 'perkeso') return 'socso';
+      if (s === 'kwsp') return 'epf';
       return s;
     });
 
-    let chosenCta = ctaMapping['salary']; // Default
-    for (const p of ctaPriority) {
-      if (catSlugs.includes(p)) {
-        chosenCta = ctaMapping[p];
+    for (const c of articleCats) {
+      if (categoryCtaMap[c]) {
+        matchedCta = categoryCtaMap[c];
         break;
       }
     }
-    
-    if (chosenCta) {
-      $('#cta-second-button').text(chosenCta.name).attr('href', chosenCta.url);
+
+    // 2. Metadata fallback if category is missing or unmapped
+    if (!matchedCta) {
+      const metaCombined = `${post.title || ''} ${slug || ''} ${post.metaTitle || ''} ${post.excerpt || ''}`.toLowerCase();
+      if (metaCombined.includes('overtime') || metaCombined.includes('ot pay')) {
+        matchedCta = categoryCtaMap['overtime'];
+      } else if (metaCombined.includes('annual leave') || metaCombined.includes('leave entitlement')) {
+        matchedCta = categoryCtaMap['annual-leave'];
+      } else if (metaCombined.includes('pcb') || metaCombined.includes('income tax') || metaCombined.includes('mtd')) {
+        matchedCta = categoryCtaMap['pcb-income-tax'];
+      } else if (metaCombined.includes('socso') || metaCombined.includes('perkeso') || metaCombined.includes('eis')) {
+        matchedCta = categoryCtaMap['socso'];
+      } else if (metaCombined.includes('epf') || metaCombined.includes('kwsp')) {
+        matchedCta = categoryCtaMap['epf'];
+      } else if (metaCombined.includes('salary') || metaCombined.includes('minimum wage') || metaCombined.includes('payroll')) {
+        matchedCta = categoryCtaMap['salary'];
+      }
+    }
+
+    // 3. Render single CTA button if matched
+    if (matchedCta) {
+      $('.cta-buttons').html(`<a href="${matchedCta.url}" class="cta-btn-primary">${matchedCta.name}</a>`);
     }
 
     // Parse FAQ for Schema
