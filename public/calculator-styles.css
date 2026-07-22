@@ -447,6 +447,30 @@ h4 {
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  background: #f9fafb;
+  border: 1px solid var(--border, #e2e8f0);
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1e293b;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.checkbox-item input[type="checkbox"] {
+  margin: 0;
+  cursor: pointer;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
 @media (max-width: 640px) {
   .statutory-grid {
     grid-template-columns: 1fr 1fr;
