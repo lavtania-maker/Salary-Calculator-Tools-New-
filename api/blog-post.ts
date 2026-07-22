@@ -133,13 +133,15 @@ export default async function handler(req: any, res: any) {
   // Normalize slug to handle any trailing slash
   slug = slug.trim().replace(/\/$/, "");
 
+  const bypassCache = req.query?.nocache === "true" || req.query?.refresh === "true";
+
   try {
     // Check in-memory cache first to guarantee 100% SLA and zero Firestore reads on repeat requests
     let post: any = null;
     const now = Date.now();
     const cached = blogPostCache.get(slug);
 
-    if (cached && (now - cached.timestamp < CACHE_TTL)) {
+    if (cached && (now - cached.timestamp < CACHE_TTL) && !bypassCache) {
       console.log(`[CACHE HIT] Serving blog post from in-memory cache for slug: ${slug}`);
       post = cached.post;
     } else {

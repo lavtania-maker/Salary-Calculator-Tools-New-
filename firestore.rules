@@ -1,13 +1,16 @@
 rules_version = '2';
-
 service cloud.firestore {
   match /databases/{database}/documents {
-
     // ===============================================================
     // Global Safety Net
     // ===============================================================
     match /{document=**} {
       allow read, write: if false;
+    }
+
+    match /admins/{adminId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
     }
 
     // ===============================================================
@@ -17,15 +20,16 @@ service cloud.firestore {
     function isSignedIn() {
       return request.auth != null;
     }
-
+    
     function isAdmin() {
-      return isSignedIn() && 
-             
-             (request.auth.token.email == "lavtania@epicareer.com" || request.auth.token.email == "ajtsalary@admin.com");
+      return isSignedIn() && (
+        exists(/databases/$(database)/documents/admins/$(request.auth.token.email)) ||
+        exists(/databases/$(database)/documents/admins/$(request.auth.token.email.lower()))
+      );
     }
 
-    function isValidId(id) {
-       return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    function isValidId(id) { 
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
     }
 
     function isValidEmail(email) {
@@ -41,6 +45,7 @@ service cloud.firestore {
         'startDate', 'targetYear', 'yearsOfService', 'baseEntitlement', 'proratedLeave', 'leaveTaken', 'remainingBalance',
         'ageGroup', 'nationality', 'totalEpf', 'socsoTotal', 'socsoCategory', 'socsoBracket', 'eisTotal', 'interaction_type'
       ];
+
       return data.diff({}).affectedKeys().hasOnly(allowedKeys) &&
              data.keys().hasAll(['email', 'action', 'createdAt', 'userType']) &&
              data.email is string && isValidEmail(data.email) &&
@@ -59,11 +64,11 @@ service cloud.firestore {
         'status', 'publishedAt', 'content', 'readMoreUrl', 'updatedAt', 'createdAt'
       ];
       return data.diff({}).affectedKeys().hasOnly(allowedKeys) &&
-             data.keys().hasAll(['title', 'slug', 'content', 'updatedAt']) &&
+             data.keys().hasAll(['title', 'slug', 'content']) &&
              data.title is string && data.title.size() <= 200 &&
              data.slug is string && data.slug.size() <= 200 &&
              data.content is string &&
-             data.updatedAt is timestamp &&
+             (!('updatedAt' in data) || data.updatedAt is timestamp) &&
              (!('metaTitle' in data) || data.metaTitle is string) &&
              (!('category' in data) || (data.category is list && data.category.size() <= 10)) &&
              (!('metaDesc' in data) || data.metaDesc is string) &&

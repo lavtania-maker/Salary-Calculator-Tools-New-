@@ -92,11 +92,13 @@ export default async function handler(req: any, res: any) {
   let category = req.query?.category || req.params?.category || "";
   if (category === "perkeso") category = "socso";
 
+  const bypassCache = req.query?.nocache === "true" || req.query?.refresh === "true";
+
   try {
     // 1. Fetch posts from Firestore (or in-memory cache)
     let allPosts: any[] = [];
     const now = Date.now();
-    if (cachedBlogList && (now - cachedBlogList.timestamp < LIST_CACHE_TTL)) {
+    if (cachedBlogList && (now - cachedBlogList.timestamp < LIST_CACHE_TTL) && !bypassCache) {
       console.log(`[CACHE HIT] Serving full blog post list from in-memory cache`);
       allPosts = cachedBlogList.posts;
     } else {
