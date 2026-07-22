@@ -713,24 +713,16 @@
         <p>Sign in to manage articles</p>
         <div id="loginErr"></div>
         
-        <button class="btn-primary" id="googleLoginBtn" style="background: #1e293b; margin-bottom: 16px;">Sign In with Google</button>
-
-        <div style="text-align: center; margin: 16px 0; color: #94a3b8; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; display: flex; align-items: center; justify-content: center; gap: 8px;">
-          <span style="flex: 1; height: 1px; background: #e2e8f0;"></span>
-          OR
-          <span style="flex: 1; height: 1px; background: #e2e8f0;"></span>
-        </div>
-
         <form id="loginForm">
           <div class="field-group">
             <label>Email</label>
-            <input id="lEmail" type="email" value="newadmin@salarycalculator.my" required autocomplete="email">
+            <input id="lEmail" type="email" value="blog-admin@salarycalculator.my" required autocomplete="email">
           </div>
           <div class="field-group">
             <label>Password</label>
-            <input id="lPass" type="password" value="password123" required autocomplete="current-password">
+            <input id="lPass" type="password" value="SalaryAdmin2026!" required autocomplete="current-password">
           </div>
-          <button class="btn-primary" id="loginBtn" type="submit">Sign In with Email</button>
+          <button class="btn-primary" id="loginBtn" type="submit">Sign In</button>
         </form>
       </div>
     </div>
@@ -942,39 +934,50 @@
             t.style.display = "none";
           }, 3000);
         }
+        var configuredAdminEmail = "blog-admin@salarycalculator.my";
+        fetch("/api/admin/config")
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (d && d.adminEmail) {
+              configuredAdminEmail = d.adminEmail;
+            }
+          })
+          .catch(function () {});
+
         Auth.onAuthStateChanged(auth, function (user) {
           if (user) {
-            G("loginWrap").style.display = "none";
-            G("adminWrap").style.display = "flex";
-            G("userEmail").textContent = user.email;
-            loadPosts();
+            if (user.email && user.email.toLowerCase() === configuredAdminEmail.toLowerCase()) {
+              G("loginWrap").style.display = "none";
+              G("adminWrap").style.display = "flex";
+              G("userEmail").textContent = user.email;
+              loadPosts();
+            } else {
+              Auth.signOut(auth);
+              G("loginWrap").style.display = "flex";
+              G("adminWrap").style.display = "none";
+              var err = G("loginErr");
+              err.textContent = "Access denied: Only the authorized Blog Admin account can log in.";
+              err.style.display = "block";
+            }
           } else {
             G("loginWrap").style.display = "flex";
             G("adminWrap").style.display = "none";
           }
         });
-        G("googleLoginBtn").addEventListener("click", async function (e) {
-          e.preventDefault();
-          var btn = G("googleLoginBtn"),
-            err = G("loginErr");
-          btn.textContent = "Signing in...";
-          btn.disabled = true;
-          err.style.display = "none";
-          try {
-            await Auth.setPersistence(auth, Auth.browserLocalPersistence);
-            var provider = new Auth.GoogleAuthProvider();
-            await Auth.signInWithPopup(auth, provider);
-          } catch (ex) {
-            err.textContent = "Google Sign In failed: " + ex.message;
-            err.style.display = "block";
-            btn.textContent = "Sign In with Google";
-            btn.disabled = false;
-          }
-        });
+
         G("loginForm").addEventListener("submit", async function (e) {
           e.preventDefault();
           var btn = G("loginBtn"),
             err = G("loginErr");
+          var inputEmail = G("lEmail").value.trim();
+          var inputPass = G("lPass").value;
+
+          if (inputEmail.toLowerCase() !== configuredAdminEmail.toLowerCase()) {
+            err.textContent = "Access denied: Invalid administrator email account.";
+            err.style.display = "block";
+            return;
+          }
+
           btn.textContent = "Signing in...";
           btn.disabled = true;
           err.style.display = "none";
@@ -982,13 +985,13 @@
             await Auth.setPersistence(auth, Auth.browserLocalPersistence);
             await Auth.signInWithEmailAndPassword(
               auth,
-              G("lEmail").value.trim(),
-              G("lPass").value
+              inputEmail,
+              inputPass
             );
           } catch (ex) {
-            err.textContent = "Email Sign In failed: " + ex.message;
+            err.textContent = "Sign In failed: " + ex.message;
             err.style.display = "block";
-            btn.textContent = "Sign In with Email";
+            btn.textContent = "Sign In";
             btn.disabled = false;
           }
         });

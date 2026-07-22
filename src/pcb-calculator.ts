@@ -467,14 +467,15 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
           console.error("Firestore error:", err);
         }
 
-        try {
-          await fetch("/api/pcb-sheet", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(sheetPayload),
-          });
-        } catch (err) {
-          console.error("Google Sheets Webhook error:", err);
+        const sheetRes = await fetch("/api/pcb-sheet", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sheetPayload),
+        });
+
+        if (!sheetRes.ok) {
+          const errData = await sheetRes.json().catch(() => ({}));
+          throw new Error(errData.error || "Failed to save data to Google Sheets.");
         }
 
         if (lastCalculation) {
@@ -558,8 +559,9 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
           if (mobileActionButtons) mobileActionButtons.style.display = "none";
           if (mobileFallbackText) mobileFallbackText.style.display = "none";
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error("Submission error:", err);
+        alert(err.message || "Failed to record lead information. Please try again.");
       } finally {
         if (submitBtn) {
           submitBtn.textContent = originalText;

@@ -545,14 +545,15 @@ document.addEventListener("DOMContentLoaded", () => {
           console.error("Firestore error:", err);
         }
 
-        try {
-          await fetch("/api/salary-sheet", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(sheetPayload),
-          });
-        } catch (err) {
-          console.error("Google Sheets Webhook error:", err);
+        const sheetRes = await fetch("/api/annual-leave-sheet", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sheetPayload),
+        });
+
+        if (!sheetRes.ok) {
+          const errData = await sheetRes.json().catch(() => ({}));
+          throw new Error(errData.error || "Failed to save data to Google Sheets.");
         }
 
         if (typeof (window as any).gtag === "function") {
@@ -610,8 +611,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           }
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error("Submission error:", err);
+        alert(err.message || "An error occurred while submitting lead data. Please try again.");
       } finally {
         if (submitBtn) {
           submitBtn.textContent = originalText;
