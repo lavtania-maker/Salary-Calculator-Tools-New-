@@ -12,52 +12,56 @@ import blogHandler from "./api/blog";
 
 dotenv.config();
 
+if (process.env.NODE_ENV !== "production" && fs.existsSync("/app/.dev.env.json")) {
+  try {
+    const devEnv = JSON.parse(fs.readFileSync("/app/.dev.env.json", "utf8"));
+    for (const key in devEnv) {
+      if (!process.env[key]) {
+        process.env[key] = devEnv[key];
+      }
+    }
+  } catch (e) {
+    console.error("Error loading /app/.dev.env.json:", e);
+  }
+}
+
 function normalizeSheetPayload(body: any) {
   const payload: any = { ...body };
 
-  const email = payload.Email || payload.email || payload["Email Address"] || "";
-  const name = payload["Full Name"] || payload["Name"] || payload.fullName || payload.name || payload.Name || "";
-  const userType = payload["User Type"] || payload.userType || payload.role || "";
+  const name = payload.Name || payload.name || "";
+  const email = payload.Email || payload.email || "";
+  const userType = payload["User Type"] || payload.userType || "";
   const companyName = payload["Company Name"] || payload.companyName || "";
   const hiringStatus = payload["Hiring Status"] || payload.hiringStatus || "";
-  const userPhone = payload["User Phone"] || payload["Phone Number"] || payload.userPhone || payload.phoneNumber || payload.phone || "";
-  const timestamp = payload.Timestamp || payload.timestamp || payload.createdAt || payload["Date & Time"] || payload["Date and Time"] || new Date().toISOString();
-  const downloadVia = payload.download_via || payload["Calculator Used"] || payload.calculatorUsed || payload.Action || payload.action || "";
+  const userPhone = payload["User Phone"] || payload.userPhone || payload.phoneNumber || "";
+  const timestamp = payload.timestamp || payload.Timestamp || payload.createdAt || new Date().toISOString();
+  const downloadVia = payload.download_via || payload.Action || payload.action || "";
 
-  // Provide all key format variations to maximize compatibility with Google Apps Script columns
-  payload.Email = email;
-  payload.email = email;
-  payload["Email Address"] = email;
-
+  // Provide both formats to maximize compatibility with Google Apps Script
   payload.Name = name;
   payload.name = name;
-  payload["Full Name"] = name;
-  payload.fullName = name;
 
+  payload.Email = email;
+  payload.email = email;
+  
   payload["User Type"] = userType;
   payload.userType = userType;
-  payload.role = userType;
-
+  
   payload["Company Name"] = companyName;
   payload.companyName = companyName;
-
+  
   payload["Hiring Status"] = hiringStatus;
   payload.hiringStatus = hiringStatus;
-
+  
   payload["User Phone"] = userPhone;
   payload.userPhone = userPhone;
-  payload.phoneNumber = userPhone;
-  payload["Phone Number"] = userPhone;
 
   payload.Timestamp = timestamp;
   payload.timestamp = timestamp;
-  payload["Date & Time"] = timestamp;
 
   payload.Action = downloadVia;
   payload.action = downloadVia;
   payload.download_via = downloadVia;
-  payload["Calculator Used"] = downloadVia;
-  payload.calculatorUsed = downloadVia;
 
   console.log("[SERVER] Normalized payload keys:", Object.keys(payload));
   return payload;
@@ -430,14 +434,28 @@ async function startServer() {
           .json({ error: "GOOGLE_SHEETS_SCRIPT_URL not configured" });
       }
 
+      // Check if it's from Annual Leave Calculator
       let targetSheetId = sheetId;
       let targetScriptUrl = scriptUrl;
-      const actn = typeof req.body.action === "string" ? req.body.action.toLowerCase() : "";
-      const dl = typeof req.body.download_via === "string" ? req.body.download_via.toLowerCase() : "";
+      const actn =
+        typeof req.body.action === "string"
+          ? req.body.action.toLowerCase()
+          : "";
+      const dl =
+        typeof req.body.download_via === "string"
+          ? req.body.download_via.toLowerCase()
+          : "";
 
       if (actn.includes("annual leave") || dl.includes("annual leave")) {
         targetSheetId = "14qNhk_A8THVB_eWsUi3Hyve7Sw6NLJRY-oF4HIqpDwA";
-        targetScriptUrl = process.env.ANNUAL_LEAVE_SHEETS_SCRIPT_URL || process.env.GOOGLE_SHEETS_SCRIPT_URL || "";
+        targetScriptUrl =
+          process.env.ANNUAL_LEAVE_SHEETS_SCRIPT_URL ||
+          process.env.GOOGLE_SHEETS_SCRIPT_URL;
+      } else if (actn.includes("overtime") || dl.includes("overtime")) {
+        targetScriptUrl =
+          process.env.VITE_OVERTIME_SHEETS_SCRIPT_URL ||
+          process.env.OVERTIME_SHEETS_SCRIPT_URL ||
+          process.env.GOOGLE_SHEETS_SCRIPT_URL;
       }
 
       if (!targetScriptUrl) {
@@ -455,11 +473,11 @@ async function startServer() {
         body: JSON.stringify(payload),
       });
       const appsText = await appsRes.text();
-      console.log("[API] salary-sheet response:", appsRes.status, appsText.slice(0, 100));
-
-      if (!appsRes.ok) {
-        return res.status(appsRes.status || 500).json({ error: "Google Sheets script failed: " + appsText });
-      }
+      console.log(
+        "[API] salary-sheet response:",
+        appsRes.status,
+        appsText.slice(0, 100),
+      );
 
       res.status(200).json({ success: true });
     } catch (err: any) {
@@ -472,15 +490,19 @@ async function startServer() {
   app.post("/api/pcb-sheet", async (req, res) => {
     try {
       console.log("[INCOMING] /api/pcb-sheet payload:", req.body);
+      fs.appendFileSync(
+        "server_logs.txt",
+        "PCB Payload: " + JSON.stringify(req.body) + "\n",
+      );
+
       const scriptUrl =
         process.env.VITE_PCB_SHEETS_SCRIPT_URL ||
-        process.env.PCB_SHEETS_SCRIPT_URL ||
         process.env.GOOGLE_SHEETS_SCRIPT_URL;
 
       const targetSheetId = "1T6QfXmRl-0T2b_dog8_VSXVYCVJj-ifcH4Jf-Uv_dTw"; // PCB Calculator ID
 
       if (!scriptUrl) {
-        return res.status(500).json({ error: "PCB script URL not configured" });
+        return res.status(500).json({ error: "Script URL not configured" });
       }
 
       const payload = {
@@ -494,11 +516,11 @@ async function startServer() {
         body: JSON.stringify(payload),
       });
       const appsText = await appsRes.text();
-      console.log("[API] pcb-sheet response:", appsRes.status, appsText.slice(0, 100));
-
-      if (!appsRes.ok) {
-        return res.status(appsRes.status || 500).json({ error: "Google Sheets script failed: " + appsText });
-      }
+      console.log(
+        "[API] pcb-sheet response:",
+        appsRes.status,
+        appsText.slice(0, 100),
+      );
 
       res.status(200).json({ success: true });
     } catch (err: any) {
@@ -507,7 +529,7 @@ async function startServer() {
     }
   });
 
-  // Server-side proxy for EPF sheet submission
+  // Server-side proxy for EPF sheet submission — avoids CORS preflight
   app.post("/api/epf-sheet", async (req, res) => {
     try {
       console.log("[INCOMING] /api/epf-sheet payload:", req.body);
@@ -517,8 +539,11 @@ async function startServer() {
       const sheetId = "1ZjzvFhb1xA5x1SB8OJgUgkUwlaSnIHrMWeqjte2uw7k"; // EPF Calculator ID
       const sheetName = process.env.EPF_SHEET_NAME || "Sheet1";
 
+      console.log("[v0] /api/epf-sheet called");
+      console.log("[v0] scriptUrl set:", !!scriptUrl);
+
       if (!scriptUrl) {
-        return res.status(500).json({ error: "EPF script URL not configured" });
+        return res.status(500).json({ error: "Script URL not configured" });
       }
 
       const payload = {
@@ -527,17 +552,18 @@ async function startServer() {
         sheetName,
       };
 
+      console.log(
+        "[v0] Forwarding to Apps Script:",
+        scriptUrl.slice(0, 60) + "...",
+      );
       const appsRes = await fetch(scriptUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
       const appsText = await appsRes.text();
-      console.log("[API] epf-sheet response status:", appsRes.status, appsText.slice(0, 100));
-
-      if (!appsRes.ok) {
-        return res.status(appsRes.status || 500).json({ error: "Google Sheets script failed: " + appsText });
-      }
+      console.log("[v0] Apps Script response status:", appsRes.status);
+      console.log("[v0] Apps Script response body:", appsText);
 
       res.status(200).json({ success: true });
     } catch (err: any) {
@@ -546,7 +572,7 @@ async function startServer() {
     }
   });
 
-  // Server-side proxy for SOCSO sheet submission
+  // Server-side proxy for SOCSO sheet submission — avoids CORS preflight
   app.post("/api/socso-sheet", async (req, res) => {
     try {
       const scriptUrl =
@@ -555,7 +581,7 @@ async function startServer() {
       const sheetId = "1rUCrHGE6kdfw17iQgtC1K426JdQZWbBZPl-uwTy3CkE"; // SOCSO Calculator ID
 
       if (!scriptUrl) {
-        return res.status(500).json({ error: "SOCSO script URL not configured" });
+        return res.status(500).json({ error: "Script URL not configured" });
       }
 
       const payload = { ...normalizeSheetPayload(req.body), sheetId };
@@ -566,82 +592,15 @@ async function startServer() {
         body: JSON.stringify(payload),
       });
       const appsText = await appsRes.text();
-      console.log("[API] socso-sheet response:", appsRes.status, appsText.slice(0, 100));
-
-      if (!appsRes.ok) {
-        return res.status(appsRes.status || 500).json({ error: "Google Sheets script failed: " + appsText });
-      }
+      console.log(
+        "[API] socso-sheet response:",
+        appsRes.status,
+        appsText.slice(0, 100),
+      );
 
       res.status(200).json({ success: true });
     } catch (err: any) {
       console.error("[API] socso-sheet error:", err);
-      res.status(500).json({ error: err.message });
-    }
-  });
-
-  // Server-side proxy for Annual Leave sheet submission
-  app.post("/api/annual-leave-sheet", async (req, res) => {
-    try {
-      const scriptUrl =
-        process.env.ANNUAL_LEAVE_SHEETS_SCRIPT_URL ||
-        process.env.GOOGLE_SHEETS_SCRIPT_URL;
-      const sheetId = "14qNhk_A8THVB_eWsUi3Hyve7Sw6NLJRY-oF4HIqpDwA"; // Annual Leave Calculator ID
-
-      if (!scriptUrl) {
-        return res.status(500).json({ error: "Annual leave script URL not configured" });
-      }
-
-      const payload = { ...normalizeSheetPayload(req.body), sheetId };
-
-      const appsRes = await fetch(scriptUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const appsText = await appsRes.text();
-      console.log("[API] annual-leave-sheet response:", appsRes.status, appsText.slice(0, 100));
-
-      if (!appsRes.ok) {
-        return res.status(appsRes.status || 500).json({ error: "Google Sheets script failed: " + appsText });
-      }
-
-      res.status(200).json({ success: true });
-    } catch (err: any) {
-      console.error("[API] annual-leave-sheet error:", err);
-      res.status(500).json({ error: err.message });
-    }
-  });
-
-  // Server-side proxy for Overtime sheet submission
-  app.post("/api/overtime-sheet", async (req, res) => {
-    try {
-      const scriptUrl =
-        process.env.OVERTIME_SHEETS_SCRIPT_URL ||
-        process.env.VITE_OVERTIME_SHEETS_SCRIPT_URL ||
-        process.env.GOOGLE_SHEETS_SCRIPT_URL;
-      const sheetId = process.env.OVERTIME_SHEET_ID || "1lkK2LBrFUPtRZMDGgHdnaYw-IcPGUtylVhp7fpe_I_0";
-
-      if (!scriptUrl) {
-        return res.status(500).json({ error: "Overtime script URL not configured" });
-      }
-
-      const payload = { ...normalizeSheetPayload(req.body), sheetId };
-
-      const appsRes = await fetch(scriptUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const appsText = await appsRes.text();
-      console.log("[API] overtime-sheet response:", appsRes.status, appsText.slice(0, 100));
-
-      if (!appsRes.ok) {
-        return res.status(appsRes.status || 500).json({ error: "Google Sheets script failed: " + appsText });
-      }
-
-      res.status(200).json({ success: true });
-    } catch (err: any) {
-      console.error("[API] overtime-sheet error:", err);
       res.status(500).json({ error: err.message });
     }
   });

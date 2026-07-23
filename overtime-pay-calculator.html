@@ -1188,17 +1188,6 @@
             // Fire GA4 Event immediately when download report button is clicked
             sendGtagEvent("click_download_overtime", { calculator_name: "overtime_pay" });
 
-            // Check if there's a recent submission (within 5 minutes)
-            const savedEmail = localStorage.getItem("salaryCalc_userEmail");
-            const lastSubmitTime = localStorage.getItem("salaryCalc_last_submit_" + savedEmail);
-            const isWithin5Mins = lastSubmitTime && (Date.now() - parseInt(lastSubmitTime, 10) < 5 * 60 * 1000);
-
-            if (isWithin5Mins) {
-              console.log("Recent submission found within 5 minutes. Bypassing form.");
-              triggerDirectDownload();
-              return;
-            }
-
             // Open Modal
             if (emailModal) {
               emailModal.style.display = "flex";
@@ -1207,6 +1196,7 @@
             }
 
             // Pre-fill email if we have it
+            const savedEmail = localStorage.getItem("salaryCalc_userEmail");
             if (savedEmail && userEmailInput) {
               userEmailInput.value = savedEmail;
             }
@@ -1323,16 +1313,42 @@
               calculatorType: "Overtime Pay",
               action: "Download Overtime Report",
               createdAt: new Date().toISOString(),
-              ...lastResults
+              ...(lastResults ? lastResults : {})
             };
 
             try {
-              // 1. Submit to Firebase
+              // 1 & 3. Submit to Firebase & Google Sheets
+              let isSuccess = false;
+              const payload = {
+                timestamp: new Date().toISOString(),
+                name: nameValue,
+                email: emailValue,
+                userType: userType,
+                hiringStatus: hiringStatus || "",
+                companyName: companyValue || "",
+                userPhone: phoneValue || "",
+                action: "Download Overtime Report",
+                download_via: "Download Overtime Report"
+              };
+
               try {
                 await addDoc(collection(db, "leads"), leadData);
                 console.log("Recorded to Firestore leads collection.");
-              } catch (fsErr) {
-                console.error("Firestore submission failed:", fsErr);
+                
+                const sheetRes = await fetch("/api/salary-sheet", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(payload),
+                });
+                
+                if (sheetRes.ok) {
+                  isSuccess = true;
+                  console.log("Google Sheets record succeeded.");
+                } else {
+                  console.error("Google Sheets Webhook error:", await sheetRes.text());
+                }
+              } catch (err) {
+                console.error("Submission failed:", err);
               }
 
               // 2. GA4 submit event
@@ -1342,42 +1358,10 @@
                 hiring_status: hiringStatus
               });
 
-              // 3. Submit to Google Sheets via server proxy
-              const sheetPayload = {
-                timestamp: new Date().toISOString(),
-                Name: nameValue,
-                Email: emailValue,
-                "User Type": userType,
-                "Hiring Status": hiringStatus || "",
-                "Company Name": companyValue || "",
-                "User Phone": phoneValue || "",
-                download_via: "Overtime Pay Calculator",
-                action: "Download Overtime Report",
-                calculatorUsed: "Overtime Pay Calculator",
-                ...(lastResults ? {
-                  "Monthly Salary": lastResults.monthlySalary,
-                  "Hourly Rate": lastResults.hourlyRate,
-                  "Ordinary Rate": lastResults.ordinaryRate,
-                  "Total Overtime Pay": lastResults.totalOtPay,
-                  "Normal Workday OT Pay": lastResults.normalOtPay,
-                  "Rest Day OT Pay": lastResults.restDayOtPay,
-                  "Public Holiday OT Pay": lastResults.publicHolidayOtPay
-                } : {})
-              };
-
-              const sheetRes = await fetch("/api/overtime-sheet", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(sheetPayload),
-              });
-
-              if (!sheetRes.ok) {
-                const errData = await sheetRes.json().catch(() => ({}));
-                throw new Error(errData.error || "Failed to save lead data to Google Sheets.");
+              // 4. Trigger Download Only if Success
+              if (isSuccess) {
+                triggerDirectDownload();
               }
-
-              // 4. Trigger Download ONLY after successful submission
-              triggerDirectDownload();
 
               // 5. Update UI Success Message
               await new Promise((resolve) => setTimeout(resolve, 800));
@@ -1408,8 +1392,9 @@
               }
 
             } catch (err) {
-              console.error("Submission error:", err);
-              alert(err.message || "An error occurred during submission. Please try again.");
+              console.error("Critical submission error handled:", err);
+              alert("An error occurred during submission, but your report is still being generated. Please wait.");
+              triggerDirectDownload();
             } finally {
               if (submitBtn) {
                 submitBtn.disabled = false;

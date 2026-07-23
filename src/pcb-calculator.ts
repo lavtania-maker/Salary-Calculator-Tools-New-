@@ -419,23 +419,13 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
         ) as HTMLSelectElement;
         const sheetPayload = {
           timestamp: new Date().toISOString(),
-          Name: name,
-          Email: email,
-          "User Type": role,
-          "Hiring Status": hiringInputExt?.value || "",
-          "Company Name": companyInputExt?.value?.trim() || "",
-          "User Phone": phone,
-          download_via: "PCB Calculator",
-          ...(lastCalculation ? {
-            "Gross Salary": lastCalculation.salary,
-            "Bonus": lastCalculation.bonus,
-            "Annual Income": lastCalculation.annualIncome,
-            "Total Reliefs": lastCalculation.relief,
-            "Tax Bracket": lastCalculation.taxBracket,
-            "Monthly PCB": lastCalculation.pcb,
-            "Net Salary": lastCalculation.netSalary,
-            "Tax Status": lastCalculation.taxStatus === "resident" ? "Resident" : "Non-Resident"
-          } : {})
+          name: name,
+          email: email,
+          userType: role,
+          hiringStatus: hiringInputExt?.value || "",
+          companyName: companyInputExt?.value?.trim() || "",
+          userPhone: phone || "",
+          download_via: "Download PCB Report",
         };
 
         const dbPayload = {
@@ -455,30 +445,34 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
             taxStatus: lastCalculation.taxStatus
           } : {})
         };
+
         if (companyInputExt?.value?.trim())
           (dbPayload as any).companyName = companyInputExt?.value?.trim();
         if (hiringInputExt?.value)
           (dbPayload as any).hiringStatus = hiringInputExt?.value;
         if (phone) (dbPayload as any).phoneNumber = phone;
 
+        // Save to Firestore and Google Sheets. Only after both succeed, generate PDF.
+        let isSuccess = false;
         try {
           await addDoc(collection(db, "leads"), dbPayload);
+          
+          const sheetRes = await fetch("/api/pcb-sheet", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(sheetPayload),
+          });
+          
+          if (sheetRes.ok) {
+            isSuccess = true;
+          } else {
+            console.error("Google Sheets Webhook error:", await sheetRes.text());
+          }
         } catch (err) {
-          console.error("Firestore error:", err);
+          console.error("Submission error:", err);
         }
 
-        const sheetRes = await fetch("/api/pcb-sheet", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(sheetPayload),
-        });
-
-        if (!sheetRes.ok) {
-          const errData = await sheetRes.json().catch(() => ({}));
-          throw new Error(errData.error || "Failed to save data to Google Sheets.");
-        }
-
-        if (lastCalculation) {
+        if (isSuccess && lastCalculation) {
           generatePDFReport({
             title: "PCB (Income Tax) Report",
             fileName: "PCB_Report",
@@ -559,9 +553,8 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
           if (mobileActionButtons) mobileActionButtons.style.display = "none";
           if (mobileFallbackText) mobileFallbackText.style.display = "none";
         }
-      } catch (err: any) {
+      } catch (err) {
         console.error("Submission error:", err);
-        alert(err.message || "Failed to record lead information. Please try again.");
       } finally {
         if (submitBtn) {
           submitBtn.textContent = originalText;

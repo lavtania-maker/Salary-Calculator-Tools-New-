@@ -498,22 +498,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const sheetPayload = {
           timestamp: new Date().toISOString(),
-          Name: name,
-          Email: email,
-          "User Type": role,
-          "Hiring Status": hiringInputExt?.value || "",
-          "Company Name": companyInputExt?.value?.trim() || "",
-          "User Phone": phoneInput?.value || "",
-          download_via: "Annual Leave Calculator",
-          ...(lastCalculation ? {
-            "Join Date": lastCalculation.startDate,
-            "Target Year": lastCalculation.targetYear,
-            "Service Years": lastCalculation.yearsOfServiceText,
-            "Base Entitlement": lastCalculation.baseEntitlement,
-            "Pro-Rated Leaves": lastCalculation.proratedLeave,
-            "Leave Taken": lastCalculation.leaveTaken,
-            "Remaining Balance": lastCalculation.remainingBalance
-          } : {})
+          name: name,
+          email: email,
+          userType: role,
+          hiringStatus: hiringInputExt?.value || "",
+          companyName: companyInputExt?.value?.trim() || "",
+          userPhone: phoneInput?.value || "",
+          download_via: "Annual Leave Calculator"
         };
 
         const dbPayload = {
@@ -539,21 +530,21 @@ document.addEventListener("DOMContentLoaded", () => {
         if (phoneInput?.value)
           (dbPayload as any).phoneNumber = phoneInput.value;
 
+        let isSuccess = false;
         try {
           await addDoc(collection(db, "leads"), dbPayload);
+          const sheetRes = await fetch("/api/salary-sheet", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(sheetPayload),
+          });
+          if (sheetRes.ok) {
+            isSuccess = true;
+          } else {
+            console.error("Google Sheets Webhook error:", await sheetRes.text());
+          }
         } catch (err) {
-          console.error("Firestore error:", err);
-        }
-
-        const sheetRes = await fetch("/api/annual-leave-sheet", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(sheetPayload),
-        });
-
-        if (!sheetRes.ok) {
-          const errData = await sheetRes.json().catch(() => ({}));
-          throw new Error(errData.error || "Failed to save data to Google Sheets.");
+          console.error("Submission error:", err);
         }
 
         if (typeof (window as any).gtag === "function") {
@@ -562,7 +553,7 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         }
 
-        if (lastCalculation) {
+        if (isSuccess && lastCalculation) {
           generatePDFReport({
             title: "Annual Leave Report",
             fileName: "Annual_Leave_Report",
@@ -611,9 +602,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           }
         }
-      } catch (err: any) {
+      } catch (err) {
         console.error("Submission error:", err);
-        alert(err.message || "An error occurred while submitting lead data. Please try again.");
       } finally {
         if (submitBtn) {
           submitBtn.textContent = originalText;

@@ -43,7 +43,8 @@ service cloud.firestore {
         'employeePcb', 'employerEpf', 'employerSocso', 'employerEis', 'download_via',
         'bonus', 'annualIncome', 'relief', 'taxBracket', 'pcb', 'taxStatus',
         'startDate', 'targetYear', 'yearsOfService', 'baseEntitlement', 'proratedLeave', 'leaveTaken', 'remainingBalance',
-        'ageGroup', 'nationality', 'totalEpf', 'socsoTotal', 'socsoCategory', 'socsoBracket', 'eisTotal', 'interaction_type'
+        'ageGroup', 'nationality', 'totalEpf', 'socsoTotal', 'socsoCategory', 'socsoBracket', 'eisTotal', 'interaction_type',
+        'calculatorType', 'otHours', 'normalHours', 'overtimeType', 'hourlyRate', 'multiplierStr', 'otPay', 'grossPay', 'workingDays'
       ];
 
       return data.diff({}).affectedKeys().hasOnly(allowedKeys) &&
