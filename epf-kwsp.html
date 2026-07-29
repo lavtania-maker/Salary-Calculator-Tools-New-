@@ -267,7 +267,7 @@
           "name": "Can I withdraw my EPF savings before retirement?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. EPF allows partial withdrawals for eligible purposes such as housing, education, medical expenses, and Hajj. Full withdrawals are allowed at age 55 or under specific conditions."
+            "text": "Yes. Members can make partial or full withdrawals prior to retirement via Account 3 (Akaun Fleksibel) for instant access, Account 2 (Akaun Sejahtera) for housing, education, and medical needs, or full withdrawal at age 55."
           }
         },
         {
@@ -275,7 +275,7 @@
           "name": "What happens to my EPF if I resign or change jobs?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Your EPF savings remain in the same account. Your new employer will continue contributing using your existing EPF account."
+            "text": "Your EPF savings remain secure and continue accumulating annual compounded dividends. Simply provide your existing EPF member number to your new employer."
           }
         },
         {
@@ -283,7 +283,7 @@
           "name": "Is EPF contribution mandatory for all employees?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "EPF is mandatory for Malaysian citizens and permanent residents in the private sector. Foreign workers and self-employed individuals may contribute voluntarily."
+            "text": "EPF is mandatory for Malaysian citizens and PRs at standard statutory rates, and mandatory for non-citizens/foreign workers at a minimum 2% employee + 2% employer rate."
           }
         },
         {
@@ -291,7 +291,7 @@
           "name": "Can I contribute more than the standard EPF rate?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. You can make voluntary EPF contributions above the mandatory rate, subject to EPF rules and applicable tax relief."
+            "text": "Yes. You can elect a higher voluntary employee deduction rate, employers can contribute higher rates, or you can self-deposit up to RM 100,000 annually."
           }
         },
         {
@@ -299,7 +299,7 @@
           "name": "What is the difference between EPF Account 1, Account 2, and Account 3?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "EPF contributions are divided into three accounts: Account 1 for retirement, Account 2 for approved pre-retirement withdrawals, and Account 3 for flexible withdrawals."
+            "text": "EPF contributions are split into three accounts: Account 1 (Akaun Persaraan - 75%) for retirement, Account 2 (Akaun Sejahtera - 15%) for pre-retirement needs, and Account 3 (Akaun Fleksibel - 10%) for flexible anytime withdrawals."
           }
         }
       ]
@@ -395,7 +395,8 @@
             <div class="dropdown-menu free-tools-dropdown" id="freeToolsMenu" role="menu" aria-labelledby="freeToolsTrigger">
               <a href="/annual-leave-calculator" class="dropdown-item" role="menuitem">Annual Leave Calculator</a>
               <a href="/overtime-pay-calculator" class="dropdown-item" role="menuitem">Overtime Pay Calculator</a>
-            </div>
+            
+              <a href="/hourly-rate" class="dropdown-item" role="menuitem">Hourly Rate Calculator</a></div>
           </div>
           <a href="/blog" class="nav-item" id="navBlog">Blog</a>
         </nav>
@@ -502,7 +503,7 @@
               </div>
 
               <div class="form-group">
-                <label class="form-label">Nationality</label>
+                <label class="form-label">Employee Rate</label>
                 <div style="display: flex; gap: 24px; margin-top: 8px">
                   <label style="
                       display: flex;
@@ -513,12 +514,12 @@
                       color: var(--text-main);
                       font-weight: 500;
                     ">
-                    <input type="radio" name="epfNationality" value="malaysian" checked="" style="
+                    <input type="radio" name="epfRate" value="11" checked="" style="
                         width: 20px;
                         height: 20px;
                         accent-color: var(--primary);
                       ">
-                    Malaysian
+                    11%
                   </label>
                   <label style="
                       display: flex;
@@ -529,12 +530,12 @@
                       color: var(--text-main);
                       font-weight: 500;
                     ">
-                    <input type="radio" name="epfNationality" value="foreigner" style="
+                    <input type="radio" name="epfRate" value="9" style="
                         width: 20px;
                         height: 20px;
                         accent-color: var(--primary);
                       ">
-                    Foreigner
+                    9%
                   </label>
                 </div>
               </div>
@@ -1215,14 +1216,19 @@
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 Can I withdraw my EPF savings before retirement?
               </summary>
-              <p style="
+              <div style="
                   margin-top: 10px;
-                  margin-bottom: 0;
-                  font-size: 16px;
+                  font-size: 15px;
                   color: #475569;
+                  line-height: 1.6;
                 ">
-                Yes. EPF allows partial withdrawals for eligible purposes such as housing, education, medical expenses, and Hajj. Full withdrawals are allowed at age 55 or under specific conditions.
-              </p>
+                <p style="margin: 0 0 8px 0;"><strong>Yes.</strong> Members can make partial or full withdrawals prior to retirement under specified EPF schemes:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li><strong>Account 3 (Akaun Fleksibel):</strong> Instant, flexible withdrawals anytime for any purpose with no conditions.</li>
+                  <li><strong>Account 2 (Akaun Sejahtera):</strong> Approved pre-retirement withdrawals for housing, education, medical expenses, Hajj, or age 50.</li>
+                  <li><strong>Full Withdrawal:</strong> Permitted upon reaching <strong>age 55</strong>, incapacitation, or permanent departure from Malaysia.</li>
+                </ul>
+              </div>
             </details>
 
             <!-- FAQ Item 2 -->
@@ -1236,14 +1242,19 @@
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 What happens to my EPF if I resign or change jobs?
               </summary>
-              <p style="
+              <div style="
                   margin-top: 10px;
-                  margin-bottom: 0;
-                  font-size: 16px;
+                  font-size: 15px;
                   color: #475569;
+                  line-height: 1.6;
                 ">
-                Your EPF savings remain in the same account. Your new employer will continue contributing using your existing EPF account.
-              </p>
+                <p style="margin: 0 0 8px 0;">Your accumulated EPF savings remain completely secure and intact:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li><strong>Account Continuity:</strong> Your EPF member number remains unchanged throughout your career across all private-sector employers.</li>
+                  <li><strong>Seamless Onboarding:</strong> Simply provide your existing EPF member number to your new employer upon joining.</li>
+                  <li><strong>Dividend Accumulation:</strong> Existing account balances continue earning annual compounded EPF dividends uninterrupted.</li>
+                </ul>
+              </div>
             </details>
 
             <!-- FAQ Item 3 -->
@@ -1257,14 +1268,19 @@
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 Is EPF contribution mandatory for all employees?
               </summary>
-              <p style="
+              <div style="
                   margin-top: 10px;
-                  margin-bottom: 0;
-                  font-size: 16px;
+                  font-size: 15px;
                   color: #475569;
+                  line-height: 1.6;
                 ">
-                EPF is mandatory for Malaysian citizens and permanent residents in the private sector. Foreign workers and self-employed individuals may contribute voluntarily.
-              </p>
+                <p style="margin: 0 0 8px 0;">EPF contributions are governed by statutory guidelines depending on residency status:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li><strong>Malaysian Citizens &amp; PRs:</strong> Mandatory at standard statutory rates (11% employee / 12-13% employer).</li>
+                  <li><strong>Non-Citizens &amp; Foreign Workers:</strong> Mandatory starting at a minimum rate of <strong>2% employee + 2% employer</strong> contributions.</li>
+                  <li><strong>Self-Employed &amp; Gig Workers:</strong> Voluntary contributions available via i-Saraan with government matching incentives.</li>
+                </ul>
+              </div>
             </details>
 
             <!-- FAQ Item 4 -->
@@ -1278,14 +1294,20 @@
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 Can I contribute more than the standard EPF rate?
               </summary>
-              <p style="
+              <div style="
                   margin-top: 10px;
-                  margin-bottom: 0;
-                  font-size: 16px;
+                  font-size: 15px;
                   color: #475569;
+                  line-height: 1.6;
                 ">
-                Yes. You can make voluntary EPF contributions above the mandatory rate, subject to EPF rules and applicable tax relief.
-              </p>
+                <p style="margin: 0 0 8px 0;"><strong>Yes!</strong> Both employees and employers can voluntarily elect to contribute above standard rates:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li><strong>Voluntary Employee Rate:</strong> Submit Form KWSP 17A (AHL) to increase your monthly payroll deduction rate.</li>
+                  <li><strong>Voluntary Employer Rate:</strong> Employers can choose to contribute higher employer rates as part of competitive remuneration packages.</li>
+                  <li><strong>Self-Deposit (i-Akaun):</strong> Make voluntary personal contributions anytime up to <strong>RM 100,000 annually</strong>.</li>
+                  <li><strong>Tax Savings:</strong> Maximizes eligible individual income tax relief under EPF and life insurance categories.</li>
+                </ul>
+              </div>
             </details>
 
             <!-- FAQ Item 5 -->
@@ -1299,14 +1321,19 @@
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 What is the difference between EPF Account 1, Account 2, and Account 3?
               </summary>
-              <p style="
+              <div style="
                   margin-top: 10px;
-                  margin-bottom: 0;
-                  font-size: 16px;
+                  font-size: 15px;
                   color: #475569;
+                  line-height: 1.6;
                 ">
-                EPF contributions are divided into three accounts: Account 1 for retirement, Account 2 for approved pre-retirement withdrawals, and Account 3 for flexible withdrawals.
-              </p>
+                <p style="margin: 0 0 8px 0;">Monthly contributions are split across three dedicated accounts under EPF's restructured 3-Account system:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li><strong>Account 1 (Akaun Persaraan - 75%):</strong> Designated for retirement wealth accumulation until reaching age 55.</li>
+                  <li><strong>Account 2 (Akaun Sejahtera - 15%):</strong> Allocated for pre-retirement life requirements including housing, healthcare, education, and age 50 withdrawals.</li>
+                  <li><strong>Account 3 (Akaun Fleksibel - 10%):</strong> Accessible anytime for emergency or immediate short-term financial needs with zero conditions.</li>
+                </ul>
+              </div>
             </details>
           </div>
         </div>
@@ -1881,5 +1908,104 @@
           }
         });
       })();
+    </script>
+    <script>
+      function initCollapsibleTables() {
+        const selectors = [
+          ".table-responsive:not(.collapsible-initialized)",
+          ".table-container:not(.collapsible-initialized)",
+          ".seo-table-wrapper:not(.collapsible-initialized)"
+        ];
+        const containers = document.querySelectorAll(selectors.join(", "));
+        containers.forEach((container) => {
+          if (
+            container.classList.contains("collapsible-initialized") ||
+            container.closest(".table-collapsible-wrapper") ||
+            container.querySelector(".collapsible-initialized")
+          ) {
+            return;
+          }
+
+          const table = container.querySelector("table");
+          if (!table) return;
+
+          const tbody = table.querySelector("tbody");
+          if (!tbody) return;
+
+          const rows = tbody.querySelectorAll("tr");
+          const SHOW_COUNT = 5;
+
+          if (rows.length > SHOW_COUNT) {
+            container.classList.add("collapsible-initialized");
+
+            const wrapper = document.createElement("div");
+            wrapper.className = "table-collapsible-wrapper collapsed";
+
+            container.parentNode.insertBefore(wrapper, container);
+            wrapper.appendChild(container);
+
+            let initialHeight = 320;
+            if (container.offsetParent !== null) {
+              const header = table.querySelector("thead");
+              let calculatedHeight = header ? header.offsetHeight : 0;
+              for (let i = 0; i < SHOW_COUNT && i < rows.length; i++) {
+                calculatedHeight += rows[i].offsetHeight;
+              }
+              if (calculatedHeight > 50) {
+                initialHeight = calculatedHeight + 8;
+              }
+            } else {
+              initialHeight = 320;
+            }
+            wrapper.style.maxHeight = initialHeight + "px";
+
+            const btnContainer = document.createElement("div");
+            btnContainer.className = "table-show-more-container";
+
+            const btn = document.createElement("button");
+            btn.className = "table-show-more-btn";
+            btn.type = "button";
+            btn.innerHTML =
+              'Show Full Table / Expand <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><path d="M6 9l6 6 6-6"></path></svg>';
+
+            btnContainer.appendChild(btn);
+            wrapper.parentNode.insertBefore(btnContainer, wrapper.nextSibling);
+
+            btn.addEventListener("click", () => {
+              const isCollapsed = wrapper.classList.contains("collapsed");
+              if (isCollapsed) {
+                wrapper.classList.remove("collapsed");
+                wrapper.classList.add("expanded");
+                wrapper.style.maxHeight = (table.scrollHeight || 3000) + 150 + "px";
+                btn.innerHTML =
+                  'Show Less / Collapse <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; transform: rotate(180deg);"><path d="M6 9l6 6 6-6"></path></svg>';
+                btn.classList.add("active");
+              } else {
+                wrapper.classList.add("collapsed");
+                wrapper.classList.remove("expanded");
+                wrapper.style.maxHeight = initialHeight + "px";
+                btn.innerHTML =
+                  'Show Full Table / Expand <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><path d="M6 9l6 6 6-6"></path></svg>';
+                btn.classList.remove("active");
+
+                const rect = wrapper.getBoundingClientRect();
+                if (rect.top < 0) {
+                  window.scrollTo({
+                    top: window.pageYOffset + rect.top - 100,
+                    behavior: "smooth",
+                  });
+                }
+              }
+            });
+          }
+        });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initCollapsibleTables);
+      } else {
+        initCollapsibleTables();
+      }
+      window.addEventListener("load", initCollapsibleTables);
     </script>
 </body></html>

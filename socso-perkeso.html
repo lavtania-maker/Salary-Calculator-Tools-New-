@@ -262,7 +262,7 @@
           "name": "What happens if my employer doesn't pay SOCSO contributions?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Employers who fail to register employees or pay SOCSO contributions may face fines of up to RM10,000 and/or imprisonment of up to 2 years under the Employees' Social Security Act 1969. Employees can report non-compliance through PERKESO's ASSIST portal or by visiting any PERKESO branch."
+            "text": "Employers who fail to register employees or pay SOCSO contributions face penalties of up to RM10,000 fine and/or 2 years imprisonment under the Employees' Social Security Act 1969. Non-compliance can be reported via PERKESO's ASSIST Portal."
           }
         },
         {
@@ -270,7 +270,7 @@
           "name": "Can I withdraw my SOCSO contributions like EPF?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. SOCSO is an insurance scheme, not a savings account. You cannot withdraw your contributions as a lump sum. Benefits are only paid when you make a valid claim, such as for work injuries, disability, or dependant claims after death."
+            "text": "No. SOCSO functions strictly as a mandatory social insurance scheme rather than an individual savings account. Benefits are paid out only upon filing valid claims under the Employment Injury Scheme or Invalidity Scheme."
           }
         },
         {
@@ -278,7 +278,7 @@
           "name": "Does SOCSO coverage continue after I resign?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. SOCSO coverage ends when your employment and contributions stop. However, you may still claim for injuries or illnesses that occurred while you were covered."
+            "text": "No. Standard coverage under the Employment Injury Scheme ends upon resignation, though historical claims for injuries during employment remain valid and new employers will resume contributions."
           }
         },
         {
@@ -286,7 +286,7 @@
           "name": "Are self-employed and gig workers eligible for SOCSO?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Self-employed individuals, freelancers, and gig workers can voluntarily join the Self-Employment Social Security Scheme (SKSPS) by paying their own contributions."
+            "text": "Yes. Self-employed individuals, freelancers, and gig workers can enroll in the Self-Employment Social Security Scheme (SKSPS) to receive statutory protection and medical benefits."
           }
         },
         {
@@ -294,7 +294,7 @@
           "name": "Does SOCSO cover foreign workers in Malaysia?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. Effective 1 October 2025, SOCSO contributions are mandatory for all foreign workers in Malaysia. Employers must register and contribute for all eligible foreign employees."
+            "text": "Yes. SOCSO coverage is mandatory for all documented foreign workers under the Employment Injury Scheme, funded via a 1.25% employer contribution rate."
           }
         }
       ]
@@ -392,7 +392,8 @@
             <div class="dropdown-menu free-tools-dropdown" id="freeToolsMenu" role="menu" aria-labelledby="freeToolsTrigger">
               <a href="/annual-leave-calculator" class="dropdown-item" role="menuitem">Annual Leave Calculator</a>
               <a href="/overtime-pay-calculator" class="dropdown-item" role="menuitem">Overtime Pay Calculator</a>
-            </div>
+            
+              <a href="/hourly-rate" class="dropdown-item" role="menuitem">Hourly Rate Calculator</a></div>
           </div>
           <a href="/blog" class="nav-item" id="navBlog">Blog</a>
         </nav>
@@ -1080,15 +1081,14 @@
                       "></div>
                   </div>
                   <p style="
-                      font-size: 15px;
-                      color: #64748b;
+                      font-size: 13px;
+                      color: #6b7280;
                       margin-top: 16px;
-                      font-style: italic;
                       border-top: 1px solid rgba(0, 0, 0, 0.05);
                       padding-top: 12px;
+                      line-height: 1.5;
                     ">
-                    This is an estimate based on individual salary. Actual group
-                    depends on household income.
+                    Note: Income group classification (B40/M40/T20) is an estimate based on individual salary. Official DOSM categories are determined by total combined household income.
                   </p>
                 </div>
               </div>
@@ -1730,6 +1730,41 @@
                 </div>
               </div>
 
+              <div id="lindungContainer" style="margin-top: 16px; margin-bottom: 24px; padding: 12px 16px; background: rgba(37, 99, 235, 0.05); border-radius: 8px; border: 1px solid rgba(37, 99, 235, 0.1);">
+                <div id="lindungMalaysian">
+                  <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; margin-bottom: 0;">
+                    <input type="checkbox" id="lindungCheckbox" checked="" style="margin-top: 4px; width: 18px; height: 18px; accent-color: var(--primary);">
+                    <div style="display: flex; flex-direction: column;">
+                      <span style="font-weight: 600; color: var(--text-main); font-size: 0.95rem;">Include Lindung 24 Jam contribution</span>
+                      <span style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Voluntary — opt out by 31 Aug 2026</span>
+                    </div>
+                  </label>
+                </div>
+                <div id="lindungForeigner" style="display: none;">
+                  <div style="font-weight: 600; color: var(--text-main); font-size: 0.95rem;">Lindung 24 Jam contribution</div>
+                  <div style="font-size: 0.85rem; color: var(--text-muted); margin-top: 2px;">Mandatory for foreign workers — included automatically.</div>
+                </div>
+              </div>
+
+              <script>
+                document.querySelectorAll('input[name="socsoNationality"]').forEach(radio => {
+                  radio.addEventListener('change', (e) => {
+                    const isMalaysian = e.target.value === 'malaysian';
+                    document.getElementById('lindungMalaysian').style.display = isMalaysian ? 'block' : 'none';
+                    document.getElementById('lindungForeigner').style.display = isMalaysian ? 'none' : 'block';
+                    if (typeof calculateSocsoOnly === 'function') {
+                      calculateSocsoOnly();
+                    }
+                  });
+                });
+                
+                document.getElementById('lindungCheckbox').addEventListener('change', () => {
+                  if (typeof calculateSocsoOnly === 'function') {
+                    calculateSocsoOnly();
+                  }
+                });
+              </script>
+
               <div class="form-actions">
                 <button type="reset" id="socsoResetBtn" class="btn btn-outline">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1823,7 +1858,7 @@
                           flex-direction: column;
                           line-height: 1.4;
                         ">
-                        <span style="font-weight: 600; color: #1e293b">Employee contribution</span>
+                        <span id="socsoEmployeeLabel" style="font-weight: 600; color: #1e293b">Employee contribution</span>
                         <span style="
                             font-size: 15px;
                             color: #94a3b8;
@@ -1854,8 +1889,22 @@
                     </div>
                     <span id="socsoEmployerCardVal">RM 0.00</span>
                   </div>
+                  <!-- Lindung 24 Jam Row -->
+                  <div class="result-item" id="lindungResultRow" style="margin-top: 12px; padding: 12px; background: rgba(37, 99, 235, 0.05); border-radius: 8px; border: 1px solid rgba(37, 99, 235, 0.1);">
+                    <div style="display: flex; align-items: flex-start; gap: 12px">
+                      <span class="indicator-dot" style="margin-top: 6px; background-color: #3b82f6;"></span>
+                      <div style="display: flex; flex-direction: column; line-height: 1.4;">
+                        <span style="font-weight: 600; color: #1e293b">Lindung 24 Jam</span>
+                        <span style="font-size: 15px; color: #94a3b8; font-weight: 400; text-align: left;">(Monthly)</span>
+                      </div>
+                    </div>
+                    <span id="lindungCardVal" style="color: #3b82f6; font-weight: 700;">RM 0.00</span>
+                  </div>
+                  <p style="font-size: 13px; color: #94a3b8; margin: 8px 0 16px; line-height: 1.4;">
+                    Estimate only — actual amount follows PERKESO's official salary-band table. Rate rises in phases: 0.75% (Jun 2026–May 2028) → 1.00% (Jun 2028–May 2031) → 1.25% (from Jun 2031).
+                  </p>
                   <!-- Total Row -->
-                  <div class="result-item total">
+                  <div class="result-item total" style="margin-top: 16px;">
                     <span>Total Contribution</span>
                     <span id="socsoTotalCardVal">RM 0.00</span>
                   </div>
@@ -4851,14 +4900,19 @@
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 What happens if my employer doesn't pay SOCSO contributions?
               </summary>
-              <p style="
+              <div style="
                   margin-top: 10px;
-                  margin-bottom: 0;
-                  font-size: 16px;
+                  font-size: 15px;
                   color: #475569;
+                  line-height: 1.6;
                 ">
-                Employers who fail to register employees or pay SOCSO contributions may face fines of up to RM10,000 and/or imprisonment of up to 2 years under the Employees' Social Security Act 1969. Employees can report non-compliance through PERKESO's ASSIST portal or by visiting any PERKESO branch.
-              </p>
+                <p style="margin: 0 0 8px 0;">Non-compliance with statutory <strong>PERKESO</strong> contribution regulations incurs strict statutory penalties under the <strong>Employees' Social Security Act 1969</strong>:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li style="margin-bottom: 6px;"><strong>Legal Penalties:</strong> Non-compliant employers face fines of up to <strong>RM10,000 fine</strong>, imprisonment of up to <strong>2 years imprisonment</strong>, or both.</li>
+                  <li style="margin-bottom: 6px;"><strong>Loss of Coverage:</strong> Failure to pay compromises employee eligibility for vital <strong>Employment Injury Scheme</strong> and <strong>Invalidity Scheme</strong> protection.</li>
+                  <li style="margin-bottom: 6px;"><strong>Reporting Non-Compliance:</strong> Employees can report non-paying employers online via <strong>PERKESO's ASSIST Portal</strong> or by visiting any physical <strong>PERKESO branch</strong> nationwide.</li>
+                </ul>
+              </div>
             </details>
 
             <!-- FAQ Item 2 -->
@@ -4872,14 +4926,19 @@
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 Can I withdraw my SOCSO contributions like EPF?
               </summary>
-              <p style="
+              <div style="
                   margin-top: 10px;
-                  margin-bottom: 0;
-                  font-size: 16px;
+                  font-size: 15px;
                   color: #475569;
+                  line-height: 1.6;
                 ">
-                No. SOCSO is an insurance scheme, not a savings account. You cannot withdraw your contributions as a lump sum. Benefits are only paid when you make a valid claim, such as for work injuries, disability, or dependant claims after death.
-              </p>
+                <p style="margin: 0 0 8px 0;"><strong>No.</strong> Unlike <strong>KWSP (EPF)</strong>, SOCSO functions strictly as a mandatory <strong>social insurance scheme</strong> rather than an individual savings account:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li style="margin-bottom: 6px;"><strong>No Lump-Sum Withdrawals:</strong> Contributions pooled into national protection funds cannot be withdrawn upon resignation, retirement, or job change.</li>
+                  <li style="margin-bottom: 6px;"><strong>Claim-Based Benefits:</strong> Financial payouts and medical benefits are disbursed only upon filing valid claims under the <strong>Employment Injury Scheme</strong> or <strong>Invalidity Scheme</strong>.</li>
+                  <li style="margin-bottom: 6px;"><strong>Comprehensive Protection:</strong> Provides lifelong medical treatment, temporary/permanent disablement allowances, pensions, and dependants' benefits following workplace accidents or severe illnesses.</li>
+                </ul>
+              </div>
             </details>
 
             <!-- FAQ Item 3 -->
@@ -4893,14 +4952,19 @@
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 Does SOCSO coverage continue after I resign?
               </summary>
-              <p style="
+              <div style="
                   margin-top: 10px;
-                  margin-bottom: 0;
-                  font-size: 16px;
+                  font-size: 15px;
                   color: #475569;
+                  line-height: 1.6;
                 ">
-                No. SOCSO coverage ends when your employment and contributions stop. However, you may still claim for injuries or illnesses that occurred while you were covered.
-              </p>
+                <p style="margin: 0 0 8px 0;"><strong>No.</strong> Standard employment-based coverage ends once active contributions cease, subject to specific claim conditions:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li style="margin-bottom: 6px;"><strong>Active Employment Term:</strong> Standard protection under the <strong>Employment Injury Scheme</strong> ends on your last day of employment.</li>
+                  <li style="margin-bottom: 6px;"><strong>Historical Claims:</strong> You remain eligible to file claims for injuries, occupational diseases, or disabilities incurred during your period of active coverage.</li>
+                  <li style="margin-bottom: 6px;"><strong>New Job Continuation:</strong> Your new employer automatically resumes contributions under your existing <strong>PERKESO</strong> registration.</li>
+                </ul>
+              </div>
             </details>
 
             <!-- FAQ Item 4 -->
@@ -4914,14 +4978,19 @@
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 Are self-employed and gig workers eligible for SOCSO?
               </summary>
-              <p style="
+              <div style="
                   margin-top: 10px;
-                  margin-bottom: 0;
-                  font-size: 16px;
+                  font-size: 15px;
                   color: #475569;
+                  line-height: 1.6;
                 ">
-                Yes. Self-employed individuals, freelancers, and gig workers can voluntarily join the Self-Employment Social Security Scheme (SKSPS) by paying their own contributions.
-              </p>
+                <p style="margin: 0 0 8px 0;"><strong>Yes!</strong> Self-employed workers, e-hailing drivers, delivery riders, and freelancers are covered under dedicated statutory protection:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li style="margin-bottom: 6px;"><strong>Self-Employment Social Security Scheme (SKSPS):</strong> Enables self-employed individuals and gig workers to register and contribute voluntarily.</li>
+                  <li style="margin-bottom: 6px;"><strong>Occupational Protection:</strong> Provides medical, temporary disablement, permanent disablement, and dependants' benefits tailored for independent work environments.</li>
+                  <li style="margin-bottom: 6px;"><strong>Online Registration:</strong> Convenient enrollment and contribution payments can be processed directly via the <strong>PERKESO Matrix Portal</strong> or <strong>ASSIST Portal</strong>.</li>
+                </ul>
+              </div>
             </details>
 
             <!-- FAQ Item 5 -->
@@ -4935,14 +5004,19 @@
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 Does SOCSO cover foreign workers in Malaysia?
               </summary>
-              <p style="
+              <div style="
                   margin-top: 10px;
-                  margin-bottom: 0;
-                  font-size: 16px;
+                  font-size: 15px;
                   color: #475569;
+                  line-height: 1.6;
                 ">
-                Yes. Effective 1 October 2025, SOCSO contributions are mandatory for all foreign workers in Malaysia. Employers must register and contribute for all eligible foreign employees.
-              </p>
+                <p style="margin: 0 0 8px 0;"><strong>Yes.</strong> Protection under <strong>PERKESO</strong> is mandatory for all documented non-citizens and foreign workers:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li style="margin-bottom: 6px;"><strong>Mandatory Registration:</strong> Employers are legally required to register and contribute for all foreign employees under the <strong>Employees' Social Security Act 1969</strong>.</li>
+                  <li style="margin-bottom: 6px;"><strong>Employment Injury Scheme:</strong> Covers foreign workers against workplace accidents, commuting accidents, and occupational diseases.</li>
+                  <li style="margin-bottom: 6px;"><strong>Contribution Rates:</strong> Employers contribute <strong>1.25%</strong> of the foreign employee's monthly wage, while foreign employees are exempt from employee-side deductions.</li>
+                </ul>
+              </div>
             </details>
           </div>
         </div>
@@ -5559,6 +5633,9 @@
             "RM 0.00";
           document.getElementById("socsoEmployerCardVal").textContent =
             "RM 0.00";
+          if (document.getElementById("lindungCardVal")) {
+            document.getElementById("lindungCardVal").textContent = "RM 0.00";
+          }
         });
 
         socsoForm.addEventListener("submit", function (e) {
@@ -5628,6 +5705,7 @@
               total: bracket_er_only,
               er_only: bracket_er_only,
               bracket: bracketIndex,
+              lindung: Number((bracket_er_only - bracket_ee).toFixed(2)),
             };
           }
 
@@ -5637,6 +5715,7 @@
             total: Number((bracket_er_act4 + bracket_ee).toFixed(2)),
             er_only: bracket_er_only,
             bracket: bracketIndex,
+            lindung: Number((bracket_er_only - bracket_ee).toFixed(2)),
           };
         }
 
@@ -5663,16 +5742,33 @@
 
           // 1. SOCSO Calculation (Deterministic Table Lookup)
           const socsoRates = getSocsoRates(salary, age, nationality);
-          const socsoEmployer = socsoRates.er;
-          const socsoEmployee = socsoRates.ee;
+          
+          // DEFINITIONS & STATE
+          const baseEmployer = socsoRates.er;
+          const baseEmployee = socsoRates.ee;
+          const lindung24Jam = socsoRates.lindung;
+
+          let includeLindung = false;
+          if (nationality === "foreigner") {
+            includeLindung = true;
+          } else {
+            const lindungCheckbox = document.getElementById("lindungCheckbox");
+            includeLindung = lindungCheckbox ? lindungCheckbox.checked : false;
+          }
+
+          // DERIVED CALCULATIONS
+          const monthlyEmployeeTotal = includeLindung ? (baseEmployee + lindung24Jam) : baseEmployee;
+          const monthlyTotalRemittance = includeLindung ? (baseEmployee + baseEmployer + lindung24Jam) : (baseEmployee + baseEmployer);
+          const annualEmployeeTotal = monthlyEmployeeTotal * 12;
+          const annualEmployerTotal = baseEmployer * 12;
 
           // Store for download
           lastCalculation = {
             salary: salary,
             epf: 0,
-            socso: socsoEmployee,
-            socsoEmployer: socsoEmployer,
-            socsoTotal: socsoRates.total,
+            socso: monthlyEmployeeTotal,
+            socsoEmployer: baseEmployer,
+            socsoTotal: monthlyTotalRemittance,
             socsoCategory:
               age === "above60"
                 ? "60 years and above (Employment Injury Scheme Only)"
@@ -5680,24 +5776,29 @@
             socsoBracket: socsoRates.bracket,
             eis: 0,
             pcb: 0,
-            totalDeductions: socsoEmployee,
-            netSalary: salary - socsoEmployee,
+            totalDeductions: monthlyEmployeeTotal,
+            netSalary: salary - monthlyEmployeeTotal,
           };
 
           // UI Update logic (Highlighting Act 4 Result correctly)
           socsoResultsContent.classList.add("show");
           socsoPlaceholder.style.display = "none";
 
+          // UI DISPLAY UPDATES
+          document.getElementById("socsoEmployeeLabel").textContent = includeLindung ? "Employee contribution (Base + Lindung)" : "Employee contribution";
           document.getElementById("socsoEmployeeCardVal").textContent =
-            "RM " + socsoEmployee.toFixed(2);
+            "RM " + monthlyEmployeeTotal.toFixed(2);
           document.getElementById("socsoEmployerCardVal").textContent =
-            "RM " + socsoEmployer.toFixed(2);
+            "RM " + baseEmployer.toFixed(2);
           document.getElementById("socsoTotalCardVal").textContent =
-            "RM " + socsoRates.total.toFixed(2);
+            "RM " + monthlyTotalRemittance.toFixed(2);
           document.getElementById("socsoAnnualEmployeeCardVal").textContent =
-            "RM " + (socsoEmployee * 12).toFixed(2);
+            "RM " + annualEmployeeTotal.toFixed(2);
           document.getElementById("socsoAnnualEmployerCardVal").textContent =
-            "RM " + (socsoEmployer * 12).toFixed(2);
+            "RM " + annualEmployerTotal.toFixed(2);
+
+          document.getElementById("lindungCardVal").textContent =
+            includeLindung ? "RM " + lindung24Jam.toFixed(2) : "Not included";
         }
 
         // Tab Switcher Logic
@@ -6540,26 +6641,30 @@
             let eis = 0;
             let eisEmployer = 0;
             if (includeEis) {
-              // EIS is calculated based on salary brackets (approximately 0.2% but fixed per bracket)
-              // Cap is at RM6000
               const eisBase = Math.min(totalIncome, 6000);
 
-              if (eisBase <= 300) {
-                eis = 0.5;
-                eisEmployer = 0.5;
+              if (eisBase <= 30) {
+                eis = 0.05;
+              } else if (eisBase <= 50) {
+                eis = 0.10;
+              } else if (eisBase <= 70) {
+                eis = 0.15;
+              } else if (eisBase <= 100) {
+                eis = 0.20;
+              } else if (eisBase <= 140) {
+                eis = 0.25;
+              } else if (eisBase <= 200) {
+                eis = 0.35;
+              } else if (eisBase <= 300) {
+                eis = 0.50;
+              } else if (eisBase <= 4000) {
+                eis = Math.ceil(eisBase / 100) * 0.2 - 0.1;
               } else {
-                // For salaries above 300 up to 6000, the contribution is based on RM100 brackets
-                // e.g., 300.01 - 400 = 0.70, 400.01 - 500 = 0.90, etc.
-                // The formula is roughly: Math.ceil(salary / 100) * 0.2 - 0.1
-                // Let's use the exact formula that matches the table
-                const bracketMultiplier = Math.ceil(eisBase / 100);
-                eis = bracketMultiplier * 0.2 - 0.1;
-                eisEmployer = bracketMultiplier * 0.2 - 0.1;
-
-                // Fix floating point precision issues (e.g. 2.1000000000000005 -> 2.10)
-                eis = Math.round(eis * 100) / 100;
-                eisEmployer = Math.round(eisEmployer * 100) / 100;
+                eis = Math.ceil(eisBase / 100) * 0.2 - 0.3;
               }
+
+              eis = Math.round(eis * 100) / 100;
+              eisEmployer = eis;
             }
 
             // 5. PCB (LHDN Progressive Logic)
@@ -8401,5 +8506,112 @@
           }
         });
       })();
+    </script>
+    <script>
+      function initCollapsibleTables() {
+        const selectors = [
+          ".table-responsive:not(.collapsible-initialized)",
+          ".table-container:not(.collapsible-initialized)",
+          ".seo-table-wrapper:not(.collapsible-initialized)"
+        ];
+        const containers = document.querySelectorAll(selectors.join(", "));
+        containers.forEach((container) => {
+          if (
+            container.classList.contains("collapsible-initialized") ||
+            container.closest(".table-collapsible-wrapper") ||
+            container.querySelector(".collapsible-initialized")
+          ) {
+            return;
+          }
+
+          const table = container.querySelector("table");
+          if (!table) return;
+
+          const tbody = table.querySelector("tbody");
+          if (!tbody) return;
+
+          const rows = tbody.querySelectorAll("tr");
+          const SHOW_COUNT = 5;
+
+          if (rows.length > SHOW_COUNT) {
+            container.classList.add("collapsible-initialized");
+
+            const wrapper = document.createElement("div");
+            wrapper.className = "table-collapsible-wrapper collapsed";
+
+            container.parentNode.insertBefore(wrapper, container);
+            wrapper.appendChild(container);
+
+            let initialHeight = 320;
+            if (container.offsetParent !== null) {
+              const header = table.querySelector("thead");
+              let calculatedHeight = header ? header.offsetHeight : 0;
+              for (let i = 0; i < SHOW_COUNT && i < rows.length; i++) {
+                calculatedHeight += rows[i].offsetHeight;
+              }
+              if (calculatedHeight > 50) {
+                initialHeight = calculatedHeight + 8;
+              }
+            } else {
+              initialHeight = 320;
+            }
+            wrapper.style.maxHeight = initialHeight + "px";
+
+            const btnContainer = document.createElement("div");
+            btnContainer.className = "table-show-more-container";
+
+            const btn = document.createElement("button");
+            btn.className = "table-show-more-btn";
+            btn.type = "button";
+            btn.innerHTML =
+              'Show Full Table / Expand <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><path d="M6 9l6 6 6-6"></path></svg>';
+
+            btnContainer.appendChild(btn);
+            wrapper.parentNode.insertBefore(btnContainer, wrapper.nextSibling);
+
+            btn.addEventListener("click", () => {
+              const isCollapsed = wrapper.classList.contains("collapsed");
+              if (isCollapsed) {
+                wrapper.classList.remove("collapsed");
+                wrapper.classList.add("expanded");
+                wrapper.style.maxHeight = (table.scrollHeight || 3000) + 150 + "px";
+                btn.innerHTML =
+                  'Show Less / Collapse <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; transform: rotate(180deg);"><path d="M6 9l6 6 6-6"></path></svg>';
+                btn.classList.add("active");
+              } else {
+                wrapper.classList.add("collapsed");
+                wrapper.classList.remove("expanded");
+                wrapper.style.maxHeight = initialHeight + "px";
+                btn.innerHTML =
+                  'Show Full Table / Expand <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><path d="M6 9l6 6 6-6"></path></svg>';
+                btn.classList.remove("active");
+
+                const rect = wrapper.getBoundingClientRect();
+                if (rect.top < 0) {
+                  window.scrollTo({
+                    top: window.pageYOffset + rect.top - 100,
+                    behavior: "smooth",
+                  });
+                }
+              }
+            });
+          }
+        });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initCollapsibleTables);
+      } else {
+        initCollapsibleTables();
+      }
+      window.addEventListener("load", initCollapsibleTables);
+
+      if (typeof window.openTab === "function") {
+        const originalOpenTab = window.openTab;
+        window.openTab = function (evt, tabName) {
+          originalOpenTab(evt, tabName);
+          setTimeout(initCollapsibleTables, 50);
+        };
+      }
     </script>
 </body></html>

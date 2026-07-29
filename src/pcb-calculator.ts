@@ -125,38 +125,34 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const bonusStr = (document.getElementById("bonus") as HTMLInputElement)
-      .value;
-    const bonus = parseFloat(bonusStr) || 0;
-
-    const epfRateStr = (document.getElementById("epfRate") as HTMLSelectElement)
-      .value;
+    const maritalStatus = (document.getElementById("maritalStatus") as HTMLSelectElement).value;
+    const spouseWorking = maritalStatus === "married" ? (document.getElementById("spouseWorking") as HTMLSelectElement).value : "yes";
+    const childrenCount = parseInt((document.getElementById("childrenCount") as HTMLInputElement).value) || 0;
+    const additionalRelief = parseFloat((document.getElementById("additionalRelief") as HTMLInputElement).value) || 0;
+    
+    const epfRateStr = (document.getElementById("epfRate") as HTMLSelectElement).value;
     const epfRate = parseFloat(epfRateStr) / 100 || 0.11;
 
-    const isNonResident =
-      (document.getElementById("taxStatus") as HTMLSelectElement).value ===
-      "non-resident";
-    const hasSpouse = false;
+    const isNonResident = (document.getElementById("taxStatus") as HTMLSelectElement).value === "non-resident";
 
-    const childrenCount = 0;
-
-    const zakatStr = (document.getElementById("zakat") as HTMLInputElement)
-      .value;
-    const zakat = parseFloat(zakatStr) || 0;
-
-    const totalIncome = salary + bonus;
+    const totalIncome = salary;
 
     // EPF deduction
-const epfDeduction = totalIncome * epfRate;
-const annualIncome = (totalIncome - epfDeduction) * 12;
-const personalRelief = 9000;
-let totalRelief = personalRelief;
-if (hasSpouse) totalRelief += 4000;
-totalRelief += (childrenCount * 2000);
-const taxableIncome = annualIncome - totalRelief;
-let tax = 0;
-let bracket = '0%';
-let annualTax = 0;
+    const actualEpf = totalIncome * epfRate;
+    const epfRelief = Math.min(actualEpf, 333.33);
+    const annualIncome = (totalIncome - epfRelief) * 12;
+    
+    const personalRelief = 9000;
+    let totalRelief = personalRelief + additionalRelief;
+    if (maritalStatus === "married" && spouseWorking === "no") {
+      totalRelief += 4000;
+    }
+    totalRelief += (childrenCount * 2000);
+    
+    const taxableIncome = Math.max(0, annualIncome - totalRelief);
+    let tax = 0;
+    let bracket = '0%';
+    let annualTax = 0;
 if (isNonResident) {
   annualTax = annualIncome * 0.30;
   bracket = '30%';
@@ -197,6 +193,7 @@ if (isNonResident) {
     tax = annualTax / 12;
   }
 }
+const zakat = 0; // removed from form
 tax = tax - zakat;
 if (tax < 0) tax = 0;
 let chargeable = taxableIncome > 0 ? taxableIncome / 12 : 0;
@@ -206,7 +203,7 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
 
     // Display
     resGross.textContent = formatRM(totalIncome);
-    resEpf.textContent = formatRM(epfDeduction);
+    resEpf.textContent = formatRM(actualEpf);
     resRelief.textContent = formatRM(finalReliefAndZakat);
     resChargeable.textContent = formatRM(chargeable);
 
@@ -219,22 +216,21 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
     resAnnualPcb.textContent = formatRM(tax * 12);
 
     // Take Home Salary updates
-    const takeHomeSalary = totalIncome - epfDeduction - tax;
+    const takeHomeSalary = totalIncome - actualEpf - tax;
     resTakeHomeSalary.textContent = formatRM(takeHomeSalary);
     resTakeHomeGross.textContent = formatRM(totalIncome);
-    resTakeHomeEpf.textContent = "-" + formatRM(epfDeduction);
+    resTakeHomeEpf.textContent = "-" + formatRM(actualEpf);
     resTakeHomePcb.textContent = "-" + formatRM(tax);
     resTakeHomeTaxRate.textContent =
       effectiveRate.toFixed(1) + "% of gross salary";
 
     lastCalculation = {
       salary: salary.toFixed(2),
-      bonus: bonus.toFixed(2),
-      epf: epfDeduction.toFixed(2),
+      epf: actualEpf.toFixed(2),
       relief: finalReliefAndZakat.toFixed(2),
       pcb: tax.toFixed(2),
-      totalDeductions: (epfDeduction + tax).toFixed(2),
-      netSalary: (totalIncome - epfDeduction - tax).toFixed(2),
+      totalDeductions: (actualEpf + tax).toFixed(2),
+      netSalary: (totalIncome - actualEpf - tax).toFixed(2),
       annualIncome: (totalIncome * 12).toFixed(2),
       annualPcb: (tax * 12).toFixed(2),
       effectiveRate: effectiveRate.toFixed(2),
@@ -242,6 +238,7 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
       taxStatus: isNonResident ? "non-resident" : "resident",
       epfRate: (epfRate * 100).toFixed(0),
       chargeable: chargeable.toFixed(2),
+      maritalStatus,
     };
 
     // Show result panel
@@ -436,13 +433,13 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
           createdAt: new Date().toISOString(),
           ...(lastCalculation ? {
             salary: lastCalculation.salary,
-            bonus: lastCalculation.bonus,
             annualIncome: lastCalculation.annualIncome,
             relief: lastCalculation.relief,
             taxBracket: lastCalculation.taxBracket,
             pcb: lastCalculation.pcb,
             netSalary: lastCalculation.netSalary,
-            taxStatus: lastCalculation.taxStatus
+            taxStatus: lastCalculation.taxStatus,
+            maritalStatus: lastCalculation.maritalStatus
           } : {})
         };
 
@@ -482,8 +479,8 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
                 value: `RM ${parseFloat(lastCalculation.salary).toFixed(2)}`,
               },
               {
-                label: "Bonus",
-                value: `RM ${parseFloat(lastCalculation.bonus).toFixed(2)}`,
+                label: "Marital Status",
+                value: lastCalculation.maritalStatus === "married" ? "Married" : "Single",
               },
               {
                 label: "Tax Status",

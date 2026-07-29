@@ -146,51 +146,46 @@ document.addEventListener("DOMContentLoaded", () => {
     const age = (
       document.querySelector('input[name="epfAge"]:checked') as HTMLInputElement
     ).value;
-    const nationality = (
-      document.querySelector(
-        'input[name="epfNationality"]:checked',
-      ) as HTMLInputElement
-    ).value;
+    const rateEl = document.querySelector(
+      'input[name="epfRate"]:checked',
+    ) as HTMLInputElement;
+    const selectedRate = rateEl ? parseFloat(rateEl.value) / 100 : 0.11;
 
-    const isMalaysian = nationality === "malaysian";
     const isAbove60 = age === "above60";
 
     let employeeRate = 0;
     let employerRate = 0;
-    let employerFlat = 0;
 
     let empRateStr = "0%";
     let emprRateStr = "0%";
 
-    if (isMalaysian) {
-      if (isAbove60) {
-        employeeRate = 0.0;
-        employerRate = 0.04;
-        empRateStr = "0%";
-        emprRateStr = "4%";
-      } else {
-        employeeRate = 0.11;
-        employerRate = salary <= 5000 ? 0.13 : 0.12;
-        empRateStr = "11%";
-        emprRateStr = salary <= 5000 ? "13%" : "12%";
-      }
+    if (isAbove60) {
+      employeeRate = 0.0;
+      employerRate = 0.04;
+      empRateStr = "0%";
+      emprRateStr = "4%";
     } else {
-      // Foreigner
-      if (isAbove60) {
-        employeeRate = 0.055;
-        employerFlat = 5;
-        empRateStr = "5.5%";
-        emprRateStr = "Flat RM 5";
-      } else {
-        employeeRate = 0.11;
-        employerFlat = 5;
-        empRateStr = "11%";
-        emprRateStr = "Flat RM 5";
-      }
+      employeeRate = selectedRate;
+      employerRate = salary <= 5000 ? 0.13 : 0.12;
+      empRateStr = `${employeeRate * 100}%`;
+      emprRateStr = salary <= 5000 ? "13%" : "12%";
     }
 
-    const employeeEpf = salary * employeeRate;
-    const employerEpf = employerFlat > 0 ? employerFlat : salary * employerRate;
+    let employeeEpf = 0;
+    let employerEpf = 0;
+
+    if (salary <= 20000) {
+      // KWSP Third Schedule band logic (RM 20 steps up to RM 20,000)
+      const wageBand = Math.ceil(salary / 20) * 20;
+      // Per Third Schedule, the contribution is generally computed on the band
+      // and rounded to nearest Ringgit, but exact formulas vary. Using round/ceil.
+      employeeEpf = Math.round(wageBand * employeeRate);
+      employerEpf = Math.round(wageBand * employerRate);
+    } else {
+      // Over RM 20,000: Exact rate on salary, typically rounded up to next RM
+      employeeEpf = Math.ceil(salary * employeeRate);
+      employerEpf = Math.ceil(salary * employerRate);
+    }
     const totalEpf = employeeEpf + employerEpf;
     const netSalary = salary - employeeEpf;
 
@@ -227,7 +222,6 @@ document.addEventListener("DOMContentLoaded", () => {
       empRateStr,
       emprRateStr,
       age,
-      nationality,
     };
 
     placeholderText.style.display = "none";
@@ -459,7 +453,7 @@ document.addEventListener("DOMContentLoaded", () => {
             totalEpf: lastCalculation.totalEpf,
             netSalary: lastCalculation.netSalary,
             ageGroup: lastCalculation.age,
-            nationality: lastCalculation.nationality
+            employeeRate: lastCalculation.empRateStr
           } : {})
         };
         if (companyInputExt?.value?.trim())
@@ -504,13 +498,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 label: "Age Group",
                 value:
                   lastCalculation.age === "above60" ? "Above 60" : "Below 60",
-              },
-              {
-                label: "Nationality",
-                value:
-                  lastCalculation.nationality === "malaysian"
-                    ? "Malaysian"
-                    : "Foreigner",
               },
               { label: "Employee Rate", value: lastCalculation.empRateStr },
               { label: "Employer Rate", value: lastCalculation.emprRateStr },

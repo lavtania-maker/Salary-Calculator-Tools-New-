@@ -160,7 +160,8 @@
             <div class="dropdown-menu free-tools-dropdown" id="freeToolsMenu" role="menu" aria-labelledby="freeToolsTrigger">
               <a href="/annual-leave-calculator" class="dropdown-item" role="menuitem">Annual Leave Calculator</a>
               <a href="/overtime-pay-calculator" class="dropdown-item" role="menuitem">Overtime Pay Calculator</a>
-            </div>
+            
+              <a href="/hourly-rate" class="dropdown-item" role="menuitem">Hourly Rate Calculator</a></div>
           </div>
           <a href="/blog" class="nav-item" id="navBlog">Blog</a>
         </nav>
@@ -288,8 +289,12 @@
                 </div>
 
                 <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;">
-                  <span>Hourly Rate (Basis)</span>
+                  <span>Hourly Rate (HRP)</span>
                   <span id="resHourlyRate" style="font-weight: 600;">RM 0.00</span>
+                </div>
+                <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;">
+                  <span>Daily Rate (ORP)</span>
+                  <span id="resDailyRate" style="font-weight: 600;">RM 0.00</span>
                 </div>
                 <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;">
                   <span>Total OT Hours</span>
@@ -324,20 +329,14 @@
         
         <!-- 1. Understanding Overtime Pay in Malaysia -->
         <div class="content-card">
-          <div class="section-title-wrap">
-            <div class="section-accent"></div>
-            <h2 style="margin-bottom: 0;">Understanding Overtime Pay in Malaysia</h2>
-          </div>
+          <h2 style="color: #2563eb !important;">Understanding Overtime Pay in Malaysia</h2>
           <p>Overtime (OT) pay is the additional compensation paid to employees who work beyond their normal working hours. In Malaysia, OT pay is regulated by the <strong>Employment Act 1955</strong> to ensure workers are fairly compensated for extra time spent on the job. Understanding these regulations is crucial for both employers and employees to maintain compliance and fair labor practices.</p>
           <p style="margin-bottom: 0;">This calculator helps you estimate your statutory overtime pay according to the Malaysian Employment Act. <a href="#otForm" style="color: #2563eb; font-weight: 600; text-decoration: underline;">Use the calculator above</a> to see the exact tiered breakdown for your hours worked.</p>
         </div>
 
         <!-- 2. Who Is Eligible for Overtime Pay? -->
         <div class="content-card">
-          <div class="section-title-wrap">
-            <div class="section-accent"></div>
-            <h2 style="margin-bottom: 0;">Who Is Eligible for Overtime Pay?</h2>
-          </div>
+          <h2 style="color: #2563eb !important;">Who Is Eligible for Overtime Pay?</h2>
           <p>Not all employees are entitled to statutory overtime pay under the Employment Act 1955. Eligibility is generally based on salary or nature of work:</p>
           <div style="display: grid; gap: 16px; margin-top: 20px;">
             <div style="display: flex; gap: 12px; align-items: flex-start; background: #f1f5f9; padding: 16px; border-radius: 12px;">
@@ -366,10 +365,7 @@
 
         <!-- 3. Overtime Rates in Malaysia -->
         <div class="content-card">
-          <div class="section-title-wrap">
-            <div class="section-accent"></div>
-            <h2 style="margin-bottom: 0;">Overtime Rates in Malaysia</h2>
-          </div>
+          <h2 style="color: #2563eb !important;">Overtime Rates in Malaysia</h2>
           <p style="margin-bottom: 32px;">Overtime multipliers are standardized by law. The rates vary depending on the day you perform the extra work:</p>
           
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
@@ -443,10 +439,7 @@
 
         <!-- 4. How to Calculate Overtime Pay -->
         <div class="content-card">
-          <div class="section-title-wrap">
-            <div class="section-accent"></div>
-            <h2 style="margin-bottom: 0;">How to Calculate Overtime Pay</h2>
-          </div>
+          <h2 style="color: #2563eb !important;">How to Calculate Overtime Pay</h2>
           <p>The calculation is a 3-step process. Each step builds on the previous one:</p>
           
           <div style="display: flex; flex-direction: column; gap: 32px; margin-top: 32px; position: relative;">
@@ -494,10 +487,7 @@
 
         <!-- 5. Overtime Calculation Example -->
         <div class="content-card">
-          <div class="section-title-wrap">
-            <div class="section-accent"></div>
-            <h2 style="margin-bottom: 0;">Overtime Calculation Example</h2>
-          </div>
+          <h2 style="color: #2563eb !important;">Overtime Calculation Example</h2>
           <p>Here is how a RM3,000 salary earner's OT pay looks for 2 hours of extra work on a normal day:</p>
           
           <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
@@ -554,10 +544,7 @@
 
         <!-- 6. Factors That Affect Overtime Pay -->
         <div class="content-card">
-          <div class="section-title-wrap">
-            <div class="section-accent"></div>
-            <h2 style="margin-bottom: 0;">Factors That Affect Overtime Pay</h2>
-          </div>
+          <h2 style="color: #2563eb !important;">Factors That Affect Overtime Pay</h2>
           <p>Several key variables will impact the final amount of overtime pay calculated:</p>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px;">
             <div style="display: flex; gap: 12px; align-items: center;">
@@ -599,57 +586,104 @@
           </div>
         </div>
 
-
         <!-- 8. Frequently Asked Questions -->
-        <div class="content-card" style="margin-bottom: 0;">
-          <div class="section-title-wrap">
-            <div class="section-accent"></div>
-            <h2 style="margin-bottom: 0;">Frequently Asked Questions</h2>
+        <div class="content-card">
+          <h2 style="color: #2563eb !important;">Frequently Asked Questions</h2>
+          <p class="seo-subtitle" style="color: #64748b; font-size: 15px; margin-top: 8px; margin-bottom: 24px;">
+            Got questions about overtime pay in Malaysia? Find answers to the most common statutory overtime questions below.
+          </p>
+
+          <div class="faq-container" style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
+            <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">How is overtime pay calculated in Malaysia?</summary>
+              <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
+                <p style="margin: 0 0 8px 0;">Overtime pay calculation is governed by the <strong>Employment Act 1955</strong> based on your <strong>Hourly Rate of Pay (HRP)</strong> and statutory multipliers:</p>
+                <div style="font-family: monospace; background: #f1f5f9; padding: 8px 12px; border-radius: 6px; margin: 8px 0 12px 0; color: #1e293b; font-size: 13px;">
+                  <strong>Overtime Pay Formula:</strong> HRP × Overtime Hours × Statutory Multiplier
+                </div>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li style="margin-bottom: 6px;"><strong>Normal Workday OT:</strong> Paid at <strong>1.5x</strong> HRP for work exceeding standard daily hours.</li>
+                  <li style="margin-bottom: 6px;"><strong>Rest Day OT (Excess Hours):</strong> Paid at <strong>2.0x</strong> HRP for work beyond normal rest day schedule.</li>
+                  <li style="margin-bottom: 6px;"><strong>Public Holiday OT (Excess Hours):</strong> Paid at <strong>3.0x</strong> HRP for work beyond standard public holiday hours.</li>
+                </ul>
+              </div>
+            </details>
+            <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">Is overtime calculated using basic salary or gross salary?</summary>
+              <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
+                <p style="margin: 0 0 8px 0;">Statutory overtime calculation uses the <strong>Ordinary Rate of Pay (ORP)</strong> rather than total gross salary:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li style="margin-bottom: 6px;"><strong>Included Earnings:</strong> <strong>Basic Monthly Salary</strong> plus fixed, non-variable monthly allowances (e.g., position or fixed housing allowance).</li>
+                  <li style="margin-bottom: 6px;"><strong>Excluded Earnings:</strong> Performance-based bonuses, variable commissions, traveling allowances, and expense reimbursements.</li>
+                  <li style="margin-bottom: 6px;"><strong>Statutory Formula:</strong> Calculated using the mandatory fixed 26-day monthly divisor under the <strong>Employment Act 1955</strong>.</li>
+                </ul>
+              </div>
+            </details>
+            <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">Who is entitled to overtime pay?</summary>
+              <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
+                <p style="margin: 0 0 8px 0;">Under First Schedule amendments to Malaysia's <strong>Employment Act 1955</strong>, statutory OT coverage includes:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li style="margin-bottom: 6px;"><strong>Salary Threshold:</strong> Employees earning a basic monthly salary of <strong>RM 4,000 or below</strong> are statutorily entitled to overtime pay.</li>
+                  <li style="margin-bottom: 6px;"><strong>Manual Labor Exception:</strong> Employees engaged in manual labor, supervision of manual workers, or operation of mechanically propelled vehicles are eligible <strong>regardless of salary level</strong>.</li>
+                  <li style="margin-bottom: 6px;"><strong>Above RM 4,000 Non-Manual:</strong> Subject to individual employment contracts or company policy rather than mandatory statutory rates.</li>
+                </ul>
+              </div>
+            </details>
+            <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">What is the overtime rate for public holidays?</summary>
+              <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
+                <p style="margin: 0 0 8px 0;">Working on an officially gazetted <strong>Public Holiday</strong> is compensated based on working hours:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li style="margin-bottom: 6px;"><strong>Within Normal Working Hours:</strong> Entitled to <strong>2 days' Ordinary Rate of Pay (ORP)</strong> regardless of actual hours worked within standard shift.</li>
+                  <li style="margin-bottom: 6px;"><strong>Excess / Overtime Hours:</strong> Paid at <strong>3.0x</strong> your <strong>Hourly Rate of Pay (HRP)</strong> for every hour worked beyond normal shift hours.</li>
+                </ul>
+              </div>
+            </details>
+            <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">What is the overtime rate for rest days?</summary>
+              <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
+                <p style="margin: 0 0 8px 0;">Work performed on a scheduled weekly <strong>Rest Day</strong> follows statutory tiered rates:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li style="margin-bottom: 6px;"><strong>Up to Half Normal Hours:</strong> Paid <strong>0.5 day's ORP</strong> (for monthly paid employees).</li>
+                  <li style="margin-bottom: 6px;"><strong>More Than Half Up to Full Shift:</strong> Paid <strong>1.0 day's ORP</strong>.</li>
+                  <li style="margin-bottom: 6px;"><strong>Excess / Overtime Hours:</strong> Paid at <strong>2.0x</strong> your <strong>Hourly Rate of Pay (HRP)</strong> for any hours worked beyond standard shift duration.</li>
+                </ul>
+              </div>
+            </details>
+            <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">How do I calculate my hourly rate?</summary>
+              <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
+                <p style="margin: 0 0 8px 0;">Your <strong>Hourly Rate of Pay (HRP)</strong> is calculated in two steps using statutory Employment Act guidelines:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li style="margin-bottom: 8px;">
+                    <strong>Step 1 — Daily Ordinary Rate of Pay (ORP):</strong>
+                    <div style="font-family: monospace; background: #f1f5f9; padding: 6px 12px; border-radius: 6px; margin: 4px 0 8px 0; color: #1e293b; font-size: 13px;">
+                      ORP = Monthly Basic Salary ÷ 26
+                    </div>
+                  </li>
+                  <li>
+                    <strong>Step 2 — Hourly Rate of Pay (HRP):</strong>
+                    <div style="font-family: monospace; background: #f1f5f9; padding: 6px 12px; border-radius: 6px; margin: 4px 0; color: #1e293b; font-size: 13px;">
+                      HRP = ORP ÷ Normal Daily Working Hours (e.g., 8 hours)
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </details>
+            <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">What is the maximum overtime hours allowed per month?</summary>
+              <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
+                <p style="margin: 0 0 8px 0;">Malaysia enforces strict statutory limits on monthly overtime work under Employment Regulations:</p>
+                <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
+                  <li style="margin-bottom: 6px;"><strong>Monthly OT Cap:</strong> Maximum allowable overtime is <strong>104 hours / month</strong>.</li>
+                  <li style="margin-bottom: 6px;"><strong>Exemption Requirements:</strong> Employers requiring employees to exceed 104 OT hours must obtain prior written approval from the <strong>Director General of Labour (JTK)</strong>.</li>
+                  <li style="margin-bottom: 6px;"><strong>Weekly Working Hour Limit:</strong> Total regular weekly working hours are capped at <strong>45 hours / week</strong> under updated <strong>Employment Act 1955</strong> standards.</li>
+                </ul>
+              </div>
+            </details>
           </div>
-          <div class="faq-accordion" style="margin-top: 32px;">
-            <details class="faq-item">
-              <summary class="faq-title">How is overtime pay calculated in Malaysia?</summary>
-              <div class="faq-content">
-                Overtime pay is calculated by multiplying the Hourly Rate of Pay (HRP) by the number of overtime hours and the applicable multiplier (1.5x for normal days, 2.0x for excess hours on rest days, and 3.0x for excess hours on holidays).
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary class="faq-title">Is overtime calculated using basic salary or gross salary?</summary>
-              <div class="faq-content">
-                In Malaysia, the statutory calculation for OT is based on the "Ordinary Rate of Pay", which typically includes your basic salary and fixed monthly allowances that do not vary based on performance.
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary class="faq-title">Who is entitled to overtime pay?</summary>
-              <div class="faq-content">
-                Under the Employment Act 1955, employees earning RM4,000 or below, or those involved in manual labor (regardless of salary), are statutorily entitled to OT pay.
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary class="faq-title">What is the overtime rate for public holidays?</summary>
-              <div class="faq-content">
-                For work beyond normal hours on a public holiday, the rate is 3 times the hourly rate. For work within normal hours, you receive 2 days' pay instead of 1.
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary class="faq-title">What is the overtime rate for rest days?</summary>
-              <div class="faq-content">
-                Hours worked beyond normal hours on a rest day are paid at 2 times the hourly rate. Within normal hours, it is tiered based on whether you work half-day or full-day.
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary class="faq-title">How do I calculate my hourly rate?</summary>
-              <div class="faq-content">
-                First, find your Ordinary Rate of Pay (ORP = Salary ÷ 26). Then divide the ORP by your normal daily working hours (usually 8).
-              </div>
-            </details>
-            <details class="faq-item">
-              <summary class="faq-title">What is the maximum overtime hours allowed per month?</summary>
-              <div class="faq-content">
-                The statutory maximum limit for overtime work in Malaysia is 104 hours per month.
-              </div>
-            </details>
-          </div>
+        </div>
 
 
       </div>
@@ -952,6 +986,7 @@
         // Results
         const resTotalOTPay = document.getElementById("resTotalOTPay");
         const resHourlyRate = document.getElementById("resHourlyRate");
+        const resDailyRate = document.getElementById("resDailyRate");
         const resTotalOTHours = document.getElementById("resTotalOTHours");
         const resMultiplierApplied = document.getElementById("resMultiplierApplied");
         const resGrossPay = document.getElementById("resGrossPay");
@@ -1063,26 +1098,11 @@
             otPay = otHours * hourlyRate * 1.5;
             multiplierStr = "1.5x hourly rate";
           } else if (overtimeType === "Rest Day") {
-            if (otHours <= normalHours / 2) {
-              otPay = 0.5 * dailyRate;
-              multiplierStr = "0.5x daily rate";
-            } else if (otHours > normalHours / 2 && otHours <= normalHours) {
-              otPay = 1.0 * dailyRate;
-              multiplierStr = "1.0x daily rate";
-            } else {
-              const excess = otHours - normalHours;
-              otPay = (1.0 * dailyRate) + (excess * hourlyRate * 2);
-              multiplierStr = `1.0x daily rate + 2.0x hourly for ${excess} excess hours`;
-            }
+            otPay = otHours * hourlyRate * 2.0;
+            multiplierStr = "2.0x hourly rate";
           } else if (overtimeType === "Public Holiday") {
-            if (otHours <= normalHours) {
-              otPay = 2.0 * dailyRate;
-              multiplierStr = "2.0x daily rate";
-            } else {
-              const excess = otHours - normalHours;
-              otPay = (2.0 * dailyRate) + (excess * hourlyRate * 3);
-              multiplierStr = `2.0x daily rate + 3.0x hourly for ${excess} excess hours`;
-            }
+            otPay = otHours * hourlyRate * 3.0;
+            multiplierStr = "3.0x hourly rate";
           }
 
           const grossPay = salary + otPay;
@@ -1092,6 +1112,7 @@
           // Display Results
           resTotalOTPay.textContent = `RM ${otPay.toFixed(2)}`;
           resHourlyRate.textContent = `RM ${hourlyRate.toFixed(2)}`;
+          resDailyRate.textContent = `RM ${dailyRate.toFixed(2)}`;
           resTotalOTHours.textContent = `${otHours} hours`;
           resMultiplierApplied.textContent = multiplierStr;
           resGrossPay.textContent = `RM ${grossPay.toFixed(2)}`;
@@ -1106,6 +1127,7 @@
             otHours,
             normalHours,
             overtimeType,
+            dailyRate,
             hourlyRate,
             multiplierStr,
             otPay,
@@ -1174,7 +1196,8 @@
               { label: "Normal Working Hours Per Day", value: `${lastResults.normalHours} Hours` },
               { label: "Overtime Type", value: lastResults.overtimeType },
               { label: "OT Hours Worked", value: `${lastResults.otHours} hours` },
-              { label: "Calculated Hourly Rate", value: `RM ${lastResults.hourlyRate.toFixed(2)}` },
+              { label: "Calculated Daily Rate (ORP)", value: `RM ${lastResults.dailyRate.toFixed(2)}` },
+              { label: "Calculated Hourly Rate (HRP)", value: `RM ${lastResults.hourlyRate.toFixed(2)}` },
               { label: "OT Multiplier Applied", value: lastResults.multiplierStr },
               { label: "Total Overtime Pay", value: `RM ${lastResults.otPay.toFixed(2)}` },
               { label: "Estimated Gross Pay", value: `RM ${lastResults.grossPay.toFixed(2)}` }
@@ -1516,6 +1539,105 @@
           }
         });
       })();
+    </script>
+    <script>
+      function initCollapsibleTables() {
+        const selectors = [
+          ".table-responsive:not(.collapsible-initialized)",
+          ".table-container:not(.collapsible-initialized)",
+          ".seo-table-wrapper:not(.collapsible-initialized)"
+        ];
+        const containers = document.querySelectorAll(selectors.join(", "));
+        containers.forEach((container) => {
+          if (
+            container.classList.contains("collapsible-initialized") ||
+            container.closest(".table-collapsible-wrapper") ||
+            container.querySelector(".collapsible-initialized")
+          ) {
+            return;
+          }
+
+          const table = container.querySelector("table");
+          if (!table) return;
+
+          const tbody = table.querySelector("tbody");
+          if (!tbody) return;
+
+          const rows = tbody.querySelectorAll("tr");
+          const SHOW_COUNT = 5;
+
+          if (rows.length > SHOW_COUNT) {
+            container.classList.add("collapsible-initialized");
+
+            const wrapper = document.createElement("div");
+            wrapper.className = "table-collapsible-wrapper collapsed";
+
+            container.parentNode.insertBefore(wrapper, container);
+            wrapper.appendChild(container);
+
+            let initialHeight = 320;
+            if (container.offsetParent !== null) {
+              const header = table.querySelector("thead");
+              let calculatedHeight = header ? header.offsetHeight : 0;
+              for (let i = 0; i < SHOW_COUNT && i < rows.length; i++) {
+                calculatedHeight += rows[i].offsetHeight;
+              }
+              if (calculatedHeight > 50) {
+                initialHeight = calculatedHeight + 8;
+              }
+            } else {
+              initialHeight = 320;
+            }
+            wrapper.style.maxHeight = initialHeight + "px";
+
+            const btnContainer = document.createElement("div");
+            btnContainer.className = "table-show-more-container";
+
+            const btn = document.createElement("button");
+            btn.className = "table-show-more-btn";
+            btn.type = "button";
+            btn.innerHTML =
+              'Show Full Table / Expand <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><path d="M6 9l6 6 6-6"></path></svg>';
+
+            btnContainer.appendChild(btn);
+            wrapper.parentNode.insertBefore(btnContainer, wrapper.nextSibling);
+
+            btn.addEventListener("click", () => {
+              const isCollapsed = wrapper.classList.contains("collapsed");
+              if (isCollapsed) {
+                wrapper.classList.remove("collapsed");
+                wrapper.classList.add("expanded");
+                wrapper.style.maxHeight = (table.scrollHeight || 3000) + 150 + "px";
+                btn.innerHTML =
+                  'Show Less / Collapse <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; transform: rotate(180deg);"><path d="M6 9l6 6 6-6"></path></svg>';
+                btn.classList.add("active");
+              } else {
+                wrapper.classList.add("collapsed");
+                wrapper.classList.remove("expanded");
+                wrapper.style.maxHeight = initialHeight + "px";
+                btn.innerHTML =
+                  'Show Full Table / Expand <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><path d="M6 9l6 6 6-6"></path></svg>';
+                btn.classList.remove("active");
+
+                const rect = wrapper.getBoundingClientRect();
+                if (rect.top < 0) {
+                  window.scrollTo({
+                    top: window.pageYOffset + rect.top - 100,
+                    behavior: "smooth",
+                  });
+                }
+              }
+            });
+          }
+        });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initCollapsibleTables);
+      } else {
+        initCollapsibleTables();
+      }
+      window.addEventListener("load", initCollapsibleTables);
     </script>
 
 </body></html>
