@@ -136,6 +136,16 @@ export default async function handler(req: any, res: any) {
   // Normalize slug to handle any trailing slash
   slug = slug.trim().replace(/\/$/, "");
 
+  const reservedSlugs = ["hourly-rate", "hourly-rate-calculator", "epf-kwsp", "socso-perkeso", "pcb-income-tax", "annual-leave-calculator", "overtime-pay-calculator"];
+  if (reservedSlugs.includes(slug)) {
+    const target = slug === 'hourly-rate-calculator' ? '/hourly-rate' : `/${slug}`;
+    if (typeof (res as any).redirect === 'function') {
+      return (res as any).redirect(301, target);
+    }
+    res.writeHead(301, { Location: target });
+    return res.end();
+  }
+
   const bypassCache = req.query?.nocache === "true" || req.query?.refresh === "true";
 
   try {

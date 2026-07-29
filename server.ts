@@ -217,7 +217,7 @@ async function startServer() {
 
   app.get("/:slug", (req, res, next) => {
     const slug = req.params.slug;
-    const reserved = ["hourly-rate", "blog", "epf-kwsp", "socso-perkeso", "pcb-income-tax", "annual-leave-calculator", "privacy-policy", "admin", "blog-admin", "mincal", "payslip-generator", "report", "overtime-pay-calculator", "epfreport", "socsoreport", "payslip", "api"];
+    const reserved = ["hourly-rate", "hourly-rate-calculator", "blog", "epf-kwsp", "socso-perkeso", "pcb-income-tax", "annual-leave-calculator", "privacy-policy", "admin", "blog-admin", "mincal", "payslip-generator", "report", "overtime-pay-calculator", "epfreport", "socsoreport", "payslip", "api"];
     if (slug && !slug.includes(".") && !reserved.includes(slug)) {
       req.query.slug = slug;
       return blogPostHandler(req as any, res as any);

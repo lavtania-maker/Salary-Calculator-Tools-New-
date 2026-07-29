@@ -123,11 +123,19 @@
       "destination": "/overtime-pay-calculator.html"
     },
     {
+      "source": "/hourly-rate",
+      "destination": "/hourly-rate.html"
+    },
+    {
+      "source": "/hourly-rate-calculator",
+      "destination": "/hourly-rate.html"
+    },
+    {
       "source": "/blog/:slug",
       "destination": "/api/blog-post"
     },
     {
-      "source": "/((?!.*\\.(?:html|png|jpg|jpeg|gif|css|js|ico|svg|xml|txt|json)$|blog$|epf-kwsp$|socso-perkeso$|pcb-income-tax$|annual-leave-calculator$|privacy-policy$|admin$|blog-admin$|mincal$|payslip-generator$|report$|overtime-pay-calculator$|epfreport$|socsoreport$|payslip$|api$)[^/.]+)",
+      "source": "/((?!.*\\.(?:html|png|jpg|jpeg|gif|css|js|ico|svg|xml|txt|json)$|blog$|epf-kwsp$|socso-perkeso$|pcb-income-tax$|annual-leave-calculator$|privacy-policy$|admin$|blog-admin$|mincal$|payslip-generator$|report$|overtime-pay-calculator$|epfreport$|socsoreport$|payslip$|hourly-rate$|hourly-rate-calculator$|api$)[^/.]+)",
       "destination": "/api/blog-post?slug=$1"
     }
   ],
