@@ -398,10 +398,8 @@
                   line-height: 1.6;
                 "></div>
               <div class="form-group">
-                <label class="form-label" for="leaveStartDate">Employee Start Date</label>
-                <div style="
-                    color: var(--danger);
-                    font-size: 13px; font-weight: 400; margin-bottom: 10px; margin-top: -6px;">*Required</div>
+                <label class="form-label" for="leaveStartDate">Employee Start Date <span style="color: red">*</span></label>
+                
                 <input type="date" id="leaveStartDate" class="form-input">
               </div>
 
@@ -437,7 +435,7 @@
 
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px">
                 <div class="form-group">
-                  <label class="form-label" for="leaveCalcDate">Calculation Date</label>
+                  <label class="form-label" for="leaveCalcDate">Calculation Date <span class="helper-text">(Optional)</span></label>
                   <input type="date" id="leaveCalcDate" class="form-input">
                   <p style="font-size: 13px; color: #64748b; margin-top: 8px">
                     Date to calculate pro-rated leave up to (defaults to end of year).
@@ -447,7 +445,7 @@
 
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px">
                 <div class="form-group" style="margin-bottom: 0">
-                  <label class="form-label" for="leaveEntitlement">Annual Leave Entitlement</label>
+                  <label class="form-label" for="leaveEntitlement">Annual Leave Entitlement <span style="color: red">*</span></label>
                   <div class="input-group">
                     <input type="number" id="leaveEntitlement" class="form-input" min="0" step="0.5">
                     <span class="input-postfix" style="

@@ -456,6 +456,11 @@ async function startServer() {
           process.env.VITE_OVERTIME_SHEETS_SCRIPT_URL ||
           process.env.OVERTIME_SHEETS_SCRIPT_URL ||
           process.env.GOOGLE_SHEETS_SCRIPT_URL;
+      } else if (actn.includes("hourly") || dl.includes("hourly")) {
+        targetScriptUrl =
+          process.env.HOURLY_SHEETS_SCRIPT_URL ||
+          process.env.GOOGLE_SHEETS_SCRIPT_URL;
+        targetSheetId = "1hourly_dummy_id_replace_later";
       }
 
       if (!targetScriptUrl) {

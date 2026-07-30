@@ -203,14 +203,14 @@
             <h2 class="card-title" style="color: #2563eb !important;">Enter Details</h2>
             <form id="otForm">
               <div class="form-group">
-                <label class="form-label" for="salary">Monthly Salary (RM) <span style="color: #dc2626">*</span></label>
-                <div style="color: #dc2626; font-size: 13px; font-weight: 400; margin-bottom: 10px; margin-top: -6px;">*Required</div>
+                <label class="form-label" for="salary">Monthly Salary (RM) <span style="color: red">*</span></label>
+                
                 <input type="number" id="salary" class="form-input" placeholder="e.g. 3000" min="0" step="0.01">
               </div>
 
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px">
                 <div class="form-group">
-                  <label class="form-label" for="workingDays">Working Days Per Week</label>
+                  <label class="form-label" for="workingDays">Working Days Per Week <span style="color: red">*</span></label>
                   <select id="workingDays" class="form-select">
                     <option value="5">5 Days</option>
                     <option value="5.5">5.5 Days</option>
@@ -218,14 +218,14 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label class="form-label" for="normalHours">Normal Hours Per Day</label>
+                  <label class="form-label" for="normalHours">Normal Hours Per Day <span style="color: red">*</span></label>
                   <input type="number" id="normalHours" class="form-input" value="8" min="1" max="24" step="0.5">
                 </div>
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="overtimeType">Overtime Type <span style="color: #dc2626">*</span></label>
-                <div style="color: #dc2626; font-size: 13px; font-weight: 400; margin-bottom: 10px; margin-top: -6px;">*Required</div>
+                <label class="form-label" for="overtimeType">Overtime Type <span style="color: red">*</span></label>
+                
                 <select id="overtimeType" class="form-select">
                   <option value="">Select type...</option>
                   <option value="Normal Working Day">Normal Working Day</option>
@@ -235,8 +235,8 @@
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="otHours">OT Hours Worked <span style="color: #dc2626">*</span></label>
-                <div style="color: #dc2626; font-size: 13px; font-weight: 400; margin-bottom: 10px; margin-top: -6px;">*Required</div>
+                <label class="form-label" for="otHours">OT Hours Worked <span style="color: red">*</span></label>
+                
                 <input type="number" id="otHours" class="form-input" placeholder="e.g. 10" min="0" step="0.5">
               </div>
 
@@ -862,13 +862,14 @@
         </div>
       </div>
     </footer>
+    
     <!-- Lead Modal -->
     <div id="emailModal" class="modal-overlay">
       <div class="modal">
-        <span class="modal-close" id="closeModal">×</span>
+        <span class="modal-close" id="closeModal">&times;</span>
 
         <div id="modalFormContent">
-          <h2 id="modalTitle" style="color: #2563eb !important;">Download OT Report</h2>
+          <h2 id="modalTitle" style="color: #2563eb !important;">Download Report</h2>
           <p id="modalDescription">
             Enter your email address to receive your detailed PDF report.
           </p>
@@ -922,7 +923,7 @@
           <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
-          <div id="modalFeedback">Your OT report is ready!</div>
+          <div id="modalFeedback">Thank you! Your report has been downloaded.</div>
 
           <div id="mobileActionButtons" style="
               display: none;
@@ -937,25 +938,17 @@
                 display: inline-block;
               ">View File Now</a>
             <p style="
-                font-size: 15px;
-                color: var(--text-muted);
-                margin-top: 5px;
-                
-              ">
-              Works on Android &amp; iPhone
+                font-size: 13px;
+                color: #64748b;
+                text-align: center;
+                margin: 0;
+              " id="mobileFallbackText">
+              If the file didn't open automatically, click the button above.
             </p>
-          </div>
-          <div id="mobileFallbackText" style="
-              display: none;
-              margin-top: 15px;
-              font-size: 15px;
-              color: var(--text-muted);
-              text-align: center;
-            ">
-            Your file has been generated. Click the button above to view it.
           </div>
         </div>
       </div>
+    </div>
     </div>
     <script type="module">
       import { db } from "/src/firebase.ts";

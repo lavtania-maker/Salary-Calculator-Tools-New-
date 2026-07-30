@@ -459,20 +459,14 @@
             <form id="pcbForm" action="#resultCard" method="GET">
               <div class="form-group">
                 <label class="form-label" for="grossSalary" style="display: flex; align-items: center; gap: 6px">
-                  Gross Monthly Salary
+                  Gross Monthly Salary <span style="color: red">*</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-muted)">
                     <circle cx="12" cy="12" r="10"></circle>
                     <line x1="12" y1="16" x2="12" y2="12"></line>
                     <line x1="12" y1="8" x2="12.01" y2="8"></line>
                   </svg>
                 </label>
-                <p style="
-                    font-size: 13px;
-                    color: #dc2626;
-                    margin-top: -2px;
-                    margin-bottom: 4px;
-                    font-weight: 400;
-                  ">*Required</p>
+                
                 <div class="input-group">
                   <span class="input-prefix">RM</span>
                   <input type="number" id="grossSalary" name="grossSalary" class="form-input" placeholder="0" min="0" required="">
@@ -501,8 +495,8 @@
               </div>
 
               <div class="form-group">
-                <label class="form-label" for="additionalRelief">Additional Tax Relief (RM / Year)</label>
-                <p style="font-size: 14px; color: #9ca3af; margin-top: -2px; margin-bottom: 4px;">(Optional)</p>
+                <label class="form-label" for="additionalRelief">Additional Tax Relief (RM / Year) <span class="helper-text">(Optional)</span></label>
+                
                 <div class="input-group">
                   <span class="input-prefix">RM</span>
                   <input type="number" id="additionalRelief" name="additionalRelief" class="form-input" placeholder="0" min="0" value="0">
@@ -511,7 +505,7 @@
 
               <div class="form-group">
                 <label class="form-label" for="epfRate">EPF Contribution Rate</label>
-                <p style="font-size: 14px; color: #9ca3af; margin-top: -2px; margin-bottom: 4px;">(Optional)</p>
+                
                 <select id="epfRate" name="epfRate" class="form-select">
                   <option value="11">11%</option>
                   <option value="9">9%</option>
@@ -520,7 +514,7 @@
 
               <div class="form-group">
                 <label class="form-label" for="taxStatus">Tax Status</label>
-                <p style="font-size: 14px; color: #9ca3af; margin-top: -2px; margin-bottom: 4px;">(Optional)</p>
+                
                 <select id="taxStatus" name="taxStatus" class="form-select">
                   <option value="resident">Resident</option>
                   <option value="non-resident">Non-Resident</option>
@@ -1644,16 +1638,16 @@
       </div>
     </div>
 
-    <!-- Email Modal -->
+    
+    <!-- Lead Modal -->
     <div id="emailModal" class="modal-overlay">
       <div class="modal">
-        <span class="modal-close" id="closeModal">×</span>
+        <span class="modal-close" id="closeModal">&times;</span>
 
         <div id="modalFormContent">
-          <h2 id="modalTitle" style="color: #2563eb !important;">Download PCB Report</h2>
+          <h2 id="modalTitle" style="color: #2563eb !important;">Download Report</h2>
           <p id="modalDescription">
-            Enter your email address to receive your PCB breakdown and tax
-            report.
+            Enter your email address to receive your detailed PDF report.
           </p>
           <form id="emailForm">
             <div class="form-group">
@@ -1666,7 +1660,7 @@
             </div>
             <div class="form-group">
               <label class="form-label" for="userType">Who are you? <span style="color: red">*</span></label>
-              <select id="userType" class="form-input" required="">
+              <select id="userType" class="form-select" required="">
                 <option value="" disabled="" selected="">Select an option</option>
                 <option value="Employer / HR">Employer / HR</option>
                 <option value="Employee">Employee</option>
@@ -1705,9 +1699,7 @@
           <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
-          <div id="modalFeedback">
-            Thank you! The PCB report has been generated.
-          </div>
+          <div id="modalFeedback">Thank you! Your report has been downloaded.</div>
 
           <div id="mobileActionButtons" style="
               display: none;
@@ -1722,25 +1714,17 @@
                 display: inline-block;
               ">View File Now</a>
             <p style="
-                font-size: 15px;
-                color: var(--text-muted);
-                margin-top: 5px;
-                
-              ">
-              Works on Android &amp; iPhone
+                font-size: 13px;
+                color: #64748b;
+                text-align: center;
+                margin: 0;
+              " id="mobileFallbackText">
+              If the file didn't open automatically, click the button above.
             </p>
-          </div>
-          <div id="mobileFallbackText" style="
-              display: none;
-              margin-top: 15px;
-              font-size: 15px;
-              color: var(--text-muted);
-              text-align: center;
-            ">
-            Your file has been generated. Click the button above to view it.
           </div>
         </div>
       </div>
+    </div>
     </div>
 
     <script type="module" src="/src/pcb-calculator.ts"></script>

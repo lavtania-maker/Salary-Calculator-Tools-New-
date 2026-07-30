@@ -185,7 +185,7 @@
             <span style="color: #ffffff; font-weight: 600;">Hourly Rate Calculator</span>
           </nav>
           <h1>Hourly Rate Calculator Malaysia</h1>
-          <p>Convert your monthly salary into an hourly rate instantly. Suitable for full-time employees, part-time workers, freelancers, and interns.</p>
+          <p>Calculate your true hourly pay instantly with our FREE calculator<br>for full-time, part-time, freelance, or intern rates.</p>
         </div>
       </section>
 
@@ -197,14 +197,14 @@
             <form id="calculatorForm">
   <!-- Monthly Salary -->
   <div class="form-group">
-    <label class="form-label" for="monthlySalary">Monthly Salary (RM) <span style="color: #dc2626">*</span></label>
+    <label class="form-label" for="monthlySalary">Monthly Salary (RM) <span style="color: red">*</span></label>
     <input type="number" id="monthlySalary" class="form-input" value="7000" min="0" step="1">
   </div>
 
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px">
     <!-- Working Days Per Week -->
     <div class="form-group">
-      <label class="form-label" for="workingDaysSelect">Working Days Per Week</label>
+      <label class="form-label" for="workingDaysSelect">Working Days Per Week <span style="color: red">*</span></label>
       <select id="workingDaysSelect" class="form-select">
         <option value="5">5 Days</option>
         <option value="5.5">5.5 Days</option>
@@ -215,7 +215,7 @@
 
     <!-- Working Hours Per Day -->
     <div class="form-group">
-      <label class="form-label" for="workingHours">Working Hours Per Day</label>
+      <label class="form-label" for="workingHours">Working Hours Per Day <span style="color: red">*</span></label>
       <input type="number" id="workingHours" class="form-input" value="8" min="1" max="24" step="0.5">
     </div>
   </div>
@@ -443,9 +443,9 @@
             If you are an employer looking to hire in Malaysia, connect with active local job seekers instantly by posting a <strong>FREE</strong> job ad:
           </p>
           <ul style="margin: 0; padding-left: 20px; color: #2563eb; font-size: 15px; line-height: 1.8;">
-            <li style="margin-bottom: 4px;"><a href="https://www.ajobthing.com/product/post-free-part-time-job-ad" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; font-weight: 600;">Post FREE Part-Time Job Ad</a></li>
-            <li style="margin-bottom: 4px;"><a href="https://www.ajobthing.com/product/post-free-freelance-job-ad" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; font-weight: 600;">Post FREE Freelance Job Ad</a></li>
-            <li style="margin-bottom: 0;"><a href="https://www.ajobthing.com/product/post-free-intern-job-ad" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; font-weight: 600;">Post FREE Intern Job Ad</a></li>
+            <li style="margin-bottom: 4px;"><a href="https://www.ajobthing.com/product/post-free-part-time-job-ad" class="job-ad-link" data-job-type="part_time" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; font-weight: 600;">Post FREE Part-Time Job Ad</a></li>
+            <li style="margin-bottom: 4px;"><a href="https://www.ajobthing.com/product/post-free-freelance-job-ad" class="job-ad-link" data-job-type="freelance" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; font-weight: 600;">Post FREE Freelance Job Ad</a></li>
+            <li style="margin-bottom: 0;"><a href="https://www.ajobthing.com/product/post-free-intern-job-ad" class="job-ad-link" data-job-type="intern" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; font-weight: 600;">Post FREE Intern Job Ad</a></li>
           </ul>
         </div>
 
@@ -721,13 +721,14 @@
         </div>
       </div>
     </footer>
+    
     <!-- Lead Modal -->
     <div id="emailModal" class="modal-overlay">
       <div class="modal">
-        <span class="modal-close" id="closeModal">×</span>
+        <span class="modal-close" id="closeModal">&times;</span>
 
         <div id="modalFormContent">
-          <h2 id="modalTitle" style="color: #2563eb !important;">Download Hourly Rate Report</h2>
+          <h2 id="modalTitle" style="color: #2563eb !important;">Download Report</h2>
           <p id="modalDescription">
             Enter your email address to receive your detailed PDF report.
           </p>
@@ -781,7 +782,7 @@
           <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
-          <div id="modalFeedback">Your Hourly rate report is ready!</div>
+          <div id="modalFeedback">Thank you! Your report has been downloaded.</div>
 
           <div id="mobileActionButtons" style="
               display: none;
@@ -796,25 +797,17 @@
                 display: inline-block;
               ">View File Now</a>
             <p style="
-                font-size: 15px;
-                color: var(--text-muted);
-                margin-top: 5px;
-                
-              ">
-              Works on Android &amp; iPhone
+                font-size: 13px;
+                color: #64748b;
+                text-align: center;
+                margin: 0;
+              " id="mobileFallbackText">
+              If the file didn't open automatically, click the button above.
             </p>
-          </div>
-          <div id="mobileFallbackText" style="
-              display: none;
-              margin-top: 15px;
-              font-size: 15px;
-              color: var(--text-muted);
-              text-align: center;
-            ">
-            Your file has been generated. Click the button above to view it.
           </div>
         </div>
       </div>
+    </div>
     </div>
     
 
@@ -932,6 +925,17 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // GA4 Helpers
+    const sendGtagEvent = (eventName, params) => {
+      if (typeof window.gtag === "function") {
+        console.log(`[GA4 Event] ${eventName}`, params);
+        window.gtag("event", eventName, params);
+      }
+    };
+
+    // 1. calculator_view
+    sendGtagEvent("calculator_view", { calculator_name: "hourly_rate", page_location: window.location.href });
+
     const calculateBtn = document.getElementById('calculateBtn');
     const resetBtn = document.getElementById('resetBtn');
     const resultsPlaceholder = document.getElementById('resultsPlaceholder');
@@ -1029,6 +1033,16 @@
       if (resMonthlyHours) resMonthlyHours.textContent = monthlyWorkingHours.toFixed(2) + ' hours';
       if (resCalcSteps) resCalcSteps.innerHTML = calculationStepsHtml;
 
+      window.lastCalculation = {
+        monthlySalary,
+        workingHours,
+        workingDaysPerWeek,
+        empType,
+        hourlyRate,
+        dailySalary,
+        monthlyWorkingHours
+      };
+
       if (resultsPlaceholder) resultsPlaceholder.style.display = 'none';
       if (resultsContent) {
         resultsContent.style.display = 'block';
@@ -1037,12 +1051,12 @@
         }, 10);
       }
       
-      if (typeof gtag === 'function') {
-        gtag('event', 'calculate_hourly', {
-          'salary': monthlySalary,
-          'method': 'statutory'
-        });
-      }
+      sendGtagEvent('click_calculate_hourly', {
+        page_location: window.location.href,
+        employment_type: empType,
+        working_days: workingDaysPerWeek,
+        working_hours: workingHours
+      });
     }
     const workingDaysNote = document.getElementById('workingDaysNote');
 
@@ -1059,12 +1073,28 @@
     }
 
     if (employmentTypeSelect) {
-      employmentTypeSelect.addEventListener('change', updateWorkingDaysNote);
+      employmentTypeSelect.addEventListener('change', (e) => {
+        updateWorkingDaysNote();
+        sendGtagEvent("select_employment_type", {
+          page_location: window.location.href,
+          employment_type: e.target.value
+        });
+      });
+    }
+
+    if (workingDaysSelect) {
+      workingDaysSelect.addEventListener('change', (e) => {
+        sendGtagEvent("select_working_days", {
+          page_location: window.location.href,
+          working_days: parseFloat(e.target.value)
+        });
+      });
     }
 
     if(calculateBtn) calculateBtn.addEventListener('click', calculate);
     
     if(resetBtn) resetBtn.addEventListener('click', () => {
+      sendGtagEvent('click_reset_hourly', { page_location: window.location.href });
       if(monthlySalaryInput) monthlySalaryInput.value = '';
       if(workingHoursInput) workingHoursInput.value = '8';
       const workingDaysSelect = document.getElementById("workingDaysSelect"); if(workingDaysSelect) workingDaysSelect.value = "5";
@@ -1086,11 +1116,35 @@
       downloadBtn.addEventListener('click', () => {
         const modal = document.getElementById('emailModal');
         if(modal) modal.style.display = 'flex';
-        if (typeof gtag === 'function') {
-          gtag('event', 'download_hourly_report_click');
-        }
+        sendGtagEvent('click_download_hourly', { page_location: window.location.href, file_format: 'pdf' });
       });
     }
+
+    // Job Ad Click Tracking
+    const jobAdLinks = document.querySelectorAll('.job-ad-link');
+    jobAdLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        sendGtagEvent('click_cta_job_ad', {
+          page_location: window.location.href,
+          job_type: link.getAttribute('data-job-type')
+        });
+      });
+    });
+
+    // FAQ Accordion Click Tracking
+    const faqItems = document.querySelectorAll('.faq-container details');
+    faqItems.forEach(item => {
+      item.addEventListener('toggle', () => {
+        if (item.open) {
+          const summary = item.querySelector('summary');
+          const questionText = summary ? summary.textContent.trim() : '';
+          sendGtagEvent('select_faq_item', {
+            page_location: window.location.href,
+            question_text: questionText
+          });
+        }
+      });
+    });
 
     // Modal close hooks
     const modalClose = document.getElementById('modalClose');
@@ -1098,8 +1152,69 @@
       modalClose.addEventListener('click', () => {
         const modal = document.getElementById('emailModal');
         if(modal) modal.style.display = 'none';
+        sendGtagEvent("click_close_download_modal", { page_location: window.location.href });
       });
     }
+
+    // Modal user type select tracking
+    const userTypeSelect = document.getElementById("userType");
+    const companyNameGroup = document.getElementById("companyNameGroup");
+    const companyInput = document.getElementById("companyName");
+    const hiringQuestionGroup = document.getElementById("hiringQuestionGroup");
+    const hiringInput = document.getElementById("hiringStatus");
+
+    if (userTypeSelect) {
+      userTypeSelect.addEventListener('change', (e) => {
+        sendGtagEvent("select_user_type", {
+          page_location: window.location.href,
+          user_type: e.target.value
+        });
+        
+        if (userTypeSelect.value === "Employer / HR") {
+          if (companyNameGroup) companyNameGroup.style.display = "block";
+          if (companyInput) companyInput.required = true;
+          if (hiringQuestionGroup) hiringQuestionGroup.style.display = "block";
+          if (hiringInput) hiringInput.required = true;
+        } else {
+          if (companyNameGroup) companyNameGroup.style.display = "none";
+          if (companyInput) {
+            companyInput.required = false;
+            companyInput.value = "";
+          }
+          if (hiringQuestionGroup) hiringQuestionGroup.style.display = "none";
+          if (hiringInput) {
+            hiringInput.required = false;
+            hiringInput.value = "";
+          }
+        }
+      });
+    }
+
+    // Direct PDF Generation Helper
+    const triggerDirectDownload = async () => {
+      if (!window.lastCalculation) {
+        alert("Please calculate your hourly rate first.");
+        return;
+      }
+      try {
+        const { generatePDFReport } = await import("/src/lib/pdf-generator.ts");
+        generatePDFReport({
+          title: "Hourly Rate Report",
+          fileName: "Hourly-Rate-Report",
+          data: [
+            { label: "Monthly Salary", value: `RM ${window.lastCalculation.monthlySalary.toFixed(2)}` },
+            { label: "Working Days Per Week", value: `${window.lastCalculation.workingDaysPerWeek} Days` },
+            { label: "Normal Working Hours Per Day", value: `${window.lastCalculation.workingHours} Hours` },
+            { label: "Employment Type", value: window.lastCalculation.empType },
+            { label: "Calculated Daily Rate", value: `RM ${window.lastCalculation.dailySalary.toFixed(2)}` },
+            { label: "Calculated Hourly Rate", value: `RM ${window.lastCalculation.hourlyRate.toFixed(2)}` },
+            { label: "Total Monthly Working Hours", value: `${window.lastCalculation.monthlyWorkingHours.toFixed(2)} hrs` }
+          ]
+        });
+      } catch (err) {
+        console.error("Failed to generate PDF:", err);
+      }
+    };
 
     // Modal submit hook
     const emailForm = document.getElementById('emailForm');
@@ -1108,70 +1223,167 @@
         e.preventDefault();
         
         const submitBtn = emailForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = 'Processing...';
-        submitBtn.disabled = true;
+        let originalText = "Submit & Download";
+        if (submitBtn) {
+          originalText = submitBtn.textContent || "Submit & Download";
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Generating your report...";
+        }
+
+        const userTypeSelect = document.getElementById('userType');
+        const hiringInput = document.getElementById('hiringStatus');
+        const userEmailInput = document.getElementById('userEmail');
+        const userNameInput = document.getElementById('userName');
+        const userPhoneInput = document.getElementById('userPhone');
+        const companyInput = document.getElementById('companyName');
+
+        const userType = userTypeSelect ? userTypeSelect.value : "";
+        const hiringStatus = hiringInput ? hiringInput.value : "";
+        const emailValue = userEmailInput ? userEmailInput.value.trim() : "";
+        const nameValue = userNameInput ? userNameInput.value.trim() : "";
+        const phoneValue = userPhoneInput ? userPhoneInput.value.trim() : "";
+        const companyValue = companyInput ? companyInput.value.trim() : "";
+
+        // Basic validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailValue || !emailRegex.test(emailValue)) {
+          alert("Please enter a valid email address.");
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }
+          return;
+        }
+
+        if (!nameValue) {
+          alert("Please enter your name.");
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }
+          return;
+        }
+
+        if (!userType) {
+          alert("Please select who you are.");
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }
+          return;
+        }
+
+        // Save info to local storage
+        localStorage.setItem("salaryCalc_hasSubmittedEmail", "true");
+        localStorage.setItem("salaryCalc_userEmail", emailValue);
+        localStorage.setItem("salaryCalc_last_submit_" + emailValue, Date.now().toString());
+
+        const leadData = {
+          name: nameValue,
+          email: emailValue,
+          companyName: companyValue,
+          phoneNumber: phoneValue,
+          userType: userType,
+          hiringStatus: hiringStatus,
+          calculatorType: "Hourly Rate",
+          action: "Download Hourly Report",
+          createdAt: new Date().toISOString(),
+          ...(window.lastCalculation ? window.lastCalculation : {})
+        };
 
         try {
-          // Prepare data
-          const monthlySalary = parseFloat(monthlySalaryInput ? monthlySalaryInput.value : 0) || 0;
-          const workingHours = parseFloat(workingHoursInput ? workingHoursInput.value : 8) || 8;
-          const checkedDays = document.getElementById("workingDaysSelect");
-          const workingDaysRaw = checkedDays ? checkedDays.value : "5";
-          const workingDaysPerWeek = parseFloat(workingDaysRaw);
-          
-          let hourlyRate = (monthlySalary / 26) / (workingHours || 8);
-
-          const formData = new FormData(emailForm);
-          const data = {
-            name: formData.get('userName'),
-            email: formData.get('userEmail'),
-            companyName: formData.get('companyName'),
-            phone: formData.get('userPhone'),
-            userType: formData.get('userType'),
-            hiringStatus: formData.get('hiringStatus'),
-            calculatorType: 'HourlyRate',
-            salary: monthlySalary,
-            workingDays: workingDaysRaw,
-            workingHours: workingHours,
-            hourlyRate: hourlyRate,
-            timestamp: new Date().toISOString()
+          // 1 & 3. Submit to Firebase & Google Sheets
+          let isSuccess = false;
+          const payload = {
+            timestamp: new Date().toISOString(),
+            name: nameValue,
+            email: emailValue,
+            userType: userType,
+            hiringStatus: hiringStatus || "",
+            companyName: companyValue || "",
+            userPhone: phoneValue || "",
+            action: "Download Hourly Report",
+            download_via: "Download Hourly Report"
           };
 
-          // Try to submit to sheet
           try {
-            await fetch("https://script.google.com/macros/s/AKfycbye4H3j2gWkGf-uO0j4Fk19sC3d3l90W8HiyRXXi7rJc0kF87n5-WbK64fSjBfT654W/exec", {
-              method: "POST",
-              mode: "no-cors",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(data)
-            });
-          } catch(e) {}
-          
-          // Try to submit to Firestore
-          if (window.db && window.firebaseFirestore) {
-            try {
+            if (window.db && window.firebaseFirestore) {
               const { collection, addDoc } = window.firebaseFirestore;
-              await addDoc(collection(window.db, "leads"), data);
-            } catch(e) {}
+              await addDoc(collection(window.db, "leads"), leadData);
+              console.log("Recorded to Firestore leads collection.");
+            }
+            
+            const sheetRes = await fetch("/api/salary-sheet", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload),
+            });
+            
+            if (sheetRes.ok) {
+              isSuccess = true;
+              console.log("Google Sheets record succeeded.");
+            } else {
+              console.error("Google Sheets Webhook error:", await sheetRes.text());
+            }
+          } catch (err) {
+            console.error("Submission failed:", err);
           }
 
-          // Show success
-          const mfc = document.getElementById('modalFormContent');
-          const msc = document.getElementById('modalSuccessContent');
-          if(mfc) mfc.style.display = 'none';
-          if(msc) msc.style.display = 'block';
-          
-          if (typeof gtag === 'function') {
-            gtag('event', 'generate_lead_hourly');
+          // 2. GA4 submit event
+          sendGtagEvent("click_submit_hourly", {
+            calculator_name: "hourly_rate",
+            user_type: userType,
+            hiring_status: hiringStatus
+          });
+
+          // 4. Trigger Download Only if Success
+          if (isSuccess) {
+            triggerDirectDownload();
           }
-          
-        } catch (error) {
-          console.error(error);
-          alert('Something went wrong. Please try again.');
+
+          // 5. Update UI Success Message
+          await new Promise((resolve) => setTimeout(resolve, 800));
+
+          const modalFormContent = document.getElementById('modalFormContent');
+          const modalSuccessContent = document.getElementById('modalSuccessContent');
+
+          if (modalFormContent && modalSuccessContent) {
+            modalFormContent.style.display = "none";
+            const emailModal = document.getElementById('emailModal');
+            // if (emailModal) emailModal.style.display = "none"; // Kept visible like overtime modal? Wait, overtime sets modalFormContent none, but also closes modal?
+            
+            if (userType === "Employer / HR") {
+              const hiringModal = document.getElementById("hiringIntentModal");
+              if (hiringModal) {
+                hiringModal.style.display = "flex";
+                window._currentLeadEmail = emailValue;
+                window._currentLeadType = "Hourly Rate Calculator";
+              }
+            }
+            
+            const modalFeedback = document.getElementById("modalFeedback");
+            if (modalFeedback) {
+              modalFeedback.textContent = "Thank you! Your Hourly Rate report has been downloaded.";
+              modalFeedback.style.display = "block";
+            }
+
+            modalSuccessContent.style.display = "block";
+            
+            const mobileActionButtons = document.getElementById("mobileActionButtons");
+            const mobileFallbackText = document.getElementById("mobileFallbackText");
+            if (mobileActionButtons) mobileActionButtons.style.display = "none";
+            if (mobileFallbackText) mobileFallbackText.style.display = "none";
+          }
+
+        } catch (err) {
+          console.error("Critical submission error handled:", err);
+          alert("An error occurred during submission, but your report is still being generated. Please wait.");
+          triggerDirectDownload();
         } finally {
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }
         }
       });
     }
