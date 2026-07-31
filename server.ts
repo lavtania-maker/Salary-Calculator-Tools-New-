@@ -193,7 +193,7 @@ async function startServer() {
     return blogHandler(req as any, res as any);
   });
 
-  app.get("/blog", (req, res) => {
+  app.get("/blog", (req, res) => { 
     return blogHandler(req as any, res as any);
   });
 
@@ -307,7 +307,7 @@ async function startServer() {
       const q = query(postsRef, where("status", "==", "published"));
       const querySnapshot = await getDocs(q);
 
-      const PREDEFINED_CATEGORIES = ["salary", "epf", "socso", "pcb-income-tax", "annual-leave", "overtime"];
+      const PREDEFINED_CATEGORIES = ["salary", "epf", "socso", "pcb-income-tax", "annual-leave", "overtime", "hourly-rate"];
       const categories = new Set<string>(PREDEFINED_CATEGORIES);
       const categoryLastMods = new Map<string, string>();
       const posts: { slug: string; lastmod: string }[] = [];
@@ -786,15 +786,15 @@ async function startServer() {
       setHeaders: (res, filePath) => {
         if (filePath.endsWith(".xml")) {
           res.setHeader("Content-Type", "application/xml");
-          res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+          res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         } else if (filePath.endsWith(".html")) {
-          res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+          res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         } else if (filePath.includes(path.sep + "assets" + path.sep) || filePath.includes("/assets/")) {
           // Serve all compiled hashed assets with 1 year cache life to prevent unoptimized bandwidth wastage
           res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
         } else {
           // Serve other unhashed assets (e.g., calculator-styles.css, public logos) with immediate revalidation
-          res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
+          res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         }
       }
     }));

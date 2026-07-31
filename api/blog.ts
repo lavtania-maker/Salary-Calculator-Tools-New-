@@ -44,17 +44,20 @@ const categoryMeta: Record<string, { title: string; desc: string }> = {
   'overtime': {
     title: "Overtime Pay & Employment Act Guides – HR Blog Malaysia",
     desc: "Learn about overtime pay rates, normal working hours, public holiday OT calculations, and Employment Act rules in Malaysia."
+  },
+  'hourly-rate': {
+    title: "Hourly Rate & Part-Time Pay Guides – HR Blog Malaysia",
+    desc: "Learn how to calculate hourly rates, part-time wages, and freelance payments in Malaysia."
   }
 };
-
-
 
 interface BlogListCache {
   posts: any[];
   timestamp: number;
 }
+
 let cachedBlogList: BlogListCache | null = null;
-const LIST_CACHE_TTL = 10 * 60 * 1000; // 10 minutes cache TTL
+const LIST_CACHE_TTL = 0; // Disabled cache to ensure immediate updates
 
 function fmtDate(d: any) {
   if (!d) return '';
@@ -71,8 +74,10 @@ function card(p: any, large: boolean) {
     'eis': 'EIS',
     'annual-leave': 'Annual Leave',
     'pcb-income-tax': 'PCB / Income Tax',
-    'overtime': 'Overtime'
+    'overtime': 'Overtime',
+    'hourly-rate': 'Hourly Rate'
   };
+
   const rawCats = Array.isArray(p.category) ? p.category : [p.category || ''];
   const cats = rawCats.filter(Boolean).map((c: string) => {
     let catSlug = c.toLowerCase().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
@@ -91,8 +96,6 @@ function card(p: any, large: boolean) {
     `<div class="card-meta"><div class="card-date">${fmtDate(p.publishedAt)}</div></div></a>`;
 }
 
-
-
 export default async function handler(req: any, res: any) {
   let category = req.query?.category || req.params?.category || "";
   if (category === "perkeso") category = "socso";
@@ -103,6 +106,7 @@ export default async function handler(req: any, res: any) {
     // 1. Fetch posts from Firestore (or in-memory cache)
     let allPosts: any[] = [];
     const now = Date.now();
+
     if (cachedBlogList && (now - cachedBlogList.timestamp < LIST_CACHE_TTL) && !bypassCache) {
       console.log(`[CACHE HIT] Serving full blog post list from in-memory cache`);
       allPosts = cachedBlogList.posts;
@@ -121,7 +125,8 @@ export default async function handler(req: any, res: any) {
           const q = query(postsRef, where("status", "==", "published"));
           const querySnapshot = await getDocs(q);
           allPosts = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
-          allPosts.sort((a, b) => (b.publishedAt || '') > (a.publishedAt || '') ? 1 : -1);
+          const getVal = (v: any) => v?.toDate ? v.toDate().getTime() : v?.seconds ? v.seconds * 1000 : new Date(v || 0).getTime() || 0;
+          allPosts.sort((a, b) => getVal(b.publishedAt) - getVal(a.publishedAt));
         } catch (dbErr) {
           console.error(`[FIRESTORE ERROR] Failed to fetch blog post list:`, dbErr);
           if (cachedBlogList) {
@@ -168,6 +173,7 @@ export default async function handler(req: any, res: any) {
         templatePath = path.join(process.cwd(), 'blog.html');
       }
     }
+
     const htmlContent = fs.readFileSync(templatePath, 'utf-8');
     const $ = cheerio.load(htmlContent);
 
@@ -197,6 +203,7 @@ export default async function handler(req: any, res: any) {
       renderedHtml = '<div class="featured-grid">' + card(filteredPosts[0], true);
       renderedHtml += filteredPosts.length >= 2 ? card(filteredPosts[1], true) : '<div class="featured-card" style="background:#f8faff"></div>';
       renderedHtml += '</div>';
+
       if (filteredPosts.length > 2) {
         renderedHtml += '<div class="posts-grid">';
         for (let i = 2; i < filteredPosts.length; i++) {
@@ -208,16 +215,13 @@ export default async function handler(req: any, res: any) {
         renderedHtml += '</div>';
       }
     }
-
     $('#articlesContainer').html(renderedHtml);
-
-
 
     // 6. Prepend SSR completed script to prevent client-side double load
     $('head').prepend('<script>window.__SSR_COMPLETE = true;</script>');
 
     res.setHeader("Content-Type", "text/html");
-    res.setHeader("Cache-Control", "public, s-maxage=3600");
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate, proxy-revalidate, max-age=0");
     return res.status(200).send($.html());
   } catch (error) {
     console.error("Error SSR blog list:", error);

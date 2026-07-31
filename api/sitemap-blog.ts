@@ -23,7 +23,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const q = query(postsRef, where("status", "==", "published"));
     const querySnapshot = await getDocs(q);
 
-    const PREDEFINED_CATEGORIES = ["salary", "epf", "socso", "pcb-income-tax", "annual-leave", "overtime"];
+    const PREDEFINED_CATEGORIES = ["salary", "epf", "socso", "pcb-income-tax", "annual-leave", "overtime", "hourly-rate"];
     const categories = new Set<string>(PREDEFINED_CATEGORIES);
     const categoryLastMods = new Map<string, string>();
     const posts: { slug: string; lastmod: string }[] = [];

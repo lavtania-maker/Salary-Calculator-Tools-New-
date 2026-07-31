@@ -760,6 +760,7 @@
             <option value="pcb-income-tax">PCB / Income Tax</option>
             <option value="annual-leave">Annual Leave</option>
             <option value="overtime">Overtime</option>
+            <option value="hourly-rate">Hourly Rate</option>
           </select>
         </div>
         <div class="table-card">
@@ -810,6 +811,7 @@
                 <label><input type="checkbox" value="pcb-income-tax"> PCB / Income Tax</label>
                 <label><input type="checkbox" value="annual-leave"> Annual Leave</label>
                 <label><input type="checkbox" value="overtime"> Overtime</label>
+                <label><input type="checkbox" value="hourly-rate"> Hourly Rate</label>
               </div>
             </div>
           </div>
@@ -1049,7 +1051,7 @@
                 "<td>" +
                 (Array.isArray(p.category) ? p.category : [p.category || "-"]).map(function(c) { 
                   if (!c || c === "-") return "-";
-                  var catMap = { 'salary': 'Salary', 'epf': 'EPF', 'socso': 'SOCSO', 'annual-leave': 'Annual Leave', 'pcb-income-tax': 'PCB / Income Tax', 'overtime': 'Overtime' };
+                  var catMap = { 'salary': 'Salary', 'epf': 'EPF', 'socso': 'SOCSO', 'annual-leave': 'Annual Leave', 'pcb-income-tax': 'PCB / Income Tax', 'overtime': 'Overtime', 'hourly-rate': 'Hourly Rate' };
                   var displayCat = catMap[c] || c;
                   return '<span class="badge badge-cat">' + displayCat + '</span>';
                 }).join(" ") +

@@ -532,7 +532,7 @@ export default async function handler(req: any, res: any) {
     $('head').prepend('<script>window.__SSR_COMPLETE = true;</script>');
 
     res.setHeader("Content-Type", "text/html");
-    res.setHeader("Cache-Control", "public, s-maxage=3600");
+    res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
     return res.status(200).send($.html());
   } catch (error) {
     console.error("Error loading article:", error);
