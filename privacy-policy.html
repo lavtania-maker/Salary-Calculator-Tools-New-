@@ -133,12 +133,11 @@
       :root {
         --primary: #2563eb;
         --primary-hover: #1d4ed8;
-        --bg-light: #ffffff;
-        --text-main: #1f2937;
-        --text-muted: #6b7280;
-        --border: #ffffff;
-        --shadow-soft:
-          0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        --bg-light: #f8fafc;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --border: #e2e8f0;
+        --shadow-soft: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
       }
 
       * {
@@ -177,8 +176,8 @@
       /* Navbar */
       .navbar {
         background: #ffffff;
-        border-bottom: 1px solid var(--border);
-        padding: 8px 0;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 12px 0;
         position: sticky;
         top: 0;
         z-index: 100;
@@ -195,7 +194,7 @@
         align-items: center;
       }
       .logo-img {
-        height: 60px;
+        height: 44px;
         width: auto;
         max-width: 250px;
         object-fit: contain;
@@ -205,72 +204,85 @@
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 8px 14px;
+        padding: 8px 16px;
         border-radius: 8px;
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 500;
-        color: var(--text-muted);
-        background: transparent;
-        border: none;
+        color: #2563eb;
+        background: #eff6ff;
+        border: 1px solid #dbeafe;
         cursor: pointer;
         transition: all 0.2s;
         font-family: inherit;
       }
 
       .nav-back:hover {
+        background: #dbeafe;
+        color: #1d4ed8;
+      }
+
+      main {
+        padding: 40px 0 64px;
+      }
+
+      /* Unified Document Card */
+      .doc-card {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 48px;
         background: #ffffff;
-        color: var(--text-main);
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
       }
 
       /* Page Header */
       .page-header {
-        padding: 48px 0 32px;
-        border-bottom: 1px solid var(--border);
-        margin-bottom: 40px;
+        margin-bottom: 32px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #f1f5f9;
       }
 
       .page-header h1 {
-        font-size: 2rem;
-        font-weight: 800;
-        color: var(--primary);
+        font-size: 32px;
+        font-weight: 700;
+        color: #0f172a;
         letter-spacing: -0.02em;
         margin-bottom: 8px;
       }
 
-      .page-header p {
-        color: var(--text-muted);
+      .page-header p.subtitle {
+        color: #64748b;
         font-size: 16px;
+        margin-bottom: 12px;
       }
 
-      /* Content */
-      .privacy-content {
-        padding-bottom: 64px;
+      .last-updated {
+        font-size: 13px;
+        color: #64748b;
+        font-style: italic;
       }
 
+      /* Content Sections */
       .privacy-section {
-        background: #ffffff;
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 24px 28px;
-        margin-bottom: 20px;
-        box-shadow: var(--shadow-soft);
+        margin-top: 32px;
       }
 
       .privacy-section h2 {
-        font-size: 1.1rem;
-        font-weight: 700;
+        font-size: 20px;
+        font-weight: 600;
         color: #2563eb !important;
         margin-bottom: 12px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid var(--border);
+        padding-bottom: 8px;
+        border-bottom: 1px solid #f1f5f9;
         letter-spacing: -0.01em;
       }
 
       .privacy-section p {
-        color: var(--text-muted);
+        color: #334155;
         font-size: 15px;
-        line-height: 1.7;
-        margin-bottom: 4px;
+        line-height: 1.6;
+        margin-bottom: 12px;
       }
 
       .privacy-section p:last-child {
@@ -280,20 +292,24 @@
       .privacy-section ul {
         list-style: disc;
         padding-left: 20px;
-        color: var(--text-muted);
+        color: #334155;
         font-size: 15px;
         line-height: 1.7;
+        margin-bottom: 12px;
       }
 
       .privacy-section ul li {
         margin-bottom: 6px;
       }
 
-      .last-updated {
-        font-size: 15px;
-        color: #9ca3af;
-        text-align: right;
-        margin-bottom: 24px;
+      @media (max-width: 640px) {
+        .doc-card {
+          padding: 24px 20px;
+          border-radius: 8px;
+        }
+        .page-header h1 {
+          font-size: 26px;
+        }
       }
 
       /* Footer */
@@ -409,163 +425,161 @@
     <!-- Navbar -->
     <nav class="navbar">
       <div class="container">
-        
         <a href="/" class="logo">
           <img src="/logo-small.png?v=2" alt="SalaryCalculator.my" class="logo-img" width="250" height="44" fetchpriority="high">
         </a>
         <a href="/" class="nav-back"> ← Back to Calculator </a>
       </div>
-              <a href="/overtime-pay-calculator" class="nav-item" title="Overtime Pay Calculator">OT Calculator</a>
-        <a href="/overtime-pay-calculator" class="mobile-nav-item">Overtime Pay Calculator</a>
-</nav>
+    </nav>
 
     <main>
       <div class="container">
-        <div class="page-header">
-          <h1>Privacy Policy</h1>
-          <p>
-            How SalaryCalculator.my collects, uses, and protects your information.
-          </p>
-        </div>
-
-        <div class="privacy-content">
-          <p class="last-updated">Last updated: 27 April 2026</p>
-
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">1. Overview</h2>
-            <p>
-              SalaryCalculator.my ("we", "us", or "our") operates the website
-              <strong>www.salarycalculator.my</strong>. This Privacy Policy
-              explains what information we collect when you use our salary
-              calculator and related tools, how we use that information, and
-              your rights regarding your data.
+        <div class="doc-card">
+          <div class="page-header">
+            <h1>Privacy Policy</h1>
+            <p class="subtitle">
+              How SalaryCalculator.my collects, uses, and protects your information.
             </p>
-            <p>
-              By using our website, you agree to the collection and use of
-              information in accordance with this policy.
-            </p>
+            <p class="last-updated">Last updated: 27 April 2026</p>
           </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">2. Information We Collect</h2>
-            <p>
-              SalaryCalculator.my is a client-side tool. All salary calculations are
-              performed entirely in your browser — we do
-              <strong>not</strong> transmit or store the salary figures, EPF
-              contributions, SOCSO amounts, or any personal financial data you
-              enter into the calculator.
-            </p>
-            <p>
-              We may collect the following non-personal information
-              automatically:
-            </p>
-            <ul>
-              <li>Browser type and version</li>
-              <li>Operating system</li>
-              <li>Pages visited and time spent on each page</li>
-              <li>Referring URL</li>
-              <li>
-                Approximate geographic location (country/region level, via IP
-                address)
-              </li>
-            </ul>
-          </div>
+          <div class="privacy-content">
+            <div class="privacy-section">
+              <h2>1. Overview</h2>
+              <p>
+                SalaryCalculator.my ("we", "us", or "our") operates the website
+                <strong>www.salarycalculator.my</strong>. This Privacy Policy
+                explains what information we collect when you use our salary
+                calculator and related tools, how we use that information, and
+                your rights regarding your data.
+              </p>
+              <p>
+                By using our website, you agree to the collection and use of
+                information in accordance with this policy.
+              </p>
+            </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">3. How We Use Your Information</h2>
-            <p>
-              The automatically collected data listed above is used solely to:
-            </p>
-            <ul>
-              <li>Analyse website traffic and usage patterns</li>
-              <li>Improve the performance and usability of our tools</li>
-              <li>Diagnose technical issues</li>
-            </ul>
-            <p>
-              We do not sell, trade, or rent this information to third parties.
-            </p>
-          </div>
+            <div class="privacy-section">
+              <h2>2. Information We Collect</h2>
+              <p>
+                SalaryCalculator.my is a client-side tool. All salary calculations are
+                performed entirely in your browser — we do
+                <strong>not</strong> transmit or store the salary figures, EPF
+                contributions, SOCSO amounts, or any personal financial data you
+                enter into the calculator.
+              </p>
+              <p>
+                We may collect the following non-personal information
+                automatically:
+              </p>
+              <ul>
+                <li>Browser type and version</li>
+                <li>Operating system</li>
+                <li>Pages visited and time spent on each page</li>
+                <li>Referring URL</li>
+                <li>
+                  Approximate geographic location (country/region level, via IP
+                  address)
+                </li>
+              </ul>
+            </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">4. Cookies &amp; Analytics</h2>
-            <p>
-              We use <strong>Google Analytics</strong> (via Google Tag Manager)
-              to understand how visitors interact with our site. Google
-              Analytics places cookies on your browser to collect anonymous
-              usage statistics. These cookies do not identify you personally.
-            </p>
-            <p>
-              You can opt out of Google Analytics tracking by installing the
-              <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" style="color: var(--primary)">Google Analytics Opt-out Browser Add-on</a>.
-            </p>
-            <p>
-              You may also disable cookies through your browser settings. Note
-              that disabling cookies may affect the functionality of some parts
-              of our website.
-            </p>
-          </div>
+            <div class="privacy-section">
+              <h2>3. How We Use Your Information</h2>
+              <p>
+                The automatically collected data listed above is used solely to:
+              </p>
+              <ul>
+                <li>Analyse website traffic and usage patterns</li>
+                <li>Improve the performance and usability of our tools</li>
+                <li>Diagnose technical issues</li>
+              </ul>
+              <p>
+                We do not sell, trade, or rent this information to third parties.
+              </p>
+            </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">5. Third-Party Services</h2>
-            <p>Our website may use the following third-party services:</p>
-            <ul>
-              <li>
-                <strong>Google Analytics</strong> — website usage statistics
-              </li>
-              <li><strong>Google Fonts</strong> — font delivery</li>
-              <li>
-                <strong>Firebase / Firestore</strong> — backend services for
-                authenticated features
-              </li>
-            </ul>
-            <p>
-              Each third-party service has its own privacy policy. We encourage
-              you to review them directly.
-            </p>
-          </div>
+            <div class="privacy-section">
+              <h2>4. Cookies &amp; Analytics</h2>
+              <p>
+                We use <strong>Google Analytics</strong> (via Google Tag Manager)
+                to understand how visitors interact with our site. Google
+                Analytics places cookies on your browser to collect anonymous
+                usage statistics. These cookies do not identify you personally.
+              </p>
+              <p>
+                You can opt out of Google Analytics tracking by installing the
+                <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" style="color: var(--primary)">Google Analytics Opt-out Browser Add-on</a>.
+              </p>
+              <p>
+                You may also disable cookies through your browser settings. Note
+                that disabling cookies may affect the functionality of some parts
+                of our website.
+              </p>
+            </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">6. Data Security</h2>
-            <p>
-              Since no personal financial data is transmitted to our servers,
-              the risk of data breach for your salary information is minimal.
-              For any data we do hold (e.g. anonymised analytics), we take
-              reasonable technical and organisational measures to protect it
-              against unauthorised access, alteration, disclosure, or
-              destruction.
-            </p>
-          </div>
+            <div class="privacy-section">
+              <h2>5. Third-Party Services</h2>
+              <p>Our website may use the following third-party services:</p>
+              <ul>
+                <li>
+                  <strong>Google Analytics</strong> — website usage statistics
+                </li>
+                <li><strong>Google Fonts</strong> — font delivery</li>
+                <li>
+                  <strong>Firebase / Firestore</strong> — backend services for
+                  authenticated features
+                </li>
+              </ul>
+              <p>
+                Each third-party service has its own privacy policy. We encourage
+                you to review them directly.
+              </p>
+            </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">7. Children's Privacy</h2>
-            <p>
-              Our services are not directed to individuals under the age of 13.
-              We do not knowingly collect personally identifiable information
-              from children. If you believe a child has provided us with
-              personal information, please contact us so we can delete it.
-            </p>
-          </div>
+            <div class="privacy-section">
+              <h2>6. Data Security</h2>
+              <p>
+                Since no personal financial data is transmitted to our servers,
+                the risk of data breach for your salary information is minimal.
+                For any data we do hold (e.g. anonymised analytics), we take
+                reasonable technical and organisational measures to protect it
+                against unauthorised access, alteration, disclosure, or
+                destruction.
+              </p>
+            </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">8. Changes to This Policy</h2>
-            <p>
-              We may update this Privacy Policy from time to time. Any changes
-              will be reflected on this page with an updated "Last updated"
-              date. We encourage you to review this policy periodically.
-            </p>
-          </div>
+            <div class="privacy-section">
+              <h2>7. Children's Privacy</h2>
+              <p>
+                Our services are not directed to individuals under the age of 13.
+                We do not knowingly collect personally identifiable information
+                from children. If you believe a child has provided us with
+                personal information, please contact us so we can delete it.
+              </p>
+            </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">9. Contact Us</h2>
-            <p>
-              If you have any questions about this Privacy Policy, please
-              contact us at:
-            </p>
-            <p>
-              <strong>SalaryCalculator.my</strong><br>
-              Website:
-              <a href="/" style="color: var(--primary)">www.salarycalculator.my</a>
-            </p>
+            <div class="privacy-section">
+              <h2>8. Changes to This Policy</h2>
+              <p>
+                We may update this Privacy Policy from time to time. Any changes
+                will be reflected on this page with an updated "Last updated"
+                date. We encourage you to review this policy periodically.
+              </p>
+            </div>
+
+            <div class="privacy-section">
+              <h2>9. Contact Us</h2>
+              <p>
+                If you have any questions about this Privacy Policy, please
+                contact us at:
+              </p>
+              <p>
+                <strong>SalaryCalculator.my</strong><br>
+                Website:
+                <a href="/" style="color: var(--primary)">www.salarycalculator.my</a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
