@@ -464,7 +464,8 @@ async function startServer() {
       }
 
       if (!targetScriptUrl) {
-        return res.status(500).json({ error: "Script URL not configured" });
+        console.warn("[API] targetScriptUrl not configured, skipping sheet sync");
+        return res.status(200).json({ success: true, warning: "Script URL not configured" });
       }
 
       const payload = {
@@ -472,22 +473,26 @@ async function startServer() {
         sheetId: targetSheetId,
       };
 
-      const appsRes = await fetch(targetScriptUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const appsText = await appsRes.text();
-      console.log(
-        "[API] salary-sheet response:",
-        appsRes.status,
-        appsText.slice(0, 100),
-      );
+      try {
+        const appsRes = await fetch(targetScriptUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        const appsText = await appsRes.text();
+        console.log(
+          "[API] salary-sheet response:",
+          appsRes.status,
+          appsText.slice(0, 100),
+        );
+      } catch (err: any) {
+        console.warn("[API] Optional sheet sync warning:", err.message);
+      }
 
       res.status(200).json({ success: true });
     } catch (err: any) {
       console.error("[API] salary-sheet error:", err);
-      res.status(500).json({ error: err.message });
+      res.status(200).json({ success: true, warning: err.message });
     }
   });
 
@@ -675,6 +680,44 @@ async function startServer() {
     }
   });
 
+  const htmlPages: Record<string, string> = {
+    "/": "index.html",
+    "/index.html": "index.html",
+    "/admin": "admin.html",
+    "/admin.html": "admin.html",
+    "/mincal": "mincal.html",
+    "/mincal.html": "mincal.html",
+    "/payslip": "payslip.html",
+    "/payslip.html": "payslip.html",
+    "/payslip-generator": "payslip.html",
+    "/report": "report.html",
+    "/report.html": "report.html",
+    "/epf-kwsp": "epf-kwsp.html",
+    "/epf-kwsp.html": "epf-kwsp.html",
+    "/socso-perkeso": "socso-perkeso.html",
+    "/socso-perkeso.html": "socso-perkeso.html",
+    "/epfreport": "epfreport.html",
+    "/epfreport.html": "epfreport.html",
+    "/socsoreport": "socsoreport.html",
+    "/socsoreport.html": "socsoreport.html",
+    "/privacy-policy": "privacy-policy.html",
+    "/privacy-policy.html": "privacy-policy.html",
+    "/pcb-calculator": "pcb-income-tax.html",
+    "/pcb-calculator.html": "pcb-income-tax.html",
+    "/pcb-income-tax": "pcb-income-tax.html",
+    "/pcb-income-tax.html": "pcb-income-tax.html",
+    "/annual-leave-calculator": "annual-leave-calculator.html",
+    "/overtime-pay-calculator": "overtime-pay-calculator.html",
+    "/hourly-rate": "hourly-rate.html",
+    "/hourly-rate.html": "hourly-rate.html",
+    "/overtime-pay-calculator.html": "overtime-pay-calculator.html",
+    "/annual-leave-calculator.html": "annual-leave-calculator.html",
+    "/blog": "blog.html",
+    "/blog.html": "blog.html",
+    "/blog-post-template": "blog-post-template.html",
+    "/blog-post-template.html": "blog-post-template.html",
+  };
+
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
@@ -700,43 +743,7 @@ async function startServer() {
     app.use(vite.middlewares);
 
     // Serve HTML pages for MPA routes — Vite middleware mode does NOT auto-serve HTML
-    const htmlPages: Record<string, string> = {
-      "/": "index.html",
-      "/index.html": "index.html",
-      "/admin": "admin.html",
-      "/admin.html": "admin.html",
-      "/mincal": "mincal.html",
-      "/mincal.html": "mincal.html",
-      "/payslip": "payslip.html",
-      "/payslip.html": "payslip.html",
-      "/payslip-generator": "payslip.html",
-      "/report": "report.html",
-      "/report.html": "report.html",
-      "/epf-kwsp": "epf-kwsp.html",
-      "/epf-kwsp.html": "epf-kwsp.html",
-      "/socso-perkeso": "socso-perkeso.html",
-      "/socso-perkeso.html": "socso-perkeso.html",
-      "/epfreport": "epfreport.html",
-      "/epfreport.html": "epfreport.html",
-      "/socsoreport": "socsoreport.html",
-      "/socsoreport.html": "socsoreport.html",
-      "/privacy-policy": "privacy-policy.html",
-      "/privacy-policy.html": "privacy-policy.html",
-      "/pcb-calculator": "pcb-income-tax.html",
-      "/pcb-calculator.html": "pcb-income-tax.html",
-      "/pcb-income-tax": "pcb-income-tax.html",
-      "/pcb-income-tax.html": "pcb-income-tax.html",
-      "/annual-leave-calculator": "annual-leave-calculator.html",
-      "/overtime-pay-calculator": "overtime-pay-calculator.html",
-      "/hourly-rate": "hourly-rate.html",
-      "/hourly-rate.html": "hourly-rate.html",
-      "/overtime-pay-calculator.html": "overtime-pay-calculator.html",
-      "/annual-leave-calculator.html": "annual-leave-calculator.html",
-      "/blog": "blog.html",
-      "/blog.html": "blog.html",
-      "/blog-post-template": "blog-post-template.html",
-      "/blog-post-template.html": "blog-post-template.html",
-    };
+
 
     app.use((req, res, next) => {
       if (req.path === '/index.html' || req.path === '/index') {
@@ -749,8 +756,8 @@ async function startServer() {
       console.log(
         `[DEBUG] Received request: ${req.method} ${req.url} (originalUrl: ${req.originalUrl}, path: ${req.path})`,
       );
-      const urlPath = req.path;
-      const htmlFile = htmlPages[urlPath];
+      const cleanPath = req.path.replace(/\/$/, '') || '/';
+      const htmlFile = htmlPages[cleanPath] || (req.path.endsWith('.html') ? req.path.slice(1) : undefined);
       if (!htmlFile) return next();
 
       try {
@@ -802,6 +809,16 @@ async function startServer() {
     // For MPA, we don't necessarily want a single catch-all that returns index.html
     // unless it's truly a fallback.
     app.get("*all", (req, res) => {
+      const cleanPath = req.path.replace(/\/$/, '') || '/';
+      const htmlFile = htmlPages[cleanPath];
+      
+      if (htmlFile) {
+        const filePath = path.join(distPath, htmlFile);
+        if (fs.existsSync(filePath)) {
+          return res.sendFile(filePath);
+        }
+      }
+
       // If none of the static files matched, check if it's a blog post
       if (req.path.startsWith('/blog/') && !req.path.includes('.')) {
         const slug = req.path.replace(/\/$/, '').split('/').pop();

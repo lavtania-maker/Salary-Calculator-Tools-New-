@@ -135,7 +135,26 @@
     <noscript>
       <link href="/calculator-styles.css?v=20260710" rel="stylesheet" />
     </noscript>
-</head>
+
+    <style>
+      /* Prevent iOS zoom */
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+      /* Prevent layout shift */
+      .result-panel .card {
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+      }
+      .result-panel .card > .placeholder-text {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    </style>
+  </head>
 
   <body>
     <noscript>
@@ -156,54 +175,54 @@
         <tbody><tr>
           <td>
             Name:
-            <input id="name" style="border: none; border-bottom: 1px solid #ccc; outline: none">
+            <input id="name" aria-label="Name" style="border: none; border-bottom: 1px solid #ccc; outline: none">
           </td>
           <td>Date: <span id="date"></span></td>
         </tr>
         <tr>
           <td>
             IC:
-            <input id="ic" style="border: none; border-bottom: 1px solid #ccc; outline: none">
+            <input id="ic" aria-label="IC" style="border: none; border-bottom: 1px solid #ccc; outline: none">
           </td>
           <td>
             Department:
-            <input id="dept" style="border: none; border-bottom: 1px solid #ccc; outline: none">
+            <input id="dept" aria-label="Department" style="border: none; border-bottom: 1px solid #ccc; outline: none">
           </td>
         </tr>
         <tr>
           <td>
             Employee No:
-            <input id="empno" style="border: none; border-bottom: 1px solid #ccc; outline: none">
+            <input id="empno" aria-label="Employee No" style="border: none; border-bottom: 1px solid #ccc; outline: none">
           </td>
           <td>
             EPF No:
-            <input id="epfno" style="border: none; border-bottom: 1px solid #ccc; outline: none">
+            <input id="epfno" aria-label="EPF No" style="border: none; border-bottom: 1px solid #ccc; outline: none">
           </td>
         </tr>
         <tr>
           <td>
             Position:
-            <input id="position" style="border: none; border-bottom: 1px solid #ccc; outline: none">
+            <input id="position" aria-label="Position" style="border: none; border-bottom: 1px solid #ccc; outline: none">
           </td>
           <td>
             SOCSO No:
-            <input id="socso_no" style="border: none; border-bottom: 1px solid #ccc; outline: none">
+            <input id="socso_no" aria-label="SOCSO No" style="border: none; border-bottom: 1px solid #ccc; outline: none">
           </td>
         </tr>
         <tr>
           <td>
             Bank:
-            <input id="bank" style="border: none; border-bottom: 1px solid #ccc; outline: none">
+            <input id="bank" aria-label="Bank" style="border: none; border-bottom: 1px solid #ccc; outline: none">
           </td>
           <td>
             Income Tax No:
-            <input id="tax" style="border: none; border-bottom: 1px solid #ccc; outline: none">
+            <input id="tax" aria-label="Income Tax No" style="border: none; border-bottom: 1px solid #ccc; outline: none">
           </td>
         </tr>
         <tr>
           <td>
             Bank Acc No:
-            <input id="bankacc" style="border: none; border-bottom: 1px solid #ccc; outline: none">
+            <input id="bankacc" aria-label="Bank Account No" style="border: none; border-bottom: 1px solid #ccc; outline: none">
           </td>
         </tr>
       </tbody></table></div>
@@ -309,7 +328,26 @@
         });
 
         var header =
-          "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Payslip</title></head><body>";
+          "<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Payslip</title>
+    <style>
+      /* Prevent iOS zoom */
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+      /* Prevent layout shift */
+      .result-panel .card {
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+      }
+      .result-panel .card > .placeholder-text {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    </style>
+  </head><body>";
         var footer = "</body></html>";
         var sourceHTML =
           header + document.getElementById("payslip").innerHTML + footer;
@@ -330,6 +368,53 @@
 
       loadData();
     </script>
+
+    <!-- How This Calculation Works -->
+    <section class="content-section" style="padding-top: 40px; padding-bottom: 0px; background-color: #f8fafc;">
+      <div class="container">
+        <div class="content-card">
+          <h2 style="color: #2563eb !important; margin-bottom: 16px;">How This Tool Works</h2>
+          
+          <h3 style="color: #1e293b; font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Who should use this tool?</h3>
+          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
+            This tool is designed for small business owners, freelancers, and HR administrators in Malaysia who need a quick and professional way to generate standard salary payslips for their employees.
+          </p>
+
+          <h3 style="color: #1e293b; font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">3-Step Guide to Input Data</h3>
+          <ol style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
+            <li style="margin-bottom: 8px;"><strong>Enter Employee Details:</strong> Fill in the employee's name, ID, position, and the relevant pay period.</li>
+            <li style="margin-bottom: 8px;"><strong>Input Earnings & Deductions:</strong> Add the basic salary, allowances, and any statutory deductions like EPF, SOCSO, EIS, and PCB.</li>
+            <li style="margin-bottom: 8px;"><strong>Generate PDF:</strong> Click the generate button to instantly download a professional, formatted payslip in PDF format.</li>
+          </ol>
+
+          <h3 style="color: #1e293b; font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Statutory Guidelines Summary</h3>
+          <div class="table-responsive" style="margin-top: 10px;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+              <thead>
+                <tr style="background-color: #eff6ff; border-bottom: 2px solid #bfdbfe;">
+                  <th style="padding: 12px; color: #1e40af; font-weight: 600;">Guideline</th>
+                  <th style="padding: 12px; color: #1e40af; font-weight: 600;">Details</th>
+                </tr>
+              </thead>
+              <tbody style="font-size: 15px; color: #334155;">
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                  <td style="padding: 12px; font-weight: 500;">Payslip Issuance</td>
+                  <td style="padding: 12px;">Employers must issue a payslip detailing wages and deductions under the Employment Act 1955.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                  <td style="padding: 12px; font-weight: 500;">Record Keeping</td>
+                  <td style="padding: 12px;">Employment records (including payslips) must be kept for at least 7 years.</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; font-weight: 500;">Required Details</td>
+                  <td style="padding: 12px;">Basic wages, overtime, allowances, and itemized statutory deductions (EPF, SOCSO, EIS, PCB).</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
 
 <!-- Other Calculators Section --><section class="content-section other-calculators-section"><div class="container"><div class="seo-card" style="margin-bottom: 0;">
       <h2 class="seo-title" style="color: #2563eb !important;">Try Our Other Free Calculators</h2>

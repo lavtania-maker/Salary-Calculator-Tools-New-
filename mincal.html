@@ -236,6 +236,75 @@
     <noscript>
       <link href="/calculator-styles.css?v=20260710" rel="stylesheet" />
     </noscript>
+
+    <style>
+      /* Prevent iOS zoom */
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+      /* Prevent layout shift */
+      .result-panel .card {
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+      }
+      .result-panel .card > .placeholder-text {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    </style>
+  
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Malaysian Salary Calculator Tool",
+      "url": "https://salarycalculator.my/",
+      "description": "Calculate your net salary in Malaysia after EPF, SOCSO, EIS, and PCB deductions instantly. Accurate for 2026.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "MYR"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How is EPF calculated in Malaysia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "EPF (Employees Provident Fund) is calculated based on a fixed percentage of the employee's gross monthly wage. The standard rate is typically 11% for employees and 12% to 13% for employers, depending on the wage amount and age."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are SOCSO and EIS deductions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SOCSO (PERKESO) provides social security protection. The deduction is capped at a salary ceiling (currently RM6,000). EIS (Employment Insurance System) provides support for retrenched workers and is calculated at 0.2% for both employer and employee."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is LHDN PCB (MTD) calculated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Monthly Tax Deduction (PCB) is calculated by LHDN based on an individual's taxable income, taking into account tax reliefs, rebates, marital status, and number of dependents."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
   <body>
     <noscript>
@@ -362,7 +431,7 @@
             <thead>
               <tr>
                 <th style="width: 40px">
-                  <input type="checkbox" id="selectAll">
+                  <input type="checkbox" id="selectAll" aria-label="Select All">
                 </th>
                 <th>Email</th>
                 <th>User Type</th>
@@ -386,6 +455,53 @@
     </div>
 
     <script type="module" src="/src/mincal.ts"></script>
+
+    <!-- How This Calculation Works -->
+    <section class="content-section" style="padding-top: 40px; padding-bottom: 0px; background-color: #f8fafc;">
+      <div class="container">
+        <div class="content-card">
+          <h2 style="color: #2563eb !important; margin-bottom: 16px;">How This Tool Works</h2>
+          
+          <h3 style="color: #1e293b; font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Who should use this tool?</h3>
+          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
+            This tool is designed for employers, HR professionals, and employees in Malaysia to quickly verify if a monthly salary meets the current national minimum wage requirements.
+          </p>
+
+          <h3 style="color: #1e293b; font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">3-Step Guide to Input Data</h3>
+          <ol style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 20px; padding-left: 20px;">
+            <li style="margin-bottom: 8px;"><strong>Enter Basic Salary:</strong> Input the employee's monthly basic salary in RM.</li>
+            <li style="margin-bottom: 8px;"><strong>Calculate:</strong> Click the calculate button to process the input.</li>
+            <li style="margin-bottom: 8px;"><strong>Review Status:</strong> The tool will instantly indicate whether the salary complies with the minimum wage law.</li>
+          </ol>
+
+          <h3 style="color: #1e293b; font-size: 1.1rem; margin-top: 20px; margin-bottom: 10px;">Statutory Guidelines Summary</h3>
+          <div class="table-responsive" style="margin-top: 10px;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+              <thead>
+                <tr style="background-color: #eff6ff; border-bottom: 2px solid #bfdbfe;">
+                  <th style="padding: 12px; color: #1e40af; font-weight: 600;">Guideline</th>
+                  <th style="padding: 12px; color: #1e40af; font-weight: 600;">Details</th>
+                </tr>
+              </thead>
+              <tbody style="font-size: 15px; color: #334155;">
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                  <td style="padding: 12px; font-weight: 500;">Current Minimum Wage</td>
+                  <td style="padding: 12px;">RM 1,700 per month (Effective February 2026)</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;">
+                  <td style="padding: 12px; font-weight: 500;">Governing Law</td>
+                  <td style="padding: 12px;">Minimum Wages Order under the National Wages Consultative Council Act 2011</td>
+                </tr>
+                <tr>
+                  <td style="padding: 12px; font-weight: 500;">Applicability</td>
+                  <td style="padding: 12px;">All private sector employees in Malaysia (excluding domestic servants)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
 
 <!-- Other Calculators Section --><section class="content-section other-calculators-section"><div class="container"><div class="seo-card" style="margin-bottom: 0;">
       <h2 class="seo-title" style="color: #2563eb !important;">Try Our Other Free Calculators</h2>

@@ -5,7 +5,26 @@
 img { max-width: 100% !important; height: auto !important; display: block; }
 .logo-img { height: 44px; width: auto; max-width: 250px; object-fit: contain; }
 </style>
-</head>
+
+    <style>
+      /* Prevent iOS zoom */
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+      /* Prevent layout shift */
+      .result-panel .card {
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+      }
+      .result-panel .card > .placeholder-text {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    </style>
+  </head>
 <body>
 <div style="width: 500px; border: 1px solid red; padding: 20px;">
   <a href="/" class="logo" style="margin-bottom: 20px; display: block; border: 1px solid blue;">

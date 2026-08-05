@@ -1,23 +1,19 @@
-import re
+import glob
+from bs4 import BeautifulSoup
 
-files = [
-    "index.html",
-    "socso-perkeso.html",
-    "pcb-income-tax.html",
-    "epf-kwsp.html",
-    "annual-leave-calculator.html",
-    "overtime-pay-calculator.html",
-    "hourly-rate.html"
-]
-
-for file in files:
-    with open(file, 'r') as f:
+for file in glob.glob("*.html"):
+    with open(file, 'r', encoding='utf-8') as f:
         content = f.read()
-    
-    labels = re.findall(r'<label class="form-label".*?</label>', content, flags=re.DOTALL)
-    print(f"--- {file} ---")
-    for label in labels:
-        text = re.sub(r'<[^>]+>', '', label).strip()
-        text = re.sub(r'\s+', ' ', text)
-        print(text)
-
+    soup = BeautifulSoup(content, 'html.parser')
+    inputs = soup.find_all('input')
+    for inp in inputs:
+        type_ = inp.get('type')
+        id_ = inp.get('id')
+        if type_ in ['submit', 'button', 'reset', 'hidden', 'radio', 'checkbox']:
+            continue
+        
+        # Check label for id
+        label = soup.find('label', attrs={'for': id_}) if id_ else None
+        
+        if not label:
+            print(f"{file} missing label for input id={id_}, type={type_}")

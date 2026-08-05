@@ -34,7 +34,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
-    <title>Hourly Rate Calculator Malaysia | Convert Monthly Salary to Hourly Wage</title>
+    <title>Hourly Rate Calculator Malaysia | Monthly to Hourly</title>
     <meta name="description" content="Convert your monthly salary into an hourly rate instantly. Suitable for full-time employees, part-time workers, freelancers, interns, HR professionals, and employers in Malaysia.">
     <meta name="keywords" content="hourly rate calculator malaysia, calculate hourly rate, monthly to hourly salary malaysia, part time rate malaysia, freelance rate malaysia, hourly wage calculator">
     <meta name="robots" content="index, follow">
@@ -124,6 +124,75 @@
         }
       </style>
     </noscript>
+
+    <style>
+      /* Prevent iOS zoom */
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+      /* Prevent layout shift */
+      .result-panel .card {
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+      }
+      .result-panel .card > .placeholder-text {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    </style>
+  
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "Malaysian Salary Calculator Tool",
+      "url": "https://salarycalculator.my/",
+      "description": "Calculate your net salary in Malaysia after EPF, SOCSO, EIS, and PCB deductions instantly. Accurate for 2026.",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "MYR"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How is EPF calculated in Malaysia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "EPF (Employees Provident Fund) is calculated based on a fixed percentage of the employee's gross monthly wage. The standard rate is typically 11% for employees and 12% to 13% for employers, depending on the wage amount and age."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are SOCSO and EIS deductions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SOCSO (PERKESO) provides social security protection. The deduction is capped at a salary ceiling (currently RM6,000). EIS (Employment Insurance System) provides support for retrenched workers and is calculated at 0.2% for both employer and employee."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is LHDN PCB (MTD) calculated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Monthly Tax Deduction (PCB) is calculated by LHDN based on an individual's taxable income, taking into account tax reliefs, rebates, marital status, and number of dependents."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head><body>
     <!-- Navbar -->
     <header class="navbar">
@@ -199,7 +268,7 @@
   <!-- Monthly Salary -->
   <div class="form-group">
     <label class="form-label" for="monthlySalary">Monthly Salary (RM) <span style="color: red">*</span></label>
-    <input type="number" id="monthlySalary" class="form-input" value="7000" min="0" step="1">
+    <input type="number" id="monthlySalary" class="form-input" value="7000" min="0" step="1" inputmode="decimal">
   </div>
 
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px">
@@ -217,7 +286,7 @@
     <!-- Working Hours Per Day -->
     <div class="form-group">
       <label class="form-label" for="workingHours">Working Hours Per Day <span style="color: red">*</span></label>
-      <input type="number" id="workingHours" class="form-input" value="8" min="1" max="24" step="0.5">
+      <input type="number" id="workingHours" class="form-input" value="8" min="1" max="24" step="0.5" inputmode="decimal">
     </div>
   </div>
 
@@ -310,6 +379,44 @@
         </div>
       </main>
     </div>
+
+    <!-- How This Calculation Works -->
+    <section class="content-section" style="padding-top: 40px; padding-bottom: 0px; background-color: #f8fafc;">
+      <div class="container">
+        <div class="content-card">
+          <h2 style="color: #2563eb !important; margin-bottom: 16px;">How This Calculation Works</h2>
+          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-bottom: 24px;">
+            Our calculators use standardized statutory formulas as mandated by the relevant Malaysian authorities. Below are the basic rules applied to the calculations:
+          </p>
+          <div class="faq-container" style="display: flex; flex-direction: column; gap: 12px;">
+            <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                What statutory rates are used?
+              </summary>
+              <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
+                The formulas strictly follow the latest guidelines from EPF (KWSP), SOCSO (PERKESO), EIS (SIP), and LHDN (Inland Revenue Board). Rates are updated according to the official gazetted national budgets.
+              </div>
+            </details>
+            <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                Are minimum wage rules applied?
+              </summary>
+              <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
+                Yes, our calculation logic factors in the current National Minimum Wage standard where applicable, ensuring compliance with the Employment Act 1955.
+              </div>
+            </details>
+            <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
+              <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
+                Is this meant for official payroll?
+              </summary>
+              <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
+                These calculations are provided for quick, accurate estimation and reference for both employees and employers. For actual disbursement, always refer to your company's official certified payroll system.
+              </div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- Content Sections -->
     <section class="content-section" style="padding-top: 0; padding-bottom: 60px; background-color: #f8fafc;">

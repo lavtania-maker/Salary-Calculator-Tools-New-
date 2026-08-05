@@ -38,13 +38,14 @@ service cloud.firestore {
 
     function isValidLead(data) {
       let allowedKeys = [
-        'email', 'name', 'action', 'createdAt', 'userType', 'phoneNumber', 'companyName', 'hiringStatus',
+        'email', 'name', 'action', 'createdAt', 'userType', 'phoneNumber', 'userPhone', 'companyName', 'hiringStatus', 'download_via',
         'salary', 'totalDeductions', 'netSalary', 'employeeEpf', 'employeeSocso', 'employeeEis', 
-        'employeePcb', 'employerEpf', 'employerSocso', 'employerEis', 'download_via',
-        'bonus', 'annualIncome', 'relief', 'taxBracket', 'pcb', 'taxStatus',
-        'startDate', 'targetYear', 'yearsOfService', 'baseEntitlement', 'proratedLeave', 'leaveTaken', 'remainingBalance',
-        'ageGroup', 'nationality', 'totalEpf', 'socsoTotal', 'socsoCategory', 'socsoBracket', 'eisTotal', 'interaction_type',
-        'calculatorType', 'otHours', 'normalHours', 'overtimeType', 'hourlyRate', 'multiplierStr', 'otPay', 'grossPay', 'workingDays'
+        'employeePcb', 'employerEpf', 'employerSocso', 'employerEis',
+        'bonus', 'annualIncome', 'relief', 'taxBracket', 'pcb', 'taxStatus', 'maritalStatus',
+        'startDate', 'targetDate', 'targetYear', 'yearsOfService', 'baseEntitlement', 'proratedLeave', 'leaveTaken', 'remainingBalance',
+        'ageGroup', 'nationality', 'totalEpf', 'socsoTotal', 'socsoCategory', 'socsoBracket', 'eisTotal', 'interaction_type', 'employeeRate',
+        'calculatorType', 'otHours', 'normalHours', 'overtimeType', 'hourlyRate', 'multiplierStr', 'otPay', 'grossPay', 'workingDays', 'dailyRate',
+        'monthlySalary', 'workingDaysPerWeek', 'workingHours', 'empType', 'dailySalary', 'monthlyWorkingHours'
       ];
 
       return data.diff({}).affectedKeys().hasOnly(allowedKeys) &&
@@ -55,6 +56,7 @@ service cloud.firestore {
              data.userType is string && data.userType.size() > 0 &&
              (!('name' in data) || (data.name is string && data.name.size() <= 150)) &&
              (!('phoneNumber' in data) || (data.phoneNumber is string && data.phoneNumber.size() <= 50)) &&
+             (!('userPhone' in data) || (data.userPhone is string && data.userPhone.size() <= 50)) &&
              (!('companyName' in data) || (data.companyName is string && data.companyName.size() <= 150)) &&
              (!('hiringStatus' in data) || (data.hiringStatus is string && data.hiringStatus.size() <= 50));
     }
