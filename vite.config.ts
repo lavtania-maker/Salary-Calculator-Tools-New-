@@ -19,7 +19,16 @@ export default defineConfig(({ mode }) => {
     server: {
       hmr: false,
     },
+    esbuild: {
+      drop: mode === "production" ? ["console", "debugger"] : [],
+      legalComments: "none",
+      minifyIdentifiers: true,
+      minifySyntax: true,
+      minifyWhitespace: true,
+    },
     build: {
+      minify: true,
+      cssMinify: true,
       rollupOptions: {
         input: {
           main: path.resolve(__dirname, "index.html"),

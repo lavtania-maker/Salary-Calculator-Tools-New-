@@ -2889,3 +2889,15 @@ a.nav-link, a.dropdown-item, a.mobile-submenu-item, a.footer-link, summary.faq-t
   outline-offset: 2px !important;
 }
 
+
+/* CLS Optimization: Reserve minimum height for results */
+.results-container {
+    min-height: 420px;
+    transition: opacity 0.2s ease-in-out;
+}
+.ad-slot-container {
+    min-height: 250px;
+}
+.ad-slot-container-horizontal {
+    min-height: 90px;
+}
