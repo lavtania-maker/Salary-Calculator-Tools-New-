@@ -20,14 +20,14 @@ export function calculateOvertime() {
     const salary = salaryEl ? parseNum(salaryEl.value) : 0;
     const workingDays = workingDaysEl ? parseFloat(workingDaysEl.value) || 5 : 5;
     const normalHours = normalHoursEl ? parseFloat(normalHoursEl.value) || 8 : 8;
-    const overtimeType = (overtimeTypeEl && overtimeTypeEl.value) ? overtimeTypeEl.value : "Normal Working Day";
+    const overtimeType = (overtimeTypeEl && overtimeTypeEl.value) ? overtimeTypeEl.value : "";
     const otHours = otHoursEl ? parseNum(otHoursEl.value) : 0;
     const isManualLabour = isManualLabourEl ? isManualLabourEl.checked : false;
 
     const otPlaceholder = document.getElementById("otPlaceholder");
     const otResultsContent = document.getElementById("otResultsContent");
 
-    if (salary <= 0) {
+    if (salary <= 0 || !overtimeType) {
       if (otPlaceholder) otPlaceholder.style.display = "block";
       if (otResultsContent) otResultsContent.style.display = "none";
       return;
@@ -51,11 +51,21 @@ export function calculateOvertime() {
     const estimatedGrossPay = salary + otPay;
 
     // Eligibility under EA 1955
-    const isEligible = salary <= 4000 || isManualLabour;
-    const eligibilityStatus = isEligible ? "Eligible (EA 1955 Covered)" : "Reference Rate (Salary > RM4,000)";
-    const eligibilityText = isEligible
-      ? "Covered under EA 1955 statutory overtime provisions."
-      : "Under EA 1955, employees earning > RM4,000 (non-manual) OT rates depend on employment contract.";
+    let eligibilityStatus = "";
+    let eligibilityText = "";
+    let otPaySubtext = "";
+
+    if (salary <= 4000) {
+      eligibilityStatus = "Eligible (EA 1955 Covered)";
+      eligibilityText = "Covered under EA 1955 statutory overtime provisions.";
+    } else if (isManualLabour) {
+      eligibilityStatus = "Eligible (Manual / Operator Exemption)";
+      eligibilityText = "Covered under First Schedule EA 1955 manual/vehicle operator provision.";
+    } else {
+      eligibilityStatus = "Not Statutory (Exceeds RM 4,000 EA 1955 Cap)";
+      eligibilityText = "EA 1955 statutory OT rates do not apply. Subject to employer discretion or contract.";
+      otPaySubtext = "(Subject to Employment Contract)";
+    }
 
     // Show results / Hide placeholder
     if (otPlaceholder) otPlaceholder.style.display = "none";
@@ -63,6 +73,16 @@ export function calculateOvertime() {
 
     const resTotalOTPay = document.getElementById("resTotalOTPay");
     if (resTotalOTPay) resTotalOTPay.textContent = "RM " + otPay.toLocaleString("en-MY", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+    const resOTPaySubtext = document.getElementById("resOTPaySubtext");
+    if (resOTPaySubtext) {
+      if (otPaySubtext) {
+        resOTPaySubtext.textContent = otPaySubtext;
+        resOTPaySubtext.style.display = "block";
+      } else {
+        resOTPaySubtext.style.display = "none";
+      }
+    }
 
     // Update DOM
     const resHourlyRate = document.getElementById("resHourlyRate");
@@ -78,7 +98,25 @@ export function calculateOvertime() {
     if (resMultiplierApplied) resMultiplierApplied.textContent = `${multiplier.toFixed(1)}x (${overtimeType || 'Normal Working Day'})`;
 
     const resEligibilityStatus = document.getElementById("resEligibilityStatus");
-    if (resEligibilityStatus) resEligibilityStatus.textContent = eligibilityStatus;
+    if (resEligibilityStatus) {
+      resEligibilityStatus.textContent = eligibilityStatus;
+      resEligibilityStatus.style.display = "inline-block";
+      resEligibilityStatus.style.padding = "4px 10px";
+      resEligibilityStatus.style.borderRadius = "6px";
+      resEligibilityStatus.style.fontSize = "13px";
+      resEligibilityStatus.style.fontWeight = "600";
+      resEligibilityStatus.style.textAlign = "right";
+
+      if (salary <= 4000 || isManualLabour) {
+        resEligibilityStatus.style.backgroundColor = "#DCFCE7";
+        resEligibilityStatus.style.color = "#166534";
+        resEligibilityStatus.style.border = "1px solid #BBF7D0";
+      } else {
+        resEligibilityStatus.style.backgroundColor = "#FEF3C7";
+        resEligibilityStatus.style.color = "#92400E";
+        resEligibilityStatus.style.border = "1px solid #FDE68A";
+      }
+    }
 
     const resEligibilityText = document.getElementById("resEligibilityText");
     if (resEligibilityText) resEligibilityText.textContent = eligibilityText;
@@ -116,20 +154,11 @@ export function calculateOvertime() {
 function initOvertimeCalculator() {
   const form = document.getElementById("otForm") as HTMLFormElement | null;
   if (form) {
-    // 1. Handle form submit
+    // Handle form submit
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       calculateOvertime();
     });
-
-    // 2. Explicitly handle Calculate button click as fallback
-    const calcBtn = form.querySelector('button[type="submit"]');
-    if (calcBtn) {
-      calcBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        calculateOvertime();
-      });
-    }
   }
 
   const resetBtn = document.getElementById("otResetBtn") as HTMLButtonElement | null;
@@ -150,6 +179,8 @@ function initOvertimeCalculator() {
       if (resMultiplierApplied) resMultiplierApplied.textContent = "-";
       const resGrossPay = document.getElementById("resGrossPay");
       if (resGrossPay) resGrossPay.textContent = "RM 0.00";
+      const resOTPaySubtext = document.getElementById("resOTPaySubtext");
+      if (resOTPaySubtext) resOTPaySubtext.style.display = "none";
     });
   }
 
