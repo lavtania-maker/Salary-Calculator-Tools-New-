@@ -3856,5 +3856,104 @@
         });
       })();
     </script>
+    <script>
+      function initCollapsibleTables() {
+        const selectors = [
+          ".table-responsive:not(.collapsible-initialized)",
+          ".table-container:not(.collapsible-initialized)",
+          ".seo-table-wrapper:not(.collapsible-initialized)"
+        ];
+        const containers = document.querySelectorAll(selectors.join(", "));
+        containers.forEach((container) => {
+          if (
+            container.classList.contains("collapsible-initialized") ||
+            container.closest(".table-collapsible-wrapper") ||
+            container.querySelector(".collapsible-initialized")
+          ) {
+            return;
+          }
+
+          const table = container.querySelector("table");
+          if (!table) return;
+
+          const tbody = table.querySelector("tbody");
+          if (!tbody) return;
+
+          const rows = tbody.querySelectorAll("tr");
+          const SHOW_COUNT = 5;
+
+          if (rows.length > SHOW_COUNT) {
+            container.classList.add("collapsible-initialized");
+
+            const wrapper = document.createElement("div");
+            wrapper.className = "table-collapsible-wrapper collapsed";
+
+            container.parentNode.insertBefore(wrapper, container);
+            wrapper.appendChild(container);
+
+            let initialHeight = 320;
+            if (container.offsetParent !== null) {
+              const header = table.querySelector("thead");
+              let calculatedHeight = header ? header.offsetHeight : 0;
+              for (let i = 0; i < SHOW_COUNT && i < rows.length; i++) {
+                calculatedHeight += rows[i].offsetHeight;
+              }
+              if (calculatedHeight > 50) {
+                initialHeight = calculatedHeight + 8;
+              }
+            } else {
+              initialHeight = 320;
+            }
+            wrapper.style.maxHeight = initialHeight + "px";
+
+            const btnContainer = document.createElement("div");
+            btnContainer.className = "table-show-more-container";
+
+            const btn = document.createElement("button");
+            btn.className = "table-show-more-btn";
+            btn.type = "button";
+            btn.innerHTML =
+              'Show Full Table / Expand <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><path d="M6 9l6 6 6-6"></path></svg>';
+
+            btnContainer.appendChild(btn);
+            wrapper.parentNode.insertBefore(btnContainer, wrapper.nextSibling);
+
+            btn.addEventListener("click", () => {
+              const isCollapsed = wrapper.classList.contains("collapsed");
+              if (isCollapsed) {
+                wrapper.classList.remove("collapsed");
+                wrapper.classList.add("expanded");
+                wrapper.style.maxHeight = (table.scrollHeight || 3000) + 150 + "px";
+                btn.innerHTML =
+                  'Show Less / Collapse <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; transform: rotate(180deg);"><path d="M6 9l6 6 6-6"></path></svg>';
+                btn.classList.add("active");
+              } else {
+                wrapper.classList.add("collapsed");
+                wrapper.classList.remove("expanded");
+                wrapper.style.maxHeight = initialHeight + "px";
+                btn.innerHTML =
+                  'Show Full Table / Expand <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><path d="M6 9l6 6 6-6"></path></svg>';
+                btn.classList.remove("active");
+
+                const rect = wrapper.getBoundingClientRect();
+                if (rect.top < 0) {
+                  window.scrollTo({
+                    top: window.pageYOffset + rect.top - 100,
+                    behavior: "smooth",
+                  });
+                }
+              }
+            });
+          }
+        });
+      }
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initCollapsibleTables);
+      } else {
+        initCollapsibleTables();
+      }
+      window.addEventListener("load", initCollapsibleTables);
+    </script>
     <script type="module" src="/src/salary-calculator.ts"></script>
 </body></html>
