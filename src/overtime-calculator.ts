@@ -2,7 +2,7 @@
 
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebase";
-import { generatePDFReport } from "./lib/pdf-generator";
+// import { generatePDFReport } from "./lib/pdf-generator";
 
 let lastOTCalculation: any = null;
 
@@ -355,7 +355,8 @@ function initOvertimeCalculator() {
           estimatedGrossPay: 0
         };
 
-        generatePDFReport({
+        import("./lib/pdf-generator").then(({ generatePDFReport }) => {
+          generatePDFReport({
           title: "Overtime Pay Report",
           fileName: "Overtime_Report",
           data: [
@@ -369,6 +370,7 @@ function initOvertimeCalculator() {
             { label: "Total Overtime Pay", value: `RM ${calc.otPay.toFixed(2)}` },
             { label: "Estimated Total Gross Pay", value: `RM ${calc.estimatedGrossPay.toFixed(2)}` }
           ]
+        });
         });
 
         if (modalFormContent) modalFormContent.style.display = "none";

@@ -2892,7 +2892,7 @@ a.nav-link, a.dropdown-item, a.mobile-submenu-item, a.footer-link, summary.faq-t
 
 /* CLS Optimization: Reserve minimum height for results */
 .results-container {
-    min-height: 420px;
+    min-height: 850px;
     transition: opacity 0.2s ease-in-out;
 }
 .ad-slot-container {
@@ -2940,5 +2940,69 @@ a.nav-link, a.dropdown-item, a.mobile-submenu-item, a.footer-link, summary.faq-t
   }
   .form-actions .btn {
     width: 100% !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .results-container {
+    min-height: 1100px;
+  }
+}
+
+@media (max-width: 767px) {
+  .table-responsive table,
+  .table-container table,
+  .seo-table-wrapper table {
+    display: block !important;
+    width: 100% !important;
+    border: none !important;
+  }
+  .table-responsive thead,
+  .table-container thead,
+  .seo-table-wrapper thead {
+    display: none !important;
+  }
+  .table-responsive tbody,
+  .table-container tbody,
+  .seo-table-wrapper tbody {
+    display: block !important;
+    width: 100% !important;
+  }
+  .table-responsive tr,
+  .table-container tr,
+  .seo-table-wrapper tr {
+    display: block !important;
+    width: 100% !important;
+    margin-bottom: 1rem !important;
+    border: 1px solid var(--border, #e2e8f0) !important;
+    border-radius: 8px !important;
+    padding: 8px !important;
+    background: #fff !important;
+  }
+  .table-responsive td,
+  .table-container td,
+  .seo-table-wrapper td {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    padding: 8px 4px !important;
+    text-align: right !important;
+    font-size: 13px !important;
+  }
+  .table-responsive td:last-child,
+  .table-container td:last-child,
+  .seo-table-wrapper td:last-child {
+    border-bottom: none !important;
+  }
+  .table-responsive td::before,
+  .table-container td::before,
+  .seo-table-wrapper td::before {
+    content: attr(data-label);
+    font-weight: 600 !important;
+    margin-right: 15px !important;
+    text-align: left !important;
+    color: var(--text-main, #0f172a) !important;
+    flex-shrink: 0;
   }
 }

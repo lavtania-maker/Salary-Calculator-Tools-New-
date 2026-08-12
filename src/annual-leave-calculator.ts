@@ -1,6 +1,6 @@
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebase";
-import { generatePDFReport } from "./lib/pdf-generator";
+// import { generatePDFReport } from "./lib/pdf-generator";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("leaveForm") as HTMLFormElement;
@@ -544,6 +544,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (isSuccess && lastCalculation) {
+          import("./lib/pdf-generator").then(({ generatePDFReport }) => {
           generatePDFReport({
             title: "Annual Leave Report",
             fileName: "Annual_Leave_Report",
@@ -572,6 +573,7 @@ document.addEventListener("DOMContentLoaded", () => {
               },
             ],
           });
+        });
         }
 
         const modalFormContent = document.getElementById("modalFormContent");

@@ -2,7 +2,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebase";
 // Simplified Malaysia PCB Tax Calculator
 
-import { generatePDFReport } from "./lib/pdf-generator";
+// import { generatePDFReport } from "./lib/pdf-generator";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("pcbForm") as HTMLFormElement;
@@ -470,6 +470,7 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
         }
 
         if (isSuccess && lastCalculation) {
+          import("./lib/pdf-generator").then(({ generatePDFReport }) => {
           generatePDFReport({
             title: "PCB (Income Tax) Report",
             fileName: "PCB_Report",
@@ -520,6 +521,7 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
               },
             ],
           });
+        });
         }
 
         // Small delay to make "Processing..." visible but not annoying

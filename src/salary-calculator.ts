@@ -2,7 +2,7 @@
 
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebase";
-import { generatePDFReport } from "./lib/pdf-generator";
+// import { generatePDFReport } from "./lib/pdf-generator";
 
 let lastSalaryCalculation: any = null;
 
@@ -658,7 +658,8 @@ function initSalaryCalculator() {
           incomeGroup: "-"
         };
 
-        generatePDFReport({
+        import("./lib/pdf-generator").then(({ generatePDFReport }) => {
+          generatePDFReport({
           title: "Salary & Take Home Pay Report",
           fileName: "Salary_Report",
           data: [
@@ -674,6 +675,7 @@ function initSalaryCalculator() {
             { label: "Employer EIS Contribution", value: `RM ${calc.eisEmployer.toFixed(2)}` },
             { label: "Income Category", value: calc.incomeGroup }
           ]
+        });
         });
 
         if (modalFormContent) modalFormContent.style.display = "none";

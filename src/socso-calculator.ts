@@ -2,7 +2,7 @@
 
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebase";
-import { generatePDFReport } from "./lib/pdf-generator";
+// import { generatePDFReport } from "./lib/pdf-generator";
 
 let lastSocsoCalculation: any = null;
 
@@ -338,7 +338,8 @@ function initSocsoCalculator() {
           totalSocso: 0
         };
 
-        generatePDFReport({
+        import("./lib/pdf-generator").then(({ generatePDFReport }) => {
+          generatePDFReport({
           title: "SOCSO Contribution Report",
           fileName: "SOCSO_Report",
           data: [
@@ -349,6 +350,7 @@ function initSocsoCalculator() {
             { label: "Employer SOCSO Contribution", value: `RM ${calc.socsoEmployer.toFixed(2)}` },
             { label: "Total Combined SOCSO Contribution", value: `RM ${calc.totalSocso.toFixed(2)}` }
           ]
+        });
         });
 
         if (modalFormContent) modalFormContent.style.display = "none";

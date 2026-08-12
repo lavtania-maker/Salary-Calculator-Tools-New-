@@ -1,6 +1,6 @@
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebase";
-import { generatePDFReport } from "./lib/pdf-generator";
+// import { generatePDFReport } from "./lib/pdf-generator";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("epfForm") as HTMLFormElement;
@@ -486,6 +486,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (isSuccess && lastCalculation) {
+          import("./lib/pdf-generator").then(({ generatePDFReport }) => {
           generatePDFReport({
             title: "EPF Contribution Report",
             fileName: "EPF_Report",
@@ -519,6 +520,7 @@ document.addEventListener("DOMContentLoaded", () => {
               },
             ],
           });
+        });
         }
 
         await new Promise((resolve) => setTimeout(resolve, 800));

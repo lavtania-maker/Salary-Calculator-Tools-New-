@@ -171,3 +171,20 @@ if (typeof window !== "undefined") {
     renderOtherCalculators();
   }
 }
+
+// Add data-label to all table cells for mobile responsive cards
+if (typeof document !== "undefined") { document.addEventListener("DOMContentLoaded", () => {
+  const tables = document.querySelectorAll(".table-responsive table, .table-container table, .seo-table-wrapper table");
+  tables.forEach(table => {
+    const headers = Array.from(table.querySelectorAll("th")).map(th => th.textContent?.trim() || "");
+    const rows = table.querySelectorAll("tbody tr");
+    rows.forEach(row => {
+      const cells = row.querySelectorAll("td");
+      cells.forEach((cell, index) => {
+        if (headers[index]) {
+          cell.setAttribute("data-label", headers[index]);
+        }
+      });
+    });
+  });
+}); }
