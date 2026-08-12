@@ -132,6 +132,10 @@ export function renderOtherCalculators(containerOrSelector?: HTMLElement | strin
 
   const sectionContent = `
     <style>
+      .other-calculators-section {
+        border-top: none !important;
+        padding-top: 0 !important;
+      }
       .other-calculators-grid {
         display: grid !important;
         grid-template-columns: repeat(3, 1fr) !important;

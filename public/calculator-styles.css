@@ -2883,6 +2883,34 @@ a.nav-link, a.dropdown-item, a.mobile-submenu-item, a.footer-link, summary.faq-t
   border-top: none !important;
 }
 
+/* Other Calculators Section - No divider line & tight natural spacing */
+.other-calculators-section {
+  border-top: none !important;
+  border-bottom: none !important;
+  padding-top: 0 !important;
+  padding-bottom: 48px !important;
+  margin-top: 0 !important;
+}
+
+@media (max-width: 768px) {
+  .other-calculators-section {
+    padding-top: 0 !important;
+    padding-bottom: 32px !important;
+  }
+}
+
+.content-section > .container > .content-card:last-child,
+.content-section > .container > .seo-card:last-child {
+  margin-bottom: 20px !important;
+}
+
+@media (max-width: 768px) {
+  .content-section > .container > .content-card:last-child,
+  .content-section > .container > .seo-card:last-child {
+    margin-bottom: 16px !important;
+  }
+}
+
 /* Accessibility Focus States */
 *:focus-visible {
   outline: 2px solid #2563eb !important;
