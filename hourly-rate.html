@@ -33,7 +33,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
+    <link rel="icon" type="image/png" href="/favicon-ricebowl.png?v=4">
     <title>Hourly Rate Calculator Malaysia | Monthly to Hourly</title>
     <meta name="description" content="Convert your monthly salary into an hourly rate instantly. Suitable for full-time employees, part-time workers, freelancers, interns, HR professionals, and employers in Malaysia.">
     <meta name="keywords" content="hourly rate calculator malaysia, calculate hourly rate, monthly to hourly salary malaysia, part time rate malaysia, freelance rate malaysia, hourly wage calculator">
@@ -95,8 +95,8 @@
 }
 </script>
 
-    <link rel="preload" as="image" href="/logo-small.png">
-    <noscript>
+    <link rel="preload" as="image" href="/logo-small.png?v=4">
+    <noscript data-i18n="_desktop_dropdown_fallback_nav_dropdown_9f39cc">
       <style>
         /* Desktop Dropdown Fallback */
         .nav-dropdown:hover .dropdown-menu,
@@ -193,34 +193,43 @@
   ]
 }
 </script>
+<link rel="alternate" hreflang="ms" href="https://salarycalculator.my/ms/kadar-gaji-sejam">
+<link rel="alternate" hreflang="en" href="https://salarycalculator.my/hourly-rate">
+<link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/hourly-rate">
 </head><body>
     <!-- Navbar -->
     <header class="navbar">
       <div class="container">
         
         <a href="/" class="logo">
-          <img src="/logo-small.png?v=2" alt="SalaryCalculator.my" class="logo-img" width="250" height="44" fetchpriority="high">
+          <img src="/logo-small.png?v=4" alt="SalaryCalculator.my" class="logo-img" width="250" height="44" fetchpriority="high">
         </a>
                 
                 
         <nav class="desktop-nav">
-          <a href="/" class="nav-item" id="navSalary">Salary Calculator</a>
-          <a href="/socso-perkeso" class="nav-item" id="navSocso">SOCSO Calculator</a>
-          <a href="/pcb-income-tax" class="nav-item" id="navPcb">PCB Calculator</a>
-          <a href="/epf-kwsp" class="nav-item" id="navEpf">EPF Calculator</a>
+          <a href="/" class="nav-item" id="navSalary" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+          <a href="/socso-perkeso" class="nav-item" id="navSocso" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+          <a href="/pcb-income-tax" class="nav-item" id="navPcb" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+          <a href="/epf-kwsp" class="nav-item" id="navEpf" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
           <div class="nav-dropdown">
-            <button class="nav-item dropdown-trigger" id="freeToolsTrigger" aria-haspopup="true" aria-expanded="false">
+            <button class="nav-item dropdown-trigger" id="freeToolsTrigger" aria-haspopup="true" aria-expanded="false" data-i18n="free_tools_9f269a">
               Free Tools
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-            <div class="dropdown-menu free-tools-dropdown" id="freeToolsMenu" role="menu" aria-labelledby="freeToolsTrigger">
-              <a href="/annual-leave-calculator" class="dropdown-item" role="menuitem">Annual Leave Calculator</a>
-              <a href="/overtime-pay-calculator" class="dropdown-item" role="menuitem">Overtime Pay Calculator</a>
+            <div class="dropdown-menu free-tools-dropdown" id="freeToolsMenu" role="menu" aria-labelledby="freeToolsTrigger" data-i18n="annual_leave_calculator_overtime_pay_cal_060cec">
+              <a href="/annual-leave-calculator" class="dropdown-item" role="menuitem" data-i18n="annual_leave_calculator_2cfd91">Annual Leave Calculator</a>
+              <a href="/overtime-pay-calculator" class="dropdown-item" role="menuitem" data-i18n="overtime_pay_calculator_459bb3">Overtime Pay Calculator</a>
             
-              <a href="/hourly-rate" class="dropdown-item" role="menuitem">Hourly Rate Calculator</a></div>
+              <a href="/hourly-rate" class="dropdown-item" role="menuitem" data-i18n="hourly_rate_calculator_15455b">Hourly Rate Calculator</a></div>
           </div>
-          <a href="/blog" class="nav-item" id="navBlog">Blog</a>
-        </nav>
+          <a href="/blog" class="nav-item" id="navBlog" data-i18n="blog_be8df1">Blog</a>
+        
+      <div class="lang-switcher" style="display: flex; gap: 8px; align-items: center; margin-left: auto; font-weight: 500;" data-i18n="en_bm_0c2800">
+        <a href="/hourly-rate" class="lang-en" style="color: var(--primary-color); text-decoration: none;" data-i18n="en_aa85f1">EN</a>
+        <span style="color: var(--border-color);">|</span>
+        <a href="/ms/kadar-gaji-sejam" class="lang-ms" style="color: var(--text-muted); text-decoration: none;" data-i18n="bm_5089fa">BM</a>
+      </div>
+    </nav>
         <button class="mobile-menu-btn" id="mobileMenuToggle">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
@@ -228,34 +237,40 @@
             
             
       <nav class="mobile-nav" id="mobileNavMenu">
-        <a href="/" class="mobile-nav-item" id="mobNavSalary">Salary Calculator</a>
-        <a href="/socso-perkeso" class="mobile-nav-item" id="mobNavSocso">SOCSO Calculator</a>
-        <a href="/pcb-income-tax" class="mobile-nav-item" id="mobNavPcb">PCB Calculator</a>
-        <a href="/epf-kwsp" class="mobile-nav-item" id="mobNavEpf">EPF Calculator</a>
-        <button class="mobile-nav-item has-children" id="mobileFreeToolsTrigger">
+      <div class="lang-switcher" style="display: flex; gap: 8px; align-items: center; margin-left: auto; font-weight: 500;" data-i18n="en_bm_0c2800">
+        <a href="/hourly-rate" class="lang-en" style="color: var(--primary-color); text-decoration: none;" data-i18n="en_aa85f1">EN</a>
+        <span style="color: var(--border-color);">|</span>
+        <a href="/ms/kadar-gaji-sejam" class="lang-ms" style="color: var(--text-muted); text-decoration: none;" data-i18n="bm_5089fa">BM</a>
+      </div>
+    
+        <a href="/" class="mobile-nav-item" id="mobNavSalary" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+        <a href="/socso-perkeso" class="mobile-nav-item" id="mobNavSocso" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+        <a href="/pcb-income-tax" class="mobile-nav-item" id="mobNavPcb" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+        <a href="/epf-kwsp" class="mobile-nav-item" id="mobNavEpf" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
+        <button class="mobile-nav-item has-children" id="mobileFreeToolsTrigger" data-i18n="free_tools_c3d00f">
           Free Tools
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
-        <div class="mobile-submenu" id="mobileFreeToolsMenu">
-          <a href="/annual-leave-calculator" class="mobile-submenu-item">Annual Leave Calculator</a>
-          <a href="/overtime-pay-calculator" class="mobile-submenu-item">Overtime Pay Calculator</a>
+        <div class="mobile-submenu" id="mobileFreeToolsMenu" data-i18n="annual_leave_calculator_overtime_pay_cal_c7641c">
+          <a href="/annual-leave-calculator" class="mobile-submenu-item" data-i18n="annual_leave_calculator_2cfd91">Annual Leave Calculator</a>
+          <a href="/overtime-pay-calculator" class="mobile-submenu-item" data-i18n="overtime_pay_calculator_459bb3">Overtime Pay Calculator</a>
         </div>
-        <a href="/blog" class="mobile-nav-item" id="mobNavBlog">Blog</a>
+        <a href="/blog" class="mobile-nav-item" id="mobNavBlog" data-i18n="blog_be8df1">Blog</a>
       </nav>
     </header>
 
     <div class="calculator-area">
       <section class="hero">
         <div class="container">
-          <nav class="breadcrumb-nav" aria-label="Breadcrumb" style="margin-bottom: 12px; font-size: 14px; color: #e2e8f0;">
-            <a href="/" style="color: #ffffff; text-decoration: none;">Home</a>
+          <nav class="breadcrumb-nav" aria-label="Breadcrumb" style="margin-bottom: 12px; font-size: 14px; color: #e2e8f0;" data-i18n="home_free_tools_hourly_rate_calculator_bc72be">
+            <a href="/" style="color: #ffffff; text-decoration: none;" data-i18n="home_8cf04a">Home</a>
             <span style="margin: 0 8px; opacity: 0.7;">/</span>
             <span style="color: #ffffff; opacity: 0.9;">Free Tools</span>
             <span style="margin: 0 8px; opacity: 0.7;">/</span>
             <span style="color: #ffffff; font-weight: 600;">Hourly Rate Calculator</span>
           </nav>
-          <h1>Hourly Rate Calculator Malaysia</h1>
-          <p>Calculate your true hourly pay instantly with our FREE calculator<br>for full-time, part-time, freelance, or intern rates.</p>
+          <h1 data-i18n="hourly_rate_calculator_malaysia_960d0e">Hourly Rate Calculator Malaysia</h1>
+          <p data-i18n="calculate_your_true_hourly_pay_instantly_778ee7">Calculate your true hourly pay instantly with our FREE calculator<br>for full-time, part-time, freelance, or intern rates.</p>
         </div>
       </section>
 
@@ -263,36 +278,36 @@
         <div class="main-layout">
           <!-- Form -->
           <section class="card">
-            <h2 class="card-title" style="color: #2563eb !important;">Enter Details</h2>
+            <h2 class="card-title" style="color: #2563eb !important;" data-i18n="enter_details_a4b074">Enter Details</h2>
             <form id="calculatorForm">
   <!-- Monthly Salary -->
-  <div class="form-group">
-    <label class="form-label" for="monthlySalary">Monthly Salary (RM) <span style="color: red">*</span></label>
+  <div class="form-group" data-i18n="monthly_salary_rm_8fdbb3">
+    <label class="form-label" for="monthlySalary" data-i18n="monthly_salary_rm__33a192">Monthly Salary (RM) <span style="color: red">*</span></label>
     <input type="number" id="monthlySalary" class="form-input" value="7000" min="0" step="1" inputmode="decimal">
   </div>
 
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px">
     <!-- Working Days Per Week -->
     <div class="form-group">
-      <label class="form-label" for="workingDaysSelect">Working Days Per Week <span style="color: red">*</span></label>
-      <select id="workingDaysSelect" class="form-select">
+      <label class="form-label" for="workingDaysSelect" data-i18n="working_days_per_week__fd1ee0">Working Days Per Week <span style="color: red">*</span></label>
+      <select id="workingDaysSelect" class="form-select" data-i18n="5_days_5_5_days_6_days_cc6e13">
         <option value="5">5 Days</option>
         <option value="5.5">5.5 Days</option>
         <option value="6">6 Days</option>
       </select>
-      <div id="workingDaysNote" style="font-size: 11px; color: #64748b; margin-top: 4px;">Adjusts total monthly working hours. Note: Under Section 60I of Malaysia's Employment Act 1955, statutory daily and hourly rates are strictly based on a fixed 26-day divisor.</div>
+      <div id="workingDaysNote" style="font-size: 11px; color: #64748b; margin-top: 4px;" data-i18n="adjusts_total_monthly_working_hours_note_8579ed">Adjusts total monthly working hours. Note: Under Section 60I of Malaysia's Employment Act 1955, statutory daily and hourly rates are strictly based on a fixed 26-day divisor.</div>
     </div>
 
     <!-- Working Hours Per Day -->
-    <div class="form-group">
-      <label class="form-label" for="workingHours">Working Hours Per Day <span style="color: red">*</span></label>
+    <div class="form-group" data-i18n="working_hours_per_day_33705a">
+      <label class="form-label" for="workingHours" data-i18n="working_hours_per_day__3578e0">Working Hours Per Day <span style="color: red">*</span></label>
       <input type="number" id="workingHours" class="form-input" value="8" min="1" max="24" step="0.5" inputmode="decimal">
     </div>
   </div>
 
   <!-- Employment Type -->
-  <div class="form-group">
-    <label class="form-label" for="employmentType">Employment Type</label>
+  <div class="form-group" data-i18n="employment_type_full_time_part_time_free_cb1ba1">
+    <label class="form-label" for="employmentType" data-i18n="employment_type_eaca10">Employment Type</label>
     <select id="employmentType" class="form-select">
       <option value="full-time">Full-Time</option>
       <option value="part-time">Part-Time</option>
@@ -301,9 +316,9 @@
     </select>
   </div>
 
-  <div class="form-actions" style="margin-top: 24px; gap: 16px;">
-    <button type="reset" id="resetBtn" class="btn btn-outline" style="flex: 1;">Reset</button>
-    <button type="button" id="calculateBtn" class="btn btn-primary" style="flex: 2;">Calculate Hourly Rate</button>
+  <div class="form-actions" style="margin-top: 24px; gap: 16px;" data-i18n="reset_calculate_hourly_rate_51c69c">
+    <button type="reset" id="resetBtn" class="btn btn-outline" style="flex: 1;" data-i18n="reset_526d68">Reset</button>
+    <button type="button" id="calculateBtn" class="btn btn-primary" style="flex: 2;" data-i18n="calculate_hourly_rate_7ea54c">Calculate Hourly Rate</button>
   </div>
 </form>
           </section>
@@ -311,7 +326,7 @@
           <!-- Results -->
           <aside class="result-panel">
 <div class="card results-container" id="hourlyResultCard" style="background: #f8fafc;">
-  <h2 class="card-title" style="color: #2563eb !important;">Calculation Results</h2>
+  <h2 class="card-title" style="color: #2563eb !important;" data-i18n="calculation_results_f72359">Calculation Results</h2>
   
   <div id="resultsPlaceholder" class="placeholder-text">
     <div style="display: flex; justify-content: center; margin-bottom: 16px;">
@@ -320,8 +335,8 @@
         <polyline points="12 6 12 12 16 14"></polyline>
       </svg>
     </div>
-    <p>Enter details to see hourly rate breakdown</p>
-    <noscript>
+    <p data-i18n="enter_details_to_see_hourly_rate_breakdo_f12cc0">Enter details to see hourly rate breakdown</p>
+    <noscript data-i18n="javascript_is_required_to_calculate_your_23fb32">
       <p style="color: #dc2626; font-weight: 600; margin-top: 10px; background-color: #fef2f2; padding: 12px; border-radius: 8px; border: 1px solid #f87171; text-align: left;">
         JavaScript is required to calculate your results. Please enable JavaScript to use this calculator.
       </p>
@@ -329,17 +344,17 @@
   </div>
 
   <div id="resultsContent" style="display: none;">
-    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 24px; border-radius: 12px; margin-bottom: 20px; text-align: center;">
+    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 24px; border-radius: 12px; margin-bottom: 20px; text-align: center;" data-i18n="your_hourly_rate_rm_0_00_statutory_ea_19_7f6160">
       <span style="display: block; color: #166534; font-weight: 600; margin-bottom: 4px;">Your Hourly Rate</span>
       <span id="resHourlyRate" style="font-size: 32px; font-weight: 800; color: #15803d;">RM 0.00</span>
       <span id="resSubtitleTag" style="display: block; color: #15803d; font-size: 13px; font-weight: 500; margin-top: 4px;">(Statutory EA 1955 Rate)</span>
     </div>
 
-    <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;">
+    <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;" data-i18n="daily_salary_orp_rm_0_00_b6e44b">
       <span>Daily Salary (ORP)</span>
       <span id="resDailySalary" style="font-weight: 600;">RM 0.00</span>
     </div>
-    <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;">
+    <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;" data-i18n="monthly_working_hours_0_hours_54fd5b">
       <span>Monthly Working Hours</span>
       <span id="resMonthlyHours" style="font-weight: 600;">0 hours</span>
     </div>
@@ -347,32 +362,32 @@
 
     <!-- Overtime Rates Breakdown -->
     <div id="otRatesPanel" style="margin-top: 24px; display: none;">
-      <span style="display: block; color: #1e293b; font-weight: 600; font-size: 14px; margin-bottom: 12px;">Overtime Multipliers (Statutory)</span>
+      <span style="display: block; color: #1e293b; font-weight: 600; font-size: 14px; margin-bottom: 12px;" data-i18n="overtime_multipliers_statutory_65cf11">Overtime Multipliers (Statutory)</span>
       <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
         <div style="background: white; border: 1px solid #e2e8f0; padding: 12px 8px; border-radius: 8px; text-align: center;">
-          <div style="font-size: 11px; color: #64748b; font-weight: 600; margin-bottom: 4px;">Normal (1.5x)</div>
+          <div style="font-size: 11px; color: #64748b; font-weight: 600; margin-bottom: 4px;" data-i18n="normal_1_5x_b0034e">Normal (1.5x)</div>
           <div id="resOT15" style="font-size: 14px; font-weight: 700; color: #1e293b;">RM 0.00</div>
         </div>
         <div style="background: white; border: 1px solid #e2e8f0; padding: 12px 8px; border-radius: 8px; text-align: center;">
-          <div style="font-size: 11px; color: #64748b; font-weight: 600; margin-bottom: 4px;">Rest Day (2.0x)</div>
+          <div style="font-size: 11px; color: #64748b; font-weight: 600; margin-bottom: 4px;" data-i18n="rest_day_2_0x_ba0c1e">Rest Day (2.0x)</div>
           <div id="resOT20" style="font-size: 14px; font-weight: 700; color: #1e293b;">RM 0.00</div>
         </div>
         <div style="background: white; border: 1px solid #e2e8f0; padding: 12px 8px; border-radius: 8px; text-align: center;">
-          <div style="font-size: 11px; color: #64748b; font-weight: 600; margin-bottom: 4px;">Holiday (3.0x)</div>
+          <div style="font-size: 11px; color: #64748b; font-weight: 600; margin-bottom: 4px;" data-i18n="holiday_3_0x_17e68b">Holiday (3.0x)</div>
           <div id="resOT30" style="font-size: 14px; font-weight: 700; color: #1e293b;">RM 0.00</div>
         </div>
       </div>
-      <div id="otPartTimeNote" style="display: none; font-size: 11px; color: #64748b; margin-top: 8px;">Note: Under Part-Time Regulations 2010, extra hours up to standard daily limit are paid at 1.0x HRP.</div>
+      <div id="otPartTimeNote" style="display: none; font-size: 11px; color: #64748b; margin-top: 8px;" data-i18n="note_under_part_time_regulations_2010_ex_614abd">Note: Under Part-Time Regulations 2010, extra hours up to standard daily limit are paid at 1.0x HRP.</div>
     </div>
 
     <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 16px; border-radius: 12px; margin-top: 24px;">
-      <span style="display: block; color: #1e40af; font-weight: 600; font-size: 14px; margin-bottom: 8px;">Calculation Breakdown</span>
+      <span style="display: block; color: #1e40af; font-weight: 600; font-size: 14px; margin-bottom: 8px;" data-i18n="calculation_breakdown_a2c384">Calculation Breakdown</span>
       <div id="resCalcSteps" style="font-size: 13px; color: #3b82f6;">
         <!-- Steps go here -->
       </div>
     </div>
 
-    <button id="downloadReportBtn" class="btn btn-primary" style="width: 100%; margin-top: 24px;">Download Hourly Rate Report</button>
+    <button id="downloadReportBtn" class="btn btn-primary" style="width: 100%; margin-top: 24px;" data-i18n="download_hourly_rate_report_e77cd3">Download Hourly Rate Report</button>
   </div>
 </div>
 </aside>
@@ -385,67 +400,67 @@
       <div class="container">
         <!-- 1. What is an Hourly Rate? -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">What is an Hourly Rate?</h2>
-          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 0;">
+          <h2 style="color: #2563eb !important;" data-i18n="what_is_an_hourly_rate_8a9bec">What is an Hourly Rate?</h2>
+          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 0;" data-i18n="an_hourly_rate_is_the_fixed_amount_of_mo_5f06fb">
             An <strong>hourly rate</strong> is the fixed amount of money earned for every single hour of work performed. Unlike a fixed monthly salary, hourly compensation directly correlates with the exact number of hours clocked. It is essential for determining <strong>statutory overtime pay (OT)</strong>, <strong>freelance client billing</strong>, and <strong>part-time shift wages</strong> across Malaysia.
           </p>
         </div>
 
         <!-- 2. Who Uses Hourly Pay? -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">Who Uses Hourly Pay?</h2>
-          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 12px;">
+          <h2 style="color: #2563eb !important;" data-i18n="who_uses_hourly_pay_ab940a">Who Uses Hourly Pay?</h2>
+          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 12px;" data-i18n="hourly_pay_rates_are_widely_utilized_acr_845a4a">
             Hourly pay rates are widely utilized across multiple employment sectors in Malaysia:
           </p>
           <ul style="margin: 0; padding-left: 20px; color: #475569; font-size: 15px; line-height: 1.8;">
-            <li style="margin-bottom: 6px;"><strong>Part-Time Employees:</strong> Paid strictly based on logged shift hours in retail, F&amp;B, and service industries.</li>
-            <li style="margin-bottom: 6px;"><strong>Freelancers &amp; Independent Contractors:</strong> Utilize hourly rates to quote, invoice, and bill clients for custom project work.</li>
-            <li style="margin-bottom: 6px;"><strong>Interns &amp; Trainees:</strong> May receive hourly or daily stipends instead of a fixed monthly allowance.</li>
-            <li style="margin-bottom: 6px;"><strong>Contract &amp; Shift Workers:</strong> Prevalent in manufacturing, logistics, and healthcare operations.</li>
-            <li style="margin-bottom: 0;"><strong>Employers &amp; HR Managers:</strong> Rely on hourly rates to calculate statutory overtime pay under the <strong>Employment Act 1955</strong>.</li>
+            <li style="margin-bottom: 6px;" data-i18n="parttime_employees_paid_strictly_based_o_a72ca2"><strong>Part-Time Employees:</strong> Paid strictly based on logged shift hours in retail, F&amp;B, and service industries.</li>
+            <li style="margin-bottom: 6px;" data-i18n="freelancers_independent_contractors_util_098dfc"><strong>Freelancers &amp; Independent Contractors:</strong> Utilize hourly rates to quote, invoice, and bill clients for custom project work.</li>
+            <li style="margin-bottom: 6px;" data-i18n="interns_trainees_may_receive_hourly_or_d_a98b87"><strong>Interns &amp; Trainees:</strong> May receive hourly or daily stipends instead of a fixed monthly allowance.</li>
+            <li style="margin-bottom: 6px;" data-i18n="contract_shift_workers_prevalent_in_manu_a5cc29"><strong>Contract &amp; Shift Workers:</strong> Prevalent in manufacturing, logistics, and healthcare operations.</li>
+            <li style="margin-bottom: 0;" data-i18n="employers_hr_managers_rely_on_hourly_rat_6402a2"><strong>Employers &amp; HR Managers:</strong> Rely on hourly rates to calculate statutory overtime pay under the <strong>Employment Act 1955</strong>.</li>
           </ul>
         </div>
 
         <!-- 3. How to Calculate Hourly Rate -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">How to Calculate Hourly Rate</h2>
-          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 12px;">
+          <h2 style="color: #2563eb !important;" data-i18n="how_to_calculate_hourly_rate_d047c7">How to Calculate Hourly Rate</h2>
+          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 12px;" data-i18n="the_standard_statutory_calculation_in_ma_c584fe">
             The standard statutory calculation in Malaysia (under the <strong>Employment Act 1955</strong>) enforces a fixed <strong>26-day monthly divisor</strong>, regardless of calendar month length:
           </p>
           
           <div class="seo-formula-box" style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #2563eb; padding: 16px 20px; border-radius: 8px; margin: 16px 0;">
-            <strong style="color: #1e293b; font-size: 15px; margin-bottom: 6px; display: block;">Statutory Formula (EA 1955):</strong>
-            <div style="font-family: monospace; font-size: 15px; color: #2563eb; font-weight: 700;">
+            <strong style="color: #1e293b; font-size: 15px; margin-bottom: 6px; display: block;" data-i18n="statutory_formula_ea_1955_c2cd37">Statutory Formula (EA 1955):</strong>
+            <div style="font-family: monospace; font-size: 15px; color: #2563eb; font-weight: 700;" data-i18n="hourly_rate_hrp_monthly_basic_salary_26_2f72c0">
               Hourly Rate (HRP) = (Monthly Basic Salary ÷ 26) ÷ Normal Daily Work Hours
             </div>
           </div>
           
-          <div style="background: #eff6ff; border-left: 4px solid #3b82f6; padding: 12px 16px; border-radius: 6px; font-size: 14px; color: #1e3a8a; line-height: 1.6; margin-top: 12px;">
+          <div style="background: #eff6ff; border-left: 4px solid #3b82f6; padding: 12px 16px; border-radius: 6px; font-size: 14px; color: #1e3a8a; line-height: 1.6; margin-top: 12px;" data-i18n="pro_tip_for_standard_5_day_workweeks_act_2eab63">
             <strong>Pro Tip:</strong> For standard 5-day workweeks, actual average monthly working days equal <strong>21.67 days</strong> <code>(5 days × 52 weeks ÷ 12 months)</code>. Our calculator allows selecting your exact work schedule for personal budgeting.
           </div>
         </div>
 
         <!-- 4. Monthly Salary to Hourly Rate Conversion -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">Monthly Salary to Hourly Rate Conversion</h2>
-          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 16px;">
+          <h2 style="color: #2563eb !important;" data-i18n="monthly_salary_to_hourly_rate_conversion_2329c7">Monthly Salary to Hourly Rate Conversion</h2>
+          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 16px;" data-i18n="quick_benchmark_guide_based_on_standard__fcc5b1">
             Quick benchmark guide based on standard Malaysian 26-day monthly divisor (8-hour shift):
           </p>
           <div class="table-container" style="overflow-x: auto; border: 1px solid #e2e8f0; border-radius: 12px; margin-bottom: 0;">
-            <table style="width: 100%; min-width: 500px; border-collapse: collapse; text-align: left; background: white;">
+            <table style="width: 100%; min-width: 500px; border-collapse: collapse; text-align: left; background: white;" data-i18n="monthly_basic_salary_daily_rate_26_days_1cb6fe">
               <thead>
                 <tr style="background: #f8fafc; border-bottom: 2px solid #e2e8f0;">
-                  <th style="padding: 14px 18px; color: #1e293b; font-weight: 700; font-size: 14px;">Monthly Basic Salary</th>
-                  <th style="padding: 14px 18px; color: #1e293b; font-weight: 700; font-size: 14px;">Daily Rate (26 Days)</th>
-                  <th style="padding: 14px 18px; color: #1e293b; font-weight: 700; font-size: 14px;">Hourly Rate (8 Hours)</th>
+                  <th style="padding: 14px 18px; color: #1e293b; font-weight: 700; font-size: 14px;" data-i18n="monthly_basic_salary_d17df3">Monthly Basic Salary</th>
+                  <th style="padding: 14px 18px; color: #1e293b; font-weight: 700; font-size: 14px;" data-i18n="daily_rate_26_days_9fe03f">Daily Rate (26 Days)</th>
+                  <th style="padding: 14px 18px; color: #1e293b; font-weight: 700; font-size: 14px;" data-i18n="hourly_rate_8_hours_ddf52b">Hourly Rate (8 Hours)</th>
                 </tr>
               </thead>
               <tbody style="color: #475569; font-size: 14px;">
-                <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 14px 18px; font-weight: 600; color: #1e293b;">RM 1,500</td><td style="padding: 14px 18px;">RM 57.69</td><td style="padding: 14px 18px; font-weight: 700; color: #2563eb;">RM 7.21</td></tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 14px 18px; font-weight: 600; color: #1e293b;">RM 2,000</td><td style="padding: 14px 18px;">RM 76.92</td><td style="padding: 14px 18px; font-weight: 700; color: #2563eb;">RM 9.62</td></tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 14px 18px; font-weight: 600; color: #1e293b;">RM 3,000</td><td style="padding: 14px 18px;">RM 115.38</td><td style="padding: 14px 18px; font-weight: 700; color: #2563eb;">RM 14.42</td></tr>
-                <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 14px 18px; font-weight: 600; color: #1e293b;">RM 4,000</td><td style="padding: 14px 18px;">RM 153.85</td><td style="padding: 14px 18px; font-weight: 700; color: #2563eb;">RM 19.23</td></tr>
-                <tr><td style="padding: 14px 18px; font-weight: 600; color: #1e293b;">RM 5,000</td><td style="padding: 14px 18px;">RM 192.31</td><td style="padding: 14px 18px; font-weight: 700; color: #2563eb;">RM 24.04</td></tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 14px 18px; font-weight: 600; color: #1e293b;" data-i18n="rm_1500_eecac5">RM 1,500</td><td style="padding: 14px 18px;" data-i18n="rm_5769_4372dc">RM 57.69</td><td style="padding: 14px 18px; font-weight: 700; color: #2563eb;" data-i18n="rm_721_ff6413">RM 7.21</td></tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 14px 18px; font-weight: 600; color: #1e293b;" data-i18n="rm_2000_f8fc75">RM 2,000</td><td style="padding: 14px 18px;" data-i18n="rm_7692_4be030">RM 76.92</td><td style="padding: 14px 18px; font-weight: 700; color: #2563eb;" data-i18n="rm_962_546ba4">RM 9.62</td></tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 14px 18px; font-weight: 600; color: #1e293b;" data-i18n="rm_3000_54cbff">RM 3,000</td><td style="padding: 14px 18px;" data-i18n="rm_11538_0c7159">RM 115.38</td><td style="padding: 14px 18px; font-weight: 700; color: #2563eb;" data-i18n="rm_1442_849ca9">RM 14.42</td></tr>
+                <tr style="border-bottom: 1px solid #e2e8f0;"><td style="padding: 14px 18px; font-weight: 600; color: #1e293b;" data-i18n="rm_4000_c4e43c">RM 4,000</td><td style="padding: 14px 18px;" data-i18n="rm_15385_d912eb">RM 153.85</td><td style="padding: 14px 18px; font-weight: 700; color: #2563eb;" data-i18n="rm_1923_54ad8b">RM 19.23</td></tr>
+                <tr><td style="padding: 14px 18px; font-weight: 600; color: #1e293b;" data-i18n="rm_5000_ab4936">RM 5,000</td><td style="padding: 14px 18px;" data-i18n="rm_19231_2843fe">RM 192.31</td><td style="padding: 14px 18px; font-weight: 700; color: #2563eb;" data-i18n="rm_2404_a6d47d">RM 24.04</td></tr>
               </tbody>
             </table>
           </div>
@@ -453,90 +468,90 @@
 
         <!-- 5. Factors That Affect Hourly Rate -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">Factors That Affect Hourly Rate</h2>
-          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 12px;">
+          <h2 style="color: #2563eb !important;" data-i18n="factors_that_affect_hourly_rate_9bcda0">Factors That Affect Hourly Rate</h2>
+          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 12px;" data-i18n="several_core_parameters_determine_your_a_a92eaa">
             Several core parameters determine your actual hourly earning power:
           </p>
           <ul style="margin: 0; padding-left: 20px; color: #475569; font-size: 15px; line-height: 1.8;">
-            <li style="margin-bottom: 6px;"><strong>Weekly Working Schedule:</strong> A 5-day workweek yields a higher hourly rate than a 6-day workweek for the same monthly salary.</li>
-            <li style="margin-bottom: 6px;"><strong>Shift Hours:</strong> Working 7 hours daily yields a higher hourly value than an 8-hour shift at identical monthly pay.</li>
-            <li style="margin-bottom: 0;"><strong>Fixed Monthly Allowances:</strong> Non-variable position or housing allowances are included when computing the <strong>Ordinary Rate of Pay (ORP)</strong>.</li>
+            <li style="margin-bottom: 6px;" data-i18n="weekly_working_schedule_a_5day_workweek__3e75bc"><strong>Weekly Working Schedule:</strong> A 5-day workweek yields a higher hourly rate than a 6-day workweek for the same monthly salary.</li>
+            <li style="margin-bottom: 6px;" data-i18n="shift_hours_working_7_hours_daily_yields_868a3c"><strong>Shift Hours:</strong> Working 7 hours daily yields a higher hourly value than an 8-hour shift at identical monthly pay.</li>
+            <li style="margin-bottom: 0;" data-i18n="fixed_monthly_allowances_nonvariable_pos_67c8fb"><strong>Fixed Monthly Allowances:</strong> Non-variable position or housing allowances are included when computing the <strong>Ordinary Rate of Pay (ORP)</strong>.</li>
           </ul>
         </div>
 
         <!-- 6. Average Hourly Rates in Malaysia -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">Average Hourly Rates in Malaysia</h2>
-          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 12px;">
+          <h2 style="color: #2563eb !important;" data-i18n="average_hourly_rates_in_malaysia_73968e">Average Hourly Rates in Malaysia</h2>
+          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 12px;" data-i18n="market_benchmarks_across_various_industr_f0b6b2">
             Market benchmarks across various industries and employment types in Malaysia:
           </p>
           <ul style="margin: 0; padding-left: 20px; color: #475569; font-size: 15px; line-height: 1.8;">
-            <li style="margin-bottom: 6px;"><strong>Retail &amp; F&amp;B Service Staff:</strong> <strong>RM 7.00 – RM 12.00 / hour</strong></li>
-            <li style="margin-bottom: 6px;"><strong>Event Promoters &amp; Brand Ambassadors:</strong> <strong>RM 10.00 – RM 25.00 / hour</strong></li>
-            <li style="margin-bottom: 6px;"><strong>Freelance Writers, Designers &amp; Developers:</strong> <strong>RM 30.00 – RM 150.00+ / hour</strong></li>
-            <li style="margin-bottom: 0;"><strong>Private Home Tutors &amp; Trainers:</strong> <strong>RM 40.00 – RM 100.00+ / hour</strong></li>
+            <li style="margin-bottom: 6px;" data-i18n="retail_fb_service_staff_rm_700_rm_1200_h_69548b"><strong>Retail &amp; F&amp;B Service Staff:</strong> <strong>RM 7.00 – RM 12.00 / hour</strong></li>
+            <li style="margin-bottom: 6px;" data-i18n="event_promoters_brand_ambassadors_rm_100_efd3e9"><strong>Event Promoters &amp; Brand Ambassadors:</strong> <strong>RM 10.00 – RM 25.00 / hour</strong></li>
+            <li style="margin-bottom: 6px;" data-i18n="freelance_writers_designers_developers_r_3ebf03"><strong>Freelance Writers, Designers &amp; Developers:</strong> <strong>RM 30.00 – RM 150.00+ / hour</strong></li>
+            <li style="margin-bottom: 0;" data-i18n="private_home_tutors_trainers_rm_4000_rm__d8b4ad"><strong>Private Home Tutors &amp; Trainers:</strong> <strong>RM 40.00 – RM 100.00+ / hour</strong></li>
           </ul>
         </div>
 
         <!-- 7. Minimum Wage & Hourly Pay in Malaysia -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">Minimum Wage &amp; Hourly Pay in Malaysia</h2>
-          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 12px;">
+          <h2 style="color: #2563eb !important;" data-i18n="minimum_wage_hourly_pay_in_malaysia_ccc368">Minimum Wage &amp; Hourly Pay in Malaysia</h2>
+          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 12px;" data-i18n="under_national_statutory_minimum_wage_or_ad008c">
             Under national statutory Minimum Wage Orders, the mandatory minimum base rate is <strong>RM 1,700 / month</strong>. Converted hourly rates equal:
           </p>
           <ul style="margin: 0; padding-left: 20px; color: #475569; font-size: 15px; line-height: 1.8;">
-            <li style="margin-bottom: 6px;"><strong>Statutory Daily Rate (ORP):</strong> <strong>RM 65.38 / day</strong> <code>(RM 1,700 ÷ 26 days)</code></li>
-            <li style="margin-bottom: 6px;"><strong>Statutory Minimum Hourly Rate:</strong> <strong>RM 8.17 / hour</strong> <code>(based on 8-hour daily shift)</code></li>
-            <li style="margin-bottom: 0;"><strong>Monthly Minimum Salary Base:</strong> <strong>RM 1,700 / month</strong></li>
+            <li style="margin-bottom: 6px;" data-i18n="statutory_daily_rate_orp_rm_6538_day_rm__b64e9e"><strong>Statutory Daily Rate (ORP):</strong> <strong>RM 65.38 / day</strong> <code>(RM 1,700 ÷ 26 days)</code></li>
+            <li style="margin-bottom: 6px;" data-i18n="statutory_minimum_hourly_rate_rm_817_hou_faf845"><strong>Statutory Minimum Hourly Rate:</strong> <strong>RM 8.17 / hour</strong> <code>(based on 8-hour daily shift)</code></li>
+            <li style="margin-bottom: 0;" data-i18n="monthly_minimum_salary_base_rm_1700_mont_dac126"><strong>Monthly Minimum Salary Base:</strong> <strong>RM 1,700 / month</strong></li>
           </ul>
         </div>
 
         <!-- 8. Tips for Part-Time Workers, Freelancers & Interns -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">Tips for Part-Time Workers, Freelancers &amp; Interns</h2>
-          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 12px;">
+          <h2 style="color: #2563eb !important;" data-i18n="tips_for_parttime_workers_freelancers_in_ec6995">Tips for Part-Time Workers, Freelancers &amp; Interns</h2>
+          <p style="color: #475569; font-size: 15px; line-height: 1.6; margin-top: 12px; margin-bottom: 12px;" data-i18n="when_negotiating_freelance_rates_or_part_bb5af1">
             When negotiating freelance rates or part-time contract wages in Malaysia, factor in critical self-funded overheads:
           </p>
           <ul style="margin: 0; padding-left: 20px; color: #475569; font-size: 15px; line-height: 1.8;">
-            <li style="margin-bottom: 6px;"><strong>Statutory Deductions:</strong> Account for voluntary self-employed <strong>KWSP (i-Saraan)</strong> and <strong>PERKESO (SKSPS)</strong> contributions.</li>
-            <li style="margin-bottom: 6px;"><strong>Medical &amp; Equipment Costs:</strong> Factor in personal health insurance, software licenses, laptop equipment, and travel expenses.</li>
-            <li style="margin-bottom: 0;"><strong>Freelance Rate Premium:</strong> Set your freelance hourly quote at least <strong>25% – 35% higher</strong> than equivalent full-time hourly pay to compensate for unpaid time off and client acquisition.</li>
+            <li style="margin-bottom: 6px;" data-i18n="statutory_deductions_account_for_volunta_807f5c"><strong>Statutory Deductions:</strong> Account for voluntary self-employed <strong>KWSP (i-Saraan)</strong> and <strong>PERKESO (SKSPS)</strong> contributions.</li>
+            <li style="margin-bottom: 6px;" data-i18n="medical_equipment_costs_factor_in_person_b1c214"><strong>Medical &amp; Equipment Costs:</strong> Factor in personal health insurance, software licenses, laptop equipment, and travel expenses.</li>
+            <li style="margin-bottom: 0;" data-i18n="freelance_rate_premium_set_your_freelanc_306340"><strong>Freelance Rate Premium:</strong> Set your freelance hourly quote at least <strong>25% – 35% higher</strong> than equivalent full-time hourly pay to compensate for unpaid time off and client acquisition.</li>
           </ul>
         </div>
 
         <!-- Standalone Hiring CTA Banner -->
         <div class="content-card" style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 24px 28px; border-radius: 12px; min-height: 250px; box-sizing: border-box;">
-          <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: #1e3a8a; font-size: 16px; margin-bottom: 8px;">
+          <div style="display: flex; align-items: center; gap: 8px; font-weight: 700; color: #1e3a8a; font-size: 16px; margin-bottom: 8px;" data-i18n="_looking_to_hire_part_time_freelance_or_b6cd6b">
             <span>📢</span> Looking to Hire Part-Time, Freelance, or Interns?
           </div>
-          <p style="color: #334155; margin: 0 0 12px 0; font-size: 15px; line-height: 1.6;">
+          <p style="color: #334155; margin: 0 0 12px 0; font-size: 15px; line-height: 1.6;" data-i18n="if_you_are_an_employer_looking_to_hire_i_2387ba">
             If you are an employer looking to hire in Malaysia, connect with active local job seekers instantly by posting a <strong>FREE</strong> job ad:
           </p>
           <ul style="margin: 0; padding-left: 20px; color: #2563eb; font-size: 15px; line-height: 1.8;">
-            <li style="margin-bottom: 4px;"><a href="https://www.ajobthing.com/product/post-free-part-time-job-ad" class="job-ad-link" data-job-type="part_time" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; font-weight: 600;">Post FREE Part-Time Job Ad</a></li>
-            <li style="margin-bottom: 4px;"><a href="https://www.ajobthing.com/product/post-free-freelance-job-ad" class="job-ad-link" data-job-type="freelance" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; font-weight: 600;">Post FREE Freelance Job Ad</a></li>
-            <li style="margin-bottom: 0;"><a href="https://www.ajobthing.com/product/post-free-intern-job-ad" class="job-ad-link" data-job-type="intern" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; font-weight: 600;">Post FREE Intern Job Ad</a></li>
+            <li style="margin-bottom: 4px;" data-i18n="post_free_parttime_job_ad_8e78bf"><a href="https://www.ajobthing.com/product/post-free-part-time-job-ad" class="job-ad-link" data-job-type="part_time" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; font-weight: 600;">Post FREE Part-Time Job Ad</a></li>
+            <li style="margin-bottom: 4px;" data-i18n="post_free_freelance_job_ad_f83a5f"><a href="https://www.ajobthing.com/product/post-free-freelance-job-ad" class="job-ad-link" data-job-type="freelance" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; font-weight: 600;">Post FREE Freelance Job Ad</a></li>
+            <li style="margin-bottom: 0;" data-i18n="post_free_intern_job_ad_04a16f"><a href="https://www.ajobthing.com/product/post-free-intern-job-ad" class="job-ad-link" data-job-type="intern" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline; font-weight: 600;">Post FREE Intern Job Ad</a></li>
           </ul>
         </div>
 
         <!-- 10. Frequently Asked Questions -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">Frequently Asked Questions</h2>
-          <p class="seo-subtitle" style="color: #64748b; font-size: 15px; margin-top: 8px; margin-bottom: 24px;">
+          <h2 style="color: #2563eb !important;" data-i18n="frequently_asked_questions_5405d8">Frequently Asked Questions</h2>
+          <p class="seo-subtitle" style="color: #64748b; font-size: 15px; margin-top: 8px; margin-bottom: 24px;" data-i18n="got_questions_about_calculating_your_hou_3434e4">
             Got questions about calculating your hourly rate in Malaysia? Find answers to the most common questions below.
           </p>
           
-          <div class="faq-container" style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
+          <div class="faq-container" style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;" data-i18n="what_is_an_hourly_rate_an_hourly_rate_is_ee9419">
             <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">
                 What is an hourly rate?
               </summary>
               <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
-                <p style="margin: 0 0 8px 0;">An <strong>hourly rate</strong> is the specific amount of compensation earned for each hour of work performed. It is used to calculate:</p>
+                <p style="margin: 0 0 8px 0;" data-i18n="an_hourly_rate_is_the_specific_amount_of_626414">An <strong>hourly rate</strong> is the specific amount of compensation earned for each hour of work performed. It is used to calculate:</p>
                 <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
-                  <li style="margin-bottom: 6px;"><strong>Part-Time Wages:</strong> Hourly compensation for retail, F&amp;B, and contract staff.</li>
-                  <li style="margin-bottom: 6px;"><strong>Freelance Client Invoicing:</strong> Billable project rates for contractors and freelancers.</li>
-                  <li style="margin-bottom: 6px;"><strong>Statutory Overtime Pay (OT):</strong> Base <strong>Hourly Rate of Pay (HRP)</strong> under the <strong>Employment Act 1955</strong>.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="parttime_wages_hourly_compensation_for_r_e0035b"><strong>Part-Time Wages:</strong> Hourly compensation for retail, F&amp;B, and contract staff.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="freelance_client_invoicing_billable_proj_769733"><strong>Freelance Client Invoicing:</strong> Billable project rates for contractors and freelancers.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="statutory_overtime_pay_ot_base_hourly_ra_aae9c5"><strong>Statutory Overtime Pay (OT):</strong> Base <strong>Hourly Rate of Pay (HRP)</strong> under the <strong>Employment Act 1955</strong>.</li>
                 </ul>
               </div>
             </details>
@@ -546,15 +561,15 @@
                 How do I calculate hourly pay?
               </summary>
               <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
-                <p style="margin: 0 0 8px 0;">The calculation depends on whether you follow statutory labor law or personal schedule methods:</p>
+                <p style="margin: 0 0 8px 0;" data-i18n="the_calculation_depends_on_whether_you_f_88e605">The calculation depends on whether you follow statutory labor law or personal schedule methods:</p>
                 <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
-                  <li style="margin-bottom: 8px;">
+                  <li style="margin-bottom: 8px;" data-i18n="statutory_ea_1955_method_enforces_a_fixe_b1ad1e">
                     <strong>Statutory EA 1955 Method:</strong> Enforces a fixed 26-day monthly divisor.
                     <div style="font-family: monospace; background: #f1f5f9; padding: 6px 12px; border-radius: 6px; margin: 4px 0 8px 0; color: #1e293b; font-size: 13px;">
                       Hourly Rate (HRP) = (Monthly Basic Salary ÷ 26) ÷ Daily Working Hours
                     </div>
                   </li>
-                  <li>
+                  <li data-i18n="calendar_schedule_method_calculates_sche_1677b6">
                     <strong>Calendar Schedule Method:</strong> Calculates schedule-based actual monthly working hours.
                     <div style="font-family: monospace; background: #f1f5f9; padding: 6px 12px; border-radius: 6px; margin: 4px 0; color: #1e293b; font-size: 13px;">
                       Hourly Rate = Monthly Basic Salary ÷ Total Monthly Working Hours
@@ -569,12 +584,12 @@
                 How many working days are there in a month?
               </summary>
               <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
-                <p style="margin: 0 0 8px 0;">Average working days per month vary based on weekly schedule:</p>
+                <p style="margin: 0 0 8px 0;" data-i18n="average_working_days_per_month_vary_base_b4e786">Average working days per month vary based on weekly schedule:</p>
                 <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
-                  <li style="margin-bottom: 6px;"><strong>5-Day Workweek:</strong> Approximately <strong>21.67 working days</strong> per month <code>(5 days × 52 weeks ÷ 12 months)</code>.</li>
-                  <li style="margin-bottom: 6px;"><strong>5.5-Day Workweek:</strong> Approximately <strong>23.83 working days</strong> per month <code>(5.5 days × 52 weeks ÷ 12 months)</code>.</li>
-                  <li style="margin-bottom: 6px;"><strong>6-Day Workweek:</strong> Approximately <strong>26.00 working days</strong> per month <code>(6 days × 52 weeks ÷ 12 months)</code>.</li>
-                  <li style="margin-bottom: 6px;"><strong>Statutory Employment Act (EA 1955):</strong> Strictly fixed at <strong>26 days</strong> for daily and hourly rates.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="5day_workweek_approximately_2167_working_72c630"><strong>5-Day Workweek:</strong> Approximately <strong>21.67 working days</strong> per month <code>(5 days × 52 weeks ÷ 12 months)</code>.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="55day_workweek_approximately_2383_workin_d0c6d8"><strong>5.5-Day Workweek:</strong> Approximately <strong>23.83 working days</strong> per month <code>(5.5 days × 52 weeks ÷ 12 months)</code>.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="6day_workweek_approximately_2600_working_a5645b"><strong>6-Day Workweek:</strong> Approximately <strong>26.00 working days</strong> per month <code>(6 days × 52 weeks ÷ 12 months)</code>.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="statutory_employment_act_ea_1955_strictl_863584"><strong>Statutory Employment Act (EA 1955):</strong> Strictly fixed at <strong>26 days</strong> for daily and hourly rates.</li>
                 </ul>
               </div>
             </details>
@@ -584,11 +599,11 @@
                 Does hourly pay include overtime?
               </summary>
               <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
-                <p style="margin: 0 0 8px 0;"><strong>No.</strong> Standard hourly rates cover regular working hours only. Overtime hours are compensated using statutory multipliers under the <strong>Employment Act 1955</strong>:</p>
+                <p style="margin: 0 0 8px 0;" data-i18n="no_standard_hourly_rates_cover_regular_w_f06363"><strong>No.</strong> Standard hourly rates cover regular working hours only. Overtime hours are compensated using statutory multipliers under the <strong>Employment Act 1955</strong>:</p>
                 <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
-                  <li style="margin-bottom: 6px;"><strong>Normal Workday OT:</strong> Paid at <strong>1.5x</strong> your Hourly Rate of Pay (HRP).</li>
-                  <li style="margin-bottom: 6px;"><strong>Rest Day OT:</strong> Paid at <strong>2.0x</strong> your HRP for excess hours.</li>
-                  <li style="margin-bottom: 6px;"><strong>Public Holiday OT:</strong> Paid at <strong>3.0x</strong> your HRP for excess hours.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="normal_workday_ot_paid_at_15x_your_hourl_3119c7"><strong>Normal Workday OT:</strong> Paid at <strong>1.5x</strong> your Hourly Rate of Pay (HRP).</li>
+                  <li style="margin-bottom: 6px;" data-i18n="rest_day_ot_paid_at_20x_your_hrp_for_exc_73626d"><strong>Rest Day OT:</strong> Paid at <strong>2.0x</strong> your HRP for excess hours.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="public_holiday_ot_paid_at_30x_your_hrp_f_a7e72a"><strong>Public Holiday OT:</strong> Paid at <strong>3.0x</strong> your HRP for excess hours.</li>
                 </ul>
               </div>
             </details>
@@ -598,11 +613,11 @@
                 What is Malaysia's minimum hourly wage?
               </summary>
               <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
-                <p style="margin: 0 0 8px 0;">Under Malaysia's statutory Minimum Wage Order, the minimum monthly base is <strong>RM 1,700</strong>. Key statutory minimum benchmarks include:</p>
+                <p style="margin: 0 0 8px 0;" data-i18n="under_malaysias_statutory_minimum_wage_o_782346">Under Malaysia's statutory Minimum Wage Order, the minimum monthly base is <strong>RM 1,700</strong>. Key statutory minimum benchmarks include:</p>
                 <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
-                  <li style="margin-bottom: 6px;"><strong>Statutory Minimum Hourly Rate:</strong> <strong>RM 8.17 / hour</strong> <code>(based on 8-hour daily shift)</code>.</li>
-                  <li style="margin-bottom: 6px;"><strong>Statutory Daily Rate (ORP):</strong> <strong>RM 65.38 / day</strong> <code>(RM 1,700 ÷ 26 days)</code>.</li>
-                  <li style="margin-bottom: 6px;"><strong>Monthly Minimum Salary Base:</strong> <strong>RM 1,700 / month</strong>.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="statutory_minimum_hourly_rate_rm_817_hou_a0d85b"><strong>Statutory Minimum Hourly Rate:</strong> <strong>RM 8.17 / hour</strong> <code>(based on 8-hour daily shift)</code>.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="statutory_daily_rate_orp_rm_6538_day_rm__816755"><strong>Statutory Daily Rate (ORP):</strong> <strong>RM 65.38 / day</strong> <code>(RM 1,700 ÷ 26 days)</code>.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="monthly_minimum_salary_base_rm_1700_mont_33543a"><strong>Monthly Minimum Salary Base:</strong> <strong>RM 1,700 / month</strong>.</li>
                 </ul>
               </div>
             </details>
@@ -640,46 +655,46 @@
         }
       </style>
       <div class="seo-card" style="margin-bottom: 0;">
-        <h2 class="seo-title" style="color: #2563eb !important;">Try Our Other Free Calculators</h2>
-        <p class="seo-subtitle" style="color: #64748b; font-size: 1rem; margin-bottom: 24px;">Free, instant and accurate HR calculation tools for Malaysia.</p>
-        <div class="other-calculators-grid">
+        <h2 class="seo-title" style="color: #2563eb !important;" data-i18n="try_our_other_free_calculators_2e46ec">Try Our Other Free Calculators</h2>
+        <p class="seo-subtitle" style="color: #64748b; font-size: 1rem; margin-bottom: 24px;" data-i18n="free_instant_and_accurate_hr_calculation_9be83b">Free, instant and accurate HR calculation tools for Malaysia.</p>
+        <div class="other-calculators-grid" data-i18n="salary_calculator_calculate_your_exact_t_236a65">
 
-      <a href="/" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #fde68a; border-radius: 12px; background: #fffbeb; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';">
+      <a href="/" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #fde68a; border-radius: 12px; background: #fffbeb; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';" data-i18n="salary_calculator_calculate_your_exact_t_eb33e3">
         <div style="background: #fef3c7; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path><circle cx="14" cy="9" r="1"></circle></svg>
         </div>
         <h3 style="color: #d97706; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">Salary Calculator</h3>
-        <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Calculate your exact take home pay after EPF, SOCSO, EIS & PCB deductions.</p>
+        <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Calculate your exact take home pay after EPF, SOCSO, EIS &amp; PCB deductions.</p>
       </a>
-      <a href="/socso-perkeso" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #bbf7d0; border-radius: 12px; background: #f0fdf4; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';">
+      <a href="/socso-perkeso" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #bbf7d0; border-radius: 12px; background: #f0fdf4; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';" data-i18n="socso_calculator_check_employee_and_empl_12eec8">
         <div style="background: #dcfce7; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
         </div>
         <h3 style="color: #166534; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">SOCSO Calculator</h3>
-        <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Check employee and employer PERKESO & EIS contribution rates.</p>
+        <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Check employee and employer PERKESO &amp; EIS contribution rates.</p>
       </a>
-      <a href="/pcb-income-tax" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #bae6fd; border-radius: 12px; background: #f0f9ff; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';">
+      <a href="/pcb-income-tax" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #bae6fd; border-radius: 12px; background: #f0f9ff; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';" data-i18n="pcb_calculator_calculate_your_monthly_ta_d9cda1">
         <div style="background: #e0f2fe; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#075985" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"></path><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 17.5V6.5"></path></svg>
         </div>
         <h3 style="color: #075985; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">PCB Calculator</h3>
-        <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Calculate your monthly tax deduction (MTD) for employees & employers.</p>
+        <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Calculate your monthly tax deduction (MTD) for employees &amp; employers.</p>
       </a>
-      <a href="/epf-kwsp" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #fecaca; border-radius: 12px; background: #fef2f2; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';">
+      <a href="/epf-kwsp" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #fecaca; border-radius: 12px; background: #fef2f2; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';" data-i18n="epf_calculator_calculate_epf_kwsp_employ_39a659">
         <div style="background: #fee2e2; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#991b1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M3 7v1a3 3 0 0 0 6 0V7m6 0v1a3 3 0 0 0 6 0V7M9 7h6"></path><path d="M5 21V10.85M19 21V10.85M9 21V14M15 21V14"></path><path d="M10.22 2.72a2 2 0 0 1 3.56 0L15 5H9l1.22-2.28Z"></path></svg>
         </div>
         <h3 style="color: #991b1b; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">EPF Calculator</h3>
         <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Calculate EPF (KWSP) employee and employer contribution amounts.</p>
       </a>
-      <a href="/annual-leave-calculator" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #e9d5ff; border-radius: 12px; background: #faf5ff; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';">
+      <a href="/annual-leave-calculator" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #e9d5ff; border-radius: 12px; background: #faf5ff; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';" data-i18n="annual_leave_calculator_calculate_accura_196109">
         <div style="background: #ede9fe; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5b21b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>
         </div>
         <h3 style="color: #5b21b6; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">Annual Leave Calculator</h3>
         <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Calculate accurate pro-rated annual leave entitlement under Employment Act.</p>
       </a>
-      <a href="/overtime-pay-calculator" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #fde68a; border-radius: 12px; background: #fffbeb; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';">
+      <a href="/overtime-pay-calculator" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #fde68a; border-radius: 12px; background: #fffbeb; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';" data-i18n="overtime_pay_calculator_calculate_ot_pay_a95f1d">
         <div style="background: #fef3c7; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
         </div>
@@ -697,14 +712,14 @@
 <section class="explore-more-section" style="padding: 60px 0; background-color: #f8fafc; border-top: 1px solid #e2e8f0;">
   <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; width: 100%;">
     <div style="text-align: center; margin-bottom: 40px;">
-      <h2 style="font-size: 2rem; font-weight: 700; color: #2563eb !important; margin: 0 0 12px 0;">Explore More Articles</h2>
-      <p style="font-size: 1.1rem; color: #64748b; margin: 0 auto; max-width: 600px; line-height: 1.5; text-align: center;">Browse our latest guides, salary tips, and calculator tutorials.</p>
+      <h2 style="font-size: 2rem; font-weight: 700; color: #2563eb !important; margin: 0 0 12px 0;" data-i18n="explore_more_articles_b11beb">Explore More Articles</h2>
+      <p style="font-size: 1.1rem; color: #64748b; margin: 0 auto; max-width: 600px; line-height: 1.5; text-align: center;" data-i18n="browse_our_latest_guides_salary_tips_and_9a8be2">Browse our latest guides, salary tips, and calculator tutorials.</p>
     </div>
     <div class="explore-more-grid">
       
     </div>
-    <div style="text-align: center; margin-top: 40px;">
-      <a class="view-all-articles-link" href="https://salarycalculator.my/blog" style="display: inline-block; font-size: 1.1rem; font-weight: 600; color: #2563eb; text-decoration: none; transition: color 0.2s ease, transform 0.2s ease;">View All Articles →</a>
+    <div style="text-align: center; margin-top: 40px;" data-i18n="view_all_articles_f98ed5">
+      <a class="view-all-articles-link" href="https://salarycalculator.my/blog" style="display: inline-block; font-size: 1.1rem; font-weight: 600; color: #2563eb; text-decoration: none; transition: color 0.2s ease, transform 0.2s ease;" data-i18n="view_all_articles_13678c">View All Articles →</a>
     </div>
   </div>
 </section>
@@ -790,29 +805,29 @@
           <!-- Logo + Description -->
           <div class="footer-col" style="max-width: max-content; padding-left: 32px; box-sizing: border-box;">
             <a href="/" class="logo" style="margin-bottom: 16px; display: block;">
-              <img src="/logo-small.png?v=3" alt="SalaryCalculator.my" width="250" height="44" style="height: 44px !important; width: auto !important; max-width: none !important; object-fit: contain; object-position: left center; display: block; margin: 0; padding: 0;">
+              <img src="/logo-small.png?v=4" alt="SalaryCalculator.my" width="250" height="44" style="height: 44px !important; width: auto !important; max-width: none !important; object-fit: contain; object-position: left center; display: block; margin: 0; padding: 0;">
             </a>
-            <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+            <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;" data-i18n="accurate_malaysia_salary_calculator_inst_0c4a26">
               Accurate Malaysia salary calculator.<br>
               Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
             </p>
             <div style="font-size: 15px; color: #64748b; margin: 0;">
-              <p style="margin: 0 0 8px 0;">© 2026 SalaryCalculator.my. All rights reserved.</p>
-              <p style="margin: 0;">Data is estimated for reference only</p>
+              <p style="margin: 0 0 8px 0;" data-i18n="_2026_salarycalculatormy_all_rights_rese_2ead1b">© 2026 SalaryCalculator.my. All rights reserved.</p>
+              <p style="margin: 0;" data-i18n="data_is_estimated_for_reference_only_e819d1">Data is estimated for reference only</p>
             </div>
           </div>
 
           <!-- Quick Links -->
           <div class="footer-col footer-col-links">
-            <h4>Quick Links</h4>
-            <a href="/" class="footer-link">Salary Calculator</a>
-            <a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
-            <a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
-            <a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
-            <a href="/annual-leave-calculator" class="footer-link">Annual Leave Calculator</a>
-            <a href="/overtime-pay-calculator" class="footer-link">Overtime Pay Calculator</a>
-            <a href="/blog" class="footer-link">Blog</a>
-            <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+            <h4 data-i18n="quick_links_f0fb2c">Quick Links</h4>
+            <a href="/" class="footer-link" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+            <a href="/socso-perkeso" class="footer-link" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+            <a href="/pcb-income-tax" class="footer-link" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+            <a href="/epf-kwsp" class="footer-link" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
+            <a href="/annual-leave-calculator" class="footer-link" data-i18n="annual_leave_calculator_2cfd91">Annual Leave Calculator</a>
+            <a href="/overtime-pay-calculator" class="footer-link" data-i18n="overtime_pay_calculator_459bb3">Overtime Pay Calculator</a>
+            <a href="/blog" class="footer-link" data-i18n="blog_be8df1">Blog</a>
+            <a href="/privacy-policy" class="footer-link" data-i18n="privacy_policy_fa2ead">Privacy Policy</a>
           </div>
         </div>
       </div>
@@ -821,24 +836,24 @@
     <!-- Lead Modal -->
     <div id="emailModal" class="modal-overlay">
       <div class="modal">
-        <span class="modal-close" id="closeModal">&times;</span>
+        <span class="modal-close" id="closeModal">×</span>
 
         <div id="modalFormContent">
-          <h2 id="modalTitle" style="color: #2563eb !important;">Download Report</h2>
-          <p id="modalDescription">
+          <h2 id="modalTitle" style="color: #2563eb !important;" data-i18n="download_report_9b1ef6">Download Report</h2>
+          <p id="modalDescription" data-i18n="enter_your_email_address_to_receive_your_72d9cb">
             Enter your email address to receive your detailed PDF report.
           </p>
           <form id="emailForm">
-            <div class="form-group">
-              <label class="form-label" for="userName">Full Name <span style="color: red">*</span></label>
+            <div class="form-group" data-i18n="full_name_466a99">
+              <label class="form-label" for="userName" data-i18n="full_name__491e5c">Full Name <span style="color: red">*</span></label>
               <input type="text" id="userName" class="form-input" placeholder="Your Name" required="">
             </div>
-            <div class="form-group">
-              <label class="form-label" for="userEmail">Email Address <span style="color: red">*</span></label>
+            <div class="form-group" data-i18n="email_address_1b72a4">
+              <label class="form-label" for="userEmail" data-i18n="email_address__cf919c">Email Address <span style="color: red">*</span></label>
               <input type="email" id="userEmail" class="form-input" placeholder="you@example.com" required="">
             </div>
-            <div class="form-group">
-              <label class="form-label" for="userType">Who are you? <span style="color: red">*</span></label>
+            <div class="form-group" data-i18n="who_are_you_select_an_option_employer_hr_657aa8">
+              <label class="form-label" for="userType" data-i18n="who_are_you__9f4733">Who are you? <span style="color: red">*</span></label>
               <select id="userType" class="form-select" required="">
                 <option value="" disabled="" selected="">Select an option</option>
                 <option value="Employer / HR">Employer / HR</option>
@@ -847,13 +862,13 @@
               </select>
             </div>
 
-            <div class="form-group" id="companyNameGroup" style="display: none">
-              <label class="form-label" for="companyName">Company Name <span style="color: red">*</span></label>
+            <div class="form-group" id="companyNameGroup" style="display: none" data-i18n="company_name_ba75a1">
+              <label class="form-label" for="companyName" data-i18n="company_name__576bf0">Company Name <span style="color: red">*</span></label>
               <input type="text" id="companyName" class="form-input" placeholder="Your Company Name">
             </div>
 
-            <div class="form-group" id="hiringQuestionGroup" style="display: none">
-              <label class="form-label" for="hiringStatus">Hiring Status <span style="color: red">*</span></label>
+            <div class="form-group" id="hiringQuestionGroup" style="display: none" data-i18n="hiring_status_select_status_hiring_now_p_14ce78">
+              <label class="form-label" for="hiringStatus" data-i18n="hiring_status__480dcd">Hiring Status <span style="color: red">*</span></label>
               <select id="hiringStatus" class="form-select">
                 <option value="" disabled="" selected="">Select status</option>
                 <option value="Hiring Now">Hiring Now</option>
@@ -864,11 +879,11 @@
               </select>
             </div>
 
-            <div class="form-group">
-              <label class="form-label" for="userPhone">Contact Number <span class="helper-text">(Optional)</span></label>
+            <div class="form-group" data-i18n="contact_number_optional_5c564a">
+              <label class="form-label" for="userPhone" data-i18n="contact_number_optional_869f92">Contact Number <span class="helper-text">(Optional)</span></label>
               <input type="tel" id="userPhone" class="form-input" placeholder="e.g. +60123456789">
             </div>
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" data-i18n="submit_download_6d76fa">
               Submit &amp; Download
             </button>
           </form>
@@ -878,7 +893,7 @@
           <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
-          <div id="modalFeedback">Thank you! Your report has been downloaded.</div>
+          <div id="modalFeedback" data-i18n="thank_you_your_report_has_been_downloade_4070be">Thank you! Your report has been downloaded.</div>
 
           <div id="mobileActionButtons" style="
               display: none;
@@ -891,20 +906,20 @@
                 text-align: center;
                 text-decoration: none;
                 display: inline-block;
-              ">View File Now</a>
+              " data-i18n="view_file_now_98f768">View File Now</a>
             <p style="
                 font-size: 13px;
                 color: #64748b;
                 text-align: center;
                 margin: 0;
-              " id="mobileFallbackText">
+              " id="mobileFallbackText" data-i18n="if_the_file_didnt_open_automatically_cli_9bcb7a">
               If the file didn't open automatically, click the button above.
             </p>
           </div>
         </div>
       </div>
     </div>
-    </div>
+    
     
 
     
@@ -996,12 +1011,15 @@
         // desktop and mobile highlighting
         const allLinks = document.querySelectorAll('.nav-item, .mobile-nav-item, .dropdown-item, .mobile-submenu-item');
         allLinks.forEach(link => {
-          const href = link.getAttribute('href');
+          let href = link.getAttribute('href');
           if (!href) return;
           
-          if (href === '/' && (normalizedPath === '/index.html' || normalizedPath === '/')) {
+          const isHomeLink = href === '/' || href === '/ms/' || href === '/ms';
+          const isHomePath = normalizedPath === '/index.html' || normalizedPath === '/' || normalizedPath === '/ms/' || normalizedPath === '/ms';
+          
+          if (isHomeLink && isHomePath) {
             link.classList.add('active-nav');
-          } else if (href !== '/' && normalizedPath.includes(href)) {
+          } else if (!isHomeLink && normalizedPath.includes(href)) {
             link.classList.add('active-nav');
             
             // If it's a dropdown item, also highlight the trigger
@@ -1388,8 +1406,7 @@
         };
 
         try {
-          // 1 & 3. Submit to Firebase & Google Sheets
-          let isSuccess = false;
+          // 1. Submit to Firebase (non-blocking in background)
           const payload = {
             timestamp: new Date().toISOString(),
             name: nameValue,
@@ -1402,51 +1419,39 @@
             download_via: "Download Hourly Report"
           };
 
-          try {
-            if (window.db && window.firebaseFirestore) {
-              const { collection, addDoc } = window.firebaseFirestore;
-              await addDoc(collection(window.db, "leads"), leadData);
-              console.log("Recorded to Firestore leads collection.");
-            }
-            
-            const sheetRes = await fetch("/api/salary-sheet", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(payload),
+          if (window.db && window.firebaseFirestore) {
+            const { collection, addDoc } = window.firebaseFirestore;
+            addDoc(collection(window.db, "leads"), leadData).catch((fErr) => {
+              console.warn("Firestore lead record error:", fErr);
             });
-            
-            if (sheetRes.ok) {
-              isSuccess = true;
-              console.log("Google Sheets record succeeded.");
-            } else {
-              console.error("Google Sheets Webhook error:", await sheetRes.text());
-            }
-          } catch (err) {
-            console.error("Submission failed:", err);
           }
+          
+          // 2. Submit to Google Sheet via server proxy (non-blocking in background)
+          fetch("/api/hourly-sheet", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          }).catch((sErr) => {
+            console.warn("Google Sheets record error:", sErr);
+          });
 
-          // 2. GA4 submit event
+          // GA4 submit event
           sendGtagEvent("click_submit_hourly", {
             calculator_name: "hourly_rate",
             user_type: userType,
             hiring_status: hiringStatus
           });
 
-          // 4. Trigger Download Only if Success
-          if (isSuccess) {
-            triggerDirectDownload();
-          }
+          // 3. Trigger Download Report
+          await triggerDirectDownload();
 
-          // 5. Update UI Success Message
-          await new Promise((resolve) => setTimeout(resolve, 800));
-
+          // 4. Update UI Success Message
           const modalFormContent = document.getElementById('modalFormContent');
           const modalSuccessContent = document.getElementById('modalSuccessContent');
 
           if (modalFormContent && modalSuccessContent) {
             modalFormContent.style.display = "none";
             const emailModal = document.getElementById('emailModal');
-            // if (emailModal) emailModal.style.display = "none"; // Kept visible like overtime modal? Wait, overtime sets modalFormContent none, but also closes modal?
             
             if (userType === "Employer / HR") {
               const hiringModal = document.getElementById("hiringIntentModal");
@@ -1464,17 +1469,11 @@
             }
 
             modalSuccessContent.style.display = "block";
-            
-            const mobileActionButtons = document.getElementById("mobileActionButtons");
-            const mobileFallbackText = document.getElementById("mobileFallbackText");
-            if (mobileActionButtons) mobileActionButtons.style.display = "none";
-            if (mobileFallbackText) mobileFallbackText.style.display = "none";
           }
 
         } catch (err) {
           console.error("Critical submission error handled:", err);
-          alert("An error occurred during submission, but your report is still being generated. Please wait.");
-          triggerDirectDownload();
+          alert(err.message || "An error occurred during submission. Please try again.");
         } finally {
           if (submitBtn) {
             submitBtn.disabled = false;

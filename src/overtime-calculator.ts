@@ -2,7 +2,7 @@
 
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebase";
-// import { generatePDFReport } from "./lib/pdf-generator";
+import { generatePDFReport } from "./lib/pdf-generator";
 
 let lastOTCalculation: any = null;
 
@@ -40,9 +40,9 @@ export function calculateOvertime() {
     const hourlyRate = dailyRate / normalHours;
 
     let multiplier = 1.5;
-    if (overtimeType === "Rest Day") {
+    if (overtimeType === "Rest Day" || overtimeType === "Hari Rehat") {
       multiplier = 2.0;
-    } else if (overtimeType === "Public Holiday") {
+    } else if (overtimeType === "Public Holiday" || overtimeType === "Cuti Kelepasan Am" || overtimeType === "Cuti Umum") {
       multiplier = 3.0;
     }
 
@@ -317,24 +317,19 @@ function initOvertimeCalculator() {
           dbPayload.grossPay = lastOTCalculation.estimatedGrossPay;
         }
 
-        try {
-          await addDoc(collection(db, "leads"), dbPayload);
-        } catch (fErr) {
-          console.error("Firestore leads error:", fErr);
-        }
+        // 1. Store lead in Firestore (non-blocking in background)
+        addDoc(collection(db, "leads"), dbPayload).catch((fErr) => {
+          console.warn("Firestore leads record error:", fErr);
+        });
 
-        try {
-          const sheetRes = await fetch("/api/salary-sheet", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(sheetPayload),
-          });
-          if (!sheetRes.ok) {
-            console.error("Google Sheets Webhook error:", await sheetRes.text());
-          }
-        } catch (sErr) {
-          console.error("Google Sheets request error:", sErr);
-        }
+        // 2. Submit to Google Sheet via server proxy (non-blocking in background)
+        fetch("/api/overtime-sheet", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sheetPayload),
+        }).catch((sErr) => {
+          console.warn("Google Sheets record error:", sErr);
+        });
 
         if (typeof (window as any).gtag === "function") {
           (window as any).gtag("event", "submit_lead_overtime", {
@@ -355,8 +350,8 @@ function initOvertimeCalculator() {
           estimatedGrossPay: 0
         };
 
-        import("./lib/pdf-generator").then(({ generatePDFReport }) => {
-          generatePDFReport({
+        // 3. Generate & Download PDF Report
+        await generatePDFReport({
           title: "Overtime Pay Report",
           fileName: "Overtime_Report",
           data: [
@@ -370,7 +365,6 @@ function initOvertimeCalculator() {
             { label: "Total Overtime Pay", value: `RM ${calc.otPay.toFixed(2)}` },
             { label: "Estimated Total Gross Pay", value: `RM ${calc.estimatedGrossPay.toFixed(2)}` }
           ]
-        });
         });
 
         if (modalFormContent) modalFormContent.style.display = "none";
@@ -388,8 +382,15 @@ function initOvertimeCalculator() {
             (window as any)._currentLeadType = "Overtime Calculator";
           }
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error("Critical submission error handled:", err);
+        if (modalFeedback) {
+          modalFeedback.textContent = err.message || "Failed to generate report. Please try again.";
+          modalFeedback.style.color = "#dc2626";
+          modalFeedback.style.display = "block";
+        } else {
+          alert("Failed to generate report. Please try again.");
+        }
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;

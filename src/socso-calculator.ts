@@ -2,7 +2,7 @@
 
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebase";
-// import { generatePDFReport } from "./lib/pdf-generator";
+import { generatePDFReport } from "./lib/pdf-generator";
 
 let lastSocsoCalculation: any = null;
 
@@ -72,6 +72,39 @@ function getSocsoRates(salary: number, age: string, nationality = "malaysian") {
   };
 }
 
+export function getLindung24JamRate(salary: number): number {
+  if (!salary || salary <= 0) return 0;
+  const capped = Math.min(salary, 6000);
+  let bracketIndex = 0;
+
+  if (capped <= 30) bracketIndex = 1;
+  else if (capped <= 50) bracketIndex = 2;
+  else if (capped <= 70) bracketIndex = 3;
+  else if (capped <= 100) bracketIndex = 4;
+  else if (capped <= 140) bracketIndex = 5;
+  else if (capped <= 200) bracketIndex = 6;
+  else if (salary > 6000) bracketIndex = 65;
+  else {
+    bracketIndex = Math.floor((capped - 200.01) / 100) + 7;
+  }
+
+  const lindung_table = [
+    0, 0.15, 0.30, 0.45, 0.65, 0.90, 1.30, 1.90, 2.65, 3.40, 4.15, 4.90,
+    5.65, 6.40, 7.15, 7.90, 8.65, 9.40, 10.15, 10.90, 11.65, 12.40,
+    13.15, 13.90, 14.65, 15.40, 16.15, 16.90, 17.65, 18.40, 19.15,
+    19.90, 20.65, 21.40, 22.15, 22.90, 23.65, 24.40, 25.15, 25.90,
+    26.65, 27.40, 28.15, 28.90, 29.65, 30.40, 31.15, 31.90, 32.65,
+    33.40, 34.15, 34.90, 35.65, 36.40, 37.15, 37.90, 38.65, 39.40,
+    40.15, 40.90, 41.65, 42.40, 43.15, 43.90, 44.65, 44.65,
+  ];
+
+  return lindung_table[bracketIndex] !== undefined
+    ? lindung_table[bracketIndex]
+    : Number((capped * 0.0075).toFixed(2));
+}
+
+(window as any).getLindung24JamRate = getLindung24JamRate;
+
 export function calculateSocsoOnly() {
   try {
     if (typeof (window as any).gtag === "function") {
@@ -96,6 +129,11 @@ export function calculateSocsoOnly() {
     const socsoEmployer = socsoRates.er;
     const socsoEmployee = socsoRates.ee;
 
+    const lindungCheckbox = document.getElementById("lindungCheckbox") as HTMLInputElement | null;
+    const isLindungIncluded = nationality === "foreigner" || (lindungCheckbox ? lindungCheckbox.checked : false);
+    const lindungContribution = isLindungIncluded ? getLindung24JamRate(salary) : 0;
+    const totalContribution = Number((socsoEmployer + socsoEmployee + lindungContribution).toFixed(2));
+
     const socsoResultsContent = document.getElementById("socsoResultsContent");
     const socsoPlaceholder = document.getElementById("socsoPlaceholder");
 
@@ -114,8 +152,11 @@ export function calculateSocsoOnly() {
     const resEmpr = document.getElementById("socsoEmployerCardVal");
     if (resEmpr) resEmpr.textContent = "RM " + socsoEmployer.toFixed(2);
 
+    const resLindung = document.getElementById("lindungCardVal");
+    if (resLindung) resLindung.textContent = "RM " + lindungContribution.toFixed(2);
+
     const resTotal = document.getElementById("socsoTotalCardVal");
-    if (resTotal) resTotal.textContent = "RM " + socsoRates.total.toFixed(2);
+    if (resTotal) resTotal.textContent = "RM " + totalContribution.toFixed(2);
 
     const resAnnualEmp = document.getElementById("socsoAnnualEmployeeCardVal");
     if (resAnnualEmp) resAnnualEmp.textContent = "RM " + (socsoEmployee * 12).toFixed(2);
@@ -129,7 +170,8 @@ export function calculateSocsoOnly() {
       nationality,
       socsoEmployee,
       socsoEmployer,
-      totalSocso: socsoRates.total
+      lindungContribution,
+      totalSocso: totalContribution,
     };
   } catch (err) {
     console.error("SOCSO calculation error:", err);
@@ -304,24 +346,19 @@ function initSocsoCalculator() {
           dbPayload.socsoTotal = lastSocsoCalculation.totalSocso;
         }
 
-        try {
-          await addDoc(collection(db, "leads"), dbPayload);
-        } catch (fErr) {
-          console.error("Firestore leads error:", fErr);
-        }
+        // 1. Store lead in Firestore (non-blocking in background)
+        addDoc(collection(db, "leads"), dbPayload).catch((fErr) => {
+          console.warn("Firestore leads record error:", fErr);
+        });
 
-        try {
-          const sheetRes = await fetch("/api/socso-sheet", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(sheetPayload),
-          });
-          if (!sheetRes.ok) {
-            console.error("Google Sheets Webhook error:", await sheetRes.text());
-          }
-        } catch (sErr) {
-          console.error("Google Sheets request error:", sErr);
-        }
+        // 2. Submit to Google Sheet via server proxy (non-blocking in background)
+        fetch("/api/socso-sheet", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sheetPayload),
+        }).catch((sErr) => {
+          console.warn("Google Sheets record error:", sErr);
+        });
 
         if (typeof (window as any).gtag === "function") {
           (window as any).gtag("event", "submit_lead_socso", {
@@ -338,8 +375,8 @@ function initSocsoCalculator() {
           totalSocso: 0
         };
 
-        import("./lib/pdf-generator").then(({ generatePDFReport }) => {
-          generatePDFReport({
+        // 3. Generate & Download PDF Report
+        await generatePDFReport({
           title: "SOCSO Contribution Report",
           fileName: "SOCSO_Report",
           data: [
@@ -350,7 +387,6 @@ function initSocsoCalculator() {
             { label: "Employer SOCSO Contribution", value: `RM ${calc.socsoEmployer.toFixed(2)}` },
             { label: "Total Combined SOCSO Contribution", value: `RM ${calc.totalSocso.toFixed(2)}` }
           ]
-        });
         });
 
         if (modalFormContent) modalFormContent.style.display = "none";
@@ -368,8 +404,15 @@ function initSocsoCalculator() {
             (window as any)._currentLeadType = "SOCSO Calculator";
           }
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error("Critical submission error handled:", err);
+        if (modalFeedback) {
+          modalFeedback.textContent = err.message || "Failed to generate report. Please try again.";
+          modalFeedback.style.color = "#dc2626";
+          modalFeedback.style.display = "block";
+        } else {
+          alert("Failed to generate report. Please try again.");
+        }
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;

@@ -1,6 +1,6 @@
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebase";
-// import { generatePDFReport } from "./lib/pdf-generator";
+import { generatePDFReport } from "./lib/pdf-generator";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("leaveForm") as HTMLFormElement;
@@ -520,22 +520,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (phoneInput?.value)
           (dbPayload as any).phoneNumber = phoneInput.value;
 
-        let isSuccess = false;
-        try {
-          await addDoc(collection(db, "leads"), dbPayload);
-          const sheetRes = await fetch("/api/salary-sheet", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(sheetPayload),
-          });
-          if (sheetRes.ok) {
-            isSuccess = true;
-          } else {
-            console.error("Google Sheets Webhook error:", await sheetRes.text());
-          }
-        } catch (err) {
-          console.error("Submission error:", err);
-        }
+        // 1. Store lead in Firestore (non-blocking in background)
+        addDoc(collection(db, "leads"), dbPayload).catch((fErr) => {
+          console.warn("Firestore leads record error:", fErr);
+        });
+
+        // 2. Submit to Google Sheet via server proxy (non-blocking in background)
+        fetch("/api/annual-leave-sheet", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sheetPayload),
+        }).catch((sErr) => {
+          console.warn("Google Sheets record error:", sErr);
+        });
 
         if (typeof (window as any).gtag === "function") {
           (window as any).gtag("event", "submit_lead_leave", {
@@ -543,9 +540,8 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         }
 
-        if (isSuccess && lastCalculation) {
-          import("./lib/pdf-generator").then(({ generatePDFReport }) => {
-          generatePDFReport({
+        if (lastCalculation) {
+          await generatePDFReport({
             title: "Annual Leave Report",
             fileName: "Annual_Leave_Report",
             data: [
@@ -573,7 +569,6 @@ document.addEventListener("DOMContentLoaded", () => {
               },
             ],
           });
-        });
         }
 
         const modalFormContent = document.getElementById("modalFormContent");
@@ -594,8 +589,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           }
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error("Submission error:", err);
+        alert(err.message || "An error occurred while generating the report. Please try again.");
       } finally {
         if (submitBtn) {
           submitBtn.textContent = originalText;

@@ -119,7 +119,6 @@ export default async function handler(req: any, res: any) {
         allPosts = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
       } catch (err) {
         console.warn(`[FIRESTORE WARNING] orderBy query failed, trying fallback un-ordered query:`, err);
-        // Fallback query without orderBy if indexing issue or first run
         try {
           const postsRef = collection(db, COLL);
           const q = query(postsRef, where("status", "==", "published"));
@@ -186,14 +185,18 @@ export default async function handler(req: any, res: any) {
     }
 
     // 4. Populate SEO category metadata
+    const canonicalUrl = category && categoryMeta[category]
+      ? `https://salarycalculator.my/blog/category/${category}`
+      : "https://salarycalculator.my/blog";
+
     if (category && categoryMeta[category]) {
       const meta = categoryMeta[category];
       $('title').text(meta.title);
       $('meta[name="description"]').attr('content', meta.desc);
-      $('link[rel="canonical"]').attr('href', `https://salarycalculator.my/blog/category/${category}`);
-    } else {
-      $('link[rel="canonical"]').attr('href', "https://salarycalculator.my/blog");
     }
+    
+    $('link[rel="canonical"]').attr('href', canonicalUrl);
+    $('link[rel="alternate"]').remove(); // No hreflang for blog pages
 
     // 5. Render posts
     let renderedHtml = "";
@@ -216,6 +219,12 @@ export default async function handler(req: any, res: any) {
       }
     }
     $('#articlesContainer').html(renderedHtml);
+
+    // 6. Language Switcher (EN -> /blog, BM -> /ms/)
+    $('.lang-en').attr('href', "/blog").css('color', 'var(--primary-color)').css('font-weight', '600');
+    $('.lang-ms').attr('href', "/ms/").css('color', 'var(--text-muted)').css('font-weight', '400');
+    $('html').attr('lang', 'en');
+
 
     // 6. Prepend SSR completed script to prevent client-side double load
     $('head').prepend('<script>window.__SSR_COMPLETE = true;</script>');

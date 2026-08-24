@@ -1,3 +1,4 @@
+import * as cheerio from "cheerio";
 import express from "express";
 import { createServer as createViteServer } from "vite";
 import path from "path";
@@ -9,6 +10,243 @@ import { initializeApp } from "firebase/app";
 import { initializeFirestore, collection, query, where, getDocs } from "firebase/firestore";
 import blogPostHandler from "./api/blog-post";
 import blogHandler from "./api/blog";
+import { ROUTE_MAP, REVERSE_ROUTE_MAP, getEnRoute, getMsRoute } from "./src/lib/route-map";
+import { FULL_TEXT_MAP_MS } from "./src/lib/translations-ms";
+
+function transformPage($: cheerio.CheerioAPI, enRoute: string, isMsRoute: boolean) {
+  const msRoute = getMsRoute(enRoute);
+
+  if (isMsRoute) {
+    // Language Swap
+    $('html').attr('lang', 'ms');
+
+    // Load locales
+    let msJson: any = {};
+    try {
+      const localesPath = path.join(process.cwd(), 'locales/ms.json');
+      if (fs.existsSync(localesPath)) {
+        msJson = JSON.parse(fs.readFileSync(localesPath, 'utf8'));
+      }
+    } catch (e) {
+      console.error("[SERVER] Error loading ms.json:", e);
+    }
+
+    // 1. Translate elements with data-i18n
+    $('[data-i18n]').each((_, el) => {
+      const key = $(el).attr('data-i18n');
+      if (key && msJson[key]) {
+        $(el).html(msJson[key]);
+      }
+    });
+
+    // 2. Comprehensive translation for all text elements & breadcrumbs
+    $('option, label, h1, h2, h3, h4, h5, h6, th, td, button, p, span, a, div, summary, li, strong, em, b').each((_, el) => {
+      if ($(el).children().length === 0) {
+        const text = $(el).text().trim();
+        if (FULL_TEXT_MAP_MS[text]) {
+          $(el).text(FULL_TEXT_MAP_MS[text]);
+        } else if (text === 'Home') {
+          $(el).text('Laman Utama');
+        } else if (text === 'Free Tools') {
+          $(el).text('Kalkulator Percuma');
+        } else if (text === 'Blog') {
+          $(el).text('Blog');
+        } else if (text === 'Privacy Policy') {
+          $(el).text('Dasar Privasi');
+        } else if (text === 'Try Our Other Free Calculators') {
+          $(el).text('Cuba Kalkulator Percuma Kami Yang Lain');
+        } else if (text === 'Explore More Articles') {
+          $(el).text('Terokai Artikel Terkini');
+        } else if (text === 'Download Report') {
+          $(el).text('Muat Turun Laporan');
+        }
+      }
+    });
+
+    // Translate Breadcrumbs specifically
+    $('.breadcrumb, .breadcrumbs, nav[aria-label="breadcrumb"]').find('a, span').each((_, el) => {
+      const text = $(el).text().trim();
+      if (text === 'Home') $(el).text('Laman Utama');
+      if (text === 'Free Tools') $(el).text('Kalkulator Percuma');
+      if (FULL_TEXT_MAP_MS[text]) $(el).text(FULL_TEXT_MAP_MS[text]);
+    });
+
+    // 3. Input placeholders
+    $('input[placeholder], textarea[placeholder]').each((_, el) => {
+      const ph = $(el).attr('placeholder');
+      if (ph) {
+        let newPh = ph;
+        if (newPh.includes('e.g.')) {
+          newPh = newPh.replace('e.g.', 'cth.');
+        }
+        if (newPh === 'Your Name') newPh = 'Nama Anda';
+        if (newPh === 'Your Company Name') newPh = 'Nama Syarikat Anda';
+        if (newPh === 'Search articles...') newPh = 'Cari artikel...';
+        if (newPh === 'Type keyword and press Enter...') newPh = 'Taip kata kunci dan tekan Enter...';
+        if (newPh !== ph) {
+           $(el).attr('placeholder', newPh);
+        }
+      }
+    });
+
+    // Canonical & Hreflang
+    const canonicalUrl = 'https://salarycalculator.my' + msRoute;
+    const enUrl = 'https://salarycalculator.my' + enRoute;
+
+    $('link[rel="canonical"]').attr('href', canonicalUrl);
+    $('link[rel="alternate"]').remove();
+    $('head').append(`<link rel="alternate" hreflang="en" href="${enUrl}" />`);
+    $('head').append(`<link rel="alternate" hreflang="ms" href="${canonicalUrl}" />`);
+    $('head').append(`<link rel="alternate" hreflang="x-default" href="${enUrl}" />`);
+
+        // Meta updates
+    const currentTitle = $('title').text();
+    let desc = $('meta[name="description"]').attr('content') || '';
+    let ogTitle = $('meta[property="og:title"]').attr('content') || '';
+    let ogDesc = $('meta[property="og:description"]').attr('content') || '';
+
+    // Custom MS SEO map
+    const SEO_MS: Record<string, { title: string; desc: string; h1: string }> = {
+      "/ms/": {
+        title: "Kalkulator Gaji Malaysia 2026: Kira Gaji Bersih Anda",
+        desc: "Kira gaji bersih anda dengan tepat. Kalkulator gaji Malaysia 2026 percuma kami menolak caruman EPF, SOCSO, EIS dan PCB secara automatik mengikut akta terkini.",
+        h1: "Kalkulator Gaji Malaysia"
+      },
+      "/ms/kalkulator-epf": {
+        title: "Kalkulator EPF Malaysia 2026",
+        desc: "Kira caruman EPF (KWSP) bahagian pekerja dan majikan dengan mudah. Gunakan kalkulator EPF Malaysia 2026 yang percuma dan pantas ini.",
+        h1: "Kalkulator EPF Malaysia"
+      },
+      "/ms/kalkulator-socso": {
+        title: "Kalkulator SOCSO Malaysia 2026",
+        desc: "Semak jadual caruman PERKESO (SOCSO) dan SIP (EIS) 2026. Kira kadar potongan majikan dan pekerja dengan tepat menggunakan kalkulator SOCSO ini.",
+        h1: "Kalkulator SOCSO Malaysia"
+      },
+      "/ms/kalkulator-pcb": {
+        title: "Kalkulator PCB Malaysia 2026",
+        desc: "Kira Potongan Cukai Berjadual (PCB) bulanan anda. Kalkulator cukai pendapatan LHDN ini dikemaskini mengikut struktur cukai rasmi Malaysia 2026.",
+        h1: "Kalkulator PCB Malaysia"
+      },
+      "/ms/kalkulator-cuti-tahunan": {
+        title: "Kalkulator Cuti Tahunan Malaysia 2026",
+        desc: "Kira kelayakan cuti tahunan pro-rata berdasarkan Akta Kerja 1955 Malaysia. Ketahui hak cuti berbayar mengikut tempoh perkhidmatan anda.",
+        h1: "Kalkulator Cuti Tahunan Malaysia"
+      },
+      "/ms/kalkulator-overtime": {
+        title: "Kalkulator Overtime Malaysia 2026",
+        desc: "Kira bayaran kerja lebih masa (OT) dengan betul. Kalkulator OT Malaysia ini membantu anda mengira kadar bayaran untuk hari biasa, cuti rehat, dan cuti am.",
+        h1: "Kalkulator Overtime Malaysia"
+      },
+      "/ms/kadar-gaji-sejam": {
+        title: "Kalkulator Kadar Gaji Sejam Malaysia 2026",
+        desc: "Tukar gaji bulanan kepada kadar sejam, harian, atau pro-rata mengikut piawaian undang-undang Malaysia. Sesuai untuk pekerja separuh masa atau pengiraan OT.",
+        h1: "Kalkulator Kadar Gaji Sejam Malaysia"
+      },
+      "/ms/kalkulator-gaji-minimum": {
+        title: "Kalkulator Gaji Minimum Malaysia 2026",
+        desc: "Semak jika gaji anda menepati standard Gaji Minimum terkini di Malaysia. Pastikan pematuhan undang-undang buruh untuk majikan dan pekerja.",
+        h1: "Kalkulator Gaji Minimum Malaysia"
+      },
+      "/ms/penjana-payslip": {
+        title: "Penjana Payslip Malaysia",
+        desc: "Jana slip gaji profesional secara percuma yang lengkap dengan pengiraan EPF, SOCSO, EIS dan PCB. Sesuai untuk PKS dan majikan di Malaysia.",
+        h1: "Penjana Payslip Malaysia"
+      },
+      "/ms/dasar-privasi": {
+        title: "Dasar Privasi",
+        desc: "Baca dasar privasi kami mengenai perlindungan data peribadi anda di SalaryCalculator.my. Privasi dan kerahsiaan anda adalah keutamaan kami.",
+        h1: "Dasar Privasi"
+      }
+    };
+
+    const msRouteNormalized = msRoute.replace(/\/$/, '') || '/ms/';
+    const seoData = SEO_MS[msRouteNormalized];
+
+    if (seoData) {
+      $('title').text(seoData.title);
+      $('meta[name="description"]').attr('content', seoData.desc);
+      $('meta[property="og:title"]').attr('content', seoData.title);
+      $('meta[property="og:description"]').attr('content', seoData.desc);
+      $('meta[property="og:url"]').attr('content', canonicalUrl);
+      
+      // Look for the main h1 and update it if exists
+      const h1El = $('h1').first();
+      if (h1El.length > 0) {
+        h1El.text(seoData.h1);
+        // remove data-i18n attribute so client side js doesn't overwrite it incorrectly
+        h1El.removeAttr('data-i18n');
+      }
+    } else {
+      const translateMeta = (text: string) => {
+        if (!text) return text;
+        let res = text;
+        if (res.includes('Salary Calculator')) res = res.replace(/Salary Calculator/g, 'Kalkulator Gaji');
+        if (res.includes('EPF Calculator')) res = res.replace(/EPF Calculator/g, 'Kalkulator EPF (KWSP)');
+        if (res.includes('SOCSO & EIS Calculator')) res = res.replace(/SOCSO & EIS Calculator/g, 'Kalkulator SOCSO & EIS');
+        else if (res.includes('SOCSO Calculator')) res = res.replace(/SOCSO Calculator/g, 'Kalkulator SOCSO');
+        if (res.includes('PCB Income Tax Calculator')) res = res.replace(/PCB Income Tax Calculator/g, 'Kalkulator PCB & Cukai Pendapatan');
+        else if (res.includes('PCB Calculator')) res = res.replace(/PCB Calculator/g, 'Kalkulator PCB');
+        if (res.includes('Annual Leave Calculator')) res = res.replace(/Annual Leave Calculator/g, 'Kalkulator Cuti Tahunan');
+        if (res.includes('Overtime Pay Calculator')) res = res.replace(/Overtime Pay Calculator/g, 'Kalkulator Overtime (OT)');
+        else if (res.includes('Overtime Calculator')) res = res.replace(/Overtime Calculator/g, 'Kalkulator Overtime');
+        if (res.includes('Hourly Rate Calculator')) res = res.replace(/Hourly Rate Calculator/g, 'Kalkulator Kadar Gaji Sejam');
+        if (res.includes('Minimum Wage Calculator')) res = res.replace(/Minimum Wage Calculator/g, 'Kalkulator Gaji Minimum');
+        if (res.includes('Payslip Generator')) res = res.replace(/Payslip Generator/g, 'Penjana Slip Gaji');
+        if (res.includes('Privacy Policy')) res = res.replace(/Privacy Policy/g, 'Dasar Privasi');
+        res = res.replace(/Calculate your exact take home pay/gi, 'Kira gaji bersih anda');
+        res = res.replace(/Calculate employee and employer/gi, 'Kira caruman pekerja dan majikan');
+        res = res.replace(/Calculate /g, 'Kira ');
+        res = res.replace(/ for FREE/g, ' secara PERCUMA');
+        res = res.replace(/Free, instant and accurate HR calculation tools for Malaysia/gi, 'Kalkulator HR percuma, pantas dan tepat untuk Malaysia');
+        return res;
+      };
+      $('title').text(translateMeta(currentTitle));
+      if (desc) $('meta[name="description"]').attr('content', translateMeta(desc));
+      if (ogTitle) $('meta[property="og:title"]').attr('content', translateMeta(ogTitle));
+      if (ogDesc) $('meta[property="og:description"]').attr('content', translateMeta(ogDesc));
+      $('meta[property="og:url"]').attr('content', canonicalUrl);
+    }
+    // Rewrite internal links
+    $('a').each((_, el) => {
+      const href = $(el).attr('href');
+      if (href) {
+        const cleanHref = href.split('#')[0].split('?')[0];
+        const anchor = href.slice(cleanHref.length);
+        if (ROUTE_MAP[cleanHref]) {
+          $(el).attr('href', ROUTE_MAP[cleanHref] + anchor);
+        }
+      }
+    });
+
+    // Update Language Switcher
+    $('.lang-en').attr('href', enRoute);
+    $('.lang-ms').attr('href', msRoute);
+    $('.lang-ms').css('color', 'var(--primary-color)').css('font-weight', '600');
+    $('.lang-en').css('color', 'var(--text-muted)').css('font-weight', '400');
+  } else {
+    // EN route
+    const isBlog = enRoute.startsWith('/blog');
+    const canonicalUrl = 'https://salarycalculator.my' + enRoute;
+    const msUrl = 'https://salarycalculator.my' + msRoute;
+
+    $('link[rel="canonical"]').attr('href', canonicalUrl);
+    $('link[rel="alternate"]').remove();
+
+    if (!isBlog) {
+      $('head').append(`<link rel="alternate" hreflang="ms" href="${msUrl}" />`);
+      $('head').append(`<link rel="alternate" hreflang="en" href="${canonicalUrl}" />`);
+      $('head').append(`<link rel="alternate" hreflang="x-default" href="${canonicalUrl}" />`);
+    }
+
+    $('.lang-en').attr('href', enRoute);
+    $('.lang-ms').attr('href', msRoute);
+    $('.lang-en').css('color', 'var(--primary-color)').css('font-weight', '600');
+    $('.lang-ms').css('color', 'var(--text-muted)').css('font-weight', '400');
+  }
+}
+
+
+
 
 dotenv.config();
 
@@ -94,7 +332,7 @@ function getResend() {
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = parseInt(process.env.PORT || "3000", 10);
 
   const firebaseConfig = {
     apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",
@@ -110,6 +348,11 @@ async function startServer() {
   const db = initializeFirestore(fbApp, { experimentalForceLongPolling: true }, DB_ID);
 
   app.use(express.json());
+
+  // Platform health check endpoint
+  app.get("/api/health", (req, res) => {
+    res.json({ status: "ok", timestamp: new Date().toISOString() });
+  });
 
   // Helper function to ensure single shared Blog Admin account is synced
   async function syncAdminAccount() {
@@ -197,13 +440,14 @@ async function startServer() {
     return blogHandler(req as any, res as any);
   });
 
+
+
   app.get("/blog/category/:category", (req, res) => {
     req.query.category = req.params.category;
     return blogHandler(req as any, res as any);
   });
 
   app.get("/api/blog-post", (req, res) => {
-    // Wrap to match expected signatures if needed, but Express req/res works for the subset used.
     return blogPostHandler(req as any, res as any);
   });
 
@@ -217,7 +461,7 @@ async function startServer() {
 
   app.get("/:slug", (req, res, next) => {
     const slug = req.params.slug;
-    const reserved = ["hourly-rate", "hourly-rate-calculator", "blog", "epf-kwsp", "socso-perkeso", "pcb-income-tax", "annual-leave-calculator", "privacy-policy", "admin", "blog-admin", "mincal", "payslip-generator", "report", "overtime-pay-calculator", "epfreport", "socsoreport", "payslip", "api"];
+    const reserved = ["ms", "hourly-rate", "hourly-rate-calculator", "blog", "epf-kwsp", "socso-perkeso", "pcb-income-tax", "annual-leave-calculator", "privacy-policy", "admin", "blog-admin", "mincal", "payslip-generator", "report", "overtime-pay-calculator", "epfreport", "socsoreport", "payslip", "api"];
     if (slug && !slug.includes(".") && !reserved.includes(slug)) {
       req.query.slug = slug;
       return blogPostHandler(req as any, res as any);
@@ -226,13 +470,16 @@ async function startServer() {
   });
 
   // Expose dynamic sitemap index
-  app.get(["/api/sitemap", "/sitemap.xml"], async (req, res) => {
+  app.get(["/api/sitemap", "/sitemap.xml", "/sitemap-blog.xml"], async (req, res) => {
     try {
       const postsRef = collection(db, COLL);
       const q = query(postsRef, where("status", "==", "published"));
       const querySnapshot = await getDocs(q);
 
       let maxArticleLastmod = "";
+      const postsList = [];
+      const categoriesSet = new Set();
+      const categoryLastMods = new Map();
 
       querySnapshot.forEach((doc) => {
         const data = doc.data();
@@ -254,14 +501,31 @@ async function startServer() {
             maxArticleLastmod = lastmod;
           }
         }
+
+        if (data.slug) {
+          postsList.push({
+            slug: data.slug,
+            lastmod: lastmod || "2026-06-25",
+            translations: data.translations
+          });
+        }
+
+        if (data.category) {
+          categoriesSet.add(data.category);
+          if (lastmod && (!categoryLastMods.get(data.category) || lastmod > categoryLastMods.get(data.category))) {
+            categoryLastMods.set(data.category, lastmod);
+          }
+        }
       });
 
-      const blogLandingLastmod = maxArticleLastmod && maxArticleLastmod > "2026-06-25" 
-        ? maxArticleLastmod 
-        : "2026-06-25";
+      const categories = Array.from(categoriesSet);
+      const blogLandingLastmod = maxArticleLastmod && maxArticleLastmod > "2026-06-25"
+         ? maxArticleLastmod
+         : "2026-06-25";
 
       let pagesLastmod = "2026-07-08";
       try {
+        const path = require('path');
         const filePath = path.join(process.cwd(), "public", "sitemap-pages.xml");
         if (fs.existsSync(filePath)) {
           const content = fs.readFileSync(filePath, "utf8");
@@ -280,124 +544,29 @@ async function startServer() {
         console.error("Error reading sitemap-pages.xml in server.ts:", err);
       }
 
-      let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-      xml += `<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
-      xml += `  <sitemap>\n`;
-      xml += `    <loc>https://salarycalculator.my/sitemap-pages.xml</loc>\n`;
-      xml += `    <lastmod>${pagesLastmod}</lastmod>\n`;
-      xml += `  </sitemap>\n`;
-      xml += `  <sitemap>\n`;
-      xml += `    <loc>https://salarycalculator.my/sitemap-blog.xml</loc>\n`;
-      xml += `    <lastmod>${blogLandingLastmod}</lastmod>\n`;
-      xml += `  </sitemap>\n`;
-      xml += `</sitemapindex>`;
+      let xml = `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>https://salarycalculator.my/sitemap-pages.xml</loc>
+    <lastmod>${pagesLastmod}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>https://salarycalculator.my/sitemap-blog.xml</loc>
+    <lastmod>${blogLandingLastmod}</lastmod>
+  </sitemap>
+</sitemapindex>`;
 
-      res.setHeader("Content-Type", "application/xml");
-      res.status(200).send(xml);
-    } catch (error) {
-      console.error("Error generating sitemap index in server:", error);
-      res.status(500).send("Error generating sitemap index");
-    }
-  });
-
-  // Also expose at /sitemap-blog.xml directly for preview and indexing
-  app.get(["/api/sitemap-blog", "/sitemap-blog.xml"], async (req, res) => {
-    try {
-      const postsRef = collection(db, COLL);
-      const q = query(postsRef, where("status", "==", "published"));
-      const querySnapshot = await getDocs(q);
-
-      const PREDEFINED_CATEGORIES = ["salary", "epf", "socso", "pcb-income-tax", "annual-leave", "overtime", "hourly-rate"];
-      const categories = new Set<string>(PREDEFINED_CATEGORIES);
-      const categoryLastMods = new Map<string, string>();
-      const posts: { slug: string; lastmod: string }[] = [];
-      let maxArticleLastmod = "";
-
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        const slug = data.slug;
-        if (!slug) return;
-        
-        let lastmod = '';
-        if (data.updatedAt && data.updatedAt.toDate) {
-          lastmod = data.updatedAt.toDate().toISOString();
-        } else if (data.publishedAt) {
-          if (typeof data.publishedAt === 'string') {
-            lastmod = new Date(data.publishedAt).toISOString();
-          } else if (data.publishedAt.toDate) {
-            lastmod = data.publishedAt.toDate().toISOString();
-          }
-        } else if (data.updatedAt) {
-          lastmod = new Date(data.updatedAt).toISOString();
+      if (req.path === "/sitemap-blog.xml") {
+        xml = `<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">`;
+        for (const cat of categories) {
+          xml += `  <url>\n    <loc>https://salarycalculator.my/blog/category/${cat}</loc>\n    <lastmod>${categoryLastMods.get(cat) || "2026-06-25"}</lastmod>\n  </url>\n`;
         }
-
-        if (lastmod) {
-          if (!maxArticleLastmod || lastmod > maxArticleLastmod) {
-            maxArticleLastmod = lastmod;
-          }
+        for (const post of postsList) {
+          const enUrl = `https://salarycalculator.my/blog/${post.slug}`;
+          xml += `  <url>\n    <loc>${enUrl}</loc>\n    <lastmod>${post.lastmod}</lastmod>\n  </url>\n`;
         }
-
-        // Collect categories
-        const rawCats = Array.isArray(data.category) ? data.category : [data.category || ''];
-        const articleCats = rawCats.filter(Boolean).map((c: string) => {
-          let catSlug = c.toLowerCase().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
-          if (catSlug === 'perkeso') catSlug = 'socso';
-          return catSlug;
-        });
-
-        articleCats.forEach((catSlug: string) => {
-          categories.add(catSlug);
-          if (lastmod) {
-            const currentMax = categoryLastMods.get(catSlug);
-            if (!currentMax || lastmod > currentMax) {
-              categoryLastMods.set(catSlug, lastmod);
-            }
-          }
-        });
-
-        posts.push({ slug, lastmod });
-      });
-
-      let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
-      xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
-
-      // 1. Blog landing page
-      const blogLandingLastmod = maxArticleLastmod && maxArticleLastmod > "2026-06-25" 
-        ? maxArticleLastmod 
-        : "2026-06-25";
-
-      xml += `  <url>\n`;
-      xml += `    <loc>https://salarycalculator.my/blog</loc>\n`;
-      xml += `    <lastmod>${blogLandingLastmod}</lastmod>\n`;
-      xml += `    <changefreq>weekly</changefreq>\n`;
-      xml += `    <priority>0.8</priority>\n`;
-      xml += `  </url>\n`;
-
-      // 2. Blog category pages
-      const sortedCategories = Array.from(categories).sort();
-      sortedCategories.forEach((catSlug) => {
-        const catLastmod = categoryLastMods.get(catSlug) || blogLandingLastmod;
-        xml += `  <url>\n`;
-        xml += `    <loc>https://salarycalculator.my/blog/category/${catSlug}</loc>\n`;
-        xml += `    <lastmod>${catLastmod}</lastmod>\n`;
-        xml += `    <changefreq>weekly</changefreq>\n`;
-        xml += `    <priority>0.6</priority>\n`;
-        xml += `  </url>\n`;
-      });
-
-      // 3. Published blog articles
-      posts.forEach((post) => {
-        xml += `  <url>\n`;
-        xml += `    <loc>https://salarycalculator.my/blog/${post.slug}</loc>\n`;
-        if (post.lastmod) {
-          xml += `    <lastmod>${post.lastmod}</lastmod>\n`;
-        }
-        xml += `    <changefreq>weekly</changefreq>\n`;
-        xml += `    <priority>0.8</priority>\n`;
-        xml += `  </url>\n`;
-      });
-
-      xml += `</urlset>`;
+        xml += `</urlset>`;
+      }
 
       res.setHeader("Content-Type", "application/xml");
       res.status(200).send(xml);
@@ -406,7 +575,6 @@ async function startServer() {
       res.status(500).send("Error generating sitemap");
     }
   });
-
 
   // API Routes
 
@@ -422,6 +590,49 @@ async function startServer() {
     });
   });
 
+  // Helper to forward payloads to Google Apps Script and verify successful write
+  async function forwardToGoogleAppsScript(scriptUrl: string, payload: any): Promise<{ success: boolean; error?: string }> {
+    if (!scriptUrl) {
+      return { success: false, error: "Google Apps Script URL is not configured" };
+    }
+    try {
+      const appsRes = await fetch(scriptUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const appsText = await appsRes.text();
+      console.log("[Google Apps Script Response]:", appsRes.status, appsText.slice(0, 200));
+
+      if (!appsRes.ok) {
+        return { success: false, error: `Google Apps Script returned HTTP ${appsRes.status}: ${appsText}` };
+      }
+
+      let parsed: any = null;
+      try {
+        parsed = JSON.parse(appsText);
+      } catch {
+        if (appsText.toLowerCase().includes("error") || appsText.toLowerCase().includes("exception")) {
+          return { success: false, error: appsText };
+        }
+        return { success: true };
+      }
+
+      if (parsed) {
+        if (parsed.error) {
+          return { success: false, error: parsed.error };
+        }
+        if (parsed.success === false || parsed.status === "error" || parsed.status === "failed") {
+          return { success: false, error: parsed.message || parsed.error || "Google Sheet write rejected" };
+        }
+      }
+
+      return { success: true };
+    } catch (err: any) {
+      return { success: false, error: err.message || "Failed to communicate with Google Apps Script" };
+    }
+  }
+
   // Server-side proxy for Homepage Salary sheet submission
   app.post("/api/salary-sheet", async (req, res) => {
     try {
@@ -431,7 +642,7 @@ async function startServer() {
       if (!scriptUrl) {
         return res
           .status(500)
-          .json({ error: "GOOGLE_SHEETS_SCRIPT_URL not configured" });
+          .json({ success: false, error: "GOOGLE_SHEETS_SCRIPT_URL not configured" });
       }
 
       // Check if it's from Annual Leave Calculator
@@ -460,12 +671,6 @@ async function startServer() {
         targetScriptUrl =
           process.env.HOURLY_SHEETS_SCRIPT_URL ||
           process.env.GOOGLE_SHEETS_SCRIPT_URL;
-        targetSheetId = "1hourly_dummy_id_replace_later";
-      }
-
-      if (!targetScriptUrl) {
-        console.warn("[API] targetScriptUrl not configured, skipping sheet sync");
-        return res.status(200).json({ success: true, warning: "Script URL not configured" });
       }
 
       const payload = {
@@ -473,26 +678,15 @@ async function startServer() {
         sheetId: targetSheetId,
       };
 
-      try {
-        const appsRes = await fetch(targetScriptUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        });
-        const appsText = await appsRes.text();
-        console.log(
-          "[API] salary-sheet response:",
-          appsRes.status,
-          appsText.slice(0, 100),
-        );
-      } catch (err: any) {
-        console.warn("[API] Optional sheet sync warning:", err.message);
+      const result = await forwardToGoogleAppsScript(targetScriptUrl, payload);
+      if (!result.success) {
+        return res.status(500).json({ success: false, error: result.error || "Failed to write row to Google Sheet" });
       }
 
-      res.status(200).json({ success: true });
+      return res.status(200).json({ success: true });
     } catch (err: any) {
       console.error("[API] salary-sheet error:", err);
-      res.status(200).json({ success: true, warning: err.message });
+      return res.status(500).json({ success: false, error: err.message });
     }
   });
 
@@ -500,19 +694,15 @@ async function startServer() {
   app.post("/api/pcb-sheet", async (req, res) => {
     try {
       console.log("[INCOMING] /api/pcb-sheet payload:", req.body);
-      fs.appendFileSync(
-        "server_logs.txt",
-        "PCB Payload: " + JSON.stringify(req.body) + "\n",
-      );
-
       const scriptUrl =
         process.env.VITE_PCB_SHEETS_SCRIPT_URL ||
+        process.env.PCB_SHEETS_SCRIPT_URL ||
         process.env.GOOGLE_SHEETS_SCRIPT_URL;
 
       const targetSheetId = "1T6QfXmRl-0T2b_dog8_VSXVYCVJj-ifcH4Jf-Uv_dTw"; // PCB Calculator ID
 
       if (!scriptUrl) {
-        return res.status(500).json({ error: "Script URL not configured" });
+        return res.status(500).json({ success: false, error: "PCB script URL not configured" });
       }
 
       const payload = {
@@ -520,22 +710,15 @@ async function startServer() {
         sheetId: targetSheetId,
       };
 
-      const appsRes = await fetch(scriptUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const appsText = await appsRes.text();
-      console.log(
-        "[API] pcb-sheet response:",
-        appsRes.status,
-        appsText.slice(0, 100),
-      );
+      const result = await forwardToGoogleAppsScript(scriptUrl, payload);
+      if (!result.success) {
+        return res.status(500).json({ success: false, error: result.error || "Failed to write row to Google Sheet" });
+      }
 
-      res.status(200).json({ success: true });
+      return res.status(200).json({ success: true });
     } catch (err: any) {
       console.error("[API] pcb-sheet error:", err);
-      res.status(500).json({ error: err.message });
+      return res.status(500).json({ success: false, error: err.message });
     }
   });
 
@@ -549,11 +732,8 @@ async function startServer() {
       const sheetId = "1ZjzvFhb1xA5x1SB8OJgUgkUwlaSnIHrMWeqjte2uw7k"; // EPF Calculator ID
       const sheetName = process.env.EPF_SHEET_NAME || "Sheet1";
 
-      console.log("[v0] /api/epf-sheet called");
-      console.log("[v0] scriptUrl set:", !!scriptUrl);
-
       if (!scriptUrl) {
-        return res.status(500).json({ error: "Script URL not configured" });
+        return res.status(500).json({ success: false, error: "EPF script URL not configured" });
       }
 
       const payload = {
@@ -562,23 +742,15 @@ async function startServer() {
         sheetName,
       };
 
-      console.log(
-        "[v0] Forwarding to Apps Script:",
-        scriptUrl.slice(0, 60) + "...",
-      );
-      const appsRes = await fetch(scriptUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const appsText = await appsRes.text();
-      console.log("[v0] Apps Script response status:", appsRes.status);
-      console.log("[v0] Apps Script response body:", appsText);
+      const result = await forwardToGoogleAppsScript(scriptUrl, payload);
+      if (!result.success) {
+        return res.status(500).json({ success: false, error: result.error || "Failed to write row to Google Sheet" });
+      }
 
-      res.status(200).json({ success: true });
+      return res.status(200).json({ success: true });
     } catch (err: any) {
       console.error("[API] epf-sheet error:", err);
-      res.status(500).json({ error: err.message });
+      return res.status(500).json({ success: false, error: err.message });
     }
   });
 
@@ -591,27 +763,97 @@ async function startServer() {
       const sheetId = "1rUCrHGE6kdfw17iQgtC1K426JdQZWbBZPl-uwTy3CkE"; // SOCSO Calculator ID
 
       if (!scriptUrl) {
-        return res.status(500).json({ error: "Script URL not configured" });
+        return res.status(500).json({ success: false, error: "SOCSO script URL not configured" });
       }
 
       const payload = { ...normalizeSheetPayload(req.body), sheetId };
 
-      const appsRes = await fetch(scriptUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      const appsText = await appsRes.text();
-      console.log(
-        "[API] socso-sheet response:",
-        appsRes.status,
-        appsText.slice(0, 100),
-      );
+      const result = await forwardToGoogleAppsScript(scriptUrl, payload);
+      if (!result.success) {
+        return res.status(500).json({ success: false, error: result.error || "Failed to write row to Google Sheet" });
+      }
 
-      res.status(200).json({ success: true });
+      return res.status(200).json({ success: true });
     } catch (err: any) {
       console.error("[API] socso-sheet error:", err);
-      res.status(500).json({ error: err.message });
+      return res.status(500).json({ success: false, error: err.message });
+    }
+  });
+
+  // Server-side proxy for Annual Leave sheet submission
+  app.post("/api/annual-leave-sheet", async (req, res) => {
+    try {
+      const scriptUrl =
+        process.env.ANNUAL_LEAVE_SHEETS_SCRIPT_URL ||
+        process.env.GOOGLE_SHEETS_SCRIPT_URL;
+      const sheetId = "14qNhk_A8THVB_eWsUi3Hyve7Sw6NLJRY-oF4HIqpDwA";
+
+      if (!scriptUrl) {
+        return res.status(500).json({ success: false, error: "Annual Leave script URL not configured" });
+      }
+
+      const payload = { ...normalizeSheetPayload(req.body), sheetId };
+
+      const result = await forwardToGoogleAppsScript(scriptUrl, payload);
+      if (!result.success) {
+        return res.status(500).json({ success: false, error: result.error || "Failed to write row to Google Sheet" });
+      }
+
+      return res.status(200).json({ success: true });
+    } catch (err: any) {
+      console.error("[API] annual-leave-sheet error:", err);
+      return res.status(500).json({ success: false, error: err.message });
+    }
+  });
+
+  // Server-side proxy for Overtime sheet submission
+  app.post("/api/overtime-sheet", async (req, res) => {
+    try {
+      const scriptUrl =
+        process.env.VITE_OVERTIME_SHEETS_SCRIPT_URL ||
+        process.env.OVERTIME_SHEETS_SCRIPT_URL ||
+        process.env.GOOGLE_SHEETS_SCRIPT_URL;
+
+      if (!scriptUrl) {
+        return res.status(500).json({ success: false, error: "Overtime script URL not configured" });
+      }
+
+      const payload = normalizeSheetPayload(req.body);
+
+      const result = await forwardToGoogleAppsScript(scriptUrl, payload);
+      if (!result.success) {
+        return res.status(500).json({ success: false, error: result.error || "Failed to write row to Google Sheet" });
+      }
+
+      return res.status(200).json({ success: true });
+    } catch (err: any) {
+      console.error("[API] overtime-sheet error:", err);
+      return res.status(500).json({ success: false, error: err.message });
+    }
+  });
+
+  // Server-side proxy for Hourly Rate sheet submission
+  app.post("/api/hourly-sheet", async (req, res) => {
+    try {
+      const scriptUrl =
+        process.env.HOURLY_SHEETS_SCRIPT_URL ||
+        process.env.GOOGLE_SHEETS_SCRIPT_URL;
+
+      if (!scriptUrl) {
+        return res.status(500).json({ success: false, error: "Hourly Rate script URL not configured" });
+      }
+
+      const payload = normalizeSheetPayload(req.body);
+
+      const result = await forwardToGoogleAppsScript(scriptUrl, payload);
+      if (!result.success) {
+        return res.status(500).json({ success: false, error: result.error || "Failed to write row to Google Sheet" });
+      }
+
+      return res.status(200).json({ success: true });
+    } catch (err: any) {
+      console.error("[API] hourly-sheet error:", err);
+      return res.status(500).json({ success: false, error: err.message });
     }
   });
 
@@ -721,7 +963,7 @@ async function startServer() {
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
-      configFile: path.join(CURRENT_DIRNAME, "vite.config.ts"),
+      configFile: path.join(process.cwd(), "vite.config.ts"),
       server: {
         middlewareMode: true,
         hmr: false,
@@ -733,17 +975,14 @@ async function startServer() {
       },
       appType: "custom",
     });
+    app.use(express.static(path.join(process.cwd(), 'public')));
+
     app.use((req, res, next) => {
       if (req.path.endsWith('.xml')) {
         res.setHeader('Content-Type', 'application/xml');
       }
       next();
     });
-
-    app.use(vite.middlewares);
-
-    // Serve HTML pages for MPA routes — Vite middleware mode does NOT auto-serve HTML
-
 
     app.use((req, res, next) => {
       if (req.path === '/index.html' || req.path === '/index') {
@@ -752,29 +991,52 @@ async function startServer() {
       next();
     });
     
+    // Custom HTML GET/HEAD handler MUST run BEFORE vite.middlewares to apply transformPage for all pages!
     app.use(async (req, res, next) => {
+      if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+      if (req.path.startsWith('/api/') || (req.path.includes('.') && !req.path.endsWith('.html'))) {
+        return next();
+      }
+
       console.log(
         `[DEBUG] Received request: ${req.method} ${req.url} (originalUrl: ${req.originalUrl}, path: ${req.path})`,
       );
-      const cleanPath = req.path.replace(/\/$/, '') || '/';
-      const htmlFile = htmlPages[cleanPath] || (req.path.endsWith('.html') ? req.path.slice(1) : undefined);
+      const isMsRoute = req.path.startsWith('/ms/') || req.path === '/ms';
+      const enRoute = isMsRoute ? getEnRoute(req.path) : (req.path.replace(/\/$/, '') || '/');
+      
+      if (isMsRoute && enRoute === null) {
+        return res.status(404).send('Not Found');
+      }
+
+      const htmlFile = enRoute ? htmlPages[enRoute] || (req.path.endsWith('.html') ? req.path.slice(1) : undefined) : undefined;
       if (!htmlFile) return next();
 
       try {
-        const filePath = path.join(CURRENT_DIRNAME, htmlFile);
+        const filePath = fs.existsSync(path.join(CURRENT_DIRNAME, htmlFile))
+          ? path.join(CURRENT_DIRNAME, htmlFile)
+          : path.join(process.cwd(), htmlFile);
+        if (!fs.existsSync(filePath)) return next();
         let html = fs.readFileSync(filePath, "utf-8");
-        html = await vite.transformIndexHtml(req.originalUrl, html);
+        html = await vite.transformIndexHtml("/" + htmlFile, html);
         // Strip @vite/client WebSocket script — it cannot connect through the v0 proxy
         html = html.replace(
           /<script type="module" src="\/@vite\/client"><\/script>\n?/g,
           "",
         );
-        res.setHeader("Content-Type", "text/html");
-        res.end(html);
+        const $ = cheerio.load(html);
+        transformPage($, enRoute, isMsRoute);
+
+        res.status(200).setHeader("Content-Type", "text/html; charset=utf-8");
+        if (req.method === 'HEAD') {
+          return res.end();
+        }
+        return res.send($.html());
       } catch (e) {
         next(e);
       }
     });
+
+    app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use((req, res, next) => {
@@ -788,8 +1050,11 @@ async function startServer() {
       }
       next();
     });
+
+    // Disable auto html extension serving in express.static so app.get("*all") handles page HTML transformations
     app.use(express.static(distPath, {
-      extensions: ["html"],
+      extensions: [],
+      index: false,
       setHeaders: (res, filePath) => {
         if (filePath.endsWith(".xml")) {
           res.setHeader("Content-Type", "application/xml");
@@ -809,13 +1074,25 @@ async function startServer() {
     // For MPA, we don't necessarily want a single catch-all that returns index.html
     // unless it's truly a fallback.
     app.get("*all", (req, res) => {
-      const cleanPath = req.path.replace(/\/$/, '') || '/';
-      const htmlFile = htmlPages[cleanPath];
+      const isMsRoute = req.path.startsWith('/ms/') || req.path === '/ms';
+      const enRoute = isMsRoute ? getEnRoute(req.path) : (req.path.replace(/\/$/, '') || '/');
+      
+      if (isMsRoute && enRoute === null) {
+        return res.status(404).send('Not Found');
+      }
+      
+      let htmlFile = enRoute ? htmlPages[enRoute] : undefined;
+      if (!htmlFile && enRoute === '/') htmlFile = 'index.html';
       
       if (htmlFile) {
         const filePath = path.join(distPath, htmlFile);
         if (fs.existsSync(filePath)) {
-          return res.sendFile(filePath);
+          const rawHtml = fs.readFileSync(filePath, 'utf8');
+          const $ = cheerio.load(rawHtml);
+          transformPage($, enRoute as string, isMsRoute);
+          
+          res.status(200).setHeader("Content-Type", "text/html");
+          return res.send($.html());
         }
       }
 
@@ -827,6 +1104,7 @@ async function startServer() {
           return blogPostHandler(req as any, res as any);
         }
       }
+
       // fallback to index.html
       res.sendFile(path.join(distPath, "index.html"));
     });

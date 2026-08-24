@@ -2,7 +2,7 @@
 
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebase";
-// import { generatePDFReport } from "./lib/pdf-generator";
+import { generatePDFReport } from "./lib/pdf-generator";
 
 let lastSalaryCalculation: any = null;
 
@@ -84,6 +84,8 @@ function getSocsoRates(salary: number, age: string, nationality = "malaysian") {
 
 export function calculateSalary() {
   try {
+    const isMs = typeof window !== "undefined" && (window.location.pathname.startsWith("/ms/") || window.location.pathname === "/ms" || document.documentElement.lang === "ms");
+
     if (typeof (window as any).gtag === "function") {
       (window as any).gtag("event", "click_calculate", {
         event_category: "calculator",
@@ -240,9 +242,9 @@ export function calculateSalary() {
         }
       };
 
-      addDeduction("EPF (11%)", epf);
-      addDeduction("SOCSO", socso);
-      addDeduction("EIS (0.2%)", eis);
+      addDeduction(isMs ? "KWSP (11%)" : "EPF (11%)", epf);
+      addDeduction(isMs ? "PERKESO" : "SOCSO", socso);
+      addDeduction(isMs ? "SIP (0.2%)" : "EIS (0.2%)", eis);
       const pcbPercent = totalIncome > 0 ? ((pcb / totalIncome) * 100).toFixed(1) : "0";
       addDeduction(`PCB (${pcbPercent}%)`, pcb);
     } else {
@@ -267,10 +269,12 @@ export function calculateSalary() {
         }
       };
 
-      const epfEmployerLabel = totalIncome <= 5000 ? "EPF (13%)" : "EPF (12%)";
+      const epfEmployerLabel = totalIncome <= 5000 
+        ? (isMs ? "KWSP (13%)" : "EPF (13%)")
+        : (isMs ? "KWSP (12%)" : "EPF (12%)");
       addEmployerContribution(epfEmployerLabel, epfEmployer);
-      addEmployerContribution("SOCSO", socsoEmployer);
-      addEmployerContribution("EIS (0.2%)", eisEmployer);
+      addEmployerContribution(isMs ? "PERKESO" : "SOCSO", socsoEmployer);
+      addEmployerContribution(isMs ? "SIP (0.2%)" : "EIS (0.2%)", eisEmployer);
     } else {
       totalEmployerContribution = epfEmployer + socsoEmployer + eisEmployer;
     }
@@ -326,6 +330,7 @@ export function calculateSalary() {
     let groupBg = "#fef2f2";
     let groupBorder = "#fee2e2";
     let shortExplanation = "lower income group";
+    let shortExplanationMs = "kumpulan pendapatan rendah";
 
     if (totalIncome >= 15870) {
       incomeGroup = "T20";
@@ -334,6 +339,7 @@ export function calculateSalary() {
       groupBg = "#f0fdf4";
       groupBorder = "#dcfce7";
       shortExplanation = "top income group";
+      shortExplanationMs = "kumpulan pendapatan tertinggi";
     } else if (totalIncome >= 11820) {
       incomeGroup = "T20";
       subGroup = "T1";
@@ -341,6 +347,7 @@ export function calculateSalary() {
       groupBg = "#f0fdf4";
       groupBorder = "#dcfce7";
       shortExplanation = "top income group";
+      shortExplanationMs = "kumpulan pendapatan tertinggi";
     } else if (totalIncome >= 9450) {
       incomeGroup = "M40";
       subGroup = "M4";
@@ -348,6 +355,7 @@ export function calculateSalary() {
       groupBg = "#fefce8";
       groupBorder = "#fef9c3";
       shortExplanation = "middle income group";
+      shortExplanationMs = "kumpulan pendapatan pertengahan";
     } else if (totalIncome >= 7690) {
       incomeGroup = "M40";
       subGroup = "M3";
@@ -355,6 +363,7 @@ export function calculateSalary() {
       groupBg = "#fefce8";
       groupBorder = "#fef9c3";
       shortExplanation = "middle income group";
+      shortExplanationMs = "kumpulan pendapatan pertengahan";
     } else if (totalIncome >= 6340) {
       incomeGroup = "M40";
       subGroup = "M2";
@@ -362,6 +371,7 @@ export function calculateSalary() {
       groupBg = "#fefce8";
       groupBorder = "#fef9c3";
       shortExplanation = "middle income group";
+      shortExplanationMs = "kumpulan pendapatan pertengahan";
     } else if (totalIncome >= 5250) {
       incomeGroup = "M40";
       subGroup = "M1";
@@ -369,6 +379,7 @@ export function calculateSalary() {
       groupBg = "#fefce8";
       groupBorder = "#fef9c3";
       shortExplanation = "middle income group";
+      shortExplanationMs = "kumpulan pendapatan pertengahan";
     } else if (totalIncome >= 4310) {
       incomeGroup = "B40";
       subGroup = "B4";
@@ -376,6 +387,7 @@ export function calculateSalary() {
       groupBg = "#fef2f2";
       groupBorder = "#fee2e2";
       shortExplanation = "lower income group";
+      shortExplanationMs = "kumpulan pendapatan rendah";
     } else if (totalIncome >= 3440) {
       incomeGroup = "B40";
       subGroup = "B3";
@@ -383,6 +395,7 @@ export function calculateSalary() {
       groupBg = "#fef2f2";
       groupBorder = "#fee2e2";
       shortExplanation = "lower income group";
+      shortExplanationMs = "kumpulan pendapatan rendah";
     } else if (totalIncome >= 2560) {
       incomeGroup = "B40";
       subGroup = "B2";
@@ -390,6 +403,7 @@ export function calculateSalary() {
       groupBg = "#fef2f2";
       groupBorder = "#fee2e2";
       shortExplanation = "lower income group";
+      shortExplanationMs = "kumpulan pendapatan rendah";
     } else {
       incomeGroup = "B40";
       subGroup = "B1";
@@ -397,6 +411,7 @@ export function calculateSalary() {
       groupBg = "#fef2f2";
       groupBorder = "#fee2e2";
       shortExplanation = "lower income group";
+      shortExplanationMs = "kumpulan pendapatan rendah";
     }
 
     const groupLabel = document.getElementById("resIncomeGroupLabel");
@@ -416,7 +431,10 @@ export function calculateSalary() {
 
     const descriptionEl = document.getElementById("resIncomeGroupDescription");
     if (descriptionEl) {
-      descriptionEl.innerHTML = `With your total monthly income, you’re in the <strong style="color: ${groupColor}; font-weight: 800;">${incomeGroup} (${subGroup}) category (${shortExplanation})</strong> in Malaysia.`;
+      const isMs = typeof window !== "undefined" && (window.location.pathname.startsWith("/ms/") || window.location.pathname === "/ms" || document.documentElement.lang === "ms");
+      descriptionEl.innerHTML = isMs 
+        ? `Berdasarkan jumlah pendapatan bulanan anda, anda berada dalam <strong style="color: ${groupColor}; font-weight: 800;">kategori ${incomeGroup} (${subGroup}) (${shortExplanationMs})</strong> di Malaysia.`
+        : `With your total monthly income, you’re in the <strong style="color: ${groupColor}; font-weight: 800;">${incomeGroup} (${subGroup}) category (${shortExplanation})</strong> in Malaysia.`;
     }
 
     const section = document.getElementById("incomeGroupSection");
@@ -485,6 +503,9 @@ function initSalaryCalculator() {
   const downloadReportBtn = document.getElementById(
     "downloadReportBtn",
   ) as HTMLButtonElement | null;
+  const downloadPayslipBtn = document.getElementById(
+    "downloadPayslipBtn",
+  ) as HTMLButtonElement | null;
   const emailModal = document.getElementById(
     "emailModal",
   ) as HTMLElement | null;
@@ -530,6 +551,14 @@ function initSalaryCalculator() {
 
   if (downloadReportBtn) {
     downloadReportBtn.addEventListener("click", () => {
+      if (emailModal) {
+        emailModal.style.display = "flex";
+      }
+    });
+  }
+
+  if (downloadPayslipBtn) {
+    downloadPayslipBtn.addEventListener("click", () => {
       if (emailModal) {
         emailModal.style.display = "flex";
       }
@@ -617,24 +646,19 @@ function initSalaryCalculator() {
           dbPayload.totalDeductions = lastSalaryCalculation.totalDeductions;
         }
 
-        try {
-          await addDoc(collection(db, "leads"), dbPayload);
-        } catch (fErr) {
-          console.error("Firestore leads error:", fErr);
-        }
+        // 1. Store lead in Firestore (non-blocking in background)
+        addDoc(collection(db, "leads"), dbPayload).catch((fErr) => {
+          console.warn("Firestore leads record error:", fErr);
+        });
 
-        try {
-          const sheetRes = await fetch("/api/salary-sheet", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(sheetPayload),
-          });
-          if (!sheetRes.ok) {
-            console.error("Google Sheets Webhook error:", await sheetRes.text());
-          }
-        } catch (sErr) {
-          console.error("Google Sheets request error:", sErr);
-        }
+        // 2. Submit to Google Sheet via server proxy (non-blocking in background)
+        fetch("/api/salary-sheet", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sheetPayload),
+        }).catch((sErr) => {
+          console.warn("Google Sheets record error:", sErr);
+        });
 
         if (typeof (window as any).gtag === "function") {
           (window as any).gtag("event", "submit_lead_salary", {
@@ -658,8 +682,8 @@ function initSalaryCalculator() {
           incomeGroup: "-"
         };
 
-        import("./lib/pdf-generator").then(({ generatePDFReport }) => {
-          generatePDFReport({
+        // 3. Generate & Download PDF Report
+        await generatePDFReport({
           title: "Salary & Take Home Pay Report",
           fileName: "Salary_Report",
           data: [
@@ -675,7 +699,6 @@ function initSalaryCalculator() {
             { label: "Employer EIS Contribution", value: `RM ${calc.eisEmployer.toFixed(2)}` },
             { label: "Income Category", value: calc.incomeGroup }
           ]
-        });
         });
 
         if (modalFormContent) modalFormContent.style.display = "none";
@@ -693,8 +716,15 @@ function initSalaryCalculator() {
             (window as any)._currentLeadType = "Salary Calculator";
           }
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error("Critical submission error handled:", err);
+        if (modalFeedback) {
+          modalFeedback.textContent = err.message || "Failed to generate report. Please try again.";
+          modalFeedback.style.color = "#dc2626";
+          modalFeedback.style.display = "block";
+        } else {
+          alert("Failed to generate report. Please try again.");
+        }
       } finally {
         if (submitBtn) {
           submitBtn.disabled = false;

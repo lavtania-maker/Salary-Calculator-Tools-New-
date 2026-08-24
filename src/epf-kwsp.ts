@@ -1,6 +1,6 @@
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebase";
-// import { generatePDFReport } from "./lib/pdf-generator";
+import { generatePDFReport } from "./lib/pdf-generator";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("epfForm") as HTMLFormElement;
@@ -462,22 +462,19 @@ document.addEventListener("DOMContentLoaded", () => {
           (dbPayload as any).hiringStatus = hiringInputExt?.value;
         if (phone) (dbPayload as any).phoneNumber = phone;
 
-        let isSuccess = false;
-        try {
-          await addDoc(collection(db, "leads"), dbPayload);
-          const sheetRes = await fetch("/api/epf-sheet", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(sheetPayload),
-          });
-          if (sheetRes.ok) {
-            isSuccess = true;
-          } else {
-            console.error("Google Sheets Webhook error:", await sheetRes.text());
-          }
-        } catch (err) {
-          console.error("Submission error:", err);
-        }
+        // 1. Store lead in Firestore (non-blocking in background)
+        addDoc(collection(db, "leads"), dbPayload).catch((fErr) => {
+          console.warn("Firestore leads record error:", fErr);
+        });
+
+        // 2. Submit to Google Sheet via server proxy (non-blocking in background)
+        fetch("/api/epf-sheet", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sheetPayload),
+        }).catch((sErr) => {
+          console.warn("Google Sheets record error:", sErr);
+        });
 
         if (typeof (window as any).gtag === "function") {
           (window as any).gtag("event", "submit_lead_epf", {
@@ -485,9 +482,8 @@ document.addEventListener("DOMContentLoaded", () => {
           });
         }
 
-        if (isSuccess && lastCalculation) {
-          import("./lib/pdf-generator").then(({ generatePDFReport }) => {
-          generatePDFReport({
+        if (lastCalculation) {
+          await generatePDFReport({
             title: "EPF Contribution Report",
             fileName: "EPF_Report",
             data: [
@@ -520,10 +516,7 @@ document.addEventListener("DOMContentLoaded", () => {
               },
             ],
           });
-        });
         }
-
-        await new Promise((resolve) => setTimeout(resolve, 800));
 
         if (modalFormContent && modalSuccessContent) {
           modalFormContent.style.display = "none";
@@ -551,10 +544,10 @@ document.addEventListener("DOMContentLoaded", () => {
           if (mobileActionButtons) mobileActionButtons.style.display = "none";
           if (mobileFallbackText) mobileFallbackText.style.display = "none";
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error("Submission error:", err);
         alert(
-          "An error occurred while generating the report. Please try again.",
+          err.message || "An error occurred while generating the report. Please try again.",
         );
       } finally {
         if (submitBtn) {

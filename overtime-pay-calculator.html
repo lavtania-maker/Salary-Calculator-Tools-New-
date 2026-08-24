@@ -33,7 +33,7 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
+    <link rel="icon" type="image/png" href="/favicon-ricebowl.png?v=4">
     <title>Overtime Pay Calculator Malaysia | Instant OT Pay</title>
     <meta name="description" content="Calculate accurate overtime pay based on Malaysian Employment Act 1955. Free tool for HR, payroll, and employees to calculate OT rates, rest day pay, and public holiday pay.">
     <meta name="keywords" content="overtime calculator malaysia, ot calculator malaysia, calculate overtime pay malaysia, employment act 1955 overtime, rest day overtime malaysia, public holiday overtime malaysia">
@@ -108,8 +108,8 @@
     }
     </script>
 
-    <link rel="preload" as="image" href="/logo-small.png">
-    <noscript>
+    <link rel="preload" as="image" href="/logo-small.png?v=4">
+    <noscript data-i18n="_desktop_dropdown_fallback_nav_dropdown_9f39cc">
       <style>
         /* Desktop Dropdown Fallback */
         .nav-dropdown:hover .dropdown-menu,
@@ -212,34 +212,43 @@
   
   
   
+<link rel="alternate" hreflang="ms" href="https://salarycalculator.my/ms/kalkulator-overtime">
+<link rel="alternate" hreflang="en" href="https://salarycalculator.my/overtime-pay-calculator">
+<link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/overtime-pay-calculator">
 </head><body>
     <!-- Navbar -->
     <header class="navbar">
       <div class="container">
         
         <a href="/" class="logo">
-          <img src="/logo-small.png?v=2" alt="SalaryCalculator.my" class="logo-img" width="250" height="44" fetchpriority="high">
+          <img src="/logo-small.png?v=4" alt="SalaryCalculator.my" class="logo-img" width="250" height="44" fetchpriority="high">
         </a>
                 
                 
         <nav class="desktop-nav">
-          <a href="/" class="nav-item" id="navSalary">Salary Calculator</a>
-          <a href="/socso-perkeso" class="nav-item" id="navSocso">SOCSO Calculator</a>
-          <a href="/pcb-income-tax" class="nav-item" id="navPcb">PCB Calculator</a>
-          <a href="/epf-kwsp" class="nav-item" id="navEpf">EPF Calculator</a>
+          <a href="/" class="nav-item" id="navSalary" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+          <a href="/socso-perkeso" class="nav-item" id="navSocso" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+          <a href="/pcb-income-tax" class="nav-item" id="navPcb" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+          <a href="/epf-kwsp" class="nav-item" id="navEpf" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
           <div class="nav-dropdown">
-            <button class="nav-item dropdown-trigger" id="freeToolsTrigger" aria-haspopup="true" aria-expanded="false">
+            <button class="nav-item dropdown-trigger" id="freeToolsTrigger" aria-haspopup="true" aria-expanded="false" data-i18n="free_tools_9f269a">
               Free Tools
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-            <div class="dropdown-menu free-tools-dropdown" id="freeToolsMenu" role="menu" aria-labelledby="freeToolsTrigger">
-              <a href="/annual-leave-calculator" class="dropdown-item" role="menuitem">Annual Leave Calculator</a>
-              <a href="/overtime-pay-calculator" class="dropdown-item" role="menuitem">Overtime Pay Calculator</a>
+            <div class="dropdown-menu free-tools-dropdown" id="freeToolsMenu" role="menu" aria-labelledby="freeToolsTrigger" data-i18n="annual_leave_calculator_overtime_pay_cal_060cec">
+              <a href="/annual-leave-calculator" class="dropdown-item" role="menuitem" data-i18n="annual_leave_calculator_2cfd91">Annual Leave Calculator</a>
+              <a href="/overtime-pay-calculator" class="dropdown-item" role="menuitem" data-i18n="overtime_pay_calculator_459bb3">Overtime Pay Calculator</a>
             
-              <a href="/hourly-rate" class="dropdown-item" role="menuitem">Hourly Rate Calculator</a></div>
+              <a href="/hourly-rate" class="dropdown-item" role="menuitem" data-i18n="hourly_rate_calculator_15455b">Hourly Rate Calculator</a></div>
           </div>
-          <a href="/blog" class="nav-item" id="navBlog">Blog</a>
-        </nav>
+          <a href="/blog" class="nav-item" id="navBlog" data-i18n="blog_be8df1">Blog</a>
+        
+      <div class="lang-switcher" style="display: flex; gap: 8px; align-items: center; margin-left: auto; font-weight: 500;" data-i18n="en_bm_506984">
+        <a href="/overtime-pay-calculator" class="lang-en" style="color: var(--primary-color); text-decoration: none;" data-i18n="en_aa85f1">EN</a>
+        <span style="color: var(--border-color);">|</span>
+        <a href="/ms/kalkulator-overtime" class="lang-ms" style="color: var(--text-muted); text-decoration: none;" data-i18n="bm_5089fa">BM</a>
+      </div>
+    </nav>
         <button class="mobile-menu-btn" id="mobileMenuToggle">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
@@ -247,27 +256,33 @@
             
             
       <nav class="mobile-nav" id="mobileNavMenu">
-        <a href="/" class="mobile-nav-item" id="mobNavSalary">Salary Calculator</a>
-        <a href="/socso-perkeso" class="mobile-nav-item" id="mobNavSocso">SOCSO Calculator</a>
-        <a href="/pcb-income-tax" class="mobile-nav-item" id="mobNavPcb">PCB Calculator</a>
-        <a href="/epf-kwsp" class="mobile-nav-item" id="mobNavEpf">EPF Calculator</a>
-        <button class="mobile-nav-item has-children" id="mobileFreeToolsTrigger">
+      <div class="lang-switcher" style="display: flex; gap: 8px; align-items: center; margin-left: auto; font-weight: 500;" data-i18n="en_bm_506984">
+        <a href="/overtime-pay-calculator" class="lang-en" style="color: var(--primary-color); text-decoration: none;" data-i18n="en_aa85f1">EN</a>
+        <span style="color: var(--border-color);">|</span>
+        <a href="/ms/kalkulator-overtime" class="lang-ms" style="color: var(--text-muted); text-decoration: none;" data-i18n="bm_5089fa">BM</a>
+      </div>
+    
+        <a href="/" class="mobile-nav-item" id="mobNavSalary" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+        <a href="/socso-perkeso" class="mobile-nav-item" id="mobNavSocso" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+        <a href="/pcb-income-tax" class="mobile-nav-item" id="mobNavPcb" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+        <a href="/epf-kwsp" class="mobile-nav-item" id="mobNavEpf" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
+        <button class="mobile-nav-item has-children" id="mobileFreeToolsTrigger" data-i18n="free_tools_c3d00f">
           Free Tools
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
-        <div class="mobile-submenu" id="mobileFreeToolsMenu">
-          <a href="/annual-leave-calculator" class="mobile-submenu-item">Annual Leave Calculator</a>
-          <a href="/overtime-pay-calculator" class="mobile-submenu-item">Overtime Pay Calculator</a>
+        <div class="mobile-submenu" id="mobileFreeToolsMenu" data-i18n="annual_leave_calculator_overtime_pay_cal_c7641c">
+          <a href="/annual-leave-calculator" class="mobile-submenu-item" data-i18n="annual_leave_calculator_2cfd91">Annual Leave Calculator</a>
+          <a href="/overtime-pay-calculator" class="mobile-submenu-item" data-i18n="overtime_pay_calculator_459bb3">Overtime Pay Calculator</a>
         </div>
-        <a href="/blog" class="mobile-nav-item" id="mobNavBlog">Blog</a>
+        <a href="/blog" class="mobile-nav-item" id="mobNavBlog" data-i18n="blog_be8df1">Blog</a>
       </nav>
     </header>
 
     <div class="calculator-area">
       <section class="hero">
         <div class="container">
-          <h1>Overtime Pay Calculator Malaysia 2026</h1>
-          <p>Calculate OT pay according to the Employment Act 1955 instantly for FREE.</p>
+          <h1 data-i18n="overtime_pay_calculator_malaysia_2026_eb9002">Overtime Pay Calculator Malaysia 2026</h1>
+          <p data-i18n="calculate_ot_pay_according_to_the_employ_4e9a61">Calculate OT pay according to the Employment Act 1955 instantly for FREE.</p>
         </div>
       </section>
 
@@ -275,31 +290,31 @@
         <div class="main-layout">
           <!-- Form -->
           <section class="card">
-            <h2 class="card-title" style="color: #2563eb !important;">Enter Details</h2>
+            <h2 class="card-title" style="color: #2563eb !important;" data-i18n="enter_details_a4b074">Enter Details</h2>
             <form id="otForm">
-              <div class="form-group">
-                <label class="form-label" for="salary">Monthly Salary (RM) <span style="color: red">*</span></label>
+              <div class="form-group" data-i18n="monthly_salary_rm_ed58a4">
+                <label class="form-label" for="salary" data-i18n="monthly_salary_rm__33a192">Monthly Salary (RM) <span style="color: red">*</span></label>
                 
                 <input type="number" id="salary" class="form-input" placeholder="e.g. 3000" min="0.01" step="0.01" required="" inputmode="decimal">
               </div>
 
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px">
-                <div class="form-group">
-                  <label class="form-label" for="workingDays">Working Days Per Week <span style="color: red">*</span></label>
+                <div class="form-group" data-i18n="working_days_per_week_5_days_5_5_days_6_4a72ae">
+                  <label class="form-label" for="workingDays" data-i18n="working_days_per_week__fd1ee0">Working Days Per Week <span style="color: red">*</span></label>
                   <select id="workingDays" class="form-select" required="">
                     <option value="5">5 Days</option>
                     <option value="5.5">5.5 Days</option>
                     <option value="6">6 Days</option>
                   </select>
                 </div>
-                <div class="form-group">
-                  <label class="form-label" for="normalHours">Normal Hours Per Day <span style="color: red">*</span></label>
+                <div class="form-group" data-i18n="normal_hours_per_day_984cc1">
+                  <label class="form-label" for="normalHours" data-i18n="normal_hours_per_day__54b7eb">Normal Hours Per Day <span style="color: red">*</span></label>
                   <input type="number" id="normalHours" class="form-input" value="8" min="1" max="24" step="0.5" required="" inputmode="decimal">
                 </div>
               </div>
 
-              <div class="form-group">
-                <label class="form-label" for="overtimeType">Overtime Type <span style="color: red">*</span></label>
+              <div class="form-group" data-i18n="overtime_type_select_type_normal_working_cb0b73">
+                <label class="form-label" for="overtimeType" data-i18n="overtime_type__2a44c4">Overtime Type <span style="color: red">*</span></label>
                 
                 <select id="overtimeType" class="form-select" required="">
                   <option value="">Select type...</option>
@@ -309,15 +324,15 @@
                 </select>
               </div>
 
-              <div class="form-group">
-                <label class="form-label" for="otHours">OT Hours Worked <span style="color: red">*</span></label>
+              <div class="form-group" data-i18n="ot_hours_worked_35e121">
+                <label class="form-label" for="otHours" data-i18n="ot_hours_worked__994e32">OT Hours Worked <span style="color: red">*</span></label>
                 
                 <input type="number" id="otHours" class="form-input" placeholder="e.g. 10" min="0" step="0.5" required="" inputmode="decimal">
               </div>
 
-              <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+              <div class="form-group" style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;" data-i18n="manual_labour_supervisor_vehicle_operato_5d6b83">
                 <input type="checkbox" id="isManualLabour" style="width: 18px; height: 18px;">
-                <label for="isManualLabour" style="font-size: 14px; color: #475569; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px;">
+                <label for="isManualLabour" style="font-size: 14px; color: #475569; font-weight: 500; cursor: pointer; display: flex; align-items: center; gap: 6px;" data-i18n="manual_labour_supervisor_vehicle_operato_4e08b6">
                   <span>Manual Labour / Supervisor / Vehicle Operator?</span>
                   <span title="Under First Schedule EA 1955, employees engaged in manual labor, supervising manual workers, or operating commercial motor vehicles are entitled to statutory OT pay regardless of salary level." style="display: inline-flex; align-items: center; cursor: help; color: #64748b;">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -329,11 +344,11 @@
                 </label>
               </div>
 
-              <div class="form-actions" style="margin-top: 24px; gap: 16px;">
-                <button type="reset" id="otResetBtn" class="btn btn-outline" style="flex: 1;">Reset</button>
-                <button type="submit" class="btn btn-primary" style="flex: 2;">Calculate</button>
+              <div class="form-actions" style="margin-top: 24px; gap: 16px;" data-i18n="reset_calculate_45e507">
+                <button type="reset" id="otResetBtn" class="btn btn-outline" style="flex: 1;" data-i18n="reset_526d68">Reset</button>
+                <button type="submit" class="btn btn-primary" style="flex: 2;" data-i18n="calculate_93f311">Calculate</button>
               </div>
-              <noscript>
+              <noscript data-i18n="_javascript_is_required_to_calculate_you_24a304">
                 <div style="background: #fef2f2; border: 1px solid #fecaca; padding: 12px 20px; text-align: center; border-radius: 8px; margin-top: 20px;">
                   <p style="color: #dc2626; font-weight: 600; margin: 0">
                     ⚠️ JavaScript is required to calculate your overtime pay. Please
@@ -348,14 +363,14 @@
           <!-- Results -->
           <aside class="result-panel">
             <div class="card results-container" id="otResultCard" style="background: #f8fafc;">
-              <h2 class="card-title" style="color: #2563eb !important;">Calculation Results</h2>
+              <h2 class="card-title" style="color: #2563eb !important;" data-i18n="calculation_results_f72359">Calculation Results</h2>
               
               <div id="otPlaceholder" class="placeholder-text">
                 <div style="display: flex; justify-content: center; margin-bottom: 16px;">
                   <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                 </div>
-                <p>Enter details to see OT pay breakdown</p>
-                <noscript>
+                <p data-i18n="enter_details_to_see_ot_pay_breakdown_07a93e">Enter details to see OT pay breakdown</p>
+                <noscript data-i18n="javascript_is_required_to_calculate_your_c5bbad">
                   <p style="color: #dc2626; font-weight: 600; margin-top: 10px; background-color: #fef2f2; padding: 12px; border-radius: 8px; border: 1px solid #f87171; text-align: left;">
                     JavaScript is required to calculate your results. Please enable JavaScript to use this calculator.
                   </p>
@@ -364,45 +379,45 @@
 
               <div id="otResultsContent" style="display: none;">
                 <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 24px; border-radius: 12px; margin-bottom: 20px; text-align: center;">
-                  <span style="display: block; color: #166534; font-weight: 600; margin-bottom: 8px;">Total Overtime Pay</span>
+                  <span style="display: block; color: #166534; font-weight: 600; margin-bottom: 8px;" data-i18n="total_overtime_pay_947c3d">Total Overtime Pay</span>
                   <span id="resTotalOTPay" style="font-size: 32px; font-weight: 800; color: #15803d;">RM 0.00</span>
-                  <div id="resOTPaySubtext" style="display: none; font-size: 12px; color: #15803d; margin-top: 4px; font-weight: 500;">(Subject to Employment Contract)</div>
+                  <div id="resOTPaySubtext" style="display: none; font-size: 12px; color: #15803d; margin-top: 4px; font-weight: 500;" data-i18n="_subject_to_employment_contract_dfa7ee">(Subject to Employment Contract)</div>
                 </div>
 
-                <div id="complianceWarning" style="display: none; background: #fef2f2; border: 1px solid #fecaca; padding: 16px; border-radius: 8px; color: #b91c1c; margin-bottom: 16px; font-size: 14px;">
+                <div id="complianceWarning" style="display: none; background: #fef2f2; border: 1px solid #fecaca; padding: 16px; border-radius: 8px; color: #b91c1c; margin-bottom: 16px; font-size: 14px;" data-i18n="warning_exceeds_104_hour_monthly_ot_cap_e4b57e">
                    <strong>Warning:</strong> Exceeds 104-hour monthly OT cap.
                 </div>
 
-                <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;">
+                <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;" data-i18n="hourly_rate_hrp_rm_0_00_603c71">
                   <span>Hourly Rate (HRP)</span>
                   <span id="resHourlyRate" style="font-weight: 600;">RM 0.00</span>
                 </div>
-                <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;">
+                <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;" data-i18n="daily_rate_orp_rm_0_00_cf527e">
                   <span>Daily Rate (ORP)</span>
                   <span id="resDailyRate" style="font-weight: 600;">RM 0.00</span>
                 </div>
-                <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;">
+                <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;" data-i18n="total_ot_hours_0_hours_fd1a99">
                   <span>Total OT Hours</span>
                   <span id="resTotalOTHours" style="font-weight: 600;">0 hours</span>
                 </div>
-                <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;">
+                <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between;" data-i18n="multiplier_applied_523749">
                   <span>Multiplier Applied</span>
                   <span id="resMultiplierApplied" style="font-weight: 600;">-</span>
                 </div>
                 <div class="result-item" style="padding: 12px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;">
-                  <span style="white-space: nowrap;">Eligibility</span>
-                  <div style="text-align: right;">
+                  <span style="white-space: nowrap;" data-i18n="eligibility_b13387">Eligibility</span>
+                  <div style="text-align: right;" data-i18n="eligible_8d80c6">
                     <span id="resEligibilityStatus" style="display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: 13px; font-weight: 600; text-align: right;">Eligible</span>
                   </div>
                 </div>
                 <div id="resEligibilityText" style="font-size: 12px; color: #64748b; margin-top: 4px; line-height: 1.4; text-align: right;"></div>
 
-                <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 16px; border-radius: 12px; margin-top: 24px;">
+                <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 16px; border-radius: 12px; margin-top: 24px;" data-i18n="estimated_gross_pay_rm_0_00_2c64a6">
                   <span style="display: block; color: #1e40af; font-weight: 600; font-size: 14px;">Estimated Gross Pay</span>
                   <span id="resGrossPay" style="font-size: 20px; font-weight: 700; color: #1d4ed8;">RM 0.00</span>
                 </div>
 
-                <button id="downloadOTReportBtn" class="btn btn-primary" style="width: 100%; margin-top: 24px;">Download Report PDF</button>
+                <button id="downloadOTReportBtn" class="btn btn-primary" style="width: 100%; margin-top: 24px;" data-i18n="download_report_pdf_a3ea21">Download Report PDF</button>
               </div>
             </div>
           </aside>
@@ -416,35 +431,35 @@
         
         <!-- 1. Understanding Overtime Pay in Malaysia -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">Understanding Overtime Pay in Malaysia</h2>
-          <p>Overtime (OT) pay is the additional compensation paid to employees who work beyond their normal working hours. In Malaysia, OT pay is regulated by the <strong>Employment Act 1955</strong> to ensure workers are fairly compensated for extra time spent on the job. Understanding these regulations is crucial for both employers and employees to maintain compliance and fair labor practices.</p>
-          <p style="margin-bottom: 0;">This calculator helps you estimate your statutory overtime pay according to the Malaysian Employment Act. <a href="#otForm" style="color: #2563eb; font-weight: 600; text-decoration: underline;">Use the calculator above</a> to see the exact tiered breakdown for your hours worked.</p>
+          <h2 style="color: #2563eb !important;" data-i18n="understanding_overtime_pay_in_malaysia_aa9b4b">Understanding Overtime Pay in Malaysia</h2>
+          <p data-i18n="overtime_ot_pay_is_the_additional_compen_bfe2e2">Overtime (OT) pay is the additional compensation paid to employees who work beyond their normal working hours. In Malaysia, OT pay is regulated by the <strong>Employment Act 1955</strong> to ensure workers are fairly compensated for extra time spent on the job. Understanding these regulations is crucial for both employers and employees to maintain compliance and fair labor practices.</p>
+          <p style="margin-bottom: 0;" data-i18n="this_calculator_helps_you_estimate_your__874afd">This calculator helps you estimate your statutory overtime pay according to the Malaysian Employment Act. <a href="#otForm" style="color: #2563eb; font-weight: 600; text-decoration: underline;">Use the calculator above</a> to see the exact tiered breakdown for your hours worked.</p>
         </div>
 
         <!-- 2. Who Is Eligible for Overtime Pay? -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">Who Is Eligible for Overtime Pay?</h2>
-          <p>Not all employees are entitled to statutory overtime pay under the Employment Act 1955. Eligibility is generally based on salary or nature of work:</p>
+          <h2 style="color: #2563eb !important;" data-i18n="who_is_eligible_for_overtime_pay_7a19c9">Who Is Eligible for Overtime Pay?</h2>
+          <p data-i18n="not_all_employees_are_entitled_to_statut_a1c9ca">Not all employees are entitled to statutory overtime pay under the Employment Act 1955. Eligibility is generally based on salary or nature of work:</p>
           <div style="display: grid; gap: 16px; margin-top: 20px;">
             <div style="display: flex; gap: 12px; align-items: flex-start; background: #f1f5f9; padding: 16px; border-radius: 12px;">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
               <div>
-                <p style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">Salary-Based Eligibility</p>
-                <p style="margin-bottom: 0; font-size: 15px;">Employees earning <strong>RM4,000 or below</strong> per month are statutorily entitled to overtime pay.</p>
+                <p style="font-weight: 700; color: #1e293b; margin-bottom: 4px;" data-i18n="salarybased_eligibility_d04bdb">Salary-Based Eligibility</p>
+                <p style="margin-bottom: 0; font-size: 15px;" data-i18n="employees_earning_rm4000_or_below_per_mo_b876f0">Employees earning <strong>RM4,000 or below</strong> per month are statutorily entitled to overtime pay.</p>
               </div>
             </div>
             <div style="display: flex; gap: 12px; align-items: flex-start; background: #f1f5f9; padding: 16px; border-radius: 12px;">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
               <div>
-                <p style="font-weight: 700; color: #1e293b; margin-bottom: 4px;">Occupation-Based Eligibility</p>
-                <p style="margin-bottom: 0; font-size: 15px;">Manual workers, machine operators, and supervisors of manual labour are eligible <strong>regardless of salary</strong>.</p>
+                <p style="font-weight: 700; color: #1e293b; margin-bottom: 4px;" data-i18n="occupationbased_eligibility_105610">Occupation-Based Eligibility</p>
+                <p style="margin-bottom: 0; font-size: 15px;" data-i18n="manual_workers_machine_operators_and_sup_1deb0c">Manual workers, machine operators, and supervisors of manual labour are eligible <strong>regardless of salary</strong>.</p>
               </div>
             </div>
             <div style="display: flex; gap: 12px; align-items: flex-start; background: #fffbeb; padding: 16px; border-radius: 12px; border: 1px solid #fde68a;">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
               <div>
-                <p style="font-weight: 700; color: #92400e; margin-bottom: 4px;">Important Note</p>
-                <p style="margin-bottom: 0; font-size: 15px; color: #92400e;">Employees above RM4,000 not in these categories may still receive OT if stated in their employment contract, but it is not a legal requirement.</p>
+                <p style="font-weight: 700; color: #92400e; margin-bottom: 4px;" data-i18n="important_note_18f7d6">Important Note</p>
+                <p style="margin-bottom: 0; font-size: 15px; color: #92400e;" data-i18n="employees_above_rm4000_not_in_these_cate_5ba677">Employees above RM4,000 not in these categories may still receive OT if stated in their employment contract, but it is not a legal requirement.</p>
               </div>
             </div>
           </div>
@@ -452,8 +467,8 @@
 
         <!-- 3. Overtime Rates in Malaysia -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">Overtime Rates in Malaysia</h2>
-          <p style="margin-bottom: 32px;">Overtime multipliers are standardized by law. The rates vary depending on the day you perform the extra work:</p>
+          <h2 style="color: #2563eb !important;" data-i18n="overtime_rates_in_malaysia_346f51">Overtime Rates in Malaysia</h2>
+          <p style="margin-bottom: 32px;" data-i18n="overtime_multipliers_are_standardized_by_fd06cf">Overtime multipliers are standardized by law. The rates vary depending on the day you perform the extra work:</p>
           
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px;">
             <!-- Normal Working Day -->
@@ -462,10 +477,10 @@
                 <div style="background: #eff6ff; padding: 8px; border-radius: 8px;">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
                 </div>
-                <span style="background: #2563eb; color: white; padding: 4px 12px; border-radius: 99px; font-weight: 700; font-size: 14px;">1.5x Rate</span>
+                <span style="background: #2563eb; color: white; padding: 4px 12px; border-radius: 99px; font-weight: 700; font-size: 14px;" data-i18n="1_5x_rate_199959">1.5x Rate</span>
               </div>
-              <h3 style="margin-bottom: 12px; font-size: 1.25rem;">Normal Working Day</h3>
-              <p style="font-size: 15px; margin-bottom: 0;">Standard OT for work beyond normal hours (e.g. 8 hours) on a typical workday.</p>
+              <h3 style="margin-bottom: 12px; font-size: 1.25rem;" data-i18n="normal_working_day_0e8ab8">Normal Working Day</h3>
+              <p style="font-size: 15px; margin-bottom: 0;" data-i18n="standard_ot_for_work_beyond_normal_hours_0ebb35">Standard OT for work beyond normal hours (e.g. 8 hours) on a typical workday.</p>
             </div>
 
             <!-- Rest Day -->
@@ -474,23 +489,23 @@
                 <div style="background: #ecfdf5; padding: 8px; border-radius: 8px;">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
                 </div>
-                <span style="background: #059669; color: white; padding: 4px 12px; border-radius: 99px; font-weight: 700; font-size: 14px;">Up to 2.0x</span>
+                <span style="background: #059669; color: white; padding: 4px 12px; border-radius: 99px; font-weight: 700; font-size: 14px;" data-i18n="up_to_2_0x_afc204">Up to 2.0x</span>
               </div>
-              <h3 style="margin-bottom: 12px; font-size: 1.25rem;">Rest Day</h3>
+              <h3 style="margin-bottom: 12px; font-size: 1.25rem;" data-i18n="rest_day_486edf">Rest Day</h3>
               <div style="background: #f8fafc; border-radius: 8px; overflow: hidden; border: 1px solid #f1f5f9; margin-top: 12px;">
-                <div style="display: flex; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid #f1f5f9;">
+                <div style="display: flex; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid #f1f5f9;" data-i18n="work_hours_multiplier_6467b4">
                   <span style="font-size: 13px; font-weight: 600;">Work Hours</span>
                   <span style="font-size: 13px; font-weight: 600;">Multiplier</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white;">
+                <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white;" data-i18n="0_4_hrs_0_5_day_pay_09b319">
                   <span style="font-size: 13px;">0 - 4 hrs</span>
                   <span style="font-size: 13px; font-weight: 700; color: #059669;">0.5 Day Pay</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; padding: 8px 12px;">
+                <div style="display: flex; justify-content: space-between; padding: 8px 12px;" data-i18n="4_8_hrs_1_0_day_pay_196051">
                   <span style="font-size: 13px;">4 - 8 hrs</span>
                   <span style="font-size: 13px; font-weight: 700; color: #059669;">1.0 Day Pay</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white;">
+                <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white;" data-i18n="8_hrs_ot_2_0x_hrp_3378e3">
                   <span style="font-size: 13px;">8+ hrs (OT)</span>
                   <span style="font-size: 13px; font-weight: 700; color: #059669;">2.0x HRP</span>
                 </div>
@@ -503,19 +518,19 @@
                 <div style="background: #fef2f2; padding: 8px; border-radius: 8px;">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 </div>
-                <span style="background: #dc2626; color: white; padding: 4px 12px; border-radius: 99px; font-weight: 700; font-size: 14px;">Up to 3.0x</span>
+                <span style="background: #dc2626; color: white; padding: 4px 12px; border-radius: 99px; font-weight: 700; font-size: 14px;" data-i18n="up_to_3_0x_da095b">Up to 3.0x</span>
               </div>
-              <h3 style="margin-bottom: 12px; font-size: 1.25rem;">Public Holiday</h3>
+              <h3 style="margin-bottom: 12px; font-size: 1.25rem;" data-i18n="public_holiday_06edf1">Public Holiday</h3>
               <div style="background: #f8fafc; border-radius: 8px; overflow: hidden; border: 1px solid #f1f5f9; margin-top: 12px;">
-                <div style="display: flex; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid #f1f5f9;">
+                <div style="display: flex; justify-content: space-between; padding: 8px 12px; border-bottom: 1px solid #f1f5f9;" data-i18n="work_hours_multiplier_6467b4">
                   <span style="font-size: 13px; font-weight: 600;">Work Hours</span>
                   <span style="font-size: 13px; font-weight: 600;">Multiplier</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white;">
+                <div style="display: flex; justify-content: space-between; padding: 8px 12px; background: white;" data-i18n="0_8_hrs_2_0_days_pay_c5ea81">
                   <span style="font-size: 13px;">0 - 8 hrs</span>
                   <span style="font-size: 13px; font-weight: 700; color: #dc2626;">2.0 Days Pay</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; padding: 8px 12px;">
+                <div style="display: flex; justify-content: space-between; padding: 8px 12px;" data-i18n="8_hrs_ot_3_0x_hrp_6382ec">
                   <span style="font-size: 13px;">8+ hrs (OT)</span>
                   <span style="font-size: 13px; font-weight: 700; color: #dc2626;">3.0x HRP</span>
                 </div>
@@ -526,16 +541,16 @@
 
         <!-- 4. How to Calculate Overtime Pay -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">How to Calculate Overtime Pay</h2>
-          <p>The calculation is a 3-step process. Each step builds on the previous one:</p>
+          <h2 style="color: #2563eb !important;" data-i18n="how_to_calculate_overtime_pay_b66715">How to Calculate Overtime Pay</h2>
+          <p data-i18n="the_calculation_is_a_3step_process_each__244db3">The calculation is a 3-step process. Each step builds on the previous one:</p>
           
           <div style="display: flex; flex-direction: column; gap: 32px; margin-top: 32px; position: relative;">
             <!-- Step 1 -->
             <div style="background: white; border: 1px solid #e2e8f0; padding: 24px; border-radius: 16px; position: relative; z-index: 1;">
-              <div style="position: absolute; top: -12px; left: 24px; background: #2563eb; color: white; padding: 2px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase;">Step 1</div>
-              <h4 style="margin-bottom: 12px; font-weight: 700; color: #1e293b;">Ordinary Rate of Pay (ORP)</h4>
-              <p style="font-size: 14px; margin-bottom: 16px;">Calculate your daily rate based on a standard 26-day working month.</p>
-              <div style="background: #f1f5f9; padding: 16px; border-radius: 8px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 700; color: #2563eb; border: 1px dashed #cbd5e1;">
+              <div style="position: absolute; top: -12px; left: 24px; background: #2563eb; color: white; padding: 2px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase;" data-i18n="step_1_6f4a22">Step 1</div>
+              <h4 style="margin-bottom: 12px; font-weight: 700; color: #1e293b;" data-i18n="ordinary_rate_of_pay_orp_a3c796">Ordinary Rate of Pay (ORP)</h4>
+              <p style="font-size: 14px; margin-bottom: 16px;" data-i18n="calculate_your_daily_rate_based_on_a_sta_89a59d">Calculate your daily rate based on a standard 26-day working month.</p>
+              <div style="background: #f1f5f9; padding: 16px; border-radius: 8px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 700; color: #2563eb; border: 1px dashed #cbd5e1;" data-i18n="monthly_salary_26_1d2765">
                 Monthly Salary ÷ 26
               </div>
             </div>
@@ -547,10 +562,10 @@
 
             <!-- Step 2 -->
             <div style="background: white; border: 1px solid #e2e8f0; padding: 24px; border-radius: 16px; position: relative; z-index: 1;">
-              <div style="position: absolute; top: -12px; left: 24px; background: #2563eb; color: white; padding: 2px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase;">Step 2</div>
-              <h4 style="margin-bottom: 12px; font-weight: 700; color: #1e293b;">Hourly Rate of Pay (HRP)</h4>
-              <p style="font-size: 14px; margin-bottom: 16px;">Divide your ORP by the number of normal hours you work per day.</p>
-              <div style="background: #f1f5f9; padding: 16px; border-radius: 8px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 700; color: #2563eb; border: 1px dashed #cbd5e1;">
+              <div style="position: absolute; top: -12px; left: 24px; background: #2563eb; color: white; padding: 2px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase;" data-i18n="step_2_e31ad1">Step 2</div>
+              <h4 style="margin-bottom: 12px; font-weight: 700; color: #1e293b;" data-i18n="hourly_rate_of_pay_hrp_858b13">Hourly Rate of Pay (HRP)</h4>
+              <p style="font-size: 14px; margin-bottom: 16px;" data-i18n="divide_your_orp_by_the_number_of_normal__6c5055">Divide your ORP by the number of normal hours you work per day.</p>
+              <div style="background: #f1f5f9; padding: 16px; border-radius: 8px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 700; color: #2563eb; border: 1px dashed #cbd5e1;" data-i18n="orp_normal_work_hours_36b260">
                 ORP ÷ Normal Work Hours
               </div>
             </div>
@@ -562,10 +577,10 @@
 
             <!-- Step 3 -->
             <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 24px; border-radius: 16px; position: relative; z-index: 1;">
-              <div style="position: absolute; top: -12px; left: 24px; background: #1d4ed8; color: white; padding: 2px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase;">Step 3</div>
-              <h4 style="margin-bottom: 12px; font-weight: 700; color: #1e293b;">Final Overtime Pay</h4>
-              <p style="font-size: 14px; margin-bottom: 16px;">Multiply your hourly rate by the extra hours worked and the relevant multiplier.</p>
-              <div style="background: #ffffff; padding: 16px; border-radius: 8px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 700; color: #1d4ed8; border: 1px solid #bfdbfe;">
+              <div style="position: absolute; top: -12px; left: 24px; background: #1d4ed8; color: white; padding: 2px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase;" data-i18n="step_3_2d5ce4">Step 3</div>
+              <h4 style="margin-bottom: 12px; font-weight: 700; color: #1e293b;" data-i18n="final_overtime_pay_5da8e5">Final Overtime Pay</h4>
+              <p style="font-size: 14px; margin-bottom: 16px;" data-i18n="multiply_your_hourly_rate_by_the_extra_h_f422c5">Multiply your hourly rate by the extra hours worked and the relevant multiplier.</p>
+              <div style="background: #ffffff; padding: 16px; border-radius: 8px; text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 700; color: #1d4ed8; border: 1px solid #bfdbfe;" data-i18n="hrp_ot_hours_multiplier_bbf313">
                 HRP × OT Hours × Multiplier
               </div>
             </div>
@@ -574,13 +589,13 @@
 
         <!-- 5. Overtime Calculation Example -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">Overtime Calculation Example</h2>
-          <p>Here is how a RM3,000 salary earner's OT pay looks for 2 hours of extra work on a normal day:</p>
+          <h2 style="color: #2563eb !important;" data-i18n="overtime_calculation_example_b42709">Overtime Calculation Example</h2>
+          <p data-i18n="here_is_how_a_rm3000_salary_earners_ot_p_fd4137">Here is how a RM3,000 salary earner's OT pay looks for 2 hours of extra work on a normal day:</p>
           
           <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
             <!-- Receipt Header -->
             <div style="background: #f8fafc; padding: 20px; border-bottom: 1px dashed #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
-              <span style="font-weight: 700; font-size: 14px; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;">Input Summary</span>
+              <span style="font-weight: 700; font-size: 14px; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em;" data-i18n="input_summary_e33279">Input Summary</span>
               <div style="display: flex; gap: 4px;">
                 <div style="width: 8px; height: 8px; border-radius: 50%; background: #e2e8f0;"></div>
                 <div style="width: 8px; height: 8px; border-radius: 50%; background: #e2e8f0;"></div>
@@ -590,40 +605,40 @@
             <!-- Receipt Body -->
             <div style="padding: 24px;">
               <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;">
-                <div style="font-size: 14px; color: #64748b;">Monthly Salary:</div>
+                <div style="font-size: 14px; color: #64748b;" data-i18n="monthly_salary_597b8a">Monthly Salary:</div>
                 <div style="font-size: 14px; font-weight: 600; text-align: right;">RM 3,000.00</div>
-                <div style="font-size: 14px; color: #64748b;">Normal Hours:</div>
-                <div style="font-size: 14px; font-weight: 600; text-align: right;">8 hrs / day</div>
-                <div style="font-size: 14px; color: #64748b;">OT Hours:</div>
-                <div style="font-size: 14px; font-weight: 600; text-align: right;">2 hrs</div>
-                <div style="font-size: 14px; color: #64748b;">OT Type:</div>
-                <div style="font-size: 14px; font-weight: 600; text-align: right;">Normal Day (1.5x)</div>
+                <div style="font-size: 14px; color: #64748b;" data-i18n="normal_hours_36c906">Normal Hours:</div>
+                <div style="font-size: 14px; font-weight: 600; text-align: right;" data-i18n="8_hrs_day_2a6fd7">8 hrs / day</div>
+                <div style="font-size: 14px; color: #64748b;" data-i18n="ot_hours_c24a64">OT Hours:</div>
+                <div style="font-size: 14px; font-weight: 600; text-align: right;" data-i18n="2_hrs_54d02f">2 hrs</div>
+                <div style="font-size: 14px; color: #64748b;" data-i18n="ot_type_3dc02e">OT Type:</div>
+                <div style="font-size: 14px; font-weight: 600; text-align: right;" data-i18n="normal_day_1_5x_99586d">Normal Day (1.5x)</div>
               </div>
               
               <div style="border-top: 1px solid #f1f5f9; padding-top: 20px; display: flex; flex-direction: column; gap: 12px;">
-                <div style="display: flex; justify-content: space-between; font-size: 14px;">
+                <div style="display: flex; justify-content: space-between; font-size: 14px;" data-i18n="step_1_orp_3000_26_rm_115_38_29d4a6">
                   <span style="color: #64748b;">Step 1: ORP (3000 ÷ 26)</span>
                   <span style="font-weight: 500;">RM 115.38</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; font-size: 14px;">
+                <div style="display: flex; justify-content: space-between; font-size: 14px;" data-i18n="step_2_hrp_115_38_8_rm_14_42_df80c2">
                   <span style="color: #64748b;">Step 2: HRP (115.38 ÷ 8)</span>
                   <span style="font-weight: 500;">RM 14.42</span>
                 </div>
-                <div style="display: flex; justify-content: space-between; font-size: 14px;">
+                <div style="display: flex; justify-content: space-between; font-size: 14px;" data-i18n="step_3_pay_14_42_2_1_5_rm_43_27_330608">
                   <span style="color: #64748b;">Step 3: Pay (14.42 × 2 × 1.5)</span>
                   <span style="font-weight: 500;">RM 43.27</span>
                 </div>
               </div>
               
               <!-- Final Result -->
-              <div style="margin-top: 24px; background: #f0fdf4; border: 1px solid #bbf7d0; padding: 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;">
+              <div style="margin-top: 24px; background: #f0fdf4; border: 1px solid #bbf7d0; padding: 16px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;" data-i18n="total_ot_pay_rm_43_27_a35b4a">
                 <span style="font-weight: 700; color: #166534;">Total OT Pay</span>
                 <span style="font-size: 1.5rem; font-weight: 800; color: #15803d;">RM 43.27</span>
               </div>
             </div>
             
             <!-- Receipt Footer -->
-            <div style="background: #f8fafc; padding: 12px; border-top: 1px dashed #e2e8f0; text-align: center;">
+            <div style="background: #f8fafc; padding: 12px; border-top: 1px dashed #e2e8f0; text-align: center;" data-i18n="reference_calculation_based_on_employmen_68aeeb">
               <span style="font-size: 12px; color: #94a3b8; font-style: italic;">Reference Calculation based on Employment Act</span>
             </div>
           </div>
@@ -631,125 +646,125 @@
 
         <!-- 6. Factors That Affect Overtime Pay -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">Factors That Affect Overtime Pay</h2>
-          <p>Several key variables will impact the final amount of overtime pay calculated:</p>
+          <h2 style="color: #2563eb !important;" data-i18n="factors_that_affect_overtime_pay_66e64c">Factors That Affect Overtime Pay</h2>
+          <p data-i18n="several_key_variables_will_impact_the_fi_813057">Several key variables will impact the final amount of overtime pay calculated:</p>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px;">
             <div style="display: flex; gap: 12px; align-items: center;">
               <div style="width: 32px; height: 32px; background: #eff6ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
               </div>
-              <span style="font-size: 15px; font-weight: 500; color: #475569;">Basic Monthly Salary</span>
+              <span style="font-size: 15px; font-weight: 500; color: #475569;" data-i18n="basic_monthly_salary_f7afe8">Basic Monthly Salary</span>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
               <div style="width: 32px; height: 32px; background: #eff6ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
               </div>
-              <span style="font-size: 15px; font-weight: 500; color: #475569;">Total Overtime Hours</span>
+              <span style="font-size: 15px; font-weight: 500; color: #475569;" data-i18n="total_overtime_hours_738531">Total Overtime Hours</span>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
               <div style="width: 32px; height: 32px; background: #eff6ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
               </div>
-              <span style="font-size: 15px; font-weight: 500; color: #475569;">Daily Working Hours</span>
+              <span style="font-size: 15px; font-weight: 500; color: #475569;" data-i18n="daily_working_hours_de6186">Daily Working Hours</span>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
               <div style="width: 32px; height: 32px; background: #eff6ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
               </div>
-              <span style="font-size: 15px; font-weight: 500; color: #475569;">OT Multiplier (1.5x / 2x / 3x)</span>
+              <span style="font-size: 15px; font-weight: 500; color: #475569;" data-i18n="ot_multiplier_1_5x_2x_3x_ad355d">OT Multiplier (1.5x / 2x / 3x)</span>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
               <div style="width: 32px; height: 32px; background: #eff6ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
               </div>
-              <span style="font-size: 15px; font-weight: 500; color: #475569;">Day Category (Rest/Holiday)</span>
+              <span style="font-size: 15px; font-weight: 500; color: #475569;" data-i18n="day_category_rest_holiday_7b04a0">Day Category (Rest/Holiday)</span>
             </div>
             <div style="display: flex; gap: 12px; align-items: center;">
               <div style="width: 32px; height: 32px; background: #eff6ff; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
               </div>
-              <span style="font-size: 15px; font-weight: 500; color: #475569;">Tiered Multiplier Levels</span>
+              <span style="font-size: 15px; font-weight: 500; color: #475569;" data-i18n="tiered_multiplier_levels_f52617">Tiered Multiplier Levels</span>
             </div>
           </div>
         </div>
 
         <!-- 8. Frequently Asked Questions -->
         <div class="content-card">
-          <h2 style="color: #2563eb !important;">Frequently Asked Questions</h2>
-          <p class="seo-subtitle" style="color: #64748b; font-size: 15px; margin-top: 8px; margin-bottom: 24px;">
+          <h2 style="color: #2563eb !important;" data-i18n="frequently_asked_questions_5405d8">Frequently Asked Questions</h2>
+          <p class="seo-subtitle" style="color: #64748b; font-size: 15px; margin-top: 8px; margin-bottom: 24px;" data-i18n="got_questions_about_overtime_pay_in_mala_9dd48d">
             Got questions about overtime pay in Malaysia? Find answers to the most common statutory overtime questions below.
           </p>
 
-          <div class="faq-container" style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
+          <div class="faq-container" style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;" data-i18n="how_is_overtime_pay_calculated_in_malays_6a33b0">
             <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">How is overtime pay calculated in Malaysia?</summary>
               <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
-                <p style="margin: 0 0 8px 0;">Overtime pay calculation is governed by the <strong>Employment Act 1955</strong> based on your <strong>Hourly Rate of Pay (HRP)</strong> and statutory multipliers:</p>
+                <p style="margin: 0 0 8px 0;" data-i18n="overtime_pay_calculation_is_governed_by__cd5809">Overtime pay calculation is governed by the <strong>Employment Act 1955</strong> based on your <strong>Hourly Rate of Pay (HRP)</strong> and statutory multipliers:</p>
                 <div style="font-family: monospace; background: #f1f5f9; padding: 8px 12px; border-radius: 6px; margin: 8px 0 12px 0; color: #1e293b; font-size: 13px;">
                   <strong>Overtime Pay Formula:</strong> HRP × Overtime Hours × Statutory Multiplier
                 </div>
                 <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
-                  <li style="margin-bottom: 6px;"><strong>Normal Workday OT:</strong> Paid at <strong>1.5x</strong> HRP for work exceeding standard daily hours.</li>
-                  <li style="margin-bottom: 6px;"><strong>Rest Day OT (Excess Hours):</strong> Paid at <strong>2.0x</strong> HRP for work beyond normal rest day schedule.</li>
-                  <li style="margin-bottom: 6px;"><strong>Public Holiday OT (Excess Hours):</strong> Paid at <strong>3.0x</strong> HRP for work beyond standard public holiday hours.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="normal_workday_ot_paid_at_15x_hrp_for_wo_d7109b"><strong>Normal Workday OT:</strong> Paid at <strong>1.5x</strong> HRP for work exceeding standard daily hours.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="rest_day_ot_excess_hours_paid_at_20x_hrp_82cd91"><strong>Rest Day OT (Excess Hours):</strong> Paid at <strong>2.0x</strong> HRP for work beyond normal rest day schedule.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="public_holiday_ot_excess_hours_paid_at_3_0c3d94"><strong>Public Holiday OT (Excess Hours):</strong> Paid at <strong>3.0x</strong> HRP for work beyond standard public holiday hours.</li>
                 </ul>
               </div>
             </details>
             <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">Is overtime calculated using basic salary or gross salary?</summary>
               <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
-                <p style="margin: 0 0 8px 0;">Statutory overtime calculation uses the <strong>Ordinary Rate of Pay (ORP)</strong> rather than total gross salary:</p>
+                <p style="margin: 0 0 8px 0;" data-i18n="statutory_overtime_calculation_uses_the__cf0bec">Statutory overtime calculation uses the <strong>Ordinary Rate of Pay (ORP)</strong> rather than total gross salary:</p>
                 <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
-                  <li style="margin-bottom: 6px;"><strong>Included Earnings:</strong> <strong>Basic Monthly Salary</strong> plus fixed, non-variable monthly allowances (e.g., position or fixed housing allowance).</li>
-                  <li style="margin-bottom: 6px;"><strong>Excluded Earnings:</strong> Performance-based bonuses, variable commissions, traveling allowances, and expense reimbursements.</li>
-                  <li style="margin-bottom: 6px;"><strong>Statutory Formula:</strong> Calculated using the mandatory fixed 26-day monthly divisor under the <strong>Employment Act 1955</strong>.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="included_earnings_basic_monthly_salary_p_8bf999"><strong>Included Earnings:</strong> <strong>Basic Monthly Salary</strong> plus fixed, non-variable monthly allowances (e.g., position or fixed housing allowance).</li>
+                  <li style="margin-bottom: 6px;" data-i18n="excluded_earnings_performancebased_bonus_0793f2"><strong>Excluded Earnings:</strong> Performance-based bonuses, variable commissions, traveling allowances, and expense reimbursements.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="statutory_formula_calculated_using_the_m_b83fba"><strong>Statutory Formula:</strong> Calculated using the mandatory fixed 26-day monthly divisor under the <strong>Employment Act 1955</strong>.</li>
                 </ul>
               </div>
             </details>
             <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">Who is entitled to overtime pay?</summary>
               <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
-                <p style="margin: 0 0 8px 0;">Under First Schedule amendments to Malaysia's <strong>Employment Act 1955</strong>, statutory OT coverage includes:</p>
+                <p style="margin: 0 0 8px 0;" data-i18n="under_first_schedule_amendments_to_malay_fd3a26">Under First Schedule amendments to Malaysia's <strong>Employment Act 1955</strong>, statutory OT coverage includes:</p>
                 <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
-                  <li style="margin-bottom: 6px;"><strong>Salary Threshold:</strong> Employees earning a basic monthly salary of <strong>RM 4,000 or below</strong> are statutorily entitled to overtime pay.</li>
-                  <li style="margin-bottom: 6px;"><strong>Manual Labor Exception:</strong> Employees engaged in manual labor, supervision of manual workers, or operation of mechanically propelled vehicles are eligible <strong>regardless of salary level</strong>.</li>
-                  <li style="margin-bottom: 6px;"><strong>Above RM 4,000 Non-Manual:</strong> Subject to individual employment contracts or company policy rather than mandatory statutory rates.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="salary_threshold_employees_earning_a_bas_9fd103"><strong>Salary Threshold:</strong> Employees earning a basic monthly salary of <strong>RM 4,000 or below</strong> are statutorily entitled to overtime pay.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="manual_labor_exception_employees_engaged_df353c"><strong>Manual Labor Exception:</strong> Employees engaged in manual labor, supervision of manual workers, or operation of mechanically propelled vehicles are eligible <strong>regardless of salary level</strong>.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="above_rm_4000_nonmanual_subject_to_indiv_478022"><strong>Above RM 4,000 Non-Manual:</strong> Subject to individual employment contracts or company policy rather than mandatory statutory rates.</li>
                 </ul>
               </div>
             </details>
             <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">What is the overtime rate for public holidays?</summary>
               <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
-                <p style="margin: 0 0 8px 0;">Working on an officially gazetted <strong>Public Holiday</strong> is compensated based on working hours:</p>
+                <p style="margin: 0 0 8px 0;" data-i18n="working_on_an_officially_gazetted_public_44fde4">Working on an officially gazetted <strong>Public Holiday</strong> is compensated based on working hours:</p>
                 <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
-                  <li style="margin-bottom: 6px;"><strong>Within Normal Working Hours:</strong> Entitled to <strong>2 days' Ordinary Rate of Pay (ORP)</strong> regardless of actual hours worked within standard shift.</li>
-                  <li style="margin-bottom: 6px;"><strong>Excess / Overtime Hours:</strong> Paid at <strong>3.0x</strong> your <strong>Hourly Rate of Pay (HRP)</strong> for every hour worked beyond normal shift hours.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="within_normal_working_hours_entitled_to__742896"><strong>Within Normal Working Hours:</strong> Entitled to <strong>2 days' Ordinary Rate of Pay (ORP)</strong> regardless of actual hours worked within standard shift.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="excess_overtime_hours_paid_at_30x_your_h_acf41b"><strong>Excess / Overtime Hours:</strong> Paid at <strong>3.0x</strong> your <strong>Hourly Rate of Pay (HRP)</strong> for every hour worked beyond normal shift hours.</li>
                 </ul>
               </div>
             </details>
             <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">What is the overtime rate for rest days?</summary>
               <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
-                <p style="margin: 0 0 8px 0;">Work performed on a scheduled weekly <strong>Rest Day</strong> follows statutory tiered rates:</p>
+                <p style="margin: 0 0 8px 0;" data-i18n="work_performed_on_a_scheduled_weekly_res_3a9d5d">Work performed on a scheduled weekly <strong>Rest Day</strong> follows statutory tiered rates:</p>
                 <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
-                  <li style="margin-bottom: 6px;"><strong>Up to Half Normal Hours:</strong> Paid <strong>0.5 day's ORP</strong> (for monthly paid employees).</li>
-                  <li style="margin-bottom: 6px;"><strong>More Than Half Up to Full Shift:</strong> Paid <strong>1.0 day's ORP</strong>.</li>
-                  <li style="margin-bottom: 6px;"><strong>Excess / Overtime Hours:</strong> Paid at <strong>2.0x</strong> your <strong>Hourly Rate of Pay (HRP)</strong> for any hours worked beyond standard shift duration.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="up_to_half_normal_hours_paid_05_days_orp_7b412d"><strong>Up to Half Normal Hours:</strong> Paid <strong>0.5 day's ORP</strong> (for monthly paid employees).</li>
+                  <li style="margin-bottom: 6px;" data-i18n="more_than_half_up_to_full_shift_paid_10__beb785"><strong>More Than Half Up to Full Shift:</strong> Paid <strong>1.0 day's ORP</strong>.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="excess_overtime_hours_paid_at_20x_your_h_4cde7a"><strong>Excess / Overtime Hours:</strong> Paid at <strong>2.0x</strong> your <strong>Hourly Rate of Pay (HRP)</strong> for any hours worked beyond standard shift duration.</li>
                 </ul>
               </div>
             </details>
             <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">How do I calculate my hourly rate?</summary>
               <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
-                <p style="margin: 0 0 8px 0;">Your <strong>Hourly Rate of Pay (HRP)</strong> is calculated in two steps using statutory Employment Act guidelines:</p>
+                <p style="margin: 0 0 8px 0;" data-i18n="your_hourly_rate_of_pay_hrp_is_calculate_a3ff59">Your <strong>Hourly Rate of Pay (HRP)</strong> is calculated in two steps using statutory Employment Act guidelines:</p>
                 <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
-                  <li style="margin-bottom: 8px;">
+                  <li style="margin-bottom: 8px;" data-i18n="step_1_daily_ordinary_rate_of_pay_orp_or_8dddda">
                     <strong>Step 1 — Daily Ordinary Rate of Pay (ORP):</strong>
                     <div style="font-family: monospace; background: #f1f5f9; padding: 6px 12px; border-radius: 6px; margin: 4px 0 8px 0; color: #1e293b; font-size: 13px;">
                       ORP = Monthly Basic Salary ÷ 26
                     </div>
                   </li>
-                  <li>
+                  <li data-i18n="step_2_hourly_rate_of_pay_hrp_hrp_orp_no_48af3b">
                     <strong>Step 2 — Hourly Rate of Pay (HRP):</strong>
                     <div style="font-family: monospace; background: #f1f5f9; padding: 6px 12px; border-radius: 6px; margin: 4px 0; color: #1e293b; font-size: 13px;">
                       HRP = ORP ÷ Normal Daily Working Hours (e.g., 8 hours)
@@ -761,11 +776,11 @@
             <details style="background: #ffffff; padding: 16px; border-radius: 8px; border: 1px solid #f1f5f9; cursor: pointer;">
               <summary style="font-weight: 600; font-size: 1rem; color: #1e293b">What is the maximum overtime hours allowed per month?</summary>
               <div style="margin-top: 10px; font-size: 15px; color: #475569; line-height: 1.6;">
-                <p style="margin: 0 0 8px 0;">Malaysia enforces strict statutory limits on monthly overtime work under Employment Regulations:</p>
+                <p style="margin: 0 0 8px 0;" data-i18n="malaysia_enforces_strict_statutory_limit_4046c6">Malaysia enforces strict statutory limits on monthly overtime work under Employment Regulations:</p>
                 <ul style="margin: 0; padding-left: 20px; line-height: 1.6; color: #475569;">
-                  <li style="margin-bottom: 6px;"><strong>Monthly OT Cap:</strong> Maximum allowable overtime is <strong>104 hours / month</strong>.</li>
-                  <li style="margin-bottom: 6px;"><strong>Exemption Requirements:</strong> Employers requiring employees to exceed 104 OT hours must obtain prior written approval from the <strong>Director General of Labour (JTK)</strong>.</li>
-                  <li style="margin-bottom: 6px;"><strong>Weekly Working Hour Limit:</strong> Total regular weekly working hours are capped at <strong>45 hours / week</strong> under updated <strong>Employment Act 1955</strong> standards.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="monthly_ot_cap_maximum_allowable_overtim_35d1a9"><strong>Monthly OT Cap:</strong> Maximum allowable overtime is <strong>104 hours / month</strong>.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="exemption_requirements_employers_requiri_740341"><strong>Exemption Requirements:</strong> Employers requiring employees to exceed 104 OT hours must obtain prior written approval from the <strong>Director General of Labour (JTK)</strong>.</li>
+                  <li style="margin-bottom: 6px;" data-i18n="weekly_working_hour_limit_total_regular__0510b2"><strong>Weekly Working Hour Limit:</strong> Total regular weekly working hours are capped at <strong>45 hours / week</strong> under updated <strong>Employment Act 1955</strong> standards.</li>
                 </ul>
               </div>
             </details>
@@ -774,7 +789,7 @@
 
 
       </div>
-    </div></section>
+    </section>
 
     <!-- Other Calculators Section -->
   <section class="content-section other-calculators-section">
@@ -805,46 +820,46 @@
         }
       </style>
       <div class="seo-card" style="margin-bottom: 0;">
-        <h2 class="seo-title" style="color: #2563eb !important;">Try Our Other Free Calculators</h2>
-        <p class="seo-subtitle" style="color: #64748b; font-size: 1rem; margin-bottom: 24px;">Free, instant and accurate HR calculation tools for Malaysia.</p>
-        <div class="other-calculators-grid">
+        <h2 class="seo-title" style="color: #2563eb !important;" data-i18n="try_our_other_free_calculators_2e46ec">Try Our Other Free Calculators</h2>
+        <p class="seo-subtitle" style="color: #64748b; font-size: 1rem; margin-bottom: 24px;" data-i18n="free_instant_and_accurate_hr_calculation_9be83b">Free, instant and accurate HR calculation tools for Malaysia.</p>
+        <div class="other-calculators-grid" data-i18n="salary_calculator_calculate_your_exact_t_706a31">
 
-      <a href="/" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #fde68a; border-radius: 12px; background: #fffbeb; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';">
+      <a href="/" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #fde68a; border-radius: 12px; background: #fffbeb; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';" data-i18n="salary_calculator_calculate_your_exact_t_eb33e3">
         <div style="background: #fef3c7; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"></path><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"></path><circle cx="14" cy="9" r="1"></circle></svg>
         </div>
         <h3 style="color: #d97706; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">Salary Calculator</h3>
-        <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Calculate your exact take home pay after EPF, SOCSO, EIS & PCB deductions.</p>
+        <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Calculate your exact take home pay after EPF, SOCSO, EIS &amp; PCB deductions.</p>
       </a>
-      <a href="/socso-perkeso" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #bbf7d0; border-radius: 12px; background: #f0fdf4; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';">
+      <a href="/socso-perkeso" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #bbf7d0; border-radius: 12px; background: #f0fdf4; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';" data-i18n="socso_calculator_check_employee_and_empl_12eec8">
         <div style="background: #dcfce7; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
         </div>
         <h3 style="color: #166534; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">SOCSO Calculator</h3>
-        <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Check employee and employer PERKESO & EIS contribution rates.</p>
+        <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Check employee and employer PERKESO &amp; EIS contribution rates.</p>
       </a>
-      <a href="/pcb-income-tax" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #bae6fd; border-radius: 12px; background: #f0f9ff; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';">
+      <a href="/pcb-income-tax" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #bae6fd; border-radius: 12px; background: #f0f9ff; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';" data-i18n="pcb_calculator_calculate_your_monthly_ta_d9cda1">
         <div style="background: #e0f2fe; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#075985" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1Z"></path><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><path d="M12 17.5V6.5"></path></svg>
         </div>
         <h3 style="color: #075985; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">PCB Calculator</h3>
-        <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Calculate your monthly tax deduction (MTD) for employees & employers.</p>
+        <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Calculate your monthly tax deduction (MTD) for employees &amp; employers.</p>
       </a>
-      <a href="/epf-kwsp" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #fecaca; border-radius: 12px; background: #fef2f2; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';">
+      <a href="/epf-kwsp" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #fecaca; border-radius: 12px; background: #fef2f2; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';" data-i18n="epf_calculator_calculate_epf_kwsp_employ_39a659">
         <div style="background: #fee2e2; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#991b1b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"></path><path d="M3 7v1a3 3 0 0 0 6 0V7m6 0v1a3 3 0 0 0 6 0V7M9 7h6"></path><path d="M5 21V10.85M19 21V10.85M9 21V14M15 21V14"></path><path d="M10.22 2.72a2 2 0 0 1 3.56 0L15 5H9l1.22-2.28Z"></path></svg>
         </div>
         <h3 style="color: #991b1b; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">EPF Calculator</h3>
         <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Calculate EPF (KWSP) employee and employer contribution amounts.</p>
       </a>
-      <a href="/annual-leave-calculator" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #e9d5ff; border-radius: 12px; background: #faf5ff; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';">
+      <a href="/annual-leave-calculator" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #e9d5ff; border-radius: 12px; background: #faf5ff; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';" data-i18n="annual_leave_calculator_calculate_accura_196109">
         <div style="background: #ede9fe; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#5b21b6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>
         </div>
         <h3 style="color: #5b21b6; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">Annual Leave Calculator</h3>
         <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">Calculate accurate pro-rated annual leave entitlement under Employment Act.</p>
       </a>
-      <a href="/hourly-rate" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #bfdbfe; border-radius: 12px; background: #eff6ff; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';">
+      <a href="/hourly-rate" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid #bfdbfe; border-radius: 12px; background: #eff6ff; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';" data-i18n="hourly_rate_calculator_calculate_your_ex_21f9dd">
         <div style="background: #dbeafe; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1d4ed8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 16 10"></polyline><line x1="12" y1="2" x2="12" y2="4"></line></svg>
         </div>
@@ -862,24 +877,24 @@
 <section class="explore-more-section" style="padding: 60px 0; background-color: #f8fafc; border-top: 1px solid #e2e8f0;">
   <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; width: 100%;">
     <div style="text-align: center; margin-bottom: 40px;">
-      <h2 style="font-size: 2rem; font-weight: 700; color: #2563eb !important; margin: 0 0 12px 0;">Explore More Articles</h2>
-      <p style="font-size: 1.1rem; color: #64748b; margin: 0 auto; max-width: 600px; line-height: 1.5; text-align: center;">Browse our latest guides, salary tips, and calculator tutorials.</p>
+      <h2 style="font-size: 2rem; font-weight: 700; color: #2563eb !important; margin: 0 0 12px 0;" data-i18n="explore_more_articles_b11beb">Explore More Articles</h2>
+      <p style="font-size: 1.1rem; color: #64748b; margin: 0 auto; max-width: 600px; line-height: 1.5; text-align: center;" data-i18n="browse_our_latest_guides_salary_tips_and_9a8be2">Browse our latest guides, salary tips, and calculator tutorials.</p>
     </div>
-    <div class="explore-more-grid">
-      <a class="blog-card" href="/blog/how-to-calculate-overtime-pay-in-malaysia-normal-days-rest-days-public-holidays">
+    <div class="explore-more-grid" data-i18n="overtime_how_to_calculate_overtime_pay_i_917b14">
+      <a class="blog-card" href="/blog/how-to-calculate-overtime-pay-in-malaysia-normal-days-rest-days-public-holidays" data-i18n="overtime_how_to_calculate_overtime_pay_i_f1b93d">
       <div class="blog-content">
         <div style="margin-bottom: 12px; display: flex; align-items: center;">
           <span class="blog-category category-overtime">Overtime</span>
         </div>
-        <h3 class="blog-title">How to Calculate Overtime Pay in Malaysia: Normal Days, Rest Days & Public Holidays</h3>
+        <h3 class="blog-title">How to Calculate Overtime Pay in Malaysia: Normal Days, Rest Days &amp; Public Holidays</h3>
         <div class="blog-meta">
           <span class="read-more-link">Read Article →</span>
         </div>
       </div>
     </a>
     </div>
-    <div style="text-align: center; margin-top: 40px;">
-      <a class="view-all-articles-link" href="https://salarycalculator.my/blog" style="display: inline-block; font-size: 1.1rem; font-weight: 600; color: #2563eb; text-decoration: none; transition: color 0.2s ease, transform 0.2s ease;">View All Articles →</a>
+    <div style="text-align: center; margin-top: 40px;" data-i18n="view_all_articles_f98ed5">
+      <a class="view-all-articles-link" href="https://salarycalculator.my/blog" style="display: inline-block; font-size: 1.1rem; font-weight: 600; color: #2563eb; text-decoration: none; transition: color 0.2s ease, transform 0.2s ease;" data-i18n="view_all_articles_13678c">View All Articles →</a>
     </div>
   </div>
 </section>
@@ -965,29 +980,29 @@
           <!-- Logo + Description -->
           <div class="footer-col" style="max-width: max-content; padding-left: 32px; box-sizing: border-box;">
             <a href="/" class="logo" style="margin-bottom: 16px; display: block;">
-              <img src="/logo-small.png?v=3" alt="SalaryCalculator.my" width="250" height="44" style="height: 44px !important; width: auto !important; max-width: none !important; object-fit: contain; object-position: left center; display: block; margin: 0; padding: 0;">
+              <img src="/logo-small.png?v=4" alt="SalaryCalculator.my" width="250" height="44" style="height: 44px !important; width: auto !important; max-width: none !important; object-fit: contain; object-position: left center; display: block; margin: 0; padding: 0;">
             </a>
-            <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+            <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;" data-i18n="accurate_malaysia_salary_calculator_inst_0c4a26">
               Accurate Malaysia salary calculator.<br>
               Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
             </p>
             <div style="font-size: 15px; color: #64748b; margin: 0;">
-              <p style="margin: 0 0 8px 0;">© 2026 SalaryCalculator.my. All rights reserved.</p>
-              <p style="margin: 0;">Data is estimated for reference only</p>
+              <p style="margin: 0 0 8px 0;" data-i18n="_2026_salarycalculatormy_all_rights_rese_2ead1b">© 2026 SalaryCalculator.my. All rights reserved.</p>
+              <p style="margin: 0;" data-i18n="data_is_estimated_for_reference_only_e819d1">Data is estimated for reference only</p>
             </div>
           </div>
 
           <!-- Quick Links -->
           <div class="footer-col footer-col-links">
-            <h4>Quick Links</h4>
-            <a href="/" class="footer-link">Salary Calculator</a>
-            <a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
-            <a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
-            <a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
-            <a href="/annual-leave-calculator" class="footer-link">Annual Leave Calculator</a>
-            <a href="/overtime-pay-calculator" class="footer-link">Overtime Pay Calculator</a>
-            <a href="/blog" class="footer-link">Blog</a>
-            <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+            <h4 data-i18n="quick_links_f0fb2c">Quick Links</h4>
+            <a href="/" class="footer-link" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+            <a href="/socso-perkeso" class="footer-link" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+            <a href="/pcb-income-tax" class="footer-link" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+            <a href="/epf-kwsp" class="footer-link" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
+            <a href="/annual-leave-calculator" class="footer-link" data-i18n="annual_leave_calculator_2cfd91">Annual Leave Calculator</a>
+            <a href="/overtime-pay-calculator" class="footer-link" data-i18n="overtime_pay_calculator_459bb3">Overtime Pay Calculator</a>
+            <a href="/blog" class="footer-link" data-i18n="blog_be8df1">Blog</a>
+            <a href="/privacy-policy" class="footer-link" data-i18n="privacy_policy_fa2ead">Privacy Policy</a>
           </div>
         </div>
       </div>
@@ -996,24 +1011,24 @@
     <!-- Lead Modal -->
     <div id="emailModal" class="modal-overlay">
       <div class="modal">
-        <span class="modal-close" id="closeModal">&times;</span>
+        <span class="modal-close" id="closeModal">×</span>
 
         <div id="modalFormContent">
-          <h2 id="modalTitle" style="color: #2563eb !important;">Download Report</h2>
-          <p id="modalDescription">
+          <h2 id="modalTitle" style="color: #2563eb !important;" data-i18n="download_report_9b1ef6">Download Report</h2>
+          <p id="modalDescription" data-i18n="enter_your_email_address_to_receive_your_72d9cb">
             Enter your email address to receive your detailed PDF report.
           </p>
           <form id="emailForm">
-            <div class="form-group">
-              <label class="form-label" for="userName">Full Name <span style="color: red">*</span></label>
+            <div class="form-group" data-i18n="full_name_466a99">
+              <label class="form-label" for="userName" data-i18n="full_name__491e5c">Full Name <span style="color: red">*</span></label>
               <input type="text" id="userName" class="form-input" placeholder="Your Name" required="">
             </div>
-            <div class="form-group">
-              <label class="form-label" for="userEmail">Email Address <span style="color: red">*</span></label>
+            <div class="form-group" data-i18n="email_address_1b72a4">
+              <label class="form-label" for="userEmail" data-i18n="email_address__cf919c">Email Address <span style="color: red">*</span></label>
               <input type="email" id="userEmail" class="form-input" placeholder="you@example.com" required="">
             </div>
-            <div class="form-group">
-              <label class="form-label" for="userType">Who are you? <span style="color: red">*</span></label>
+            <div class="form-group" data-i18n="who_are_you_select_an_option_employer_hr_657aa8">
+              <label class="form-label" for="userType" data-i18n="who_are_you__9f4733">Who are you? <span style="color: red">*</span></label>
               <select id="userType" class="form-select" required="">
                 <option value="" disabled="" selected="">Select an option</option>
                 <option value="Employer / HR">Employer / HR</option>
@@ -1022,13 +1037,13 @@
               </select>
             </div>
 
-            <div class="form-group" id="companyNameGroup" style="display: none">
-              <label class="form-label" for="companyName">Company Name <span style="color: red">*</span></label>
+            <div class="form-group" id="companyNameGroup" style="display: none" data-i18n="company_name_ba75a1">
+              <label class="form-label" for="companyName" data-i18n="company_name__576bf0">Company Name <span style="color: red">*</span></label>
               <input type="text" id="companyName" class="form-input" placeholder="Your Company Name">
             </div>
 
-            <div class="form-group" id="hiringQuestionGroup" style="display: none">
-              <label class="form-label" for="hiringStatus">Hiring Status <span style="color: red">*</span></label>
+            <div class="form-group" id="hiringQuestionGroup" style="display: none" data-i18n="hiring_status_select_status_hiring_now_p_14ce78">
+              <label class="form-label" for="hiringStatus" data-i18n="hiring_status__480dcd">Hiring Status <span style="color: red">*</span></label>
               <select id="hiringStatus" class="form-select">
                 <option value="" disabled="" selected="">Select status</option>
                 <option value="Hiring Now">Hiring Now</option>
@@ -1039,11 +1054,11 @@
               </select>
             </div>
 
-            <div class="form-group">
-              <label class="form-label" for="userPhone">Contact Number <span class="helper-text">(Optional)</span></label>
+            <div class="form-group" data-i18n="contact_number_optional_5c564a">
+              <label class="form-label" for="userPhone" data-i18n="contact_number_optional_869f92">Contact Number <span class="helper-text">(Optional)</span></label>
               <input type="tel" id="userPhone" class="form-input" placeholder="e.g. +60123456789">
             </div>
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" data-i18n="submit_download_6d76fa">
               Submit &amp; Download
             </button>
           </form>
@@ -1053,7 +1068,7 @@
           <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
           </svg>
-          <div id="modalFeedback">Thank you! Your report has been downloaded.</div>
+          <div id="modalFeedback" data-i18n="thank_you_your_report_has_been_downloade_4070be">Thank you! Your report has been downloaded.</div>
 
           <div id="mobileActionButtons" style="
               display: none;
@@ -1066,20 +1081,20 @@
                 text-align: center;
                 text-decoration: none;
                 display: inline-block;
-              ">View File Now</a>
+              " data-i18n="view_file_now_98f768">View File Now</a>
             <p style="
                 font-size: 13px;
                 color: #64748b;
                 text-align: center;
                 margin: 0;
-              " id="mobileFallbackText">
+              " id="mobileFallbackText" data-i18n="if_the_file_didnt_open_automatically_cli_9bcb7a">
               If the file didn't open automatically, click the button above.
             </p>
           </div>
         </div>
       </div>
     </div>
-    </div>
+    
 
     
 
@@ -1170,12 +1185,15 @@
         // desktop and mobile highlighting
         const allLinks = document.querySelectorAll('.nav-item, .mobile-nav-item, .dropdown-item, .mobile-submenu-item');
         allLinks.forEach(link => {
-          const href = link.getAttribute('href');
+          let href = link.getAttribute('href');
           if (!href) return;
           
-          if (href === '/' && (normalizedPath === '/index.html' || normalizedPath === '/')) {
+          const isHomeLink = href === '/' || href === '/ms/' || href === '/ms';
+          const isHomePath = normalizedPath === '/index.html' || normalizedPath === '/' || normalizedPath === '/ms/' || normalizedPath === '/ms';
+          
+          if (isHomeLink && isHomePath) {
             link.classList.add('active-nav');
-          } else if (href !== '/' && normalizedPath.includes(href)) {
+          } else if (!isHomeLink && normalizedPath.includes(href)) {
             link.classList.add('active-nav');
             
             // If it's a dropdown item, also highlight the trigger

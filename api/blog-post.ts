@@ -1,3 +1,4 @@
+import { ROUTE_MAP, getEnRoute } from '../src/lib/route-map';
 import * as cheerio from "cheerio";
 import * as fs from "fs";
 import * as path from "path";
@@ -236,6 +237,18 @@ export default async function handler(req: any, res: any) {
       $('#related-articles-list').html(relatedHtml);
     }
 
+    const enUrl = '/blog/' + slug;
+    const msUrl = '/ms/';
+    const canonicalUrl = 'https://salarycalculator.my' + enUrl;
+
+    $('html').attr('lang', 'en');
+    $('link[rel="canonical"]').attr('href', canonicalUrl);
+    $('link[rel="alternate"]').remove(); // No hreflang tags for blog pages
+
+    $('.lang-en').attr('href', enUrl).css('color', 'var(--primary-color)').css('font-weight', '600');
+    $('.lang-ms').attr('href', msUrl).css('color', 'var(--text-muted)').css('font-weight', '400');
+
+
     if (!post) {
       // Return 404 populated template
       $('title').text("Article Not Found – HR & Salary Blog Malaysia");
@@ -244,6 +257,7 @@ export default async function handler(req: any, res: any) {
       $('#article-title').text("Article Not Found");
       $('#article-content').html('<p>The article you are looking for does not exist or may have been removed. Browse the <a href="/blog">full blog</a> instead.</p>');
       $('head').prepend('<script>window.__SSR_COMPLETE = true;</script>');
+
       res.setHeader("Content-Type", "text/html");
       return res.status(404).send($.html());
     }

@@ -3,7 +3,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HR &amp; Salary Blog Malaysia | Payroll Law Guides</title>
   <meta name="description" content="Free guides on EPF, PCB, SOCSO, employment law and payroll for Malaysian employees and employers.">
-  <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
+  <link rel="icon" type="image/png" href="/favicon-ricebowl.png?v=4">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -94,7 +94,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
     <!-- Main Stylesheet -->
     <link href="/calculator-styles.css?v=20260710" rel="stylesheet">
@@ -102,7 +102,7 @@
       <link href="/calculator-styles.css?v=20260710" rel="stylesheet" />
     </noscript>
 
-    <link rel="preload" as="image" href="/logo-small.png">
+    <link rel="preload" as="image" href="/logo-small.png?v=4">
     <noscript>
       <style>
         /* Desktop Dropdown Fallback */
@@ -150,23 +150,24 @@
         justify-content: center;
       }
     </style>
-  </head>
+  <link rel="canonical" href="https://salarycalculator.my/blog">
+</head>
 <body>
 <header class="navbar">
       <div class="container">
         <a href="/" class="logo">
-          <img src="/logo-small.png?v=2" alt="SalaryCalculator.my" class="logo-img" width="250" height="44" fetchpriority="high">
+          <img src="/logo-small.png?v=4" alt="SalaryCalculator.my" class="logo-img" width="250" height="44" fetchpriority="high">
         </a>
 
         <!-- Desktop Nav -->
                 
         <nav class="desktop-nav">
-          <a href="/" class="nav-item" id="navSalary">Salary Calculator</a>
-          <a href="/socso-perkeso" class="nav-item" id="navSocso">SOCSO Calculator</a>
-          <a href="/pcb-income-tax" class="nav-item" id="navPcb">PCB Calculator</a>
-          <a href="/epf-kwsp" class="nav-item" id="navEpf">EPF Calculator</a>
+          <a href="/" class="nav-item" id="navSalary" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+          <a href="/socso-perkeso" class="nav-item" id="navSocso" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+          <a href="/pcb-income-tax" class="nav-item" id="navPcb" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+          <a href="/epf-kwsp" class="nav-item" id="navEpf" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
           <div class="nav-dropdown">
-            <button class="nav-item dropdown-trigger" id="freeToolsTrigger" aria-haspopup="true" aria-expanded="false">
+            <button class="nav-item dropdown-trigger" id="freeToolsTrigger" aria-haspopup="true" aria-expanded="false" data-i18n="free_tools_9f269a">
               Free Tools
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
@@ -176,8 +177,14 @@
             
               <a href="/hourly-rate" class="dropdown-item" role="menuitem">Hourly Rate Calculator</a></div>
           </div>
-          <a href="/blog" class="nav-item" id="navBlog">Blog</a>
-        </nav>
+          <a href="/blog" class="nav-item" id="navBlog" data-i18n="blog_be8df1">Blog</a>
+        
+      <div class="lang-switcher" style="display: flex; gap: 8px; align-items: center; margin-left: auto; font-weight: 500;">
+        <a href="/blog" class="lang-en" style="color: var(--primary-color); text-decoration: none;">EN</a>
+        <span style="color: var(--border-color);">|</span>
+        <a href="/ms/" class="lang-ms" style="color: var(--text-muted); text-decoration: none;">BM</a>
+      </div>
+    </nav>
 
         <!-- Mobile Hamburger Button -->
         <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Menu">
@@ -192,11 +199,17 @@
       <!-- Mobile Dropdown Menu -->
             
       <nav class="mobile-nav" id="mobileNavMenu">
-        <a href="/" class="mobile-nav-item" id="mobNavSalary">Salary Calculator</a>
-        <a href="/socso-perkeso" class="mobile-nav-item" id="mobNavSocso">SOCSO Calculator</a>
-        <a href="/pcb-income-tax" class="mobile-nav-item" id="mobNavPcb">PCB Calculator</a>
-        <a href="/epf-kwsp" class="mobile-nav-item" id="mobNavEpf">EPF Calculator</a>
-        <button class="mobile-nav-item has-children" id="mobileFreeToolsTrigger">
+      <div class="lang-switcher" style="display: flex; gap: 8px; align-items: center; margin-left: auto; font-weight: 500;">
+        <a href="/blog" class="lang-en" style="color: var(--primary-color); text-decoration: none;">EN</a>
+        <span style="color: var(--border-color);">|</span>
+        <a href="/ms/" class="lang-ms" style="color: var(--text-muted); text-decoration: none;">BM</a>
+      </div>
+    
+        <a href="/" class="mobile-nav-item" id="mobNavSalary" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+        <a href="/socso-perkeso" class="mobile-nav-item" id="mobNavSocso" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+        <a href="/pcb-income-tax" class="mobile-nav-item" id="mobNavPcb" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+        <a href="/epf-kwsp" class="mobile-nav-item" id="mobNavEpf" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
+        <button class="mobile-nav-item has-children" id="mobileFreeToolsTrigger" data-i18n="free_tools_c3d00f">
           Free Tools
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
@@ -204,7 +217,7 @@
           <a href="/annual-leave-calculator" class="mobile-submenu-item">Annual Leave Calculator</a>
           <a href="/overtime-pay-calculator" class="mobile-submenu-item">Overtime Pay Calculator</a>
         </div>
-        <a href="/blog" class="mobile-nav-item" id="mobNavBlog">Blog</a>
+        <a href="/blog" class="mobile-nav-item" id="mobNavBlog" data-i18n="blog_be8df1">Blog</a>
       </nav>
     </header>
 <noscript>
@@ -214,8 +227,8 @@
   </div>
 </noscript>
 <div class="hero">
-  <h1>HR &amp; Salary Blog Malaysia</h1>
-  <p>Free guides on EPF, PCB, SOCSO, employment law and payroll for Malaysian employees and employers.</p>
+  <h1 data-i18n="hr_salary_blog_malaysia_e61f36">HR &amp; Salary Blog Malaysia</h1>
+  <p data-i18n="free_guides_on_epf_pcb_socso_employment__494191">Free guides on EPF, PCB, SOCSO, employment law and payroll for Malaysian employees and employers.</p>
   <svg class="hero-wave" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="position: absolute; bottom: -1px; left: 0; width: 100%; height: 50px; display: block; z-index: 1; pointer-events: none;">
     <path d="M0,40 Q360,90 720,60 T1440,90 L1440,120 L0,120 Z" fill="#ffffff"></path>
   </svg>
@@ -242,7 +255,7 @@
     </div>
     <aside class="sidebar">
       <div class="sidebar-card">
-        <h3>Free HR Calculators</h3>
+        <h3 data-i18n="free_hr_calculators_f7d1da">Free HR Calculators</h3>
         <div class="sidebar-links">
           <a href="/" class="sidebar-link"><span class="sidebar-link-icon">💰</span><div><div class="sidebar-link-text">Salary Calculator</div><div class="sidebar-link-desc">Take-home pay after EPF, SOCSO &amp; PCB</div></div></a>
           <a href="/epf-kwsp" class="sidebar-link"><span class="sidebar-link-icon">🏦</span><div><div class="sidebar-link-text">EPF Calculator</div><div class="sidebar-link-desc">Employee &amp; employer contributions</div></div></a>
@@ -270,29 +283,29 @@
           <!-- Logo + Description -->
           <div class="footer-col" style="max-width: max-content; padding-left: 32px; box-sizing: border-box;">
             <a href="/" class="logo" style="margin-bottom: 16px; display: block;">
-              <img src="/logo-small.png?v=3" alt="SalaryCalculator.my" width="250" height="44" style="height: 44px !important; width: auto !important; max-width: none !important; object-fit: contain; object-position: left center; display: block; margin: 0; padding: 0;">
+              <img src="/logo-small.png?v=4" alt="SalaryCalculator.my" width="250" height="44" style="height: 44px !important; width: auto !important; max-width: none !important; object-fit: contain; object-position: left center; display: block; margin: 0; padding: 0;">
             </a>
-            <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;">
+            <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0 0 16px 0;" data-i18n="accurate_malaysia_salary_calculator_inst_0c4a26">
               Accurate Malaysia salary calculator.<br>
               Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
             </p>
             <div style="font-size: 15px; color: #64748b; margin: 0;">
-              <p style="margin: 0 0 8px 0;">© 2026 SalaryCalculator.my. All rights reserved.</p>
-              <p style="margin: 0;">Data is estimated for reference only</p>
+              <p style="margin: 0 0 8px 0;" data-i18n="_2026_salarycalculatormy_all_rights_rese_2ead1b">© 2026 SalaryCalculator.my. All rights reserved.</p>
+              <p style="margin: 0;" data-i18n="data_is_estimated_for_reference_only_e819d1">Data is estimated for reference only</p>
             </div>
           </div>
 
           <!-- Quick Links -->
           <div class="footer-col footer-col-links">
-            <h4>Quick Links</h4>
-            <a href="/" class="footer-link">Salary Calculator</a>
-            <a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
-            <a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
-            <a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
-            <a href="/annual-leave-calculator" class="footer-link">Annual Leave Calculator</a>
-            <a href="/overtime-pay-calculator" class="footer-link">Overtime Pay Calculator</a>
-            <a href="/blog" class="footer-link">Blog</a>
-            <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+            <h4 data-i18n="quick_links_f0fb2c">Quick Links</h4>
+            <a href="/" class="footer-link" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+            <a href="/socso-perkeso" class="footer-link" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+            <a href="/pcb-income-tax" class="footer-link" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+            <a href="/epf-kwsp" class="footer-link" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
+            <a href="/annual-leave-calculator" class="footer-link" data-i18n="annual_leave_calculator_2cfd91">Annual Leave Calculator</a>
+            <a href="/overtime-pay-calculator" class="footer-link" data-i18n="overtime_pay_calculator_459bb3">Overtime Pay Calculator</a>
+            <a href="/blog" class="footer-link" data-i18n="blog_be8df1">Blog</a>
+            <a href="/privacy-policy" class="footer-link" data-i18n="privacy_policy_fa2ead">Privacy Policy</a>
           </div>
         </div>
       </div>
@@ -380,12 +393,15 @@
         // desktop and mobile highlighting
         const allLinks = document.querySelectorAll('.nav-item, .mobile-nav-item, .dropdown-item, .mobile-submenu-item');
         allLinks.forEach(link => {
-          const href = link.getAttribute('href');
+          let href = link.getAttribute('href');
           if (!href) return;
           
-          if (href === '/' && (normalizedPath === '/index.html' || normalizedPath === '/')) {
+          const isHomeLink = href === '/' || href === '/ms/' || href === '/ms';
+          const isHomePath = normalizedPath === '/index.html' || normalizedPath === '/' || normalizedPath === '/ms/' || normalizedPath === '/ms';
+          
+          if (isHomeLink && isHomePath) {
             link.classList.add('active-nav');
-          } else if (href !== '/' && normalizedPath.includes(href)) {
+          } else if (!isHomeLink && normalizedPath.includes(href)) {
             link.classList.add('active-nav');
             
             // If it's a dropdown item, also highlight the trigger

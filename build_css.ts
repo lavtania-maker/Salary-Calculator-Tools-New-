@@ -41,7 +41,7 @@ ul { list-style: none; }
 .navbar { background: #ffffff; border-bottom: 1px solid var(--border); padding: 12px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
 .navbar .container { display: flex; justify-content: space-between; align-items: center; }
 .logo { display: flex; align-items: center; text-decoration: none; }
-.logo-img { height: 44px; width: auto; max-width: 250px; object-fit: contain; }
+.logo-img { height: 58px; width: auto; max-width: 320px; object-fit: contain; }
 .desktop-nav { display: flex; gap: 8px; align-items: center; }
 .nav-item {
   background: transparent; border: none; font-family: inherit; font-size: 0.95rem; font-weight: 600;

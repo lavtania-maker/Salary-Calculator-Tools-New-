@@ -1,3 +1,5 @@
+import { getMsRoute } from "./lib/route-map";
+
 export interface CalculatorTool {
   path: string;
   title: string;
@@ -82,6 +84,37 @@ export const CALCULATOR_TOOLS: CalculatorTool[] = [
   }
 ];
 
+export const CALCULATOR_TOOLS_MS: Record<string, { title: string; description: string }> = {
+  "/": {
+    title: "Kalkulator Gaji",
+    description: "Kira gaji bersih anda selepas potongan KWSP, PERKESO, SIP & PCB."
+  },
+  "/socso-perkeso": {
+    title: "Kalkulator SOCSO",
+    description: "Semak kadar caruman PERKESO & SIP untuk pekerja dan majikan."
+  },
+  "/pcb-income-tax": {
+    title: "Kalkulator PCB",
+    description: "Kira potongan cukai bulanan (PCB) untuk pekerja & majikan."
+  },
+  "/epf-kwsp": {
+    title: "Kalkulator KWSP",
+    description: "Kira jumlah caruman pekerja dan majikan KWSP."
+  },
+  "/annual-leave-calculator": {
+    title: "Kalkulator Cuti Tahunan",
+    description: "Kira kelayakan cuti tahunan mengikut Akta Kerja Malaysia."
+  },
+  "/overtime-pay-calculator": {
+    title: "Kalkulator Kerja Lebih Masa",
+    description: "Kira bayaran Overtime (OT) mengikut Akta Kerja Malaysia."
+  },
+  "/hourly-rate": {
+    title: "Kalkulator Kadar Gaji Sejam",
+    description: "Kira kadar gaji Sejam, Harian, dan pecahan waktu kerja anda."
+  }
+};
+
 export function normalizePath(p: string): string {
   let clean = (p || "/").split("?")[0].split("#")[0].toLowerCase();
   if (clean.endsWith(".html")) {
@@ -101,6 +134,7 @@ export function normalizePath(p: string): string {
 
 export function renderOtherCalculators(containerOrSelector?: HTMLElement | string | null): void {
   const currentPath = normalizePath(window.location.pathname);
+  const isMs = typeof window !== "undefined" && (window.location.pathname.startsWith("/ms/") || window.location.pathname === "/ms");
   
   // Filter out the current route
   let remaining = CALCULATOR_TOOLS.filter(tool => normalizePath(tool.path) !== currentPath);
@@ -120,15 +154,23 @@ export function renderOtherCalculators(containerOrSelector?: HTMLElement | strin
 
   if (!container) return;
 
-  const cardsHtml = remaining.map(tool => `
-    <a href="${tool.path}" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid ${tool.borderColor}; border-radius: 12px; background: ${tool.bgColor}; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';">
+  const cardsHtml = remaining.map(tool => {
+    const msInfo = CALCULATOR_TOOLS_MS[tool.path];
+    const toolTitle = (isMs && msInfo) ? msInfo.title : tool.title;
+    const toolDesc = (isMs && msInfo) ? msInfo.description : tool.description;
+    return `
+    <a href="${isMs ? getMsRoute(tool.path) : tool.path}" class="other-calc-card hover-lift" style="padding: 24px; border: 1px solid ${tool.borderColor}; border-radius: 12px; background: ${tool.bgColor}; text-decoration: none; box-shadow: 0 2px 4px -1px rgba(0,0,0,0.05); transition: transform 0.2s, box-shadow 0.2s; display: block;" onmouseover="this.style.transform = 'translateY(-2px)'; this.style.boxShadow = '0 6px 10px -3px rgba(0, 0, 0, 0.1)';" onmouseout="this.style.transform = 'translateY(0)'; this.style.boxShadow = '0 2px 4px -1px rgba(0, 0, 0, 0.05)';">
       <div style="background: ${tool.iconBgColor}; width: 48px; height: 48px; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
         ${tool.svgIcon}
       </div>
-      <h3 style="color: ${tool.textColor}; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">${tool.title}</h3>
-      <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">${tool.description}</p>
+      <h3 style="color: ${tool.textColor}; font-size: 1.125rem; font-weight: 700; margin-bottom: 8px;">${toolTitle}</h3>
+      <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;">${toolDesc}</p>
     </a>
-  `).join("");
+  `;
+  }).join("");
+
+  const sectionTitle = isMs ? "Cuba Kalkulator Percuma Kami Yang Lain" : "Try Our Other Free Calculators";
+  const sectionSubtitle = isMs ? "Alat pengiraan sumber manusia yang percuma, pantas dan tepat untuk Malaysia." : "Free, instant and accurate HR calculation tools for Malaysia.";
 
   const sectionContent = `
     <style>
@@ -157,8 +199,8 @@ export function renderOtherCalculators(containerOrSelector?: HTMLElement | strin
       }
     </style>
     <div class="seo-card" style="margin-bottom: 0;">
-      <h2 class="seo-title" style="color: #2563eb !important;">Try Our Other Free Calculators</h2>
-      <p class="seo-subtitle" style="color: #64748b; font-size: 1rem; margin-bottom: 24px;">Free, instant and accurate HR calculation tools for Malaysia.</p>
+      <h2 class="seo-title" style="color: #2563eb !important;">${sectionTitle}</h2>
+      <p class="seo-subtitle" style="color: #64748b; font-size: 1rem; margin-bottom: 24px;">${sectionSubtitle}</p>
       <div class="other-calculators-grid">
         ${cardsHtml}
       </div>

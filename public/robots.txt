@@ -4,10 +4,7 @@ Disallow: /
 User-agent: Googlebot
 Disallow: /admin
 Disallow: /blog-admin
-Disallow: /mincal
 Disallow: /report
-Disallow: /payslip
-Disallow: /payslip-generator
 Disallow: /epfreport
 Disallow: /pcbreport
 Disallow: /socsoreport

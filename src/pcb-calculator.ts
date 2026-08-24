@@ -1,8 +1,7 @@
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebase";
+import { generatePDFReport } from "./lib/pdf-generator";
 // Simplified Malaysia PCB Tax Calculator
-
-// import { generatePDFReport } from "./lib/pdf-generator";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("pcbForm") as HTMLFormElement;
@@ -122,6 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (salary <= 0) {
       placeholderText.style.display = "block";
       resultContent.classList.remove("show");
+      resultContent.style.display = "none";
       return;
     }
 
@@ -244,6 +244,7 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
     // Show result panel
     placeholderText.style.display = "none";
     resultContent.classList.add("show");
+    resultContent.style.display = "block";
   };
 
   const grossSalaryInput = document.getElementById(
@@ -291,6 +292,7 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
     setTimeout(() => {
       placeholderText.style.display = "block";
       resultContent.classList.remove("show");
+      resultContent.style.display = "none";
       // calculateBtn.disabled = true;
       if (pcbDisclaimer) pcbDisclaimer.style.display = "none";
     }, 10);
@@ -449,29 +451,22 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
           (dbPayload as any).hiringStatus = hiringInputExt?.value;
         if (phone) (dbPayload as any).phoneNumber = phone;
 
-        // Save to Firestore and Google Sheets. Only after both succeed, generate PDF.
-        let isSuccess = false;
-        try {
-          await addDoc(collection(db, "leads"), dbPayload);
-          
-          const sheetRes = await fetch("/api/pcb-sheet", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(sheetPayload),
-          });
-          
-          if (sheetRes.ok) {
-            isSuccess = true;
-          } else {
-            console.error("Google Sheets Webhook error:", await sheetRes.text());
-          }
-        } catch (err) {
-          console.error("Submission error:", err);
-        }
+        // 1. Store lead in Firestore (non-blocking in background)
+        addDoc(collection(db, "leads"), dbPayload).catch((fErr) => {
+          console.warn("Firestore leads record error:", fErr);
+        });
+        
+        // 2. Submit to Google Sheet via server proxy (non-blocking in background)
+        fetch("/api/pcb-sheet", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sheetPayload),
+        }).catch((sErr) => {
+          console.warn("Google Sheets record error:", sErr);
+        });
 
-        if (isSuccess && lastCalculation) {
-          import("./lib/pdf-generator").then(({ generatePDFReport }) => {
-          generatePDFReport({
+        if (lastCalculation) {
+          await generatePDFReport({
             title: "PCB (Income Tax) Report",
             fileName: "PCB_Report",
             data: [
@@ -521,7 +516,6 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
               },
             ],
           });
-        });
         }
 
         // Small delay to make "Processing..." visible but not annoying
@@ -552,8 +546,9 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
           if (mobileActionButtons) mobileActionButtons.style.display = "none";
           if (mobileFallbackText) mobileFallbackText.style.display = "none";
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error("Submission error:", err);
+        alert(err.message || "An error occurred while generating the report. Please try again.");
       } finally {
         if (submitBtn) {
           submitBtn.textContent = originalText;
