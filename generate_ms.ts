@@ -238,6 +238,7 @@ export function transformPage($: cheerio.CheerioAPI, enRoute: string, isMsRoute:
     $('.lang-en').css('color', 'var(--text-muted)').css('font-weight', '400');
   } else {
     // EN route
+    $('html').attr('lang', 'en');
     const isBlog = enRoute.startsWith('/blog');
     const canonicalUrl = 'https://salarycalculator.my' + enRoute;
     const msUrl = 'https://salarycalculator.my' + msRoute;

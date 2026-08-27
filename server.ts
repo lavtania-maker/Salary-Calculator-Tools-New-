@@ -225,6 +225,7 @@ function transformPage($: cheerio.CheerioAPI, enRoute: string, isMsRoute: boolea
     $('.lang-en').css('color', 'var(--text-muted)').css('font-weight', '400');
   } else {
     // EN route
+    $('html').attr('lang', 'en');
     const isBlog = enRoute.startsWith('/blog');
     const canonicalUrl = 'https://salarycalculator.my' + enRoute;
     const msUrl = 'https://salarycalculator.my' + msRoute;
@@ -476,6 +477,16 @@ async function startServer() {
       return blogPostHandler(req as any, res as any);
     }
     next();
+  });
+
+  // Serve static pages sitemap with proper XML content type
+  app.get("/sitemap-pages.xml", (req, res) => {
+    const filePath = path.join(process.cwd(), "public", "sitemap-pages.xml");
+    if (fs.existsSync(filePath)) {
+      res.setHeader("Content-Type", "application/xml; charset=utf-8");
+      return res.sendFile(filePath);
+    }
+    res.status(404).send("Not Found");
   });
 
   // Expose dynamic sitemap index
