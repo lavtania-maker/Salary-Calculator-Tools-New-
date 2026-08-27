@@ -135,6 +135,50 @@
       "destination": "/api/blog-post"
     },
     {
+      "source": "/ms",
+      "destination": "/ms/index.html"
+    },
+    {
+      "source": "/ms/",
+      "destination": "/ms/index.html"
+    },
+    {
+      "source": "/ms/kalkulator-epf",
+      "destination": "/ms/kalkulator-epf.html"
+    },
+    {
+      "source": "/ms/kalkulator-socso",
+      "destination": "/ms/kalkulator-socso.html"
+    },
+    {
+      "source": "/ms/kalkulator-pcb",
+      "destination": "/ms/kalkulator-pcb.html"
+    },
+    {
+      "source": "/ms/kalkulator-cuti-tahunan",
+      "destination": "/ms/kalkulator-cuti-tahunan.html"
+    },
+    {
+      "source": "/ms/kalkulator-overtime",
+      "destination": "/ms/kalkulator-overtime.html"
+    },
+    {
+      "source": "/ms/kadar-gaji-sejam",
+      "destination": "/ms/kadar-gaji-sejam.html"
+    },
+    {
+      "source": "/ms/kalkulator-gaji-minimum",
+      "destination": "/ms/kalkulator-gaji-minimum.html"
+    },
+    {
+      "source": "/ms/penjana-payslip",
+      "destination": "/ms/penjana-payslip.html"
+    },
+    {
+      "source": "/ms/dasar-privasi",
+      "destination": "/ms/dasar-privasi.html"
+    },
+    {
       "source": "/((?!.*\\.(?:html|png|jpg|jpeg|gif|css|js|ico|svg|xml|txt|json)$|blog$|epf-kwsp$|socso-perkeso$|pcb-income-tax$|annual-leave-calculator$|privacy-policy$|admin$|blog-admin$|mincal$|payslip-generator$|report$|overtime-pay-calculator$|epfreport$|socsoreport$|payslip$|hourly-rate$|hourly-rate-calculator$|api$)[^/.]+)",
       "destination": "/api/blog-post?slug=$1"
     }
