@@ -137,9 +137,21 @@ export default async function handler(req: any, res: any) {
   // Normalize slug to handle any trailing slash
   slug = slug.trim().replace(/\/$/, "");
 
-  const reservedSlugs = ["hourly-rate", "hourly-rate-calculator", "epf-kwsp", "socso-perkeso", "pcb-income-tax", "annual-leave-calculator", "overtime-pay-calculator"];
-  if (reservedSlugs.includes(slug)) {
-    const target = slug === 'hourly-rate-calculator' ? '/hourly-rate' : `/${slug}`;
+  const reservedSlugs: Record<string, string> = {
+    "hourly-rate": "/hourly-rate-calculator",
+    "hourly-rate-calculator": "/hourly-rate-calculator",
+    "epf-kwsp": "/epf-kwsp",
+    "socso-perkeso": "/socso-perkeso",
+    "pcb-income-tax": "/pcb-calculator",
+    "pcb-calculator": "/pcb-calculator",
+    "annual-leave-calculator": "/annual-leave-calculator",
+    "overtime-pay-calculator": "/overtime-pay-calculator",
+    "payslip": "/payslip-generator",
+    "payslip-generator": "/payslip-generator",
+    "mincal": "/mincal",
+  };
+  if (reservedSlugs[slug]) {
+    const target = reservedSlugs[slug];
     if (typeof (res as any).redirect === 'function') {
       return (res as any).redirect(301, target);
     }

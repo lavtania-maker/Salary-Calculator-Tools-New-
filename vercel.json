@@ -55,6 +55,21 @@
       "source": "/calculate-overtime-pay",
       "destination": "/overtime-pay-calculator",
       "permanent": true
+    },
+    {
+      "source": "/pcb-income-tax",
+      "destination": "/pcb-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/hourly-rate",
+      "destination": "/hourly-rate-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/payslip",
+      "destination": "/payslip-generator",
+      "permanent": true
     }
   ],
   "rewrites": [
@@ -103,10 +118,6 @@
       "destination": "/pcb-income-tax.html"
     },
     {
-      "source": "/pcb-income-tax",
-      "destination": "/pcb-income-tax.html"
-    },
-    {
       "source": "/blog",
       "destination": "/api/blog"
     },
@@ -121,10 +132,6 @@
     {
       "source": "/overtime-pay-calculator",
       "destination": "/overtime-pay-calculator.html"
-    },
-    {
-      "source": "/hourly-rate",
-      "destination": "/hourly-rate.html"
     },
     {
       "source": "/hourly-rate-calculator",
@@ -179,7 +186,7 @@
       "destination": "/ms/dasar-privasi.html"
     },
     {
-      "source": "/((?!.*\\.(?:html|png|jpg|jpeg|gif|css|js|ico|svg|xml|txt|json)$|blog$|epf-kwsp$|socso-perkeso$|pcb-income-tax$|annual-leave-calculator$|privacy-policy$|admin$|blog-admin$|mincal$|payslip-generator$|report$|overtime-pay-calculator$|epfreport$|socsoreport$|payslip$|hourly-rate$|hourly-rate-calculator$|api$)[^/.]+)",
+      "source": "/((?!.*\\.(?:html|png|jpg|jpeg|gif|css|js|ico|svg|xml|txt|json)$|blog$|epf-kwsp$|socso-perkeso$|pcb-calculator$|pcb-income-tax$|annual-leave-calculator$|privacy-policy$|admin$|blog-admin$|mincal$|payslip$|payslip-generator$|report$|overtime-pay-calculator$|epfreport$|socsoreport$|hourly-rate$|hourly-rate-calculator$|api$)[^/.]+)",
       "destination": "/api/blog-post?slug=$1"
     }
   ],

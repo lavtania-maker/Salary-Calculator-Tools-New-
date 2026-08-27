@@ -1,7 +1,4 @@
-User-agent: Yandex
-Disallow: /
-
-User-agent: Googlebot
+User-agent: *
 Disallow: /admin
 Disallow: /blog-admin
 Disallow: /report
@@ -9,50 +6,11 @@ Disallow: /epfreport
 Disallow: /pcbreport
 Disallow: /socsoreport
 
-User-agent: Googlebot-Image
-Disallow:
-
-User-agent: Googlebot-News
-Disallow:
-
-User-agent: Googlebot-Video
-Disallow:
-
-User-agent: Google-InspectionTool
-Disallow:
-
-User-agent: Bingbot
-Disallow:
-
-User-agent: msnbot
-Disallow:
-
-User-agent: msnbot-media
-Disallow:
-
-User-agent: DuckDuckBot
-Disallow:
-
-User-agent: AhrefsBot
-Disallow:
-
-User-agent: AhrefsSiteAudit
-Disallow:
-
-User-agent: Applebot
-Disallow:
-
-User-agent: Slurp
-Disallow:
-
-User-agent: Baiduspider
-Disallow:
+User-agent: Yandex
+Disallow: /
 
 User-agent: PetalBot
 Disallow: /
-
-User-agent: GPTBot
-Disallow:
 
 User-agent: MJ12Bot
 Disallow: /
@@ -62,9 +20,6 @@ Disallow: /
 
 User-agent: LinkTiger
 Disallow: /
-
-User-agent: Google-Extended
-Disallow:
 
 User-agent: CCBot
 Disallow: /
@@ -95,9 +50,6 @@ Disallow: /
 
 User-agent: Claude-Web
 Disallow: /
-
-User-agent: PerplexityBot
-Disallow:
 
 User-agent: cohere-ai
 Disallow: /

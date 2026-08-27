@@ -256,6 +256,15 @@ export function transformPage($: cheerio.CheerioAPI, enRoute: string, isMsRoute:
     $('.lang-en').css('color', 'var(--primary-color)').css('font-weight', '600');
     $('.lang-ms').css('color', 'var(--text-muted)').css('font-weight', '400');
   }
+
+  const isNoIndexPage = ['/admin', '/blog-admin', '/epfreport', '/socsoreport', '/pcbreport', '/report'].includes(enRoute);
+  if (!isNoIndexPage) {
+    if ($('meta[name="robots"]').length > 0) {
+      $('meta[name="robots"]').attr('content', 'index, follow');
+    } else {
+      $('head').append('<meta name="robots" content="index, follow">');
+    }
+  }
 }
 
 

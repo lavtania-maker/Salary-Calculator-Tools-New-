@@ -243,6 +243,15 @@ function transformPage($: cheerio.CheerioAPI, enRoute: string, isMsRoute: boolea
     $('.lang-en').css('color', 'var(--primary-color)').css('font-weight', '600');
     $('.lang-ms').css('color', 'var(--text-muted)').css('font-weight', '400');
   }
+
+  const isNoIndexPage = ['/admin', '/blog-admin', '/epfreport', '/socsoreport', '/pcbreport', '/report'].includes(enRoute);
+  if (!isNoIndexPage) {
+    if ($('meta[name="robots"]').length > 0) {
+      $('meta[name="robots"]').attr('content', 'index, follow');
+    } else {
+      $('head').append('<meta name="robots" content="index, follow">');
+    }
+  }
 }
 
 
@@ -922,6 +931,17 @@ async function startServer() {
     }
   });
 
+  // 301 Permanent Redirects for renamed routes
+  app.get(["/pcb-income-tax", "/pcb-income-tax.html"], (req, res) => {
+    res.redirect(301, "/pcb-calculator");
+  });
+  app.get(["/hourly-rate", "/hourly-rate.html"], (req, res) => {
+    res.redirect(301, "/hourly-rate-calculator");
+  });
+  app.get(["/payslip", "/payslip.html"], (req, res) => {
+    res.redirect(301, "/payslip-generator");
+  });
+
   const htmlPages: Record<string, string> = {
     "/": "index.html",
     "/index.html": "index.html",
@@ -929,9 +949,8 @@ async function startServer() {
     "/admin.html": "admin.html",
     "/mincal": "mincal.html",
     "/mincal.html": "mincal.html",
-    "/payslip": "payslip.html",
-    "/payslip.html": "payslip.html",
     "/payslip-generator": "payslip.html",
+    "/payslip-generator.html": "payslip.html",
     "/report": "report.html",
     "/report.html": "report.html",
     "/epf-kwsp": "epf-kwsp.html",
@@ -946,14 +965,12 @@ async function startServer() {
     "/privacy-policy.html": "privacy-policy.html",
     "/pcb-calculator": "pcb-income-tax.html",
     "/pcb-calculator.html": "pcb-income-tax.html",
-    "/pcb-income-tax": "pcb-income-tax.html",
-    "/pcb-income-tax.html": "pcb-income-tax.html",
     "/annual-leave-calculator": "annual-leave-calculator.html",
-    "/overtime-pay-calculator": "overtime-pay-calculator.html",
-    "/hourly-rate": "hourly-rate.html",
-    "/hourly-rate.html": "hourly-rate.html",
-    "/overtime-pay-calculator.html": "overtime-pay-calculator.html",
     "/annual-leave-calculator.html": "annual-leave-calculator.html",
+    "/overtime-pay-calculator": "overtime-pay-calculator.html",
+    "/overtime-pay-calculator.html": "overtime-pay-calculator.html",
+    "/hourly-rate-calculator": "hourly-rate.html",
+    "/hourly-rate-calculator.html": "hourly-rate.html",
     "/blog": "blog.html",
     "/blog.html": "blog.html",
     "/blog-post-template": "blog-post-template.html",

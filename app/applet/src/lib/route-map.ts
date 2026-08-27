@@ -2,12 +2,12 @@ export const ROUTE_MAP: Record<string, string> = {
   "/": "/ms/",
   "/epf-kwsp": "/ms/kalkulator-epf",
   "/socso-perkeso": "/ms/kalkulator-socso",
-  "/pcb-income-tax": "/ms/kalkulator-pcb",
+  "/pcb-calculator": "/ms/kalkulator-pcb",
   "/annual-leave-calculator": "/ms/kalkulator-cuti-tahunan",
   "/overtime-pay-calculator": "/ms/kalkulator-overtime",
-  "/hourly-rate": "/ms/kadar-gaji-sejam",
+  "/hourly-rate-calculator": "/ms/kadar-gaji-sejam",
   "/mincal": "/ms/kalkulator-gaji-minimum",
-  "/payslip": "/ms/penjana-payslip",
+  "/payslip-generator": "/ms/penjana-payslip",
   "/privacy-policy": "/ms/dasar-privasi",
 };
 
@@ -15,6 +15,13 @@ export const REVERSE_ROUTE_MAP: Record<string, string> = {};
 for (const [en, ms] of Object.entries(ROUTE_MAP)) {
   REVERSE_ROUTE_MAP[ms] = en;
 }
+
+// Fallback mappings for old routes
+const LEGACY_EN_TO_MS: Record<string, string> = {
+  "/pcb-income-tax": "/ms/kalkulator-pcb",
+  "/hourly-rate": "/ms/kadar-gaji-sejam",
+  "/payslip": "/ms/penjana-payslip",
+};
 
 export function getEnRoute(msRoute: string): string | null {
   if (msRoute === '/ms' || msRoute === '/ms/') return '/';
@@ -27,5 +34,6 @@ export function getMsRoute(enRoute: string): string {
   if (normalized.startsWith('/blog')) {
     return enRoute; // Blog remains English
   }
-  return ROUTE_MAP[normalized] || ROUTE_MAP[normalized + '/'] || '/ms/';
+  return ROUTE_MAP[normalized] || ROUTE_MAP[normalized + '/'] || LEGACY_EN_TO_MS[normalized] || '/ms/';
 }
+

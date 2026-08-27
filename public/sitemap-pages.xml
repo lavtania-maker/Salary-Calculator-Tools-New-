@@ -43,18 +43,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/socso-perkeso" />
   </url>
   <url>
-    <loc>https://salarycalculator.my/pcb-income-tax</loc>
+    <loc>https://salarycalculator.my/pcb-calculator</loc>
     <lastmod>2026-08-18</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://salarycalculator.my/pcb-income-tax" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://salarycalculator.my/pcb-calculator" />
     <xhtml:link rel="alternate" hreflang="ms" href="https://salarycalculator.my/ms/kalkulator-pcb" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/pcb-income-tax" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/pcb-calculator" />
   </url>
   <url>
     <loc>https://salarycalculator.my/ms/kalkulator-pcb</loc>
     <lastmod>2026-08-18</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://salarycalculator.my/pcb-income-tax" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://salarycalculator.my/pcb-calculator" />
     <xhtml:link rel="alternate" hreflang="ms" href="https://salarycalculator.my/ms/kalkulator-pcb" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/pcb-income-tax" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/pcb-calculator" />
   </url>
   <url>
     <loc>https://salarycalculator.my/annual-leave-calculator</loc>
@@ -85,18 +85,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/overtime-pay-calculator" />
   </url>
   <url>
-    <loc>https://salarycalculator.my/hourly-rate</loc>
+    <loc>https://salarycalculator.my/hourly-rate-calculator</loc>
     <lastmod>2026-08-18</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://salarycalculator.my/hourly-rate" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://salarycalculator.my/hourly-rate-calculator" />
     <xhtml:link rel="alternate" hreflang="ms" href="https://salarycalculator.my/ms/kadar-gaji-sejam" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/hourly-rate" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/hourly-rate-calculator" />
   </url>
   <url>
     <loc>https://salarycalculator.my/ms/kadar-gaji-sejam</loc>
     <lastmod>2026-08-18</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://salarycalculator.my/hourly-rate" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://salarycalculator.my/hourly-rate-calculator" />
     <xhtml:link rel="alternate" hreflang="ms" href="https://salarycalculator.my/ms/kadar-gaji-sejam" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/hourly-rate" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/hourly-rate-calculator" />
   </url>
   <url>
     <loc>https://salarycalculator.my/mincal</loc>
@@ -113,18 +113,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/mincal" />
   </url>
   <url>
-    <loc>https://salarycalculator.my/payslip</loc>
+    <loc>https://salarycalculator.my/payslip-generator</loc>
     <lastmod>2026-08-18</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://salarycalculator.my/payslip" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://salarycalculator.my/payslip-generator" />
     <xhtml:link rel="alternate" hreflang="ms" href="https://salarycalculator.my/ms/penjana-payslip" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/payslip" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/payslip-generator" />
   </url>
   <url>
     <loc>https://salarycalculator.my/ms/penjana-payslip</loc>
     <lastmod>2026-08-18</lastmod>
-    <xhtml:link rel="alternate" hreflang="en" href="https://salarycalculator.my/payslip" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://salarycalculator.my/payslip-generator" />
     <xhtml:link rel="alternate" hreflang="ms" href="https://salarycalculator.my/ms/penjana-payslip" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/payslip" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/payslip-generator" />
   </url>
   <url>
     <loc>https://salarycalculator.my/privacy-policy</loc>
@@ -139,9 +139,5 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://salarycalculator.my/privacy-policy" />
     <xhtml:link rel="alternate" hreflang="ms" href="https://salarycalculator.my/ms/dasar-privasi" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/privacy-policy" />
-  </url>
-  <url>
-    <loc>https://salarycalculator.my/blog</loc>
-    <lastmod>2026-08-18</lastmod>
   </url>
 </urlset>

@@ -33,7 +33,7 @@ export const CALCULATOR_TOOLS: CalculatorTool[] = [
     svgIcon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#166534" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`
   },
   {
-    path: "/pcb-income-tax",
+    path: "/pcb-calculator",
     title: "PCB Calculator",
     description: "Calculate your monthly tax deduction (MTD) for employees & employers.",
     borderColor: "#bae6fd",
@@ -73,7 +73,7 @@ export const CALCULATOR_TOOLS: CalculatorTool[] = [
     svgIcon: `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>`
   },
   {
-    path: "/hourly-rate",
+    path: "/hourly-rate-calculator",
     title: "Hourly Rate Calculator",
     description: "Calculate your exact hourly rate, daily rate, and working hour breakdown.",
     borderColor: "#bfdbfe",
@@ -93,6 +93,10 @@ export const CALCULATOR_TOOLS_MS: Record<string, { title: string; description: s
     title: "Kalkulator SOCSO",
     description: "Semak kadar caruman PERKESO & SIP untuk pekerja dan majikan."
   },
+  "/pcb-calculator": {
+    title: "Kalkulator PCB",
+    description: "Kira potongan cukai bulanan (PCB) untuk pekerja & majikan."
+  },
   "/pcb-income-tax": {
     title: "Kalkulator PCB",
     description: "Kira potongan cukai bulanan (PCB) untuk pekerja & majikan."
@@ -109,6 +113,10 @@ export const CALCULATOR_TOOLS_MS: Record<string, { title: string; description: s
     title: "Kalkulator Kerja Lebih Masa",
     description: "Kira bayaran Overtime (OT) mengikut Akta Kerja Malaysia."
   },
+  "/hourly-rate-calculator": {
+    title: "Kalkulator Kadar Gaji Sejam",
+    description: "Kira kadar gaji Sejam, Harian, dan pecahan waktu kerja anda."
+  },
   "/hourly-rate": {
     title: "Kalkulator Kadar Gaji Sejam",
     description: "Kira kadar gaji Sejam, Harian, dan pecahan waktu kerja anda."
@@ -123,8 +131,14 @@ export function normalizePath(p: string): string {
   if (clean === "" || clean === "/index") {
     clean = "/";
   }
-  if (clean === "/hourly-rate-calculator") {
-    clean = "/hourly-rate";
+  if (clean === "/hourly-rate") {
+    clean = "/hourly-rate-calculator";
+  }
+  if (clean === "/pcb-income-tax") {
+    clean = "/pcb-calculator";
+  }
+  if (clean === "/payslip") {
+    clean = "/payslip-generator";
   }
   if (!clean.startsWith("/")) {
     clean = "/" + clean;
