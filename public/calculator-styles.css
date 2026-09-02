@@ -2886,7 +2886,8 @@ a.nav-link, a.dropdown-item, a.mobile-submenu-item, a.footer-link, summary.faq-t
 }
 
 /* Other Calculators Section - No divider line & tight natural spacing */
-.other-calculators-section {
+.other-calculators-section,
+.explore-more-section {
   border-top: none !important;
   border-bottom: none !important;
   padding-top: 0 !important;
@@ -2895,7 +2896,8 @@ a.nav-link, a.dropdown-item, a.mobile-submenu-item, a.footer-link, summary.faq-t
 }
 
 @media (max-width: 768px) {
-  .other-calculators-section {
+  .other-calculators-section,
+  .explore-more-section {
     padding-top: 0 !important;
     padding-bottom: 32px !important;
   }
