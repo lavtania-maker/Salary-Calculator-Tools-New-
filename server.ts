@@ -471,7 +471,7 @@ async function startServer() {
 
   app.get("/:slug", (req, res, next) => {
     const slug = req.params.slug;
-    const reserved = ["ms", "hourly-rate", "hourly-rate-calculator", "blog", "epf-kwsp", "socso-perkeso", "pcb-income-tax", "annual-leave-calculator", "privacy-policy", "admin", "blog-admin", "mincal", "payslip-generator", "report", "overtime-pay-calculator", "epfreport", "socsoreport", "payslip", "api"];
+    const reserved = ["ms", "hourly-rate", "hourly-rate-calculator", "blog", "epf-kwsp", "socso-perkeso", "pcb-income-tax", "pcb-calculator", "annual-leave-calculator", "privacy-policy", "admin", "blog-admin", "mincal", "payslip-generator", "report", "overtime-pay-calculator", "epfreport", "socsoreport", "pcbreport", "payslip", "api"];
     if (slug && !slug.includes(".") && !reserved.includes(slug)) {
       req.query.slug = slug;
       return blogPostHandler(req as any, res as any);
@@ -943,9 +943,6 @@ async function startServer() {
   });
 
   // 301 Permanent Redirects for renamed routes
-  app.get(["/pcb-income-tax", "/pcb-income-tax.html"], (req, res) => {
-    res.redirect(301, "/pcb-calculator");
-  });
   app.get(["/hourly-rate", "/hourly-rate.html"], (req, res) => {
     res.redirect(301, "/hourly-rate-calculator");
   });
@@ -976,6 +973,8 @@ async function startServer() {
     "/privacy-policy.html": "privacy-policy.html",
     "/pcb-calculator": "pcb-income-tax.html",
     "/pcb-calculator.html": "pcb-income-tax.html",
+    "/pcb-income-tax": "pcb-income-tax.html",
+    "/pcb-income-tax.html": "pcb-income-tax.html",
     "/annual-leave-calculator": "annual-leave-calculator.html",
     "/annual-leave-calculator.html": "annual-leave-calculator.html",
     "/overtime-pay-calculator": "overtime-pay-calculator.html",
@@ -1054,7 +1053,11 @@ async function startServer() {
         const $ = cheerio.load(html);
         transformPage($, enRoute, isMsRoute);
 
-        res.status(200).setHeader("Content-Type", "text/html; charset=utf-8");
+        res.status(200)
+          .setHeader("Content-Type", "text/html; charset=utf-8")
+          .setHeader("Cache-Control", "no-cache, no-store, must-revalidate")
+          .setHeader("Pragma", "no-cache")
+          .setHeader("Expires", "0");
         if (req.method === 'HEAD') {
           return res.end();
         }
@@ -1119,7 +1122,9 @@ async function startServer() {
           const $ = cheerio.load(rawHtml);
           transformPage($, enRoute as string, isMsRoute);
           
-          res.status(200).setHeader("Content-Type", "text/html");
+          res.status(200)
+            .setHeader("Content-Type", "text/html")
+            .setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
           return res.send($.html());
         }
       }

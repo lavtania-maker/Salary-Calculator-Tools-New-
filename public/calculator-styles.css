@@ -1708,7 +1708,7 @@ details[open] .faq-title::after {
 .content-section {
   padding: 48px 0 !important;
   background-color: #ffffff !important; /* soft background to make white cards stand out */
-  border-top: 1px solid #e2e8f0 !important;
+   
 }
 
 /* Eliminate duplicate margins between adjacent content sections */

@@ -139,24 +139,18 @@ export default async function handler(req: any, res: any) {
 
   const reservedSlugs: Record<string, string> = {
     "hourly-rate": "/hourly-rate-calculator",
-    "hourly-rate-calculator": "/hourly-rate-calculator",
-    "epf-kwsp": "/epf-kwsp",
-    "socso-perkeso": "/socso-perkeso",
     "pcb-income-tax": "/pcb-calculator",
-    "pcb-calculator": "/pcb-calculator",
-    "annual-leave-calculator": "/annual-leave-calculator",
-    "overtime-pay-calculator": "/overtime-pay-calculator",
     "payslip": "/payslip-generator",
-    "payslip-generator": "/payslip-generator",
-    "mincal": "/mincal",
   };
   if (reservedSlugs[slug]) {
     const target = reservedSlugs[slug];
-    if (typeof (res as any).redirect === 'function') {
-      return (res as any).redirect(301, target);
+    if (target !== `/${slug}` && req.path !== target) {
+      if (typeof (res as any).redirect === 'function') {
+        return (res as any).redirect(301, target);
+      }
+      res.writeHead(301, { Location: target });
+      return res.end();
     }
-    res.writeHead(301, { Location: target });
-    return res.end();
   }
 
   const bypassCache = req.query?.nocache === "true" || req.query?.refresh === "true";
@@ -386,9 +380,9 @@ export default async function handler(req: any, res: any) {
       'socso': { name: 'SOCSO Calculator', url: '/socso-perkeso' },
       'perkeso': { name: 'SOCSO Calculator', url: '/socso-perkeso' },
       'eis': { name: 'SOCSO Calculator', url: '/socso-perkeso' },
-      'pcb': { name: 'PCB Calculator', url: '/pcb-income-tax' },
-      'pcb-income-tax': { name: 'PCB Calculator', url: '/pcb-income-tax' },
-      'tax': { name: 'PCB Calculator', url: '/pcb-income-tax' },
+      'pcb': { name: 'PCB Calculator', url: '/pcb-calculator' },
+      'pcb-income-tax': { name: 'PCB Calculator', url: '/pcb-calculator' },
+      'tax': { name: 'PCB Calculator', url: '/pcb-calculator' },
       'annual-leave': { name: 'Annual Leave Calculator', url: '/annual-leave-calculator' },
       'overtime': { name: 'Overtime Pay Calculator', url: '/overtime-pay-calculator' }
     };
