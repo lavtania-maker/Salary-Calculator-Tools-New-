@@ -1705,10 +1705,20 @@ details[open] .faq-title::after {
    ========================================== */
 
 /* 1. SECTION SPACING & MAX WIDTH (Requirements 1, 2, 6) */
+.calculator-area,
+.main-layout,
+main.container,
+.content-section,
+#salarySeoContent,
+section,
+section.content-section {
+  border-top: none !important;
+  border-bottom: none !important;
+}
+
 .content-section {
   padding: 48px 0 !important;
   background-color: #ffffff !important; /* soft background to make white cards stand out */
-   
 }
 
 /* Eliminate duplicate margins between adjacent content sections */
