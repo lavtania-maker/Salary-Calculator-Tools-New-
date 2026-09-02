@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
+    <meta name="robots" content="index, follow">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HR & Salary Blog Malaysia - EPF, PCB, SOCSO & Employment Law Guides</title>
+  <title>HR &amp; Salary Blog Malaysia | Payroll Law Guides</title>
   <meta name="description" content="Free guides on EPF, PCB, SOCSO, employment law and payroll for Malaysian employees and employers.">
-  <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
+  <link rel="icon" type="image/png" href="/favicon-ricebowl.png?v=4">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -49,10 +48,9 @@
       
       
     }
-    .hero{background:linear-gradient(135deg,#1e3a8a 0%,#2563eb 60%,#3b82f6 100%);padding:100px 24px 140px;text-align:center;position:relative;overflow:hidden;min-height:320px;display:flex;flex-direction:column;justify-content:center;align-items:center}
-    .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:60px;background:#fff;clip-path:ellipse(60% 100% at 50% 100%)}
-    .hero h1{color:#fff !important;margin-bottom:16px;position:relative;z-index:2}
-    .hero p{color:rgba(255,255,255,.9) !important;max-width:650px;margin:0 auto;position:relative;z-index:2;font-size:17px;font-weight:500}
+    .hero{background:linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);padding:110px 24px 100px;text-align:center;position:relative;overflow:hidden;min-height:340px;display:flex;flex-direction:column;justify-content:center;align-items:center}
+    .hero h1{color:#ffffff !important;margin-bottom:16px;position:relative;z-index:2;font-size:clamp(32px, 4vw, 44px);font-weight:800;letter-spacing:-0.5px}
+    .hero p{color:#f1f5f9 !important;max-width:650px;margin:0 auto;position:relative;z-index:2;font-size:18px;font-weight:500;line-height:1.5}
     .tabs-wrap{background:#fff;border-bottom:2px solid #f1f5f9;position:sticky;top:60px;z-index:90}
     .tabs{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;overflow-x:auto;scrollbar-width:none}
     .tabs::-webkit-scrollbar{display:none}
@@ -75,10 +73,11 @@
     .post-card:hover{background:#f8faff}
     .post-card .card-title{font-size:clamp(18px,2vw,22px)}
     .empty-state{text-align:center;padding:80px 24px;color:#475569}
-    .empty-state h2{font-size:22px;color:#475569;margin-bottom:8px}
+    .empty-state h2{font-size:22px;color:#2563eb;margin-bottom:8px}
     .sidebar{position:sticky;top:120px}
     .sidebar-card{background:#f8faff;border:1px solid #dbeafe;border-radius:12px;padding:24px;margin-bottom:20px}
-    .sidebar-card h3{font-size:13px;font-weight:700;color:#1e3a8a;margin-bottom:14px;text-transform:uppercase;letter-spacing:.05em}
+    h1, h2, h3, h4, h5, h6 { color: #2563eb !important; }
+    .sidebar-card h3{font-size:13px;font-weight:700;color:#2563eb;margin-bottom:14px;text-transform:uppercase;letter-spacing:.05em}
     .sidebar-links{display:flex;flex-direction:column;gap:8px}
     .sidebar-link{display:flex;align-items:center;gap:10px;text-decoration:none;padding:9px 12px;border-radius:8px;background:#fff;border:1px solid #e2e8f0;transition:all .15s}
     .sidebar-link:hover{border-color:#2563eb;background:#eff6ff}
@@ -95,52 +94,98 @@
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    </noscript>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
     <!-- Main Stylesheet -->
-    <link rel="preload" href="/calculator-styles.css" as="style" />
-    <link href="/calculator-styles.css" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="/calculator-styles.css?v=20260902" rel="stylesheet">
     <noscript>
-      <link href="/calculator-styles.css" rel="stylesheet" />
+      <link href="/calculator-styles.css?v=20260902" rel="stylesheet" />
     </noscript>
+
+    <link rel="preload" as="image" href="/logo-small.png?v=99">
+    <noscript>
+      <style>
+        /* Desktop Dropdown Fallback */
+        .nav-dropdown:hover .dropdown-menu,
+        .nav-dropdown:focus-within .dropdown-menu {
+          visibility: visible !important;
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+          display: block !important;
+        }
+        
+        /* Mobile Navigation Fallback */
+        @media (max-width: 1150px) {
+          .mobile-menu-btn {
+            display: none !important;
+          }
+          .mobile-nav {
+            display: flex !important;
+            position: static !important;
+            box-shadow: none !important;
+            border-top: 1px solid #e2e8f0;
+          }
+          .mobile-submenu {
+            display: block !important;
+          }
+        }
+      </style>
+    </noscript>
+
+    <style>
+      /* Prevent iOS zoom */
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+      /* Prevent layout shift */
+      .result-panel .card {
+        min-height: 600px;
+        display: flex;
+        flex-direction: column;
+      }
+      .result-panel .card > .placeholder-text {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    </style>
+  <link rel="canonical" href="https://salarycalculator.my/blog">
 </head>
 <body>
 <header class="navbar">
       <div class="container">
         <a href="/" class="logo">
-          <img src="/logo-small.png" alt="SalaryCalc MY" class="logo-img" width="250" height="44" fetchpriority="high">
+          <img src="/logo-small.png?v=99" alt="SalaryCalculator.my" class="logo-img" width="250" height="44" fetchpriority="high">
         </a>
 
         <!-- Desktop Nav -->
                 
         <nav class="desktop-nav">
-          <a href="/" class="nav-item" id="navSalary">Salary Calculator</a>
-          <a href="/socso-perkeso" class="nav-item" id="navSocso">SOCSO Calculator</a>
-          <a href="/pcb-income-tax" class="nav-item" id="navPcb">PCB Calculator</a>
-          <a href="/epf-kwsp" class="nav-item" id="navEpf">EPF Calculator</a>
+          <a href="/" class="nav-item" id="navSalary" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+          <a href="/socso-perkeso" class="nav-item" id="navSocso" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+          <a href="/pcb-calculator" class="nav-item" id="navPcb" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+          <a href="/epf-kwsp" class="nav-item" id="navEpf" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
           <div class="nav-dropdown">
-            <button class="nav-item dropdown-trigger" id="freeToolsTrigger" aria-haspopup="true" aria-expanded="false">
+            <button class="nav-item dropdown-trigger" id="freeToolsTrigger" aria-haspopup="true" aria-expanded="false" data-i18n="free_tools_9f269a">
               Free Tools
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-            <div class="dropdown-menu" id="freeToolsMenu">
-              <a href="/annual-leave-calculator" class="dropdown-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
-                Annual Leave Calculator
-              </a>
-              <a href="/overtime-pay-calculator" class="dropdown-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                Overtime Pay Calculator
-              </a>
-            </div>
+            <div class="dropdown-menu free-tools-dropdown" id="freeToolsMenu" role="menu" aria-labelledby="freeToolsTrigger">
+              <a href="/annual-leave-calculator" class="dropdown-item" role="menuitem">Annual Leave Calculator</a>
+              <a href="/overtime-pay-calculator" class="dropdown-item" role="menuitem">Overtime Pay Calculator</a>
+            
+              <a href="/hourly-rate-calculator" class="dropdown-item" role="menuitem">Hourly Rate Calculator</a></div>
           </div>
-          <a href="/blog" class="nav-item" id="navBlog">Blog</a>
-        </nav>
+          <a href="/blog" class="nav-item" id="navBlog" data-i18n="blog_be8df1">Blog</a>
+        
+      <div class="lang-switcher" style="display: flex; gap: 8px; align-items: center; margin-left: auto; font-weight: 500;">
+        <a href="/blog" class="lang-en" style="color: var(--primary-color); text-decoration: none;">EN</a>
+        <span style="color: var(--border-color);">|</span>
+        <a href="/ms/" class="lang-ms" style="color: var(--text-muted); text-decoration: none;">BM</a>
+      </div>
+    </nav>
 
         <!-- Mobile Hamburger Button -->
         <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Menu">
@@ -155,11 +200,17 @@
       <!-- Mobile Dropdown Menu -->
             
       <nav class="mobile-nav" id="mobileNavMenu">
-        <a href="/" class="mobile-nav-item" id="mobNavSalary">Salary Calculator</a>
-        <a href="/socso-perkeso" class="mobile-nav-item" id="mobNavSocso">SOCSO Calculator</a>
-        <a href="/pcb-income-tax" class="mobile-nav-item" id="mobNavPcb">PCB Calculator</a>
-        <a href="/epf-kwsp" class="mobile-nav-item" id="mobNavEpf">EPF Calculator</a>
-        <button class="mobile-nav-item has-children" id="mobileFreeToolsTrigger">
+      <div class="lang-switcher" style="display: flex; gap: 8px; align-items: center; margin-left: auto; font-weight: 500;">
+        <a href="/blog" class="lang-en" style="color: var(--primary-color); text-decoration: none;">EN</a>
+        <span style="color: var(--border-color);">|</span>
+        <a href="/ms/" class="lang-ms" style="color: var(--text-muted); text-decoration: none;">BM</a>
+      </div>
+    
+        <a href="/" class="mobile-nav-item" id="mobNavSalary" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+        <a href="/socso-perkeso" class="mobile-nav-item" id="mobNavSocso" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+        <a href="/pcb-calculator" class="mobile-nav-item" id="mobNavPcb" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+        <a href="/epf-kwsp" class="mobile-nav-item" id="mobNavEpf" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
+        <button class="mobile-nav-item has-children" id="mobileFreeToolsTrigger" data-i18n="free_tools_c3d00f">
           Free Tools
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
@@ -167,24 +218,21 @@
           <a href="/annual-leave-calculator" class="mobile-submenu-item">Annual Leave Calculator</a>
           <a href="/overtime-pay-calculator" class="mobile-submenu-item">Overtime Pay Calculator</a>
         </div>
-        <a href="/blog" class="mobile-nav-item" id="mobNavBlog">Blog</a>
+        <a href="/blog" class="mobile-nav-item" id="mobNavBlog" data-i18n="blog_be8df1">Blog</a>
       </nav>
     </header>
 <noscript>
   <div style="max-width:1200px;margin:24px auto;padding:0 24px">
     <p style="background:#fff7ed;border:1px solid #fed7aa;border-radius:8px;padding:16px;color:#92400e;font-size:14px">
-      This blog needs JavaScript enabled to load articles. In the meantime, try our
-      <a href="/" style="color:#1e3a8a;font-weight:600">Salary Calculator</a>,
-      <a href="/epf-kwsp" style="color:#1e3a8a;font-weight:600">EPF Calculator</a>,
-      <a href="/socso-perkeso" style="color:#1e3a8a;font-weight:600">SOCSO Calculator</a>,
-      <a href="/pcb-income-tax" style="color:#1e3a8a;font-weight:600">PCB Calculator</a>, or
-      <a href="/annual-leave-calculator" style="color:#1e3a8a;font-weight:600">Annual Leave Calculator</a>.
     </p>
   </div>
 </noscript>
 <div class="hero">
-  <h1>HR &amp; Salary Blog Malaysia</h1>
-  <p>Free guides on EPF, PCB, SOCSO, employment law and payroll for Malaysian employees and employers.</p>
+  <h1 data-i18n="hr_salary_blog_malaysia_e61f36">HR &amp; Salary Blog Malaysia</h1>
+  <p data-i18n="free_guides_on_epf_pcb_socso_employment__494191">Free guides on EPF, PCB, SOCSO, employment law and payroll for Malaysian employees and employers.</p>
+  <svg class="hero-wave" viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="position: absolute; bottom: -1px; left: 0; width: 100%; height: 50px; display: block; z-index: 1; pointer-events: none;">
+    <path d="M0,40 Q360,90 720,60 T1440,90 L1440,120 L0,120 Z" fill="#ffffff"></path>
+  </svg>
 </div>
 <div class="tabs-wrap">
   <div class="tabs" id="categoryTabs">
@@ -194,6 +242,8 @@
     <a class="tab" href="/blog/category/socso" data-cat="socso">SOCSO</a>
     <a class="tab" href="/blog/category/pcb-income-tax" data-cat="pcb-income-tax">PCB / Income Tax</a>
     <a class="tab" href="/blog/category/annual-leave" data-cat="annual-leave">Annual Leave</a>
+    <a class="tab" href="/blog/category/overtime" data-cat="overtime">Overtime</a>
+    <a class="tab" href="/blog/category/hourly-rate" data-cat="hourly-rate">Hourly Rate</a>
   </div>
 </div>
 <main class="blog-main">
@@ -206,138 +256,20 @@
     </div>
     <aside class="sidebar">
       <div class="sidebar-card">
-        <h3>Free HR Calculators</h3>
+        <h3 data-i18n="free_hr_calculators_f7d1da">Free HR Calculators</h3>
         <div class="sidebar-links">
-          <a href="/" class="sidebar-link"><span class="sidebar-link-icon">&#128176;</span><div><div class="sidebar-link-text">Salary Calculator</div><div class="sidebar-link-desc">Take-home pay after EPF, SOCSO &amp; PCB</div></div></a>
-          <a href="/epf-kwsp" class="sidebar-link"><span class="sidebar-link-icon">&#127974;</span><div><div class="sidebar-link-text">EPF Calculator</div><div class="sidebar-link-desc">Employee &amp; employer contributions</div></div></a>
-          <a href="/socso-perkeso" class="sidebar-link"><span class="sidebar-link-icon">&#128737;</span><div><div class="sidebar-link-text">SOCSO Calculator</div><div class="sidebar-link-desc">PERKESO contribution rates</div></div></a>
-          <a href="/pcb-income-tax" class="sidebar-link"><span class="sidebar-link-icon">&#128202;</span><div><div class="sidebar-link-text">PCB / Income Tax</div><div class="sidebar-link-desc">Monthly tax deduction (MTD)</div></div></a>
-          <a href="/annual-leave-calculator" class="sidebar-link"><span class="sidebar-link-icon">&#128197;</span><div><div class="sidebar-link-text">Annual Leave</div><div class="sidebar-link-desc">Leave entitlement calculator</div></div></a>
+          <a href="/" class="sidebar-link"><span class="sidebar-link-icon">💰</span><div><div class="sidebar-link-text">Salary Calculator</div><div class="sidebar-link-desc">Take-home pay after EPF, SOCSO &amp; PCB</div></div></a>
+          <a href="/epf-kwsp" class="sidebar-link"><span class="sidebar-link-icon">🏦</span><div><div class="sidebar-link-text">EPF Calculator</div><div class="sidebar-link-desc">Employee &amp; employer contributions</div></div></a>
+          <a href="/socso-perkeso" class="sidebar-link"><span class="sidebar-link-icon">🛡</span><div><div class="sidebar-link-text">SOCSO Calculator</div><div class="sidebar-link-desc">PERKESO contribution rates</div></div></a>
+          <a href="/pcb-calculator" class="sidebar-link"><span class="sidebar-link-icon">📊</span><div><div class="sidebar-link-text">PCB / Income Tax</div><div class="sidebar-link-desc">Monthly tax deduction (MTD)</div></div></a>
+          <a href="/annual-leave-calculator" class="sidebar-link"><span class="sidebar-link-icon">📅</span><div><div class="sidebar-link-text">Annual Leave</div><div class="sidebar-link-desc">Leave entitlement calculator</div></div></a>
+          <a href="/overtime-pay-calculator" class="sidebar-link"><span class="sidebar-link-icon">⏱</span><div><div class="sidebar-link-text">Overtime Calculator</div><div class="sidebar-link-desc">Overtime pay &amp; rates calculator</div></div></a>
+          <a href="/hourly-rate-calculator" class="sidebar-link"><span class="sidebar-link-icon">⏰</span><div><div class="sidebar-link-text">Hourly Rate Calculator</div><div class="sidebar-link-desc">Calculate hourly &amp; daily rates</div></div></a>
         </div>
       </div>
     </aside>
   </div>
 </main>
-<script>
-(async function() {
-  var FB = 'https://www.gstatic.com/firebasejs/10.12.0/';
-  var cfg = {apiKey:"AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",authDomain:"gen-lang-client-0273291777.firebaseapp.com",projectId:"gen-lang-client-0273291777"};
-  var DB_ID = "ai-studio-f7c7f3ec-1f6a-45a9-a332-4733fe85d918";
-  var COLL = "blog_posts";
-  var App = await import(FB + 'firebase-app.js');
-  var FS = await import(FB + 'firebase-firestore.js');
-  var app = App.initializeApp(cfg);
-  var db = FS.getFirestore(app, DB_ID);
-  var allPosts = [], activeCategory = '';
-
-  // Get category from URL
-  var urlParams = new URLSearchParams(window.location.search);
-  activeCategory = urlParams.get('category') || '';
-  
-  // Also check pathname for category/slug structure
-  if (!activeCategory && window.location.pathname.includes('/blog/category/')) {
-    activeCategory = window.location.pathname.split('/blog/category/')[1].split('/')[0];
-  }
-  
-  // Handle Perkeso to Socso mapping
-  if (activeCategory === 'perkeso') activeCategory = 'socso';
-
-  // Update active tab UI
-  document.querySelectorAll('.tab').forEach(function(t) {
-    var tabCat = t.getAttribute('data-cat') || '';
-    t.classList.toggle('active', tabCat === activeCategory);
-  });
-
-  function fmtDate(d) {
-    if (!d) return '';
-    var dt = new Date(d);
-    return isNaN(dt) ? d : dt.toLocaleDateString('en-MY', {day:'numeric',month:'long',year:'numeric'});
-  }
-  function initials(t) { return (t||'SC').split(' ').slice(0,2).map(function(w){return w[0];}).join('').toUpperCase(); }
-  function card(p, large) {
-    var cls = large ? 'featured-card' : 'post-card';
-    var catMap = {
-      'salary': 'Salary',
-      'epf': 'EPF',
-      'socso': 'SOCSO',
-      'eis': 'EIS',
-      'annual-leave': 'Annual Leave',
-      'pcb-income-tax': 'PCB / Income Tax'
-    };
-    var rawCats = Array.isArray(p.category) ? p.category : [p.category || ''];
-    var cats = rawCats.filter(Boolean).map(function(c){
-       var catSlug = c.toLowerCase().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
-       if (catSlug === 'perkeso') catSlug = 'socso';
-       return catMap[catSlug] || c.replace(/-/g, ' ').replace(/\b\w/g, function(char) { return char.toUpperCase(); });
-    });
-    
-    var desc = p.metaDesc || p.excerpt || p.summary || '';
-    
-    return '<a class="'+cls+'" href="/blog/'+(p.slug||p.id)+'">'
-      +'<div class="card-cat">'+cats.map(function(c){return '<span>'+c+'</span>';}).join(' <span class="bullet" style="margin: 0 6px; color:#94a3b8; display:inline-block; transform:translateY(-1px);">•</span> ')+'</div>'
-      +'<h2 class="card-title">'+(p.title||'Untitled')+'</h2>'
-      +(desc?'<p class="card-excerpt">'+desc+'</p>':'')
-      +'<div class="card-meta">'
-      +'<div class="card-date">'+fmtDate(p.publishedAt)+'</div></div></a>';
-  }
-  function render(posts) {
-    var c = document.getElementById('articlesContainer');
-    if (!posts.length) { c.innerHTML='<div class="empty-state"><h2>No articles yet</h2><p>Check back soon for guides on EPF, PCB, SOCSO and more.</p></div>'; return; }
-    var h = '<div class="featured-grid">'+card(posts[0],true);
-    h += posts.length>=2 ? card(posts[1],true) : '<div class="featured-card" style="background:#f8faff"></div>';
-    h += '</div>';
-    if (posts.length>2) {
-      h += '<div class="posts-grid">';
-      for(var i=2;i<posts.length;i++) h+=card(posts[i],false);
-      if ((posts.length-2)%2!==0) h+='<div class="post-card" style="background:#f8faff"></div>';
-      h += '</div>';
-    }
-    c.innerHTML = h;
-  }
-  function filterAndRender() {
-    var f = activeCategory ? allPosts.filter(function(p){
-      var cats = Array.isArray(p.category) ? p.category : [p.category || ''];
-      var pCat = cats.map(function(c) { return c.toLowerCase(); }).join(' ');
-      if (activeCategory === 'socso') {
-        return pCat.indexOf('socso') > -1 || pCat.indexOf('perkeso') > -1;
-      }
-      return pCat.indexOf(activeCategory) > -1;
-    }) : allPosts;
-    render(f);
-  }
-  async function loadPosts() {
-    try {
-      var q = FS.query(FS.collection(db,COLL), FS.where('status','==','published'), FS.orderBy('publishedAt','desc'));
-      var s = await FS.getDocs(q);
-      allPosts = s.docs.map(function(d){return Object.assign({id:d.id},d.data());});
-      if (!s.docs.length) {
-        var q2 = FS.query(FS.collection(db,COLL), FS.where('status','==','published'));
-        var s2 = await FS.getDocs(q2);
-        allPosts = s2.docs.map(function(d){return Object.assign({id:d.id},d.data());});
-        allPosts.sort(function(a,b){return (b.publishedAt||'')>(a.publishedAt||'')?1:-1;});
-      }
-      filterAndRender();
-    } catch(e) {
-      try {
-        var q3 = FS.query(FS.collection(db,COLL), FS.orderBy('createdAt','desc'));
-        var s3 = await FS.getDocs(q3);
-        allPosts = s3.docs.map(function(d){return Object.assign({id:d.id},d.data());}).filter(function(p){return p.status==='published';});
-        filterAndRender();
-      } catch(e2) {
-        document.getElementById('articlesContainer').innerHTML='<div class="empty-state"><h2>Load error</h2><p>'+e2.message+'</p></div>';
-      }
-    }
-  }
-  const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-  const mobileNavMenu = document.getElementById('mobileNavMenu');
-  if (mobileMenuToggle && mobileNavMenu) {
-    mobileMenuToggle.addEventListener('click', () => {
-      mobileNavMenu.classList.toggle('open');
-    });
-  }
-  await loadPosts();
-})();
-</script>
 
     
 
@@ -345,6 +277,41 @@
 
     
 
+
+<footer class="footer">
+      <div class="container">
+        <div class="footer-grid">
+          <!-- Logo + Description -->
+          <div class="footer-col" style="max-width: max-content; padding-left: 32px; box-sizing: border-box; display: flex; flex-direction: column;">
+            <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+              <a href="/" class="logo" style="display: block;">
+                <img src="/logo-small.png?v=99" alt="SalaryCalculator.my" width="250" height="44" style="height: 44px !important; width: auto !important; max-width: none !important; object-fit: contain; object-position: left center; display: block; margin: 0; padding: 0;">
+              </a>
+              <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;" data-i18n="accurate_malaysia_salary_calculator_inst_0c4a26">
+                Accurate Malaysia salary calculator.<br>
+                Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
+              </p>
+            </div>
+            <div style="font-size: 15px; color: #64748b; margin: 0;">
+              <p style="margin: 0 0 8px 0;" data-i18n="_2026_salarycalculatormy_all_rights_rese_2ead1b">© 2026 SalaryCalculator.my. All rights reserved.</p>
+              <p style="margin: 0;" data-i18n="data_is_estimated_for_reference_only_e819d1">Data is estimated for reference only</p>
+            </div>
+          </div>
+          <!-- Quick Links -->
+          <div class="footer-col footer-col-links">
+            <h4 data-i18n="quick_links_f0fb2c">Quick Links</h4>
+            <a href="/" class="footer-link" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+            <a href="/socso-perkeso" class="footer-link" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+            <a href="/pcb-calculator" class="footer-link" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+            <a href="/epf-kwsp" class="footer-link" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
+            <a href="/annual-leave-calculator" class="footer-link" data-i18n="annual_leave_calculator_2cfd91">Annual Leave Calculator</a>
+            <a href="/overtime-pay-calculator" class="footer-link" data-i18n="overtime_pay_calculator_459bb3">Overtime Pay Calculator</a>
+            <a href="/blog" class="footer-link" data-i18n="blog_be8df1">Blog</a>
+            <a href="/privacy-policy" class="footer-link" data-i18n="privacy_policy_fa2ead">Privacy Policy</a>
+          </div>
+        </div>
+      </div>
+    </footer>
     <!-- Navbar Support Script -->
     <script>
       (function() {
@@ -360,23 +327,35 @@
           });
         }
 
-        // Desktop Dropdown Toggle (for click fallback on touch devices)
+        // Desktop Dropdown Toggle
         const freeToolsTrigger = document.getElementById('freeToolsTrigger');
         const freeToolsMenu = document.getElementById('freeToolsMenu');
         
         if (freeToolsTrigger && freeToolsMenu) {
+          const toggleDropdown = (show) => {
+            freeToolsMenu.classList.toggle('show', show);
+            freeToolsTrigger.setAttribute('aria-expanded', show);
+            const svg = freeToolsTrigger.querySelector('svg');
+            if (svg) svg.style.transform = show ? 'rotate(180deg)' : 'rotate(0deg)';
+          };
+
           freeToolsTrigger.addEventListener('click', (e) => {
-            if (window.innerWidth > 1150) {
-              e.preventDefault();
-              const isShow = freeToolsMenu.classList.contains('show');
-              freeToolsMenu.classList.toggle('show', !isShow);
-            }
+            e.preventDefault();
+            const isShow = freeToolsMenu.classList.contains('show');
+            toggleDropdown(!isShow);
           });
 
           // Close menu when clicking outside
           document.addEventListener('click', (e) => {
             if (!freeToolsTrigger.contains(e.target) && !freeToolsMenu.contains(e.target)) {
-              freeToolsMenu.classList.remove('show');
+              toggleDropdown(false);
+            }
+          });
+
+          // Close on Esc key
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+              toggleDropdown(false);
             }
           });
         }
@@ -390,6 +369,7 @@
             e.preventDefault();
             const isShow = mobileFreeToolsMenu.classList.contains('show');
             mobileFreeToolsMenu.classList.toggle('show', !isShow);
+            mobileFreeToolsTrigger.setAttribute('aria-expanded', !isShow);
             const svg = mobileFreeToolsTrigger.querySelector('svg');
             if (svg) svg.style.transform = isShow ? 'rotate(0deg)' : 'rotate(180deg)';
           });
@@ -415,12 +395,15 @@
         // desktop and mobile highlighting
         const allLinks = document.querySelectorAll('.nav-item, .mobile-nav-item, .dropdown-item, .mobile-submenu-item');
         allLinks.forEach(link => {
-          const href = link.getAttribute('href');
+          let href = link.getAttribute('href');
           if (!href) return;
           
-          if (href === '/' && (normalizedPath === '/index.html' || normalizedPath === '/')) {
+          const isHomeLink = href === '/' || href === '/ms/' || href === '/ms';
+          const isHomePath = normalizedPath === '/index.html' || normalizedPath === '/' || normalizedPath === '/ms/' || normalizedPath === '/ms';
+          
+          if (isHomeLink && isHomePath) {
             link.classList.add('active-nav');
-          } else if (href !== '/' && normalizedPath.includes(href)) {
+          } else if (!isHomeLink && normalizedPath.includes(href)) {
             link.classList.add('active-nav');
             
             // If it's a dropdown item, also highlight the trigger
@@ -437,5 +420,6 @@
         });
       })();
     </script>
-</body>
-</html>
+
+
+</body></html>

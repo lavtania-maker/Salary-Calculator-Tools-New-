@@ -1,6 +1,12 @@
-<!doctype html>
-<html lang="en">
-  <head>
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-TMQV1XC09P');
+    </script>
     <script>
       (function () {
         var ignoreScriptError = function (msg) {
@@ -54,17 +60,48 @@
         );
       })();
     </script>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/favicon-ricebowl.png?v=4">
     <title>Loading Article... – HR &amp; Salary Blog Malaysia</title>
-    <meta name="description" content="Loading article description" />
-    <meta name="keywords" content="" />
-    <meta name="title" content="" />
+    <meta name="description" content="Loading article description">
+    <meta name="keywords" content="">
+    <meta name="title" content="">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Loading Article... – HR &amp; Salary Blog Malaysia">
+    <meta property="og:description" content="Loading article description">
+    <meta property="og:url" content="https://salarycalculator.my/blog/post-slug">
+    <meta property="og:image" content="https://salarycalculator.my/logo-small.png?v=99">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Loading Article... – HR &amp; Salary Blog Malaysia">
+    <meta property="twitter:description" content="Loading article description">
+    <meta property="twitter:image" content="https://salarycalculator.my/logo-small.png?v=99">
 
     <!-- SEO -->
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://salarycalculator.my/blog/post-slug" />
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://salarycalculator.my/blog/post-slug">
+
+    <!-- Noscript fallbacks for SEO / JS-Disabled browsing -->
+    <noscript>
+      <style>
+        #article-main {
+          display: block !important;
+        }
+        #loading-skeleton {
+          display: none !important;
+        }
+      </style>
+    </noscript>
+    
+    <style>
+      body {
+        background-color: #ffffff !important;
+      }
+    </style>
 
     <!-- Google Fonts -->
     
@@ -134,22 +171,23 @@
         ]
       }
     </script>
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": []
-      }
-    </script>
     <style>
       article {
-        max-width: 780px;
+        max-width: 840px;
         margin: 0 auto;
+        background: #FFFFFF;
+        border: 1px solid #E5E7EB;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px -2px rgba(0,0,0,0.05), 0 2px 8px -1px rgba(0,0,0,0.025);
+        padding: 48px;
+        box-sizing: border-box;
       }
       .breadcrumb {
         font-size: 13px;
         color: #64748b;
-        margin-bottom: 40px;
+        margin: 0 auto 24px auto;
+        max-width: 840px;
+        padding: 0 8px;
         text-align: left;
       }
       .breadcrumb a {
@@ -166,36 +204,85 @@
         color: #cbd5e1;
       }
       .article-header {
+        max-width: 100%;
+        margin: 0 auto 36px auto;
         text-align: center;
-        margin-bottom: 40px;
+        border-bottom: 1px solid #f1f5f9;
+        padding-bottom: 32px;
       }
       .article-meta {
         display: flex;
         align-items: center;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 8px;
-        font-size: 14px;
-        color: #64748b;
-        margin-bottom: 16px;
+        gap: 12px;
+        margin-bottom: 20px;
       }
-      .article-meta .bullet {
-        color: #cbd5e1;
-        font-size: 10px;
+      #article-category {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      #article-category a {
+        background-color: #eff6ff;
+        color: #2563eb !important;
+        font-weight: 600;
+        font-size: 0.75rem;
+        padding: 6px 14px;
+        border-radius: 9999px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        text-decoration: none;
+        transition: all 0.15s ease-in-out;
+        display: inline-block;
+        border: 1px solid #dbeafe;
+      }
+      #article-category a:hover {
+        background-color: #dbeafe;
+        text-decoration: none;
+      }
+      #article-read-time {
+        font-size: 0.75rem;
+        color: #475569;
+        font-weight: 600;
+        background-color: #f1f5f9;
+        padding: 6px 14px;
+        border-radius: 9999px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        display: inline-block;
+        border: 1px solid #e2e8f0;
+      }
+      .article-meta .bullet, .article-author .bullet {
+        display: none !important;
       }
       .article-title {
-        font-size: 2.5rem;
+        font-size: clamp(1.8rem, 4.5vw, 2.5rem);
         font-weight: 800;
-        color: #0f172a;
+        color: #2563eb !important;
         margin: 16px 0;
-        line-height: 1.2;
+        line-height: 1.25;
         letter-spacing: -0.02em;
+        word-wrap: break-word;
+        text-align: center;
+      }
+      #article-title {
+        color: #2563eb !important;
       }
       .article-author {
-        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+        font-size: 0.875rem;
         color: #64748b;
         font-weight: 500;
         margin: 0;
+      }
+      #article-date {
+        color: #475569;
+        font-weight: 600;
       }
       /* Loading Skeleton */
       .skeleton {
@@ -210,7 +297,7 @@
         100% { background-position: -200% 0; }
       }
       #loading-skeleton {
-        max-width: 780px;
+        max-width: 840px;
         margin: 40px auto;
         padding: 0 20px;
       }
@@ -219,40 +306,55 @@
       .skeleton-line { height: 16px; width: 100%; margin-bottom: 12px; }
       .skeleton-line.short { width: 60%; }
 
+      .article-body h1, .article-body h1 * {
+        color: #2563eb !important;
+      }
+      .article-body h2, .article-body h2 * {
+        color: #2563eb !important;
+      }
       .article-body h2 {
-        font-size: 1.5rem;
+        font-size: 1.625rem;
         font-weight: 700;
-        color: #0f172a;
-        margin: 40px 0 16px;
-        padding-left: 14px;
+        margin: 44px 0 18px;
+        padding-left: 16px;
         border-left: 4px solid #2563eb;
         line-height: 1.3;
       }
+      .article-body h3, .article-body h3 * {
+        color: #2563eb !important;
+      }
       .article-body h3 {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         font-weight: 600;
-        color: #0f172a;
-        margin: 28px 0 12px;
+        margin: 32px 0 14px;
+        line-height: 1.4;
+      }
+      .article-body h4, .article-body h4 *,
+      .article-body h5, .article-body h5 *,
+      .article-body h6, .article-body h6 * {
+        color: #2563eb !important;
       }
       .article-body p {
-        font-size: 1rem;
+        font-size: 1.05rem;
         line-height: 1.8;
         color: #334155;
-        margin-bottom: 20px;
+        margin-bottom: 24px;
       }
       .article-body ul {
         list-style-type: disc !important;
-        padding-left: 1.8em !important;
-        margin-bottom: 1em !important;
+        padding-left: 2em !important;
+        margin-bottom: 24px !important;
       }
       .article-body ol {
         list-style-type: decimal !important;
-        padding-left: 1.8em !important;
-        margin-bottom: 1em !important;
+        padding-left: 2em !important;
+        margin-bottom: 24px !important;
       }
       .article-body li {
         display: list-item !important;
-        margin-bottom: 0.4em !important;
+        margin-bottom: 8px !important;
+        line-height: 1.75;
+        color: #334155;
       }
       .article-body a {
         color: #2563eb !important;
@@ -264,158 +366,452 @@
       .article-body table {
         width: 100%;
         border-collapse: collapse !important;
-        margin-bottom: 1.5em;
-        font-size: 15px;
+        margin-bottom: 0;
+        font-size: 0.95rem;
       }
       .article-body table th,
       .article-body table td {
-        border: 1px solid #e2e8f0 !important;
-        padding: 12px 16px !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+        padding: 14px 18px !important;
         text-align: left;
         vertical-align: middle;
       }
       .article-body table th {
-        background: #f8fafc !important;
+        background: #ffffff !important;
         font-weight: 700;
         color: #0f172a;
+        border-bottom: 2px solid #cbd5e1 !important;
       }
       .article-body table tr:nth-child(even) {
-        background: #f8fafc !important;
+        background: #ffffff !important;
       }
       .article-body table tr:hover {
         background: #f1f5f9 !important;
       }
+      .article-body table tr:last-child td {
+        border-bottom: none !important;
+      }
       .article-body .table-wrapper {
         overflow-x: auto;
-        margin-bottom: 1.5em;
+        margin-bottom: 28px;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        background: #ffffff;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+      }
+      
+      /* Collapsible Table Styles */
+      .article-body .table-wrapper.collapsible-wrapper {
+        position: relative;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow: hidden;
+      }
+      .article-body .table-wrapper.collapsible-wrapper::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 80px;
+        background: linear-gradient(to top, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.8) 30%, rgba(255, 255, 255, 0) 100%);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+      .article-body .table-wrapper.collapsible-wrapper.collapsed::after {
+        opacity: 1;
+      }
+      
+      .table-collapse-btn-container {
+        display: flex;
+        justify-content: center;
+        margin-top: -16px;
+        margin-bottom: 32px;
+        position: relative;
+        z-index: 10;
+      }
+      .table-collapse-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background-color: #ffffff;
+        color: #2563eb;
+        border: 1px solid #e2e8f0;
+        padding: 10px 24px;
+        border-radius: 9999px;
+        font-weight: 600;
+        font-size: 0.875rem;
+        cursor: pointer;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.025);
+        transition: all 0.2s ease-in-out;
+      }
+      .table-collapse-btn:hover {
+        background-color: #ffffff;
+        border-color: #cbd5e1;
+        color: #1d4ed8;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 8px -1px rgba(0, 0, 0, 0.08), 0 3px 6px -1px rgba(0, 0, 0, 0.03);
+      }
+      .table-collapse-btn:active {
+        transform: translateY(1px);
+      }
+      .table-collapse-btn .chevron-icon {
+        width: 16px;
+        height: 16px;
+        stroke: currentColor;
+        stroke-width: 2.5;
+        fill: none;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .article-body .table-wrapper.collapsed + .table-collapse-btn-container .table-collapse-btn .chevron-icon {
+        transform: rotate(0deg);
+      }
+      .article-body .table-wrapper:not(.collapsed) + .table-collapse-btn-container .table-collapse-btn .chevron-icon {
+        transform: rotate(180deg);
       }
       .article-body strong {
         color: #0f172a;
       }
+      .article-body blockquote {
+        border-left: 4px solid #cbd5e1;
+        padding-left: 16px;
+        margin: 24px 0;
+        font-style: italic;
+        color: #475569;
+        background: #ffffff;
+        padding: 16px;
+        border-radius: 0 8px 8px 0;
+      }
       .toc-box {
-        background: #f8fafc;
+        background: #ffffff;
         border: 1px solid #e2e8f0;
         border-radius: 12px;
-        padding: 24px;
-        margin: 0 0 32px 0;
+        padding: 20px;
+        margin: 0 0 36px 0;
       }
       .toc-box h3 {
-        font-size: 15px !important;
+        font-size: 0.875rem !important;
         font-weight: 700 !important;
-        color: #0f172a !important;
-        margin: 0 0 16px 0 !important;
+        color: #2563eb !important;
+        margin: 0 0 12px 0 !important;
         text-transform: uppercase;
         letter-spacing: 0.05em;
+        border: none !important;
+        padding: 0 !important;
       }
       .toc-box ul {
         list-style: none !important;
         margin: 0 !important;
         padding: 0 !important;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
       }
       .toc-box li {
-        margin-bottom: 12px !important;
-        display: flex;
-        gap: 8px;
-        line-height: 1.5;
+        margin: 0 !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center;
+        line-height: 1.4;
       }
       .toc-box li::before {
-        content: "•";
-        color: #94a3b8;
-        font-weight: bold;
-      }
-      .toc-box li:last-child {
-        margin-bottom: 0 !important;
+        display: none !important;
       }
       .toc-box a {
-        color: #3b82f6;
+        color: #475569;
         text-decoration: none;
+        font-size: 0.925rem;
         font-weight: 500;
-        transition: color 0.15s;
+        padding: 6px 12px;
+        border-radius: 6px;
+        display: block;
+        width: 100%;
+        transition: all 0.15s ease-in-out;
+        border-left: 2px solid transparent;
       }
       .toc-box a:hover {
-        color: #1d4ed8;
-        text-decoration: underline;
+        color: #2563eb;
+        background: #f1f5f9;
+        text-decoration: none;
+        padding-left: 16px;
+        border-left-color: #2563eb;
+      }
+      .toc-box a.active-toc {
+        color: #2563eb;
+        background: #eff6ff;
+        font-weight: 600;
+        padding-left: 16px;
+        border-left-color: #2563eb;
+      }
+      
+      /* CTA and Related articles styles */
+      .cta-box {
+        margin-top: 56px;
+        padding: 36px;
+        background: #ffffff;
+        border-radius: 16px;
+        border: 1px solid #e5e7eb;
+      }
+      .cta-box h3 {
+        margin-top: 0 !important;
+        color: #2563eb !important;
+        font-size: 1.35rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 12px !important;
+      }
+      .cta-box p {
+        color: #475569;
+        margin-bottom: 24px;
+        line-height: 1.6;
+        font-size: 0.95rem;
+      }
+      .cta-buttons {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 36px;
+      }
+      .cta-btn-primary {
+        display: inline-block;
+        background: #2563eb;
+        color: #fff !important;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none !important;
+        transition: background 0.15s;
+      }
+      .cta-btn-primary:hover {
+        background: #1d4ed8;
+        text-decoration: none !important;
+      }
+      .cta-btn-secondary {
+        display: inline-block;
+        background: #fff;
+        color: #2563eb !important;
+        border: 1px solid #2563eb;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none !important;
+        transition: all 0.15s;
+      }
+      .cta-btn-secondary:hover {
+        background: #eff6ff;
+        text-decoration: none !important;
+      }
+      .related-heading {
+        margin-top: 36px !important;
+        color: #2563eb !important;
+        font-size: 1.15rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 16px !important;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      #related-articles-list {
+        display: grid !important;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)) !important;
+        gap: 16px !important;
+        list-style: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      #related-articles-list li {
+        display: block !important;
+        margin: 0 !important;
+        padding: 0 !important;
+      }
+      .related-card {
+        background: #ffffff;
+        border: 1px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 18px;
+        transition: all 0.15s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        box-sizing: border-box;
+      }
+      .related-card:hover {
+        border-color: #2563eb;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.05);
+      }
+      .related-card-meta {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.75rem;
+        color: #64748b;
+        font-weight: 500;
+        margin-bottom: 10px;
+        flex-wrap: wrap;
+      }
+      .related-card-category {
+        color: #2563eb;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+      .related-card-dot {
+        color: #cbd5e1;
+      }
+      .related-card-read-time {
+        color: #64748b;
+      }
+      .related-card-title {
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        line-height: 1.45 !important;
+        margin: 0 !important;
+      }
+      .related-card-title a {
+        color: #1e293b !important;
+        text-decoration: none !important;
+        display: block;
+      }
+      .related-card-title a:hover {
+        color: #2563eb !important;
+      }
+      
+      /* Mobile responsiveness */
+      @media (max-width: 768px) {
+        article {
+          padding: 32px 20px;
+          border-radius: 12px;
+        }
+        .cta-box {
+          padding: 24px 20px;
+        }
+        .cta-buttons {
+          flex-direction: column;
+          gap: 10px;
+        }
+        .cta-btn-primary, .cta-btn-secondary {
+          width: 100%;
+          text-align: center;
+        }
+        .toc-box {
+          padding: 16px;
+        }
+      }
+      @media (max-width: 480px) {
+        article {
+          padding: 24px 16px;
+          border-radius: 8px;
+        }
+        .article-title {
+          font-size: 1.625rem;
+        }
+        .toc-box a {
+          font-size: 0.875rem;
+          padding: 4px 8px;
+        }
       }
     </style>
   
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    </noscript>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
     <!-- Main Stylesheet -->
-    <link rel="preload" href="/calculator-styles.css" as="style" />
-    <link href="/calculator-styles.css" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="/calculator-styles.css?v=20260902" rel="stylesheet">
     <noscript>
-      <link href="/calculator-styles.css" rel="stylesheet" />
+      <link href="/calculator-styles.css?v=20260902" rel="stylesheet" />
     </noscript>
-</head>
+
+    <link rel="preload" as="image" href="/logo-small.png?v=99">
+    <noscript>
+      <style>
+        /* Desktop Dropdown Fallback */
+        .nav-dropdown:hover .dropdown-menu,
+        .nav-dropdown:focus-within .dropdown-menu {
+          visibility: visible !important;
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+          display: block !important;
+        }
+        
+        /* Mobile Navigation Fallback */
+        @media (max-width: 1150px) {
+          .mobile-menu-btn {
+            display: none !important;
+          }
+          .mobile-nav {
+            display: flex !important;
+            position: static !important;
+            box-shadow: none !important;
+            border-top: 1px solid #e2e8f0;
+          }
+          .mobile-submenu {
+            display: block !important;
+          }
+        }
+      </style>
+    </noscript>
+
+    <style>
+      /* Prevent iOS zoom */
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+      /* Prevent layout shift */
+      .result-panel .card {
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .result-panel .card > .placeholder-text {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    </style>
+  </head>
   <body>
     <!-- Navbar -->
     <header class="navbar">
-      <div
-        class="container"
-        style="
+      <div class="container" style="
           display: flex;
           justify-content: space-between;
           align-items: center;
           position: relative;
-        "
-      >
+        ">
         <a href="/" class="logo">
-          <img
-            src="/logo-small.png"
-            alt="SalaryCalc MY"
-            class="logo-img"
-            width="250"
-            height="44"
-          />
+          <img src="/logo-small.png?v=99" alt="SalaryCalculator.my" class="logo-img" width="250" height="44">
         </a>
 
         
         <nav class="desktop-nav">
-          <a href="/" class="nav-item" id="navSalary">Salary Calculator</a>
-          <a href="/socso-perkeso" class="nav-item" id="navSocso">SOCSO Calculator</a>
-          <a href="/pcb-income-tax" class="nav-item" id="navPcb">PCB Calculator</a>
-          <a href="/epf-kwsp" class="nav-item" id="navEpf">EPF Calculator</a>
+          <a href="/" class="nav-item" id="navSalary" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+          <a href="/socso-perkeso" class="nav-item" id="navSocso" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+          <a href="/pcb-calculator" class="nav-item" id="navPcb" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+          <a href="/epf-kwsp" class="nav-item" id="navEpf" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
           <div class="nav-dropdown">
-            <button class="nav-item dropdown-trigger" id="freeToolsTrigger" aria-haspopup="true" aria-expanded="false">
+            <button class="nav-item dropdown-trigger" id="freeToolsTrigger" aria-haspopup="true" aria-expanded="false" data-i18n="free_tools_9f269a">
               Free Tools
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </button>
-            <div class="dropdown-menu" id="freeToolsMenu">
-              <a href="/annual-leave-calculator" class="dropdown-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
-                Annual Leave Calculator
-              </a>
-              <a href="/overtime-pay-calculator" class="dropdown-item">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                Overtime Pay Calculator
-              </a>
+            <div class="dropdown-menu free-tools-dropdown" id="freeToolsMenu" role="menu" aria-labelledby="freeToolsTrigger">
+              <a href="/annual-leave-calculator" class="dropdown-item" role="menuitem">Annual Leave Calculator</a>
+              <a href="/overtime-pay-calculator" class="dropdown-item" role="menuitem">Overtime Pay Calculator</a>
             </div>
           </div>
-          <a href="/blog" class="nav-item" id="navBlog">Blog</a>
-        </nav>
+          <a href="/blog" class="nav-item" id="navBlog" data-i18n="blog_be8df1">Blog</a>
+        
+      <div class="lang-switcher" style="display: flex; gap: 8px; align-items: center; margin-left: auto; font-weight: 500;">
+        <a href="/blog" class="lang-en" style="color: var(--primary-color); text-decoration: none;">EN</a>
+        <span style="color: var(--border-color);">|</span>
+        <a href="/ms/" class="lang-ms" style="color: var(--text-muted); text-decoration: none;">BM</a>
+      </div>
+    </nav>
 
-        <button
-          class="mobile-menu-btn"
-          id="mobileMenuToggle"
-          aria-label="Toggle Menu"
-        >
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
+        <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <line x1="3" y1="12" x2="21" y2="12"></line>
             <line x1="3" y1="6" x2="21" y2="6"></line>
             <line x1="3" y1="18" x2="21" y2="18"></line>
@@ -425,11 +821,17 @@
 
       
       <nav class="mobile-nav" id="mobileNavMenu">
-        <a href="/" class="mobile-nav-item" id="mobNavSalary">Salary Calculator</a>
-        <a href="/socso-perkeso" class="mobile-nav-item" id="mobNavSocso">SOCSO Calculator</a>
-        <a href="/pcb-income-tax" class="mobile-nav-item" id="mobNavPcb">PCB Calculator</a>
-        <a href="/epf-kwsp" class="mobile-nav-item" id="mobNavEpf">EPF Calculator</a>
-        <button class="mobile-nav-item has-children" id="mobileFreeToolsTrigger">
+      <div class="lang-switcher" style="display: flex; gap: 8px; align-items: center; margin-left: auto; font-weight: 500;">
+        <a href="/blog" class="lang-en" style="color: var(--primary-color); text-decoration: none;">EN</a>
+        <span style="color: var(--border-color);">|</span>
+        <a href="/ms/blog" class="lang-ms" style="color: var(--text-muted); text-decoration: none;">BM</a>
+      </div>
+    
+        <a href="/" class="mobile-nav-item" id="mobNavSalary" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+        <a href="/socso-perkeso" class="mobile-nav-item" id="mobNavSocso" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+        <a href="/pcb-calculator" class="mobile-nav-item" id="mobNavPcb" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+        <a href="/epf-kwsp" class="mobile-nav-item" id="mobNavEpf" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
+        <button class="mobile-nav-item has-children" id="mobileFreeToolsTrigger" data-i18n="free_tools_c3d00f">
           Free Tools
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transition: transform 0.2s;"><polyline points="6 9 12 15 18 9"></polyline></svg>
         </button>
@@ -437,46 +839,12 @@
           <a href="/annual-leave-calculator" class="mobile-submenu-item">Annual Leave Calculator</a>
           <a href="/overtime-pay-calculator" class="mobile-submenu-item">Overtime Pay Calculator</a>
         </div>
-        <a href="/blog" class="mobile-nav-item" id="mobNavBlog">Blog</a>
+        <a href="/blog" class="mobile-nav-item" id="mobNavBlog" data-i18n="blog_be8df1">Blog</a>
       </nav>
     </header>
 
-    <noscript>
-      <div style="max-width: 780px; margin: 24px auto; padding: 0 20px">
-        <p
-          style="
-            background: #fff7ed;
-            border: 1px solid #fed7aa;
-            border-radius: 8px;
-            padding: 16px;
-            color: #92400e;
-            font-size: 14px;
-          "
-        >
-          This article needs JavaScript enabled to load. In the meantime, try
-          our
-          <a href="/" style="color: #1e3a8a; font-weight: 600"
-            >Salary Calculator</a
-          >,
-          <a href="/epf-kwsp" style="color: #1e3a8a; font-weight: 600"
-            >EPF Calculator</a
-          >,
-          <a href="/socso-perkeso" style="color: #1e3a8a; font-weight: 600"
-            >SOCSO Calculator</a
-          >,
-          <a href="/pcb-income-tax" style="color: #1e3a8a; font-weight: 600"
-            >PCB Calculator</a
-          >, or
-          <a
-            href="/annual-leave-calculator"
-            style="color: #1e3a8a; font-weight: 600"
-            >Annual Leave Calculator</a
-          >.
-        </p>
-      </div>
-    </noscript>
 
-    <main class="container" style="padding: 40px 20px">
+    <main class="container" style="padding: 20px 16px;">
       <!-- Breadcrumb -->
       <nav class="breadcrumb">
         <a href="/">Home</a>
@@ -499,6 +867,10 @@
           </p>
         </header>
 
+        <div id="article-featured-image-container" style="display: none; margin-bottom: 20px; width: 100%;">
+          <img id="article-featured-image" src="" alt="" style="width: 100%; max-height: 480px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);">
+        </div>
+
         <div id="article-toc" class="toc-box" style="display: none;">
           <h3>Table of Contents</h3>
           <ul id="toc-list"></ul>
@@ -506,16 +878,8 @@
 
         <div id="article-content" class="article-body"></div>
 
-        <div
-          id="read-more-container"
-          style="display: none; margin-top: 40px; text-align: center"
-        >
-          <a
-            id="read-more-link"
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-            style="
+        <div id="read-more-container" style="display: none; margin-top: 16px; text-align: center">
+          <a id="read-more-link" href="#" target="_blank" rel="noopener noreferrer" style="
               display: inline-block;
               background: #2563eb;
               color: #fff;
@@ -525,11 +889,25 @@
               text-decoration: none;
               transition: background 0.15s;
               box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-            "
-          >
+            ">
             Read More
           </a>
         </div>
+
+        <div id="cta-related" class="cta-box">
+          <h3>Simplify Your Payroll Today</h3>
+          <p>Use our free tools to calculate your PCB, EPF, and SOCSO deductions instantly. Stay compliant with Malaysian labor laws.</p>
+          <div class="cta-buttons">
+            <a href="/" class="cta-btn-primary">Salary Calculator</a>
+            <a id="cta-second-button" href="/pcb-calculator" class="cta-btn-secondary">PCB Calculator</a>
+          </div>
+          
+          <h4 class="related-heading">Related Articles</h4>
+          <ul id="related-articles-list">
+            <!-- Dynamically populated related cards -->
+          </ul>
+        </div>
+
       </article>
 
       <!-- Loading Skeleton -->
@@ -537,13 +915,13 @@
         <div class="skeleton skeleton-meta"></div>
         <div class="skeleton skeleton-title"></div>
         <div class="skeleton skeleton-meta" style="width: 20%; margin-top: -10px;"></div>
-        <div style="margin-top: 60px">
+        <div style="margin-top: 16px;">
           <div class="skeleton skeleton-line"></div>
           <div class="skeleton skeleton-line"></div>
           <div class="skeleton skeleton-line"></div>
           <div class="skeleton skeleton-line short"></div>
         </div>
-        <div style="margin-top: 40px">
+        <div style="margin-top: 16px;">
           <div class="skeleton skeleton-line"></div>
           <div class="skeleton skeleton-line"></div>
           <div class="skeleton skeleton-line short"></div>
@@ -552,49 +930,38 @@
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
+
+<footer class="footer">
       <div class="container">
         <div class="footer-grid">
-          <div class="footer-col">
-            <a
-              href="/"
-              class="logo"
-              style="margin-bottom: 20px; display: block"
-            >
-              <img
-                src="/logo-small.png"
-                alt="SalaryCalc MY"
-                referrerpolicy="no-referrer"
-                width="250"
-                height="44"
-                style="
-                  height: 60px;
-                  width: auto;
-                  object-fit: contain;
-                  border-radius: 4px;
-                "
-              />
-            </a>
-            <p style="color: #94a3b8; font-size: 15px; line-height: 1.6">
-              Accurate Malaysia salary calculator.<br />
-              Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
-            </p>
+          <!-- Logo + Description -->
+          <div class="footer-col" style="max-width: max-content; padding-left: 32px; box-sizing: border-box; display: flex; flex-direction: column;">
+            <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+              <a href="/" class="logo" style="display: block;">
+                <img src="/logo-small.png?v=99" alt="SalaryCalculator.my" width="250" height="44" style="height: 44px !important; width: auto !important; max-width: none !important; object-fit: contain; object-position: left center; display: block; margin: 0; padding: 0;">
+              </a>
+              <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;" data-i18n="accurate_malaysia_salary_calculator_inst_0c4a26">
+                Accurate Malaysia salary calculator.<br>
+                Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
+              </p>
+            </div>
+            <div style="font-size: 15px; color: #64748b; margin: 0;">
+              <p style="margin: 0 0 8px 0;" data-i18n="_2026_salarycalculatormy_all_rights_rese_2ead1b">© 2026 SalaryCalculator.my. All rights reserved.</p>
+              <p style="margin: 0;" data-i18n="data_is_estimated_for_reference_only_e819d1">Data is estimated for reference only</p>
+            </div>
           </div>
+          <!-- Quick Links -->
           <div class="footer-col footer-col-links">
-            <h4>Quick Links</h4>
-            <a href="/" class="footer-link">Salary Calculator</a>
-            <a href="/socso-perkeso" class="footer-link">SOCSO Calculator</a>
-            <a href="/pcb-income-tax" class="footer-link">PCB Calculator</a>
-            <a href="/epf-kwsp" class="footer-link">EPF Calculator</a>
-            <a href="/annual-leave-calculator" class="footer-link"
-              >Annual Leave Calculator</a
-            >
-            <a href="/blog" class="footer-link">Blog</a>
-            <a href="/privacy-policy" class="footer-link">Privacy Policy</a>
+            <h4 data-i18n="quick_links_f0fb2c">Quick Links</h4>
+            <a href="/" class="footer-link" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+            <a href="/socso-perkeso" class="footer-link" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+            <a href="/pcb-calculator" class="footer-link" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+            <a href="/epf-kwsp" class="footer-link" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
+            <a href="/annual-leave-calculator" class="footer-link" data-i18n="annual_leave_calculator_2cfd91">Annual Leave Calculator</a>
+            <a href="/overtime-pay-calculator" class="footer-link" data-i18n="overtime_pay_calculator_459bb3">Overtime Pay Calculator</a>
+            <a href="/blog" class="footer-link" data-i18n="blog_be8df1">Blog</a>
+            <a href="/privacy-policy" class="footer-link" data-i18n="privacy_policy_fa2ead">Privacy Policy</a>
           </div>
-        </div>
-        <div class="footer-bottom">
-          <p>© 2026 SalaryCalc MY</p>
         </div>
       </div>
     </footer>
@@ -607,212 +974,6 @@
         .replace(/\/$/, "");
       console.log("Current post slug:", slug);
 
-      async function loadArticle() {
-        if (window.__SSR_COMPLETE) return;
-        if (!slug) return;
-        try {
-          var FB = "https://www.gstatic.com/firebasejs/10.12.0/";
-          var cfg = {
-            apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",
-            authDomain: "gen-lang-client-0273291777.firebaseapp.com",
-            projectId: "gen-lang-client-0273291777",
-          };
-          var DB_ID = "ai-studio-f7c7f3ec-1f6a-45a9-a332-4733fe85d918";
-          var COLL = "blog_posts";
-          var App = await import(FB + "firebase-app.js");
-          var FS = await import(FB + "firebase-firestore.js");
-          var app = App.initializeApp(cfg);
-          var db = FS.getFirestore(app, DB_ID);
-
-          var q = FS.query(
-            FS.collection(db, COLL),
-            FS.where("slug", "==", slug),
-            FS.where("status", "==", "published"),
-            FS.limit(1),
-          );
-          var snap = await FS.getDocs(q);
-          var post = null;
-          if (!snap.empty) {
-            var d = snap.docs[0];
-            post = Object.assign({ id: d.id }, d.data());
-          }
-
-          if (post) {
-            document.title = post.title + " – HR & Salary Blog Malaysia";
-            var metaDesc = document.querySelector('meta[name="description"]');
-            if (metaDesc && post.metaDesc)
-              metaDesc.setAttribute("content", post.metaDesc);
-            else if (metaDesc && post.excerpt)
-              metaDesc.setAttribute("content", post.excerpt);
-
-            var metaTitle = document.querySelector('meta[name="title"]');
-            if (metaTitle && post.metaTitle)
-              metaTitle.setAttribute("content", post.metaTitle);
-            else if (metaTitle)
-              metaTitle.setAttribute("content", post.title);
-
-            var metaKeywords = document.querySelector('meta[name="keywords"]');
-            if (metaKeywords && post.metaKeywords)
-              metaKeywords.setAttribute("content", post.metaKeywords);
-
-            var canonicalLink = document.querySelector('link[rel="canonical"]');
-            if (canonicalLink)
-              canonicalLink.setAttribute(
-                "href",
-                "https://salarycalculator.my/blog/" + slug,
-              );
-
-            document.getElementById("breadcrumb-title").textContent =
-              post.title;
-            document.getElementById("article-title").textContent = post.title;
-
-            const catEl = document.getElementById("article-category");
-            const catMap = {
-              'salary': 'Salary',
-              'epf': 'EPF',
-              'socso': 'SOCSO',
-              'annual-leave': 'Annual Leave',
-              'pcb-income-tax': 'PCB / Income Tax'
-            };
-
-            let cats = Array.isArray(post.category) ? post.category : [post.category || ""];
-            let catLinks = cats.filter(c => c).map(function(c) {
-              let catSlug = c.toLowerCase().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
-              if (catSlug === 'perkeso') catSlug = 'socso';
-              let displayCat = catMap[catSlug] || c.replace(/-/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
-              return `<a href="/blog/category/${catSlug}" style="color: inherit; text-decoration: none;">${displayCat}</a>`;
-            });
-
-            if (catLinks.length > 0) {
-              catEl.innerHTML = catLinks.join(' <span class="bullet" style="margin: 0 8px;">•</span> ');
-              document.getElementById("bullet-1").style.display = "inline";
-            } else {
-              catEl.textContent = "";
-              document.getElementById("bullet-1").style.display = "none";
-            }
-
-            if (post.publishedAt) {
-              var dt = new Date(post.publishedAt);
-              document.getElementById("article-date").textContent = isNaN(dt)
-                ? post.publishedAt
-                : dt.toLocaleDateString("en-MY", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric",
-                  });
-              document.getElementById("bullet-2").style.display = "inline";
-            } else {
-              document.getElementById("bullet-2").style.display = "none";
-            }
-
-            if (post.readTime) {
-              document.getElementById("article-read-time").textContent =
-                post.readTime + " min read";
-            } else {
-              const words = (post.content || "").split(" ").length;
-              const readTime = Math.ceil(words / 200);
-              document.getElementById("article-read-time").textContent =
-                readTime + " min read";
-            }
-
-            const articleContent = document.getElementById("article-content");
-            articleContent.innerHTML = post.content || "";
-
-            // Wrap tables in .table-wrapper
-            const tables = articleContent.querySelectorAll("table");
-            tables.forEach(table => {
-              const wrapper = document.createElement("div");
-              wrapper.className = "table-wrapper";
-              table.parentNode.insertBefore(wrapper, table);
-              wrapper.appendChild(table);
-            });
-
-            // Generate Table of Contents
-            const headings = articleContent.querySelectorAll("h2");
-            const tocContainer = document.getElementById("article-toc");
-            const tocList = document.getElementById("toc-list");
-            
-            if (headings.length >= 2) {
-              tocList.innerHTML = "";
-              headings.forEach((heading, index) => {
-                // Ensure heading has an ID
-                if (!heading.id) {
-                  heading.id = "heading-" + index;
-                }
-                const li = document.createElement("li");
-                const a = document.createElement("a");
-                a.href = "#" + heading.id;
-                a.textContent = heading.textContent;
-                a.addEventListener("click", function (e) {
-                  e.preventDefault();
-                  heading.scrollIntoView({ behavior: "smooth" });
-                });
-                li.appendChild(a);
-                tocList.appendChild(li);
-              });
-              tocContainer.style.display = "block";
-            } else {
-              tocContainer.style.display = "none";
-            }
-
-            if (post.readMoreUrl) {
-              const rmLink = document.getElementById("read-more-link");
-              if (rmLink) rmLink.href = post.readMoreUrl;
-              const rmCont = document.getElementById("read-more-container");
-              if (rmCont) rmCont.style.display = "block";
-            } else {
-              const rmCont = document.getElementById("read-more-container");
-              if (rmCont) rmCont.style.display = "none";
-            }
-
-            var ld = document.createElement("script");
-            ld.type = "application/ld+json";
-            ld.text = JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Article",
-              headline: post.title,
-              description: post.excerpt || "",
-              datePublished: post.publishedAt || "",
-              dateModified: post.updatedAt || post.publishedAt || "",
-              author: [
-                {
-                  "@type": "Organization",
-                  name: "SalaryCalculator.my Team",
-                  url: "https://salarycalculator.my/",
-                },
-              ],
-              publisher: {
-                "@type": "Organization",
-                name: "SalaryCalculator.my",
-              },
-              mainEntityOfPage: "https://salarycalculator.my/blog/" + slug,
-            });
-            document.head.appendChild(ld);
-
-            // Hide skeleton and show content
-            document.getElementById("loading-skeleton").style.display = "none";
-            document.getElementById("article-main").style.display = "block";
-          } else {
-            document.title = "Article Not Found – HR & Salary Blog Malaysia";
-            document.getElementById("loading-skeleton").style.display = "none";
-            document.getElementById("article-main").style.display = "block";
-            document.getElementById("article-title").textContent =
-              "Article Not Found";
-            document.getElementById("article-content").innerHTML =
-              '<p>The article you are looking for does not exist or may have been removed. Browse the <a href="/blog">full blog</a> instead.</p>';
-          }
-        } catch (error) {
-          console.error("Error loading article:", error);
-          document.getElementById("loading-skeleton").style.display = "none";
-          document.getElementById("article-main").style.display = "block";
-          document.getElementById("article-title").textContent =
-            "Error Loading Article";
-          document.getElementById("article-content").innerHTML =
-            "<p>There was an error loading the article. Please try again later.</p>";
-        }
-      }
-
-      loadArticle();
 
       // Mobile Menu Toggle
       const mobileMenuToggle = document.getElementById("mobileMenuToggle");
@@ -822,6 +983,156 @@
           mobileNavMenu.classList.toggle("open");
         });
       }
+
+      // Highlight active section in Table of Contents on scroll
+      window.addEventListener("DOMContentLoaded", () => {
+        // Since content might be loaded dynamically, let's run this setup
+        const setupScrollSpy = () => {
+          const headings = Array.from(document.querySelectorAll(".article-body h2"));
+          const tocLinks = Array.from(document.querySelectorAll("#toc-list a"));
+          
+          if (headings.length > 0 && tocLinks.length > 0) {
+            const observerOptions = {
+              root: null,
+              rootMargin: "0px 0px -50% 0px",
+              threshold: 0
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  const id = entry.target.getAttribute("id");
+                  tocLinks.forEach((link) => {
+                    const href = link.getAttribute("href");
+                    if (href === "#" + id || href === id) {
+                      link.classList.add("active-toc");
+                    } else {
+                      link.classList.remove("active-toc");
+                    }
+                  });
+                }
+              });
+            }, observerOptions);
+            
+            headings.forEach((heading) => {
+              observer.observe(heading);
+            });
+          }
+        };
+
+        const setupCollapsibleTables = () => {
+          const wrappers = document.querySelectorAll(".article-body .table-wrapper");
+          
+          wrappers.forEach((wrapper) => {
+            if (wrapper.dataset.collapsibleInitialized) return;
+            
+            const table = wrapper.querySelector("table");
+            if (!table) return;
+            
+            const rows = Array.from(table.querySelectorAll("tr"));
+            const rowCount = rows.length;
+            const initialHeight = wrapper.offsetHeight;
+            
+            // Limit to tables with > 6 rows OR > 400px height
+            if (rowCount > 6 || initialHeight > 400) {
+              wrapper.dataset.collapsibleInitialized = "true";
+              
+              // Calculate height of first 4 rows (header + first 3 data rows)
+              const rowsToShowCount = Math.min(rowCount, 4);
+              let collapsedHeight = 0;
+              
+              const computeCollapsedHeight = () => {
+                let h = 0;
+                for (let i = 0; i < rowsToShowCount; i++) {
+                  h += rows[i].offsetHeight;
+                }
+                return h;
+              };
+              
+              collapsedHeight = computeCollapsedHeight();
+              
+              // Handle edge case where browser has not computed layout yet
+              if (collapsedHeight === 0 || collapsedHeight > 350) {
+                collapsedHeight = 220; // safe default
+                
+                const recalculate = () => {
+                  const h = computeCollapsedHeight();
+                  if (h > 0 && wrapper.classList.contains("collapsed")) {
+                    collapsedHeight = h;
+                    wrapper.style.maxHeight = h + "px";
+                  }
+                };
+                window.addEventListener("load", recalculate);
+                setTimeout(recalculate, 100);
+                setTimeout(recalculate, 500);
+              }
+              
+              wrapper.classList.add("collapsible-wrapper", "collapsed");
+              wrapper.style.maxHeight = collapsedHeight + "px";
+              
+              // Create show more/less button
+              const btnContainer = document.createElement("div");
+              btnContainer.className = "table-collapse-btn-container";
+              
+              const btn = document.createElement("button");
+              btn.className = "table-collapse-btn";
+              btn.setAttribute("aria-expanded", "false");
+              btn.innerHTML = `
+                <span>Show More</span>
+                <svg class="chevron-icon" viewBox="0 0 24 24" stroke="currentColor">
+                  <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              `;
+              
+              btnContainer.appendChild(btn);
+              wrapper.parentNode.insertBefore(btnContainer, wrapper.nextSibling);
+              
+              btn.addEventListener("click", () => {
+                const isCollapsed = wrapper.classList.contains("collapsed");
+                
+                if (isCollapsed) {
+                  // Expand
+                  wrapper.classList.remove("collapsed");
+                  btn.setAttribute("aria-expanded", "true");
+                  // Animate to full table height
+                  const fullHeight = table.offsetHeight + 10;
+                  wrapper.style.maxHeight = fullHeight + "px";
+                  btn.querySelector("span").textContent = "Show Less";
+                  
+                  const handleTransitionEnd = () => {
+                    if (!wrapper.classList.contains("collapsed")) {
+                      wrapper.style.maxHeight = "none";
+                    }
+                    wrapper.removeEventListener("transitionend", handleTransitionEnd);
+                  };
+                  wrapper.addEventListener("transitionend", handleTransitionEnd);
+                } else {
+                  // Collapse
+                  // Set height explicitly first so browser can animate down
+                  wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+                  wrapper.offsetHeight; // force reflow
+                  
+                  wrapper.classList.add("collapsed");
+                  btn.setAttribute("aria-expanded", "false");
+                  wrapper.style.maxHeight = collapsedHeight + "px";
+                  btn.querySelector("span").textContent = "Show More";
+                  
+                  // Scroll table wrapper back into view if it was scrolled out of view
+                  const rect = wrapper.getBoundingClientRect();
+                  if (rect.top < 0) {
+                    wrapper.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                }
+              });
+            }
+          });
+        };
+
+        // Run after brief delay to allow dynamic content rendering
+        setTimeout(setupScrollSpy, 500);
+        setTimeout(setupCollapsibleTables, 100);
+        setTimeout(setupCollapsibleTables, 500);
+      });
     </script>
   
     
@@ -841,23 +1152,35 @@
           });
         }
 
-        // Desktop Dropdown Toggle (for click fallback on touch devices)
+        // Desktop Dropdown Toggle
         const freeToolsTrigger = document.getElementById('freeToolsTrigger');
         const freeToolsMenu = document.getElementById('freeToolsMenu');
         
         if (freeToolsTrigger && freeToolsMenu) {
+          const toggleDropdown = (show) => {
+            freeToolsMenu.classList.toggle('show', show);
+            freeToolsTrigger.setAttribute('aria-expanded', show);
+            const svg = freeToolsTrigger.querySelector('svg');
+            if (svg) svg.style.transform = show ? 'rotate(180deg)' : 'rotate(0deg)';
+          };
+
           freeToolsTrigger.addEventListener('click', (e) => {
-            if (window.innerWidth > 1150) {
-              e.preventDefault();
-              const isShow = freeToolsMenu.classList.contains('show');
-              freeToolsMenu.classList.toggle('show', !isShow);
-            }
+            e.preventDefault();
+            const isShow = freeToolsMenu.classList.contains('show');
+            toggleDropdown(!isShow);
           });
 
           // Close menu when clicking outside
           document.addEventListener('click', (e) => {
             if (!freeToolsTrigger.contains(e.target) && !freeToolsMenu.contains(e.target)) {
-              freeToolsMenu.classList.remove('show');
+              toggleDropdown(false);
+            }
+          });
+
+          // Close on Esc key
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+              toggleDropdown(false);
             }
           });
         }
@@ -871,6 +1194,7 @@
             e.preventDefault();
             const isShow = mobileFreeToolsMenu.classList.contains('show');
             mobileFreeToolsMenu.classList.toggle('show', !isShow);
+            mobileFreeToolsTrigger.setAttribute('aria-expanded', !isShow);
             const svg = mobileFreeToolsTrigger.querySelector('svg');
             if (svg) svg.style.transform = isShow ? 'rotate(0deg)' : 'rotate(180deg)';
           });
@@ -896,12 +1220,15 @@
         // desktop and mobile highlighting
         const allLinks = document.querySelectorAll('.nav-item, .mobile-nav-item, .dropdown-item, .mobile-submenu-item');
         allLinks.forEach(link => {
-          const href = link.getAttribute('href');
+          let href = link.getAttribute('href');
           if (!href) return;
           
-          if (href === '/' && (normalizedPath === '/index.html' || normalizedPath === '/')) {
+          const isHomeLink = href === '/' || href === '/ms/' || href === '/ms';
+          const isHomePath = normalizedPath === '/index.html' || normalizedPath === '/' || normalizedPath === '/ms/' || normalizedPath === '/ms';
+          
+          if (isHomeLink && isHomePath) {
             link.classList.add('active-nav');
-          } else if (href !== '/' && normalizedPath.includes(href)) {
+          } else if (!isHomeLink && normalizedPath.includes(href)) {
             link.classList.add('active-nav');
             
             // If it's a dropdown item, also highlight the trigger
@@ -918,5 +1245,6 @@
         });
       })();
     </script>
-</body>
-</html>
+
+
+</body></html>

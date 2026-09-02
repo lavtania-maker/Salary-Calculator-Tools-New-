@@ -65,26 +65,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://salarycalculator.my/privacy-policy">
-    <link rel="alternate" hreflang="en-MY" href="https://salarycalculator.my/privacy-policy">
-    <link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/privacy-policy">
+    
+    
     <meta property="article:published_time" content="2025-01-01T00:00:00+08:00">
     <meta property="article:modified_time" content="2026-05-18T00:00:00+08:00">
-    <link rel="icon" type="image/png" href="/favicon-ricebowl.png">
-    <title>Privacy Policy | SalaryCalc MY</title>
-    <meta name="description" content="Privacy Policy for SalaryCalc MY — learn how we collect, use, and protect your data.">
+    <link rel="icon" type="image/png" href="/favicon-ricebowl.png?v=4">
+    <title>Privacy Policy | SalaryCalculator.my</title>
+    <meta name="description" content="Privacy Policy for SalaryCalculator.my — learn how we collect, use, and protect your data.">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://salarycalculator.my/privacy-policy">
-    <meta property="og:title" content="Privacy Policy | SalaryCalc MY">
-    <meta property="og:description" content="Privacy Policy for SalaryCalc MY — learn how we collect, use, and protect your data.">
-    <meta property="og:site_name" content="SalaryCalc MY">
+    <meta property="og:title" content="Privacy Policy | SalaryCalculator.my">
+    <meta property="og:description" content="Privacy Policy for SalaryCalculator.my — learn how we collect, use, and protect your data.">
+    <meta property="og:site_name" content="SalaryCalculator.my">
     <meta property="og:locale" content="en_MY">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Privacy Policy | SalaryCalc MY">
-    <meta name="twitter:description" content="Privacy Policy for SalaryCalc MY — learn how we collect, use, and protect your data.">
+    <meta name="twitter:title" content="Privacy Policy | SalaryCalculator.my">
+    <meta name="twitter:description" content="Privacy Policy for SalaryCalculator.my — learn how we collect, use, and protect your data.">
 
     
     
@@ -133,12 +133,11 @@
       :root {
         --primary: #2563eb;
         --primary-hover: #1d4ed8;
-        --bg-light: #ffffff;
-        --text-main: #1f2937;
-        --text-muted: #6b7280;
-        --border: #ffffff;
-        --shadow-soft:
-          0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        --bg-light: #f8fafc;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --border: #e2e8f0;
+        --shadow-soft: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
       }
 
       * {
@@ -177,8 +176,8 @@
       /* Navbar */
       .navbar {
         background: #ffffff;
-        border-bottom: 1px solid var(--border);
-        padding: 8px 0;
+        border-bottom: 1px solid #e2e8f0;
+        padding: 12px 0;
         position: sticky;
         top: 0;
         z-index: 100;
@@ -193,84 +192,99 @@
       .logo {
         display: flex;
         align-items: center;
+        flex-shrink: 0;
       }
       .logo-img {
-        height: 60px;
-        width: auto;
-        max-width: 250px;
+        height: 32px !important;
+        width: auto !important;
+        max-width: 190px !important;
         object-fit: contain;
+        display: block;
       }
 
       .nav-back {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        padding: 8px 14px;
+        padding: 8px 16px;
         border-radius: 8px;
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 500;
-        color: var(--text-muted);
-        background: transparent;
-        border: none;
+        color: #2563eb;
+        background: #eff6ff;
+        border: 1px solid #dbeafe;
         cursor: pointer;
         transition: all 0.2s;
         font-family: inherit;
       }
 
       .nav-back:hover {
+        background: #dbeafe;
+        color: #1d4ed8;
+      }
+
+      main {
+        padding: 40px 0 64px;
+      }
+
+      /* Unified Document Card */
+      .doc-card {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 48px;
         background: #ffffff;
-        color: var(--text-main);
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
       }
 
       /* Page Header */
       .page-header {
-        padding: 48px 0 32px;
-        border-bottom: 1px solid var(--border);
-        margin-bottom: 40px;
+        margin-bottom: 32px;
+        padding-bottom: 24px;
+        border-bottom: 1px solid #f1f5f9;
       }
 
       .page-header h1 {
-        font-size: 2rem;
-        font-weight: 800;
-        color: var(--primary);
+        font-size: 32px;
+        font-weight: 700;
+        color: #2563eb;
         letter-spacing: -0.02em;
         margin-bottom: 8px;
       }
 
-      .page-header p {
-        color: var(--text-muted);
+      .page-header p.subtitle {
+        color: #64748b;
         font-size: 16px;
+        margin-bottom: 12px;
       }
 
-      /* Content */
-      .privacy-content {
-        padding-bottom: 64px;
+      .last-updated {
+        font-size: 13px;
+        color: #64748b;
+        font-style: italic;
       }
 
+      /* Content Sections */
       .privacy-section {
-        background: #ffffff;
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        padding: 24px 28px;
-        margin-bottom: 20px;
-        box-shadow: var(--shadow-soft);
+        margin-top: 32px;
       }
 
       .privacy-section h2 {
-        font-size: 1.1rem;
-        font-weight: 700;
+        font-size: 20px;
+        font-weight: 600;
         color: #2563eb !important;
         margin-bottom: 12px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid var(--border);
+        padding-bottom: 8px;
+        border-bottom: 1px solid #f1f5f9;
         letter-spacing: -0.01em;
       }
 
       .privacy-section p {
-        color: var(--text-muted);
+        color: #334155;
         font-size: 15px;
-        line-height: 1.7;
-        margin-bottom: 10px;
+        line-height: 1.6;
+        margin-bottom: 12px;
       }
 
       .privacy-section p:last-child {
@@ -280,20 +294,24 @@
       .privacy-section ul {
         list-style: disc;
         padding-left: 20px;
-        color: var(--text-muted);
+        color: #334155;
         font-size: 15px;
         line-height: 1.7;
+        margin-bottom: 12px;
       }
 
       .privacy-section ul li {
         margin-bottom: 6px;
       }
 
-      .last-updated {
-        font-size: 15px;
-        color: #9ca3af;
-        text-align: right;
-        margin-bottom: 24px;
+      @media (max-width: 640px) {
+        .doc-card {
+          padding: 24px 20px;
+          border-radius: 8px;
+        }
+        .page-header h1 {
+          font-size: 26px;
+        }
       }
 
       /* Footer */
@@ -314,7 +332,7 @@
       .footer-col h4 {
         color: #ffffff;
         font-weight: 700;
-        margin-bottom: 16px;
+        margin-bottom: 8px;
         font-size: 15px;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -324,7 +342,7 @@
         display: block;
         color: #94a3b8;
         font-size: 15px;
-        margin-bottom: 10px;
+        margin-bottom: 4px;
         transition: color 0.2s;
       }
 
@@ -343,212 +361,396 @@
   
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    </noscript>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
 
     <!-- Main Stylesheet -->
-    <link rel="preload" href="/calculator-styles.css" as="style" />
-    <link href="/calculator-styles.css" rel="stylesheet" media="print" onload="this.media='all'" />
-    <noscript>
-      <link href="/calculator-styles.css" rel="stylesheet" />
+    <link href="/calculator-styles.css?v=20260902" rel="stylesheet">
+    <noscript data-i18n="_98bba9">
+      <link href="/calculator-styles.css?v=20260902" rel="stylesheet" />
     </noscript>
+    <noscript data-i18n="_desktop_dropdown_fallback_nav_dropdown_9f39cc">
+      <style>
+        /* Desktop Dropdown Fallback */
+        .nav-dropdown:hover .dropdown-menu,
+        .nav-dropdown:focus-within .dropdown-menu {
+          visibility: visible !important;
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+          display: block !important;
+        }
+        
+        /* Mobile Navigation Fallback */
+        @media (max-width: 1150px) {
+          .mobile-menu-btn {
+            display: none !important;
+          }
+          .mobile-nav {
+            display: flex !important;
+            position: static !important;
+            box-shadow: none !important;
+            border-top: 1px solid #e2e8f0;
+          }
+          .mobile-submenu {
+            display: block !important;
+          }
+        }
+      </style>
+    </noscript>
+
+    <style>
+      /* Prevent iOS zoom */
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+      /* Prevent layout shift */
+      .result-panel .card {
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .result-panel .card > .placeholder-text {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    </style>
+  <link rel="alternate" hreflang="ms" href="https://salarycalculator.my/ms/dasar-privasi">
+<link rel="alternate" hreflang="en" href="https://salarycalculator.my/privacy-policy">
+<link rel="alternate" hreflang="x-default" href="https://salarycalculator.my/privacy-policy">
 </head>
   <body>
     
     <!-- Navbar -->
     <nav class="navbar">
-      <div class="container">
-        
+      <div class="container" data-i18n="_back_to_calculator_32a8c2">
         <a href="/" class="logo">
-          <img src="/logo-small.png" alt="SalaryCalc MY" class="logo-img" width="250" height="44" fetchpriority="high">
+          <img src="/logo-small.png?v=99" alt="SalaryCalculator.my" class="logo-img" width="250" height="44" fetchpriority="high">
         </a>
-        <a href="/" class="nav-back"> ← Back to Calculator </a>
+        <a href="/" class="nav-back" data-i18n="_back_to_calculator_9d0684"> ← Back to Calculator </a>
       </div>
-              <a href="/overtime-pay-calculator" class="nav-item" title="Overtime Pay Calculator">OT Calculator</a>
-        <a href="/overtime-pay-calculator" class="mobile-nav-item">Overtime Pay Calculator</a>
-</nav>
+    </nav>
 
     <main>
       <div class="container">
-        <div class="page-header">
-          <h1>Privacy Policy</h1>
-          <p>
-            How SalaryCalc MY collects, uses, and protects your information.
-          </p>
-        </div>
-
-        <div class="privacy-content">
-          <p class="last-updated">Last updated: 27 April 2026</p>
-
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">1. Overview</h2>
-            <p>
-              SalaryCalc MY ("we", "us", or "our") operates the website
-              <strong>www.salarycalculator.my</strong>. This Privacy Policy
-              explains what information we collect when you use our salary
-              calculator and related tools, how we use that information, and
-              your rights regarding your data.
+        <div class="doc-card">
+          <div class="page-header">
+            <h1 data-i18n="privacy_policy_fa2ead">Privacy Policy</h1>
+            <p class="subtitle" data-i18n="how_salarycalculatormy_collects_uses_and_213a0f">
+              How SalaryCalculator.my collects, uses, and protects your information.
             </p>
-            <p>
-              By using our website, you agree to the collection and use of
-              information in accordance with this policy.
-            </p>
+            <p class="last-updated" data-i18n="last_updated_27_april_2026_e901cc">Last updated: 27 April 2026</p>
           </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">2. Information We Collect</h2>
-            <p>
-              SalaryCalc MY is a client-side tool. All salary calculations are
-              performed entirely in your browser — we do
-              <strong>not</strong> transmit or store the salary figures, EPF
-              contributions, SOCSO amounts, or any personal financial data you
-              enter into the calculator.
-            </p>
-            <p>
-              We may collect the following non-personal information
-              automatically:
-            </p>
-            <ul>
-              <li>Browser type and version</li>
-              <li>Operating system</li>
-              <li>Pages visited and time spent on each page</li>
-              <li>Referring URL</li>
-              <li>
-                Approximate geographic location (country/region level, via IP
-                address)
-              </li>
-            </ul>
-          </div>
+          <div class="privacy-content">
+            <div class="privacy-section">
+              <h2 data-i18n="1_overview_f4290a">1. Overview</h2>
+              <p data-i18n="salarycalculatormy_we_us_or_our_operates_ceccf5">
+                SalaryCalculator.my ("we", "us", or "our") operates the website
+                <strong>www.salarycalculator.my</strong>. This Privacy Policy
+                explains what information we collect when you use our salary
+                calculator and related tools, how we use that information, and
+                your rights regarding your data.
+              </p>
+              <p data-i18n="by_using_our_website_you_agree_to_the_co_46f5a2">
+                By using our website, you agree to the collection and use of
+                information in accordance with this policy.
+              </p>
+            </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">3. How We Use Your Information</h2>
-            <p>
-              The automatically collected data listed above is used solely to:
-            </p>
-            <ul>
-              <li>Analyse website traffic and usage patterns</li>
-              <li>Improve the performance and usability of our tools</li>
-              <li>Diagnose technical issues</li>
-            </ul>
-            <p>
-              We do not sell, trade, or rent this information to third parties.
-            </p>
-          </div>
+            <div class="privacy-section">
+              <h2 data-i18n="2_information_we_collect_7ad1d2">2. Information We Collect</h2>
+              <p data-i18n="salarycalculatormy_is_a_clientside_tool__1bda48">
+                SalaryCalculator.my is a client-side tool. All salary calculations are
+                performed entirely in your browser — we do
+                <strong>not</strong> transmit or store the salary figures, EPF
+                contributions, SOCSO amounts, or any personal financial data you
+                enter into the calculator.
+              </p>
+              <p data-i18n="we_may_collect_the_following_nonpersonal_cde82a">
+                We may collect the following non-personal information
+                automatically:
+              </p>
+              <ul>
+                <li data-i18n="browser_type_and_version_f50565">Browser type and version</li>
+                <li data-i18n="operating_system_696c66">Operating system</li>
+                <li data-i18n="pages_visited_and_time_spent_on_each_pag_50d0b4">Pages visited and time spent on each page</li>
+                <li data-i18n="referring_url_ea60b9">Referring URL</li>
+                <li data-i18n="approximate_geographic_location_countryr_797897">
+                  Approximate geographic location (country/region level, via IP
+                  address)
+                </li>
+              </ul>
+            </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">4. Cookies &amp; Analytics</h2>
-            <p>
-              We use <strong>Google Analytics</strong> (via Google Tag Manager)
-              to understand how visitors interact with our site. Google
-              Analytics places cookies on your browser to collect anonymous
-              usage statistics. These cookies do not identify you personally.
-            </p>
-            <p>
-              You can opt out of Google Analytics tracking by installing the
-              <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" style="color: var(--primary)">Google Analytics Opt-out Browser Add-on</a>.
-            </p>
-            <p>
-              You may also disable cookies through your browser settings. Note
-              that disabling cookies may affect the functionality of some parts
-              of our website.
-            </p>
-          </div>
+            <div class="privacy-section">
+              <h2 data-i18n="3_how_we_use_your_information_ca135d">3. How We Use Your Information</h2>
+              <p data-i18n="the_automatically_collected_data_listed__0eca32">
+                The automatically collected data listed above is used solely to:
+              </p>
+              <ul>
+                <li data-i18n="analyse_website_traffic_and_usage_patter_5added">Analyse website traffic and usage patterns</li>
+                <li data-i18n="improve_the_performance_and_usability_of_ffa92d">Improve the performance and usability of our tools</li>
+                <li data-i18n="diagnose_technical_issues_ba3eb9">Diagnose technical issues</li>
+              </ul>
+              <p data-i18n="we_do_not_sell_trade_or_rent_this_inform_3a3148">
+                We do not sell, trade, or rent this information to third parties.
+              </p>
+            </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">5. Third-Party Services</h2>
-            <p>Our website may use the following third-party services:</p>
-            <ul>
-              <li>
-                <strong>Google Analytics</strong> — website usage statistics
-              </li>
-              <li><strong>Google Fonts</strong> — font delivery</li>
-              <li>
-                <strong>Firebase / Firestore</strong> — backend services for
-                authenticated features
-              </li>
-            </ul>
-            <p>
-              Each third-party service has its own privacy policy. We encourage
-              you to review them directly.
-            </p>
-          </div>
+            <div class="privacy-section">
+              <h2 data-i18n="4_cookies_analytics_191718">4. Cookies &amp; Analytics</h2>
+              <p data-i18n="we_use_google_analytics_via_google_tag_m_65cc31">
+                We use <strong>Google Analytics</strong> (via Google Tag Manager)
+                to understand how visitors interact with our site. Google
+                Analytics places cookies on your browser to collect anonymous
+                usage statistics. These cookies do not identify you personally.
+              </p>
+              <p data-i18n="you_can_opt_out_of_google_analytics_trac_007eea">
+                You can opt out of Google Analytics tracking by installing the
+                <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" style="color: var(--primary)">Google Analytics Opt-out Browser Add-on</a>.
+              </p>
+              <p data-i18n="you_may_also_disable_cookies_through_you_969b5d">
+                You may also disable cookies through your browser settings. Note
+                that disabling cookies may affect the functionality of some parts
+                of our website.
+              </p>
+            </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">6. Data Security</h2>
-            <p>
-              Since no personal financial data is transmitted to our servers,
-              the risk of data breach for your salary information is minimal.
-              For any data we do hold (e.g. anonymised analytics), we take
-              reasonable technical and organisational measures to protect it
-              against unauthorised access, alteration, disclosure, or
-              destruction.
-            </p>
-          </div>
+            <div class="privacy-section">
+              <h2 data-i18n="5_thirdparty_services_27f3e7">5. Third-Party Services</h2>
+              <p data-i18n="our_website_may_use_the_following_thirdp_a4c88c">Our website may use the following third-party services:</p>
+              <ul>
+                <li data-i18n="google_analytics_website_usage_statistic_8b40e0">
+                  <strong>Google Analytics</strong> — website usage statistics
+                </li>
+                <li data-i18n="google_fonts_font_delivery_8aac96"><strong>Google Fonts</strong> — font delivery</li>
+                <li data-i18n="firebase_firestore_backend_services_for__57b6fa">
+                  <strong>Firebase / Firestore</strong> — backend services for
+                  authenticated features
+                </li>
+              </ul>
+              <p data-i18n="each_thirdparty_service_has_its_own_priv_76bb88">
+                Each third-party service has its own privacy policy. We encourage
+                you to review them directly.
+              </p>
+            </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">7. Children's Privacy</h2>
-            <p>
-              Our services are not directed to individuals under the age of 13.
-              We do not knowingly collect personally identifiable information
-              from children. If you believe a child has provided us with
-              personal information, please contact us so we can delete it.
-            </p>
-          </div>
+            <div class="privacy-section">
+              <h2 data-i18n="6_data_security_7192d2">6. Data Security</h2>
+              <p data-i18n="since_no_personal_financial_data_is_tran_59f55d">
+                Since no personal financial data is transmitted to our servers,
+                the risk of data breach for your salary information is minimal.
+                For any data we do hold (e.g. anonymised analytics), we take
+                reasonable technical and organisational measures to protect it
+                against unauthorised access, alteration, disclosure, or
+                destruction.
+              </p>
+            </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">8. Changes to This Policy</h2>
-            <p>
-              We may update this Privacy Policy from time to time. Any changes
-              will be reflected on this page with an updated "Last updated"
-              date. We encourage you to review this policy periodically.
-            </p>
-          </div>
+            <div class="privacy-section">
+              <h2 data-i18n="7_childrens_privacy_41f2a3">7. Children's Privacy</h2>
+              <p data-i18n="our_services_are_not_directed_to_individ_7430da">
+                Our services are not directed to individuals under the age of 13.
+                We do not knowingly collect personally identifiable information
+                from children. If you believe a child has provided us with
+                personal information, please contact us so we can delete it.
+              </p>
+            </div>
 
-          <div class="privacy-section">
-            <h2 style="color: #2563eb !important;">9. Contact Us</h2>
-            <p>
-              If you have any questions about this Privacy Policy, please
-              contact us at:
-            </p>
-            <p>
-              <strong>SalaryCalc MY</strong><br>
-              Website:
-              <a href="/" style="color: var(--primary)">www.salarycalculator.my</a>
-            </p>
+            <div class="privacy-section">
+              <h2 data-i18n="8_changes_to_this_policy_0313d9">8. Changes to This Policy</h2>
+              <p data-i18n="we_may_update_this_privacy_policy_from_t_3459c8">
+                We may update this Privacy Policy from time to time. Any changes
+                will be reflected on this page with an updated "Last updated"
+                date. We encourage you to review this policy periodically.
+              </p>
+            </div>
+
+            <div class="privacy-section">
+              <h2 data-i18n="9_contact_us_aeb0cf">9. Contact Us</h2>
+              <p data-i18n="if_you_have_any_questions_about_this_pri_3b606e">
+                If you have any questions about this Privacy Policy, please
+                contact us at:
+              </p>
+              <p data-i18n="salarycalculatormy_website_wwwsalarycalc_5acdf3">
+                <strong>SalaryCalculator.my</strong><br>
+                Website:
+                <a href="/" style="color: var(--primary)">www.salarycalculator.my</a>
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
+    <!-- START_EXPLORE_MORE_ARTICLES -->
+<section class="explore-more-section" style="padding: 60px 0; background-color: #f8fafc;">
+  <div class="container" style="max-width: 1100px; margin: 0 auto; padding: 0 20px; box-sizing: border-box; width: 100%;">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <h2 style="font-size: 2rem; font-weight: 700; color: #2563eb !important; margin: 0 0 12px 0;" data-i18n="explore_more_articles_b11beb">Explore More Articles</h2>
+      <p style="font-size: 1.1rem; color: #64748b; margin: 0 auto; max-width: 600px; line-height: 1.5; text-align: center;" data-i18n="browse_our_latest_guides_salary_tips_and_9a8be2">Browse our latest guides, salary tips, and calculator tutorials.</p>
+    </div>
+    <div class="explore-more-grid" data-i18n="salary_hourly_rate_in_malaysia_how_much_3125cd">
+      <a class="blog-card" href="/blog/hourly-rate-in-malaysia-how-much-do-you-earn-per-hour" data-i18n="salary_hourly_rate_in_malaysia_how_much_3aab3c">
+      <div class="blog-content">
+        <div style="margin-bottom: 12px; display: flex; align-items: center;">
+          <span class="blog-category category-tips">Salary</span>
+        </div>
+        <h3 class="blog-title">Hourly Rate in Malaysia: How Much Do You Earn Per Hour?</h3>
+        <div class="blog-meta">
+          <span class="read-more-link">Read Article →</span>
+        </div>
+      </div>
+    </a>
+<a class="blog-card" href="/blog/perkeso-lindung-24-jam-skbbk-coverage-contribution-rates-opt-out-guide-2026" data-i18n="socso_perkeso_lindung_24_jam_skbbk_cover_7a8334">
+      <div class="blog-content">
+        <div style="margin-bottom: 12px; display: flex; align-items: center;">
+          <span class="blog-category category-socso">SOCSO</span>
+        </div>
+        <h3 class="blog-title">PERKESO LINDUNG 24 Jam (SKBBK): Coverage, Contribution Rates &amp; Opt-Out Guide (2026)</h3>
+        <div class="blog-meta">
+          <span class="read-more-link">Read Article →</span>
+        </div>
+      </div>
+    </a>
+<a class="blog-card" href="/blog/how-to-calculate-overtime-pay-in-malaysia-normal-days-rest-days-public-holidays" data-i18n="overtime_how_to_calculate_overtime_pay_i_f1b93d">
+      <div class="blog-content">
+        <div style="margin-bottom: 12px; display: flex; align-items: center;">
+          <span class="blog-category category-overtime">Overtime</span>
+        </div>
+        <h3 class="blog-title">How to Calculate Overtime Pay in Malaysia: Normal Days, Rest Days &amp; Public Holidays</h3>
+        <div class="blog-meta">
+          <span class="read-more-link">Read Article →</span>
+        </div>
+      </div>
+    </a>
+<a class="blog-card" href="/blog/salary-deductions-in-malaysia-how-they-affect-your-take-home-salary" data-i18n="salary_salary_deductions_in_malaysia_how_38dc63">
+      <div class="blog-content">
+        <div style="margin-bottom: 12px; display: flex; align-items: center;">
+          <span class="blog-category category-tips">Salary</span>
+        </div>
+        <h3 class="blog-title">Salary Deductions in Malaysia: How They Affect Your Take-Home Salary</h3>
+        <div class="blog-meta">
+          <span class="read-more-link">Read Article →</span>
+        </div>
+      </div>
+    </a>
+    </div>
+    <div style="text-align: center; margin-top: 40px;" data-i18n="view_all_articles_f98ed5">
+      <a class="view-all-articles-link" href="https://salarycalculator.my/blog" style="display: inline-block; font-size: 1.1rem; font-weight: 600; color: #2563eb; text-decoration: none; transition: color 0.2s ease, transform 0.2s ease;" data-i18n="view_all_articles_13678c">View All Articles →</a>
+    </div>
+  </div>
+</section>
+<style>
+  .explore-more-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 32px !important;
+    margin-top: 32px !important;
+  }
+  @media (max-width: 640px) {
+    .explore-more-grid {
+      grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+      gap: 20px !important;
+    }
+  }
+  .explore-more-grid .blog-card {
+    display: flex !important;
+    flex-direction: column !important;
+    text-decoration: none !important;
+    height: 100% !important;
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+  .explore-more-grid .blog-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+  }
+  .explore-more-grid .blog-content {
+    padding: 32px !important;
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    background: #ffffff !important;
+    box-sizing: border-box !important;
+    border-radius: 12px !important;
+  }
+  @media (max-width: 640px) {
+    .explore-more-grid .blog-content {
+      padding: 24px !important;
+    }
+  }
+  .explore-more-grid .blog-title {
+    font-size: 1.25rem !important;
+    font-weight: 600 !important;
+    color: #0f172a !important;
+    margin: 0 0 16px 0 !important;
+    line-height: 1.4 !important;
+    flex-grow: 1 !important;
+  }
+  .explore-more-grid .blog-meta {
+    margin-top: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+  }
+  .explore-more-grid .read-more-link {
+    color: #2563eb !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    transition: color 0.15s ease !important;
+  }
+  .explore-more-grid .blog-card:hover .read-more-link {
+    color: #1d4ed8 !important;
+  }
+  .view-all-articles-link:hover {
+    color: #1d4ed8 !important;
+    text-decoration: underline !important;
+  }
+</style>
+<!-- END_EXPLORE_MORE_ARTICLES -->
+<footer class="footer">
       <div class="container">
         <div class="footer-grid">
-          <div class="footer-col">
-            <a href="/" class="logo" style="margin-bottom: 20px; display: block">
-              <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" width="250" height="39" style="height: 60px; width: auto; object-fit: contain; border-radius: 4px;  ">
-            </a>
-            <p style="color: #94a3b8; font-size: 15px; line-height: 1.6">
-              Accurate Malaysia salary calculator.<br>
-              Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
-            </p>
+          <!-- Logo + Description -->
+          <div class="footer-col" style="max-width: max-content; padding-left: 32px; box-sizing: border-box; display: flex; flex-direction: column;">
+            <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 16px;">
+              <a href="/" class="logo" style="display: block;">
+                <img src="/logo-small.png?v=99" alt="SalaryCalculator.my" width="250" height="44" style="height: 44px !important; width: auto !important; max-width: none !important; object-fit: contain; object-position: left center; display: block; margin: 0; padding: 0;">
+              </a>
+              <p style="color: #64748b; font-size: 15px; line-height: 1.6; margin: 0;" data-i18n="accurate_malaysia_salary_calculator_inst_0c4a26">
+                Accurate Malaysia salary calculator.<br>
+                Instantly calculate take-home pay after EPF, SOCSO, EIS &amp; PCB.
+              </p>
+            </div>
+            <div style="font-size: 15px; color: #64748b; margin: 0;">
+              <p style="margin: 0 0 8px 0;" data-i18n="_2026_salarycalculatormy_all_rights_rese_2ead1b">© 2026 SalaryCalculator.my. All rights reserved.</p>
+              <p style="margin: 0;" data-i18n="data_is_estimated_for_reference_only_e819d1">Data is estimated for reference only</p>
+            </div>
           </div>
-          <div class="footer-col">
-            <h4>Quick Links</h4>
-            <a href="/" class="footer-link">Salary Calculator</a>
-            <a href="/socso-perkeso" class="footer-link">SOCSO (PERKESO) Calculator</a>
-            <a href="/privacy-policy" class="footer-link" style="color: #ffffff">Privacy Policy</a>
+          <!-- Quick Links -->
+          <div class="footer-col footer-col-links">
+            <h4 data-i18n="quick_links_f0fb2c">Quick Links</h4>
+            <a href="/" class="footer-link" data-i18n="salary_calculator_3b7db6">Salary Calculator</a>
+            <a href="/socso-perkeso" class="footer-link" data-i18n="socso_calculator_d2a8d8">SOCSO Calculator</a>
+            <a href="/pcb-calculator" class="footer-link" data-i18n="pcb_calculator_c61255">PCB Calculator</a>
+            <a href="/epf-kwsp" class="footer-link" data-i18n="epf_calculator_27f3cc">EPF Calculator</a>
+            <a href="/annual-leave-calculator" class="footer-link" data-i18n="annual_leave_calculator_2cfd91">Annual Leave Calculator</a>
+            <a href="/overtime-pay-calculator" class="footer-link" data-i18n="overtime_pay_calculator_459bb3">Overtime Pay Calculator</a>
+            <a href="/blog" class="footer-link" data-i18n="blog_be8df1">Blog</a>
+            <a href="/privacy-policy" class="footer-link" data-i18n="privacy_policy_fa2ead">Privacy Policy</a>
           </div>
-        </div>
-        <div class="footer-bottom">
-          <p>© 2026 SalaryCalc MY</p>
-          <p style="margin-top: 8px; font-size: 15px; color: #64748b">
-            Data is estimated for reference only
-          </p>
         </div>
       </div>
     </footer>
@@ -718,12 +920,15 @@
         // desktop and mobile highlighting
         const allLinks = document.querySelectorAll('.nav-item, .mobile-nav-item, .dropdown-item, .mobile-submenu-item');
         allLinks.forEach(link => {
-          const href = link.getAttribute('href');
+          let href = link.getAttribute('href');
           if (!href) return;
           
-          if (href === '/' && (normalizedPath === '/index.html' || normalizedPath === '/')) {
+          const isHomeLink = href === '/' || href === '/ms/' || href === '/ms';
+          const isHomePath = normalizedPath === '/index.html' || normalizedPath === '/' || normalizedPath === '/ms/' || normalizedPath === '/ms';
+          
+          if (isHomeLink && isHomePath) {
             link.classList.add('active-nav');
-          } else if (href !== '/' && normalizedPath.includes(href)) {
+          } else if (!isHomeLink && normalizedPath.includes(href)) {
             link.classList.add('active-nav');
             
             // If it's a dropdown item, also highlight the trigger

@@ -19,7 +19,16 @@ export default defineConfig(({ mode }) => {
     server: {
       hmr: false,
     },
+    esbuild: {
+      drop: mode === "production" ? ["console", "debugger"] : [],
+      legalComments: "none",
+      minifyIdentifiers: true,
+      minifySyntax: true,
+      minifyWhitespace: true,
+    },
     build: {
+      minify: true,
+      cssMinify: true,
       rollupOptions: {
         input: {
           main: path.resolve(__dirname, "index.html"),
@@ -38,6 +47,7 @@ export default defineConfig(({ mode }) => {
           blog: path.resolve(__dirname, "blog.html"),
           blogAdmin: path.resolve(__dirname, "blog-admin.html"),
           overtimePay: path.resolve(__dirname, "overtime-pay-calculator.html"),
+          hourlyRate: path.resolve(__dirname, "hourly-rate.html"),
         },
       },
     },

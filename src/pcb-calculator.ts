@@ -1,8 +1,7 @@
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "./firebase";
-// Simplified Malaysia PCB Tax Calculator
-
 import { generatePDFReport } from "./lib/pdf-generator";
+// Simplified Malaysia PCB Tax Calculator
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("pcbForm") as HTMLFormElement;
@@ -122,41 +121,38 @@ document.addEventListener("DOMContentLoaded", () => {
     if (salary <= 0) {
       placeholderText.style.display = "block";
       resultContent.classList.remove("show");
+      resultContent.style.display = "none";
       return;
     }
 
-    const bonusStr = (document.getElementById("bonus") as HTMLInputElement)
-      .value;
-    const bonus = parseFloat(bonusStr) || 0;
-
-    const epfRateStr = (document.getElementById("epfRate") as HTMLSelectElement)
-      .value;
+    const maritalStatus = (document.getElementById("maritalStatus") as HTMLSelectElement).value;
+    const spouseWorking = maritalStatus === "married" ? (document.getElementById("spouseWorking") as HTMLSelectElement).value : "yes";
+    const childrenCount = parseInt((document.getElementById("childrenCount") as HTMLInputElement).value) || 0;
+    const additionalRelief = parseFloat((document.getElementById("additionalRelief") as HTMLInputElement).value) || 0;
+    
+    const epfRateStr = (document.getElementById("epfRate") as HTMLSelectElement).value;
     const epfRate = parseFloat(epfRateStr) / 100 || 0.11;
 
-    const isNonResident =
-      (document.getElementById("taxStatus") as HTMLSelectElement).value ===
-      "non-resident";
-    const hasSpouse = false;
+    const isNonResident = (document.getElementById("taxStatus") as HTMLSelectElement).value === "non-resident";
 
-    const childrenCount = 0;
-
-    const zakatStr = (document.getElementById("zakat") as HTMLInputElement)
-      .value;
-    const zakat = parseFloat(zakatStr) || 0;
-
-    const totalIncome = salary + bonus;
+    const totalIncome = salary;
 
     // EPF deduction
-const epfDeduction = totalIncome * epfRate;
-const annualIncome = (totalIncome - epfDeduction) * 12;
-const personalRelief = 9000;
-let totalRelief = personalRelief;
-if (hasSpouse) totalRelief += 4000;
-totalRelief += (childrenCount * 2000);
-const taxableIncome = annualIncome - totalRelief;
-let tax = 0;
-let bracket = '0%';
-let annualTax = 0;
+    const actualEpf = totalIncome * epfRate;
+    const epfRelief = Math.min(actualEpf, 333.33);
+    const annualIncome = (totalIncome - epfRelief) * 12;
+    
+    const personalRelief = 9000;
+    let totalRelief = personalRelief + additionalRelief;
+    if (maritalStatus === "married" && spouseWorking === "no") {
+      totalRelief += 4000;
+    }
+    totalRelief += (childrenCount * 2000);
+    
+    const taxableIncome = Math.max(0, annualIncome - totalRelief);
+    let tax = 0;
+    let bracket = '0%';
+    let annualTax = 0;
 if (isNonResident) {
   annualTax = annualIncome * 0.30;
   bracket = '30%';
@@ -197,6 +193,7 @@ if (isNonResident) {
     tax = annualTax / 12;
   }
 }
+const zakat = 0; // removed from form
 tax = tax - zakat;
 if (tax < 0) tax = 0;
 let chargeable = taxableIncome > 0 ? taxableIncome / 12 : 0;
@@ -206,7 +203,7 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
 
     // Display
     resGross.textContent = formatRM(totalIncome);
-    resEpf.textContent = formatRM(epfDeduction);
+    resEpf.textContent = formatRM(actualEpf);
     resRelief.textContent = formatRM(finalReliefAndZakat);
     resChargeable.textContent = formatRM(chargeable);
 
@@ -219,22 +216,21 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
     resAnnualPcb.textContent = formatRM(tax * 12);
 
     // Take Home Salary updates
-    const takeHomeSalary = totalIncome - epfDeduction - tax;
+    const takeHomeSalary = totalIncome - actualEpf - tax;
     resTakeHomeSalary.textContent = formatRM(takeHomeSalary);
     resTakeHomeGross.textContent = formatRM(totalIncome);
-    resTakeHomeEpf.textContent = "-" + formatRM(epfDeduction);
+    resTakeHomeEpf.textContent = "-" + formatRM(actualEpf);
     resTakeHomePcb.textContent = "-" + formatRM(tax);
     resTakeHomeTaxRate.textContent =
       effectiveRate.toFixed(1) + "% of gross salary";
 
     lastCalculation = {
       salary: salary.toFixed(2),
-      bonus: bonus.toFixed(2),
-      epf: epfDeduction.toFixed(2),
+      epf: actualEpf.toFixed(2),
       relief: finalReliefAndZakat.toFixed(2),
       pcb: tax.toFixed(2),
-      totalDeductions: (epfDeduction + tax).toFixed(2),
-      netSalary: (totalIncome - epfDeduction - tax).toFixed(2),
+      totalDeductions: (actualEpf + tax).toFixed(2),
+      netSalary: (totalIncome - actualEpf - tax).toFixed(2),
       annualIncome: (totalIncome * 12).toFixed(2),
       annualPcb: (tax * 12).toFixed(2),
       effectiveRate: effectiveRate.toFixed(2),
@@ -242,11 +238,13 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
       taxStatus: isNonResident ? "non-resident" : "resident",
       epfRate: (epfRate * 100).toFixed(0),
       chargeable: chargeable.toFixed(2),
+      maritalStatus,
     };
 
     // Show result panel
     placeholderText.style.display = "none";
     resultContent.classList.add("show");
+    resultContent.style.display = "block";
   };
 
   const grossSalaryInput = document.getElementById(
@@ -294,6 +292,7 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
     setTimeout(() => {
       placeholderText.style.display = "block";
       resultContent.classList.remove("show");
+      resultContent.style.display = "none";
       // calculateBtn.disabled = true;
       if (pcbDisclaimer) pcbDisclaimer.style.display = "none";
     }, 10);
@@ -419,23 +418,13 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
         ) as HTMLSelectElement;
         const sheetPayload = {
           timestamp: new Date().toISOString(),
-          Name: name,
-          Email: email,
-          "User Type": role,
-          "Hiring Status": hiringInputExt?.value || "",
-          "Company Name": companyInputExt?.value?.trim() || "",
-          "User Phone": phone,
-          download_via: "PCB Calculator",
-          ...(lastCalculation ? {
-            "Gross Salary": lastCalculation.salary,
-            "Bonus": lastCalculation.bonus,
-            "Annual Income": lastCalculation.annualIncome,
-            "Total Reliefs": lastCalculation.relief,
-            "Tax Bracket": lastCalculation.taxBracket,
-            "Monthly PCB": lastCalculation.pcb,
-            "Net Salary": lastCalculation.netSalary,
-            "Tax Status": lastCalculation.taxStatus === "resident" ? "Resident" : "Non-Resident"
-          } : {})
+          name: name,
+          email: email,
+          userType: role,
+          hiringStatus: hiringInputExt?.value || "",
+          companyName: companyInputExt?.value?.trim() || "",
+          userPhone: phone || "",
+          download_via: "Download PCB Report",
         };
 
         const dbPayload = {
@@ -446,39 +435,38 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
           createdAt: new Date().toISOString(),
           ...(lastCalculation ? {
             salary: lastCalculation.salary,
-            bonus: lastCalculation.bonus,
             annualIncome: lastCalculation.annualIncome,
             relief: lastCalculation.relief,
             taxBracket: lastCalculation.taxBracket,
             pcb: lastCalculation.pcb,
             netSalary: lastCalculation.netSalary,
-            taxStatus: lastCalculation.taxStatus
+            taxStatus: lastCalculation.taxStatus,
+            maritalStatus: lastCalculation.maritalStatus
           } : {})
         };
+
         if (companyInputExt?.value?.trim())
           (dbPayload as any).companyName = companyInputExt?.value?.trim();
         if (hiringInputExt?.value)
           (dbPayload as any).hiringStatus = hiringInputExt?.value;
         if (phone) (dbPayload as any).phoneNumber = phone;
 
-        try {
-          await addDoc(collection(db, "leads"), dbPayload);
-        } catch (err) {
-          console.error("Firestore error:", err);
-        }
-
-        try {
-          await fetch("/api/pcb-sheet", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(sheetPayload),
-          });
-        } catch (err) {
-          console.error("Google Sheets Webhook error:", err);
-        }
+        // 1. Store lead in Firestore (non-blocking in background)
+        addDoc(collection(db, "leads"), dbPayload).catch((fErr) => {
+          console.warn("Firestore leads record error:", fErr);
+        });
+        
+        // 2. Submit to Google Sheet via server proxy (non-blocking in background)
+        fetch("/api/pcb-sheet", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sheetPayload),
+        }).catch((sErr) => {
+          console.warn("Google Sheets record error:", sErr);
+        });
 
         if (lastCalculation) {
-          generatePDFReport({
+          await generatePDFReport({
             title: "PCB (Income Tax) Report",
             fileName: "PCB_Report",
             data: [
@@ -487,8 +475,8 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
                 value: `RM ${parseFloat(lastCalculation.salary).toFixed(2)}`,
               },
               {
-                label: "Bonus",
-                value: `RM ${parseFloat(lastCalculation.bonus).toFixed(2)}`,
+                label: "Marital Status",
+                value: lastCalculation.maritalStatus === "married" ? "Married" : "Single",
               },
               {
                 label: "Tax Status",
@@ -558,8 +546,9 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
           if (mobileActionButtons) mobileActionButtons.style.display = "none";
           if (mobileFallbackText) mobileFallbackText.style.display = "none";
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error("Submission error:", err);
+        alert(err.message || "An error occurred while generating the report. Please try again.");
       } finally {
         if (submitBtn) {
           submitBtn.textContent = originalText;

@@ -1,1 +1,0 @@
-PCB Payload: {"timestamp":"2026-06-11T08:08:05.607Z","email":"test@example.com","userType":"Employer/HR","hiringStatus":"Hiring Now","companyName":"ABC Sdn Bhd","userPhone":"0123456789","download_via":"PCB Calculator"}

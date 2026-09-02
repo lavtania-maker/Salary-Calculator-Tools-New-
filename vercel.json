@@ -1,68 +1,225 @@
 {
   "redirects": [
     {
-      "source": "/(.*)",
-      "has": [{ "type": "header", "key": "x-forwarded-proto", "value": "http" }],
-      "destination": "https://salarycalculator.my/$1",
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index",
+      "destination": "/",
       "permanent": true
     },
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "www.salarycalculator.my" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "www.salarycalculator.my"
+        }
+      ],
       "destination": "https://salarycalculator.my/$1",
+      "permanent": true
+    },
+    {
+      "source": "/epf-contribution-guide-2026",
+      "destination": "/blog/how-to-calculate-epf-kwsp-in-malaysia-formula-contribution-rates",
+      "permanent": true
+    },
+    {
+      "source": "/malaysia-salary-guide-2026",
+      "destination": "/blog/how-to-calculate-gaji-bersih-net-salary-in-malaysia-formula-example-salary-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/annual-leave-malaysia-2026",
+      "destination": "/blog/annual-leave-al-in-malaysia-entitlement-rules-how-to-calculate",
+      "permanent": true
+    },
+    {
+      "source": "/socso-malaysia-2026",
+      "destination": "/blog/epf-socso-eis-malaysia-latest-contribution-rates-employer-guide-2026",
+      "permanent": true
+    },
+    {
+      "source": "/pcb-tax-deduction-202",
+      "destination": "/blog/how-to-calculate-pcb-monthly-tax-deduction-in-malaysia-formula-example",
+      "permanent": true
+    },
+    {
+      "source": "/pcb-tax-deduction-2026",
+      "destination": "/blog/how-to-calculate-pcb-monthly-tax-deduction-in-malaysia-formula-example",
+      "permanent": true
+    },
+    {
+      "source": "/calculate-overtime-pay",
+      "destination": "/overtime-pay-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/pcb-income-tax",
+      "destination": "/pcb-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/hourly-rate",
+      "destination": "/hourly-rate-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/payslip",
+      "destination": "/payslip-generator",
       "permanent": true
     }
   ],
   "rewrites": [
-    { "source": "/sitemap.xml",       "destination": "/public/sitemap.xml" },
-    { "source": "/sitemap-blog.xml",  "destination": "/api/sitemap-blog" },
-    { "source": "/robots.txt",        "destination": "/public/robots.txt" },
-    { "source": "/privacy-policy",    "destination": "/privacy-policy.html" },
-    { "source": "/admin",             "destination": "/admin.html" },
-    { "source": "/blog-admin",        "destination": "/blog-admin.html" },
-    { "source": "/mincal",            "destination": "/mincal.html" },
-    { "source": "/payslip-generator", "destination": "/payslip.html" },
-    { "source": "/report",            "destination": "/report.html" },
-    { "source": "/epf-kwsp",          "destination": "/epf-kwsp.html" },
-    { "source": "/socso-perkeso",     "destination": "/socso-perkeso.html" },
-    { "source": "/pcb-calculator",    "destination": "/pcb-income-tax.html" },
-    { "source": "/pcb-income-tax",    "destination": "/pcb-income-tax.html" },
-    { "source": "/blog",              "destination": "/blog.html" },
-    { "source": "/blog/category/:category", "destination": "/blog.html?category=:category" },
-    { "source": "/annual-leave-calculator", "destination": "/annual-leave-calculator.html" },
-    { "source": "/blog/:slug", "destination": "/api/blog-post" },
-    { "source": "/:slug((?!.*\\.(html|png|jpg|jpeg|gif|css|js|ico|svg|xml|txt|json)$|blog$|epf-kwsp$|socso-perkeso$|pcb-income-tax$|annual-leave-calculator$|privacy-policy$|admin$|blog-admin$|mincal$|payslip-generator$|report$)[^/.]+)", "destination": "/api/blog-post" }
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    },
+    {
+      "source": "/sitemap-blog.xml",
+      "destination": "/api/sitemap-blog"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy-policy.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
+      "source": "/blog-admin",
+      "destination": "/blog-admin.html"
+    },
+    {
+      "source": "/mincal",
+      "destination": "/mincal.html"
+    },
+    {
+      "source": "/payslip-generator",
+      "destination": "/payslip.html"
+    },
+    {
+      "source": "/report",
+      "destination": "/report.html"
+    },
+    {
+      "source": "/epf-kwsp",
+      "destination": "/epf-kwsp.html"
+    },
+    {
+      "source": "/socso-perkeso",
+      "destination": "/socso-perkeso.html"
+    },
+    {
+      "source": "/pcb-calculator",
+      "destination": "/pcb-income-tax.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/api/blog"
+    },
+    {
+      "source": "/blog/category/:category",
+      "destination": "/api/blog?category=:category"
+    },
+    {
+      "source": "/annual-leave-calculator",
+      "destination": "/annual-leave-calculator.html"
+    },
+    {
+      "source": "/overtime-pay-calculator",
+      "destination": "/overtime-pay-calculator.html"
+    },
+    {
+      "source": "/hourly-rate-calculator",
+      "destination": "/hourly-rate.html"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/api/blog-post"
+    },
+    {
+      "source": "/ms",
+      "destination": "/ms/index.html"
+    },
+    {
+      "source": "/ms/",
+      "destination": "/ms/index.html"
+    },
+    {
+      "source": "/ms/kalkulator-epf",
+      "destination": "/ms/kalkulator-epf.html"
+    },
+    {
+      "source": "/ms/kalkulator-socso",
+      "destination": "/ms/kalkulator-socso.html"
+    },
+    {
+      "source": "/ms/kalkulator-pcb",
+      "destination": "/ms/kalkulator-pcb.html"
+    },
+    {
+      "source": "/ms/kalkulator-cuti-tahunan",
+      "destination": "/ms/kalkulator-cuti-tahunan.html"
+    },
+    {
+      "source": "/ms/kalkulator-overtime",
+      "destination": "/ms/kalkulator-overtime.html"
+    },
+    {
+      "source": "/ms/kadar-gaji-sejam",
+      "destination": "/ms/kadar-gaji-sejam.html"
+    },
+    {
+      "source": "/ms/kalkulator-gaji-minimum",
+      "destination": "/ms/kalkulator-gaji-minimum.html"
+    },
+    {
+      "source": "/ms/penjana-payslip",
+      "destination": "/ms/penjana-payslip.html"
+    },
+    {
+      "source": "/ms/dasar-privasi",
+      "destination": "/ms/dasar-privasi.html"
+    },
+    {
+      "source": "/((?!.*\\.(?:html|png|jpg|jpeg|gif|css|js|ico|svg|xml|txt|json)$|blog$|epf-kwsp$|socso-perkeso$|pcb-calculator$|pcb-income-tax$|annual-leave-calculator$|privacy-policy$|admin$|blog-admin$|mincal$|payslip$|payslip-generator$|report$|overtime-pay-calculator$|epfreport$|socsoreport$|hourly-rate$|hourly-rate-calculator$|api$)[^/.]+)",
+      "destination": "/api/blog-post?slug=$1"
+    }
   ],
   "headers": [
     {
-      "source": "/public/calculator-styles.css",
+      "source": "/(.*)\\.(css|js|png|jpg|jpeg|gif|ico|svg|webp)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/calculator-styles.css",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/(.*)\\.js",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/(.*)\\.html",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
       ]
     },
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Robots-Tag", "value": "index, follow" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "index, follow"
+        }
       ]
     }
   ],

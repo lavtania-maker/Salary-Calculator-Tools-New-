@@ -1,0 +1,2776 @@
+{
+  "/ms/": {
+    "title": "Kalkulator Gaji Malaysia 2026 | EPF, SOCSO, PCB",
+    "metaDesc": "Kira your net salary in Malaysia after EPF, SOCSO, EIS, and PCB deductions instantly. Free tool for 2026 tax rates.",
+    "canonical": "https://salarycalculator.my/ms/",
+    "hreflangs": [
+      "en:https://salarycalculator.my/",
+      "ms:https://salarycalculator.my/ms/",
+      "x-default:https://salarycalculator.my/"
+    ],
+    "h1": "Kalkulator Gaji Malaysia (Gaji Bersih) 2026MY INCOME JOURNEY 🚀MY INCOMEJOURNEY 🚀",
+    "navLinks": [
+      "Kalkulator Gaji -> /ms/",
+      "Kalkulator SOCSO -> /ms/kalkulator-socso",
+      "Kalkulator PCB -> /ms/kalkulator-pcb",
+      "Kalkulator EPF (KWSP) -> /ms/kalkulator-epf",
+      "Kalkulator Percuma -> undefined",
+      "Kalkulator Cuti Tahunan -> /ms/kalkulator-cuti-tahunan",
+      "Kalkulator Overtime -> /ms/kalkulator-overtime",
+      "Kalkulator Kadar Gaji Sejam -> /ms/kadar-gaji-sejam",
+      "Blog -> /blog",
+      "EN -> /"
+    ],
+    "footerLinks": [
+      " -> /ms/",
+      "Kalkulator Gaji -> /ms/",
+      "Kalkulator SOCSO -> /ms/kalkulator-socso",
+      "Kalkulator PCB -> /ms/kalkulator-pcb",
+      "Kalkulator EPF (KWSP) -> /ms/kalkulator-epf",
+      "Kalkulator Cuti Tahunan -> /ms/kalkulator-cuti-tahunan",
+      "Kalkulator Overtime -> /ms/kalkulator-overtime",
+      "Blog -> /blog",
+      "Dasar Privasi -> /ms/dasar-privasi"
+    ],
+    "breadcrumbs": "",
+    "untranslatedElements": [
+      {
+        "tag": "div",
+        "class": "calculator-area",
+        "id": "",
+        "text": "Kalkulator Gaji Malaysia (Gaji Bersih) 2026 Kira Gaji Bersih, Caruman EPF (KWSP), SOCSO (PERKESO), EIS (SIP) dan PCB sec"
+      },
+      {
+        "tag": "div",
+        "class": "main-layout",
+        "id": "layoutSalary",
+        "text": "Masukkan Butiran Gaji Gaji Kasar Bulanan * RM Bonus / Allowance (RM) (Pilihan) Reset Calculate Pilihan Potongan Gaji Sta"
+      },
+      {
+        "tag": "div",
+        "class": "form-actions",
+        "id": "",
+        "text": "Reset Calculate"
+      },
+      {
+        "tag": "button",
+        "class": "btn btn-primary",
+        "id": "",
+        "text": "Calculate"
+      },
+      {
+        "tag": "div",
+        "class": "take-home-card",
+        "id": "",
+        "text": "Ke Mana Perginya Gaji Anda? Take Home (0%) Potongan (0%) Gaji Bersih (Take Home Pay) RM 0.00 Potongan RM 0.00"
+      },
+      {
+        "tag": "div",
+        "class": "salary-go-pills",
+        "id": "",
+        "text": "Gaji Bersih (Take Home Pay) RM 0.00 Potongan RM 0.00"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Gaji Bersih (Take Home Pay) RM 0.00"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Gaji Bersih (Take Home Pay)"
+      },
+      {
+        "tag": "p",
+        "class": "seo-subtitle",
+        "id": "",
+        "text": "Pengiraan gaji bersih (take home pay) dikira dengan menolak semua caruman berkanun daripada gaji kasar anda. Gunakan kal"
+      },
+      {
+        "tag": "div",
+        "class": "seo-table-wrapper",
+        "id": "",
+        "text": "Term Penerangan Impact on Gaji Bersih EPF (KWSP) Employee Provident Fund for retirement savings. Reduces current net pay"
+      },
+      {
+        "tag": "td",
+        "class": "",
+        "id": "",
+        "text": "Employee Provident Fund for retirement savings."
+      },
+      {
+        "tag": "div",
+        "class": "contribution-content active",
+        "id": "epf",
+        "text": "Salary Range Employee (%) Employer (%) ≤ RM5,000 11% 13% > RM5,000 11% 12%"
+      },
+      {
+        "tag": "th",
+        "class": "",
+        "id": "",
+        "text": "Employee (%)"
+      },
+      {
+        "tag": "th",
+        "class": "",
+        "id": "",
+        "text": "Employer (%)"
+      },
+      {
+        "tag": "div",
+        "class": "contribution-content",
+        "id": "socso",
+        "text": "Monthly Wages (RM) Employee (RM) Employer (RM) Jumlah (RM) RM1,000 – RM2,000 4.75 16.65 21.40 RM3,000 – RM4,000 14.75 51"
+      },
+      {
+        "tag": "th",
+        "class": "",
+        "id": "",
+        "text": "Employee (RM)"
+      },
+      {
+        "tag": "th",
+        "class": "",
+        "id": "",
+        "text": "Employer (RM)"
+      },
+      {
+        "tag": "div",
+        "class": "contribution-content",
+        "id": "eis",
+        "text": "Salary Range (RM) Employee (RM) Employer (RM) Jumlah (RM) Up to 300 0.50 0.50 1.00 2,000 – 2,100 4.10 4.10 8.20 4,000 – "
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "1. EPF (KWSP) ✓ Included Items Gaji asas (Basic salary) Bonus tahunan dan insentif Komisen Elaun (melainkan yang diberi "
+      },
+      {
+        "tag": "div",
+        "class": "seo-grid-2",
+        "id": "",
+        "text": "✓ Included Items Gaji asas (Basic salary) Bonus tahunan dan insentif Komisen Elaun (melainkan yang diberi pengecualian) "
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Gaji asas (Basic salary)"
+      },
+      {
+        "tag": "div",
+        "class": "seo-grid-2",
+        "id": "",
+        "text": "✓ Included Items Gaji asas (Basic salary) Bayaran overtime (OT) Komisen dan caj perkhidmatan Bayaran cuti bergaji Elaun "
+      },
+      {
+        "tag": "div",
+        "class": "seo-table-wrapper",
+        "id": "",
+        "text": "Item Calculation Amount Gaji Kasar Bulanan — RM 5,000.00 EPF 11% of RM5,000 - RM 550.00 SOCSO Official PERKESO table - R"
+      },
+      {
+        "tag": "h3",
+        "class": "",
+        "id": "",
+        "text": "What Your Employer Pays On Top"
+      },
+      {
+        "tag": "div",
+        "class": "seo-table-wrapper",
+        "id": "",
+        "text": "Item Calculation Amount EPF Employer 13% of RM5,000 + RM 650.00 SOCSO Employer Official PERKESO table + RM 70.25 EIS Emp"
+      },
+      {
+        "tag": "td",
+        "class": "",
+        "id": "",
+        "text": "EPF Employer"
+      },
+      {
+        "tag": "td",
+        "class": "",
+        "id": "",
+        "text": "SOCSO Employer"
+      },
+      {
+        "tag": "td",
+        "class": "",
+        "id": "",
+        "text": "EIS Employer"
+      },
+      {
+        "tag": "td",
+        "class": "",
+        "id": "",
+        "text": "Same as employee rate"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Your employer pays an extra RM730.25 on top of your salary every month — this never appears on your payslip but is the r"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Deduct individual relief: RM53,400 − RM9,000 = RM44,400 taxable income"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "Minimum Wage Malaysia 2026"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Malaysia's minimum wage is RM1,700 per month, effective 1 February 2025 under the Minimum Wages Order 2024. This applies"
+      },
+      {
+        "tag": "div",
+        "class": "seo-table-wrapper",
+        "id": "",
+        "text": "Kategori Current Rate Bulanan RM 1,700.00 Daily (26 working days) RM 65.38 Hourly (8 hours/day) RM 8.17 Effective Date 1"
+      },
+      {
+        "tag": "td",
+        "class": "",
+        "id": "",
+        "text": "Daily (26 working days)"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Minimum Wage History:"
+      },
+      {
+        "tag": "div",
+        "class": "seo-table-wrapper",
+        "id": "",
+        "text": "Year Rate Notes 2013RM 900First national minimum wage 2016RM 1,000+11% 2018RM 1,050Unified nationwide 2019RM 1,100+4.8% "
+      },
+      {
+        "tag": "td",
+        "class": "",
+        "id": "",
+        "text": "First national minimum wage"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Take Home Pay at RM1,700:"
+      },
+      {
+        "tag": "div",
+        "class": "seo-table-wrapper",
+        "id": "",
+        "text": "Item Amount Gaji KasarRM 1,700.00 EPF (11%)- RM 187.00 SOCSO- RM 8.25 EIS- RM 3.40 PCBRM 0.00 Gaji Bersih (Take Home Pay"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "No PCB deduction applies at RM1,700 for a single Malaysian with standard individual relief."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Note: Based on single status, Malaysian resident, RM9,000 individual relief only."
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "Malaysia Tax Relief 2026 – Complete List"
+      },
+      {
+        "tag": "div",
+        "class": "seo-table-wrapper",
+        "id": "",
+        "text": "Relief Type Maximum Jumlah (RM) Pelepasan Individu (RM9,000)RM 9,000 Spouse Relief (non-working)RM 4,000 Child below 18 "
+      },
+      {
+        "tag": "th",
+        "class": "",
+        "id": "",
+        "text": "Relief Type"
+      },
+      {
+        "tag": "td",
+        "class": "",
+        "id": "",
+        "text": "Spouse Relief (non-working)"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Reliefs are claimed when you file your annual income tax return via MyTax e-Filing portal. The more reliefs you claim, t"
+      },
+      {
+        "tag": "div",
+        "class": "seo-card",
+        "id": "",
+        "text": "Soalan Lazim (FAQ) How accurate are these calculations? All calculations strictly adhere to official schedules published"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Follows exact contribution tables and formulas from (EPF), (SOCSO & EIS), and (PCB income tax)."
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Updated for the current tax year including wage ceilings and tax relief brackets."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Results are estimates. Actual payslip amounts may vary slightly due to company-specific allowance taxability, individual"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Gross salary represents total pre-deduction earnings: Base Monthly Pay: Enter your basic salary before any statutory ded"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Enter your basic salary before any statutory deductions."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Berkanun contributions for social security have a fixed maximum threshold: Berkanun Wage Ceiling: Both PERKESO (SOCSO) a"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Earnings above pay the exact same fixed maximum contribution as an RM 6,000 salary."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Yes. Select Foreigner / Non-Malaysian under Nationality settings: Foreigner EPF Rate: Foreign employees are subject to m"
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "What is the difference between employee and employer contributions?"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Berkanun contributions are split between payroll deductions and employer costs: Employee Potongan: Subtracted directly f"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Berkanun contributions are split between payroll deductions and employer costs:"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Represents the complete financial expenditure required by an employer (Gaji Kasar + Employer Berkanun Contributions)."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Official SOCSO Website Official PERKESO contribution reference portal."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Official PERKESO contribution reference portal."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Official EPF Website Official EPF contribution & savings portal."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Official EPF contribution & savings portal."
+      },
+      {
+        "tag": "div",
+        "class": "container",
+        "id": "",
+        "text": ".other-calculators-section { border-top: none !important; padding-top: 0 !important; } .other-calculators-grid { display"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Check employee and employer PERKESO & EIS contribution rates."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your bulanly tax deduction (MTD) for employees & employers."
+      },
+      {
+        "tag": "h3",
+        "class": "blog-title",
+        "id": "",
+        "text": "Hourly Rate in Malaysia: How Much Do You Earn Per Hour?"
+      },
+      {
+        "tag": "h3",
+        "class": "blog-title",
+        "id": "",
+        "text": "PERKESO LINDUNG 24 Jam (SKBBK): Coverage, Contribution Rates & Opt-Out Guide (2026)"
+      },
+      {
+        "tag": "h3",
+        "class": "blog-title",
+        "id": "",
+        "text": "How to Calculate Overtime Pay in Malaysia: Normal Hari, Rest Hari & Public Holidays"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Accurate Malaysia salary calculator. Instantly calculate take-home pay after EPF, SOCSO, EIS & PCB."
+      },
+      {
+        "tag": "div",
+        "class": "modal-overlay",
+        "id": "emailModal",
+        "text": "× Download Report Enter your email address to receive your detailed PDF report. Full Name * Emel Address * Who are you? "
+      },
+      {
+        "tag": "div",
+        "class": "form-group",
+        "id": "",
+        "text": "Who are you? * Select an option Employer / HR Employee Job Seeker"
+      }
+    ]
+  },
+  "/ms/kalkulator-epf": {
+    "title": "Kalkulator EPF Malaysia 2026",
+    "metaDesc": "Kira caruman EPF (KWSP) bahagian pekerja dan majikan dengan mudah. Gunakan kalkulator EPF Malaysia 2026 yang percuma dan pantas ini.",
+    "canonical": "https://salarycalculator.my/ms/kalkulator-epf",
+    "hreflangs": [
+      "en:https://salarycalculator.my/epf-kwsp",
+      "ms:https://salarycalculator.my/ms/kalkulator-epf",
+      "x-default:https://salarycalculator.my/epf-kwsp"
+    ],
+    "h1": "Kalkulator EPF Malaysia",
+    "navLinks": [
+      "Kalkulator Gaji -> /ms/",
+      "Kalkulator SOCSO -> /ms/kalkulator-socso",
+      "Kalkulator PCB -> /ms/kalkulator-pcb",
+      "Kalkulator EPF (KWSP) -> /ms/kalkulator-epf",
+      "Kalkulator Percuma -> undefined",
+      "Kalkulator Cuti Tahunan -> /ms/kalkulator-cuti-tahunan",
+      "Kalkulator Overtime -> /ms/kalkulator-overtime",
+      "Kalkulator Kadar Gaji Sejam -> /ms/kadar-gaji-sejam",
+      "Blog -> /blog",
+      "EN -> /epf-kwsp"
+    ],
+    "footerLinks": [
+      " -> /ms/",
+      "Kalkulator Gaji -> /ms/",
+      "Kalkulator SOCSO -> /ms/kalkulator-socso",
+      "Kalkulator PCB -> /ms/kalkulator-pcb",
+      "Kalkulator EPF (KWSP) -> /ms/kalkulator-epf",
+      "Kalkulator Cuti Tahunan -> /ms/kalkulator-cuti-tahunan",
+      "Kalkulator Overtime -> /ms/kalkulator-overtime",
+      "Blog -> /blog",
+      "Dasar Privasi -> /ms/dasar-privasi"
+    ],
+    "breadcrumbs": "",
+    "untranslatedElements": [
+      {
+        "tag": "div",
+        "class": "calculator-area",
+        "id": "",
+        "text": "Kalkulator EPF Malaysia Calculate employee and employer EPF contributions instantly for FREE. Masukkan Butiran Gross Mon"
+      },
+      {
+        "tag": "div",
+        "class": "container",
+        "id": "",
+        "text": "Kalkulator EPF Malaysia Calculate employee and employer EPF contributions instantly for FREE."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate employee and employer EPF contributions instantly for FREE."
+      },
+      {
+        "tag": "div",
+        "class": "main-layout",
+        "id": "layoutEpf",
+        "text": "Masukkan Butiran Gross Monthly Salary * RM Kumpulan Umur Below 60 Above 60 Kadar Pekerja 11% 9% Reset Calculate Keputusa"
+      },
+      {
+        "tag": "div",
+        "class": "form-group",
+        "id": "",
+        "text": "Gross Monthly Salary * RM"
+      },
+      {
+        "tag": "label",
+        "class": "form-label",
+        "id": "",
+        "text": "Gross Monthly Salary"
+      },
+      {
+        "tag": "div",
+        "class": "form-actions",
+        "id": "",
+        "text": "Reset Calculate"
+      },
+      {
+        "tag": "button",
+        "class": "btn btn-primary",
+        "id": "",
+        "text": "Calculate"
+      },
+      {
+        "tag": "div",
+        "class": "results-content",
+        "id": "epfResultsContent",
+        "text": "Gaji Bulanan RM 0.00 Caruman pekerja (11%) RM 0.00 Caruman majikan (13%) RM 0.00 Gaji Bersih Selepas EPF RM 0.00 Unjuran"
+      },
+      {
+        "tag": "span",
+        "class": "",
+        "id": "",
+        "text": "Please check official KWSP guidelines for accurate deductions."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Caruman Pekerja A standard percentage (usually 11% for those below 60) is deducted directly from your monthly payslip. C"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Caruman Majikan Employers provide an additional contribution (12% to 13%) on top of your base salary, deposited into you"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Employers provide an additional contribution (12% to 13%) on top of your base salary, deposited into your account."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculation is simple: multiply your gross monthly salary by the applicable employee and employer rates. For most Malays"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "EPF Contribution Table (2026 Updated)"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Reference table for standard monthly contribution amounts based on gross income for Malaysian citizens below age 60."
+      },
+      {
+        "tag": "div",
+        "class": "table-container",
+        "id": "",
+        "text": "Gaji Bulanan Employee (11%) Employer (12-13%) RM 2,000 RM 220 RM 260 RM 3,000 RM 330 RM 390 RM 5,000 RM 550 RM 650 RM 8,"
+      },
+      {
+        "tag": "th",
+        "class": "",
+        "id": "",
+        "text": "Employee (11%)"
+      },
+      {
+        "tag": "th",
+        "class": "",
+        "id": "",
+        "text": "Employer (12-13%)"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "EPF contributions are calculated based on your gross monthly salary, age group and nationality. Both employee and employ"
+      },
+      {
+        "tag": "div",
+        "class": "seo-table-wrapper",
+        "id": "",
+        "text": "Kategori Employee (%) Employer (%) Malaysian below 60, salary ≤ RM5,00011%13% Malaysian below 60, salary > RM5,00011%12%"
+      },
+      {
+        "tag": "th",
+        "class": "",
+        "id": "",
+        "text": "Employee (%)"
+      },
+      {
+        "tag": "th",
+        "class": "",
+        "id": "",
+        "text": "Employer (%)"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Monthly Contribution Amounts:"
+      },
+      {
+        "tag": "div",
+        "class": "seo-table-wrapper",
+        "id": "",
+        "text": "Salary Employee Employer Jumlah RM 1,500RM 165.00RM 195.00RM 360.00 RM 1,700RM 187.00RM 221.00RM 408.00 RM 2,000RM 220.0"
+      },
+      {
+        "tag": "th",
+        "class": "",
+        "id": "",
+        "text": "Employee"
+      },
+      {
+        "tag": "th",
+        "class": "",
+        "id": "",
+        "text": "Employer"
+      },
+      {
+        "tag": "div",
+        "class": "seo-table-wrapper",
+        "id": "",
+        "text": "Salary Employee Employer Jumlah Annual Savings RM 2,000RM 2,640RM 3,120RM 5,760 RM 3,000RM 3,960RM 4,680RM 8,640 RM 5,00"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Termasuk (Dikenakan Caruman): Gaji asas (Basic salary) Bayaran overtime (OT) Komisen Elaun (melainkan yang diberi pengec"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Gaji asas (Basic salary)"
+      },
+      {
+        "tag": "div",
+        "class": "seo-card",
+        "id": "",
+        "text": "Soalan Lazim (FAQ) Can I withdraw my EPF savings before retirement? Yes. Members can make partial or full withdrawals pr"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Your accumulated EPF savings remain completely secure and intact: Account Continuity: Your EPF member number remains unc"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Simply provide your existing EPF member number to your new employer upon joining."
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "Is EPF contribution mandatory for all employees?"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "EPF contributions are governed by statutory guidelines depending on residency status: Malaysian Citizens & PRs: Mandator"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Mandatory at standard statutory rates (11% employee / 12-13% employer)."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Yes! Both employees and employers can voluntarily elect to contribute above standard rates: Voluntary Employee Rate: Han"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Employers can choose to contribute higher employer rates as part of competitive remuneration packages."
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Maximizes eligible individual income tax relief under EPF and life insurance categories."
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "What is the difference between EPF Account 1, Account 2, and Account 3?"
+      },
+      {
+        "tag": "div",
+        "class": "container",
+        "id": "",
+        "text": ".other-calculators-section { border-top: none !important; padding-top: 0 !important; } .other-calculators-grid { display"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your exact take home pay after EPF, SOCSO, EIS & PCB deductions."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Check employee and employer PERKESO & EIS contribution rates."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your bulanly tax deduction (MTD) for employees & employers."
+      },
+      {
+        "tag": "div",
+        "class": "explore-more-grid",
+        "id": "",
+        "text": "EPF How to Calculate EPF (KWSP) in Malaysia: Formula & Contribution Rates Read Article → EPF EPF, SOCSO & EIS Malaysia: "
+      },
+      {
+        "tag": "h3",
+        "class": "blog-title",
+        "id": "",
+        "text": "How to Calculate EPF (KWSP) in Malaysia: Formula & Contribution Rates"
+      },
+      {
+        "tag": "h3",
+        "class": "blog-title",
+        "id": "",
+        "text": "EPF, SOCSO & EIS Malaysia: Latest Contribution Rates & Employer Guide (2026)"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Accurate Malaysia salary calculator. Instantly calculate take-home pay after EPF, SOCSO, EIS & PCB."
+      },
+      {
+        "tag": "div",
+        "class": "modal-overlay",
+        "id": "emailModal",
+        "text": "× Download EPF Report Enter your email address to receive your EPF contribution breakdown. Full Name * Emel Address * Wh"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "modalDescription",
+        "text": "Enter your email address to receive your EPF contribution breakdown."
+      },
+      {
+        "tag": "div",
+        "class": "form-group",
+        "id": "",
+        "text": "Who are you? * Select an option Employer / HR Employee Job Seeker"
+      }
+    ]
+  },
+  "/ms/kalkulator-socso": {
+    "title": "Kalkulator SOCSO Malaysia 2026",
+    "metaDesc": "Semak jadual caruman PERKESO (SOCSO) dan SIP (EIS) 2026. Kira kadar potongan majikan dan pekerja dengan tepat menggunakan kalkulator SOCSO ini.",
+    "canonical": "https://salarycalculator.my/ms/kalkulator-socso",
+    "hreflangs": [
+      "en:https://salarycalculator.my/socso-perkeso",
+      "ms:https://salarycalculator.my/ms/kalkulator-socso",
+      "x-default:https://salarycalculator.my/socso-perkeso"
+    ],
+    "h1": "Kalkulator SOCSO MalaysiaMY INCOME JOURNEY 🚀MY INCOMEJOURNEY 🚀",
+    "navLinks": [
+      "Kalkulator Gaji -> /ms/",
+      "Kalkulator SOCSO -> /ms/kalkulator-socso",
+      "Kalkulator PCB -> /ms/kalkulator-pcb",
+      "Kalkulator EPF (KWSP) -> /ms/kalkulator-epf",
+      "Kalkulator Percuma -> undefined",
+      "Kalkulator Cuti Tahunan -> /ms/kalkulator-cuti-tahunan",
+      "Kalkulator Overtime -> /ms/kalkulator-overtime",
+      "Kalkulator Kadar Gaji Sejam -> /ms/kadar-gaji-sejam",
+      "Blog -> /blog",
+      "EN -> /socso-perkeso"
+    ],
+    "footerLinks": [
+      " -> /ms/",
+      "Kalkulator Gaji -> /ms/",
+      "Kalkulator SOCSO -> /ms/kalkulator-socso",
+      "Kalkulator PCB -> /ms/kalkulator-pcb",
+      "Kalkulator EPF (KWSP) -> /ms/kalkulator-epf",
+      "Kalkulator Cuti Tahunan -> /ms/kalkulator-cuti-tahunan",
+      "Kalkulator Overtime -> /ms/kalkulator-overtime",
+      "Blog -> /blog",
+      "Dasar Privasi -> /ms/dasar-privasi"
+    ],
+    "breadcrumbs": "",
+    "untranslatedElements": [
+      {
+        "tag": "div",
+        "class": "calculator-area",
+        "id": "",
+        "text": "Kalkulator SOCSO Malaysia Calculate employee and employer SOCSO & EIS contributions instantly for FREE. Masukkan Butiran"
+      },
+      {
+        "tag": "div",
+        "class": "container",
+        "id": "",
+        "text": "Kalkulator SOCSO Malaysia Calculate employee and employer SOCSO & EIS contributions instantly for FREE."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "heroSubtitle",
+        "text": "Calculate employee and employer SOCSO & EIS contributions instantly for FREE."
+      },
+      {
+        "tag": "div",
+        "class": "main-layout",
+        "id": "layoutSocso",
+        "text": "Masukkan Butiran Gaji Kasar Bulanan * RM Kumpulan Umur Below 60 Above 60 Nationality Malaysian Foreigner Include Lindung"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "lindungContainer",
+        "text": "Include Lindung 24 Jam contribution Voluntary — opt out by 31 Aug 2026 Lindung 24 Jam contribution Mandatory for foreign"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "lindungMalaysian",
+        "text": "Include Lindung 24 Jam contribution Voluntary — opt out by 31 Aug 2026"
+      },
+      {
+        "tag": "span",
+        "class": "",
+        "id": "",
+        "text": "Include Lindung 24 Jam contribution"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "lindungForeigner",
+        "text": "Lindung 24 Jam contribution Mandatory for foreign workers — included automatically."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Lindung 24 Jam contribution"
+      },
+      {
+        "tag": "div",
+        "class": "form-actions",
+        "id": "",
+        "text": "Reset Calculate"
+      },
+      {
+        "tag": "button",
+        "class": "btn btn-primary",
+        "id": "",
+        "text": "Calculate"
+      },
+      {
+        "tag": "div",
+        "class": "result-content",
+        "id": "socsoResultsContent",
+        "text": "Caruman pekerja (Bulanan) RM 0.00 Caruman majikan (Bulanan) RM 0.00 Lindung 24 Jam (Bulanan) RM 0.00 Estimate only — act"
+      },
+      {
+        "tag": "span",
+        "class": "",
+        "id": "",
+        "text": "Please check official PERKESO guidelines for accurate deductions."
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "What is SOCSO (PERKESO)?"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "How SOCSO Contribution Works"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "SOCSO contribution is calculated based on two main variables: your monthly gross salary and your age."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Gaji Kasar Bulanan SOCSO is structured by contribution bands: ✓ Uses official contribution tables. ✓ Salaries mapped to "
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "SOCSO is structured by contribution bands:"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Category 1 Below 60 Years Old Full coverage: Employment Injury & Invalidity Schemes. Employer and employee contribute. E"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Full coverage: Employment Injury & Invalidity Schemes. Employer and employee contribute."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Employer ~1.75% Employee ~0.5%"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Employer ~1.75%"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Employer"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Employee ~0.5%"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Employee"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Limited coverage: Employment Injury Scheme only. Only employer contributes; ."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Employer ~1.25% Employee 0%"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Employer ~1.25%"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Employee 0%"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "1. Temporary Disablement Benefit (Faedah Hilang Upaya Sementara) Bila: Employee temporarily unable to work due to work-r"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Employee temporarily unable to work due to work-related injury or illness"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "3. Dependants’ Benefit (Faedah Orang Tanggungan) Bila: Employee dies due to work-related accident or disease Manfaat: Mo"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Employee dies due to work-related accident or disease"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "5. Education Benefit (Faedah Pendidikan) Bila: Children of eligible employees receive support Manfaat: Covers education "
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "University tuition support for employee’s child"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "7. Rehabilitation Benefit (Faedah Pemulihan) Bila: Employee needs recovery support after injury Manfaat: Rehab services,"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Employee needs recovery support after injury"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "8. Constant Attendance Allowance (Elaun Layan Sentiasa) Bila: Employee requires constant care due to disability Manfaat:"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Employee requires constant care due to disability"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "SOCSO Contribution Table (2026 Updated) Official contribution rates mapped to salary bands."
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "SOCSO Contribution Table (2026 Updated)"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Official contribution rates mapped to salary bands."
+      },
+      {
+        "tag": "div",
+        "class": "socso-table-wrapper",
+        "id": "socsoTableWrapper",
+        "text": "No Salary Range Employer Employee Jumlah Employer Only 1 Wages up to RM30 RM0.40 RM0.10 RM0.50 RM0.30 2 Exceed RM30 but "
+      },
+      {
+        "tag": "th",
+        "class": "",
+        "id": "",
+        "text": "Employer Only"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Show All Contribution Table"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "SOCSO Contribution Table 2026 (PERKESO)"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "SOCSO contributions are based on your monthly salary bracket. The contribution ceiling was updated from RM5,000 to RM6,0"
+      },
+      {
+        "tag": "div",
+        "class": "seo-table-wrapper",
+        "id": "",
+        "text": "Kategori Details Malaysian below 60Both schemes (Employee + Employer) Malaysian above 60Employment Injury only (Employer"
+      },
+      {
+        "tag": "td",
+        "class": "",
+        "id": "",
+        "text": "Both schemes (Employee + Employer)"
+      },
+      {
+        "tag": "td",
+        "class": "",
+        "id": "",
+        "text": "Employment Injury only (Employer only)"
+      },
+      {
+        "tag": "div",
+        "class": "seo-table-wrapper",
+        "id": "",
+        "text": "Salary Employee Employer RM 1,000RM 3.90RM 14.10 RM 2,000RM 9.75RM 35.25 RM 3,000RM 14.75RM 53.25 RM 4,000RM 19.75RM 71."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Note: For salaries above RM6,000, SOCSO contribution remains at the RM6,000 ceiling amount."
+      },
+      {
+        "tag": "div",
+        "class": "seo-table-wrapper",
+        "id": "",
+        "text": "Salary Employee Employer RM 1,000RM 2.00RM 2.00 RM 2,000RM 3.90RM 3.90 RM 3,000RM 5.90RM 5.90 RM 4,000RM 7.90RM 7.90 RM "
+      },
+      {
+        "tag": "div",
+        "class": "content-card",
+        "id": "",
+        "text": "💻 ASSIST Portal • Register new employees • Submit monthly contributions • Track payment history • Manage employer recor"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Manage employer records"
+      },
+      {
+        "tag": "div",
+        "class": "content-card",
+        "id": "",
+        "text": "🎯 Who Should Use This? • HR Managers & Payroll Teams • Business Owners & SMEs • Accounting Professionals • Employees ve"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Employees verifying deductions"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "What is PERKESO LINDUNG 24 Jam?"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "LINDUNG 24 Jam does not replace or change existing SOCSO employer contribution rates. It is an additional employee contr"
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "What happens if my employer doesn't pay SOCSO contributions?"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Non-compliance with statutory PERKESO contribution regulations incurs strict statutory penalties under the Employees' So"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Non-compliance with statutory contribution regulations incurs strict statutory penalties under the :"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Failure to pay compromises employee eligibility for vital and protection."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "No. Standard employment-based coverage ends once active contributions cease, subject to specific claim conditions: Activ"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Your new employer automatically resumes contributions under your existing registration."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Yes! Self-employed workers, e-hailing drivers, delivery riders, and freelancers are covered under dedicated statutory pr"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Convenient enrollment and contribution payments can be processed directly via the or ."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Yes. Protection under PERKESO is mandatory for all documented non-citizens and foreign workers: Mandatory Registration: "
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Employers contribute of the foreign employee's bulanly wage, while foreign employees are exempt from employee-side deduc"
+      },
+      {
+        "tag": "div",
+        "class": "container",
+        "id": "",
+        "text": ".other-calculators-section { border-top: none !important; padding-top: 0 !important; } .other-calculators-grid { display"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your exact take home pay after EPF, SOCSO, EIS & PCB deductions."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your bulanly tax deduction (MTD) for employees & employers."
+      },
+      {
+        "tag": "div",
+        "class": "explore-more-grid",
+        "id": "",
+        "text": "SOCSO PERKESO LINDUNG 24 Jam (SKBBK): Coverage, Contribution Rates & Opt-Out Guide (2026) Read Article → EPF EPF, SOCSO "
+      },
+      {
+        "tag": "h3",
+        "class": "blog-title",
+        "id": "",
+        "text": "PERKESO LINDUNG 24 Jam (SKBBK): Coverage, Contribution Rates & Opt-Out Guide (2026)"
+      },
+      {
+        "tag": "h3",
+        "class": "blog-title",
+        "id": "",
+        "text": "EPF, SOCSO & EIS Malaysia: Latest Contribution Rates & Employer Guide (2026)"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Accurate Malaysia salary calculator. Instantly calculate take-home pay after EPF, SOCSO, EIS & PCB."
+      },
+      {
+        "tag": "div",
+        "class": "modal-overlay",
+        "id": "emailModal",
+        "text": "× Download Report Enter your email address to receive your detailed PDF report. Full Name * Emel Address * Who are you? "
+      },
+      {
+        "tag": "div",
+        "class": "form-group",
+        "id": "",
+        "text": "Who are you? * Select an option Employer / HR Employee Job Seeker"
+      }
+    ]
+  },
+  "/ms/kalkulator-pcb": {
+    "title": "Kalkulator PCB Malaysia 2026",
+    "metaDesc": "Kira Potongan Cukai Berjadual (PCB) bulanan anda. Kalkulator cukai pendapatan LHDN ini dikemaskini mengikut struktur cukai rasmi Malaysia 2026.",
+    "canonical": "https://salarycalculator.my/ms/kalkulator-pcb",
+    "hreflangs": [
+      "en:https://salarycalculator.my/pcb-calculator",
+      "ms:https://salarycalculator.my/ms/kalkulator-pcb",
+      "x-default:https://salarycalculator.my/pcb-calculator"
+    ],
+    "h1": "Kalkulator PCB Malaysia",
+    "navLinks": [
+      "Kalkulator Gaji -> /ms/",
+      "Kalkulator SOCSO -> /ms/kalkulator-socso",
+      "Kalkulator PCB -> /ms/kalkulator-pcb",
+      "Kalkulator EPF (KWSP) -> /ms/kalkulator-epf",
+      "Kalkulator Percuma -> undefined",
+      "Kalkulator Cuti Tahunan -> /ms/kalkulator-cuti-tahunan",
+      "Kalkulator Overtime -> /ms/kalkulator-overtime",
+      "Kalkulator Kadar Gaji Sejam -> /ms/kadar-gaji-sejam",
+      "Blog -> /blog",
+      "EN -> /pcb-calculator"
+    ],
+    "footerLinks": [
+      " -> /ms/",
+      "Kalkulator Gaji -> /ms/",
+      "Kalkulator SOCSO -> /ms/kalkulator-socso",
+      "Kalkulator PCB -> /ms/kalkulator-pcb",
+      "Kalkulator EPF (KWSP) -> /ms/kalkulator-epf",
+      "Kalkulator Cuti Tahunan -> /ms/kalkulator-cuti-tahunan",
+      "Kalkulator Overtime -> /ms/kalkulator-overtime",
+      "Blog -> /blog",
+      "Dasar Privasi -> /ms/dasar-privasi"
+    ],
+    "breadcrumbs": "",
+    "untranslatedElements": [
+      {
+        "tag": "div",
+        "class": "calculator-area",
+        "id": "",
+        "text": "Kalkulator PCB Malaysia Calculate PCB instantly for FREE with up-to-date Malaysia tax rates. Masukkan Butiran Gaji Kasar"
+      },
+      {
+        "tag": "div",
+        "class": "container",
+        "id": "",
+        "text": "Kalkulator PCB Malaysia Calculate PCB instantly for FREE with up-to-date Malaysia tax rates."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "heroSubtitle",
+        "text": "Calculate PCB instantly for FREE with up-to-date Malaysia tax rates."
+      },
+      {
+        "tag": "div",
+        "class": "main-layout",
+        "id": "layoutPcb",
+        "text": "Masukkan Butiran Gaji Kasar Bulanan * RM Status Perkahwinan Bujang Married Spouse Working Status Working Not Working Num"
+      },
+      {
+        "tag": "div",
+        "class": "form-group",
+        "id": "",
+        "text": "Additional Tax Relief (RM / Year) (Pilihan) RM"
+      },
+      {
+        "tag": "label",
+        "class": "form-label",
+        "id": "",
+        "text": "Additional Tax Relief (RM / Year)"
+      },
+      {
+        "tag": "div",
+        "class": "form-actions",
+        "id": "",
+        "text": "Reset Calculate"
+      },
+      {
+        "tag": "button",
+        "class": "btn btn-primary",
+        "id": "calculatePcbBtn",
+        "text": "Calculate"
+      },
+      {
+        "tag": "div",
+        "class": "result-section",
+        "id": "",
+        "text": "POTONGAN PCB RM 0.00 Per Month Gaji Kasar & Bonus RM 0.00 Potongan EPF RM 0.00 Tax Relief & Zakat RM 0.00 Pendapatan Ber"
+      },
+      {
+        "tag": "div",
+        "class": "result-item",
+        "id": "",
+        "text": "Tax Relief & Zakat RM 0.00"
+      },
+      {
+        "tag": "span",
+        "class": "",
+        "id": "",
+        "text": "Tax Relief & Zakat"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "pcbDisclaimer",
+        "text": "This calculator is for reference only. Please refer to official LHDN guidelines for accurate PCB deductions."
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "What is PCB (Monthly Tax Deduction)?"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Instead of paying a large amount at the end of the year, your employer deducts a portion of your income and submits it t"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "How to Calculate PCB"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "EPF reduces your taxable income."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Tax reliefs may include Individual relief, Spouse or child relief, or Zakat (if applicable)."
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "Who Needs to Pay PCB & Taxable Income"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Your PCB is not fixed and may change depending on your income and deductions."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Gross monthly salary = RM 5,000.00 EPF deduction (11%) = RM 550.00 Monthly income after EPF = RM 4,450.00 Annualise: RM4"
+      },
+      {
+        "tag": "div",
+        "class": "seo-card",
+        "id": "",
+        "text": "Soalan Lazim (FAQ) What is the difference between PCB and income tax? PCB (Potongan Cukai Bulanan) is your bulanly incom"
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "What is the difference between PCB and income tax?"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "PCB (Potongan Cukai Bulanan) is your bulanly income tax deduction paid to LHDN by your employer. It is an advance paymen"
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "What happens if my employer does not deduct PCB?"
+      },
+      {
+        "tag": "div",
+        "class": "container",
+        "id": "",
+        "text": ".other-calculators-section { border-top: none !important; padding-top: 0 !important; } .other-calculators-grid { display"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your exact take home pay after EPF, SOCSO, EIS & PCB deductions."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Check employee and employer PERKESO & EIS contribution rates."
+      },
+      {
+        "tag": "div",
+        "class": "explore-more-grid",
+        "id": "",
+        "text": "PCB / Pendapatan Tax How to Calculate PCB (Monthly Tax Deduction) in Malaysia: Formula & Example Read Article →"
+      },
+      {
+        "tag": "h3",
+        "class": "blog-title",
+        "id": "",
+        "text": "How to Calculate PCB (Monthly Tax Deduction) in Malaysia: Formula & Example"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Accurate Malaysia salary calculator. Instantly calculate take-home pay after EPF, SOCSO, EIS & PCB."
+      },
+      {
+        "tag": "div",
+        "class": "modal-overlay",
+        "id": "emailModal",
+        "text": "× Download Report Enter your email address to receive your detailed PDF report. Full Name * Emel Address * Who are you? "
+      },
+      {
+        "tag": "div",
+        "class": "form-group",
+        "id": "",
+        "text": "Who are you? * Select an option Employer / HR Employee Job Seeker"
+      }
+    ]
+  },
+  "/ms/kalkulator-cuti-tahunan": {
+    "title": "Kalkulator Cuti Tahunan Malaysia 2026",
+    "metaDesc": "Kira kelayakan cuti tahunan pro-rata berdasarkan Akta Kerja 1955 Malaysia. Ketahui hak cuti berbayar mengikut tempoh perkhidmatan anda.",
+    "canonical": "https://salarycalculator.my/ms/kalkulator-cuti-tahunan",
+    "hreflangs": [
+      "en:https://salarycalculator.my/annual-leave-calculator",
+      "ms:https://salarycalculator.my/ms/kalkulator-cuti-tahunan",
+      "x-default:https://salarycalculator.my/annual-leave-calculator"
+    ],
+    "h1": "Kalkulator Cuti Tahunan Malaysia",
+    "navLinks": [
+      "Kalkulator Gaji -> /ms/",
+      "Kalkulator SOCSO -> /ms/kalkulator-socso",
+      "Kalkulator PCB -> /ms/kalkulator-pcb",
+      "Kalkulator EPF (KWSP) -> /ms/kalkulator-epf",
+      "Kalkulator Percuma -> undefined",
+      "Kalkulator Cuti Tahunan -> /ms/kalkulator-cuti-tahunan",
+      "Kalkulator Overtime -> /ms/kalkulator-overtime",
+      "Kalkulator Kadar Gaji Sejam -> /ms/kadar-gaji-sejam",
+      "Blog -> /blog",
+      "EN -> /annual-leave-calculator"
+    ],
+    "footerLinks": [
+      " -> /ms/",
+      "Kalkulator Gaji -> /ms/",
+      "Kalkulator SOCSO -> /ms/kalkulator-socso",
+      "Kalkulator PCB -> /ms/kalkulator-pcb",
+      "Kalkulator EPF (KWSP) -> /ms/kalkulator-epf",
+      "Kalkulator Cuti Tahunan -> /ms/kalkulator-cuti-tahunan",
+      "Kalkulator Overtime -> /ms/kalkulator-overtime",
+      "Blog -> /blog",
+      "Dasar Privasi -> /ms/dasar-privasi"
+    ],
+    "breadcrumbs": "",
+    "untranslatedElements": [
+      {
+        "tag": "div",
+        "class": "calculator-area",
+        "id": "",
+        "text": "Kalkulator Cuti Tahunan Malaysia Calculate pro-rated annual leave and leave balance instantly for FREE. Masukkan Butiran"
+      },
+      {
+        "tag": "div",
+        "class": "container",
+        "id": "",
+        "text": "Kalkulator Cuti Tahunan Malaysia Calculate pro-rated annual leave and leave balance instantly for FREE."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate pro-rated annual leave and leave balance instantly for FREE."
+      },
+      {
+        "tag": "div",
+        "class": "main-layout",
+        "id": "layoutLeave",
+        "text": "Masukkan Butiran Employee Start Date * Employment Type Full Time Part Time Employee Category Below 2 Years 2-5 Years Abo"
+      },
+      {
+        "tag": "div",
+        "class": "form-group",
+        "id": "",
+        "text": "Employee Start Date *"
+      },
+      {
+        "tag": "label",
+        "class": "form-label",
+        "id": "",
+        "text": "Employee Start Date"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Employment Type Full Time Part Time Employee Category Below 2 Years 2-5 Years Above 5 Years"
+      },
+      {
+        "tag": "div",
+        "class": "form-group",
+        "id": "",
+        "text": "Employee Category Below 2 Years 2-5 Years Above 5 Years"
+      },
+      {
+        "tag": "label",
+        "class": "form-label",
+        "id": "",
+        "text": "Employee Category"
+      },
+      {
+        "tag": "div",
+        "class": "form-group",
+        "id": "",
+        "text": "Public Holiday Included? Yes No"
+      },
+      {
+        "tag": "label",
+        "class": "form-label",
+        "id": "",
+        "text": "Public Holiday Included?"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Calculation Date (Pilihan) Date to calculate pro-rated leave up to (defaults to end of year)."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Date to calculate pro-rated leave up to (defaults to end of year)."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Annual Leave Entitlement * Hari Based on Malaysian Employment Act minimum entitlement. Leave Taken (Pilihan) Hari"
+      },
+      {
+        "tag": "label",
+        "class": "form-label",
+        "id": "",
+        "text": "Annual Leave Entitlement"
+      },
+      {
+        "tag": "div",
+        "class": "form-actions",
+        "id": "",
+        "text": "Reset Calculate"
+      },
+      {
+        "tag": "button",
+        "class": "btn btn-primary",
+        "id": "leaveHantarBtn",
+        "text": "Calculate"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Fill employee details to calculate annual leave"
+      },
+      {
+        "tag": "div",
+        "class": "results-content",
+        "id": "leaveResultsContent",
+        "text": "Tempoh Perkhidmatan - Kelayakan Cuti Tahunan 12 Hari Cuti Prorata Untuk tempoh 9.5 Hari Cuti Diambil 0 Hari Baki 0 Hari "
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "resSuggestedAction",
+        "text": "Employee still has leave remaining."
+      },
+      {
+        "tag": "div",
+        "class": "content-card",
+        "id": "",
+        "text": "What is Annual Leave in Malaysia? Annual leave is paid time off provided by employers to employees for rest, vacation, o"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "What is Annual Leave in Malaysia?"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Annual leave is paid time off provided by employers to employees for rest, vacation, or personal reasons. In Malaysia, a"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "Annual Leave Entitlement Under Malaysian Labour Law"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "How Annual Leave is Calculated"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Annual leave is calculated based on your years of service. If an employee joins in the middle of a calendar year, their "
+      },
+      {
+        "tag": "h3",
+        "class": "",
+        "id": "",
+        "text": "Pro-rated Annual Leave Formula"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Pro-rated Leave = (Months Worked ÷ 12) × Annual Leave Entitlement"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "An employee with an entitlement of 12 days joins on July 1st. They will work exactly 6 months of the year."
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "Difference Between Annual Leave and Medical Leave"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Cuti Tahunan Used for rest, vacation, or personal errands. Usually requires advanced approval from the employer dependin"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Used for rest, vacation, or personal errands. Usually requires advanced approval from the employer depending on company "
+      },
+      {
+        "tag": "div",
+        "class": "content-card",
+        "id": "",
+        "text": "Can Employers Reject Annual Leave? Yes. Employers in Malaysia have the right to approve or reject leave applications bas"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "Can Employers Reject Annual Leave?"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "What Happens to Unused Annual Leave?"
+      },
+      {
+        "tag": "div",
+        "class": "content-card",
+        "id": "",
+        "text": "Annual Leave for Resigned Employees If you resign and still have remaining pro-rated annual leave, the employer is gener"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "Annual Leave for Resigned Employees"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "If you resign and still have remaining pro-rated annual leave, the employer is generally required to either pay out the "
+      },
+      {
+        "tag": "div",
+        "class": "content-card",
+        "id": "",
+        "text": "Common Annual Leave Mistakes by Employers Rejecting leave unfairly. Having an unclear or unwritten leave policy. Calcula"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "Common Annual Leave Mistakes by Employers"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Failing to keep accurate employee leave tracking records."
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "Annual Leave Entitlement Under Malaysian Law"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Under the Malaysian Employment Act 1955, annual leave entitlement increases with years of service. Here is the minimum e"
+      },
+      {
+        "tag": "h3",
+        "class": "",
+        "id": "",
+        "text": "Pro-Rated Annual Leave Formula"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "If an employee joined mid-year, their annual leave is pro-rated based on months worked."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Employee joined on 1 April 2026."
+      },
+      {
+        "tag": "div",
+        "class": "content-card",
+        "id": "",
+        "text": "Soalan Lazim (FAQ) How do you calculate pro-rated annual leave in Malaysia? The formula is (Months Worked ÷ 12) × Kelaya"
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "How do you calculate pro-rated annual leave in Malaysia?"
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "Can annual leave expire in Malaysia?"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Yes, unless company policy allows carry-forward, unutilized annual leave typically expires."
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "Can employers reject annual leave?"
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "Is unused annual leave paid after resignation?"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Under the Employment Act, an employer must compensate you for unused pro-rated annual leave balance."
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "Does annual leave include weekends?"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "No, annual leave only counts towards working days. Rest days do not count."
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "Is annual leave mandatory in Malaysia?"
+      },
+      {
+        "tag": "div",
+        "class": "container",
+        "id": "",
+        "text": ".other-calculators-section { border-top: none !important; padding-top: 0 !important; } .other-calculators-grid { display"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your exact take home pay after EPF, SOCSO, EIS & PCB deductions."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Check employee and employer PERKESO & EIS contribution rates."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your bulanly tax deduction (MTD) for employees & employers."
+      },
+      {
+        "tag": "div",
+        "class": "explore-more-grid",
+        "id": "",
+        "text": "Annual Leave Annual Leave (AL) in Malaysia: Entitlement, Rules & How to Calculate Read Article →"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Annual Leave"
+      },
+      {
+        "tag": "h3",
+        "class": "blog-title",
+        "id": "",
+        "text": "Annual Leave (AL) in Malaysia: Entitlement, Rules & How to Calculate"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Accurate Malaysia salary calculator. Instantly calculate take-home pay after EPF, SOCSO, EIS & PCB."
+      },
+      {
+        "tag": "div",
+        "class": "modal-overlay",
+        "id": "emailModal",
+        "text": "× Download Leave Report Enter your email to receive your annual leave balance report. Full Name * Emel Address * Who are"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "modalDescription",
+        "text": "Enter your email to receive your annual leave balance report."
+      },
+      {
+        "tag": "div",
+        "class": "form-group",
+        "id": "",
+        "text": "Who are you? * Select an option Employer / HR Employee Job Seeker"
+      }
+    ]
+  },
+  "/ms/kalkulator-overtime": {
+    "title": "Kalkulator Overtime Malaysia 2026",
+    "metaDesc": "Kira bayaran kerja lebih masa (OT) dengan betul. Kalkulator OT Malaysia ini membantu anda mengira kadar bayaran untuk hari biasa, cuti rehat, dan cuti am.",
+    "canonical": "https://salarycalculator.my/ms/kalkulator-overtime",
+    "hreflangs": [
+      "en:https://salarycalculator.my/overtime-pay-calculator",
+      "ms:https://salarycalculator.my/ms/kalkulator-overtime",
+      "x-default:https://salarycalculator.my/overtime-pay-calculator"
+    ],
+    "h1": "Kalkulator Overtime Malaysia",
+    "navLinks": [
+      "Kalkulator Gaji -> /ms/",
+      "Kalkulator SOCSO -> /ms/kalkulator-socso",
+      "Kalkulator PCB -> /ms/kalkulator-pcb",
+      "Kalkulator EPF (KWSP) -> /ms/kalkulator-epf",
+      "Kalkulator Percuma -> undefined",
+      "Kalkulator Cuti Tahunan -> /ms/kalkulator-cuti-tahunan",
+      "Kalkulator Overtime -> /ms/kalkulator-overtime",
+      "Kalkulator Kadar Gaji Sejam -> /ms/kadar-gaji-sejam",
+      "Blog -> /blog",
+      "EN -> /overtime-pay-calculator"
+    ],
+    "footerLinks": [
+      " -> /ms/",
+      "Kalkulator Gaji -> /ms/",
+      "Kalkulator SOCSO -> /ms/kalkulator-socso",
+      "Kalkulator PCB -> /ms/kalkulator-pcb",
+      "Kalkulator EPF (KWSP) -> /ms/kalkulator-epf",
+      "Kalkulator Cuti Tahunan -> /ms/kalkulator-cuti-tahunan",
+      "Kalkulator Overtime -> /ms/kalkulator-overtime",
+      "Blog -> /blog",
+      "Dasar Privasi -> /ms/dasar-privasi"
+    ],
+    "breadcrumbs": "",
+    "untranslatedElements": [
+      {
+        "tag": "div",
+        "class": "calculator-area",
+        "id": "",
+        "text": "Kalkulator Overtime Malaysia Calculate OT pay according to the Employment Act 1955 instantly for FREE. Masukkan Butiran "
+      },
+      {
+        "tag": "div",
+        "class": "container",
+        "id": "",
+        "text": "Kalkulator Overtime Malaysia Calculate OT pay according to the Employment Act 1955 instantly for FREE."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate OT pay according to the Employment Act 1955 instantly for FREE."
+      },
+      {
+        "tag": "div",
+        "class": "main-layout",
+        "id": "",
+        "text": "Masukkan Butiran Gaji Bulanan (RM) * Working Hari Per Week * 5 Hari 5.5 Hari 6 Hari Normal Hours Per Day * Overtime Type"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "Understanding Overtime Pay in Malaysia"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Overtime (OT) pay is the additional compensation paid to employees who work beyond their normal working hours. In Malays"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "This calculator helps you estimate your statutory overtime pay according to the Malaysian Employment Act. to see the exa"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "Who Is Eligible for Overtime Pay?"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Not all employees are entitled to statutory overtime pay under the Employment Act 1955. Eligibility is generally based o"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Salary-Based Eligibility Employees earning RM4,000 or below per month are statutorily entitled to overtime pay."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Employees earning per month are statutorily entitled to overtime pay."
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "How to Calculate Overtime Pay"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your daily rate based on a standard 26-day working month."
+      },
+      {
+        "tag": "h4",
+        "class": "",
+        "id": "",
+        "text": "Hourly Rate of Pay (HRP)"
+      },
+      {
+        "tag": "h4",
+        "class": "",
+        "id": "",
+        "text": "Final Overtime Pay"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Multiply your hourly rate by the extra hours worked and the relevant multiplier."
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "Factors That Affect Overtime Pay"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Several key variables will impact the final amount of overtime pay calculated:"
+      },
+      {
+        "tag": "p",
+        "class": "seo-subtitle",
+        "id": "",
+        "text": "Got questions about overtime pay in Malaysia? Find answers to the most common statutory overtime questions below."
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "How is overtime pay calculated in Malaysia?"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Overtime pay calculation is governed by the based on your and statutory multipliers:"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Paid at HRP for work beyond normal rest day schedule."
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Paid at HRP for work beyond standard public holiday hours."
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "Is overtime calculated using basic salary or gross salary?"
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "Who is entitled to overtime pay?"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Under First Schedule amendments to Malaysia's Employment Act 1955, statutory OT coverage includes: Salary Threshold: Emp"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Employees earning a basic bulanly salary of are statutorily entitled to overtime pay."
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "What is the overtime rate for public holidays?"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Working on an officially gazetted Cuti Umum / Hari Kelepasan Am (3.0x) is compensated based on working hours: Within Nor"
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "What is the overtime rate for rest days?"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Work performed on a scheduled weekly Hari Rehat (2.0x) follows statutory tiered rates: Up to Half Normal Hours: Paid 0.5"
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "How do I calculate my hourly rate?"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Your Hourly Rate of Pay (HRP) is calculated in two steps using statutory Employment Act guidelines: Step 1 — Daily Ordin"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Step 1 — Daily Ordinary Rate of Pay (ORP): ORP = Monthly Basic Salary ÷ 26"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "ORP = Monthly Basic Salary ÷ 26"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Step 2 — Hourly Rate of Pay (HRP): HRP = ORP ÷ Normal Jam Bekerja Sehari (e.g., 8 hours)"
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "What is the maximum overtime hours allowed per bulan?"
+      },
+      {
+        "tag": "div",
+        "class": "container",
+        "id": "",
+        "text": ".other-calculators-section { border-top: none !important; padding-top: 0 !important; } .other-calculators-grid { display"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your exact take home pay after EPF, SOCSO, EIS & PCB deductions."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Check employee and employer PERKESO & EIS contribution rates."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your bulanly tax deduction (MTD) for employees & employers."
+      },
+      {
+        "tag": "div",
+        "class": "explore-more-grid",
+        "id": "",
+        "text": "Overtime (OT) How to Calculate Overtime Pay in Malaysia: Normal Hari, Rest Hari & Public Holidays Read Article →"
+      },
+      {
+        "tag": "h3",
+        "class": "blog-title",
+        "id": "",
+        "text": "How to Calculate Overtime Pay in Malaysia: Normal Hari, Rest Hari & Public Holidays"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Accurate Malaysia salary calculator. Instantly calculate take-home pay after EPF, SOCSO, EIS & PCB."
+      },
+      {
+        "tag": "div",
+        "class": "modal-overlay",
+        "id": "emailModal",
+        "text": "× Download Report Enter your email address to receive your detailed PDF report. Full Name * Emel Address * Who are you? "
+      },
+      {
+        "tag": "div",
+        "class": "form-group",
+        "id": "",
+        "text": "Who are you? * Select an option Employer / HR Employee Job Seeker"
+      }
+    ]
+  },
+  "/ms/kadar-gaji-sejam": {
+    "title": "Kalkulator Kadar Gaji Sejam Malaysia 2026",
+    "metaDesc": "Tukar gaji bulanan kepada kadar sejam, harian, atau pro-rata mengikut piawaian undang-undang Malaysia. Sesuai untuk pekerja separuh masa atau pengiraan OT.",
+    "canonical": "https://salarycalculator.my/ms/kadar-gaji-sejam",
+    "hreflangs": [
+      "en:https://salarycalculator.my/hourly-rate",
+      "ms:https://salarycalculator.my/ms/kadar-gaji-sejam",
+      "x-default:https://salarycalculator.my/hourly-rate"
+    ],
+    "h1": "Kalkulator Kadar Gaji Sejam Malaysia",
+    "navLinks": [
+      "Kalkulator Gaji -> /ms/",
+      "Kalkulator SOCSO -> /ms/kalkulator-socso",
+      "Kalkulator PCB -> /ms/kalkulator-pcb",
+      "Kalkulator EPF (KWSP) -> /ms/kalkulator-epf",
+      "Kalkulator Percuma -> undefined",
+      "Kalkulator Cuti Tahunan -> /ms/kalkulator-cuti-tahunan",
+      "Kalkulator Overtime -> /ms/kalkulator-overtime",
+      "Kalkulator Kadar Gaji Sejam -> /ms/kadar-gaji-sejam",
+      "Blog -> /blog",
+      "EN -> /hourly-rate"
+    ],
+    "footerLinks": [
+      " -> /ms/",
+      "Kalkulator Gaji -> /ms/",
+      "Kalkulator SOCSO -> /ms/kalkulator-socso",
+      "Kalkulator PCB -> /ms/kalkulator-pcb",
+      "Kalkulator EPF (KWSP) -> /ms/kalkulator-epf",
+      "Kalkulator Cuti Tahunan -> /ms/kalkulator-cuti-tahunan",
+      "Kalkulator Overtime -> /ms/kalkulator-overtime",
+      "Blog -> /blog",
+      "Dasar Privasi -> /ms/dasar-privasi"
+    ],
+    "breadcrumbs": "",
+    "untranslatedElements": [
+      {
+        "tag": "div",
+        "class": "calculator-area",
+        "id": "",
+        "text": "Laman Utama / Kalkulator Percuma / Kalkulator Kadar Gaji Sejam Kalkulator Kadar Gaji Sejam Malaysia Calculate your true "
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your true hourly pay instantly with our FREE calculatorfor full-time, part-time, freelance, or intern rates."
+      },
+      {
+        "tag": "div",
+        "class": "main-layout",
+        "id": "",
+        "text": "Masukkan Butiran Gaji Bulanan (RM) * Working Days Per Week * 5 Hari 5.5 Hari 6 Hari Adjusts total bulanly working hours."
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Working Days Per Week * 5 Hari 5.5 Hari 6 Hari Adjusts total bulanly working hours. Nota: Under Section 60I of Malaysia'"
+      },
+      {
+        "tag": "label",
+        "class": "form-label",
+        "id": "",
+        "text": "Working Days Per Week"
+      },
+      {
+        "tag": "div",
+        "class": "form-actions",
+        "id": "",
+        "text": "Reset Calculate Hourly Rate"
+      },
+      {
+        "tag": "button",
+        "class": "btn btn-primary",
+        "id": "calculateBtn",
+        "text": "Calculate Hourly Rate"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Enter details to see hourly rate breakdown"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Rest Day (2.0x) RM 0.00"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Rest Day (2.0x)"
+      },
+      {
+        "tag": "button",
+        "class": "btn btn-primary",
+        "id": "downloadReportBtn",
+        "text": "Download Hourly Rate Report"
+      },
+      {
+        "tag": "div",
+        "class": "content-card",
+        "id": "",
+        "text": "What is an Hourly Rate? An hourly rate is the fixed amount of money earned for every single hour of work performed. Unli"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "What is an Hourly Rate?"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Rely on hourly rates to calculate statutory overtime pay under the ."
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "How to Calculate Hourly Rate"
+      },
+      {
+        "tag": "div",
+        "class": "seo-formula-box",
+        "id": "",
+        "text": "Formula Berkanun (Akta Kerja 1955): Kadar Sejam (HRP) = (Monthly Basic Salary ÷ 26) ÷ Normal Daily Jam Bekerja"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Kadar Sejam (HRP) = (Monthly Basic Salary ÷ 26) ÷ Normal Daily Jam Bekerja"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "For standard 5-day workweeks, actual average bulanly working days equal . Our calculator allows selecting your exact wor"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "Monthly Salary to Hourly Rate Conversion"
+      },
+      {
+        "tag": "div",
+        "class": "table-container",
+        "id": "",
+        "text": "Monthly Basic Salary Daily Rate (26 Hari) Hourly Rate (8 Hours) RM 1,500RM 57.69RM 7.21 RM 2,000RM 76.92RM 9.62 RM 3,000"
+      },
+      {
+        "tag": "th",
+        "class": "",
+        "id": "",
+        "text": "Monthly Basic Salary"
+      },
+      {
+        "tag": "th",
+        "class": "",
+        "id": "",
+        "text": "Hourly Rate (8 Hours)"
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "Factors That Affect Hourly Rate"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "A 5-day workweek yields a higher hourly rate than a 6-day workweek for the same monthly salary."
+      },
+      {
+        "tag": "h2",
+        "class": "",
+        "id": "",
+        "text": "Minimum Wage & Hourly Pay in Malaysia"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Under national statutory Minimum Wage Orders, the mandatory minimum base rate is . Converted hourly rates equal:"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "If you are an employer looking to hire in Malaysia, connect with active local job seekers instantly by posting a job ad:"
+      },
+      {
+        "tag": "p",
+        "class": "seo-subtitle",
+        "id": "",
+        "text": "Got questions about calculating your hourly rate in Malaysia? Find answers to the most common questions below."
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "What is an hourly rate?"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "An hourly rate is the specific amount of compensation earned for each hour of work performed. It is used to calculate: P"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "An is the specific amount of compensation earned for each hour of work performed. It is used to calculate:"
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "How do I calculate hourly pay?"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "The calculation depends on whether you follow statutory labor law or personal schedule methods: Berkanun EA 1955 Method:"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Kadar Sejam (HRP) = (Monthly Basic Salary ÷ 26) ÷ Jam Bekerja Sehari"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Hourly Rate = Monthly Basic Salary ÷ Jumlah Jam Bekerja Bulanan"
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "How many working days are there in a bulan?"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Average working days per bulan vary based on weekly schedule: 5-Day Workweek: Approximately 21.67 working days per bulan"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Average working days per bulan vary based on weekly schedule:"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "No. Standard hourly rates cover regular working hours only. Overtime hours are compensated using statutory multipliers u"
+      },
+      {
+        "tag": "li",
+        "class": "",
+        "id": "",
+        "text": "Paid at your Hourly Rate of Pay (HRP)."
+      },
+      {
+        "tag": "summary",
+        "class": "",
+        "id": "",
+        "text": "What is Malaysia's minimum hourly wage?"
+      },
+      {
+        "tag": "div",
+        "class": "",
+        "id": "",
+        "text": "Under Malaysia's statutory Minimum Wage Order, the minimum bulanly base is RM 1,700. Key statutory minimum benchmarks in"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Under Malaysia's statutory Minimum Wage Order, the minimum bulanly base is . Key statutory minimum benchmarks include:"
+      },
+      {
+        "tag": "div",
+        "class": "container",
+        "id": "",
+        "text": ".other-calculators-section { border-top: none !important; padding-top: 0 !important; } .other-calculators-grid { display"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your exact take home pay after EPF, SOCSO, EIS & PCB deductions."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Check employee and employer PERKESO & EIS contribution rates."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your bulanly tax deduction (MTD) for employees & employers."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Accurate Malaysia salary calculator. Instantly calculate take-home pay after EPF, SOCSO, EIS & PCB."
+      },
+      {
+        "tag": "div",
+        "class": "modal-overlay",
+        "id": "emailModal",
+        "text": "× Download Report Enter your email address to receive your detailed PDF report. Full Name * Emel Address * Who are you? "
+      },
+      {
+        "tag": "div",
+        "class": "form-group",
+        "id": "",
+        "text": "Who are you? * Select an option Employer / HR Employee Job Seeker"
+      }
+    ]
+  },
+  "/ms/kalkulator-gaji-minimum": {
+    "title": "Kalkulator Gaji Minimum Malaysia 2026",
+    "metaDesc": "Semak jika gaji anda menepati standard Gaji Minimum terkini di Malaysia. Pastikan pematuhan undang-undang buruh untuk majikan dan pekerja.",
+    "canonical": "https://salarycalculator.my/ms/kalkulator-gaji-minimum",
+    "hreflangs": [
+      "en:https://salarycalculator.my/mincal",
+      "ms:https://salarycalculator.my/ms/kalkulator-gaji-minimum",
+      "x-default:https://salarycalculator.my/mincal"
+    ],
+    "h1": "Kalkulator Gaji Minimum MalaysiaDashboard",
+    "navLinks": [],
+    "footerLinks": [],
+    "breadcrumbs": "",
+    "untranslatedElements": [
+      {
+        "tag": "div",
+        "class": "container",
+        "id": "",
+        "text": ".other-calculators-section { border-top: none !important; padding-top: 0 !important; } .other-calculators-grid { display"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your exact take home pay after EPF, SOCSO, EIS & PCB deductions."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Check employee and employer PERKESO & EIS contribution rates."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your bulanly tax deduction (MTD) for employees & employers."
+      }
+    ]
+  },
+  "/ms/penjana-payslip": {
+    "title": "Penjana Payslip Malaysia",
+    "metaDesc": "Jana slip gaji profesional secara percuma yang lengkap dengan pengiraan EPF, SOCSO, EIS dan PCB. Sesuai untuk PKS dan majikan di Malaysia.",
+    "canonical": "https://salarycalculator.my/ms/penjana-payslip",
+    "hreflangs": [
+      "en:https://salarycalculator.my/payslip-generator",
+      "ms:https://salarycalculator.my/ms/penjana-payslip",
+      "x-default:https://salarycalculator.my/payslip-generator"
+    ],
+    "h1": "",
+    "navLinks": [],
+    "footerLinks": [],
+    "breadcrumbs": "",
+    "untranslatedElements": [
+      {
+        "tag": "div",
+        "class": "container",
+        "id": "",
+        "text": ".other-calculators-section { border-top: none !important; padding-top: 0 !important; } .other-calculators-grid { display"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your exact take home pay after EPF, SOCSO, EIS & PCB deductions."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Check employee and employer PERKESO & EIS contribution rates."
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Calculate your bulanly tax deduction (MTD) for employees & employers."
+      }
+    ]
+  },
+  "/ms/dasar-privasi": {
+    "title": "Dasar Privasi",
+    "metaDesc": "Baca dasar privasi kami mengenai perlindungan data peribadi anda di SalaryCalculator.my. Privasi dan kerahsiaan anda adalah keutamaan kami.",
+    "canonical": "https://salarycalculator.my/ms/dasar-privasi",
+    "hreflangs": [
+      "en:https://salarycalculator.my/privacy-policy",
+      "ms:https://salarycalculator.my/ms/dasar-privasi",
+      "x-default:https://salarycalculator.my/privacy-policy"
+    ],
+    "h1": "Dasar Privasi",
+    "navLinks": [
+      " -> /ms/",
+      "← Back to Calculator -> /ms/"
+    ],
+    "footerLinks": [
+      " -> /ms/",
+      "Kalkulator Gaji -> /ms/",
+      "Kalkulator SOCSO -> /ms/kalkulator-socso",
+      "Kalkulator PCB -> /ms/kalkulator-pcb",
+      "Kalkulator EPF (KWSP) -> /ms/kalkulator-epf",
+      "Kalkulator Cuti Tahunan -> /ms/kalkulator-cuti-tahunan",
+      "Kalkulator Overtime -> /ms/kalkulator-overtime",
+      "Blog -> /blog",
+      "Dasar Privasi -> /ms/dasar-privasi"
+    ],
+    "breadcrumbs": "",
+    "untranslatedElements": [
+      {
+        "tag": "h3",
+        "class": "blog-title",
+        "id": "",
+        "text": "Hourly Rate in Malaysia: How Much Do You Earn Per Hour?"
+      },
+      {
+        "tag": "h3",
+        "class": "blog-title",
+        "id": "",
+        "text": "PERKESO LINDUNG 24 Jam (SKBBK): Coverage, Contribution Rates & Opt-Out Guide (2026)"
+      },
+      {
+        "tag": "h3",
+        "class": "blog-title",
+        "id": "",
+        "text": "How to Calculate Overtime Pay in Malaysia: Normal Hari, Rest Hari & Public Holidays"
+      },
+      {
+        "tag": "p",
+        "class": "",
+        "id": "",
+        "text": "Accurate Malaysia salary calculator. Instantly calculate take-home pay after EPF, SOCSO, EIS & PCB."
+      }
+    ]
+  }
+}

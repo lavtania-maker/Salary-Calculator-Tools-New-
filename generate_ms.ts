@@ -1,0 +1,329 @@
+import * as fs from "fs";
+import * as path from "path";
+import * as cheerio from "cheerio";
+import { ROUTE_MAP, getEnRoute, getMsRoute } from "./src/lib/route-map";
+import { FULL_TEXT_MAP_MS } from "./src/lib/translations-ms";
+
+const htmlPages: Record<string, string> = {
+  "/": "index.html",
+  "/admin": "admin.html",
+  "/mincal": "mincal.html",
+  "/payslip": "payslip.html",
+  "/payslip-generator": "payslip.html",
+  "/report": "report.html",
+  "/epf-kwsp": "epf-kwsp.html",
+  "/epfreport": "epfreport.html",
+  "/socsoreport": "socsoreport.html",
+  "/privacy-policy": "privacy-policy.html",
+  "/pcb-income-tax": "pcb-income-tax.html",
+  "/pcb-calculator": "pcb-income-tax.html",
+  "/annual-leave-calculator": "annual-leave-calculator.html",
+  "/socso-perkeso": "socso-perkeso.html",
+  "/blog": "blog.html",
+  "/blog-admin": "blog-admin.html",
+  "/overtime-pay-calculator": "overtime-pay-calculator.html",
+  "/hourly-rate": "hourly-rate.html",
+  "/hourly-rate-calculator": "hourly-rate.html",
+};
+
+export function transformPage($: cheerio.CheerioAPI, enRoute: string, isMsRoute: boolean) {
+  const msRoute = getMsRoute(enRoute);
+
+  if (isMsRoute) {
+    // Language Swap
+    $('html').attr('lang', 'ms');
+
+    // Load locales
+    let msJson: any = {};
+    try {
+      const localesPath = path.join(process.cwd(), 'locales/ms.json');
+      if (fs.existsSync(localesPath)) {
+        msJson = JSON.parse(fs.readFileSync(localesPath, 'utf8'));
+      }
+    } catch (e) {
+      console.error("[SERVER] Error loading ms.json:", e);
+    }
+
+    // 1. Translate elements with data-i18n
+    $('[data-i18n]').each((_, el) => {
+      const key = $(el).attr('data-i18n');
+      if (key && msJson[key]) {
+        $(el).html(msJson[key]);
+      }
+    });
+
+    // 2. Comprehensive translation for all text elements & breadcrumbs
+    $('option, label, h1, h2, h3, h4, h5, h6, th, td, button, p, span, a, div, summary, li, strong, em, b').each((_, el) => {
+      if ($(el).children().length === 0) {
+        const text = $(el).text().trim();
+        if (FULL_TEXT_MAP_MS[text]) {
+          $(el).text(FULL_TEXT_MAP_MS[text]);
+        } else if (text === 'Home') {
+          $(el).text('Laman Utama');
+        } else if (text === 'Free Tools') {
+          $(el).text('Kalkulator Percuma');
+        } else if (text === 'Blog') {
+          $(el).text('Blog');
+        } else if (text === 'Privacy Policy') {
+          $(el).text('Dasar Privasi');
+        } else if (text === 'Try Our Other Free Calculators') {
+          $(el).text('Cuba Kalkulator Percuma Kami Yang Lain');
+        } else if (text === 'Explore More Articles') {
+          $(el).text('Terokai Artikel Terkini');
+        } else if (text === 'Download Report') {
+          $(el).text('Muat Turun Laporan');
+        }
+      }
+    });
+
+    // Translate Breadcrumbs specifically
+    $('.breadcrumb, .breadcrumbs, nav[aria-label="breadcrumb"]').find('a, span').each((_, el) => {
+      const text = $(el).text().trim();
+      if (text === 'Home') $(el).text('Laman Utama');
+      if (text === 'Free Tools') $(el).text('Kalkulator Percuma');
+      if (FULL_TEXT_MAP_MS[text]) $(el).text(FULL_TEXT_MAP_MS[text]);
+    });
+
+    // 3. Input placeholders
+    $('input[placeholder], textarea[placeholder]').each((_, el) => {
+      const ph = $(el).attr('placeholder');
+      if (ph) {
+        let newPh = ph;
+        if (newPh.includes('e.g.')) {
+          newPh = newPh.replace('e.g.', 'cth.');
+        }
+        if (newPh === 'Your Name') newPh = 'Nama Anda';
+        if (newPh === 'Your Company Name') newPh = 'Nama Syarikat Anda';
+        if (newPh === 'Search articles...') newPh = 'Cari artikel...';
+        if (newPh === 'Type keyword and press Enter...') newPh = 'Taip kata kunci dan tekan Enter...';
+        if (newPh !== ph) {
+           $(el).attr('placeholder', newPh);
+        }
+      }
+    });
+
+    // Canonical & Hreflang
+    const canonicalUrl = 'https://salarycalculator.my' + msRoute;
+    const enUrl = 'https://salarycalculator.my' + enRoute;
+
+    $('link[rel="canonical"]').attr('href', canonicalUrl);
+    $('link[rel="alternate"]').remove();
+    $('head').append(`<link rel="alternate" hreflang="en" href="${enUrl}" />`);
+    $('head').append(`<link rel="alternate" hreflang="ms" href="${canonicalUrl}" />`);
+    $('head').append(`<link rel="alternate" hreflang="x-default" href="${enUrl}" />`);
+
+        // Meta updates
+    const currentTitle = $('title').text();
+    let desc = $('meta[name="description"]').attr('content') || '';
+    let ogTitle = $('meta[property="og:title"]').attr('content') || '';
+    let ogDesc = $('meta[property="og:description"]').attr('content') || '';
+
+    // Custom MS SEO map
+    const SEO_MS: Record<string, { title: string; desc: string; h1: string }> = {
+      "/ms/": {
+        title: "Kalkulator Gaji Malaysia 2026: Kira Gaji Bersih Anda",
+        desc: "Kira gaji bersih anda dengan tepat. Kalkulator gaji Malaysia 2026 percuma kami menolak caruman EPF, SOCSO, EIS dan PCB secara automatik mengikut akta terkini.",
+        h1: "Kalkulator Gaji Malaysia"
+      },
+      "/ms/kalkulator-epf": {
+        title: "Kalkulator EPF Malaysia 2026",
+        desc: "Kira caruman EPF (KWSP) bahagian pekerja dan majikan dengan mudah. Gunakan kalkulator EPF Malaysia 2026 yang percuma dan pantas ini.",
+        h1: "Kalkulator EPF Malaysia"
+      },
+      "/ms/kalkulator-socso": {
+        title: "Kalkulator SOCSO Malaysia 2026",
+        desc: "Semak jadual caruman PERKESO (SOCSO) dan SIP (EIS) 2026. Kira kadar potongan majikan dan pekerja dengan tepat menggunakan kalkulator SOCSO ini.",
+        h1: "Kalkulator SOCSO Malaysia"
+      },
+      "/ms/kalkulator-pcb": {
+        title: "Kalkulator PCB Malaysia 2026",
+        desc: "Kira Potongan Cukai Berjadual (PCB) bulanan anda. Kalkulator cukai pendapatan LHDN ini dikemaskini mengikut struktur cukai rasmi Malaysia 2026.",
+        h1: "Kalkulator PCB Malaysia"
+      },
+      "/ms/kalkulator-cuti-tahunan": {
+        title: "Kalkulator Cuti Tahunan Malaysia 2026",
+        desc: "Kira kelayakan cuti tahunan pro-rata berdasarkan Akta Kerja 1955 Malaysia. Ketahui hak cuti berbayar mengikut tempoh perkhidmatan anda.",
+        h1: "Kalkulator Cuti Tahunan Malaysia"
+      },
+      "/ms/kalkulator-overtime": {
+        title: "Kalkulator Overtime Malaysia 2026",
+        desc: "Kira bayaran kerja lebih masa (OT) dengan betul. Kalkulator OT Malaysia ini membantu anda mengira kadar bayaran untuk hari biasa, cuti rehat, dan cuti am.",
+        h1: "Kalkulator Overtime Malaysia"
+      },
+      "/ms/kadar-gaji-sejam": {
+        title: "Kalkulator Kadar Gaji Sejam Malaysia 2026",
+        desc: "Tukar gaji bulanan kepada kadar sejam, harian, atau pro-rata mengikut piawaian undang-undang Malaysia. Sesuai untuk pekerja separuh masa atau pengiraan OT.",
+        h1: "Kalkulator Kadar Gaji Sejam Malaysia"
+      },
+      "/ms/kalkulator-gaji-minimum": {
+        title: "Kalkulator Gaji Minimum Malaysia 2026",
+        desc: "Semak jika gaji anda menepati standard Gaji Minimum terkini di Malaysia. Pastikan pematuhan undang-undang buruh untuk majikan dan pekerja.",
+        h1: "Kalkulator Gaji Minimum Malaysia"
+      },
+      "/ms/penjana-payslip": {
+        title: "Penjana Payslip Malaysia",
+        desc: "Jana slip gaji profesional secara percuma yang lengkap dengan pengiraan EPF, SOCSO, EIS dan PCB. Sesuai untuk PKS dan majikan di Malaysia.",
+        h1: "Penjana Payslip Malaysia"
+      },
+      "/ms/dasar-privasi": {
+        title: "Dasar Privasi",
+        desc: "Baca dasar privasi kami mengenai perlindungan data peribadi anda di SalaryCalculator.my. Privasi dan kerahsiaan anda adalah keutamaan kami.",
+        h1: "Dasar Privasi"
+      }
+    };
+
+    const msRouteNormalized = msRoute.replace(/\/$/, '') || '/ms/';
+    const seoData = SEO_MS[msRouteNormalized];
+
+    if (seoData) {
+      $('title').text(seoData.title);
+      $('meta[name="description"]').attr('content', seoData.desc);
+      $('meta[property="og:title"]').attr('content', seoData.title);
+      $('meta[property="og:description"]').attr('content', seoData.desc);
+      $('meta[property="og:url"]').attr('content', canonicalUrl);
+      
+      // Look for the main h1 and update it if exists
+      const h1El = $('h1').first();
+      if (h1El.length > 0) {
+        h1El.text(seoData.h1);
+        // remove data-i18n attribute so client side js doesn't overwrite it incorrectly
+        h1El.removeAttr('data-i18n');
+      }
+    } else {
+      const translateMeta = (text: string) => {
+        if (!text) return text;
+        let res = text;
+        if (res.includes('Salary Calculator')) res = res.replace(/Salary Calculator/g, 'Kalkulator Gaji');
+        if (res.includes('EPF Calculator')) res = res.replace(/EPF Calculator/g, 'Kalkulator EPF (KWSP)');
+        if (res.includes('SOCSO & EIS Calculator')) res = res.replace(/SOCSO & EIS Calculator/g, 'Kalkulator SOCSO & EIS');
+        else if (res.includes('SOCSO Calculator')) res = res.replace(/SOCSO Calculator/g, 'Kalkulator SOCSO');
+        if (res.includes('PCB Income Tax Calculator')) res = res.replace(/PCB Income Tax Calculator/g, 'Kalkulator PCB & Cukai Pendapatan');
+        else if (res.includes('PCB Calculator')) res = res.replace(/PCB Calculator/g, 'Kalkulator PCB');
+        if (res.includes('Annual Leave Calculator')) res = res.replace(/Annual Leave Calculator/g, 'Kalkulator Cuti Tahunan');
+        if (res.includes('Overtime Pay Calculator')) res = res.replace(/Overtime Pay Calculator/g, 'Kalkulator Overtime (OT)');
+        else if (res.includes('Overtime Calculator')) res = res.replace(/Overtime Calculator/g, 'Kalkulator Overtime');
+        if (res.includes('Hourly Rate Calculator')) res = res.replace(/Hourly Rate Calculator/g, 'Kalkulator Kadar Gaji Sejam');
+        if (res.includes('Minimum Wage Calculator')) res = res.replace(/Minimum Wage Calculator/g, 'Kalkulator Gaji Minimum');
+        if (res.includes('Payslip Generator')) res = res.replace(/Payslip Generator/g, 'Penjana Slip Gaji');
+        if (res.includes('Privacy Policy')) res = res.replace(/Privacy Policy/g, 'Dasar Privasi');
+        res = res.replace(/Calculate your exact take home pay/gi, 'Kira gaji bersih anda');
+        res = res.replace(/Calculate employee and employer/gi, 'Kira caruman pekerja dan majikan');
+        res = res.replace(/Calculate /g, 'Kira ');
+        res = res.replace(/ for FREE/g, ' secara PERCUMA');
+        res = res.replace(/Free, instant and accurate HR calculation tools for Malaysia/gi, 'Kalkulator HR percuma, pantas dan tepat untuk Malaysia');
+        return res;
+      };
+      $('title').text(translateMeta(currentTitle));
+      if (desc) $('meta[name="description"]').attr('content', translateMeta(desc));
+      if (ogTitle) $('meta[property="og:title"]').attr('content', translateMeta(ogTitle));
+      if (ogDesc) $('meta[property="og:description"]').attr('content', translateMeta(ogDesc));
+      $('meta[property="og:url"]').attr('content', canonicalUrl);
+    }
+    // Rewrite internal links
+    $('a').each((_, el) => {
+      const href = $(el).attr('href');
+      if (href) {
+        const cleanHref = href.split('#')[0].split('?')[0];
+        const anchor = href.slice(cleanHref.length);
+        if (ROUTE_MAP[cleanHref]) {
+          $(el).attr('href', ROUTE_MAP[cleanHref] + anchor);
+        }
+      }
+    });
+
+    // Update Language Switcher
+    $('.lang-en').attr('href', enRoute);
+    $('.lang-ms').attr('href', msRoute);
+    $('.lang-ms').css('color', 'var(--primary-color)').css('font-weight', '600');
+    $('.lang-en').css('color', 'var(--text-muted)').css('font-weight', '400');
+  } else {
+    // EN route
+    $('html').attr('lang', 'en');
+    const isBlog = enRoute.startsWith('/blog');
+    const canonicalUrl = 'https://salarycalculator.my' + enRoute;
+    const msUrl = 'https://salarycalculator.my' + msRoute;
+
+    $('link[rel="canonical"]').attr('href', canonicalUrl);
+    $('link[rel="alternate"]').remove();
+
+    if (!isBlog) {
+      $('head').append(`<link rel="alternate" hreflang="ms" href="${msUrl}" />`);
+      $('head').append(`<link rel="alternate" hreflang="en" href="${canonicalUrl}" />`);
+      $('head').append(`<link rel="alternate" hreflang="x-default" href="${canonicalUrl}" />`);
+    }
+
+    $('.lang-en').attr('href', enRoute);
+    $('.lang-ms').attr('href', msRoute);
+    $('.lang-en').css('color', 'var(--primary-color)').css('font-weight', '600');
+    $('.lang-ms').css('color', 'var(--text-muted)').css('font-weight', '400');
+  }
+
+  const isNoIndexPage = ['/admin', '/blog-admin', '/epfreport', '/socsoreport', '/pcbreport', '/report'].includes(enRoute);
+  if (!isNoIndexPage) {
+    if ($('meta[name="robots"]').length > 0) {
+      $('meta[name="robots"]').attr('content', 'index, follow');
+    } else {
+      $('head').append('<meta name="robots" content="index, follow">');
+    }
+  }
+}
+
+
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+async function main() {
+  const distDir = path.join(__dirname, "dist");
+  const msDir = path.join(distDir, "ms");
+
+  if (!fs.existsSync(msDir)) {
+    fs.mkdirSync(msDir, { recursive: true });
+  }
+
+  for (const enRoute of Object.keys(htmlPages)) {
+    const htmlFile = htmlPages[enRoute];
+    const enFilePath = path.join(distDir, htmlFile);
+    if (!fs.existsSync(enFilePath)) continue;
+    
+    // We must only process English files once
+    const rawHtml = fs.readFileSync(enFilePath, "utf8");
+    const $ = cheerio.load(rawHtml);
+    transformPage($, enRoute, false);
+    fs.writeFileSync(enFilePath, $.html());
+    console.log(`Updated static EN page for ${enRoute}`);
+  }
+
+  for (const [enRoute, msRoute] of Object.entries(ROUTE_MAP)) {
+    let htmlFile = htmlPages[enRoute];
+    if (!htmlFile && enRoute === "/") htmlFile = "index.html";
+    if (!htmlFile) continue;
+
+    const enFilePath = path.join(distDir, htmlFile);
+    if (!fs.existsSync(enFilePath)) continue;
+
+    const rawHtml = fs.readFileSync(enFilePath, "utf8");
+    const $ = cheerio.load(rawHtml);
+    transformPage($, enRoute, true);
+
+    const msPath = msRoute.replace(/\/$/, "");
+    const msFilePath = path.join(distDir, msPath + ".html");
+    
+    // For '/' it returns '/ms/', so msPath is '/ms'
+    if (msPath === "/ms") {
+      fs.writeFileSync(path.join(msDir, "index.html"), $.html());
+    } else {
+      // E.g. msPath = '/ms/kalkulator-epf', write to dist/ms/kalkulator-epf.html
+      const outPath = path.join(distDir, msPath + ".html");
+      const outDir = path.dirname(outPath);
+      if (!fs.existsSync(outDir)) {
+        fs.mkdirSync(outDir, { recursive: true });
+      }
+      fs.writeFileSync(outPath, $.html());
+    }
+    console.log(`Generated static MS page for ${msRoute}`);
+  }
+}
+
+main().catch(console.error);

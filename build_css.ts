@@ -41,7 +41,7 @@ ul { list-style: none; }
 .navbar { background: #ffffff; border-bottom: 1px solid var(--border); padding: 12px 0; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 3px rgba(0,0,0,0.02); }
 .navbar .container { display: flex; justify-content: space-between; align-items: center; }
 .logo { display: flex; align-items: center; text-decoration: none; }
-.logo-img { height: 44px; width: auto; max-width: 250px; object-fit: contain; }
+.logo-img { height: 58px; width: auto; max-width: 320px; object-fit: contain; }
 .desktop-nav { display: flex; gap: 8px; align-items: center; }
 .nav-item {
   background: transparent; border: none; font-family: inherit; font-size: 0.95rem; font-weight: 600;
@@ -107,7 +107,7 @@ h1, h2, h3, h4 { color: var(--text-main); letter-spacing: -0.02em; }
 
 /* Form Elements */
 .form-group { margin-bottom: 24px; }
-.form-label { display: block; font-weight: 700; margin-bottom: 10px; font-size: 1rem; color: #1e293b; }
+.form-label { display: block; font-weight: 700; margin-bottom: 4px; font-size: 1rem; color: #1e293b; }
 .input-group {
   display: flex; align-items: center; border: 1px solid var(--border-input);
   border-radius: 12px; overflow: hidden; background: #ffffff; transition: all 0.2s ease;
@@ -229,8 +229,8 @@ h1, h2, h3, h4 { color: var(--text-main); letter-spacing: -0.02em; }
 .footer { background: #0f172a; color: white; padding: 48px 0 24px; border-top: 1px solid var(--border); }
 .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; margin-bottom: 32px; }
 @media (max-width: 640px) { .footer-grid { grid-template-columns: 1fr; } }
-.footer-col h4 { margin-bottom: 16px; font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; }
-.footer-link { display: block; margin-bottom: 10px; color: #cbd5e1; font-size: 0.95rem; transition: color 0.2s; }
+.footer-col h4 { margin-bottom: 8px; font-size: 1rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #94a3b8; }
+.footer-link { display: block; margin-bottom: 4px; color: #cbd5e1; font-size: 0.95rem; transition: color 0.2s; }
 .footer-link:hover { color: white; text-decoration: underline; }
 .footer-bottom { text-align: center; padding-top: 24px; border-top: 1px solid rgba(255, 255, 255, 0.1); font-size: 0.85rem; color: #64748b; }
 `;

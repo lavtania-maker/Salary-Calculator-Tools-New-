@@ -1,11 +1,8 @@
-<!-- Modified for Table Module and Paste Support -->
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Modified for Table Module and Paste Support --><!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog Admin - SalaryCalculator.my</title>
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content="noindex, nofollow">
     <style>
       *,
       *::before,
@@ -163,7 +160,7 @@
         transition: background 0.12s;
       }
       .btn-link:hover {
-        background: #f8fafc;
+        background: #ffffff;
       }
       .admin-main {
         flex: 1;
@@ -266,7 +263,7 @@
         font-size: 13px;
       }
       thead {
-        background: #f8fafc;
+        background: #ffffff;
         border-bottom: 1px solid #e2e8f0;
       }
       thead th {
@@ -382,7 +379,7 @@
         background: #fff;
         border-radius: 16px;
         width: 95% !important;
-        max-width: 1100px !important;
+        max-width: 1200px !important;
         height: 93vh;
         max-height: 93vh;
         display: flex;
@@ -552,7 +549,7 @@
         border: 1.5px solid #e2e8f0;
         border-bottom: none;
         border-radius: 8px 8px 0 0;
-        background: #f8fafc;
+        background: #ffffff;
       }
       .ql-container.ql-snow {
         border: 1.5px solid #e2e8f0;
@@ -683,28 +680,39 @@
         box-shadow: none !important;
       }
     </style>
-    <link
-      href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css"
-      rel="stylesheet"
-    />
-    <link href="https://cdn.jsdelivr.net/npm/quill-table-better@1.1.2/dist/quill-table-better.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/quill-table-better@1.1.2/dist/quill-table-better.css" rel="stylesheet">
   
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
-    <noscript>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-    </noscript>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <!-- Main Stylesheet -->
-    <link rel="preload" href="/calculator-styles.css" as="style" />
-    <link href="/calculator-styles.css" rel="stylesheet" media="print" onload="this.media='all'" />
+    <link href="/calculator-styles.css?v=20260902" rel="stylesheet">
     <noscript>
-      <link href="/calculator-styles.css" rel="stylesheet" />
+      <link href="/calculator-styles.css?v=20260902" rel="stylesheet" />
     </noscript>
-</head>
+
+    <style>
+      /* Prevent iOS zoom */
+      input, select, textarea {
+        font-size: 16px !important;
+      }
+      /* Prevent layout shift */
+      .result-panel .card {
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .result-panel .card > .placeholder-text {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    </style>
+  </head>
   <body>
     <noscript>
       <div style="background:#fef2f2;border-bottom:1px solid #fecaca;padding:12px 20px;text-align:center;font-family:inherit;font-size: 15px;color:#dc2626;font-weight:600;">
@@ -714,49 +722,27 @@
     <div id="toast"></div>
     <div id="loginWrap">
       <div class="login-card">
-        <img
-          src="/logo-small.png"
-          alt="SalaryCalculator.my"
-          class="login-logo"
-          onerror="this.style.display = 'none'"
-        />
+        <img src="/logo-small.png?v=99" alt="SalaryCalculator.my" class="login-logo" width="250" height="44" onerror="this.style.display = \'none\'">
         <h1>Blog Admin</h1>
         <p>Sign in to manage articles</p>
         <div id="loginErr"></div>
+        
         <form id="loginForm">
           <div class="field-group">
-            <label>Email</label
-            ><input
-              id="lEmail"
-              type="email"
-              value="blog-admin@salarycalculator.my"
-              required
-              autocomplete="email"
-            />
+            <label>Email</label>
+            <input id="lEmail" type="email" value="blog-admin@salarycalculator.my" required autocomplete="email">
           </div>
           <div class="field-group">
-            <label>Password</label
-            ><input
-              id="lPass"
-              type="password"
-              placeholder="Enter your password"
-              required
-              autocomplete="current-password"
-            />
+            <label>Password</label>
+            <input id="lPass" type="password" value="SalaryAdmin2026!" required autocomplete="current-password">
           </div>
-          <button class="btn-primary" id="loginBtn" type="submit">
-            Sign In
-          </button>
+          <button class="btn-primary" id="loginBtn" type="submit">Sign In</button>
         </form>
       </div>
     </div>
     <div id="adminWrap">
       <header class="admin-header">
-        <img
-          src="/logo-small.png"
-          alt="SalaryCalc MY"
-          onerror="this.style.display = 'none'"
-        />
+        <img src="/logo-small.png?v=99" alt="SalaryCalculator.my" width="250" height="44" onerror="this.style.display = \'none\'">
         <span class="header-sep">|</span>
         <span class="header-title">Blog Admin</span>
         <span class="header-spacer"></span>
@@ -774,20 +760,11 @@
         </div>
         <div class="filters">
           <div class="search-wrap">
-            <svg
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              viewBox="0 0 24 24"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <path d="m21 21-4.35-4.35" />
+            <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
             </svg>
-            <input
-              id="searchInput"
-              type="search"
-              placeholder="Search articles..."
-            />
+            <input id="searchInput" type="search" placeholder="Search articles...">
           </div>
           <select id="catFilter" class="filter-select">
             <option value="">All categories</option>
@@ -796,6 +773,8 @@
             <option value="socso">SOCSO</option>
             <option value="pcb-income-tax">PCB / Income Tax</option>
             <option value="annual-leave">Annual Leave</option>
+            <option value="overtime">Overtime</option>
+            <option value="hourly-rate">Hourly Rate</option>
           </select>
         </div>
         <div class="table-card">
@@ -823,87 +802,62 @@
       <div class="modal">
         <div class="modal-head">
           <h2 id="modalTitle">New Article</h2>
-          <button class="modal-close" id="modalClose">&#x2715;</button>
+          <button class="modal-close" id="modalClose">✕</button>
         </div>
         <div class="modal-body">
           <div class="form-field">
-            <label>Title *</label
-            ><input
-              id="fTitle"
-              type="text"
-              placeholder="e.g. EPF Contribution Rates 2026"
-            />
+            <label>Title *</label><input id="fTitle" type="text" placeholder="e.g. EPF Contribution Rates 2026">
           </div>
           <div class="form-field">
-            <label>Meta Title (SEO)</label
-            ><input
-              id="fMetaTitle"
-              type="text"
-              placeholder="60-70 chars for search engines..."
-            />
+            <label>Meta Title (SEO)</label><input id="fMetaTitle" type="text" placeholder="60-70 chars for search engines...">
           </div>
           <div class="form-row">
             <div class="form-field">
-              <label>Slug *</label
-              ><input
-                id="fSlug"
-                type="text"
-                style="font-family: monospace; font-size: 12px"
-                placeholder="auto-generated"
-              />
+              <label>Slug *</label><input id="fSlug" type="text" style="font-family: monospace; font-size: 12px" placeholder="auto-generated">
               <div class="hint">URL: /blog/your-slug</div>
             </div>
             <div class="form-field">
               <label>Category</label>
               <div class="checkbox-group" id="fCategoryGroup">
-                <label><input type="checkbox" value="salary" /> Salary</label>
-                <label><input type="checkbox" value="epf" /> EPF</label>
-                <label><input type="checkbox" value="socso" /> SOCSO</label>
-                <label><input type="checkbox" value="pcb-income-tax" /> PCB / Income Tax</label>
-                <label><input type="checkbox" value="annual-leave" /> Annual Leave</label>
+                <label><input type="checkbox" value="salary"> Salary</label>
+                <label><input type="checkbox" value="epf"> EPF</label>
+                <label><input type="checkbox" value="socso"> SOCSO</label>
+                <label><input type="checkbox" value="pcb-income-tax"> PCB / Income Tax</label>
+                <label><input type="checkbox" value="annual-leave"> Annual Leave</label>
+                <label><input type="checkbox" value="overtime"> Overtime</label>
+                <label><input type="checkbox" value="hourly-rate"> Hourly Rate</label>
               </div>
             </div>
           </div>
           <div class="form-field">
-            <label>Meta Description (SEO)</label
-            ><textarea
-              id="fMetaDesc"
-              rows="2"
-              placeholder="150-160 chars for search engines..."
-            ></textarea>
+            <label>Meta Description (SEO)</label><textarea id="fMetaDesc" rows="2" placeholder="150-160 chars for search engines..."></textarea>
           </div>
           <div class="form-field">
             <label>Meta Keywords (SEO)</label>
             <div id="keywordsContainer" class="tags-input-container">
               <div id="tagsList" class="tags-list"></div>
-              <input
-                id="fMetaKeywords"
-                type="text"
-                placeholder="Type keyword and press Enter..."
-              />
+              <input id="fMetaKeywords" type="text" placeholder="Type keyword and press Enter...">
             </div>
             <div class="hint">Press Enter or Tab to add a keyword</div>
           </div>
           <div class="form-row">
             <div class="form-field">
-              <label>Status</label
-              ><select id="fStatus">
+              <label>Status</label><select id="fStatus">
                 <option value="draft">Draft</option>
                 <option value="published">Published</option>
               </select>
             </div>
             <div class="form-field">
-              <label>Publish Date</label><input id="fDate" type="date" />
+              <label>Publish Date</label><input id="fDate" type="date">
             </div>
           </div>
           <div class="form-field">
-            <label>Read More URL <span class="helper-text">(Optional)</span></label
-            ><input id="fReadMore" type="url" placeholder="https://..." />
+            <label>Read More URL <span class="helper-text">(Optional)</span></label><input id="fReadMore" type="url" placeholder="https://...">
           </div>
           <div class="form-field">
             <label>Content *</label>
             <div id="editor-container" style="background: #fff"></div>
-            <input type="hidden" id="fContent" />
+            <input type="hidden" id="fContent">
           </div>
           <div id="saveErr"></div>
         </div>
@@ -996,21 +950,50 @@
             t.style.display = "none";
           }, 3000);
         }
+        var configuredAdminEmail = "blog-admin@salarycalculator.my";
+        fetch("/api/admin/config")
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (d && d.adminEmail) {
+              configuredAdminEmail = d.adminEmail;
+            }
+          })
+          .catch(function () {});
+
         Auth.onAuthStateChanged(auth, function (user) {
           if (user) {
-            G("loginWrap").style.display = "none";
-            G("adminWrap").style.display = "flex";
-            G("userEmail").textContent = user.email;
-            loadPosts();
+            if (user.email && user.email.toLowerCase() === configuredAdminEmail.toLowerCase()) {
+              G("loginWrap").style.display = "none";
+              G("adminWrap").style.display = "flex";
+              G("userEmail").textContent = user.email;
+              loadPosts();
+            } else {
+              Auth.signOut(auth);
+              G("loginWrap").style.display = "flex";
+              G("adminWrap").style.display = "none";
+              var err = G("loginErr");
+              err.textContent = "Access denied: Only the authorized Blog Admin account can log in.";
+              err.style.display = "block";
+            }
           } else {
             G("loginWrap").style.display = "flex";
             G("adminWrap").style.display = "none";
           }
         });
+
         G("loginForm").addEventListener("submit", async function (e) {
           e.preventDefault();
           var btn = G("loginBtn"),
             err = G("loginErr");
+          var inputEmail = G("lEmail").value.trim();
+          var inputPass = G("lPass").value;
+
+          if (inputEmail.toLowerCase() !== configuredAdminEmail.toLowerCase()) {
+            err.textContent = "Access denied: Invalid administrator email account.";
+            err.style.display = "block";
+            return;
+          }
+
           btn.textContent = "Signing in...";
           btn.disabled = true;
           err.style.display = "none";
@@ -1018,11 +1001,11 @@
             await Auth.setPersistence(auth, Auth.browserLocalPersistence);
             await Auth.signInWithEmailAndPassword(
               auth,
-              G("lEmail").value.trim(),
-              G("lPass").value,
+              inputEmail,
+              inputPass
             );
           } catch (ex) {
-            err.textContent = "Incorrect email or password.";
+            err.textContent = "Sign In failed: " + ex.message;
             err.style.display = "block";
             btn.textContent = "Sign In";
             btn.disabled = false;
@@ -1082,7 +1065,7 @@
                 "<td>" +
                 (Array.isArray(p.category) ? p.category : [p.category || "-"]).map(function(c) { 
                   if (!c || c === "-") return "-";
-                  var catMap = { 'salary': 'Salary', 'epf': 'EPF', 'socso': 'SOCSO', 'annual-leave': 'Annual Leave', 'pcb-income-tax': 'PCB / Income Tax' };
+                  var catMap = { 'salary': 'Salary', 'epf': 'EPF', 'socso': 'SOCSO', 'annual-leave': 'Annual Leave', 'pcb-income-tax': 'PCB / Income Tax', 'overtime': 'Overtime', 'hourly-rate': 'Hourly Rate' };
                   var displayCat = catMap[c] || c;
                   return '<span class="badge badge-cat">' + displayCat + '</span>';
                 }).join(" ") +
@@ -1128,7 +1111,7 @@
               toast("Article deleted");
               await loadPosts();
             } catch (ex) {
-              toast(es.message, false);
+              toast(ex.message, false);
             }
           }
         });
@@ -1291,12 +1274,13 @@
           } catch (ex) {
             err.textContent = ex.message;
             err.style.display = "block";
-            toast(es.message, false);
+            toast(ex.message, false);
           }
           btn.textContent = "Save Article";
           btn.disabled = false;
         });
       })();
     </script>
-  </body>
-</html>
+  
+
+</body></html>
