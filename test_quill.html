@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet">
+</head>
+<body>
+  <div id="editor"></div>
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+  <script>
+    var quill = new Quill('#editor', { theme: 'snow' });
+    try {
+        console.log("convert method:", typeof quill.clipboard.convert);
+        quill.clipboard.dangerouslyPasteHTML(0, "<h1>Hello</h1>");
+        console.log("dangerouslyPasteHTML works");
+    } catch(e) {
+        console.log("Error:", e.message);
+    }
+  </script>
+</body>
+</html>

@@ -162,6 +162,7 @@ export function calculateSalary() {
       switch (maritalStatus) {
         case "single":
           break;
+        case "married_non_working":
         case "married_spouse_not_working_no_child":
         case "married_spouse_not_working":
           spouseRelief = 4000;
@@ -174,6 +175,7 @@ export function calculateSalary() {
           spouseRelief = 4000;
           childRelief = 4000;
           break;
+        case "married_working":
         case "married_spouse_working_no_child":
         case "married_spouse_working":
           break;
@@ -332,23 +334,23 @@ export function calculateSalary() {
     let shortExplanation = "lower income group";
     let shortExplanationMs = "kumpulan pendapatan rendah";
 
-    if (totalIncome >= 15870) {
+    if (grossSalary >= 15040) {
       incomeGroup = "T20";
       subGroup = "T2";
       groupColor = "#16a34a";
       groupBg = "#f0fdf4";
       groupBorder = "#dcfce7";
-      shortExplanation = "top income group";
+      shortExplanation = "upper income group";
       shortExplanationMs = "kumpulan pendapatan tertinggi";
-    } else if (totalIncome >= 11820) {
+    } else if (grossSalary >= 11820) {
       incomeGroup = "T20";
       subGroup = "T1";
       groupColor = "#16a34a";
       groupBg = "#f0fdf4";
       groupBorder = "#dcfce7";
-      shortExplanation = "top income group";
+      shortExplanation = "upper income group";
       shortExplanationMs = "kumpulan pendapatan tertinggi";
-    } else if (totalIncome >= 9450) {
+    } else if (grossSalary >= 10300) {
       incomeGroup = "M40";
       subGroup = "M4";
       groupColor = "#ca8a04";
@@ -356,7 +358,7 @@ export function calculateSalary() {
       groupBorder = "#fef9c3";
       shortExplanation = "middle income group";
       shortExplanationMs = "kumpulan pendapatan pertengahan";
-    } else if (totalIncome >= 7690) {
+    } else if (grossSalary >= 8700) {
       incomeGroup = "M40";
       subGroup = "M3";
       groupColor = "#ca8a04";
@@ -364,7 +366,7 @@ export function calculateSalary() {
       groupBorder = "#fef9c3";
       shortExplanation = "middle income group";
       shortExplanationMs = "kumpulan pendapatan pertengahan";
-    } else if (totalIncome >= 6340) {
+    } else if (grossSalary >= 7110) {
       incomeGroup = "M40";
       subGroup = "M2";
       groupColor = "#ca8a04";
@@ -372,7 +374,7 @@ export function calculateSalary() {
       groupBorder = "#fef9c3";
       shortExplanation = "middle income group";
       shortExplanationMs = "kumpulan pendapatan pertengahan";
-    } else if (totalIncome >= 5250) {
+    } else if (grossSalary >= 5250) {
       incomeGroup = "M40";
       subGroup = "M1";
       groupColor = "#ca8a04";
@@ -380,7 +382,7 @@ export function calculateSalary() {
       groupBorder = "#fef9c3";
       shortExplanation = "middle income group";
       shortExplanationMs = "kumpulan pendapatan pertengahan";
-    } else if (totalIncome >= 4310) {
+    } else if (grossSalary >= 3970) {
       incomeGroup = "B40";
       subGroup = "B4";
       groupColor = "#ef4444";
@@ -388,7 +390,7 @@ export function calculateSalary() {
       groupBorder = "#fee2e2";
       shortExplanation = "lower income group";
       shortExplanationMs = "kumpulan pendapatan rendah";
-    } else if (totalIncome >= 3440) {
+    } else if (grossSalary >= 3170) {
       incomeGroup = "B40";
       subGroup = "B3";
       groupColor = "#ef4444";
@@ -396,7 +398,7 @@ export function calculateSalary() {
       groupBorder = "#fee2e2";
       shortExplanation = "lower income group";
       shortExplanationMs = "kumpulan pendapatan rendah";
-    } else if (totalIncome >= 2560) {
+    } else if (grossSalary >= 2500) {
       incomeGroup = "B40";
       subGroup = "B2";
       groupColor = "#ef4444";
@@ -413,7 +415,6 @@ export function calculateSalary() {
       shortExplanation = "lower income group";
       shortExplanationMs = "kumpulan pendapatan rendah";
     }
-
     const groupLabel = document.getElementById("resIncomeGroupLabel");
     if (groupLabel) {
       groupLabel.textContent = `${incomeGroup} (${subGroup})`;
@@ -432,9 +433,10 @@ export function calculateSalary() {
     const descriptionEl = document.getElementById("resIncomeGroupDescription");
     if (descriptionEl) {
       const isMs = typeof window !== "undefined" && (window.location.pathname.startsWith("/ms/") || window.location.pathname === "/ms" || document.documentElement.lang === "ms");
+      
       descriptionEl.innerHTML = isMs 
-        ? `Berdasarkan jumlah pendapatan bulanan anda, anda berada dalam <strong style="color: ${groupColor}; font-weight: 800;">kategori ${incomeGroup} (${subGroup}) (${shortExplanationMs})</strong> di Malaysia.`
-        : `With your total monthly income, you’re in the <strong style="color: ${groupColor}; font-weight: 800;">${incomeGroup} (${subGroup}) category (${shortExplanation})</strong> in Malaysia.`;
+        ? `Dengan jumlah pendapatan bulanan anda, anda berada dalam <strong style="color: ${groupColor}; font-weight: 800;">kategori ${incomeGroup} (${subGroup}) (${shortExplanationMs})</strong> di Malaysia.`
+        : `With your total monthly income, you're in the <strong style="color: ${groupColor}; font-weight: 800;">${incomeGroup} (${subGroup}) category (${shortExplanation})</strong> in Malaysia.`;
     }
 
     const section = document.getElementById("incomeGroupSection");
@@ -469,6 +471,8 @@ export function calculateSalary() {
       totalDeductions,
       incomeGroup: `${incomeGroup} (${subGroup})`
     };
+
+    updatePremiumIncomeJourney(totalIncome, grossSalary);
   } catch (err) {
     console.error("Salary calculation error:", err);
   }
@@ -483,6 +487,21 @@ function initSalaryCalculator() {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       calculateSalary();
+    });
+  }
+
+  const calcBtn = document.getElementById("calculateBtn") as HTMLButtonElement | null;
+  if (calcBtn) {
+    calcBtn.addEventListener("click", () => {
+      if (form) {
+        if (typeof form.requestSubmit === "function") {
+          form.requestSubmit();
+        } else {
+          form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
+        }
+      } else {
+        calculateSalary();
+      }
     });
   }
 
@@ -740,3 +759,274 @@ if (document.readyState === "loading") {
 } else {
   initSalaryCalculator();
 }
+
+
+function updatePremiumIncomeJourney(totalIncome: number, grossSalary: number) {
+  const section = document.getElementById("premiumIncomeJourneySection");
+  if (!section) return;
+
+  const isMs = typeof window !== "undefined" && (window.location.pathname.startsWith("/ms/") || window.location.pathname === "/ms" || document.documentElement.lang === "ms");
+
+  let currentGroup = "B40";
+  let nextGroup = "M40";
+  let lowerBound = 0;
+  let upperBound = 5250; 
+  let isT20 = false;
+  
+  if (grossSalary >= 11820) {
+    currentGroup = "T20";
+    nextGroup = "None";
+    lowerBound = 11820;
+    upperBound = 11820;
+    isT20 = true;
+  } else if (totalIncome >= 5250) {
+    currentGroup = "M40";
+    nextGroup = "T20";
+    lowerBound = 5250;
+    upperBound = 11820;
+  } else {
+    currentGroup = "B40";
+    nextGroup = "M40";
+    lowerBound = 0;
+    upperBound = 5250;
+  }
+
+  let progressPct = 0;
+  let trackPct = 0;
+  let amountNeeded = 0;
+  
+  if (isT20) {
+    progressPct = 100;
+    trackPct = 100;
+  } else {
+    amountNeeded = upperBound - grossSalary;
+    if (amountNeeded < 0) amountNeeded = 0;
+    progressPct = Math.round((grossSalary / upperBound) * 100);
+    if (progressPct > 100) progressPct = 100;
+
+    if (grossSalary < 5250) {
+      const segmentRatio = Math.min(grossSalary / 5249, 1);
+      trackPct = segmentRatio * 45;
+    } else if (grossSalary < 11820) {
+      const segmentRatio = Math.min((grossSalary - 5250) / (11819 - 5250), 1);
+      trackPct = 50 + (segmentRatio * 45);
+    }
+  }
+  
+  if (trackPct > 100) trackPct = 100;
+  if (trackPct < 0) trackPct = 0;
+  
+  const badge = document.getElementById("journeyCurrentBadge");
+  if (badge) {
+    badge.textContent = currentGroup;
+    badge.style.background = currentGroup === "B40" ? "#ef4444" : currentGroup === "M40" ? "#eab308" : "#16a34a";
+    badge.style.boxShadow = `0 4px 14px -4px ${currentGroup === "B40" ? "rgba(239, 68, 68, 0.4)" : currentGroup === "M40" ? "rgba(202, 138, 4, 0.4)" : "rgba(22, 163, 74, 0.4)"}`;
+  }
+
+  const trackFill = document.getElementById("journeyTrackFill");
+  if (trackFill) {
+    trackFill.style.width = `${trackPct}%`;
+    trackFill.style.background = currentGroup === "B40" ? "#ef4444" : currentGroup === "M40" ? "#eab308" : "#16a34a";
+  }
+
+  const youAreHere = document.getElementById("journeyYouAreHere");
+  if (youAreHere) {
+    youAreHere.style.left = `${trackPct}%`;
+    youAreHere.style.color = currentGroup === "B40" ? "#ef4444" : currentGroup === "M40" ? "#eab308" : "#16a34a";
+    youAreHere.innerHTML = isMs 
+      ? `Anda di sini <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: 2px auto 0"><polyline points="6 9 12 15 18 9"></polyline></svg>` 
+      : `You are here <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="display: block; margin: 2px auto 0"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
+  }
+  
+  const nodeB40 = document.getElementById("nodeB40");
+  const nodeM40 = document.getElementById("nodeM40");
+  const nodeT20 = document.getElementById("nodeT20");
+  
+  if (nodeB40) nodeB40.style.borderColor = "#ef4444";
+  if (nodeM40) nodeM40.style.borderColor = grossSalary >= 5250 ? (currentGroup === "M40" ? "#eab308" : "#16a34a") : "#e2e8f0";
+  if (nodeT20) nodeT20.style.borderColor = grossSalary >= 11820 ? "#16a34a" : "#e2e8f0";
+
+  const nextGoalContent = document.getElementById("nextGoalContent");
+  const maxGoalContent = document.getElementById("maxGoalContent");
+  
+  if (isT20) {
+    if (nextGoalContent) nextGoalContent.style.display = "none";
+    if (maxGoalContent) maxGoalContent.style.display = "block";
+  } else {
+    if (nextGoalContent) nextGoalContent.style.display = "block";
+    if (maxGoalContent) maxGoalContent.style.display = "none";
+    
+    const nextGoalTitle = document.getElementById("nextGoalTitle");
+    if (nextGoalTitle) {
+      nextGoalTitle.textContent = isMs ? `Sasaran: ${nextGroup}` : `Next Goal: ${nextGroup}`;
+    }
+    
+    const nextGoalAmount = document.getElementById("nextGoalAmount");
+    if (nextGoalAmount) {
+      nextGoalAmount.textContent = `RM ${amountNeeded.toFixed(2)}`;
+    }
+  }
+
+  const milestoneGroup = document.getElementById("insightMilestoneGroup");
+  if (milestoneGroup) {
+    if (isT20) {
+      milestoneGroup.textContent = isMs ? "Kumpulan T20" : "T20 Income Group";
+      milestoneGroup.style.color = "#16a34a";
+    } else {
+      milestoneGroup.textContent = isMs ? `Kumpulan ${nextGroup}` : `${nextGroup} Income Group`;
+      milestoneGroup.style.color = nextGroup === "M40" ? "#ca8a04" : "#16a34a";
+    }
+  }
+
+  const milestoneRange = document.getElementById("insightMilestoneRange");
+  if (milestoneRange) {
+    if (isT20) {
+      milestoneRange.textContent = isMs ? "RM11,820 & ke atas" : "RM11,820 & above";
+    } else if (nextGroup === "M40") {
+      milestoneRange.textContent = "RM5,250 - RM11,819";
+    } else {
+      milestoneRange.textContent = isMs ? "RM11,820 & ke atas" : "RM11,820 & above";
+    }
+  }
+
+  const milestoneMsg = document.getElementById("insightMilestoneMsg");
+  if (milestoneMsg) {
+    if (isT20) {
+      milestoneMsg.textContent = isMs ? "Anda telah mencapai tahap pendapatan tertinggi (T20)" : "You have reached the top income tier (T20)";
+    } else {
+      milestoneMsg.textContent = isMs ? "Teruskan usaha! Anda semakin hampir." : "Keep going! You're getting closer.";
+    }
+  }
+  
+  const milestoneIconBg = document.getElementById("insightMilestoneIconBg");
+  if (milestoneIconBg) {
+    if (isT20) {
+      milestoneIconBg.style.background = "#dcfce7";
+      milestoneIconBg.innerHTML = "🏆";
+    } else if (nextGroup === "M40") {
+      milestoneIconBg.style.background = "#fef9c3";
+      milestoneIconBg.innerHTML = "🏕️";
+    } else {
+      milestoneIconBg.style.background = "#e0e7ff";
+      milestoneIconBg.innerHTML = "🏔️";
+    }
+  }
+
+  const progressPctEl = document.getElementById("insightProgressPct");
+  if (progressPctEl) {
+    progressPctEl.textContent = progressPct.toString();
+  }
+  
+  const progressPctWrapper = document.getElementById("insightProgressPctWrapper");
+  if (progressPctWrapper) {
+    progressPctWrapper.style.color = currentGroup === "B40" ? "#ef4444" : currentGroup === "M40" ? "#eab308" : "#16a34a";
+  }
+  
+  const progressBar = document.getElementById("insightProgressBar");
+  if (progressBar) {
+    progressBar.style.width = `${progressPct}%`;
+    progressBar.style.background = currentGroup === "B40" ? "#ef4444" : currentGroup === "M40" ? "#eab308" : "#16a34a";
+  }
+  
+  const progressBg = document.getElementById("insightProgressBg");
+  if (progressBg) {
+    progressBg.style.background = currentGroup === "B40" ? "#fee2e2" : currentGroup === "M40" ? "#fef9c3" : "#dcfce7";
+  }
+
+  const progressRemaining = document.getElementById("insightProgressRemaining");
+  if (progressRemaining) {
+    if (isT20) {
+      progressRemaining.textContent = isMs ? "Sasaran tercapai" : "Goal reached";
+    } else {
+      progressRemaining.textContent = isMs ? `RM ${amountNeeded.toFixed(2)} lagi sebulan` : `RM ${amountNeeded.toFixed(2)} more per month`;
+    }
+  }
+
+  const progressLabel = document.getElementById("insightProgressLabel");
+  if (progressLabel) {
+    if (isT20) {
+      progressLabel.textContent = "";
+    } else {
+      progressLabel.textContent = isMs ? `untuk capai ${nextGroup}` : `to reach ${nextGroup}`;
+    }
+  }
+  
+  if (section.style.display === "none" || section.style.opacity === "0") {
+    section.style.display = "block";
+    setTimeout(() => {
+      section.style.opacity = "1";
+    }, 50);
+  }
+}
+
+
+// Expose global UI helpers
+const _lastToggleTimes: Record<string, number> = {};
+(window as any).toggleResultSection = function (sectionId: string) {
+  const now = Date.now();
+  if (_lastToggleTimes[sectionId] && now - _lastToggleTimes[sectionId] < 120) {
+    return;
+  }
+  _lastToggleTimes[sectionId] = now;
+  const section = document.getElementById(sectionId);
+  if (!section) return;
+  const indicator = section.querySelector(".toggle-indicator");
+  if (section.classList.contains("collapsed")) {
+    section.classList.remove("collapsed");
+    if (indicator) indicator.textContent = "▼";
+  } else {
+    section.classList.add("collapsed");
+    if (indicator) indicator.textContent = "▶";
+  }
+};
+
+(window as any).openTab = function (evt: any, tabName: string) {
+  const contents = document.getElementsByClassName("contribution-content");
+  for (let i = 0; i < contents.length; i++) {
+    (contents[i] as HTMLElement).style.display = "none";
+    contents[i].classList.remove("active");
+  }
+  const tabs = document.getElementsByClassName("seo-tab");
+  for (let i = 0; i < tabs.length; i++) {
+    tabs[i].className = tabs[i].className.replace(" active", "");
+  }
+  const target = document.getElementById(tabName);
+  if (target) {
+    target.style.display = "block";
+    target.classList.add("active");
+  }
+  if (evt && evt.currentTarget) {
+    evt.currentTarget.className += " active";
+  }
+};
+
+(window as any).clearAndRefreshLogs = function () {
+  const content = document.getElementById("errorLogContent");
+  if (content) content.innerHTML = '<p style="color:#64748b;text-align:center;padding:20px;">No error logs recorded.</p>';
+  try {
+    localStorage.removeItem("salary_calculator_error_logs");
+  } catch (e) {}
+};
+
+// Expose share progress globally
+(window as any).shareProgress = function(platform: string) {
+  const url = encodeURIComponent(window.location.href);
+  const isMs = typeof window !== "undefined" && (window.location.pathname.startsWith("/ms/") || window.location.pathname === "/ms" || document.documentElement.lang === "ms");
+  const text = encodeURIComponent(
+    isMs 
+      ? "Saya baru sahaja semak kumpulan pendapatan isi rumah guna Kalkulator Gaji Malaysia! Semak gaji anda di sini:"
+      : "I just checked my household income group using the Malaysian Salary Calculator! Check yours here:"
+  );
+  
+  if (platform === 'linkedin') {
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${url}`, '_blank');
+  } else if (platform === 'facebook') {
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`, '_blank');
+  } else if (platform === 'twitter') {
+    window.open(`https://twitter.com/intent/tweet?url=${url}&text=${text}`, '_blank');
+  } else if (platform === 'whatsapp') {
+    window.open(`https://api.whatsapp.com/send?text=${text} ${url}`, '_blank');
+  } else if (platform === 'threads') {
+    window.open(`https://threads.net/intent/post?text=${text} ${url}`, '_blank');
+  }
+};

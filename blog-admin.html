@@ -688,30 +688,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Main Stylesheet -->
-    <link href="/calculator-styles.css?v=20260902" rel="stylesheet">
-    <noscript>
-      <link href="/calculator-styles.css?v=20260902" rel="stylesheet" />
-    </noscript>
-
-    <style>
-      /* Prevent iOS zoom */
-      input, select, textarea {
-        font-size: 16px !important;
-      }
-      /* Prevent layout shift */
-      .result-panel .card {
-        min-height: 0;
-        display: flex;
-        flex-direction: column;
-      }
-      .result-panel .card > .placeholder-text {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-    </style>
   </head>
   <body>
     <noscript>
@@ -1179,9 +1155,8 @@
           G("fReadMore").value = (post && post.readMoreUrl) || "";
           const initialHtml = (post && post.content) || "";
           setTimeout(function () {
-            const editorEl = document.querySelector('#editor-container .ql-editor');
-            if (editorEl) {
-              editorEl.innerHTML = initialHtml;
+            if (typeof quill !== 'undefined') {
+              quill.clipboard.dangerouslyPasteHTML(initialHtml);
             }
           }, 200);
           G("fContent").value = (post && post.content) || "";
@@ -1228,10 +1203,11 @@
             err = G("saveErr");
 
           // Sync Quill content to hidden field
-          const editorEl = document.querySelector('#editor-container .ql-editor');
-          let htmlContent = editorEl ? editorEl.innerHTML : "";
+          let htmlContent = (typeof quill !== 'undefined' && quill.getSemanticHTML) 
+            ? quill.getSemanticHTML() 
+            : (document.querySelector('#editor-container .ql-editor')?.innerHTML || "");
 
-          if (htmlContent === "<p><br></p>" || htmlContent === "")
+          if (htmlContent === "<p><br></p>" || htmlContent === "<p></p>" || htmlContent === "")
             htmlContent = "";
           G("fContent").value = htmlContent;
 

@@ -342,7 +342,7 @@ function getResend() {
 
 async function startServer() {
   const app = express();
-  const PORT = parseInt(process.env.PORT || "3000", 10);
+  const PORT = 3000;
 
   const firebaseConfig = {
     apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",

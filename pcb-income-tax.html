@@ -40,6 +40,15 @@
         }, true);
       })();
     </script>
+    <script>
+      window.clearAndRefreshLogs = function () {
+        var content = document.getElementById("errorLogContent");
+        if (content) content.innerHTML = '<p style="color:#64748b;text-align:center;padding:20px;">No error logs recorded.</p>';
+        try {
+          localStorage.removeItem("salary_calculator_error_logs");
+        } catch (e) {}
+      };
+    </script>
     
     
     

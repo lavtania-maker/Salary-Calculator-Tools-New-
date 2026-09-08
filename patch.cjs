@@ -1,126 +1,40 @@
 const fs = require('fs');
+const path = 'src/salary-calculator.ts';
+let code = fs.readFileSync(path, 'utf8');
 
-let content = fs.readFileSync('server.ts', 'utf8');
+// Update shortExplanation for T20
+code = code.replace(/"top income group"/g, '"upper income group"');
 
-const startTag = '// Expose dynamic sitemap index';
-const endTag = '  // API Routes';
+// Update groupLabel
+code = code.replace(
+  "groupLabel.textContent = `${incomeGroup}`;",
+  "groupLabel.textContent = `${incomeGroup} (${subGroup})`;"
+);
 
-const startIdx = content.indexOf(startTag);
-const endIdx = content.indexOf(endTag);
+// Update description body
+const descStartStr = `const descriptionEl = document.getElementById("resIncomeGroupDescription");`;
+const descEndStr = `const section = document.getElementById("incomeGroupSection");`;
+const startIndex = code.indexOf(descStartStr);
+const endIndex = code.indexOf(descEndStr);
 
-if (startIdx !== -1 && endIdx !== -1) {
-  const newRoute = `// Expose dynamic sitemap index
-  app.get(["/api/sitemap", "/sitemap.xml", "/sitemap-blog.xml"], async (req, res) => {
-    try {
-      const postsRef = collection(db, COLL);
-      const q = query(postsRef, where("status", "==", "published"));
-      const querySnapshot = await getDocs(q);
-
-      let maxArticleLastmod = "";
-      const postsList = [];
-      const categoriesSet = new Set();
-      const categoryLastMods = new Map();
-
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        let lastmod = '';
-        if (data.updatedAt && data.updatedAt.toDate) {
-          lastmod = data.updatedAt.toDate().toISOString();
-        } else if (data.publishedAt) {
-          if (typeof data.publishedAt === 'string') {
-            lastmod = new Date(data.publishedAt).toISOString();
-          } else if (data.publishedAt.toDate) {
-            lastmod = data.publishedAt.toDate().toISOString();
-          }
-        } else if (data.updatedAt) {
-          lastmod = new Date(data.updatedAt).toISOString();
-        }
-
-        if (lastmod) {
-          if (!maxArticleLastmod || lastmod > maxArticleLastmod) {
-            maxArticleLastmod = lastmod;
-          }
-        }
-
-        if (data.slug) {
-          postsList.push({
-            slug: data.slug,
-            lastmod: lastmod || "2026-06-25",
-            translations: data.translations
-          });
-        }
-
-        if (data.category) {
-          categoriesSet.add(data.category);
-          if (lastmod && (!categoryLastMods.get(data.category) || lastmod > categoryLastMods.get(data.category))) {
-            categoryLastMods.set(data.category, lastmod);
-          }
-        }
-      });
-
-      const categories = Array.from(categoriesSet);
-      const blogLandingLastmod = maxArticleLastmod && maxArticleLastmod > "2026-06-25"
-         ? maxArticleLastmod
-         : "2026-06-25";
-
-      let pagesLastmod = "2026-07-08";
-      try {
-        const path = require('path');
-        const filePath = path.join(process.cwd(), "public", "sitemap-pages.xml");
-        if (fs.existsSync(filePath)) {
-          const content = fs.readFileSync(filePath, "utf8");
-          const lastmodRegex = /<lastmod>([^<]+)<\\/lastmod>/g;
-          let match;
-          let maxDate = "";
-          while ((match = lastmodRegex.exec(content)) !== null) {
-            const dateStr = match[1].trim();
-            if (dateStr && (!maxDate || dateStr > maxDate)) {
-              maxDate = dateStr;
-            }
-          }
-          if (maxDate) pagesLastmod = maxDate;
-        }
-      } catch (err) {
-        console.error("Error reading sitemap-pages.xml in server.ts:", err);
-      }
-
-      let xml = \`<?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <sitemap>
-    <loc>https://salarycalculator.my/sitemap-pages.xml</loc>
-    <lastmod>\${pagesLastmod}</lastmod>
-  </sitemap>
-  <sitemap>
-    <loc>https://salarycalculator.my/sitemap-blog.xml</loc>
-    <lastmod>\${blogLandingLastmod}</lastmod>
-  </sitemap>
-</sitemapindex>\`;
-
-      if (req.path === "/sitemap-blog.xml") {
-        xml = \`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\`;
-        for (const cat of categories) {
-          xml += \`  <url>\\n    <loc>https://salarycalculator.my/blog/category/\${cat}</loc>\\n    <lastmod>\${categoryLastMods.get(cat) || "2026-06-25"}</lastmod>\\n  </url>\\n\`;
-        }
-        for (const post of postsList) {
-          const enUrl = \`https://salarycalculator.my/blog/\${post.slug}\`;
-          xml += \`  <url>\\n    <loc>\${enUrl}</loc>\\n    <lastmod>\${post.lastmod}</lastmod>\\n  </url>\\n\`;
-        }
-        xml += \`</urlset>\`;
-      }
-
-      res.setHeader("Content-Type", "application/xml");
-      res.status(200).send(xml);
-    } catch (error) {
-      console.error("Error generating sitemap:", error);
-      res.status(500).send("Error generating sitemap");
+if (startIndex !== -1 && endIndex !== -1) {
+  const newDesc = `const descriptionEl = document.getElementById("resIncomeGroupDescription");
+    if (descriptionEl) {
+      const isMs = typeof window !== "undefined" && (window.location.pathname.startsWith("/ms/") || window.location.pathname === "/ms" || document.documentElement.lang === "ms");
+      
+      descriptionEl.innerHTML = isMs 
+        ? \`Dengan jumlah pendapatan bulanan anda, anda berada dalam <strong style="color: \${groupColor}; font-weight: 800;">kategori \${incomeGroup} (\${subGroup}) (\${shortExplanationMs})</strong> di Malaysia.\`
+        : \`With your total monthly income, you're in the <strong style="color: \${groupColor}; font-weight: 800;">\${incomeGroup} (\${subGroup}) category (\${shortExplanation})</strong> in Malaysia.\`;
     }
-  });
 
-`;
-  
-  content = content.substring(0, startIdx) + newRoute + content.substring(endIdx);
-  fs.writeFileSync('server.ts', content);
-  console.log('patched successfully');
-} else {
-  console.log('not found');
+    `;
+  code = code.substring(0, startIndex) + newDesc + code.substring(endIndex);
 }
+
+// Update trackPct for B40
+code = code.replace(
+  "trackPct = (grossSalary / 5250) * 50;",
+  "trackPct = 50; // Spans fully across B40 section connecting to M40 circle"
+);
+
+fs.writeFileSync(path, code);

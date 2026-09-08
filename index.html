@@ -40,6 +40,52 @@
         }, true);
       })();
     </script>
+    <script>
+      var _lastToggleTimes = {};
+      window.toggleResultSection = function (sectionId) {
+        var now = Date.now();
+        if (_lastToggleTimes[sectionId] && now - _lastToggleTimes[sectionId] < 120) {
+          return;
+        }
+        _lastToggleTimes[sectionId] = now;
+        var section = document.getElementById(sectionId);
+        if (!section) return;
+        var indicator = section.querySelector(".toggle-indicator");
+        if (section.classList.contains("collapsed")) {
+          section.classList.remove("collapsed");
+          if (indicator) indicator.textContent = "▼";
+        } else {
+          section.classList.add("collapsed");
+          if (indicator) indicator.textContent = "▶";
+        }
+      };
+      window.openTab = function (evt, tabName) {
+        var contents = document.getElementsByClassName("contribution-content");
+        for (var i = 0; i < contents.length; i++) {
+          contents[i].style.display = "none";
+          contents[i].classList.remove("active");
+        }
+        var tabs = document.getElementsByClassName("seo-tab");
+        for (var j = 0; j < tabs.length; j++) {
+          tabs[j].className = tabs[j].className.replace(" active", "");
+        }
+        var target = document.getElementById(tabName);
+        if (target) {
+          target.style.display = "block";
+          target.classList.add("active");
+        }
+        if (evt && evt.currentTarget) {
+          evt.currentTarget.className += " active";
+        }
+      };
+      window.clearAndRefreshLogs = function () {
+        var content = document.getElementById("errorLogContent");
+        if (content) content.innerHTML = '<p style="color:#64748b;text-align:center;padding:20px;">No error logs recorded.</p>';
+        try {
+          localStorage.removeItem("salary_calculator_error_logs");
+        } catch (e) {}
+      };
+    </script>
     
     
     
@@ -479,7 +525,7 @@
                   </svg>
                   Reset
                 </button>
-                <button type="submit" class="btn btn-primary" data-i18n="calculate_7cbe1d">
+                <button type="submit" id="calculateBtn" class="btn btn-primary" data-i18n="calculate_7cbe1d">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
                     <line x1="8" y1="6" x2="16" y2="6"></line>
@@ -962,7 +1008,7 @@
                         text-transform: uppercase;
                         letter-spacing: 0.05em;
                         color: #1e293b;
-                      ">Your Income Group</span>
+                      ">YOUR INCOME GROUP</span>
                     <span id="resIncomeGroupLabel" style="
                         color: white;
                         padding: 6px 14px;
@@ -1327,7 +1373,7 @@
                       color: #0f172a;
                       line-height: 1.4;
                     " data-i18n="you_re_in_the_top_household_income_group_b1faaa">
-                    You're in the top household income group!
+                    You have reached the top income tier (T20)
                   </div>
                 </div>
               </div>
