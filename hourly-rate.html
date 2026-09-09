@@ -881,8 +881,11 @@
             </div>
 
             <div class="form-group" data-i18n="contact_number_optional_5c564a">
-              <label class="form-label" for="userPhone" data-i18n="contact_number_optional_869f92">Contact Number <span class="helper-text">(Optional)</span></label>
-              <input type="tel" id="userPhone" class="form-input" placeholder="e.g. +60123456789">
+              <label class="form-label" for="userPhone" data-i18n="contact_number_optional_869f92">Contact Number <span style="color: red">*</span></label>
+              <div class="input-group">
+                <span class="input-prefix">+60</span>
+                <input type="tel" id="userPhone" class="form-input" placeholder="12 345 6789" required>
+              </div>
             </div>
             <button type="submit" class="btn btn-primary" data-i18n="submit_download_6d76fa">
               Submit &amp; Download
@@ -1356,7 +1359,11 @@
         const hiringStatus = hiringInput ? hiringInput.value : "";
         const emailValue = userEmailInput ? userEmailInput.value.trim() : "";
         const nameValue = userNameInput ? userNameInput.value.trim() : "";
-        const phoneValue = userPhoneInput ? userPhoneInput.value.trim() : "";
+        let phoneValue = userPhoneInput ? userPhoneInput.value.trim() : "";
+        if (phoneValue) {
+          phoneValue = phoneValue.replace(/\D/g, '').replace(/^(60|0)/, '');
+          phoneValue = '+60' + phoneValue;
+        }
         const companyValue = companyInput ? companyInput.value.trim() : "";
 
         // Basic validation

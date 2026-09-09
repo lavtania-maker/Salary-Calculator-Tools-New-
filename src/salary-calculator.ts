@@ -610,7 +610,11 @@ function initSalaryCalculator() {
       const email = userEmail ? userEmail.value.trim() : "";
       const name = userName ? userName.value.trim() : "";
       const role = userType ? userType.value : "";
-      const phone = userPhone ? userPhone.value.trim() : "";
+      let phone = userPhone ? userPhone.value.trim() : "";
+      if (phone) {
+        phone = phone.replace(/\D/g, '').replace(/^(60|0)/, '');
+        phone = '+60' + phone;
+      }
       const comp = companyName ? companyName.value.trim() : "";
       const hire = hiringStatus ? hiringStatus.value : "";
 

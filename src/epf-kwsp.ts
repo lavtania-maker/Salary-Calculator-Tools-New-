@@ -410,7 +410,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const email = userEmail ? userEmail.value : "";
       const name = userName ? userName.value : "";
       const role = userType ? userType.value : "";
-      const phone = userPhone ? userPhone.value : "";
+      let phone = userPhone ? userPhone.value : "";
+      if (phone) {
+        phone = phone.replace(/\D/g, '').replace(/^(60|0)/, '');
+        phone = '+60' + phone;
+      }
 
       const submitBtn = emailForm.querySelector(
         'button[type="submit"]',
