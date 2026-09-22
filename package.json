@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "tsx server.ts",
     "build": "node optimize_images.cjs && vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs && tsx generate_ms.ts",
-    "start": "NODE_ENV=production node dist/server.cjs",
+    "start": "node dist/server.cjs",
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit"
@@ -19,6 +19,7 @@
     "@vercel/node": "^5.7.13",
     "@vitalets/google-translate-api": "^9.2.1",
     "@vitejs/plugin-react": "^5.0.4",
+    "cheerio": "^1.2.0",
     "clsx": "^2.1.1",
     "dotenv": "^17.2.3",
     "esbuild": "^0.28.0",
@@ -30,7 +31,6 @@
     "jspdf-autotable": "^5.0.8",
     "lucide-react": "^0.546.0",
     "motion": "^12.23.24",
-    "playwright": "^1.62.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "resend": "^6.10.0",
@@ -44,11 +44,9 @@
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.4.21",
-    "cheerio": "^1.2.0",
     "eslint": "^10.2.1",
     "jimp": "^1.6.1",
     "tailwindcss": "^4.1.14",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "typescript": "~5.8.2"
   }
 }

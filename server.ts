@@ -1,6 +1,5 @@
 import * as cheerio from "cheerio";
 import express from "express";
-import { createServer as createViteServer } from "vite";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
@@ -12,6 +11,13 @@ import blogPostHandler from "./api/blog-post";
 import blogHandler from "./api/blog";
 import { ROUTE_MAP, REVERSE_ROUTE_MAP, getEnRoute, getMsRoute } from "./src/lib/route-map";
 import { FULL_TEXT_MAP_MS } from "./src/lib/translations-ms";
+
+if (
+  (typeof __filename !== "undefined" && __filename.includes("server.cjs")) ||
+  process.argv[1]?.includes("server.cjs")
+) {
+  process.env.NODE_ENV = "production";
+}
 
 function transformPage($: cheerio.CheerioAPI, enRoute: string, isMsRoute: boolean) {
   const msRoute = getMsRoute(enRoute);
@@ -545,7 +551,6 @@ async function startServer() {
 
       let pagesLastmod = "2026-07-08";
       try {
-        const path = require('path');
         const filePath = path.join(process.cwd(), "public", "sitemap-pages.xml");
         if (fs.existsSync(filePath)) {
           const content = fs.readFileSync(filePath, "utf8");
@@ -987,8 +992,16 @@ async function startServer() {
     "/blog-post-template.html": "blog-post-template.html",
   };
 
-  // Vite middleware for development
-  if (process.env.NODE_ENV !== "production") {
+  // Detect production environment safely
+  const isProduction =
+    process.env.NODE_ENV === "production" ||
+    (typeof __filename !== "undefined" && __filename.includes("server.cjs")) ||
+    process.argv[1]?.includes("server.cjs") ||
+    !fs.existsSync(path.join(process.cwd(), "vite.config.ts"));
+
+  // Vite middleware for development only
+  if (!isProduction) {
+    const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       configFile: path.join(process.cwd(), "vite.config.ts"),
       server: {
@@ -1069,7 +1082,9 @@ async function startServer() {
 
     app.use(vite.middlewares);
   } else {
-    const distPath = path.join(process.cwd(), "dist");
+    const distPath = fs.existsSync(path.join(process.cwd(), "dist"))
+      ? path.join(process.cwd(), "dist")
+      : CURRENT_DIRNAME;
     app.use((req, res, next) => {
       if (req.path === '/index.html' || req.path === '/index') {
         return res.redirect(308, '/');

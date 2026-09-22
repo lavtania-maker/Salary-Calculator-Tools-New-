@@ -507,14 +507,40 @@
                 
                 <div class="input-group">
                   <span class="input-prefix">RM</span>
-                  <input type="number" id="grossSalary" name="grossSalary" class="form-input" placeholder="0" required="" inputmode="decimal">
+                  <input type="number" id="grossSalary" name="grossSalary" class="form-input" placeholder="0" required="" inputmode="numeric">
                 </div>
+
+              <div class="quick-salary-wrapper">
+                <div class="quick-salary-buttons" id="quickSalaryButtons">
+                  <button type="button" class="btn-quick-salary" data-val="3000">RM 3,000</button>
+                  <button type="button" class="btn-quick-salary" data-val="5000">RM 5,000</button>
+                  <button type="button" class="btn-quick-salary" data-val="8000">RM 8,000</button>
+                  <button type="button" class="btn-quick-salary" data-val="12000">RM 12,000</button>
+                  <div class="quick-salary-dropdown-container">
+                    <button type="button" class="btn-quick-salary btn-quick-salary-more" id="quickSalaryMoreBtn" aria-expanded="false" aria-haspopup="true">
+                      <span>More</span>
+                      <svg class="more-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </button>
+                    <div class="quick-salary-dropdown" id="quickSalaryDropdown">
+                      <button type="button" class="quick-salary-dropdown-item" data-val="1500">RM 1,500</button>
+                      <button type="button" class="quick-salary-dropdown-item" data-val="2000">RM 2,000</button>
+                      <button type="button" class="quick-salary-dropdown-item" data-val="2500">RM 2,500</button>
+                      <button type="button" class="quick-salary-dropdown-item" data-val="4000">RM 4,000</button>
+                      <button type="button" class="quick-salary-dropdown-item" data-val="10000">RM 10,000</button>
+                      <button type="button" class="quick-salary-dropdown-item quick-salary-dropdown-item-others" id="quickSalaryOthersBtn">Others</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               </div>
 
               <div class="form-group" data-i18n="bonus_allowance_rm_optional_e4d2d1">
                 <label class="form-label" for="bonus" data-i18n="bonus_allowance_rm_optional_eb84e5">Bonus / Allowance (RM) <span class="helper-text">(Optional)</span></label>
                 
-                <input type="number" id="bonus" name="bonus" class="form-input" placeholder="e.g. 1000" inputmode="decimal">
+                <input type="number" id="bonus" name="bonus" class="form-input" placeholder="e.g. 1000" inputmode="numeric">
               </div>
 
               <div class="form-actions" data-i18n="reset_calculate_46eb10">
@@ -731,6 +757,22 @@
 
               <!-- Results (Hidden until calculated) -->
               <div id="results" class="result-content">
+                <!-- Shared Result Notice Banner -->
+                <div id="sharedResultBanner" class="shared-result-banner" style="display: none;">
+                  <div class="shared-banner-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="9" cy="7" r="4"></circle>
+                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                  </div>
+                  <div class="shared-banner-text">
+                    <strong>This is a shared calculation result</strong>
+                    <p>This calculation was shared via a link. You can make your own calculation on SalaryCalculator.my.</p>
+                  </div>
+                </div>
+
                 <div class="take-home-card">
                   <!-- Monthly Take Home -->
                   <div class="col-monthly">
@@ -988,13 +1030,30 @@
                   </button>
                 </div>
 
+                <!-- Share This Calculation Button -->
+                <div class="share-cta-container">
+                  <button id="shareCalculationBtn" class="btn btn-outline-share" type="button">
+                    <svg class="share-btn-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                    <span>Share this calculation</span>
+                  </button>
+                </div>
+
+                <div id="createOwnCalculationContainer" style="display: none; width: 100%;">
+                  <button id="createOwnCalculationBtn" class="btn btn-create-own" type="button">
+                    Create Your Own Calculation
+                  </button>
+                </div>
+
                 <div id="incomeGroupSection" class="highlight-box" style="
                     display: none;
                     text-align: left;
                     padding: 20px;
                     border-radius: 16px;
                     border: 1px solid;
-                    margin-top: 24px;
+                    margin-top: 20px;
                   ">
                   <div style="
                       display: flex;
@@ -3087,6 +3146,76 @@
     </div>
 
     
+    <!-- Share Calculation Modal -->
+    <div id="shareCalculationModal" class="share-modal-overlay">
+      <div class="share-modal-card">
+        <div class="share-modal-header">
+          <button id="closeShareModal" class="share-modal-close" type="button" aria-label="Close">✕</button>
+          <h3>Share this calculation</h3>
+          <p class="share-modal-subtitle">Share your salary calculation result with others.</p>
+        </div>
+
+        <div class="share-channels-row">
+          <!-- Copy link circle -->
+          <a id="shareChannelCopy" class="share-channel-btn" href="javascript:void(0)" role="button">
+            <div class="share-channel-circle share-circle-link">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+            </div>
+            <span class="share-channel-label">Copy link</span>
+          </a>
+
+          <!-- WhatsApp circle -->
+          <a id="shareChannelWhatsapp" class="share-channel-btn" href="#" target="_blank" rel="noopener noreferrer">
+            <div class="share-channel-circle share-circle-whatsapp">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+            </div>
+            <span class="share-channel-label">WhatsApp</span>
+          </a>
+
+          <!-- X circle -->
+          <a id="shareChannelX" class="share-channel-btn" href="#" target="_blank" rel="noopener noreferrer">
+            <div class="share-channel-circle share-circle-x">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
+              </svg>
+            </div>
+            <span class="share-channel-label">X</span>
+          </a>
+
+          <!-- Threads circle -->
+          <a id="shareChannelThreads" class="share-channel-btn" href="#" target="_blank" rel="noopener noreferrer">
+            <div class="share-channel-circle share-circle-threads">
+              <svg width="22" height="22" viewBox="0 0 192 192" fill="currentColor">
+                <path d="M141.537 88.988a66.667 66.667 0 0 0-2.518-1.143c-1.482-27.307-16.403-42.94-41.457-43.1h-.34c-14.986 0-27.449 6.396-35.12 18.036l13.779 9.452c5.73-8.695 14.724-10.548 21.348-10.548h.229c8.249.053 14.474 2.452 18.503 7.129 2.932 3.405 4.893 8.111 5.864 14.05-7.314-1.243-15.224-1.626-23.68-1.14-23.82 1.371-39.134 15.264-38.105 34.568.522 9.792 5.4 18.216 13.735 23.719 7.047 4.652 16.124 6.927 25.557 6.412 12.458-.683 22.231-5.436 29.049-14.127 5.178-6.6 8.453-15.153 9.899-25.93 5.937 3.583 10.337 8.298 12.767 13.966 4.132 9.635 4.373 25.468-8.546 38.376-11.319 11.308-24.925 16.2-45.488 16.351-22.809-.169-40.06-7.484-51.275-21.742C35.236 139.966 29.808 120.682 29.605 96c.203-24.682 5.63-43.966 16.133-57.317C56.954 24.425 74.204 17.11 97.013 16.94c22.975.17 40.526 7.52 52.171 21.847 5.71 7.026 10.015 15.86 12.853 26.162l16.147-4.308c-3.44-12.68-8.853-23.606-16.219-32.668C147.036 9.607 125.202.195 97.07 0h-.113C68.882.194 47.292 9.642 32.788 28.08 19.882 44.485 13.224 67.315 13.001 95.932L13 96v.067c.224 28.617 6.882 51.447 19.788 67.854C47.292 182.358 68.882 191.806 96.957 192h.113c24.96-.173 42.554-6.708 57.048-21.189 18.963-18.945 18.392-42.692 12.142-57.27-4.484-10.454-13.033-18.945-24.723-24.553ZM98.44 129.507c-10.44.588-21.286-4.098-21.82-14.135-.397-7.442 5.296-15.746 22.461-16.735 1.966-.114 3.895-.169 5.79-.169 6.235 0 12.068.606 17.371 1.765-1.978 24.702-13.58 28.713-23.802 29.274Z"></path>
+              </svg>
+            </div>
+            <span class="share-channel-label">Threads</span>
+          </a>
+        </div>
+
+        <div class="share-direct-link-section">
+          <label class="share-direct-label" for="shareCalculationUrlInput">Or copy the link directly</label>
+          <div class="share-input-row">
+            <input id="shareCalculationUrlInput" class="share-input-field" type="text" readonly value="">
+            <button id="shareDirectCopyBtn" class="share-copy-btn" type="button">Copy</button>
+          </div>
+          <div id="shareCopySuccessAlert" class="share-copy-success-banner" style="display: none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Link copied to clipboard!</span>
+          </div>
+        </div>
+
+        <p class="share-modal-footer-note">This link will share your input details and calculation result.</p>
+      </div>
+    </div>
+
     <!-- Lead Modal -->
     <div id="emailModal" class="modal-overlay">
       <div class="modal">
@@ -4007,6 +4136,276 @@
       }
       window.addEventListener("load", initCollapsibleTables);
     </script>
+    <!-- Sticky Mobile Take-Home Pay Summary Bar (< 768px only) -->
+    <div id="stickyMobileSummary" class="sticky-mobile-summary" aria-hidden="true">
+      <div class="sticky-mobile-inner">
+        <div class="sticky-mobile-pay-info">
+          <span class="sticky-mobile-label" id="stickyMobileLabel" data-i18n="take_home_pay_sticky">Take-Home Pay:</span>
+          <span id="stickyMobileAmount" class="sticky-mobile-amount"></span>
+        </div>
+        <button type="button" id="stickyMobileDownloadBtn" class="sticky-mobile-btn" data-i18n="download_pdf_sticky">
+          Download PDF
+        </button>
+      </div>
+    </div>
+
     <script type="module" src="/src/salary-calculator.ts"></script>
   <script type="module" src="/src/other-calculators.ts"></script>
-</body></html>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const quickButtons = document.querySelectorAll(".btn-quick-salary[data-val]");
+    const dropdownItems = document.querySelectorAll(".quick-salary-dropdown-item[data-val]");
+    const othersBtn = document.getElementById("quickSalaryOthersBtn");
+    const moreBtn = document.getElementById("quickSalaryMoreBtn");
+    const dropdown = document.getElementById("quickSalaryDropdown");
+    const grossSalaryInput = document.getElementById("grossSalary");
+    
+    if (!grossSalaryInput) return;
+
+    function setSalary(val) {
+      if (val) {
+        grossSalaryInput.value = val;
+        updateActiveState();
+        grossSalaryInput.dispatchEvent(new Event('input', { bubbles: true }));
+
+        // Immediately trigger the existing calculation flow so results update
+        const form = grossSalaryInput.closest("form");
+        if (form) {
+          if (typeof form.requestSubmit === "function") {
+            form.requestSubmit();
+          } else {
+            form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
+          }
+        } else if (typeof window.calculateSalary === "function") {
+          window.calculateSalary();
+        }
+      }
+    }
+
+    function openDropdown() {
+      if (dropdown && moreBtn) {
+        dropdown.classList.add("open");
+        moreBtn.classList.add("open");
+        moreBtn.setAttribute("aria-expanded", "true");
+      }
+    }
+
+    function closeDropdown() {
+      if (dropdown && moreBtn) {
+        dropdown.classList.remove("open");
+        moreBtn.classList.remove("open");
+        moreBtn.setAttribute("aria-expanded", "false");
+      }
+    }
+
+    // Visible quick salary buttons
+    quickButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        const val = btn.getAttribute("data-val");
+        setSalary(val);
+        closeDropdown();
+      });
+    });
+
+    // Dropdown preset items
+    dropdownItems.forEach(item => {
+      item.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const val = item.getAttribute("data-val");
+        setSalary(val);
+        closeDropdown();
+      });
+    });
+
+    // "Others" custom salary option
+    if (othersBtn) {
+      othersBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        closeDropdown();
+        grossSalaryInput.value = "";
+        updateActiveState();
+        grossSalaryInput.dispatchEvent(new Event('input', { bubbles: true }));
+        grossSalaryInput.focus();
+      });
+    }
+
+    // More button click
+    if (moreBtn && dropdown) {
+      moreBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (dropdown.classList.contains("open")) {
+          closeDropdown();
+        } else {
+          openDropdown();
+        }
+      });
+
+      // Click outside to close
+      document.addEventListener("click", (e) => {
+        if (!dropdown.contains(e.target) && !moreBtn.contains(e.target)) {
+          closeDropdown();
+        }
+      });
+
+      // Escape key to close
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          closeDropdown();
+        }
+      });
+    }
+
+    // Form reset
+    const form = grossSalaryInput.closest("form");
+    if (form) {
+      form.addEventListener("reset", () => {
+        setTimeout(() => {
+          updateActiveState();
+          closeDropdown();
+        }, 0);
+      });
+    }
+
+    // Manual input typing / change
+    grossSalaryInput.addEventListener("input", updateActiveState);
+
+    function updateActiveState() {
+      const rawVal = (grossSalaryInput.value || "").trim();
+      const numVal = parseFloat(rawVal);
+      const isValidNumber = rawVal !== "" && !isNaN(numVal);
+
+      let mainActive = false;
+      quickButtons.forEach(btn => {
+        const btnVal = parseFloat(btn.getAttribute("data-val") || "");
+        if (isValidNumber && numVal === btnVal) {
+          btn.classList.add("active");
+          mainActive = true;
+        } else {
+          btn.classList.remove("active");
+        }
+      });
+
+      let dropdownMatched = false;
+      dropdownItems.forEach(item => {
+        const itemVal = parseFloat(item.getAttribute("data-val") || "");
+        if (isValidNumber && numVal === itemVal) {
+          item.classList.add("active");
+          dropdownMatched = true;
+        } else {
+          item.classList.remove("active");
+        }
+      });
+
+      // Highlight More button if selected amount came from dropdown and isn't one of the 4 main buttons
+      if (moreBtn) {
+        if (isValidNumber && dropdownMatched && !mainActive) {
+          moreBtn.classList.add("has-selected");
+        } else {
+          moreBtn.classList.remove("has-selected");
+        }
+      }
+    }
+
+    // Initial check
+    updateActiveState();
+
+    // Sticky Mobile Take-Home Pay Summary Bar (< 768px only)
+    (function initStickySummaryBar() {
+      const stickyBar = document.getElementById("stickyMobileSummary");
+      const stickyAmount = document.getElementById("stickyMobileAmount");
+      const stickyLabel = document.getElementById("stickyMobileLabel");
+      const stickyDownloadBtn = document.getElementById("stickyMobileDownloadBtn");
+      const salaryForm = document.getElementById("salaryForm");
+      const resultsContainer = document.getElementById("results");
+      const resNetMonthly = document.getElementById("resNetMonthly");
+      const downloadReportBtn = document.getElementById("downloadReportBtn");
+
+      if (!stickyBar || !salaryForm) return;
+
+      const isMs = typeof window !== "undefined" && (
+        window.location.pathname.startsWith("/ms/") || 
+        window.location.pathname === "/ms" || 
+        document.documentElement.lang === "ms"
+      );
+      if (isMs) {
+        if (stickyLabel) stickyLabel.textContent = "Gaji Bersih:";
+        if (stickyDownloadBtn) stickyDownloadBtn.textContent = "Muat Turun PDF";
+      }
+
+      if (stickyDownloadBtn) {
+        stickyDownloadBtn.addEventListener("click", () => {
+          if (downloadReportBtn) {
+            downloadReportBtn.click();
+          }
+        });
+      }
+
+      let isScrolledPast = false;
+
+      function syncAmount() {
+        if (!resNetMonthly || !stickyAmount) return;
+        const text = (resNetMonthly.textContent || "").trim();
+        stickyAmount.textContent = text;
+      }
+
+      function checkVisibility() {
+        const isMobile = window.innerWidth < 768;
+        const hasResults = resultsContainer && 
+                           resultsContainer.style.display !== "none" && 
+                           resNetMonthly && 
+                           resNetMonthly.textContent && 
+                           resNetMonthly.textContent.trim() !== "RM 0.00" && 
+                           resNetMonthly.textContent.trim() !== "";
+
+        if (isMobile && isScrolledPast && hasResults) {
+          syncAmount();
+          stickyBar.classList.add("visible");
+          document.body.classList.add("has-sticky-mobile-summary");
+          stickyBar.setAttribute("aria-hidden", "false");
+        } else {
+          stickyBar.classList.remove("visible");
+          document.body.classList.remove("has-sticky-mobile-summary");
+          stickyBar.setAttribute("aria-hidden", "true");
+        }
+      }
+
+      if (resNetMonthly && typeof MutationObserver !== "undefined") {
+        const observer = new MutationObserver(() => {
+          syncAmount();
+          checkVisibility();
+        });
+        observer.observe(resNetMonthly, { childList: true, characterData: true, subtree: true });
+      }
+
+      salaryForm.addEventListener("reset", () => {
+        setTimeout(() => {
+          if (stickyAmount) stickyAmount.textContent = "";
+          checkVisibility();
+        }, 0);
+      });
+
+      if ("IntersectionObserver" in window) {
+        const scrollObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            isScrolledPast = !entry.isIntersecting && entry.boundingClientRect.bottom <= 40;
+            checkVisibility();
+          });
+        }, {
+          threshold: [0, 0.05]
+        });
+        scrollObserver.observe(salaryForm);
+      } else {
+        window.addEventListener("scroll", () => {
+          const rect = salaryForm.getBoundingClientRect();
+          isScrolledPast = rect.bottom <= 40;
+          checkVisibility();
+        }, { passive: true });
+      }
+
+      window.addEventListener("resize", checkVisibility, { passive: true });
+    })();
+  });
+</script>
+</body>
+</html>

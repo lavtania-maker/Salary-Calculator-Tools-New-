@@ -82,7 +82,7 @@ function getSocsoRates(salary: number, age: string, nationality = "malaysian") {
   };
 }
 
-export function calculateSalary() {
+export function calculateSalary(scrollOnMobile = false) {
   try {
     const isMs = typeof window !== "undefined" && (window.location.pathname.startsWith("/ms/") || window.location.pathname === "/ms" || document.documentElement.lang === "ms");
 
@@ -473,20 +473,48 @@ export function calculateSalary() {
     };
 
     updatePremiumIncomeJourney(totalIncome, grossSalary);
+
+    if (scrollOnMobile && typeof window !== "undefined" && window.innerWidth < 768 && grossSalary > 0) {
+      scrollToResultsOnMobile();
+    }
   } catch (err) {
     console.error("Salary calculation error:", err);
   }
+}
+
+function scrollToResultsOnMobile() {
+  if (typeof window === "undefined" || window.innerWidth >= 768) return;
+
+  const target = document.getElementById("resultCard") || document.getElementById("results");
+  if (!target) return;
+
+  requestAnimationFrame(() => {
+    const navbar = document.querySelector(".navbar") as HTMLElement | null;
+    const navHeight = navbar ? navbar.getBoundingClientRect().height : 54;
+    const scrollY = window.scrollY || window.pageYOffset || 0;
+    const targetRect = target.getBoundingClientRect();
+    const targetTop = targetRect.top + scrollY - navHeight - 16;
+
+    window.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: "smooth",
+    });
+  });
 }
 
 // Expose on window for any inline handlers
 (window as any).calculateSalary = calculateSalary;
 
 function initSalaryCalculator() {
+  let shouldScrollOnMobileAfterCalc = false;
+
   const form = document.getElementById("salaryForm") as HTMLFormElement | null;
   if (form) {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
-      calculateSalary();
+      const shouldScroll = shouldScrollOnMobileAfterCalc;
+      shouldScrollOnMobileAfterCalc = false;
+      calculateSalary(shouldScroll);
     });
   }
 
@@ -494,13 +522,21 @@ function initSalaryCalculator() {
   if (calcBtn) {
     calcBtn.addEventListener("click", () => {
       if (form) {
+        if (!form.checkValidity()) {
+          shouldScrollOnMobileAfterCalc = false;
+          if (typeof form.reportValidity === "function") {
+            form.reportValidity();
+          }
+          return;
+        }
+        shouldScrollOnMobileAfterCalc = true;
         if (typeof form.requestSubmit === "function") {
           form.requestSubmit();
         } else {
           form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
         }
       } else {
-        calculateSalary();
+        calculateSalary(true);
       }
     });
   }
@@ -755,6 +791,212 @@ function initSalaryCalculator() {
         }
       }
     });
+  }
+
+  // --- Share Calculation Feature ---
+  const shareBtn = document.getElementById("shareCalculationBtn");
+  const shareModal = document.getElementById("shareCalculationModal");
+  const closeShareModalBtn = document.getElementById("closeShareModal");
+  const shareUrlInput = document.getElementById("shareCalculationUrlInput") as HTMLInputElement | null;
+  const shareDirectCopyBtn = document.getElementById("shareDirectCopyBtn");
+  const shareChannelCopy = document.getElementById("shareChannelCopy");
+  const shareChannelWhatsapp = document.getElementById("shareChannelWhatsapp") as HTMLAnchorElement | null;
+  const shareChannelX = document.getElementById("shareChannelX") as HTMLAnchorElement | null;
+  const shareChannelThreads = document.getElementById("shareChannelThreads") as HTMLAnchorElement | null;
+  const shareSuccessAlert = document.getElementById("shareCopySuccessAlert");
+  const sharedResultBanner = document.getElementById("sharedResultBanner");
+  const createOwnBtn = document.getElementById("createOwnCalculationBtn");
+  const createOwnContainer = document.getElementById("createOwnCalculationContainer");
+
+  const buildShareUrl = () => {
+    const grossVal = (document.getElementById("grossSalary") as HTMLInputElement)?.value || "0";
+    const bonusVal = (document.getElementById("bonus") as HTMLInputElement)?.value || "0";
+    const statusVal = (document.getElementById("maritalStatus") as HTMLSelectElement)?.value || "single";
+    const natVal = (document.getElementById("nationality") as HTMLSelectElement)?.value || "malaysian";
+    const epfVal = (document.getElementById("includeEpf") as HTMLInputElement)?.checked ? "1" : "0";
+    const socsoVal = (document.getElementById("includeSocso") as HTMLInputElement)?.checked ? "1" : "0";
+    const eisVal = (document.getElementById("includeEis") as HTMLInputElement)?.checked ? "1" : "0";
+    const pcbVal = (document.getElementById("includePcb") as HTMLInputElement)?.checked ? "1" : "0";
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("gross", grossVal);
+    url.searchParams.set("bonus", bonusVal);
+    url.searchParams.set("status", statusVal);
+    url.searchParams.set("nat", natVal);
+    url.searchParams.set("epf", epfVal);
+    url.searchParams.set("socso", socsoVal);
+    url.searchParams.set("eis", eisVal);
+    url.searchParams.set("pcb", pcbVal);
+    url.searchParams.set("shared", "1");
+    return url.toString();
+  };
+
+  let copyTimeout: any = null;
+  const executeCopy = async (url: string) => {
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(url);
+      } else {
+        const textArea = document.createElement("textarea");
+        textArea.value = url;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand("copy");
+        textArea.remove();
+      }
+      if (shareDirectCopyBtn) {
+        shareDirectCopyBtn.textContent = "✓ Copied";
+        shareDirectCopyBtn.classList.add("copied");
+      }
+      if (shareSuccessAlert) {
+        shareSuccessAlert.style.display = "flex";
+      }
+      if (copyTimeout) clearTimeout(copyTimeout);
+      copyTimeout = setTimeout(() => {
+        if (shareDirectCopyBtn) {
+          shareDirectCopyBtn.textContent = "Copy";
+          shareDirectCopyBtn.classList.remove("copied");
+        }
+        if (shareSuccessAlert) {
+          shareSuccessAlert.style.display = "none";
+        }
+      }, 3000);
+    } catch (err) {
+      console.error("Clipboard copy error:", err);
+    }
+  };
+
+  if (shareBtn) {
+    shareBtn.addEventListener("click", () => {
+      calculateSalary();
+      const shareUrl = buildShareUrl();
+      if (shareUrlInput) shareUrlInput.value = shareUrl;
+
+      if (shareChannelWhatsapp) {
+        const text = `Check out my Malaysia salary calculation on SalaryCalculator.my: ${shareUrl}`;
+        shareChannelWhatsapp.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+      }
+
+      if (shareChannelX) {
+        const text = `Check my salary calculation: ${shareUrl}`;
+        shareChannelX.href = `https://x.com/intent/tweet?text=${encodeURIComponent(text)}`;
+      }
+
+      if (shareChannelThreads) {
+        const text = `Check my salary calculation: ${shareUrl}`;
+        shareChannelThreads.href = `https://www.threads.net/intent/post?text=${encodeURIComponent(text)}`;
+      }
+
+      if (shareDirectCopyBtn) {
+        shareDirectCopyBtn.textContent = "Copy";
+        shareDirectCopyBtn.classList.remove("copied");
+      }
+      if (shareSuccessAlert) {
+        shareSuccessAlert.style.display = "none";
+      }
+
+      if (shareModal) shareModal.style.display = "flex";
+    });
+  }
+
+  if (closeShareModalBtn && shareModal) {
+    closeShareModalBtn.addEventListener("click", () => {
+      shareModal.style.display = "none";
+    });
+  }
+
+  if (shareModal) {
+    shareModal.addEventListener("click", (e) => {
+      if (e.target === shareModal) {
+        shareModal.style.display = "none";
+      }
+    });
+  }
+
+  if (shareChannelCopy) {
+    shareChannelCopy.addEventListener("click", (e) => {
+      e.preventDefault();
+      const url = shareUrlInput?.value || buildShareUrl();
+      executeCopy(url);
+    });
+  }
+
+  if (shareDirectCopyBtn) {
+    shareDirectCopyBtn.addEventListener("click", () => {
+      const url = shareUrlInput?.value || buildShareUrl();
+      executeCopy(url);
+    });
+  }
+
+  if (createOwnBtn) {
+    createOwnBtn.addEventListener("click", () => {
+      if (sharedResultBanner) sharedResultBanner.style.display = "none";
+      if (createOwnContainer) createOwnContainer.style.display = "none";
+      window.history.replaceState({}, document.title, window.location.pathname);
+      const grossInput = document.getElementById("grossSalary") as HTMLInputElement | null;
+      if (grossInput) {
+        grossInput.focus();
+        grossInput.select();
+      }
+      const formEl = document.getElementById("salaryForm");
+      if (formEl) {
+        formEl.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
+
+  // Check URL parameters for shared calculation
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has("gross")) {
+    const grossParam = urlParams.get("gross");
+    const grossInput = document.getElementById("grossSalary") as HTMLInputElement | null;
+    if (grossInput && grossParam) {
+      grossInput.value = grossParam;
+      grossInput.dispatchEvent(new Event("input", { bubbles: true }));
+    }
+
+    if (urlParams.has("bonus")) {
+      const bonusInput = document.getElementById("bonus") as HTMLInputElement | null;
+      if (bonusInput) bonusInput.value = urlParams.get("bonus") || "0";
+    }
+
+    if (urlParams.has("status")) {
+      const statusSelect = document.getElementById("maritalStatus") as HTMLSelectElement | null;
+      if (statusSelect) statusSelect.value = urlParams.get("status") || "single";
+    }
+
+    if (urlParams.has("nat")) {
+      const natSelect = document.getElementById("nationality") as HTMLSelectElement | null;
+      if (natSelect) natSelect.value = urlParams.get("nat") || "malaysian";
+    }
+
+    if (urlParams.has("epf")) {
+      const epfCheck = document.getElementById("includeEpf") as HTMLInputElement | null;
+      if (epfCheck) epfCheck.checked = urlParams.get("epf") === "1";
+    }
+    if (urlParams.has("socso")) {
+      const socsoCheck = document.getElementById("includeSocso") as HTMLInputElement | null;
+      if (socsoCheck) socsoCheck.checked = urlParams.get("socso") === "1";
+    }
+    if (urlParams.has("eis")) {
+      const eisCheck = document.getElementById("includeEis") as HTMLInputElement | null;
+      if (eisCheck) eisCheck.checked = urlParams.get("eis") === "1";
+    }
+    if (urlParams.has("pcb")) {
+      const pcbCheck = document.getElementById("includePcb") as HTMLInputElement | null;
+      if (pcbCheck) pcbCheck.checked = urlParams.get("pcb") === "1";
+    }
+
+    // Automatically calculate
+    calculateSalary();
+
+    if (urlParams.get("shared") === "1") {
+      if (sharedResultBanner) sharedResultBanner.style.display = "flex";
+      if (createOwnContainer) createOwnContainer.style.display = "block";
+    }
   }
 }
 
