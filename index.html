@@ -294,9 +294,9 @@
     </noscript>
 
     <!-- Main Stylesheet -->
-    <link href="/calculator-styles.css?v=20260922v1790066901914" rel="stylesheet">
+    <link href="/calculator-styles.css?v=20260922v1790067520778" rel="stylesheet">
     <noscript data-i18n="_98bba9">
-      <link href="/calculator-styles.css?v=20260922v1790066901914" rel="stylesheet" />
+      <link href="/calculator-styles.css?v=20260922v1790067520778" rel="stylesheet" />
     </noscript>
     <style id="quickSalaryCriticalCss">
       .quick-salary-wrapper {
@@ -4345,18 +4345,6 @@
         grossSalaryInput.value = val;
         updateActiveState();
         grossSalaryInput.dispatchEvent(new Event('input', { bubbles: true }));
-
-        // Immediately trigger the existing calculation flow so results update
-        const form = grossSalaryInput.closest("form");
-        if (form) {
-          if (typeof form.requestSubmit === "function") {
-            form.requestSubmit();
-          } else {
-            form.dispatchEvent(new Event("submit", { cancelable: true, bubbles: true }));
-          }
-        } else if (typeof window.calculateSalary === "function") {
-          window.calculateSalary();
-        }
       }
     }
 
