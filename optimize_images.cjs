@@ -5,6 +5,7 @@ const esbuild = require('esbuild');
 
 // 1. Minify CSS
 try {
+  require('./update_css_links.cjs');
   const cssSourcePath = fs.existsSync('calculator-styles.src.css') ? 'calculator-styles.src.css' : 'public/calculator-styles.css';
   const cssSource = fs.readFileSync(cssSourcePath, 'utf8');
   const minified = esbuild.transformSync(cssSource, { loader: 'css', minify: true });

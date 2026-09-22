@@ -321,18 +321,25 @@ function normalizeSheetPayload(body: any) {
   return payload;
 }
 
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("[SERVER] Unhandled Rejection at:", promise, "reason:", reason);
+});
+process.on("uncaughtException", (error) => {
+  console.error("[SERVER] Uncaught Exception:", error);
+});
+
 // In the Vercel sandbox, project env vars live in /vercel/share/.env.project
 dotenv.config({ path: "/vercel/share/.env.project", override: false });
 dotenv.config({ path: "/vercel/share/.env.snowflake", override: false });
 
 const CURRENT_FILENAME =
-  typeof import.meta.url !== "undefined"
-    ? fileURLToPath(import.meta.url)
-    : __filename;
+  typeof __filename !== "undefined"
+    ? __filename
+    : process.cwd();
 const CURRENT_DIRNAME =
-  typeof import.meta.url !== "undefined"
-    ? path.dirname(CURRENT_FILENAME)
-    : __dirname;
+  typeof __dirname !== "undefined"
+    ? __dirname
+    : path.dirname(CURRENT_FILENAME);
 
 // Lazy initialization of Resend to avoid crash if key is missing
 let resendClient: Resend | null = null;
@@ -348,7 +355,16 @@ function getResend() {
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+
+  // Port resolution:
+  // In Cloud Run / production deployment, Cloud Run injects PORT (typically 8080)
+  // In local development sandbox, the dev server must bind to 3000
+  const isProd =
+    process.env.NODE_ENV === "production" ||
+    (typeof __filename !== "undefined" && __filename.includes("server.cjs")) ||
+    (process.argv[1] && process.argv[1].includes("server.cjs"));
+
+  const PORT = isProd && process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
   const firebaseConfig = {
     apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",
@@ -365,8 +381,8 @@ async function startServer() {
 
   app.use(express.json());
 
-  // Platform health check endpoint
-  app.get("/api/health", (req, res) => {
+  // Platform health check endpoints
+  app.get(["/api/health", "/healthz", "/health", "/_health"], (req, res) => {
     res.json({ status: "ok", timestamp: new Date().toISOString() });
   });
 
@@ -1110,6 +1126,8 @@ async function startServer() {
         } else if (filePath.includes(path.sep + "assets" + path.sep) || filePath.includes("/assets/")) {
           // Serve all compiled hashed assets with 1 year cache life to prevent unoptimized bandwidth wastage
           res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
+        } else if (filePath.endsWith("calculator-styles.css")) {
+          res.setHeader("Cache-Control", "public, max-age=300, stale-while-revalidate=86400");
         } else if (filePath.endsWith(".css") || filePath.endsWith(".png") || filePath.endsWith(".webp") || filePath.endsWith(".svg") || filePath.endsWith(".ico") || filePath.endsWith(".woff2")) {
           // Serve versioned or static styling/media with 1-day client cache and background revalidation
           res.setHeader("Cache-Control", "public, max-age=86400, stale-while-revalidate=604800");
@@ -1161,9 +1179,24 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+  const server = app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on http://0.0.0.0:${PORT}`);
   });
+
+  // If deployed in production on an alternate port (such as Cloud Run 8080),
+  // also bind to port 3000 if available for backward compatibility with proxies/probes
+  if (PORT !== 3000) {
+    try {
+      const secondaryServer = app.listen(3000, "0.0.0.0", () => {
+        console.log(`Server also listening on http://0.0.0.0:3000`);
+      });
+      secondaryServer.on("error", (err: any) => {
+        console.log(`Secondary port 3000 info: ${err.message}`);
+      });
+    } catch (e) {
+      // Ignore if port 3000 cannot be bound
+    }
+  }
 }
 
 startServer();
