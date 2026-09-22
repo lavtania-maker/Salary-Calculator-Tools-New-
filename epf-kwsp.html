@@ -200,42 +200,26 @@
 <script>
   (function() {
     var dynYear = new Date().getFullYear();
-    document.addEventListener('DOMContentLoaded', 
-    function() {
-      // Update page title
-      document.title = document.title
-        .replace(/20\d\d/g, dynYear);
-      
-      // Update H1
+    document.addEventListener('DOMContentLoaded', function() {
+      if (!document.title.includes(dynYear)) {
+        document.title = document.title.replace(/20\d\d/g, dynYear);
+      }
       var h1 = document.querySelector('h1');
-      if (h1) {
-        h1.innerHTML = h1.innerHTML
-          .replace(/20\d\d/g, dynYear);
+      if (h1 && !h1.textContent.includes(dynYear)) {
+        h1.innerHTML = h1.innerHTML.replace(/20\d\d/g, dynYear);
       }
-      
-      // Update meta description
-      var metaDesc = document.querySelector(
-        'meta[name="description"]');
-      if (metaDesc) {
-        metaDesc.setAttribute('content',
-          metaDesc.getAttribute('content')
-          .replace(/20\d\d/g, dynYear));
+      var metaDesc = document.querySelector('meta[name="description"]');
+      if (metaDesc && !metaDesc.getAttribute('content').includes(dynYear)) {
+        metaDesc.setAttribute('content', metaDesc.getAttribute('content').replace(/20\d\d/g, dynYear));
       }
-
-      // Update canonical
-      var canonical = document.querySelector(
-        'link[rel="canonical"]');
-      if (canonical) {
-        canonical.setAttribute('href',
-          canonical.getAttribute('href')
-          .replace(/20\d\d/g, dynYear));
+      var canonical = document.querySelector('link[rel="canonical"]');
+      if (canonical && !canonical.getAttribute('href').includes(dynYear)) {
+        canonical.setAttribute('href', canonical.getAttribute('href').replace(/20\d\d/g, dynYear));
       }
-
-      // Update all h2 and h3 headings
-      document.querySelectorAll('h2, h3')
-      .forEach(function(el) {
-        el.innerHTML = el.innerHTML
-          .replace(/20\d\d/g, dynYear);
+      document.querySelectorAll('h2, h3').forEach(function(el) {
+        if (el.textContent && /20\d\d/.test(el.textContent) && !el.textContent.includes(dynYear)) {
+          el.innerHTML = el.innerHTML.replace(/20\d\d/g, dynYear);
+        }
       });
     });
   })();
@@ -244,12 +228,12 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=optional" rel="stylesheet">
 
     <!-- Main Stylesheet -->
-    <link href="/calculator-styles.css?v=20260922v1790067983460" rel="stylesheet">
+    <link href="/calculator-styles.css?v=20260922v1790068516152" rel="stylesheet">
     <noscript data-i18n="_98bba9">
-      <link href="/calculator-styles.css?v=20260922v1790067983460" rel="stylesheet" />
+      <link href="/calculator-styles.css?v=20260922v1790068516152" rel="stylesheet" />
     </noscript>
     <!-- FAQ Schema -->
     <script type="application/ld+json">

@@ -3,10 +3,11 @@ const fs = require('fs');
 const path = require('path');
 const esbuild = require('esbuild');
 
-// 1. Minify CSS & update cache busting links
+// 1. Minify CSS & update cache busting links & LCP optimization
 try {
   require('./update_css_links.cjs');
   require('./update_logo_cache_bust.cjs');
+  require('./optimize_lcp.cjs');
   const cssSourcePath = fs.existsSync('calculator-styles.src.css') ? 'calculator-styles.src.css' : 'public/calculator-styles.css';
   const cssSource = fs.readFileSync(cssSourcePath, 'utf8');
   const minified = esbuild.transformSync(cssSource, { loader: 'css', minify: true });
