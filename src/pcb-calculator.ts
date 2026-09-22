@@ -1,6 +1,3 @@
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "./firebase";
-import { generatePDFReport } from "./lib/pdf-generator";
 // Simplified Malaysia PCB Tax Calculator
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -456,8 +453,15 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
         if (phone) (dbPayload as any).phoneNumber = phone;
 
         // 1. Store lead in Firestore (non-blocking in background)
-        addDoc(collection(db, "leads"), dbPayload).catch((fErr) => {
-          console.warn("Firestore leads record error:", fErr);
+        Promise.all([
+          import("firebase/firestore"),
+          import("./firebase")
+        ]).then(([{ collection, addDoc }, { db }]) => {
+          addDoc(collection(db, "leads"), dbPayload).catch((fErr) => {
+            console.warn("Firestore leads record error:", fErr);
+          });
+        }).catch((err) => {
+          console.warn("Firestore import error:", err);
         });
         
         // 2. Submit to Google Sheet via server proxy (non-blocking in background)
@@ -470,6 +474,7 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
         });
 
         if (lastCalculation) {
+          const { generatePDFReport } = await import("./lib/pdf-generator");
           await generatePDFReport({
             title: "PCB (Income Tax) Report",
             fileName: "PCB_Report",

@@ -1,7 +1,3 @@
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "./firebase";
-import { generatePDFReport } from "./lib/pdf-generator";
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("leaveForm") as HTMLFormElement;
   const resetBtn = document.getElementById(
@@ -521,8 +517,15 @@ document.addEventListener("DOMContentLoaded", () => {
           (dbPayload as any).phoneNumber = phoneInput.value;
 
         // 1. Store lead in Firestore (non-blocking in background)
-        addDoc(collection(db, "leads"), dbPayload).catch((fErr) => {
-          console.warn("Firestore leads record error:", fErr);
+        Promise.all([
+          import("firebase/firestore"),
+          import("./firebase")
+        ]).then(([{ collection, addDoc }, { db }]) => {
+          addDoc(collection(db, "leads"), dbPayload).catch((fErr) => {
+            console.warn("Firestore leads record error:", fErr);
+          });
+        }).catch((err) => {
+          console.warn("Firestore import error:", err);
         });
 
         // 2. Submit to Google Sheet via server proxy (non-blocking in background)
@@ -541,6 +544,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (lastCalculation) {
+          const { generatePDFReport } = await import("./lib/pdf-generator");
           await generatePDFReport({
             title: "Annual Leave Report",
             fileName: "Annual_Leave_Report",

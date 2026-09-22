@@ -1,0 +1,11 @@
+node_modules/
+dist/
+build/
+.dev.env.json
+.dev.pid
+.env
+.env.local
+.DS_Store
+*.log
+test-results/
+Salary-Calculator-Tools-New--main/

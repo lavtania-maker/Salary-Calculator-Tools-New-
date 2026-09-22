@@ -275,17 +275,23 @@
       // Update all h2 and h3 headings
       document.querySelectorAll('h2, h3')
       .forEach(function(el) {
-        el.innerHTML = el.innerHTML
-          .replace(/20\d\d/g, dynYear);
+        if (el.textContent && /20\d\d/.test(el.textContent)) {
+          el.innerHTML = el.innerHTML
+            .replace(/20\d\d/g, dynYear);
+        }
       });
     });
   })();
 </script>
 <title>Salary Calculator Malaysia 2026 | EPF, SOCSO, PCB</title><meta name="description" content="Calculate your net salary in Malaysia after EPF, SOCSO, EIS, and PCB deductions instantly. Free tool for 2026 tax rates."><meta name="twitter:url" content="https://salarycalculator.my/">
-    <!-- Google Fonts -->
+    <!-- Google Fonts (Non-blocking async loading with font-display: swap) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" media="print" onload="this.media='all'">
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+    </noscript>
 
     <!-- Main Stylesheet -->
     <link href="/calculator-styles.css?v=20260902" rel="stylesheet">
@@ -4045,6 +4051,9 @@
           ".seo-table-wrapper:not(.collapsible-initialized)"
         ];
         const containers = document.querySelectorAll(selectors.join(", "));
+        const itemsToProcess = [];
+
+        // Phase 1: Read and calculate all heights before mutating DOM (prevents layout thrashing)
         containers.forEach((container) => {
           if (
             container.classList.contains("collapsible-initialized") ||
@@ -4064,14 +4073,6 @@
           const SHOW_COUNT = 5;
 
           if (rows.length > SHOW_COUNT) {
-            container.classList.add("collapsible-initialized");
-
-            const wrapper = document.createElement("div");
-            wrapper.className = "table-collapsible-wrapper collapsed";
-
-            container.parentNode.insertBefore(wrapper, container);
-            wrapper.appendChild(container);
-
             let initialHeight = 320;
             if (container.offsetParent !== null) {
               const header = table.querySelector("thead");
@@ -4082,59 +4083,76 @@
               if (calculatedHeight > 50) {
                 initialHeight = calculatedHeight + 8;
               }
-            } else {
-              initialHeight = 320;
             }
-            wrapper.style.maxHeight = initialHeight + "px";
-
-            const btnContainer = document.createElement("div");
-            btnContainer.className = "table-show-more-container";
-
-            const btn = document.createElement("button");
-            btn.className = "table-show-more-btn";
-            btn.type = "button";
-            btn.innerHTML =
-              'Show Full Table / Expand <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><path d="M6 9l6 6 6-6"></path></svg>';
-
-            btnContainer.appendChild(btn);
-            wrapper.parentNode.insertBefore(btnContainer, wrapper.nextSibling);
-
-            btn.addEventListener("click", () => {
-              const isCollapsed = wrapper.classList.contains("collapsed");
-              if (isCollapsed) {
-                wrapper.classList.remove("collapsed");
-                wrapper.classList.add("expanded");
-                wrapper.style.maxHeight = (table.scrollHeight || 3000) + 150 + "px";
-                btn.innerHTML =
-                  'Show Less / Collapse <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; transform: rotate(180deg);"><path d="M6 9l6 6 6-6"></path></svg>';
-                btn.classList.add("active");
-              } else {
-                wrapper.classList.add("collapsed");
-                wrapper.classList.remove("expanded");
-                wrapper.style.maxHeight = initialHeight + "px";
-                btn.innerHTML =
-                  'Show Full Table / Expand <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><path d="M6 9l6 6 6-6"></path></svg>';
-                btn.classList.remove("active");
-
-                const rect = wrapper.getBoundingClientRect();
-                if (rect.top < 0) {
-                  window.scrollTo({
-                    top: window.pageYOffset + rect.top - 100,
-                    behavior: "smooth",
-                  });
-                }
-              }
-            });
+            itemsToProcess.push({ container, table, initialHeight });
           }
+        });
+
+        // Phase 2: Batch DOM mutations together
+        itemsToProcess.forEach(({ container, table, initialHeight }) => {
+          container.classList.add("collapsible-initialized");
+
+          const wrapper = document.createElement("div");
+          wrapper.className = "table-collapsible-wrapper collapsed";
+
+          container.parentNode.insertBefore(wrapper, container);
+          wrapper.appendChild(container);
+          wrapper.style.maxHeight = initialHeight + "px";
+
+          const btnContainer = document.createElement("div");
+          btnContainer.className = "table-show-more-container";
+
+          const btn = document.createElement("button");
+          btn.className = "table-show-more-btn";
+          btn.type = "button";
+          btn.innerHTML =
+            'Show Full Table / Expand <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><path d="M6 9l6 6 6-6"></path></svg>';
+
+          btnContainer.appendChild(btn);
+          wrapper.parentNode.insertBefore(btnContainer, wrapper.nextSibling);
+
+          btn.addEventListener("click", () => {
+            const isCollapsed = wrapper.classList.contains("collapsed");
+            if (isCollapsed) {
+              wrapper.classList.remove("collapsed");
+              wrapper.classList.add("expanded");
+              wrapper.style.maxHeight = (table.scrollHeight || 3000) + 150 + "px";
+              btn.innerHTML =
+                'Show Less / Collapse <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px; transform: rotate(180deg);"><path d="M6 9l6 6 6-6"></path></svg>';
+              btn.classList.add("active");
+            } else {
+              wrapper.classList.add("collapsed");
+              wrapper.classList.remove("expanded");
+              wrapper.style.maxHeight = initialHeight + "px";
+              btn.innerHTML =
+                'Show Full Table / Expand <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-left: 4px;"><path d="M6 9l6 6 6-6"></path></svg>';
+              btn.classList.remove("active");
+
+              const rect = wrapper.getBoundingClientRect();
+              if (rect.top < 0) {
+                window.scrollTo({
+                  top: window.pageYOffset + rect.top - 100,
+                  behavior: "smooth",
+                });
+              }
+            }
+          });
         });
       }
 
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initCollapsibleTables);
-      } else {
-        initCollapsibleTables();
+      function scheduleCollapsibleTables() {
+        if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+          window.requestIdleCallback(initCollapsibleTables, { timeout: 1500 });
+        } else {
+          setTimeout(initCollapsibleTables, 150);
+        }
       }
-      window.addEventListener("load", initCollapsibleTables);
+
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", scheduleCollapsibleTables);
+      } else {
+        scheduleCollapsibleTables();
+      }
     </script>
     <!-- Sticky Mobile Take-Home Pay Summary Bar (< 768px only) -->
     <div id="stickyMobileSummary" class="sticky-mobile-summary" aria-hidden="true">

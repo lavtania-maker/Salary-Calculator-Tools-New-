@@ -232,19 +232,35 @@ if (typeof window !== "undefined") {
   }
 }
 
-// Add data-label to all table cells for mobile responsive cards
-if (typeof document !== "undefined") { document.addEventListener("DOMContentLoaded", () => {
-  const tables = document.querySelectorAll(".table-responsive table, .table-container table, .seo-table-wrapper table");
-  tables.forEach(table => {
-    const headers = Array.from(table.querySelectorAll("th")).map(th => th.textContent?.trim() || "");
-    const rows = table.querySelectorAll("tbody tr");
-    rows.forEach(row => {
-      const cells = row.querySelectorAll("td");
-      cells.forEach((cell, index) => {
-        if (headers[index]) {
-          cell.setAttribute("data-label", headers[index]);
-        }
+// Add data-label to all table cells for mobile responsive cards (scheduled during idle time)
+if (typeof document !== "undefined") {
+  const addTableLabels = () => {
+    const tables = document.querySelectorAll(".table-responsive table, .table-container table, .seo-table-wrapper table");
+    tables.forEach(table => {
+      const headers = Array.from(table.querySelectorAll("th")).map(th => th.textContent?.trim() || "");
+      const rows = table.querySelectorAll("tbody tr");
+      rows.forEach(row => {
+        const cells = row.querySelectorAll("td");
+        cells.forEach((cell, index) => {
+          if (headers[index] && !cell.hasAttribute("data-label")) {
+            cell.setAttribute("data-label", headers[index]);
+          }
+        });
       });
     });
-  });
-}); }
+  };
+
+  const scheduleTableLabels = () => {
+    if ("requestIdleCallback" in window) {
+      (window as any).requestIdleCallback(addTableLabels, { timeout: 2000 });
+    } else {
+      setTimeout(addTableLabels, 200);
+    }
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", scheduleTableLabels);
+  } else {
+    scheduleTableLabels();
+  }
+}
