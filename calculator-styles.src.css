@@ -2896,8 +2896,7 @@ a.nav-link, a.dropdown-item, a.mobile-submenu-item, a.footer-link, summary.faq-t
 }
 
 /* Other Calculators Section - No divider line & tight natural spacing */
-.other-calculators-section,
-.explore-more-section {
+.other-calculators-section {
   border-top: none !important;
   border-bottom: none !important;
   padding-top: 0 !important;
@@ -2906,10 +2905,37 @@ a.nav-link, a.dropdown-item, a.mobile-submenu-item, a.footer-link, summary.faq-t
 }
 
 @media (max-width: 768px) {
-  .other-calculators-section,
-  .explore-more-section {
+  .other-calculators-section {
     padding-top: 0 !important;
     padding-bottom: 32px !important;
+  }
+}
+
+/* Explore More Articles Section - Proper spacing, clean light background, and consistent alignment */
+.explore-more-section {
+  background-color: #f8fafc !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  border: none !important;
+  padding-top: 48px !important;
+  padding-bottom: 48px !important;
+  margin-top: 40px !important;
+  margin-bottom: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.explore-more-section ~ .footer,
+.explore-more-section + .footer,
+.explore-more-section + style + .footer {
+  border-top: none !important;
+}
+
+@media (max-width: 768px) {
+  .explore-more-section {
+    padding-top: 36px !important;
+    padding-bottom: 36px !important;
+    margin-top: 28px !important;
   }
 }
 
