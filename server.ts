@@ -1127,7 +1127,7 @@ async function startServer() {
           // Serve all compiled hashed assets with 1 year cache life to prevent unoptimized bandwidth wastage
           res.setHeader("Cache-Control", "public, max-age=31536000, immutable");
         } else if (filePath.endsWith("calculator-styles.css")) {
-          res.setHeader("Cache-Control", "public, max-age=300, stale-while-revalidate=86400");
+          res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         } else if (filePath.endsWith(".css") || filePath.endsWith(".png") || filePath.endsWith(".webp") || filePath.endsWith(".svg") || filePath.endsWith(".ico") || filePath.endsWith(".woff2")) {
           // Serve versioned or static styling/media with 1-day client cache and background revalidation
           res.setHeader("Cache-Control", "public, max-age=86400, stale-while-revalidate=604800");
