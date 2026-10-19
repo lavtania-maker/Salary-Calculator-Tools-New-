@@ -1,8 +1,5 @@
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "./firebase";
-// Simplified Malaysia PCB Tax Calculator
-
-import { generatePDFReport } from "./lib/pdf-generator";
+// Official Malaysia PCB Tax Calculator (2026 HASiL Computerised Specification)
+import { calculateOfficialPcb } from "./lib/pcb";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("pcbForm") as HTMLFormElement;
@@ -122,91 +119,42 @@ document.addEventListener("DOMContentLoaded", () => {
     if (salary <= 0) {
       placeholderText.style.display = "block";
       resultContent.classList.remove("show");
+      resultContent.style.display = "none";
       return;
     }
 
-    const bonusStr = (document.getElementById("bonus") as HTMLInputElement)
-      .value;
-    const bonus = parseFloat(bonusStr) || 0;
-
-    const epfRateStr = (document.getElementById("epfRate") as HTMLSelectElement)
-      .value;
+    const maritalStatus = (document.getElementById("maritalStatus") as HTMLSelectElement).value;
+    const spouseWorking = maritalStatus === "married" ? (document.getElementById("spouseWorking") as HTMLSelectElement).value : "yes";
+    const childrenCount = parseInt((document.getElementById("childrenCount") as HTMLInputElement).value) || 0;
+    const additionalRelief = parseFloat((document.getElementById("additionalRelief") as HTMLInputElement).value) || 0;
+    
+    const epfRateStr = (document.getElementById("epfRate") as HTMLSelectElement).value;
     const epfRate = parseFloat(epfRateStr) / 100 || 0.11;
 
-    const isNonResident =
-      (document.getElementById("taxStatus") as HTMLSelectElement).value ===
-      "non-resident";
-    const hasSpouse = false;
+    const isNonResident = (document.getElementById("taxStatus") as HTMLSelectElement).value === "non-resident";
 
-    const childrenCount = 0;
+    const totalIncome = salary;
 
-    const zakatStr = (document.getElementById("zakat") as HTMLInputElement)
-      .value;
-    const zakat = parseFloat(zakatStr) || 0;
+    const result = calculateOfficialPcb({
+      grossSalary: salary,
+      maritalStatus,
+      spouseWorking,
+      childrenCount,
+      additionalRelief,
+      epfRate,
+      taxStatus: isNonResident ? "non-resident" : "resident",
+    });
 
-    const totalIncome = salary + bonus;
-
-    // EPF deduction
-const epfDeduction = totalIncome * epfRate;
-const annualIncome = (totalIncome - epfDeduction) * 12;
-const personalRelief = 9000;
-let totalRelief = personalRelief;
-if (hasSpouse) totalRelief += 4000;
-totalRelief += (childrenCount * 2000);
-const taxableIncome = annualIncome - totalRelief;
-let tax = 0;
-let bracket = '0%';
-let annualTax = 0;
-if (isNonResident) {
-  annualTax = annualIncome * 0.30;
-  bracket = '30%';
-  tax = annualTax / 12;
-} else {
-  if (taxableIncome > 0) {
-    if (taxableIncome <= 5000) {
-      annualTax = 0;
-      bracket = '0%';
-    } else if (taxableIncome <= 20000) {
-      annualTax = (taxableIncome - 5000) * 0.01;
-      bracket = '1%';
-    } else if (taxableIncome <= 35000) {
-      annualTax = 150 + (taxableIncome - 20000) * 0.03;
-      bracket = '3%';
-    } else if (taxableIncome <= 50000) {
-      annualTax = 600 + (taxableIncome - 35000) * 0.06;
-      bracket = '6%';
-    } else if (taxableIncome <= 70000) {
-      annualTax = 1500 + (taxableIncome - 50000) * 0.11;
-      bracket = '11%';
-    } else if (taxableIncome <= 100000) {
-      annualTax = 3700 + (taxableIncome - 70000) * 0.19;
-      bracket = '19%';
-    } else if (taxableIncome <= 400000) {
-      annualTax = 9400 + (taxableIncome - 100000) * 0.25;
-      bracket = '25%';
-    } else if (taxableIncome <= 600000) {
-      annualTax = 84400 + (taxableIncome - 400000) * 0.26;
-      bracket = '26%';
-    } else if (taxableIncome <= 2000000) {
-      annualTax = 136400 + (taxableIncome - 600000) * 0.28;
-      bracket = '28%';
-    } else {
-      annualTax = 528400 + (taxableIncome - 2000000) * 0.30;
-      bracket = '30%';
-    }
-    tax = annualTax / 12;
-  }
-}
-tax = tax - zakat;
-if (tax < 0) tax = 0;
-let chargeable = taxableIncome > 0 ? taxableIncome / 12 : 0;
-const effectiveRate = totalIncome > 0 ? (tax / totalIncome) * 100 : 0;
-const finalReliefAndZakat = (totalRelief/12) + zakat;
-
+    const tax = result.monthlyPcb;
+    const actualEpf = result.actualEpfMonthly;
+    const chargeable = result.monthlyChargeableIncome;
+    const effectiveRate = result.effectiveTaxRate;
+    const bracket = result.taxBracket;
+    const finalReliefAndZakat = result.monthlyRelief;
 
     // Display
     resGross.textContent = formatRM(totalIncome);
-    resEpf.textContent = formatRM(epfDeduction);
+    resEpf.textContent = "-" + formatRM(actualEpf);
     resRelief.textContent = formatRM(finalReliefAndZakat);
     resChargeable.textContent = formatRM(chargeable);
 
@@ -214,39 +162,44 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
     resEffectiveRate.textContent = effectiveRate.toFixed(2) + "%";
     resTaxBracket.textContent = bracket;
 
-    resAnnualIncome.textContent = formatRM(totalIncome * 12);
-    resAnnualTax.textContent = formatRM(tax * 12);
-    resAnnualPcb.textContent = formatRM(tax * 12);
+    resAnnualIncome.textContent = formatRM(result.annualIncome);
+    resAnnualTax.textContent = formatRM(result.annualTax);
+    resAnnualPcb.textContent = formatRM(result.annualTax);
 
     // Take Home Salary updates
-    const takeHomeSalary = totalIncome - epfDeduction - tax;
+    const takeHomeSalary = totalIncome - actualEpf - tax;
     resTakeHomeSalary.textContent = formatRM(takeHomeSalary);
+    const resTakeHomeTotal = document.getElementById("resTakeHomeTotal");
+    if (resTakeHomeTotal) {
+      resTakeHomeTotal.textContent = formatRM(takeHomeSalary);
+    }
     resTakeHomeGross.textContent = formatRM(totalIncome);
-    resTakeHomeEpf.textContent = "-" + formatRM(epfDeduction);
+    resTakeHomeEpf.textContent = "-" + formatRM(actualEpf);
     resTakeHomePcb.textContent = "-" + formatRM(tax);
     resTakeHomeTaxRate.textContent =
       effectiveRate.toFixed(1) + "% of gross salary";
 
     lastCalculation = {
       salary: salary.toFixed(2),
-      bonus: bonus.toFixed(2),
-      epf: epfDeduction.toFixed(2),
+      epf: actualEpf.toFixed(2),
       relief: finalReliefAndZakat.toFixed(2),
       pcb: tax.toFixed(2),
-      totalDeductions: (epfDeduction + tax).toFixed(2),
-      netSalary: (totalIncome - epfDeduction - tax).toFixed(2),
-      annualIncome: (totalIncome * 12).toFixed(2),
-      annualPcb: (tax * 12).toFixed(2),
+      totalDeductions: (actualEpf + tax).toFixed(2),
+      netSalary: (totalIncome - actualEpf - tax).toFixed(2),
+      annualIncome: result.annualIncome.toFixed(2),
+      annualPcb: result.annualTax.toFixed(2),
       effectiveRate: effectiveRate.toFixed(2),
       taxBracket: bracket,
       taxStatus: isNonResident ? "non-resident" : "resident",
       epfRate: (epfRate * 100).toFixed(0),
       chargeable: chargeable.toFixed(2),
+      maritalStatus,
     };
 
     // Show result panel
     placeholderText.style.display = "none";
     resultContent.classList.add("show");
+    resultContent.style.display = "block";
   };
 
   const grossSalaryInput = document.getElementById(
@@ -294,6 +247,7 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
     setTimeout(() => {
       placeholderText.style.display = "block";
       resultContent.classList.remove("show");
+      resultContent.style.display = "none";
       // calculateBtn.disabled = true;
       if (pcbDisclaimer) pcbDisclaimer.style.display = "none";
     }, 10);
@@ -397,7 +351,11 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
       const email = userEmail ? userEmail.value : "";
       const name = userName ? userName.value : "";
       const role = userType ? userType.value : "";
-      const phone = userPhone ? userPhone.value : "";
+      let phone = userPhone ? userPhone.value : "";
+      if (phone) {
+        phone = phone.replace(/\D/g, '').replace(/^(60|0)/, '');
+        phone = '+60' + phone;
+      }
 
       const submitBtn = emailForm.querySelector(
         'button[type="submit"]',
@@ -419,23 +377,13 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
         ) as HTMLSelectElement;
         const sheetPayload = {
           timestamp: new Date().toISOString(),
-          Name: name,
-          Email: email,
-          "User Type": role,
-          "Hiring Status": hiringInputExt?.value || "",
-          "Company Name": companyInputExt?.value?.trim() || "",
-          "User Phone": phone,
-          download_via: "PCB Calculator",
-          ...(lastCalculation ? {
-            "Gross Salary": lastCalculation.salary,
-            "Bonus": lastCalculation.bonus,
-            "Annual Income": lastCalculation.annualIncome,
-            "Total Reliefs": lastCalculation.relief,
-            "Tax Bracket": lastCalculation.taxBracket,
-            "Monthly PCB": lastCalculation.pcb,
-            "Net Salary": lastCalculation.netSalary,
-            "Tax Status": lastCalculation.taxStatus === "resident" ? "Resident" : "Non-Resident"
-          } : {})
+          name: name,
+          email: email,
+          userType: role,
+          hiringStatus: hiringInputExt?.value || "",
+          companyName: companyInputExt?.value?.trim() || "",
+          userPhone: phone || "",
+          download_via: "Download PCB Report",
         };
 
         const dbPayload = {
@@ -446,39 +394,46 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
           createdAt: new Date().toISOString(),
           ...(lastCalculation ? {
             salary: lastCalculation.salary,
-            bonus: lastCalculation.bonus,
             annualIncome: lastCalculation.annualIncome,
             relief: lastCalculation.relief,
             taxBracket: lastCalculation.taxBracket,
             pcb: lastCalculation.pcb,
             netSalary: lastCalculation.netSalary,
-            taxStatus: lastCalculation.taxStatus
+            taxStatus: lastCalculation.taxStatus,
+            maritalStatus: lastCalculation.maritalStatus
           } : {})
         };
+
         if (companyInputExt?.value?.trim())
           (dbPayload as any).companyName = companyInputExt?.value?.trim();
         if (hiringInputExt?.value)
           (dbPayload as any).hiringStatus = hiringInputExt?.value;
         if (phone) (dbPayload as any).phoneNumber = phone;
 
-        try {
-          await addDoc(collection(db, "leads"), dbPayload);
-        } catch (err) {
-          console.error("Firestore error:", err);
-        }
-
-        try {
-          await fetch("/api/pcb-sheet", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(sheetPayload),
+        // 1. Store lead in Firestore (non-blocking in background)
+        Promise.all([
+          import("firebase/firestore"),
+          import("./firebase")
+        ]).then(([{ collection, addDoc }, { db }]) => {
+          addDoc(collection(db, "leads"), dbPayload).catch((fErr) => {
+            console.warn("Firestore leads record error:", fErr);
           });
-        } catch (err) {
-          console.error("Google Sheets Webhook error:", err);
-        }
+        }).catch((err) => {
+          console.warn("Firestore import error:", err);
+        });
+        
+        // 2. Submit to Google Sheet via server proxy (non-blocking in background)
+        fetch("/api/pcb-sheet", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sheetPayload),
+        }).catch((sErr) => {
+          console.warn("Google Sheets record error:", sErr);
+        });
 
         if (lastCalculation) {
-          generatePDFReport({
+          const { generatePDFReport } = await import("./lib/pdf-generator");
+          await generatePDFReport({
             title: "PCB (Income Tax) Report",
             fileName: "PCB_Report",
             data: [
@@ -487,8 +442,8 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
                 value: `RM ${parseFloat(lastCalculation.salary).toFixed(2)}`,
               },
               {
-                label: "Bonus",
-                value: `RM ${parseFloat(lastCalculation.bonus).toFixed(2)}`,
+                label: "Marital Status",
+                value: lastCalculation.maritalStatus === "married" ? "Married" : "Single",
               },
               {
                 label: "Tax Status",
@@ -558,8 +513,9 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
           if (mobileActionButtons) mobileActionButtons.style.display = "none";
           if (mobileFallbackText) mobileFallbackText.style.display = "none";
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error("Submission error:", err);
+        alert(err.message || "An error occurred while generating the report. Please try again.");
       } finally {
         if (submitBtn) {
           submitBtn.textContent = originalText;

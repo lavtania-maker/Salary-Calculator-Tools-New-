@@ -1,28 +1,21 @@
-const testFetch = async () => {
-    const payload1 = {
-        email: "test1@example.com",
-        "Email": "test1@example.com",
-        userType: "Employer/HR",
-        "User Type": "Employer/HR",
-        companyName: "ABC Sdn Bhd",
-        "Company Name": "ABC Sdn Bhd",
-        hiringStatus: "Hiring Now",
-        "Hiring Status": "Hiring Now",
-        userPhone: "0123456789",
-        "User Phone": "0123456789",
-        download_via: "PCB Calculator"
-    };
-    
-    try {
-        const res = await fetch("http://localhost:3000/api/pcb-sheet", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload1)
-        });
-        const text = await res.text();
-        console.log("Response:", text);
-    } catch(err) {
-        console.error(err);
-    }
+const { initializeApp } = require("firebase/app");
+const { getFirestore, collection, getDocs, query, where, orderBy } = require("firebase/firestore");
+
+const firebaseConfig = {
+  apiKey: "AIzaSyAT1xtn2fSPbxUrIyJvK_r449D_WB6Ete8",
+  projectId: "gen-lang-client-0273291777"
 };
-testFetch();
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app, "ai-studio-f7c7f3ec-1f6a-45a9-a332-4733fe85d918");
+
+async function run() {
+  try {
+    const q = query(collection(db, "blog_posts"), where("status", "==", "published"), orderBy("publishedAt", "desc"));
+    const snap = await getDocs(q);
+    console.log("Success with orderBy, count:", snap.docs.length);
+  } catch (err) {
+    console.error("Error with orderBy:", err.message);
+  }
+}
+run();

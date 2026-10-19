@@ -1,7 +1,3 @@
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "./firebase";
-import { generatePDFReport } from "./lib/pdf-generator";
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("leaveForm") as HTMLFormElement;
   const resetBtn = document.getElementById(
@@ -35,11 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const startDateInput = document.getElementById(
     "leaveStartDate",
   ) as HTMLInputElement;
-  const calcYearSelect = document.getElementById(
-    "leaveCalcYear",
-  ) as HTMLSelectElement;
-  const customYearInput = document.getElementById(
-    "leaveCustomYearInput",
+  const calcDateInput = document.getElementById(
+    "leaveCalcDate",
   ) as HTMLInputElement;
   const entitlementInput = document.getElementById(
     "leaveEntitlement",
@@ -93,28 +86,22 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCategoryAndEntitlement();
   });
 
-  calcYearSelect.addEventListener("change", () => {
+  calcDateInput.addEventListener("change", () => {
     updateCategoryAndEntitlement();
   });
 
-  customYearInput.addEventListener("input", () => {
-    if (calcYearSelect.value === "custom") {
-      updateCategoryAndEntitlement();
+  const getTargetDate = () => {
+    if (calcDateInput.value) {
+      return new Date(calcDateInput.value);
     }
-  });
-
-  const getTargetYear = () => {
-    if (calcYearSelect.value === "custom" && customYearInput.value) {
-      return parseInt(customYearInput.value, 10);
-    }
-    return new Date().getFullYear();
+    return new Date(new Date().getFullYear(), 11, 31); // Dec 31
   };
 
   const updateCategoryAndEntitlement = () => {
     if (!startDateInput.value) return;
 
     const startDate = new Date(startDateInput.value);
-    const targetYear = getTargetYear();
+    const targetDate = getTargetDate();
     const warningEl = document.getElementById(
       "leaveWarning",
     ) as HTMLElement | null;
@@ -125,23 +112,22 @@ document.addEventListener("DOMContentLoaded", () => {
       warningMsg = "Warning: Employee join date is in the future.";
     }
 
-    if (targetYear < startDate.getFullYear()) {
+    if (targetDate < startDate) {
       entitlementInput.value = "0";
       if (warningEl) {
         warningEl.style.display = "block";
         warningEl.textContent =
-          "Error: Employee joined after the selected calculation year.";
+          "Error: Employee joined after the selected calculation date.";
       }
       submitBtn.disabled = true;
       return;
     }
 
-    // Calculate completed years and months by end of target year
-    const currentDate = new Date(targetYear, 11, 31);
+    // Calculate completed years and months by the target date
     let totalMonths =
-      (currentDate.getFullYear() - startDate.getFullYear()) * 12 +
-      (currentDate.getMonth() - startDate.getMonth());
-    if (currentDate.getDate() < startDate.getDate()) {
+      (targetDate.getFullYear() - startDate.getFullYear()) * 12 +
+      (targetDate.getMonth() - startDate.getMonth());
+    if (targetDate.getDate() < startDate.getDate()) {
       totalMonths--;
     }
     if (totalMonths < 0) totalMonths = 0;
@@ -180,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!startDateInput.value) return;
 
     const startDate = new Date(startDateInput.value);
-    const targetYear = getTargetYear();
+    const targetDate = getTargetDate();
     const warningEl = document.getElementById(
       "leaveWarning",
     ) as HTMLElement | null;
@@ -194,11 +180,10 @@ document.addEventListener("DOMContentLoaded", () => {
       warningMsgs.push("Join date is in the future.");
     }
 
-    const currentDate = new Date(targetYear, 11, 31);
     let totalMonths =
-      (currentDate.getFullYear() - startDate.getFullYear()) * 12 +
-      (currentDate.getMonth() - startDate.getMonth());
-    if (currentDate.getDate() < startDate.getDate()) {
+      (targetDate.getFullYear() - startDate.getFullYear()) * 12 +
+      (targetDate.getMonth() - startDate.getMonth());
+    if (targetDate.getDate() < startDate.getDate()) {
       totalMonths--;
     }
     if (totalMonths < 0) totalMonths = 0;
@@ -218,28 +203,29 @@ document.addEventListener("DOMContentLoaded", () => {
     let proratedLeave = baseEntitlement;
     const proratedItem = document.getElementById("resProratedItem");
 
-    // Pro-rated rule: ONLY use pro-rated calculation if employee joined DURING the selected calculation year
-    if (startDate.getFullYear() === targetYear) {
-      if (proratedItem) proratedItem.style.display = "flex";
-
-      // Calculate months worked this year
-      let monthsWorked = 12 - startDate.getMonth();
-      if (startDate.getDate() > 15) {
-        monthsWorked -= 0.5;
-      }
-      if (monthsWorked < 0) monthsWorked = 0;
-
-      proratedLeave =
-        Math.round((monthsWorked / 12) * baseEntitlement * 10) / 10;
-    } else if (targetYear < startDate.getFullYear()) {
+    if (targetDate < startDate) {
       proratedLeave = 0;
       if (proratedItem) proratedItem.style.display = "none";
     } else {
-      proratedLeave = baseEntitlement; // Full entitlement
-      if (proratedItem) proratedItem.style.display = "none";
+      if (proratedItem) proratedItem.style.display = "flex";
+
+      let calcStart = new Date(targetDate.getFullYear(), 0, 1);
+      if (startDate > calcStart) calcStart = startDate;
+
+      let calcEnd = targetDate;
+      if (calcEnd < calcStart) calcEnd = calcStart;
+
+      const diffTime = calcEnd.getTime() - calcStart.getTime();
+      const diffDays = Math.max(0, Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1);
+      const daysInYear = ((targetDate.getFullYear() % 4 === 0 && targetDate.getFullYear() % 100 !== 0) || (targetDate.getFullYear() % 400 === 0)) ? 366 : 365;
+      
+      const monthsWorked = (diffDays / daysInYear) * 12;
+
+      // Round to nearest 0.5 day
+      proratedLeave = Math.round((monthsWorked / 12) * baseEntitlement * 2) / 2;
     }
 
-    if (leaveTaken > proratedLeave && startDate.getFullYear() === targetYear) {
+    if (leaveTaken > proratedLeave && targetDate.getFullYear() === startDate.getFullYear()) {
       warningMsgs.push(`Leave taken exceeds pro-rated entitlement.`);
     } else if (leaveTaken > proratedLeave) {
       warningMsgs.push(`Leave taken exceeds entitlement.`);
@@ -282,7 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     lastCalculation = {
       startDate: startDateInput.value,
-      targetYear,
+      targetDate: calcDateInput.value || "End of Year",
       yearsOfServiceText: `${yearsOfService} Year${yearsOfService !== 1 ? "s" : ""} ${months} Month${months !== 1 ? "s" : ""}`,
       baseEntitlement,
       proratedLeave,
@@ -498,22 +484,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const sheetPayload = {
           timestamp: new Date().toISOString(),
-          Name: name,
-          Email: email,
-          "User Type": role,
-          "Hiring Status": hiringInputExt?.value || "",
-          "Company Name": companyInputExt?.value?.trim() || "",
-          "User Phone": phoneInput?.value || "",
-          download_via: "Annual Leave Calculator",
-          ...(lastCalculation ? {
-            "Join Date": lastCalculation.startDate,
-            "Target Year": lastCalculation.targetYear,
-            "Service Years": lastCalculation.yearsOfServiceText,
-            "Base Entitlement": lastCalculation.baseEntitlement,
-            "Pro-Rated Leaves": lastCalculation.proratedLeave,
-            "Leave Taken": lastCalculation.leaveTaken,
-            "Remaining Balance": lastCalculation.remainingBalance
-          } : {})
+          name: name,
+          email: email,
+          userType: role,
+          hiringStatus: hiringInputExt?.value || "",
+          companyName: companyInputExt?.value?.trim() || "",
+          userPhone: phoneInput?.value || "",
+          download_via: "Annual Leave Calculator"
         };
 
         const dbPayload = {
@@ -524,7 +501,7 @@ document.addEventListener("DOMContentLoaded", () => {
           createdAt: new Date().toISOString(),
           ...(lastCalculation ? {
             startDate: lastCalculation.startDate,
-            targetYear: lastCalculation.targetYear,
+            targetDate: lastCalculation.targetDate,
             yearsOfService: lastCalculation.yearsOfServiceText,
             baseEntitlement: lastCalculation.baseEntitlement,
             proratedLeave: lastCalculation.proratedLeave,
@@ -539,21 +516,26 @@ document.addEventListener("DOMContentLoaded", () => {
         if (phoneInput?.value)
           (dbPayload as any).phoneNumber = phoneInput.value;
 
-        try {
-          await addDoc(collection(db, "leads"), dbPayload);
-        } catch (err) {
-          console.error("Firestore error:", err);
-        }
-
-        try {
-          await fetch("/api/salary-sheet", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(sheetPayload),
+        // 1. Store lead in Firestore (non-blocking in background)
+        Promise.all([
+          import("firebase/firestore"),
+          import("./firebase")
+        ]).then(([{ collection, addDoc }, { db }]) => {
+          addDoc(collection(db, "leads"), dbPayload).catch((fErr) => {
+            console.warn("Firestore leads record error:", fErr);
           });
-        } catch (err) {
-          console.error("Google Sheets Webhook error:", err);
-        }
+        }).catch((err) => {
+          console.warn("Firestore import error:", err);
+        });
+
+        // 2. Submit to Google Sheet via server proxy (non-blocking in background)
+        fetch("/api/annual-leave-sheet", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(sheetPayload),
+        }).catch((sErr) => {
+          console.warn("Google Sheets record error:", sErr);
+        });
 
         if (typeof (window as any).gtag === "function") {
           (window as any).gtag("event", "submit_lead_leave", {
@@ -562,12 +544,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (lastCalculation) {
-          generatePDFReport({
+          const { generatePDFReport } = await import("./lib/pdf-generator");
+          await generatePDFReport({
             title: "Annual Leave Report",
             fileName: "Annual_Leave_Report",
             data: [
               { label: "Join Date", value: lastCalculation.startDate },
-              { label: "Calculation Year", value: lastCalculation.targetYear },
+              { label: "Calculation Date", value: lastCalculation.targetDate },
               {
                 label: "Years of Service",
                 value: lastCalculation.yearsOfServiceText,
@@ -610,8 +593,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
           }
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error("Submission error:", err);
+        alert(err.message || "An error occurred while generating the report. Please try again.");
       } finally {
         if (submitBtn) {
           submitBtn.textContent = originalText;

@@ -1,0 +1,8 @@
+node_modules
+dist
+dist-ssr
+*.local
+.env
+.dev.env.json
+test-results
+Salary-Calculator-Tools-New--main

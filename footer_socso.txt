@@ -4,7 +4,7 @@
           <!-- Logo + Description -->
           <div class="footer-col">
             <a href="/" class="logo" style="margin-bottom: 20px; display: block">
-              <img src="/logo-small.png" alt="SalaryCalc MY" referrerpolicy="no-referrer" width="250" height="44" fetchpriority="high" style="
+              <img src="/logo-small.png" alt="SalaryCalculator.my" referrerpolicy="no-referrer" width="250" height="44" fetchpriority="high" style="
                   height: 60px;
                   width: auto;
                   object-fit: contain;
@@ -33,7 +33,7 @@
         </div>
 
         <div class="footer-bottom">
-          <p>© 2026 SalaryCalc MY</p>
+          <p>© 2026 SalaryCalculator.my</p>
           <p style="margin-top: 8px; font-size: 15px; color: #64748b">
             Data is estimated for reference only
           </p>
