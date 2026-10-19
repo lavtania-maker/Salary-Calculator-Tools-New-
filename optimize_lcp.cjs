@@ -23,11 +23,9 @@ for (const f of files) {
     changed = true;
   }
 
-  // 3. Optimize dynYear DOM mutation script so it does not destroy & re-create H1/headings if year is already matching
-  const oldDynYearPattern = /var dynYear = new Date\(\)\.getFullYear\(\);[\s\S]*?document\.addEventListener\('DOMContentLoaded',\s*function\(\)\s*\{[\s\S]*?document\.title = document\.title[\s\S]*?var h1 = document\.querySelector\('h1'\);[\s\S]*?h1\.innerHTML = h1\.innerHTML[\s\S]*?\}\s*\);\s*\}\)\(\);/;
-  
+  // 3. Optimize dynYear DOM mutation script so it does not block the main thread
   const optimizedDynYearScript = `var dynYear = new Date().getFullYear();
-    document.addEventListener('DOMContentLoaded', function() {
+    function updateDynYear() {
       if (!document.title.includes(dynYear)) {
         document.title = document.title.replace(/20\\d\\d/g, dynYear);
       }
@@ -48,12 +46,24 @@ for (const f of files) {
           el.innerHTML = el.innerHTML.replace(/20\\d\\d/g, dynYear);
         }
       });
-    });
+    }
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(updateDynYear, { timeout: 3000 });
+    } else {
+      setTimeout(updateDynYear, 2000);
+    }
   })();`;
 
-  if (oldDynYearPattern.test(content)) {
-    content = content.replace(oldDynYearPattern, optimizedDynYearScript);
-    changed = true;
+  if (content.includes('var dynYear = new Date().getFullYear();') && !content.includes('updateDynYear')) {
+    const scriptRegex = /<script>\s*\(function\(\)\s*\{[\s\S]*?var dynYear = new Date\(\)\.getFullYear\(\);[\s\S]*?<\/script>/;
+    if (scriptRegex.test(content)) {
+      const fullScript = `<script>
+  (function() {
+    ${optimizedDynYearScript}
+</script>`;
+      content = content.replace(scriptRegex, fullScript);
+      changed = true;
+    }
   }
 
   if (changed) {

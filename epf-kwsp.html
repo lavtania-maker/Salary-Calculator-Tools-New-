@@ -200,7 +200,7 @@
 <script>
   (function() {
     var dynYear = new Date().getFullYear();
-    document.addEventListener('DOMContentLoaded', function() {
+    function updateDynYear() {
       if (!document.title.includes(dynYear)) {
         document.title = document.title.replace(/20\d\d/g, dynYear);
       }
@@ -221,7 +221,12 @@
           el.innerHTML = el.innerHTML.replace(/20\d\d/g, dynYear);
         }
       });
-    });
+    }
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(updateDynYear, { timeout: 3000 });
+    } else {
+      setTimeout(updateDynYear, 2000);
+    }
   })();
 </script>
 <title>EPF Calculator 2026 | KWSP Contribution Rates 11% &amp; 13%</title><meta name="description" content="Calculate Employee and Employer EPF contributions for 2026. Stay compliant with the latest KWSP rates in Malaysia."><meta name="twitter:url" content="https://salarycalculator.my/epf-kwsp">
@@ -231,9 +236,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=optional" rel="stylesheet">
 
     <!-- Main Stylesheet -->
-    <link href="/calculator-styles.css?v=20260922v1790068516152" rel="stylesheet">
+    <link href="/calculator-styles.css?v=20260922v1791869441535" rel="stylesheet">
     <noscript data-i18n="_98bba9">
-      <link href="/calculator-styles.css?v=20260922v1790068516152" rel="stylesheet" />
+      <link href="/calculator-styles.css?v=20260922v1791869441535" rel="stylesheet" />
     </noscript>
     <!-- FAQ Schema -->
     <script type="application/ld+json">
@@ -331,6 +336,293 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+      }
+
+      /* Prevent layout shift & column widening in EPF Calculator */
+      #layoutEpf,
+      .main-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
+      }
+
+      #layoutEpf > *,
+      .result-panel {
+        min-width: 0 !important;
+        max-width: 100% !important;
+      }
+
+      /* Clean, unified border system for EPF Results card with fixed width */
+      #epfResultCard {
+        box-sizing: border-box !important;
+        border: 1px solid var(--border) !important;
+        border-radius: 16px !important;
+        background: #ffffff !important;
+        padding: 24px !important;
+        overflow: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+      }
+
+      /* Ensure inner results content fills the card nicely */
+      #epfResultCard #epfResultsContent {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        padding: 0 !important;
+      }
+
+      /* Reset default .result-section borders inside EPF card to prevent duplicate outer boxes */
+      #epfResultCard .result-section {
+        background: transparent !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        overflow: visible !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Header divider */
+      #epfResultCard .epf-card-header {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        margin-bottom: 16px !important;
+        padding-bottom: 14px !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Salary summary divider */
+      #epfResultCard .epf-summary-row {
+        margin-bottom: 16px !important;
+        padding-bottom: 14px !important;
+        border-bottom: 1px dashed #e2e8f0 !important;
+        text-align: center !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Breakdown bar */
+      #epfResultCard .epf-breakdown-bar-wrapper {
+        margin-bottom: 16px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Contribution rows: Employee & Employer */
+      #epfResultCard .result-item {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 12px 0 !important;
+        border-bottom: 1px dashed #e2e8f0 !important;
+        border-top: none !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+      }
+
+      #epfResultCard .result-item span:last-child {
+        font-variant-numeric: tabular-nums !important;
+        text-align: right !important;
+        white-space: nowrap !important;
+      }
+
+      /* Net Salary After EPF card */
+      #epfResultCard .epf-net-salary-card {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 14px 16px !important;
+        background: #f8fafc !important;
+        border-radius: 12px !important;
+        border: 1px solid #e2e8f0 !important;
+        margin-top: 14px !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+      }
+
+      /* EPF Savings Projection expandable card - Fixed width in both collapsed & expanded states */
+      #epfResultCard #epfProjectionCard,
+      #epfResultCard .epf-projection-card {
+        border: 1px solid #e2e8f0 !important;
+        border-radius: 12px !important;
+        overflow: hidden !important;
+        background: #ffffff !important;
+        margin-top: 14px !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-shadow: none !important;
+      }
+
+      #epfResultCard #toggleProjection {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        cursor: pointer !important;
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        color: #1e3a8a !important;
+        padding: 12px 16px !important;
+        background: #ffffff !important;
+        user-select: none !important;
+        transition: background-color 0.15s ease !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        border: none !important;
+        margin: 0 !important;
+      }
+
+      #epfResultCard #toggleProjection:hover {
+        background-color: #f8fafc !important;
+      }
+
+      #epfResultCard #projectionContent {
+        border-top: 1px solid #e2e8f0 !important;
+        border-bottom: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-radius: 0 !important;
+        background: #ffffff !important;
+        overflow: hidden !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        margin-top: 0 !important;
+        padding: 0 !important;
+      }
+
+      #epfResultCard .table-responsive {
+        border: none !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Fixed table layout prevents table cells from expanding the card */
+      #epfResultCard table {
+        border: none !important;
+        margin: 0 !important;
+        margin-bottom: 0 !important;
+        background: #ffffff !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        table-layout: fixed !important;
+        border-collapse: collapse !important;
+        box-sizing: border-box !important;
+      }
+
+      #epfResultCard table th:nth-child(1),
+      #epfResultCard table td:nth-child(1) {
+        width: 35% !important;
+        text-align: left !important;
+        white-space: nowrap !important;
+      }
+
+      #epfResultCard table th:nth-child(2),
+      #epfResultCard table td:nth-child(2) {
+        width: 30% !important;
+        text-align: right !important;
+        white-space: nowrap !important;
+      }
+
+      #epfResultCard table th:nth-child(3),
+      #epfResultCard table td:nth-child(3) {
+        width: 35% !important;
+        text-align: right !important;
+        white-space: nowrap !important;
+      }
+
+      #epfResultCard table th,
+      #epfResultCard table td {
+        padding: 10px 8px !important;
+        font-size: 14px !important;
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-bottom: 1px solid #e2e8f0 !important;
+        box-sizing: border-box !important;
+        white-space: nowrap !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        font-variant-numeric: tabular-nums !important;
+      }
+
+      #epfResultCard table tbody tr:last-child td {
+        border-bottom: none !important;
+      }
+
+      /* Disclaimer */
+      #epfResultCard .epf-disclaimer {
+        font-size: 14px !important;
+        color: var(--text-muted) !important;
+        margin-top: 14px !important;
+        margin-bottom: 0 !important;
+        line-height: 1.5 !important;
+        text-align: left !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Download Button */
+      #epfResultCard .cta-group {
+        margin-top: 18px !important;
+        padding: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      #epfResultCard .cta-group .btn {
+        width: 100% !important;
+        height: 48px !important;
+        border-radius: 10px !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Mobile responsive adjustments */
+      @media (max-width: 480px) {
+        #epfResultCard {
+          padding: 16px !important;
+        }
+        #epfResultCard .epf-net-salary-card {
+          padding: 12px 14px !important;
+        }
+        #epfResultCard #toggleProjection {
+          padding: 11px 14px !important;
+        }
+        #epfResultCard table {
+          min-width: 310px !important;
+        }
+        #epfResultCard table th,
+        #epfResultCard table td {
+          padding: 8px 6px !important;
+          font-size: 13px !important;
+        }
       }
     </style>
   
@@ -629,12 +921,12 @@
           <!-- Right Side: Result Panel -->
           <aside class="result-panel">
             <div class="card results-container" id="epfResultCard">
-              <div style="
+              <div class="epf-card-header" style="
                   display: flex;
                   justify-content: space-between;
                   align-items: center;
-                  margin-bottom: 1.5rem;
-                  padding-bottom: 0.75rem;
+                  margin-bottom: 16px;
+                  padding-bottom: 14px;
                   border-bottom: 1px solid var(--border);
                 ">
                 <h2 class="card-title" style="margin-bottom: 0; color: #2563eb !important;" data-i18n="epf_results_1ca9ee">EPF Results</h2>
@@ -712,12 +1004,7 @@
               <div id="epfResultsContent" class="results-content" style="display: none; padding: 0">
                 <div class="result-section">
                   <!-- Salary Summary -->
-                  <div style="
-                      margin-bottom: 16px;
-                      padding-bottom: 12px;
-                      border-bottom: 1px dashed #e2e8f0;
-                      text-align: center;
-                    " data-i18n="monthly_salary_rm_0_00_813487">
+                  <div class="epf-summary-row" data-i18n="monthly_salary_rm_0_00_813487">
                     <span style="
                         display: block;
                         font-size: 15px;
@@ -734,8 +1021,8 @@
                   </div>
 
                   <!-- Visual Breakdown Bar -->
-                  <div style="margin-bottom: 20px">
-                    <div style="
+                  <div class="epf-breakdown-bar-wrapper">
+                    <div class="epf-breakdown-bar" style="
                         display: flex;
                         height: 8px;
                         border-radius: 4px;
@@ -756,7 +1043,7 @@
                   </div>
 
                   <!-- Employee Row -->
-                  <div class="result-item" style="padding-top: 10px">
+                  <div class="result-item">
                     <div style="display: flex; align-items: center; gap: 12px">
                       <div style="
                           width: 32px;
@@ -809,7 +1096,7 @@
                           <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
                           <line x1="9" y1="9" x2="9.01" y2="9"></line>
                           <line x1="15" y1="9" x2="15.01" y2="9"></line>
-                          <line x1="9" y1="15" x2="15" y2="15"></line>
+                          <line x1="9" y1="15" x2="15.01" y2="15"></line>
                         </svg>
                       </div>
                       <div style="display: flex; flex-direction: column" data-i18n="employer_contribution_13_91284a">
@@ -830,88 +1117,64 @@
                     <span id="epfEmployerCardVal" style="font-weight: 700; color: #b45309">RM 0.00</span>
                   </div>
                   <!-- Net Salary Row -->
-                  <div style="
-                      display: flex;
-                      align-items: center;
-                      justify-content: space-between;
-                      padding: 16px;
-                      background: #ffffff;
-                      border-radius: 12px;
-                      margin-top: 12px;
-                      border: 1px solid #f1f5f9;
-                    " data-i18n="net_salary_after_epf_rm_0_00_32edba">
+                  <div class="epf-net-salary-card" data-i18n="net_salary_after_epf_rm_0_00_32edba">
                     <span style="font-weight: 700; color: #334155">Net Salary After EPF</span>
                     <span id="epfNetSalaryVal" style="
                         font-weight: 800;
                         color: #0f172a;
-                        font-size: 1.1rem;
+                        font-size: 1.15rem;
                       ">RM 0.00</span>
                   </div>
 
                   <!-- Monthly & Yearly Projection Section -->
-                  <div class="result-section" style="margin-top: 16px; padding-top: 16px;">
-                    <div id="toggleProjection" style="
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        cursor: pointer;
-                        font-size: 16px;
-                        font-weight: 700;
-                        color: #1e3a8a;
-                        margin: 0;
-                        padding-bottom: 8px;
-                      " data-i18n="epf_savings_projection_b3556b">
+                  <div id="epfProjectionCard" class="epf-projection-card">
+                    <div id="toggleProjection" data-i18n="epf_savings_projection_b3556b">
                       <span style="display: flex; align-items: center; gap: 8px;">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                           <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                         </svg>
                         EPF Savings Projection
                       </span>
-                      <span id="projectionArrow" style="transition: transform 0.3s ease; font-size: 15px;">▼</span>
+                      <span id="projectionArrow" style="transition: transform 0.3s ease; font-size: 14px;">▼</span>
                     </div>
-                    <div id="projectionContent" class="overflow-hidden" style="display: none; margin-top: 12px; overflow: hidden; border: 1px solid #e2e8f0; border-radius: 12px; background: #ffffff;">
-                      <div style="width: 100%; overflow-x: auto;">
-                        <table style="width: 100%; border-collapse: separate; border-spacing: 0; font-size: 15px; margin: 0; background: #ffffff;" data-i18n="monthly_yearly_employee_epf_rm_0_00_rm_0_86b1f6">
+                    <div id="projectionContent" class="overflow-hidden" style="display: none;">
+                      <div class="table-responsive">
+                        <table data-i18n="monthly_yearly_employee_epf_rm_0_00_rm_0_86b1f6">
                           <thead>
                             <tr style="background: #f8fafc;">
-                              <th style="padding: 12px 16px; text-align: left; color: #64748b; font-weight: 600; border-bottom: 1px solid #e2e8f0; border-top-left-radius: 11px;"></th>
-                              <th style="padding: 12px 16px; text-align: right; color: #1e4ed8; font-weight: 700; border-bottom: 1px solid #e2e8f0;" data-i18n="monthly_9030e3">Monthly</th>
-                              <th style="padding: 12px 16px; text-align: right; color: #1e4ed8; font-weight: 700; border-bottom: 1px solid #e2e8f0; border-top-right-radius: 11px;" data-i18n="yearly_cf5ea7">Yearly</th>
+                              <th style="text-align: left; color: #64748b; font-weight: 600;"></th>
+                              <th style="text-align: right; color: #1e4ed8; font-weight: 700;" data-i18n="monthly_9030e3">Monthly</th>
+                              <th style="text-align: right; color: #1e4ed8; font-weight: 700;" data-i18n="yearly_cf5ea7">Yearly</th>
                             </tr>
                           </thead>
                           <tbody>
                             <tr>
-                              <td style="padding: 12px 16px; border-bottom: 1px solid #e2e8f0;" data-i18n="employee_epf_00a625">
+                              <td data-i18n="employee_epf_00a625">
                                 <span style="font-weight: 600; color: #475569;">Employee EPF</span>
                               </td>
-                              <td id="tableMonthlyEmp" style="padding: 12px 16px; text-align: right; font-weight: 700; color: #059669; border-bottom: 1px solid #e2e8f0;" data-i18n="rm_000_0aa47d">RM 0.00</td>
-                              <td id="tableYearlyEmp" style="padding: 12px 16px; text-align: right; font-weight: 700; color: #059669; border-bottom: 1px solid #e2e8f0;" data-i18n="rm_000_0aa47d">RM 0.00</td>
+                              <td id="tableMonthlyEmp" style="text-align: right; font-weight: 700; color: #059669;" data-i18n="rm_000_0aa47d">RM 0.00</td>
+                              <td id="tableYearlyEmp" style="text-align: right; font-weight: 700; color: #059669;" data-i18n="rm_000_0aa47d">RM 0.00</td>
                             </tr>
                             <tr>
-                              <td style="padding: 12px 16px; border-bottom: 1px solid #e2e8f0;" data-i18n="employer_epf_a105c1">
+                              <td data-i18n="employer_epf_a105c1">
                                 <span style="font-weight: 600; color: #475569;">Employer EPF</span>
                               </td>
-                              <td id="tableMonthlyEmpr" style="padding: 12px 16px; text-align: right; font-weight: 700; color: #b45309; border-bottom: 1px solid #e2e8f0;" data-i18n="rm_000_0aa47d">RM 0.00</td>
-                              <td id="tableYearlyEmpr" style="padding: 12px 16px; text-align: right; font-weight: 700; color: #b45309; border-bottom: 1px solid #e2e8f0;" data-i18n="rm_000_0aa47d">RM 0.00</td>
+                              <td id="tableMonthlyEmpr" style="text-align: right; font-weight: 700; color: #b45309;" data-i18n="rm_000_0aa47d">RM 0.00</td>
+                              <td id="tableYearlyEmpr" style="text-align: right; font-weight: 700; color: #b45309;" data-i18n="rm_000_0aa47d">RM 0.00</td>
                             </tr>
                             <tr style="background: #f8fafc;">
-                              <td style="padding: 12px 16px; border-bottom-left-radius: 11px;" data-i18n="total_epf_savings_861cf4">
+                              <td data-i18n="total_epf_savings_861cf4">
                                 <span style="font-weight: 800; color: #1e3a8a;">Total EPF Savings</span>
                               </td>
-                              <td id="tableMonthlyTotal" style="padding: 12px 16px; text-align: right; font-weight: 800; color: #1e3a8a;" data-i18n="rm_000_0aa47d">RM 0.00</td>
-                              <td id="tableYearlyTotal" style="padding: 12px 16px; text-align: right; font-weight: 800; color: #1e3a8a; border-bottom-right-radius: 11px;" data-i18n="rm_000_0aa47d">RM 0.00</td>
+                              <td id="tableMonthlyTotal" style="text-align: right; font-weight: 800; color: #1e3a8a;" data-i18n="rm_000_0aa47d">RM 0.00</td>
+                              <td id="tableYearlyTotal" style="text-align: right; font-weight: 800; color: #1e3a8a;" data-i18n="rm_000_0aa47d">RM 0.00</td>
                             </tr>
                           </tbody>
                         </table>
                       </div>
                     </div>
                   </div>
-                  <p style="
-                      font-size: 15px;
-                      color: var(--text-muted);
-                      
-                      margin-top: 10px;
-                    " data-i18n="this_calculator_is_for_reference_onlyple_23509a">
+                  <p class="epf-disclaimer" data-i18n="this_calculator_is_for_reference_onlyple_23509a">
                     This calculator is for reference only.<br><span style="display: block; margin-top: 4px">Please check official KWSP guidelines for accurate
                       deductions.</span>
                   </p>

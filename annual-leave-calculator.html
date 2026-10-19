@@ -187,7 +187,7 @@
 <script>
   (function() {
     var dynYear = new Date().getFullYear();
-    document.addEventListener('DOMContentLoaded', function() {
+    function updateDynYear() {
       if (!document.title.includes(dynYear)) {
         document.title = document.title.replace(/20\d\d/g, dynYear);
       }
@@ -208,7 +208,12 @@
           el.innerHTML = el.innerHTML.replace(/20\d\d/g, dynYear);
         }
       });
-    });
+    }
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(updateDynYear, { timeout: 3000 });
+    } else {
+      setTimeout(updateDynYear, 2000);
+    }
   })();
 </script>
 <title>Annual Leave Calculator Malaysia | Pro-Rated Leave</title><meta name="description" content="Calculate accurate pro-rated annual leave entitlement under the Malaysian Employment Act. Free tool for HR and employees."><meta name="twitter:url" content="https://salarycalculator.my/annual-leave-calculator"><meta property="article:published_time" content="2026-06-10T00:00:00+08:00"><meta property="article:modified_time" content="2026-06-23T00:00:00+08:00">
@@ -218,9 +223,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=optional" rel="stylesheet">
 
     <!-- Main Stylesheet -->
-    <link href="/calculator-styles.css?v=20260922v1790068516152" rel="stylesheet">
+    <link href="/calculator-styles.css?v=20260922v1791869333112" rel="stylesheet">
     <noscript data-i18n="_98bba9">
-      <link href="/calculator-styles.css?v=20260922v1790068516152" rel="stylesheet" />
+      <link href="/calculator-styles.css?v=20260922v1791869333112" rel="stylesheet" />
     </noscript>
 
     <link rel="preload" as="image" href="/logo-small.png?v=20260922v5">
@@ -550,7 +555,7 @@
                 </div>
               </div>
 
-              <div class="form-actions" style="gap: 20px; align-items: stretch; margin-top: 40px" data-i18n="reset_calculate_9eecc4">
+              <div class="form-actions" style="gap: 12px; align-items: center; margin-top: 24px;" data-i18n="reset_calculate_9eecc4">
                 <button type="reset" id="leaveResetBtn" class="btn btn-outline" data-i18n="reset_2290b0">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>

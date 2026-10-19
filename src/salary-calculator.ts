@@ -12,71 +12,8 @@ function formatCurrency(amount: number): string {
   );
 }
 
-function getSocsoRates(salary: number, age: string, nationality = "malaysian") {
-  if (!salary || salary <= 0)
-    return { er: 0, ee: 0, total: 0, er_only: 0, bracket: 0 };
-  const capped = Math.min(salary, 6000);
-  let bracketIndex = 0;
-
-  if (capped <= 30) bracketIndex = 1;
-  else if (capped <= 50) bracketIndex = 2;
-  else if (capped <= 70) bracketIndex = 3;
-  else if (capped <= 100) bracketIndex = 4;
-  else if (capped <= 140) bracketIndex = 5;
-  else if (capped <= 200) bracketIndex = 6;
-  else if (salary > 6000) bracketIndex = 65;
-  else {
-    bracketIndex = Math.floor((capped - 200.01) / 100) + 7;
-  }
-
-  const er_act4_table = [
-    0, 0.4, 0.7, 1.1, 1.5, 2.1, 2.95, 4.35, 6.15, 7.85, 9.65, 11.35,
-    13.15, 14.85, 16.65, 18.35, 20.15, 21.85, 23.65, 25.35, 27.15,
-    28.85, 30.65, 32.35, 34.15, 35.85, 37.65, 39.35, 41.15, 42.85,
-    44.65, 46.35, 48.15, 49.85, 51.65, 53.35, 55.15, 56.85, 58.65,
-    60.35, 62.15, 63.85, 65.65, 67.35, 69.15, 70.85, 72.65, 74.35,
-    76.15, 77.85, 79.65, 81.35, 83.15, 84.85, 86.65, 88.35, 90.15,
-    91.85, 93.65, 95.35, 97.15, 98.85, 100.65, 102.35, 104.15, 104.15,
-  ];
-  const er_only_table = [
-    0, 0.3, 0.5, 0.8, 1.1, 1.5, 2.1, 3.1, 4.4, 5.6, 6.9, 8.1, 9.4, 10.6,
-    11.9, 13.1, 14.4, 15.6, 16.9, 18.1, 19.4, 20.6, 21.9, 23.1, 24.4,
-    25.6, 26.9, 28.1, 29.4, 30.6, 31.9, 33.1, 34.4, 35.6, 36.9, 38.1,
-    39.4, 40.6, 41.9, 43.1, 44.4, 45.6, 46.9, 48.1, 49.4, 50.6, 51.9,
-    53.1, 54.4, 55.6, 56.9, 58.1, 59.4, 60.6, 61.9, 63.1, 64.4, 65.6,
-    66.9, 68.1, 69.4, 70.6, 71.9, 73.1, 74.4, 74.4,
-  ];
-  const ee_table = [
-    0, 0.1, 0.2, 0.3, 0.4, 0.6, 0.85, 1.25, 1.75, 2.25, 2.75, 3.25,
-    3.75, 4.25, 4.75, 5.25, 5.75, 6.25, 6.75, 7.25, 7.75, 8.25, 8.75,
-    9.25, 9.75, 10.25, 10.75, 11.25, 11.75, 12.25, 12.75, 13.25, 13.75,
-    14.25, 14.75, 15.25, 15.75, 16.25, 16.75, 17.25, 17.75, 18.25,
-    18.75, 19.25, 19.75, 20.25, 20.75, 21.25, 21.75, 22.25, 22.75,
-    23.25, 23.75, 24.25, 24.75, 25.25, 25.75, 26.25, 26.75, 27.25,
-    27.75, 28.25, 28.75, 29.25, 29.75, 29.75,
-  ];
-
-  const bracket_er_act4 = er_act4_table[bracketIndex] || 0;
-  const bracket_er_only = er_only_table[bracketIndex] || 0;
-  const bracket_ee = ee_table[bracketIndex] || 0;
-
-  if (age === "above60" || nationality === "foreigner") {
-    return {
-      er: bracket_er_only,
-      ee: 0,
-      total: bracket_er_only,
-      er_only: bracket_er_only,
-      bracket: bracketIndex,
-    };
-  }
-  return {
-    er: bracket_er_act4,
-    ee: bracket_ee,
-    total: Number((bracket_er_act4 + bracket_ee).toFixed(2)),
-    er_only: bracket_er_only,
-    bracket: bracketIndex,
-  };
-}
+import { getSocsoRates } from "./lib/socso";
+import { calculateOfficialPcb } from "./lib/pcb";
 
 export function calculateSalary(scrollOnMobile = false) {
   try {
@@ -93,11 +30,13 @@ export function calculateSalary(scrollOnMobile = false) {
     const bonusEl = document.getElementById("bonus") as HTMLInputElement | null;
     const maritalStatusEl = document.getElementById("maritalStatus") as HTMLSelectElement | null;
     const nationalityEl = document.getElementById("nationality") as HTMLSelectElement | null;
+    const childrenEl = document.getElementById("children") as HTMLInputElement | null;
 
     const grossSalary = grossSalaryEl ? parseFloat(grossSalaryEl.value) || 0 : 0;
     const bonus = bonusEl ? parseFloat(bonusEl.value) || 0 : 0;
     const maritalStatus = maritalStatusEl ? maritalStatusEl.value : "single";
     const nationality = nationalityEl ? nationalityEl.value : "malaysian";
+    const childrenCount = childrenEl ? parseInt(childrenEl.value) || 0 : 0;
 
     const includeEpfEl = document.getElementById("includeEpf") as HTMLInputElement | null;
     const includeSocsoEl = document.getElementById("includeSocso") as HTMLInputElement | null;
@@ -146,76 +85,18 @@ export function calculateSalary(scrollOnMobile = false) {
       }
     }
 
-    // 5. PCB
+    // 5. PCB (Official HASiL 2026 Computerised Specification)
     let pcb = 0;
     if (includePcb) {
-      const annualIncome = totalIncome * 12;
-      const epfRelief = Math.min(epf * 12, 4000);
-      const personalRelief = 9000;
-      let spouseRelief = 0;
-      let childRelief = 0;
-
-      switch (maritalStatus) {
-        case "single":
-          break;
-        case "married_non_working":
-        case "married_spouse_not_working_no_child":
-        case "married_spouse_not_working":
-          spouseRelief = 4000;
-          break;
-        case "married_1_child_spouse_not_working":
-          spouseRelief = 4000;
-          childRelief = 2000;
-          break;
-        case "married_2_children_spouse_not_working":
-          spouseRelief = 4000;
-          childRelief = 4000;
-          break;
-        case "married_working":
-        case "married_spouse_working_no_child":
-        case "married_spouse_working":
-          break;
-        case "married_1_child_spouse_working":
-          childRelief = 2000;
-          break;
-        case "married_2_children_spouse_working":
-          childRelief = 4000;
-          break;
-      }
-
-      const totalRelief = personalRelief + epfRelief + spouseRelief + childRelief;
-      const taxableIncome = annualIncome - totalRelief;
-
-      if (taxableIncome > 0) {
-        let annualTax = 0;
-        if (taxableIncome <= 5000) {
-          annualTax = 0;
-        } else if (taxableIncome <= 20000) {
-          annualTax = (taxableIncome - 5000) * 0.01;
-        } else if (taxableIncome <= 35000) {
-          annualTax = 150 + (taxableIncome - 20000) * 0.03;
-        } else if (taxableIncome <= 50000) {
-          annualTax = 600 + (taxableIncome - 35000) * 0.08;
-        } else if (taxableIncome <= 70000) {
-          annualTax = 1800 + (taxableIncome - 50000) * 0.11;
-        } else if (taxableIncome <= 100000) {
-          annualTax = 4000 + (taxableIncome - 70000) * 0.19;
-        } else if (taxableIncome <= 400000) {
-          annualTax = 9700 + (taxableIncome - 100000) * 0.25;
-        } else if (taxableIncome <= 600000) {
-          annualTax = 84700 + (taxableIncome - 400000) * 0.26;
-        } else if (taxableIncome <= 2000000) {
-          annualTax = 136700 + (taxableIncome - 600000) * 0.28;
-        } else {
-          annualTax = 528700 + (taxableIncome - 2000000) * 0.3;
-        }
-
-        if (taxableIncome <= 35000) {
-          annualTax = Math.max(0, annualTax - 400);
-        }
-
-        pcb = annualTax / 12;
-      }
+      const pcbResult = calculateOfficialPcb({
+        grossSalary,
+        bonus,
+        epfRate: 0.11,
+        includeEpf: includeEpf && nationality === "malaysian",
+        maritalStatus,
+        childrenCount,
+      });
+      pcb = pcbResult.monthlyPcb;
     }
 
     // Update UI elements
@@ -1075,7 +956,8 @@ function updatePremiumIncomeJourney(totalIncome: number, grossSalary: number) {
 
   const trackFill = document.getElementById("journeyTrackFill");
   if (trackFill) {
-    trackFill.style.width = `${trackPct}%`;
+    trackFill.style.transform = `scaleX(${trackPct / 100})`;
+    trackFill.style.transformOrigin = "left";
     trackFill.style.background = currentGroup === "B40" ? "#ef4444" : currentGroup === "M40" ? "#eab308" : "#16a34a";
   }
 

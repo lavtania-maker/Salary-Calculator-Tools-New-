@@ -27,6 +27,10 @@ export default defineConfig(({ mode }) => {
       minifyWhitespace: true,
     },
     build: {
+      modulePreload: {
+        polyfill: false,
+      },
+      target: "es2020",
       minify: true,
       cssMinify: true,
       rollupOptions: {

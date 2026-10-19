@@ -1,203 +1,8 @@
 <!DOCTYPE html><html lang="en"><head>
     <script>
-      (function() {
-        var ignoreScriptError = function(msg) {
-          if (!msg) return true; // Treat empty message as something to ignore
-          var s = msg.toString().toLowerCase();
-          return s.indexOf("script error") > -1 || s === "script error." || s.indexOf("uncaught script error") > -1;
-        };
-
-        // 1. window.onerror
-        var oldOnError = window.onerror;
-        window.onerror = function (message, source, lineno, colno, error) {
-          if (ignoreScriptError(message)) {
-            console.warn("[SalaryCalc] Script error suppressed (window.onerror).");
-            return true;
-          }
-          if (typeof oldOnError === 'function') {
-            return oldOnError.apply(this, arguments);
-          }
-        };
-
-        // 2. addEventListener('error')
-        window.addEventListener('error', function(event) {
-          if (ignoreScriptError(event.message)) {
-            console.warn("[SalaryCalc] Script error suppressed (addEventListener).");
-            event.stopImmediatePropagation();
-            event.preventDefault();
-            return true;
-          }
-        }, true);
-        
-        // 3. handle unhandledrejection
-        window.addEventListener('unhandledrejection', function(event) {
-          if (event.reason && ignoreScriptError(event.reason.message)) {
-            console.warn("[SalaryCalc] Script error suppressed (unhandledrejection).");
-            event.stopImmediatePropagation();
-            event.preventDefault();
-            return true;
-          }
-        }, true);
-      })();
-    </script>
-    <script>
-      window.clearAndRefreshLogs = function () {
-        var content = document.getElementById("errorLogContent");
-        if (content) content.innerHTML = '<p style="color:#64748b;text-align:center;padding:20px;">No error logs recorded.</p>';
-        try {
-          localStorage.removeItem("salary_calculator_error_logs");
-        } catch (e) {}
-      };
-    </script>
-    
-    
-    
-    <script>
-      if ("scrollRestoration" in history) {
-        history.scrollRestoration = "manual";
-      }
-      window.scrollTo(0, 0);
-    </script>
-
-    <!-- Latently loaded Google Tag Manager to resolve early execution & unused JS warnings -->
-    <script>
-      window.addEventListener('load', function() {
-        setTimeout(function() {
-          const script = document.createElement("script"); script.crossOrigin = "anonymous"; script.src = "https://www.googletagmanager.com/gtag/js?id=G-TMQV1XC09P";
-          script.async = true;
-          document.head.appendChild(script);
-
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            dataLayer.push(arguments);
-          }
-          window.gtag = gtag;
-          gtag("js", new Date());
-          gtag("config", "G-TMQV1XC09P");
-        }, 1200);
-      });
-    </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="/favicon-ricebowl.png?v=20260922v5">
-
-    <meta name="keywords" content="PCB calculator, MTD calculator, Potongan Cukai Berjadual, monthly tax deduction Malaysia, income tax calculator Malaysia, LHDN PCB">
-
-    <!-- SEO -->
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://salarycalculator.my/pcb-calculator">
-    
-    
-    
-    <meta property="article:published_time" content="2025-05-10T00:00:00+08:00">
-    <meta property="article:modified_time" content="2026-06-23T00:00:00+08:00">
-
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://salarycalculator.my/pcb-calculator">
-    <meta property="og:title" content="PCB Calculator 2026 | Monthly Tax Deduction (MTD) Malaysia">
-    <meta property="og:description" content="Calculate your Monthly Tax Deduction (PCB) instantly. Includes 2026 tax brackets, reliefs, and rebates for Malaysian taxpayers.">
-    <meta property="og:image" content="https://salarycalculator.my/logo-small.png?v=20260922v5">
-      <meta property="og:image:width" content="1200">
-      <meta property="og:image:height" content="630">
-      <meta property="og:image:alt" content="Salary Calculator Malaysia">
-    <meta property="og:site_name" content="SalaryCalculator.my">
-    <meta property="og:locale" content="en_MY">
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="PCB Calculator 2026 | Monthly Tax Deduction (MTD) Malaysia">
-    <meta name="twitter:description" content="Calculate your Monthly Tax Deduction (PCB) instantly. Includes 2026 tax brackets, reliefs, and rebates for Malaysian taxpayers.">
-    <meta name="twitter:image" content="https://salarycalculator.my/logo-small.png?v=20260922v5">
-
-    <!-- JSON-LD Structured Data -->
-
-    <!-- Google Fonts -->
-    
-    
-    <!-- Asynchronously loaded Google Fonts to prevent render-blocking -->
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
-  
-<script>
   (function() {
     var dynYear = new Date().getFullYear();
-    document.addEventListener('DOMContentLoaded', function() {
+    function updateDynYear() {
       if (!document.title.includes(dynYear)) {
         document.title = document.title.replace(/20\d\d/g, dynYear);
       }
@@ -218,7 +23,12 @@
           el.innerHTML = el.innerHTML.replace(/20\d\d/g, dynYear);
         }
       });
-    });
+    }
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(updateDynYear, { timeout: 3000 });
+    } else {
+      setTimeout(updateDynYear, 2000);
+    }
   })();
 </script>
 <title>PCB Calculator 2026 | Monthly Tax Deduction (MTD) Malaysia</title><meta name="description" content="Calculate your Monthly Tax Deduction (PCB) instantly. Includes 2026 tax brackets, reliefs, and rebates for Malaysian taxpayers."><meta name="twitter:url" content="https://salarycalculator.my/pcb-calculator">
@@ -228,9 +38,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=optional" rel="stylesheet">
 
     <!-- Main Stylesheet -->
-    <link href="/calculator-styles.css?v=20260922v1790068535570" rel="stylesheet">
+    <link href="/calculator-styles.css?v=20260922v1791869333112" rel="stylesheet">
     <noscript data-i18n="_98bba9">
-      <link href="/calculator-styles.css?v=20260922v1790068535570" rel="stylesheet" />
+      <link href="/calculator-styles.css?v=20260922v1791869333112" rel="stylesheet" />
     </noscript>
     <!-- FAQ Schema -->
     <script type="application/ld+json">
@@ -326,6 +136,449 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+      }
+
+      /* PCB Form 2-Column Grid Layout & Alignment */
+      #pcbForm {
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      #pcbForm .pcb-form-group-full {
+        margin-bottom: 20px !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+
+      #pcbForm .pcb-form-row {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 20px !important;
+        margin-bottom: 20px !important;
+        align-items: stretch !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      #pcbForm .pcb-form-row .form-group {
+        margin-bottom: 0 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        height: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* When spouse working status is hidden (single), marital status spans the full row seamlessly */
+      #maritalRow:not(.is-married) {
+        grid-template-columns: 1fr !important;
+      }
+      #maritalRow:not(.is-married) #spouseWorkingGroup {
+        display: none !important;
+      }
+      #maritalRow.is-married {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      }
+      #maritalRow.is-married #spouseWorkingGroup {
+        display: flex !important;
+      }
+
+      #pcbForm .form-label {
+        display: block !important;
+        margin-bottom: 8px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        color: #1e293b !important;
+        line-height: 1.4 !important;
+        min-height: auto !important;
+        box-sizing: border-box !important;
+      }
+
+      #pcbForm .pcb-form-group-full .form-label {
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+      }
+
+      #pcbForm .form-label .helper-text {
+        font-size: 13px !important;
+        font-weight: 400 !important;
+        color: #64748b !important;
+        margin-left: 4px !important;
+        display: inline !important;
+      }
+
+      /* Perfectly align inputs horizontally across columns via flex stretch */
+      #pcbForm .pcb-form-row .form-group > .form-input,
+      #pcbForm .pcb-form-row .form-group > .form-select,
+      #pcbForm .pcb-form-row .form-group > .input-group {
+        margin-top: auto !important;
+      }
+
+      /* Unified height, border-radius, font size for all PCB form controls */
+      #pcbForm .form-input,
+      #pcbForm .form-select,
+      #pcbForm .input-group {
+        height: 48px !important;
+        min-height: 48px !important;
+        max-height: 48px !important;
+        box-sizing: border-box !important;
+        border-radius: 10px !important;
+        font-size: 15px !important;
+        width: 100% !important;
+      }
+
+      /* Standalone inputs (e.g. Number of Children) */
+      #pcbForm input.form-input {
+        border: 1px solid var(--border-input, #cbd5e1) !important;
+        background-color: #ffffff !important;
+        padding: 0 14px !important;
+        line-height: 46px !important;
+        color: #1e293b !important;
+        outline: none !important;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+      }
+
+      #pcbForm input.form-input:focus {
+        border-color: #2563eb !important;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+      }
+
+      /* Input groups (Gross Salary, Additional Tax Relief) */
+      #pcbForm .input-group {
+        display: flex !important;
+        align-items: stretch !important;
+        overflow: hidden !important;
+        background-color: #ffffff !important;
+        border: 1px solid var(--border-input, #cbd5e1) !important;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+      }
+
+      #pcbForm .input-group:focus-within {
+        border-color: #2563eb !important;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+      }
+
+      #pcbForm .input-group .input-prefix {
+        height: 46px !important;
+        line-height: 46px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        padding: 0 16px !important;
+        background-color: #f8fafc !important;
+        color: #64748b !important;
+        font-weight: 600 !important;
+        font-size: 14.5px !important;
+        border-right: 1px solid var(--border-input, #cbd5e1) !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        border-left: none !important;
+        box-sizing: border-box !important;
+        flex-shrink: 0 !important;
+      }
+
+      #pcbForm .input-group .form-input {
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        padding: 0 14px !important;
+        flex: 1 1 auto !important;
+        height: 46px !important;
+        min-height: 46px !important;
+        max-height: 46px !important;
+        line-height: 46px !important;
+        color: #1e293b !important;
+        outline: none !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Select dropdowns */
+      #pcbForm .form-select {
+        border: 1px solid var(--border-input, #cbd5e1) !important;
+        background-color: #ffffff !important;
+        padding: 0 36px 0 14px !important;
+        line-height: 46px !important;
+        color: #1e293b !important;
+        cursor: pointer !important;
+        appearance: none !important;
+        -webkit-appearance: none !important;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 14px center !important;
+        background-size: 16px !important;
+        outline: none !important;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+      }
+
+      #pcbForm .form-select:focus {
+        border-color: #2563eb !important;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12) !important;
+      }
+
+      /* Form action buttons */
+      #pcbForm .form-actions {
+        display: flex !important;
+        gap: 12px !important;
+        margin-top: 24px !important;
+        align-items: center !important;
+        width: 100% !important;
+      }
+
+      #pcbForm .form-actions .btn {
+        height: 48px !important;
+        min-height: 48px !important;
+        border-radius: 10px !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        box-sizing: border-box !important;
+      }
+
+      #pcbForm .form-actions .btn-outline {
+        flex: 1 1 35% !important;
+      }
+
+      #pcbForm .form-actions .btn-primary {
+        flex: 2 1 65% !important;
+      }
+
+      /* Mobile layout (stacks cleanly at <= 640px) */
+      @media (max-width: 640px) {
+        #pcbForm .pcb-form-row {
+          grid-template-columns: 1fr !important;
+          gap: 16px !important;
+          margin-bottom: 16px !important;
+        }
+
+        #pcbForm .pcb-form-group-full {
+          margin-bottom: 16px !important;
+        }
+
+        #maritalRow:not(.is-married),
+        #maritalRow.is-married {
+          grid-template-columns: 1fr !important;
+          gap: 16px !important;
+        }
+
+        #pcbForm .pcb-form-row .form-label {
+          margin-bottom: 6px !important;
+        }
+
+        #pcbForm .pcb-form-row .form-group > .form-input,
+        #pcbForm .pcb-form-row .form-group > .form-select,
+        #pcbForm .pcb-form-row .form-group > .input-group {
+          margin-top: 0 !important;
+        }
+
+        #pcbForm .form-input,
+        #pcbForm .form-select,
+        #pcbForm input,
+        #pcbForm select {
+          font-size: 16px !important;
+        }
+
+        #pcbForm .form-actions {
+          flex-direction: column !important;
+          gap: 10px !important;
+          margin-top: 20px !important;
+        }
+
+        #pcbForm .form-actions .btn {
+          width: 100% !important;
+          flex: 1 1 100% !important;
+        }
+      }
+
+      /* PCB Result Card Styling - Clean, uncluttered, professional */
+      #resultCard {
+        box-sizing: border-box !important;
+      }
+
+      #resultCard .pcb-section-group {
+        margin-bottom: 22px !important;
+      }
+
+      #resultCard .pcb-section-heading {
+        font-size: 13px !important;
+        font-weight: 700 !important;
+        color: #475569 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        margin: 0 0 10px 0 !important;
+        padding: 0 !important;
+        line-height: 1.3 !important;
+      }
+
+      /* Highlighted Result Cards (Consistent width, clean borders, no double nesting) */
+      #resultCard .pcb-highlight-card {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        background: #f8fafc !important;
+        border: 1px solid #bfdbfe !important;
+        border-radius: 12px !important;
+        padding: 14px 16px !important;
+        text-align: center !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 3px !important;
+        margin-bottom: 14px !important;
+        box-shadow: 0 1px 3px rgba(37, 99, 235, 0.05) !important;
+      }
+
+      #resultCard .pcb-main-highlight {
+        background: #f0f7ff !important;
+        border: 1.5px solid #93c5fd !important;
+        padding: 18px 16px !important;
+      }
+
+      #resultCard .pcb-highlight-label,
+      #resultCard .highlight-label {
+        font-size: 13px !important;
+        color: #1e3a8a !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.05em !important;
+        line-height: 1.3 !important;
+      }
+
+      #resultCard .pcb-highlight-value,
+      #resultCard .highlight-value {
+        font-size: 1.85rem !important;
+        font-weight: 800 !important;
+        color: #2563eb !important;
+        line-height: 1.15 !important;
+        letter-spacing: -0.02em !important;
+        font-variant-numeric: tabular-nums !important;
+      }
+
+      #resultCard .pcb-val-main {
+        font-size: 2.35rem !important;
+      }
+
+      #resultCard .pcb-highlight-sub {
+        font-size: 13.5px !important;
+        color: #1e3a8a !important;
+        opacity: 0.8 !important;
+        font-weight: 500 !important;
+        line-height: 1.2 !important;
+        margin-top: 2px !important;
+      }
+
+      /* Simple aligned breakdown rows - NO dashed divider lines between rows */
+      #resultCard .pcb-breakdown-list {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0 !important;
+        width: 100% !important;
+      }
+
+      #resultCard .result-item {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 7px 0 !important;
+        border-bottom: none !important;
+        border-top: none !important;
+        font-size: 14.5px !important;
+        color: #334155 !important;
+        line-height: 1.4 !important;
+      }
+
+      #resultCard .result-item > span:first-child,
+      #resultCard .result-item > strong:first-child {
+        font-weight: 400 !important;
+        color: #475569 !important;
+        text-align: left !important;
+        flex-grow: 1 !important;
+        padding-right: 12px !important;
+      }
+
+      #resultCard .result-item > span:last-child,
+      #resultCard .result-item > strong:last-child {
+        font-weight: 600 !important;
+        color: #0f172a !important;
+        text-align: right !important;
+        font-variant-numeric: tabular-nums !important;
+        white-space: nowrap !important;
+        flex-shrink: 0 !important;
+      }
+
+      /* Subtle single divider before Chargeable Income and Monthly Take Home */
+      #resultCard .result-item.total {
+        margin-top: 6px !important;
+        padding-top: 10px !important;
+        border-top: 1px solid #e2e8f0 !important;
+        border-bottom: none !important;
+      }
+
+      #resultCard .result-item.total > span:first-child {
+        font-weight: 700 !important;
+        color: #0f172a !important;
+      }
+
+      #resultCard .result-item.total > span:last-child {
+        font-weight: 700 !important;
+        color: #0f172a !important;
+        font-size: 15.5px !important;
+      }
+
+      /* Visually simple tax info rows without large bordered card */
+      #resultCard .pcb-tax-info {
+        margin-top: 4px !important;
+        padding-top: 4px !important;
+      }
+
+      #resultCard .pcb-tax-info .result-item {
+        padding: 5px 0 !important;
+      }
+
+      /* CTA button - full width of card */
+      #resultCard .cta-group {
+        margin-top: 24px !important;
+        padding: 0 !important;
+        width: 100% !important;
+      }
+
+      #resultCard .cta-group .btn {
+        width: 100% !important;
+        height: 48px !important;
+        border-radius: 10px !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        box-sizing: border-box !important;
+      }
+
+      @media (max-width: 640px) {
+        #resultCard {
+          padding: 18px 14px !important;
+        }
+
+        #resultCard .pcb-val-main {
+          font-size: 2rem !important;
+        }
+
+        #resultCard .pcb-highlight-value,
+        #resultCard .highlight-value {
+          font-size: 1.65rem !important;
+        }
+
+        #resultCard .result-item {
+          font-size: 14px !important;
+          padding: 6px 0 !important;
+        }
       }
     </style>
   
@@ -535,7 +788,7 @@
           <section class="card">
             <h2 class="card-title" style="color: #2563eb !important;" data-i18n="enter_details_a4b074">Enter Details</h2>
             <form id="pcbForm" action="#resultCard" method="GET">
-              <div class="form-group">
+              <div class="form-group pcb-form-group-full">
                 <label class="form-label" for="grossSalary" style="display: flex; align-items: center; gap: 6px" data-i18n="gross_monthly_salary__9daeee">
                   Gross Monthly Salary <span style="color: red">*</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-muted)">
@@ -551,58 +804,89 @@
                 </div>
               </div>
 
-              <div class="form-group" data-i18n="marital_status_single_married_6ca872">
-                <label class="form-label" for="maritalStatus" data-i18n="marital_status_5d0656">Marital Status</label>
-                <select id="maritalStatus" name="maritalStatus" class="form-select">
-                  <option value="single">Single</option>
-                  <option value="married">Married</option>
-                </select>
-              </div>
+              <div class="pcb-form-row" id="maritalRow">
+                <div class="form-group" data-i18n="marital_status_single_married_6ca872">
+                  <label class="form-label" for="maritalStatus" data-i18n="marital_status_5d0656">Marital Status</label>
+                  <select id="maritalStatus" name="maritalStatus" class="form-select">
+                    <option value="single">Single</option>
+                    <option value="married">Married</option>
+                  </select>
+                </div>
 
-              <div class="form-group" id="spouseWorkingGroup" style="display: none;" data-i18n="spouse_working_status_working_not_workin_dcb0cf">
-                <label class="form-label" for="spouseWorking" data-i18n="spouse_working_status_610366">Spouse Working Status</label>
-                <select id="spouseWorking" name="spouseWorking" class="form-select">
-                  <option value="yes">Working</option>
-                  <option value="no">Not Working</option>
-                </select>
-              </div>
-
-              <div class="form-group" data-i18n="number_of_children_under_18_f24a66">
-                <label class="form-label" for="childrenCount" data-i18n="number_of_children_under_18_e64055">Number of Children (Under 18)</label>
-                <input type="number" id="childrenCount" name="childrenCount" class="form-input" placeholder="0" min="0" value="0" inputmode="decimal">
-              </div>
-
-              <div class="form-group">
-                <label class="form-label" for="additionalRelief" data-i18n="additional_tax_relief_rm_year_optional_327c64">Additional Tax Relief (RM / Year) <span class="helper-text">(Optional)</span></label>
-                
-                <div class="input-group">
-                  <span class="input-prefix">RM</span>
-                  <input type="number" id="additionalRelief" name="additionalRelief" class="form-input" placeholder="0" min="0" value="0" inputmode="decimal">
+                <div class="form-group" id="spouseWorkingGroup" style="display: none;" data-i18n="spouse_working_status_working_not_workin_dcb0cf">
+                  <label class="form-label" for="spouseWorking" data-i18n="spouse_working_status_610366">Spouse Working Status</label>
+                  <select id="spouseWorking" name="spouseWorking" class="form-select">
+                    <option value="yes">Working</option>
+                    <option value="no">Not Working</option>
+                  </select>
                 </div>
               </div>
 
-              <div class="form-group" data-i18n="epf_contribution_rate_11_9_3eaf92">
-                <label class="form-label" for="epfRate" data-i18n="epf_contribution_rate_e97c94">EPF Contribution Rate</label>
-                
-                <select id="epfRate" name="epfRate" class="form-select">
-                  <option value="11">11%</option>
-                  <option value="9">9%</option>
-                </select>
+              <div class="pcb-form-row">
+                <div class="form-group" data-i18n="number_of_children_under_18_f24a66">
+                  <label class="form-label" for="childrenCount" data-i18n="number_of_children_under_18_e64055">Number of Children (Under 18)</label>
+                  <input type="number" id="childrenCount" name="childrenCount" class="form-input" placeholder="0" min="0" value="0" inputmode="decimal">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="additionalRelief" data-i18n="additional_tax_relief_rm_year_optional_327c64">Additional Tax Relief (RM / Year) <span class="helper-text">(Optional)</span></label>
+                  
+                  <div class="input-group">
+                    <span class="input-prefix">RM</span>
+                    <input type="number" id="additionalRelief" name="additionalRelief" class="form-input" placeholder="0" min="0" value="0" inputmode="decimal">
+                  </div>
+                </div>
               </div>
 
-              <div class="form-group" data-i18n="tax_status_resident_non_resident_41f74c">
-                <label class="form-label" for="taxStatus" data-i18n="tax_status_115038">Tax Status</label>
-                
-                <select id="taxStatus" name="taxStatus" class="form-select">
-                  <option value="resident">Resident</option>
-                  <option value="non-resident">Non-Resident</option>
-                </select>
+              <div class="pcb-form-row">
+                <div class="form-group" data-i18n="epf_contribution_rate_11_9_3eaf92">
+                  <label class="form-label" for="epfRate" data-i18n="epf_contribution_rate_e97c94">EPF Contribution Rate</label>
+                  
+                  <select id="epfRate" name="epfRate" class="form-select">
+                    <option value="11">11%</option>
+                    <option value="9">9%</option>
+                  </select>
+                </div>
+
+                <div class="form-group" data-i18n="tax_status_resident_non_resident_41f74c">
+                  <label class="form-label" for="taxStatus" data-i18n="tax_status_115038">Tax Status</label>
+                  
+                  <select id="taxStatus" name="taxStatus" class="form-select">
+                    <option value="resident">Resident</option>
+                    <option value="non-resident">Non-Resident</option>
+                  </select>
+                </div>
               </div>
 
               <script>
-                document.getElementById('maritalStatus').addEventListener('change', function(e) {
-                  document.getElementById('spouseWorkingGroup').style.display = e.target.value === 'married' ? 'block' : 'none';
-                });
+                (function() {
+                  var maritalSelect = document.getElementById('maritalStatus');
+                  var spouseGroup = document.getElementById('spouseWorkingGroup');
+                  var maritalRow = document.getElementById('maritalRow');
+                  var resetBtn = document.getElementById('resetBtn');
+
+                  function updateMaritalState() {
+                    if (!maritalSelect || !spouseGroup) return;
+                    var isMarried = maritalSelect.value === 'married';
+                    if (isMarried) {
+                      spouseGroup.style.display = 'flex';
+                      if (maritalRow) maritalRow.classList.add('is-married');
+                    } else {
+                      spouseGroup.style.display = 'none';
+                      if (maritalRow) maritalRow.classList.remove('is-married');
+                    }
+                  }
+
+                  if (maritalSelect) {
+                    maritalSelect.addEventListener('change', updateMaritalState);
+                  }
+                  if (resetBtn) {
+                    resetBtn.addEventListener('click', function() {
+                      setTimeout(updateMaritalState, 20);
+                    });
+                  }
+                  updateMaritalState();
+                })();
               </script>
 
               <div class="form-actions" data-i18n="reset_calculate_f9fcc0">
@@ -722,77 +1006,67 @@
 
             <div id="resultContent" class="result-content">
               <!-- 1. MONTHLY SECTION -->
-              <h3 data-i18n="monthly_pcb_deduction_915941">Monthly PCB Deduction</h3>
-              <div class="result-section">
-                <div class="highlight-box center" style="margin-bottom: 24px">
-                  <span class="highlight-label" title="Monthly tax deduction set by LHDN" style="
+              <div class="pcb-section-group">
+                <h3 class="pcb-section-heading" data-i18n="monthly_pcb_deduction_915941">MONTHLY PCB</h3>
+                <div class="pcb-highlight-card pcb-main-highlight">
+                  <span class="pcb-highlight-label" title="Monthly tax deduction set by LHDN" style="
                       cursor: help;
                       text-decoration: underline dotted #9ca3af;
                       text-underline-offset: 4px;
                     " data-i18n="pcb_mtd_deduction_9d0151">PCB (MTD) DEDUCTION</span>
-                  <span class="highlight-value" id="resPcb">RM 0.00</span>
-                  <div style="
-                      font-size: 15px;
-                      margin-top: 4px;
-                      color: #1e3a8a;
-                      opacity: 0.8;
-                      font-weight: 500;
-                    " data-i18n="per_month_2fe8a8">
+                  <span class="pcb-highlight-value pcb-val-main" id="resPcb">RM 0.00</span>
+                  <div class="pcb-highlight-sub" data-i18n="per_month_2fe8a8">
                     Per Month
                   </div>
                 </div>
 
-                <div>
+                <div class="pcb-breakdown-list">
                   <div class="result-item" data-i18n="gross_salary_amp_bonus_rm_0_00_d95f13">
                     <span>Gross Salary &amp; Bonus</span>
-                    <span id="resGross" style="font-weight: 600">RM 0.00</span>
+                    <span id="resGross">RM 0.00</span>
                   </div>
                   <div class="result-item" data-i18n="epf_deduction_rm_0_00_2c6cee">
                     <span title="Default employee contribution rate" style="cursor: help; border-bottom: 1px dotted #9ca3af">EPF Deduction</span>
-                    <span id="resEpf" style="font-weight: 600; color: var(--danger)">RM 0.00</span>
+                    <span id="resEpf" style="color: var(--danger)">-RM 0.00</span>
                   </div>
                   <div class="result-item" data-i18n="tax_relief_amp_zakat_rm_0_00_437aa8">
                     <span>Tax Relief &amp; Zakat</span>
-                    <span id="resRelief" style="font-weight: 600; color: var(--text-main)">RM 0.00</span>
+                    <span id="resRelief">RM 0.00</span>
                   </div>
                   <div class="result-item total" data-i18n="chargeable_income_monthly_rm_0_00_5ec421">
                     <span>Chargeable Income (Monthly)</span>
                     <span id="resChargeable">RM 0.00</span>
                   </div>
 
-                  <div class="result-item" style="margin-top: 16px" data-i18n="effective_tax_rate_0_00_319e6f">
-                    <span>Effective Tax Rate</span>
-                    <span id="resEffectiveRate">0.00%</span>
-                  </div>
-                  <div class="result-item" data-i18n="tax_bracket_0_3cfc33">
-                    <span>Tax Bracket</span>
-                    <span id="resTaxBracket">0%</span>
+                  <div class="pcb-tax-info">
+                    <div class="result-item" data-i18n="effective_tax_rate_0_00_319e6f">
+                      <span>Effective Tax Rate</span>
+                      <span id="resEffectiveRate">0.00%</span>
+                    </div>
+                    <div class="result-item" data-i18n="tax_bracket_0_3cfc33">
+                      <span>Tax Bracket</span>
+                      <span id="resTaxBracket">0%</span>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <!-- 2. ANNUAL SECTION -->
-              <h3 data-i18n="estimated_annual_summary_2d7e4c">Estimated Annual Summary</h3>
-              <div class="result-section">
-                <div class="highlight-box center" style="margin-bottom: 24px">
-                  <span class="highlight-label" title="Annual tax deduction" style="
+              <!-- 2. ANNUAL SUMMARY SECTION -->
+              <div class="pcb-section-group" style="margin-top: 24px;">
+                <h3 class="pcb-section-heading" data-i18n="estimated_annual_summary_2d7e4c">ANNUAL SUMMARY</h3>
+                <div class="pcb-highlight-card">
+                  <span class="pcb-highlight-label" title="Annual tax deduction" style="
                       cursor: help;
                       text-decoration: underline dotted #9ca3af;
                       text-underline-offset: 4px;
                     " data-i18n="total_pcb_yearly_fc1b69">TOTAL PCB (YEARLY)</span>
-                  <span class="highlight-value" id="resAnnualPcb">RM 0.00</span>
-                  <div style="
-                      font-size: 15px;
-                      margin-top: 4px;
-                      color: #1e3a8a;
-                      opacity: 0.8;
-                      font-weight: 500;
-                    " data-i18n="per_year_1aa60a">
+                  <span class="pcb-highlight-value" id="resAnnualPcb">RM 0.00</span>
+                  <div class="pcb-highlight-sub" data-i18n="per_year_1aa60a">
                     Per Year
                   </div>
                 </div>
 
-                <div>
+                <div class="pcb-breakdown-list">
                   <div class="result-item" data-i18n="estimated_annual_income_rm_0_00_a5faa4">
                     <span>Estimated Annual Income</span>
                     <span id="resAnnualIncome">RM 0.00</span>
@@ -805,14 +1079,17 @@
               </div>
 
               <!-- 3. TAKE HOME SALARY SECTION -->
-              <h3 data-i18n="take_home_salary_36ba82">Take Home Salary</h3>
-              <div class="result-section">
-                <div class="highlight-box center" style="margin-bottom: 24px" data-i18n="estimated_take_home_salary_rm_0_00_c9f9d2">
+              <div class="pcb-section-group" style="margin-top: 24px;">
+                <h3 class="pcb-section-heading" data-i18n="take_home_salary_36ba82">TAKE-HOME SALARY</h3>
+                <div class="pcb-highlight-card" data-i18n="estimated_take_home_salary_rm_0_00_c9f9d2">
                   <span class="highlight-label">ESTIMATED TAKE HOME SALARY</span>
                   <span class="highlight-value" id="resTakeHomeSalary">RM 0.00</span>
+                  <div class="pcb-highlight-sub" data-i18n="per_month_2fe8a8">
+                    Per Month
+                  </div>
                 </div>
 
-                <div>
+                <div class="pcb-breakdown-list">
                   <div class="result-item" data-i18n="gross_salary_rm_0_00_b64d15">
                     <span>Gross Salary</span>
                     <span id="resTakeHomeGross">RM 0.00</span>
@@ -825,25 +1102,18 @@
                     <span>PCB Deduction</span>
                     <span id="resTakeHomePcb" style="color: #ef4444">-RM 0.00</span>
                   </div>
-                  <div class="result-item" style="
-                      margin-top: 12px;
-                      padding-top: 12px;
-                      border-top: 1px dashed #cbd5e1;
-                    " data-i18n="monthly_tax_rate_0_0_of_gross_salary_115527">
-                    <span style="
-                        display: flex;
-                        flex-direction: column;
-                        line-height: 1.4;
-                      ">
-                      <span>Monthly Tax Rate</span>
-                    </span>
-                    <span id="resTakeHomeTaxRate">0.0% of gross salary</span>
+                  <div class="result-item total">
+                    <span>Monthly Take Home</span>
+                    <span id="resTakeHomeTotal">RM 0.00</span>
+                  </div>
+                  <div class="result-item" style="padding-top: 3px;" data-i18n="monthly_tax_rate_0_0_of_gross_salary_115527">
+                    <span style="font-size: 13px; color: #64748b;">Monthly Tax Rate</span>
+                    <span id="resTakeHomeTaxRate" style="font-size: 13px; color: #64748b; font-weight: 500;">0.0% of gross salary</span>
                   </div>
                 </div>
               </div>
 
               <!-- CTA Group -->
-
               <div class="cta-group" data-i18n="download_pcb_report_4d11b3">
                 <button class="btn btn-primary" id="downloadReportBtn" data-i18n="download_pcb_report_328cdc">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right: 6px">
@@ -857,11 +1127,11 @@
             </div>
 
             <p id="pcbDisclaimer" style="
-                font-size: 15px;
+                font-size: 13px;
                 color: #6b7280;
-                margin-top: 20px;
-                line-height: 1.4;
-                
+                margin-top: 18px;
+                line-height: 1.5;
+                text-align: center;
                 display: none;
               " data-i18n="this_calculator_is_for_reference_only_pl_cce3d2">
               This calculator is for reference only.<br>
@@ -1100,9 +1370,16 @@
                   <td data-i18n="600001_2000000_36d0a9">600,001 – 2,000,000</td>
                   <td data-i18n="28_1b63b8">28%</td>
                 </tr>
+                <tr>
+                  <td data-i18n="above_2000000_tax_rate_30">Above 2,000,000</td>
+                  <td data-i18n="30_percent_rate">30%</td>
+                </tr>
               </tbody>
             </table></div>
           </div>
+          <p style="margin-top: 12px; font-size: 14px; color: #64748b;" data-i18n="non_resident_tax_rate_note">
+            <strong>Note for Non-Residents:</strong> Non-resident individuals are taxed at a flat rate of 30% on gross employment income, without eligibility for personal tax reliefs or tax rebates.
+          </p>
           <p style="margin-top: 16px" data-i18n="how_it_works_00c92e"><strong>How It Works</strong></p>
           <p data-i18n="you_are_only_taxed_on_the_portion_within_27e3d4">
             You are only taxed on the portion within each range, not your entire

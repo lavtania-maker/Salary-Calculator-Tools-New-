@@ -1,4 +1,5 @@
-// Simplified Malaysia PCB Tax Calculator
+// Official Malaysia PCB Tax Calculator (2026 HASiL Computerised Specification)
+import { calculateOfficialPcb } from "./lib/pcb";
 
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("pcbForm") as HTMLFormElement;
@@ -134,73 +135,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const totalIncome = salary;
 
-    // EPF deduction
-    const actualEpf = totalIncome * epfRate;
-    const epfRelief = Math.min(actualEpf, 333.33);
-    const annualIncome = (totalIncome - epfRelief) * 12;
-    
-    const personalRelief = 9000;
-    let totalRelief = personalRelief + additionalRelief;
-    if (maritalStatus === "married" && spouseWorking === "no") {
-      totalRelief += 4000;
-    }
-    totalRelief += (childrenCount * 2000);
-    
-    const taxableIncome = Math.max(0, annualIncome - totalRelief);
-    let tax = 0;
-    let bracket = '0%';
-    let annualTax = 0;
-if (isNonResident) {
-  annualTax = annualIncome * 0.30;
-  bracket = '30%';
-  tax = annualTax / 12;
-} else {
-  if (taxableIncome > 0) {
-    if (taxableIncome <= 5000) {
-      annualTax = 0;
-      bracket = '0%';
-    } else if (taxableIncome <= 20000) {
-      annualTax = (taxableIncome - 5000) * 0.01;
-      bracket = '1%';
-    } else if (taxableIncome <= 35000) {
-      annualTax = 150 + (taxableIncome - 20000) * 0.03;
-      bracket = '3%';
-    } else if (taxableIncome <= 50000) {
-      annualTax = 600 + (taxableIncome - 35000) * 0.06;
-      bracket = '6%';
-    } else if (taxableIncome <= 70000) {
-      annualTax = 1500 + (taxableIncome - 50000) * 0.11;
-      bracket = '11%';
-    } else if (taxableIncome <= 100000) {
-      annualTax = 3700 + (taxableIncome - 70000) * 0.19;
-      bracket = '19%';
-    } else if (taxableIncome <= 400000) {
-      annualTax = 9400 + (taxableIncome - 100000) * 0.25;
-      bracket = '25%';
-    } else if (taxableIncome <= 600000) {
-      annualTax = 84400 + (taxableIncome - 400000) * 0.26;
-      bracket = '26%';
-    } else if (taxableIncome <= 2000000) {
-      annualTax = 136400 + (taxableIncome - 600000) * 0.28;
-      bracket = '28%';
-    } else {
-      annualTax = 528400 + (taxableIncome - 2000000) * 0.30;
-      bracket = '30%';
-    }
-    tax = annualTax / 12;
-  }
-}
-const zakat = 0; // removed from form
-tax = tax - zakat;
-if (tax < 0) tax = 0;
-let chargeable = taxableIncome > 0 ? taxableIncome / 12 : 0;
-const effectiveRate = totalIncome > 0 ? (tax / totalIncome) * 100 : 0;
-const finalReliefAndZakat = (totalRelief/12) + zakat;
+    const result = calculateOfficialPcb({
+      grossSalary: salary,
+      maritalStatus,
+      spouseWorking,
+      childrenCount,
+      additionalRelief,
+      epfRate,
+      taxStatus: isNonResident ? "non-resident" : "resident",
+    });
 
+    const tax = result.monthlyPcb;
+    const actualEpf = result.actualEpfMonthly;
+    const chargeable = result.monthlyChargeableIncome;
+    const effectiveRate = result.effectiveTaxRate;
+    const bracket = result.taxBracket;
+    const finalReliefAndZakat = result.monthlyRelief;
 
     // Display
     resGross.textContent = formatRM(totalIncome);
-    resEpf.textContent = formatRM(actualEpf);
+    resEpf.textContent = "-" + formatRM(actualEpf);
     resRelief.textContent = formatRM(finalReliefAndZakat);
     resChargeable.textContent = formatRM(chargeable);
 
@@ -208,13 +162,17 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
     resEffectiveRate.textContent = effectiveRate.toFixed(2) + "%";
     resTaxBracket.textContent = bracket;
 
-    resAnnualIncome.textContent = formatRM(totalIncome * 12);
-    resAnnualTax.textContent = formatRM(tax * 12);
-    resAnnualPcb.textContent = formatRM(tax * 12);
+    resAnnualIncome.textContent = formatRM(result.annualIncome);
+    resAnnualTax.textContent = formatRM(result.annualTax);
+    resAnnualPcb.textContent = formatRM(result.annualTax);
 
     // Take Home Salary updates
     const takeHomeSalary = totalIncome - actualEpf - tax;
     resTakeHomeSalary.textContent = formatRM(takeHomeSalary);
+    const resTakeHomeTotal = document.getElementById("resTakeHomeTotal");
+    if (resTakeHomeTotal) {
+      resTakeHomeTotal.textContent = formatRM(takeHomeSalary);
+    }
     resTakeHomeGross.textContent = formatRM(totalIncome);
     resTakeHomeEpf.textContent = "-" + formatRM(actualEpf);
     resTakeHomePcb.textContent = "-" + formatRM(tax);
@@ -228,8 +186,8 @@ const finalReliefAndZakat = (totalRelief/12) + zakat;
       pcb: tax.toFixed(2),
       totalDeductions: (actualEpf + tax).toFixed(2),
       netSalary: (totalIncome - actualEpf - tax).toFixed(2),
-      annualIncome: (totalIncome * 12).toFixed(2),
-      annualPcb: (tax * 12).toFixed(2),
+      annualIncome: result.annualIncome.toFixed(2),
+      annualPcb: result.annualTax.toFixed(2),
       effectiveRate: effectiveRate.toFixed(2),
       taxBracket: bracket,
       taxStatus: isNonResident ? "non-resident" : "resident",

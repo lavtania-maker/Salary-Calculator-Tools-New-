@@ -167,6 +167,8 @@ export function renderOtherCalculators(containerOrSelector?: HTMLElement | strin
   }
 
   if (!container) return;
+  // Don't waste main-thread cycles re-rendering if cards are already pre-rendered statically
+  if (container.querySelector(".other-calc-card") || container.querySelector(".other-calculators-grid")) return;
 
   const cardsHtml = remaining.map(tool => {
     const msInfo = CALCULATOR_TOOLS_MS[tool.path];
@@ -251,16 +253,16 @@ if (typeof document !== "undefined") {
   };
 
   const scheduleTableLabels = () => {
-    if ("requestIdleCallback" in window) {
-      (window as any).requestIdleCallback(addTableLabels, { timeout: 2000 });
+    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+      (window as any).requestIdleCallback(addTableLabels, { timeout: 5000 });
     } else {
-      setTimeout(addTableLabels, 200);
+      setTimeout(addTableLabels, 3000);
     }
   };
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", scheduleTableLabels);
-  } else {
+  if (document.readyState === "complete") {
     scheduleTableLabels();
+  } else {
+    window.addEventListener("load", scheduleTableLabels);
   }
 }
