@@ -19,6 +19,7 @@ const htmlPages: Record<string, string> = {
   "/pcb-calculator": "pcb-income-tax.html",
   "/annual-leave-calculator": "annual-leave-calculator.html",
   "/socso-perkeso": "socso-perkeso.html",
+  "/socso-calculator": "socso-perkeso.html",
   "/blog": "blog.html",
   "/blog-admin": "blog-admin.html",
   "/overtime-pay-calculator": "overtime-pay-calculator.html",

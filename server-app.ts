@@ -495,7 +495,7 @@ async function startServer() {
 
   app.get("/:slug", (req, res, next) => {
     const slug = req.params.slug;
-    const reserved = ["ms", "hourly-rate", "hourly-rate-calculator", "blog", "epf-kwsp", "socso-perkeso", "pcb-income-tax", "pcb-calculator", "annual-leave-calculator", "privacy-policy", "admin", "blog-admin", "mincal", "payslip-generator", "report", "overtime-pay-calculator", "epfreport", "socsoreport", "pcbreport", "payslip", "api"];
+    const reserved = ["ms", "hourly-rate", "hourly-rate-calculator", "blog", "epf-kwsp", "socso-perkeso", "socso-calculator", "pcb-income-tax", "pcb-calculator", "annual-leave-calculator", "privacy-policy", "admin", "blog-admin", "mincal", "payslip-generator", "report", "overtime-pay-calculator", "epfreport", "socsoreport", "pcbreport", "payslip", "api"];
     if (slug && !slug.includes(".") && !reserved.includes(slug)) {
       req.query.slug = slug;
       return blogPostHandler(req as any, res as any);
@@ -978,6 +978,8 @@ async function startServer() {
     "/index.html": "index.html",
     "/admin": "admin.html",
     "/admin.html": "admin.html",
+    "/blog-admin": "blog-admin.html",
+    "/blog-admin.html": "blog-admin.html",
     "/mincal": "mincal.html",
     "/mincal.html": "mincal.html",
     "/payslip-generator": "payslip.html",
@@ -988,6 +990,8 @@ async function startServer() {
     "/epf-kwsp.html": "epf-kwsp.html",
     "/socso-perkeso": "socso-perkeso.html",
     "/socso-perkeso.html": "socso-perkeso.html",
+    "/socso-calculator": "socso-perkeso.html",
+    "/socso-calculator.html": "socso-perkeso.html",
     "/epfreport": "epfreport.html",
     "/epfreport.html": "epfreport.html",
     "/socsoreport": "socsoreport.html",

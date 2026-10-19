@@ -831,6 +831,19 @@
             <label>Read More URL <span class="helper-text">(Optional)</span></label><input id="fReadMore" type="url" placeholder="https://...">
           </div>
           <div class="form-field">
+            <label>Call-to-Action (CTA) <span class="helper-text">(Optional - auto-detected from category &amp; topic)</span></label>
+            <select id="fCtaType">
+              <option value="">Auto (Recommended)</option>
+              <option value="salary">Salary Calculator (General Salary)</option>
+              <option value="socso">SOCSO Calculator (SOCSO / PERKESO)</option>
+              <option value="pcb">PCB Calculator (PCB / Income Tax)</option>
+              <option value="epf">EPF Calculator (EPF / KWSP)</option>
+              <option value="overtime">Overtime Calculator (Overtime)</option>
+              <option value="annual-leave">Annual Leave Calculator (Annual Leave)</option>
+              <option value="hourly-rate">Hourly Rate Calculator (Hourly Rate)</option>
+            </select>
+          </div>
+          <div class="form-field">
             <label>Content *</label>
             <div id="editor-container" style="background: #fff"></div>
             <input type="hidden" id="fContent">
@@ -1153,6 +1166,7 @@
               ? post.publishedAt.substring(0, 10)
               : new Date().toISOString().substring(0, 10);
           G("fReadMore").value = (post && post.readMoreUrl) || "";
+          G("fCtaType").value = (post && post.ctaType) || "";
           const initialHtml = (post && post.content) || "";
           setTimeout(function () {
             if (typeof quill !== 'undefined') {
@@ -1227,6 +1241,7 @@
             publishedAt: G("fDate").value,
             content: G("fContent").value.trim(),
             readMoreUrl: G("fReadMore").value.trim(),
+            ctaType: G("fCtaType").value.trim(),
             updatedAt: FS.serverTimestamp(),
           };
           if (!data.title || !data.slug || !data.content) {

@@ -126,6 +126,10 @@
       "destination": "/api/blog?category=:category"
     },
     {
+      "source": "/socso-calculator",
+      "destination": "/socso-perkeso.html"
+    },
+    {
       "source": "/annual-leave-calculator",
       "destination": "/annual-leave-calculator.html"
     },

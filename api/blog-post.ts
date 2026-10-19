@@ -199,11 +199,11 @@ export default async function handler(req: any, res: any) {
     }
 
     // 2. Load Template
-    let templatePath = path.join(process.cwd(), 'public', 'blog-post-template.html');
+    let templatePath = path.join(process.cwd(), 'blog-post-template.html');
     if (!fs.existsSync(templatePath)) {
        templatePath = path.join(process.cwd(), 'dist', 'blog-post-template.html');
        if (!fs.existsSync(templatePath)) {
-           templatePath = path.join(process.cwd(), 'blog-post-template.html');
+           templatePath = path.join(process.cwd(), 'public', 'blog-post-template.html');
        }
     }
     const html = fs.readFileSync(templatePath, 'utf-8');
@@ -372,60 +372,151 @@ export default async function handler(req: any, res: any) {
       $('#read-more-container').css('display', 'none');
     }
 
-    // Dynamic CTA logic - Show single relevant calculator button based on category or metadata
-    const categoryCtaMap: Record<string, { name: string; url: string }> = {
-      'salary': { name: 'Salary Calculator', url: '/' },
-      'epf': { name: 'EPF Calculator', url: '/epf-kwsp' },
-      'kwsp': { name: 'EPF Calculator', url: '/epf-kwsp' },
-      'socso': { name: 'SOCSO Calculator', url: '/socso-perkeso' },
-      'perkeso': { name: 'SOCSO Calculator', url: '/socso-perkeso' },
-      'eis': { name: 'SOCSO Calculator', url: '/socso-perkeso' },
-      'pcb': { name: 'PCB Calculator', url: '/pcb-calculator' },
-      'pcb-income-tax': { name: 'PCB Calculator', url: '/pcb-calculator' },
-      'tax': { name: 'PCB Calculator', url: '/pcb-calculator' },
-      'annual-leave': { name: 'Annual Leave Calculator', url: '/annual-leave-calculator' },
-      'overtime': { name: 'Overtime Pay Calculator', url: '/overtime-pay-calculator' }
+    // Dynamic CTA mapping rules (7 categories with distinct heading, description, button, and URL)
+    interface CtaConfig {
+      id: string;
+      heading: string;
+      description: string;
+      button: string;
+      url: string;
+    }
+
+    const CTA_VARIANTS: Record<string, CtaConfig> = {
+      // A. General Salary Articles
+      salary: {
+        id: 'salary',
+        heading: 'Calculate Your Take-Home Salary Easily',
+        description: 'Find out how much salary you take home after EPF, SOCSO, EIS and PCB deductions. Use our free Malaysia Salary Calculator to estimate your monthly and annual pay.',
+        button: 'Salary Calculator',
+        url: 'https://salarycalculator.my/'
+      },
+      // B. SOCSO / PERKESO Articles
+      socso: {
+        id: 'socso',
+        heading: 'Calculate Your SOCSO Contributions',
+        description: 'Check your estimated SOCSO contributions as an employee or employer in Malaysia. Use our free SOCSO Calculator to estimate monthly contributions based on your salary.',
+        button: 'SOCSO Calculator',
+        url: 'https://salarycalculator.my/socso-calculator'
+      },
+      // C. PCB / Income Tax Articles
+      pcb: {
+        id: 'pcb',
+        heading: 'Estimate Your Monthly PCB Deductions',
+        description: 'Calculate your estimated Monthly Tax Deduction (PCB) based on your salary and applicable tax details. Use our free PCB Calculator to understand your estimated monthly tax deductions in Malaysia.',
+        button: 'PCB Calculator',
+        url: 'https://salarycalculator.my/pcb-calculator'
+      },
+      // D. EPF / KWSP Articles
+      epf: {
+        id: 'epf',
+        heading: 'Calculate Your EPF Contributions',
+        description: 'Find out how much you and your employer contribute to EPF each month. Use our free EPF Calculator to estimate employee contributions, employer contributions and total EPF savings.',
+        button: 'EPF Calculator',
+        url: 'https://salarycalculator.my/epf-kwsp'
+      },
+      // E. Overtime Articles
+      overtime: {
+        id: 'overtime',
+        heading: 'Calculate Your Overtime Pay',
+        description: 'Want to estimate how much you could earn from overtime? Use our free Overtime Calculator to estimate overtime pay based on your salary, working hours and overtime type in Malaysia.',
+        button: 'Overtime Calculator',
+        url: 'https://salarycalculator.my/overtime-pay-calculator'
+      },
+      // F. Annual Leave Articles
+      'annual-leave': {
+        id: 'annual-leave',
+        heading: 'Calculate Your Annual Leave Entitlement',
+        description: 'Check your annual leave entitlement and remaining leave balance with our free Annual Leave Calculator. Estimate your leave based on your employment details and applicable entitlement in Malaysia.',
+        button: 'Annual Leave Calculator',
+        url: 'https://salarycalculator.my/annual-leave-calculator'
+      },
+      // G. Hourly Rate Articles
+      'hourly-rate': {
+        id: 'hourly-rate',
+        heading: 'Calculate Your Hourly Pay Rate',
+        description: 'Find out how much you earn per hour based on your salary and working hours. Use our free Hourly Rate Calculator to estimate your hourly pay in Malaysia, whether for budgeting or work-related calculations.',
+        button: 'Hourly Rate Calculator',
+        url: 'https://salarycalculator.my/hourly-rate-calculator'
+      }
     };
 
-    let matchedCta: { name: string; url: string } | null = null;
+    // Explicit article mappings based on primary topic and search intent
+    const KNOWN_ARTICLE_CTA_MAP: Record<string, string> = {
+      'salary-after-epf-socso-eis-how-much-do-you-take-home': 'salary',
+      'annual-leave-al-in-malaysia-entitlement-rules-how-to-calculate': 'annual-leave',
+      'how-to-calculate-gaji-bersih-net-salary-in-malaysia-formula-example-salary-calculator': 'salary',
+      'how-to-calculate-pcb-monthly-tax-deduction-in-malaysia-formula-example': 'pcb',
+      'basic-salary-vs-gross-salary-vs-net-salary-in-malaysia-whats-the-difference': 'salary',
+      'salary-deductions-in-malaysia-how-they-affect-your-take-home-salary': 'salary',
+      'hourly-rate-in-malaysia-how-much-do-you-earn-per-hour': 'hourly-rate',
+      'how-to-calculate-epf-kwsp-in-malaysia-formula-contribution-rates': 'epf',
+      'public-holidays-in-malaysia-2027-full-calendar-annual-leave-overtime': 'annual-leave',
+      'perkeso-lindung-24-jam-skbbk-coverage-contribution-rates-opt-out-guide-2026': 'socso',
+      'epf-socso-eis-malaysia-latest-contribution-rates-employer-guide-2026': 'salary',
+      'how-to-calculate-overtime-pay-in-malaysia-normal-days-rest-days-public-holidays': 'overtime'
+    };
 
-    // 1. Check assigned categories
-    const articleCats = cats.filter((c: string) => Boolean(c)).map((c: string) => {
-      let s = c.toLowerCase().trim().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-');
-      if (s === 'perkeso') return 'socso';
-      if (s === 'kwsp') return 'epf';
-      return s;
-    });
-
-    for (const c of articleCats) {
-      if (categoryCtaMap[c]) {
-        matchedCta = categoryCtaMap[c];
-        break;
+    const resolveCta = (p: any, postSlug: string): CtaConfig => {
+      // 1. Explicit override on article
+      if (p && p.ctaType && CTA_VARIANTS[p.ctaType]) {
+        return CTA_VARIANTS[p.ctaType];
       }
-    }
 
-    // 2. Metadata fallback if category is missing or unmapped
-    if (!matchedCta) {
-      const metaCombined = `${post.title || ''} ${slug || ''} ${post.metaTitle || ''} ${post.excerpt || ''}`.toLowerCase();
-      if (metaCombined.includes('overtime') || metaCombined.includes('ot pay')) {
-        matchedCta = categoryCtaMap['overtime'];
-      } else if (metaCombined.includes('annual leave') || metaCombined.includes('leave entitlement')) {
-        matchedCta = categoryCtaMap['annual-leave'];
-      } else if (metaCombined.includes('pcb') || metaCombined.includes('income tax') || metaCombined.includes('mtd')) {
-        matchedCta = categoryCtaMap['pcb-income-tax'];
-      } else if (metaCombined.includes('socso') || metaCombined.includes('perkeso') || metaCombined.includes('eis')) {
-        matchedCta = categoryCtaMap['socso'];
-      } else if (metaCombined.includes('epf') || metaCombined.includes('kwsp')) {
-        matchedCta = categoryCtaMap['epf'];
-      } else if (metaCombined.includes('salary') || metaCombined.includes('minimum wage') || metaCombined.includes('payroll')) {
-        matchedCta = categoryCtaMap['salary'];
+      // 2. Exact match for known published article slugs
+      const s = (postSlug || '').toLowerCase().trim();
+      if (s && KNOWN_ARTICLE_CTA_MAP[s]) {
+        return CTA_VARIANTS[KNOWN_ARTICLE_CTA_MAP[s]];
       }
-    }
 
-    // 3. Render single CTA button if matched
-    if (matchedCta) {
-      $('.cta-buttons').html(`<a href="${matchedCta.url}" class="cta-btn-primary">${matchedCta.name}</a>`);
-    }
+      // 3. Category matching
+      const pCats = (Array.isArray(p?.category) ? p.category : [p?.category || ''])
+        .filter(Boolean)
+        .map((c: string) => c.toLowerCase().trim().replace(/\//g, '-').replace(/\s+/g, '-').replace(/-+/g, '-'));
+
+      if (pCats.includes('hourly-rate')) return CTA_VARIANTS['hourly-rate'];
+      if (pCats.includes('annual-leave')) return CTA_VARIANTS['annual-leave'];
+      if (pCats.includes('overtime')) return CTA_VARIANTS['overtime'];
+      if (pCats.includes('pcb') || pCats.includes('pcb-income-tax') || pCats.includes('tax')) return CTA_VARIANTS['pcb'];
+      if (pCats.includes('socso') || pCats.includes('perkeso') || pCats.includes('eis')) return CTA_VARIANTS['socso'];
+      if (pCats.includes('epf') || pCats.includes('kwsp')) return CTA_VARIANTS['epf'];
+      if (pCats.includes('salary')) return CTA_VARIANTS['salary'];
+
+      // 4. Content / metadata analysis
+      const text = `${p?.title || ''} ${s} ${p?.metaTitle || ''} ${p?.excerpt || ''}`.toLowerCase();
+      if (text.includes('hourly rate') || text.includes('per hour') || text.includes('hourly-rate')) {
+        return CTA_VARIANTS['hourly-rate'];
+      }
+      if (text.includes('annual leave') || text.includes('annual-leave') || text.includes('leave entitlement') || text.includes('cuti tahunan')) {
+        return CTA_VARIANTS['annual-leave'];
+      }
+      if (text.includes('overtime') || text.includes('ot pay') || text.includes('overtime pay') || text.includes('kerja lebih masa')) {
+        return CTA_VARIANTS['overtime'];
+      }
+      if (text.includes('pcb') || text.includes('tax deduction') || text.includes('income tax') || text.includes('cukai pendapatan') || text.includes('mtd')) {
+        return CTA_VARIANTS['pcb'];
+      }
+      if (text.includes('socso') || text.includes('perkeso') || text.includes('eis') || text.includes('skbbk')) {
+        return CTA_VARIANTS['socso'];
+      }
+      if (text.includes('epf') || text.includes('kwsp')) {
+        return CTA_VARIANTS['epf'];
+      }
+      if (text.includes('salary') || text.includes('gaji') || text.includes('take-home') || text.includes('net salary') || text.includes('payroll')) {
+        return CTA_VARIANTS['salary'];
+      }
+
+      // Default fallback
+      return CTA_VARIANTS['salary'];
+    };
+
+    const matchedCta = resolveCta(post, slug);
+
+    // Update CTA Box Heading, Description, and Button
+    $('#cta-heading').text(matchedCta.heading);
+    $('#cta-related h3').text(matchedCta.heading);
+    $('#cta-description').text(matchedCta.description);
+    $('#cta-related > p').first().text(matchedCta.description);
+    $('.cta-buttons').html(`<a href="${matchedCta.url}" class="cta-btn-primary">${matchedCta.button}</a>`);
 
 
     // Parse FAQ for Schema
